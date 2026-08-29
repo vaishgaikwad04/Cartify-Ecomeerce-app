@@ -24,9 +24,10 @@ const PORT = process.env.PORT || 5000;
 
 
 // Middleware
+// Middleware
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://YOUR-NETLIFY-URL.netlify.app",
+  "https://peppy-quokka-eb689e.netlify.app",
 ];
 
 app.use(
@@ -35,6 +36,9 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(express.json());
+app.use(cookieParser());
 
 app.use(express.json());
 app.use(cookieParser());
