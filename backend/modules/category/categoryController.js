@@ -1,5 +1,5 @@
 import cloudinary from "../../utils/cloudinary.js";
-import categoryModel from "./CategoryModel.js";
+import categoryModel from "./categoryModel.js";
 import multer from "../../middleware/upload.js"
 
 export const createCategory = async (req, res) => {
