@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "6a7d5eaf69f177a111a5b749"
+  },
+  "user": {
+    "$oid": "6a7caaf6a6d90feeb90f03f0"
+  },
+  "title": "Order Shipped",
+  "message": "Your order has been shipped and is on its way.",
+  "type": "shipping",
+  "order": {
+    "$oid": "6a7cabbfa6d90feeb9106a6f"
+  },
+  "isRead": true,
+  "createdAt": {
+    "$date": "2026-08-13T06:05:35.215Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-13T06:09:16.912Z"
+  },
+  "__v": 0
+}]

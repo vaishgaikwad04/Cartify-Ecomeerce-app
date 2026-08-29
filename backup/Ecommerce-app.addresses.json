@@ -1,0 +1,69 @@
+[{
+  "_id": {
+    "$oid": "6a797b273c7743dd1429d9d5"
+  },
+  "userId": {
+    "$oid": "6a75b7d8b2826669dfbd42af"
+  },
+  "fullName": "Om Gaikwad",
+  "phone": "8668507235",
+  "addressLine": "p[ ouikl",
+  "city": "iokiokiokiok",
+  "state": "ioioioioioioio",
+  "postalCode": "4333333",
+  "country": "India",
+  "isDefault": true,
+  "createdAt": {
+    "$date": "2026-08-10T07:17:59.283Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-12T14:36:13.955Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a7c84d917e33e4b9f45570b"
+  },
+  "userId": {
+    "$oid": "6a75b7d8b2826669dfbd42af"
+  },
+  "fullName": "Om Gaikwad",
+  "phone": "8668507235",
+  "addressLine": "p[ ouikl",
+  "city": "aurangabad",
+  "state": "maharashtra",
+  "postalCode": "4333333",
+  "country": "India",
+  "isDefault": false,
+  "createdAt": {
+    "$date": "2026-08-12T14:36:09.063Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-12T14:36:13.949Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a7cab97a6d90feeb9106a36"
+  },
+  "userId": {
+    "$oid": "6a7caaf6a6d90feeb90f03f0"
+  },
+  "fullName": "Om Gaikwad",
+  "phone": "8668507235",
+  "addressLine": "p[ ouikl",
+  "city": "aurangabad",
+  "state": "maharashtra",
+  "postalCode": "4333333",
+  "country": "India",
+  "isDefault": true,
+  "createdAt": {
+    "$date": "2026-08-12T17:21:27.302Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-12T17:21:29.896Z"
+  },
+  "__v": 0
+}]

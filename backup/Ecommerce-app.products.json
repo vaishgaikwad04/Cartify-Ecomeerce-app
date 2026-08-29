@@ -1,0 +1,335 @@
+[{
+  "_id": {
+    "$oid": "69f787407a4137de03b1f0ab"
+  },
+  "name": "Private Aspen: Modernism in the Mountains",
+  "description": "An elevated view of the landscape and cultural setting that make Aspen, Colorado, a legendary destination   Tucked into a remote valley along the Roaring Fork River and surrounded by a majestic Rocky Mountain landscape, Aspen is a unique destination. Its magnificent, rugged landscape is home to luxe ski resorts, world-class museums, and stunning private retreats.  Private Aspen is an exclusive invitation to explore eighteen elegant modernist houses. Built from materials such as reclaimed wood and local stone, with expansive views out through glazed walls, these stunning private residences reflect the grandeur of their setting.  Richly illustrated with more than 150 photographs, the book showcases houses by nationally acclaimed architects including Peter Bohlin, Takashi Yanai, Chad Oppenheim, and Charles Gwathmey, as well as Aspen-based firms CCY and Rowland & Broughton. Interviews with the house owners and designers offer an insider’s perspective on this special place.  With a striking design evoking Aspen’s modernist heritage and authoritative text, Private Aspen captures the connection between these remarkable houses and the environment that surrounds them.",
+  "details": "16 oz | 3 inches in diameter x 4.5 inches tall Hand-thrown on the wheel  Due to the handmade nature, mugs may slightly vary in color and size Handmade in Denver, CO",
+  "careFit": "Fit:  front neck drop to v point: 10.5\"  xs: chest 35\"| length 19.5\" s: chest 37\"| length 20\" m: chest 39\"| length 20.5\" l: chest 41\"| length 21\" xl: chest 43\"| length 21.5\" Care:   Gentle machine wash cold. do not bleach. Tumble dry low. warm iron if needed. do not spot treat, or add softener",
+  "category": "books",
+  "images": [
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777829695/products/nfbmehaqrmoquaw3wa5k.webp",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777829696/products/j3zii9ozijktscrswuey.webp"
+  ],
+  "price": 64.95,
+  "discountPrice": 60,
+  "isOnSale": true,
+  "variants": [],
+  "__v": 0,
+  "brand": "Generic"
+},
+{
+  "_id": {
+    "$oid": "69f788927a4137de03b1f0ae"
+  },
+  "name": "Alanis V Neck - Vintage Black",
+  "description": "Effortlessly versatile, the Alanis V Neck delivers understated elegance through thoughtful design. Crafted from recycled cotton, this tee balances refined structure with a relaxed silhouette, featuring a flattering deep V-neckline and subtle cropped length. The generous fit moves seamlessly from casual outings to quiet moments at home, while the soft, sustainable fabric ensures comfort without compromise. A wardrobe essential that transcends occasion.",
+  "details": "70% cotton | 30% recycled cotton. Thoughtfully produced in California.",
+  "careFit": "Fit:  front neck drop to v point: 10.5\"  xs: chest 35\"| length 19.5\" s: chest 37\"| length 20\" m: chest 39\"| length 20.5\" l: chest 41\"| length 21\" xl: chest 43\"| length 21.5\" Care:   Gentle machine wash cold. do not bleach. Tumble dry low. warm iron if needed. do not spot treat, or add softener",
+  "category": "new-in-body",
+  "images": [
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830031/products/wpmfsdrwwtag81gdpaug.webp",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830032/products/wvt1pmiufqusq9cmjw2q.webp",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830033/products/lmygerxqe8hzrpjyqzgm.webp"
+  ],
+  "price": 64.95,
+  "discountPrice": 60,
+  "isOnSale": false,
+  "variants": [
+    {
+      "size": "S",
+      "stock": 4,
+      "_id": {
+        "$oid": "69f788927a4137de03b1f0af"
+      }
+    },
+    {
+      "size": "M",
+      "stock": 2,
+      "_id": {
+        "$oid": "69f788927a4137de03b1f0b0"
+      }
+    },
+    {
+      "size": "L",
+      "stock": 1,
+      "_id": {
+        "$oid": "69f788927a4137de03b1f0b1"
+      }
+    },
+    {
+      "size": "XXL",
+      "stock": 6,
+      "_id": {
+        "$oid": "69f788927a4137de03b1f0b2"
+      }
+    }
+  ],
+  "__v": 0,
+  "brand": "Gucci"
+},
+{
+  "_id": {
+    "$oid": "69f788a47a4137de03b1f0d7"
+  },
+  "name": "Alanis V Neck - Vintage Black",
+  "description": "Effortlessly versatile, the Alanis V Neck delivers understated elegance through thoughtful design. Crafted from recycled cotton, this tee balances refined structure with a relaxed silhouette, featuring a flattering deep V-neckline and subtle cropped length. The generous fit moves seamlessly from casual outings to quiet moments at home, while the soft, sustainable fabric ensures comfort without compromise. A wardrobe essential that transcends occasion.",
+  "details": "70% cotton | 30% recycled cotton. Thoughtfully produced in California.",
+  "careFit": "Fit:  front neck drop to v point: 10.5\"  xs: chest 35\"| length 19.5\" s: chest 37\"| length 20\" m: chest 39\"| length 20.5\" l: chest 41\"| length 21\" xl: chest 43\"| length 21.5\" Care:   Gentle machine wash cold. do not bleach. Tumble dry low. warm iron if needed. do not spot treat, or add softener",
+  "category": "trending-now",
+  "images": [
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830041/products/gpihesjuca4wyecycfmy.webp",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830042/products/u17ewww31szfbsjzwmk5.webp",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830052/products/dint7fac8mq2sl9lktg7.webp"
+  ],
+  "price": 64.95,
+  "discountPrice": 60,
+  "isOnSale": false,
+  "variants": [
+    {
+      "size": "S",
+      "stock": 0,
+      "_id": {
+        "$oid": "69f788a47a4137de03b1f0d8"
+      }
+    },
+    {
+      "size": "M",
+      "stock": 2,
+      "_id": {
+        "$oid": "69f788a47a4137de03b1f0d9"
+      }
+    },
+    {
+      "size": "L",
+      "stock": 1,
+      "_id": {
+        "$oid": "69f788a47a4137de03b1f0da"
+      }
+    },
+    {
+      "size": "XXL",
+      "stock": 6,
+      "_id": {
+        "$oid": "69f788a47a4137de03b1f0db"
+      }
+    }
+  ],
+  "__v": 0,
+  "brand": "Gucci"
+},
+{
+  "_id": {
+    "$oid": "69f789547a4137de03b1f143"
+  },
+  "name": "Akazi Honey Pot Basket",
+  "description": "These woven basket planters are handmade by our artisans in Gitarama, Rwanda. The women hand-dye and weave the fibers into these beautiful works of art. The sisal is woven around sweetgrass, a fragrant grass with a subtle sweetness. Use these African baskets as a desk accessory, a plant holder, or to brighten up a shelf!",
+  "details": "Small: 8 inches x 6 inches. Large: 10 inches x 8 inches. Handmade in Gitarama, Rwanda",
+  "careFit": "Fit:  front neck drop to v point: 10.5\"  xs: chest 35\"| length 19.5\" s: chest 37\"| length 20\" m: chest 39\"| length 20.5\" l: chest 41\"| length 21\" xl: chest 43\"| length 21.5\" Care:   Gentle machine wash cold. do not bleach. Tumble dry low. warm iron if needed. do not spot treat, or add softener",
+  "category": "decor",
+  "images": [
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830224/products/zx86fobfm0uywe9w2ggl.jpg",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830225/products/hgsm1ihirun0vmfnkjuy.jpg",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830228/products/ee6eiwz8hs7y6dcrvysx.jpg"
+  ],
+  "price": 64.95,
+  "discountPrice": 60,
+  "isOnSale": true,
+  "variants": [
+    {
+      "size": "S",
+      "stock": 6,
+      "_id": {
+        "$oid": "69f789547a4137de03b1f144"
+      }
+    }
+  ],
+  "__v": 0,
+  "brand": "Generic"
+},
+{
+  "_id": {
+    "$oid": "69f7896a7a4137de03b1f150"
+  },
+  "name": "Akazi Honey Pot Basket",
+  "description": "These woven basket planters are handmade by our artisans in Gitarama, Rwanda. The women hand-dye and weave the fibers into these beautiful works of art. The sisal is woven around sweetgrass, a fragrant grass with a subtle sweetness. Use these African baskets as a desk accessory, a plant holder, or to brighten up a shelf!",
+  "details": "Small: 8 inches x 6 inches. Large: 10 inches x 8 inches. Handmade in Gitarama, Rwanda",
+  "careFit": "Fit:  front neck drop to v point: 10.5\"  xs: chest 35\"| length 19.5\" s: chest 37\"| length 20\" m: chest 39\"| length 20.5\" l: chest 41\"| length 21\" xl: chest 43\"| length 21.5\" Care:   Gentle machine wash cold. do not bleach. Tumble dry low. warm iron if needed. do not spot treat, or add softener",
+  "category": "decor",
+  "images": [
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830238/products/zy4z5v3rvonukxcqawnm.jpg",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830246/products/gcnrx7uv6exumumtmiwd.jpg",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830249/products/zy2cdphslllakxazcdzo.jpg"
+  ],
+  "price": 64.95,
+  "discountPrice": 60,
+  "isOnSale": true,
+  "variants": [
+    {
+      "size": "S",
+      "stock": 6,
+      "_id": {
+        "$oid": "69f7896a7a4137de03b1f151"
+      }
+    }
+  ],
+  "__v": 0,
+  "brand": "Generic"
+},
+{
+  "_id": {
+    "$oid": "69f78a517a4137de03b1f15e"
+  },
+  "name": "The Bolder Mug - 16oz",
+  "description": "Crafted by a Denver-based ceramicist, these exquisite mugs boast a sturdy build and a flawless fit in your hand. The exterior is adorned with a sophisticated matte glaze, while the interior gleams with a luxurious gloss. You'll find yourself reaching for it every morning.",
+  "details": "16 oz | 3 inches in diameter x 4.5 inches tall Hand-thrown on the wheel  Due to the handmade nature, mugs may slightly vary in color and size Handmade in Denver, CO",
+  "careFit": "",
+  "category": "kitchen-dining",
+  "images": [
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830478/products/pl6oxhuqwdyrz1gddljw.webp",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830479/products/zlptqk6r9izqxxlpvyvj.webp",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830481/products/fltxkqz7etpveijq99od.webp"
+  ],
+  "price": null,
+  "discountPrice": null,
+  "isOnSale": false,
+  "variants": [
+    {
+      "size": "S",
+      "stock": 4,
+      "_id": {
+        "$oid": "69f78a517a4137de03b1f15f"
+      }
+    },
+    {
+      "size": "L",
+      "stock": 6,
+      "_id": {
+        "$oid": "69f78a517a4137de03b1f160"
+      }
+    }
+  ],
+  "__v": 0,
+  "brand": "H&M"
+},
+{
+  "_id": {
+    "$oid": "69f78a577a4137de03b1f16f"
+  },
+  "name": "The Bolder Mug - 16oz",
+  "description": "Crafted by a Denver-based ceramicist, these exquisite mugs boast a sturdy build and a flawless fit in your hand. The exterior is adorned with a sophisticated matte glaze, while the interior gleams with a luxurious gloss. You'll find yourself reaching for it every morning.",
+  "details": "16 oz | 3 inches in diameter x 4.5 inches tall Hand-thrown on the wheel  Due to the handmade nature, mugs may slightly vary in color and size Handmade in Denver, CO",
+  "careFit": "",
+  "category": "kitchen/dinning",
+  "images": [
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830484/products/hw3wgk5gxjpvrvwtu0tu.webp",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830485/products/be8qzkh3ihtyxndagffh.webp",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830487/products/ybr6tdl6dhoms2vgajoi.webp"
+  ],
+  "price": null,
+  "discountPrice": null,
+  "isOnSale": false,
+  "variants": [
+    {
+      "size": "S",
+      "stock": 4,
+      "_id": {
+        "$oid": "69f78a577a4137de03b1f170"
+      }
+    },
+    {
+      "size": "L",
+      "stock": 6,
+      "_id": {
+        "$oid": "69f78a577a4137de03b1f171"
+      }
+    }
+  ],
+  "__v": 0,
+  "brand": "H&M"
+},
+{
+  "_id": {
+    "$oid": "6a356854ab2018791619f539"
+  },
+  "name": "Clarifying Face Serum",
+  "description": "Mera's Clarifying Face Serum is formulated with organic ingredients to address the concerns oily, blemish-prone skin. This serum is lightweight, fast absorbing, and non-comedogenic, meaning it delivers skin-supporting compounds without clogging pores. ",
+  "details": "Massage 4-6 drops of serum into the face and neck in gentle, circular motions.   See the whole line by Mera Wellness.  1fl oz Skin Concerns: Oily + Blemish-prone skin Made in Boulder, Colorado",
+  "careFit": "Ingredients: *Grapeseed (Vitis Vinifera) Oil, *Safflower (Carthamus Tinctorius) Oil, *Argan (Argania Spinosa) Oil, *Hemp (Cannabis Sativa) Oil, *Pumpkin ( Cucurbita Pepo) Seed Oil, Essential Oils of *Rosemary (Rosmarinus Officinalis), *Frankincense (Boswellia Frereana), *Lavender (Lavandula Angustifolia), and *Lemongrass (Cymbopogon Citratus).  *Certified Organic ",
+  "category": "",
+  "brand": "H&M",
+  "images": [
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1781885049/products/mtyid4rnpmyixg0weh59.webp"
+  ],
+  "price": 42,
+  "discountPrice": 40,
+  "isOnSale": true,
+  "variants": [
+    {
+      "size": "S",
+      "stock": 4,
+      "_id": {
+        "$oid": "6a356854ab2018791619f53a"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a39058ba8a56e3fbd3dcd08"
+  },
+  "name": "Clarifying Face Serum",
+  "description": "Mera's Clarifying Face Serum is formulated with organic ingredients to address the concerns oily, blemish-prone skin. This serum is lightweight, fast absorbing, and non-comedogenic, meaning it delivers skin-supporting compounds without clogging pores. ",
+  "details": "Massage 4-6 drops of serum into the face and neck in gentle, circular motions.   See the whole line by Mera Wellness.  1fl oz Skin Concerns: Oily + Blemish-prone skin Made in Boulder, Colorado",
+  "careFit": "Ingredients: *Grapeseed (Vitis Vinifera) Oil, *Safflower (Carthamus Tinctorius) Oil, *Argan (Argania Spinosa) Oil, *Hemp (Cannabis Sativa) Oil, *Pumpkin ( Cucurbita Pepo) Seed Oil, Essential Oils of *Rosemary (Rosmarinus Officinalis), *Frankincense (Boswellia Frereana), *Lavender (Lavandula Angustifolia), and *Lemongrass (Cymbopogon Citratus).  *Certified Organic ",
+  "category": "beauty",
+  "brand": "Calvin Klein",
+  "images": [
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1786380838/products/jywnyzmnaidjregekzku.webp",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1786380839/products/glqwfu5ypsy9h966ybdn.webp",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1786380840/products/xyjol1ur4djzekhdso1s.webp"
+  ],
+  "price": 42,
+  "discountPrice": 40,
+  "isOnSale": true,
+  "variants": [
+    {
+      "size": "S",
+      "stock": 7,
+      "_id": {
+        "$oid": "6a39058ba8a56e3fbd3dcd09"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a7a0096a82f978ca8bada46"
+  },
+  "name": "Cleansing Balm",
+  "description": "A rich cleansing balm that melts into an oil to remove makeup, sunscreen, and daily buildup. Made with Safflower Seed Oil, Avocado Oil, and Sesame Oil, this nourishing formula helps cleanse without stripping, leaving skin soft, supple, and moisturized.",
+  "details": "1.4 oz | 40 mL Scent profile: geranium, balsam, and bergamot mint Skin type + concerns: all skin types — dryness, makeup removal, sunscreen removal, and daily buildup Rich balm-to-oil texture Ideal as the first step in a double cleanse routine Helps remove makeup, sunscreen, and surface impurities Soothes the feeling of sensitivity and visibly calms redness. Helps support collagen production and maintain the skin’s natural moisture barrier.",
+  "careFit": "Carthamus Tinctorius (Safflower) Seed Oil*, Cera Alba (Beeswax, Cire d'abeille), Sesamum Indicum (Sesame) Seed Oil*, Persea Gratissima (Avocado) Oil, Helianthus Annuus (Sunflower) Seed Oil, Rosmarinus Officinalis (Rosemary) Leaf Oil, Mentha Citrata (Bergamot Mint) Oil, Lavandula Angustifolia (Lavender) Oil, Juniperus Mexicana (Cedarwood) Oil, Cupressus Sempervirens (Cypress) Leaf/Nut/Stem Oil, Copaifera Officinalis (Balsam Copaiba) Resin, Citrus Aurantium Dulcis (Orange) Peel Oil, Tocopherol, Ethylhexylglycerin, Phenoxyethanol, Limonene, Linalool. *Certified Organic",
+  "category": "beauty",
+  "brand": "LOreal",
+  "images": [
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1786380925/products/ol3sorsfpfgjs6eqabj9.webp",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1786380927/products/r7x87hbmdtorbcqwlgbo.webp",
+    "https://res.cloudinary.com/dl92mxv5i/image/upload/v1786380928/products/kggkmfnizh6hilhnutrg.webp"
+  ],
+  "price": 42,
+  "discountPrice": 40,
+  "isOnSale": true,
+  "variants": [
+    {
+      "size": "S",
+      "stock": 20,
+      "_id": {
+        "$oid": "6a7a0096a82f978ca8bada47"
+      }
+    }
+  ],
+  "__v": 0
+}]

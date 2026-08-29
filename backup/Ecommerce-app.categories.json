@@ -1,0 +1,238 @@
+[{
+  "_id": {
+    "$oid": "6a79fc24a82f978ca8b67ee6"
+  },
+  "name": "Kitchen & Dining",
+  "slug": "kitchen-dining",
+  "images": [],
+  "description": "Stylish and practical essentials for cooking, serving, dining, and creating a welcoming table setting.",
+  "status": true,
+  "createdAt": {
+    "$date": "2026-08-10T16:28:20.378Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-10T16:28:20.378Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a79fc3aa82f978ca8b67ee9"
+  },
+  "name": "Pillows & Cushions",
+  "slug": "pillows-cushions",
+  "images": [],
+  "description": "Comfortable and stylish pillows and cushions that bring softness, color, and character to your home.",
+  "status": true,
+  "createdAt": {
+    "$date": "2026-08-10T16:28:42.608Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-10T16:28:42.608Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a79fc4ba82f978ca8b67eec"
+  },
+  "name": "Books",
+  "slug": "books",
+  "images": [],
+  "description": "Discover inspiring and entertaining books perfect for reading, learning, relaxing, or displaying at home.",
+  "status": true,
+  "createdAt": {
+    "$date": "2026-08-10T16:28:59.181Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-10T16:28:59.181Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a79fc62a82f978ca8b67eef"
+  },
+  "name": "Storage & Organization",
+  "slug": "storage-organization",
+  "images": [],
+  "description": "Smart and stylish storage solutions that help keep your home organized, tidy, and clutter-free.",
+  "status": true,
+  "createdAt": {
+    "$date": "2026-08-10T16:29:22.675Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-10T16:29:22.675Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a79fc7ea82f978ca8b67ef2"
+  },
+  "name": "Body Care",
+  "slug": "body-care",
+  "images": [],
+  "description": "Everyday body care essentials designed to keep your skin feeling fresh, clean, soft, and nourished.",
+  "status": false,
+  "createdAt": {
+    "$date": "2026-08-10T16:29:50.878Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-10T16:29:50.878Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a79fc9ea82f978ca8b67ef5"
+  },
+  "name": "Beauty",
+  "slug": "beauty",
+  "images": [],
+  "description": "Beauty essentials selected to enhance your everyday routine and bring out your natural confidence.",
+  "status": true,
+  "createdAt": {
+    "$date": "2026-08-10T16:30:22.897Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-10T16:30:22.897Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a79fcb2a82f978ca8b67ef8"
+  },
+  "name": "Hair Care",
+  "slug": "hair-care",
+  "images": [],
+  "description": "Hair care essentials designed to nourish, protect, and maintain healthy-looking, beautiful hair.",
+  "status": false,
+  "createdAt": {
+    "$date": "2026-08-10T16:30:42.190Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-10T16:30:42.190Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a79fcc8a82f978ca8b67efb"
+  },
+  "name": "Accessories",
+  "slug": "accessories",
+  "images": [],
+  "description": "Stylish accessories that add the perfect finishing touch to your everyday look.",
+  "status": false,
+  "createdAt": {
+    "$date": "2026-08-10T16:31:04.886Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-10T16:31:04.886Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a79fcdfa82f978ca8b67efe"
+  },
+  "name": "Wellness",
+  "slug": "wellness",
+  "images": [],
+  "description": "Explore the latest home arrivals, from stylish decor and useful essentials to fresh interior accents.",
+  "status": false,
+  "createdAt": {
+    "$date": "2026-08-10T16:31:27.359Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-10T16:31:27.359Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a79fcf1a82f978ca8b67f01"
+  },
+  "name": "New In Body",
+  "slug": "new-in-body",
+  "images": [],
+  "description": "Discover the newest beauty, body care, skincare, and wellness products added to our collection",
+  "status": false,
+  "createdAt": {
+    "$date": "2026-08-10T16:31:45.598Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-10T16:31:45.598Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a79fd09a82f978ca8b67f04"
+  },
+  "name": "New In Home",
+  "slug": "new-in-home",
+  "images": [],
+  "description": "Explore the latest home arrivals, from stylish decor and useful essentials to fresh interior accents.",
+  "status": false,
+  "createdAt": {
+    "$date": "2026-08-10T16:32:09.173Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-10T16:32:09.173Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a79fd1ca82f978ca8b67f07"
+  },
+  "name": "Trending Now",
+  "slug": "trending-now",
+  "images": [],
+  "description": "Discover the products everyone is loving right now, from popular essentials to stylish new favorites.",
+  "status": false,
+  "createdAt": {
+    "$date": "2026-08-10T16:32:28.240Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-10T16:32:28.240Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a79fd2aa82f978ca8b67f0a"
+  },
+  "name": "Best Sellers",
+  "slug": "best-sellers",
+  "images": [],
+  "description": "Shop our most-loved products chosen by customers for their quality, style, and everyday appeal.",
+  "status": true,
+  "createdAt": {
+    "$date": "2026-08-10T16:32:42.647Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-10T16:32:42.647Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a8ab40c61de2dff8ffd5993"
+  },
+  "name": "Mouth Tape",
+  "slug": "decor",
+  "images": [],
+  "description": "dddddd",
+  "status": false,
+  "createdAt": {
+    "$date": "2026-08-23T08:49:16.761Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-23T08:49:43.141Z"
+  },
+  "__v": 0
+}]

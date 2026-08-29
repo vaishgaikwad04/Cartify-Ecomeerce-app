@@ -1,0 +1,146 @@
+[{
+  "_id": {
+    "$oid": "6a30af6f6ba3257f61df329c"
+  },
+  "userId": {
+    "$oid": "6a2d131ce1196147102a91a9"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "69f789547a4137de03b1f143"
+      },
+      "productName": "Akazi Honey Pot Basket",
+      "productImage": "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830224/products/zx86fobfm0uywe9w2ggl.jpg",
+      "productPrice": 60,
+      "size": "S",
+      "quantity": 21,
+      "_id": {
+        "$oid": "6a657d64931b9ec7db73850a"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-06-16T02:05:35.873Z"
+  },
+  "updatedAt": {
+    "$date": "2026-07-26T16:30:01.953Z"
+  },
+  "__v": 20
+},
+{
+  "_id": {
+    "$oid": "6a6470a7478a92665cdc3942"
+  },
+  "userId": {
+    "$oid": "6a57b9547192c3b9cd761e2f"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "69f788a47a4137de03b1f0d7"
+      },
+      "productName": "Alanis V Neck - Vintage Black",
+      "productImage": "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830041/products/gpihesjuca4wyecycfmy.webp",
+      "productPrice": 60,
+      "size": "M",
+      "quantity": 1,
+      "_id": {
+        "$oid": "6a6470a7478a92665cdc3943"
+      }
+    },
+    {
+      "productId": {
+        "$oid": "69f788a47a4137de03b1f0d7"
+      },
+      "productName": "Alanis V Neck - Vintage Black",
+      "productImage": "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830041/products/gpihesjuca4wyecycfmy.webp",
+      "productPrice": 60,
+      "size": "XXL",
+      "quantity": 6,
+      "_id": {
+        "$oid": "6a647214478a92665cdc399d"
+      }
+    },
+    {
+      "productId": {
+        "$oid": "69f788927a4137de03b1f0ae"
+      },
+      "productName": "Alanis V Neck - Vintage Black",
+      "productImage": "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830031/products/wpmfsdrwwtag81gdpaug.webp",
+      "productPrice": 60,
+      "size": "XXL",
+      "quantity": 6,
+      "_id": {
+        "$oid": "6a647231478a92665cdc774b"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-07-25T08:15:35.067Z"
+  },
+  "updatedAt": {
+    "$date": "2026-07-25T08:38:20.460Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "6a75b95a508f334750c4dc02"
+  },
+  "userId": {
+    "$oid": "6a75b7d8b2826669dfbd42af"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "6a7a0096a82f978ca8bada46"
+      },
+      "productName": "Cleansing Balm",
+      "productImage": "https://res.cloudinary.com/dl92mxv5i/image/upload/v1786380925/products/ol3sorsfpfgjs6eqabj9.webp",
+      "productPrice": 40,
+      "size": "S",
+      "quantity": 2,
+      "_id": {
+        "$oid": "6a7ca761a6d90feeb90e24c3"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-08-07T10:54:18.915Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-12T17:04:08.604Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "6a7cab81a6d90feeb9106a23"
+  },
+  "userId": {
+    "$oid": "6a7caaf6a6d90feeb90f03f0"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "6a7a0096a82f978ca8bada46"
+      },
+      "productName": "Cleansing Balm",
+      "productImage": "https://res.cloudinary.com/dl92mxv5i/image/upload/v1786380925/products/ol3sorsfpfgjs6eqabj9.webp",
+      "productPrice": 40,
+      "size": "S",
+      "quantity": 26,
+      "_id": {
+        "$oid": "6a7cab81a6d90feeb9106a24"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-08-12T17:21:05.079Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-17T09:38:09.870Z"
+  },
+  "__v": 7
+}]

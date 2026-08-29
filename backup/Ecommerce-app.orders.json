@@ -1,0 +1,341 @@
+[{
+  "_id": {
+    "$oid": "6a76f9f8fcb474e8b3755555"
+  },
+  "userId": {
+    "$oid": "6a75b7d8b2826669dfbd42af"
+  },
+  "items": [
+    {
+      "productName": "Alanis V Neck - Vintage Black",
+      "productPrice": 60,
+      "quantity": 5,
+      "_id": {
+        "$oid": "6a76f9f8fcb474e8b3755556"
+      }
+    }
+  ],
+  "total": 300,
+  "status": "cancelled",
+  "paymentStatus": "refunded",
+  "stripeSessionId": "cs_test_a1jQqytBwQbqr1foX5oWs3d4J9kY9h9lVXdVsT7fgqSFe0opnyRa6qyR6r",
+  "createdAt": {
+    "$date": "2026-08-08T09:42:16.418Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-12T16:34:08.082Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a7860c236f5acc9298eaa6d"
+  },
+  "userId": {
+    "$oid": "6a75b7d8b2826669dfbd42af"
+  },
+  "items": [
+    {
+      "productName": "Alanis V Neck - Vintage Black",
+      "productPrice": 60,
+      "quantity": 5,
+      "image": "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830041/products/gpihesjuca4wyecycfmy.webp",
+      "_id": {
+        "$oid": "6a7860c236f5acc9298eaa6e"
+      }
+    }
+  ],
+  "total": 300,
+  "status": "cancelled",
+  "paymentStatus": "refunded",
+  "stripeSessionId": "cs_test_a1y7TYGTynnMMzbDg88gWL1klAlLB6CIkmbjrATH0ZelPN9D57a9t7aAx8",
+  "createdAt": {
+    "$date": "2026-08-09T11:13:06.489Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-12T16:34:13.826Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a7981791304a0227bd98217"
+  },
+  "userId": {
+    "$oid": "6a75b7d8b2826669dfbd42af"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "69f788a47a4137de03b1f0d7"
+      },
+      "productName": "Alanis V Neck - Vintage Black",
+      "productPrice": 60,
+      "quantity": 5,
+      "image": "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830041/products/gpihesjuca4wyecycfmy.webp",
+      "_id": {
+        "$oid": "6a7981791304a0227bd98218"
+      }
+    }
+  ],
+  "addressId": {
+    "$oid": "6a797b273c7743dd1429d9d5"
+  },
+  "shippingAddress": {
+    "fullName": "Om Gaikwad",
+    "phone": "8668507235",
+    "addressLine": "p[ ouikl",
+    "city": "iokiokiokiok",
+    "state": "ioioioioioioio",
+    "postalCode": "4333333",
+    "country": "India"
+  },
+  "total": 300,
+  "status": "cancelled",
+  "paymentStatus": "paid",
+  "stripeSessionId": "cs_test_a1T9VXEENulBTseBC53uYTapqXHEFaySSZX6eYN2Izjh6XdYSApdkMHWeH",
+  "createdAt": {
+    "$date": "2026-08-10T07:44:57.898Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-12T08:13:37.492Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a7b176d0f4c92676c3c223b"
+  },
+  "userId": {
+    "$oid": "6a75b7d8b2826669dfbd42af"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "69f788a47a4137de03b1f0d7"
+      },
+      "productName": "Alanis V Neck - Vintage Black",
+      "productPrice": 60,
+      "quantity": 5,
+      "image": "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830041/products/gpihesjuca4wyecycfmy.webp",
+      "_id": {
+        "$oid": "6a7b176d0f4c92676c3c223c"
+      }
+    }
+  ],
+  "addressId": {
+    "$oid": "6a797b273c7743dd1429d9d5"
+  },
+  "shippingAddress": {
+    "fullName": "Om Gaikwad",
+    "phone": "8668507235",
+    "addressLine": "p[ ouikl",
+    "city": "iokiokiokiok",
+    "state": "ioioioioioioio",
+    "postalCode": "4333333",
+    "country": "India"
+  },
+  "total": 300,
+  "status": "shipped",
+  "paymentStatus": "paid",
+  "stripeSessionId": "cs_test_a1og3IrKHYIOddsUaslb0mbT4cQU5iYPopEouJMBp9XMGHq7bps9eFocSj",
+  "createdAt": {
+    "$date": "2026-08-11T12:37:01.522Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-12T16:44:08.421Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a7ca793a6d90feeb90e251e"
+  },
+  "userId": {
+    "$oid": "6a75b7d8b2826669dfbd42af"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "6a7a0096a82f978ca8bada46"
+      },
+      "productName": "Cleansing Balm",
+      "productPrice": 40,
+      "quantity": 2,
+      "image": "https://res.cloudinary.com/dl92mxv5i/image/upload/v1786380925/products/ol3sorsfpfgjs6eqabj9.webp",
+      "_id": {
+        "$oid": "6a7ca793a6d90feeb90e251f"
+      }
+    }
+  ],
+  "addressId": {
+    "$oid": "6a7c84d917e33e4b9f45570b"
+  },
+  "shippingAddress": {
+    "fullName": "Om Gaikwad",
+    "phone": "8668507235",
+    "addressLine": "p[ ouikl",
+    "city": "aurangabad",
+    "state": "maharashtra",
+    "postalCode": "4333333",
+    "country": "India"
+  },
+  "total": 80,
+  "status": "shipped",
+  "paymentStatus": "pending",
+  "stripeSessionId": "cs_test_a1DA1ZLgQgaYzDcxSXpgrfzVuEnl8vEGSaIPVoXVY4RIrewVerA6OQoqKb",
+  "createdAt": {
+    "$date": "2026-08-12T17:04:19.363Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-12T17:12:08.614Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a7cabbfa6d90feeb9106a6f"
+  },
+  "userId": {
+    "$oid": "6a7caaf6a6d90feeb90f03f0"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "6a7a0096a82f978ca8bada46"
+      },
+      "productName": "Cleansing Balm",
+      "productPrice": 40,
+      "quantity": 9,
+      "image": "https://res.cloudinary.com/dl92mxv5i/image/upload/v1786380925/products/ol3sorsfpfgjs6eqabj9.webp",
+      "_id": {
+        "$oid": "6a7cabbfa6d90feeb9106a70"
+      }
+    }
+  ],
+  "addressId": {
+    "$oid": "6a7cab97a6d90feeb9106a36"
+  },
+  "shippingAddress": {
+    "fullName": "sahil",
+    "phone": "8668507235",
+    "addressLine": "p[ ouikl",
+    "city": "aurangabad",
+    "state": "maharashtra",
+    "postalCode": "433",
+    "country": "India"
+  },
+  "total": 360,
+  "status": "shipped",
+  "paymentStatus": "paid",
+  "stripeSessionId": "cs_test_a1QItIFyAxjNeiU4AWi1MrrJXcifnHNGWqkRSFhdPK2NlSa3Q0lDDqdO4W",
+  "createdAt": {
+    "$date": "2026-08-12T17:22:07.927Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-24T09:51:13.296Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a82ca2af961c7c4d267caa5"
+  },
+  "userId": {
+    "$oid": "6a7caaf6a6d90feeb90f03f0"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "6a7a0096a82f978ca8bada46"
+      },
+      "productName": "Cleansing Balm",
+      "productPrice": 40,
+      "quantity": 9,
+      "image": "https://res.cloudinary.com/dl92mxv5i/image/upload/v1786380925/products/ol3sorsfpfgjs6eqabj9.webp",
+      "_id": {
+        "$oid": "6a82ca2af961c7c4d267caa6"
+      }
+    },
+    {
+      "productId": {
+        "$oid": "69f788927a4137de03b1f0ae"
+      },
+      "productName": "Alanis V Neck - Vintage Black",
+      "productPrice": 60,
+      "quantity": 1,
+      "image": "https://res.cloudinary.com/dl92mxv5i/image/upload/v1777830031/products/wpmfsdrwwtag81gdpaug.webp",
+      "_id": {
+        "$oid": "6a82ca2af961c7c4d267caa7"
+      }
+    }
+  ],
+  "addressId": {
+    "$oid": "6a7cab97a6d90feeb9106a36"
+  },
+  "shippingAddress": {
+    "fullName": "sahil",
+    "phone": "8668507235",
+    "addressLine": "p[ ouikl",
+    "city": "aurangabad",
+    "state": "maharashtra",
+    "postalCode": "433",
+    "country": "India"
+  },
+  "total": 420,
+  "status": "pending",
+  "paymentStatus": "pending",
+  "stripeSessionId": "cs_test_b15DzRMFLaqVhYkPm3HxLmNSoOBA5NT8yVQ735h69kpH0Y8oV81ynuGCO3",
+  "createdAt": {
+    "$date": "2026-08-17T08:45:30.328Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-24T09:51:13.296Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a82d820e70352435bc87d8d"
+  },
+  "userId": {
+    "$oid": "6a7caaf6a6d90feeb90f03f0"
+  },
+  "items": [
+    {
+      "productId": {
+        "$oid": "6a7a0096a82f978ca8bada46"
+      },
+      "productName": "Cleansing Balm",
+      "productPrice": 40,
+      "quantity": 26,
+      "image": "https://res.cloudinary.com/dl92mxv5i/image/upload/v1786380925/products/ol3sorsfpfgjs6eqabj9.webp",
+      "_id": {
+        "$oid": "6a82d820e70352435bc87d8e"
+      }
+    }
+  ],
+  "addressId": {
+    "$oid": "6a7cab97a6d90feeb9106a36"
+  },
+  "shippingAddress": {
+    "fullName": "sahil",
+    "phone": "8668507235",
+    "addressLine": "p[ ouikl",
+    "city": "aurangabad",
+    "state": "maharashtra",
+    "postalCode": "433",
+    "country": "India"
+  },
+  "total": 1040,
+  "status": "pending",
+  "paymentStatus": "pending",
+  "stripeSessionId": "cs_test_a12gXUb7qBi7DuLylXYvJZD1faTwdwcKvJPZvFszgGO7xxlXXHnq1q07p0",
+  "createdAt": {
+    "$date": "2026-08-17T09:45:04.226Z"
+  },
+  "updatedAt": {
+    "$date": "2026-08-24T09:51:13.296Z"
+  },
+  "__v": 0
+}]
