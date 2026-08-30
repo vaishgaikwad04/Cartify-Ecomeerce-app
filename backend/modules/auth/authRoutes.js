@@ -6,6 +6,7 @@ import {
   loginUser,
   registerUser,
   logout,
+  getCurrentUser,
 } from "./authController.js";
 
 import { authMiddleware } from "../../middleware/authMiddleware.js";
@@ -19,6 +20,8 @@ const router = express.Router();
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.post("/logout", logout);
+
+router.get("/me", authMiddleware, getCurrentUser);
 
 
 
