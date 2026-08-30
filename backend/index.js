@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 
 import connectToDb from "./db/config.js";
+
 import authRoutes from "./modules/auth/authRoutes.js";
 import productRoutes from "./modules/products/productRoutes.js";
 import cartRoutes from "./modules/cart/cartRoutes.js";
@@ -13,18 +14,19 @@ import categoryRoutes from "./modules/category/categoryRoutes.js";
 import couponRoutes from "./modules/coupon/couponRoutes.js";
 import reviewRoutes from "./modules/reviews/reviewRoutes.js";
 import settingsRoutes from "./modules/settings/settingsRoutes.js";
-import addressRoutes from "./modules/address/addressRoutes.js"
+import addressRoutes from "./modules/address/addressRoutes.js";
 import notificationRoutes from "./modules/notification/notificationRoutes.js";
 
 dotenv.config();
 
 const app = express();
+
 const PORT = process.env.PORT || 5000;
 
+// ================================
+// CORS
+// ================================
 
-
-// Middleware
-// Middleware
 const allowedOrigins = [
   "http://localhost:5173",
   "https://peppy-quokka-eb689e.netlify.app",
@@ -37,16 +39,23 @@ app.use(
   })
 );
 
-app.use(express.json());
-app.use(cookieParser());
+// ================================
+// MIDDLEWARE
+// ================================
 
 app.use(express.json());
 app.use(cookieParser());
 
-// Database
+// ================================
+// DATABASE
+// ================================
+
 connectToDb();
 
-// Routes
+// ================================
+// ROUTES
+// ================================
+
 app.use("/auth", authRoutes);
 app.use("/addToCart", cartRoutes);
 app.use("/api/products", productRoutes);
@@ -59,6 +68,10 @@ app.use("/settings", settingsRoutes);
 app.use("/address", addressRoutes);
 app.use("/notifications", notificationRoutes);
 
+// ================================
+// SERVER
+// ================================
+
 app.listen(PORT, () => {
-  console.log(`✅ Server running on http://localhost:${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });

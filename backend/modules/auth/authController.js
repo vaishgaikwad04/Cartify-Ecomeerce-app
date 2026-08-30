@@ -27,9 +27,9 @@ export const registerUser = async (req, res) => {
     return res.status(201).json({
       message: "User registered successfully!",
     });
-
   } catch (error) {
     console.error(error);
+
     return res.status(500).json({
       message: "Something went wrong.",
     });
@@ -66,43 +66,44 @@ export const loginUser = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user._id, email: user.email },
+      {
+        id: user._id,
+        email: user.email,
+      },
       process.env.JWT_SECRET
     );
 
-    // ✅ STORE TOKEN IN COOKIE
+    // Production: frontend and backend are on different sites
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false, // true in production
-      sameSite: "Lax",
+      secure: true,
+      sameSite: "none",
     });
 
-   res.status(200).json({
-  message: "Login successful",
-  token,
-  user: {
-    _id: user._id,
-    name: user.name,
-    email: user.email,
-    role: user.role,
-  },
-});
-
+    return res.status(200).json({
+      message: "Login successful",
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
   } catch (err) {
     console.error("Login error:", err);
-    res.status(500).json({
+
+    return res.status(500).json({
       error: "Server error",
     });
   }
 };
 
+// LOGOUT
 export const logout = (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production"
-      ? "none"
-      : "lax",
+    secure: true,
+    sameSite: "none",
   });
 
   return res.status(200).json({
@@ -114,7 +115,9 @@ export const logout = (req, res) => {
 // GET CURRENT USER
 export const getCurrentUser = async (req, res) => {
   try {
-    const user = await authModel.findById(req.user.id).select("-password");
+    const user = await authModel
+      .findById(req.user.id)
+      .select("-password");
 
     if (!user) {
       return res.status(401).json({
@@ -125,7 +128,6 @@ export const getCurrentUser = async (req, res) => {
     return res.status(200).json({
       user,
     });
-
   } catch (error) {
     console.error("Get current user error:", error);
 
@@ -134,7 +136,3 @@ export const getCurrentUser = async (req, res) => {
     });
   }
 };
-
-
-
-
