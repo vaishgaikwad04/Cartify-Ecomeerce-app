@@ -1,9 +1,9 @@
 
 import express from "express";
-import {getHello } from "./dashboardController.js";
+import {getSearchItem } from "./dashboardController.js";
 
 const router = express.Router();
 
-router.get("/search", getHello);
+router.get("/search", getSearchItem);
 
 export default router;

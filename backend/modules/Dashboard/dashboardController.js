@@ -34,9 +34,3 @@ export const getSearchItem = async (req, res) => {
   }
 };
 
-export const getHello = (req, res) => {
-  return res.status(200).json({
-    success: true,
-    message: "Search route working",
-  });
-};
