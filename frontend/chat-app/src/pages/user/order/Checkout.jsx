@@ -1,14 +1,8 @@
-import {
-  FiMapPin,
-  FiCheck,
-  FiPlus,
-  FiArrowLeft,
-  FiShoppingBag,
-} from "react-icons/fi";
+import { FiMapPin, FiCheck, FiPlus, FiArrowLeft } from "react-icons/fi";
 
 import { useAddress } from "../../../hooks/user/useAddress";
-import { useCart } from "../../../hooks/user/useCart";
 import { useCheckout } from "../../../hooks/user/useCheckout";
+import { useCart } from "../../../context/CartContext";
 
 import Button from "../../../components/ui/Button";
 
@@ -16,7 +10,7 @@ const Checkout = () => {
   // Get address data.
   const { addresses = [], loading: addressLoading } = useAddress();
 
-  // Get cart data and total price.
+  // Get cart data and total price from shared CartContext.
   const { cartData = [], totalPrice = 0 } = useCart();
 
   // Get checkout state and actions.
@@ -147,7 +141,7 @@ const Checkout = () => {
                 </div>
               </div>
 
-              {/* Show loading state */}
+              {/* Loading state */}
               {addressLoading ? (
                 <div className="space-y-4">
                   {[1, 2].map((item) => (
@@ -164,7 +158,7 @@ const Checkout = () => {
                   ))}
                 </div>
               ) : addresses.length === 0 ? (
-                /* Show message when no address exists */
+                /* No address */
                 <div
                   className={`
                     rounded-xl
@@ -200,7 +194,6 @@ const Checkout = () => {
                     Add a delivery address before placing your order.
                   </p>
 
-                  {/* Go to address page */}
                   <Button
                     className="mt-5"
                     label="Add Address"
@@ -210,10 +203,9 @@ const Checkout = () => {
                   />
                 </div>
               ) : (
-                /* Show available addresses */
+                /* Available addresses */
                 <div className="space-y-3">
                   {addresses.map((address) => {
-                    // Check whether this address is selected.
                     const selected = selectedAddressId === address._id;
 
                     return (
@@ -243,7 +235,7 @@ const Checkout = () => {
                         `}
                       >
                         <div className="flex gap-3 sm:gap-4">
-                          {/* Selected address indicator */}
+                          {/* Selected indicator */}
                           <div
                             className={`
                               mt-1
@@ -272,7 +264,6 @@ const Checkout = () => {
 
                           {/* Address information */}
                           <div className="min-w-0 flex-1">
-                            {/* Name and default label */}
                             <div className="flex flex-wrap items-center gap-2">
                               <h3 className="font-semibold">
                                 {address.fullName}
@@ -299,7 +290,7 @@ const Checkout = () => {
                               )}
                             </div>
 
-                            {/* Phone number */}
+                            {/* Phone */}
                             <p
                               className={`
                                 mt-1
@@ -311,7 +302,7 @@ const Checkout = () => {
                               {address.phone}
                             </p>
 
-                            {/* Full address */}
+                            {/* Address */}
                             <p
                               className={`
                                 mt-2
@@ -373,7 +364,10 @@ const Checkout = () => {
               {/* Cart products */}
               <div className="mt-6 space-y-4">
                 {cartData.map((item) => (
-                  <div key={item.productId} className="flex gap-3">
+                  <div
+                    key={`${item.productId}-${item.size}`}
+                    className="flex gap-3"
+                  >
                     {/* Product image */}
                     <div
                       className={`
@@ -411,6 +405,7 @@ const Checkout = () => {
                         `}
                       >
                         Qty: {item.quantity}
+                        {item.size && ` • Size: ${item.size}`}
                       </p>
                     </div>
 
@@ -479,7 +474,7 @@ const Checkout = () => {
                 disabled={paymentLoading || !selectedAddressId}
               />
 
-              {/* Explain why payment is disabled */}
+              {/* Explain disabled button */}
               {!selectedAddressId && addresses.length > 0 && (
                 <p
                   className={`

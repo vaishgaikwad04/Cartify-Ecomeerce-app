@@ -4,6 +4,7 @@ import {
   getAllOrders,
   updateOrderStatus,
 } from "../../../api/user/OrderApi";
+import toast from "react-hot-toast";
 
 export const useOrders = () => {
   // Get current theme
@@ -43,14 +44,10 @@ export const useOrders = () => {
   const fetchedOrders = async () => {
     try {
       setLoading(true);
-
       const res = await getAllOrders();
-
-      console.log("Orders:", res?.data);
-
       setOrderData(res?.data?.allOrders || []);
     } catch (error) {
-      console.log(
+     toast.error(
         "Order fetch error:",
         error?.response?.data || error
       );
@@ -68,11 +65,8 @@ export const useOrders = () => {
   // OPEN MANAGE ORDER MODAL
   const handleManageOrder = (order) => {
     setSelectedOrder(order);
-
     setOrderStatus(order?.status || "processing");
-
     setPaymentStatus(order?.paymentStatus || "pending");
-
     setShowManageModal(true);
   };
 
@@ -82,14 +76,13 @@ export const useOrders = () => {
 
     try {
       setUpdatingStatus(true);
-
       const res = await updateOrderStatus(
         selectedOrder._id,
         orderStatus,
         paymentStatus
       );
 
-      console.log("Order updated:", res?.data);
+      toast.success(res?.data?.message);
 
       // Update order in local state
       setOrderData((prevOrders) =>
@@ -114,7 +107,7 @@ export const useOrders = () => {
       // Close modal
       setShowManageModal(false);
     } catch (error) {
-      console.log(
+      toast.error(
         "Update order error:",
         error?.response?.data || error
       );

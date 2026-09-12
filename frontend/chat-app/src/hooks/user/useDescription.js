@@ -5,6 +5,7 @@ import { fetchSingleProduct } from "../../api/user/ProductApi";
 import { NotificationContext } from "../../context/NotificationContext";
 import toast from "react-hot-toast";
 import { ThemeContext } from "../../context/ThemeContext";
+import { CartContext } from "../../context/CartContext";
 import {
   deleteReview,
   fetchReview,
@@ -20,6 +21,7 @@ export const useDescription = () => {
 
   // Get current theme
   const { theme } = useContext(ThemeContext);
+  const { fetchCart } = useContext(CartContext);
   const isDark = theme === "Dark Mode";
 
   // Get notification permission
@@ -118,7 +120,7 @@ export const useDescription = () => {
         if (!selectedVariant) {
           return {
             success: false,
-            message: "Please select a size",
+            message: "Selected size is not available",
           };
         }
 
@@ -179,13 +181,12 @@ export const useDescription = () => {
   // Handle cart button and show notification
   const handleCart = async () => {
     const result = await handleAddToCart();
+    await fetchCart();
 
     if (!result) return;
 
     if (result.success) {
-      if (allowNotification) {
-        toast.success(result.message);
-      }
+      toast.success(result.message);
     } else {
       toast.error(result.message);
     }

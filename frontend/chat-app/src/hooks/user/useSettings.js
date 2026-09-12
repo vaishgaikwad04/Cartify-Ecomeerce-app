@@ -70,7 +70,6 @@ export const useSettings = () => {
         setAllowNotification(data.notification);
       }
 
-      console.log("User settings loaded");
     } catch (error) {
       console.error(
         "Settings fetch error:",
@@ -90,7 +89,6 @@ export const useSettings = () => {
     try {
       const res = await updateSettings(settings);
 
-      console.log("Settings updated:", res?.data);
 
       // Make sure global contexts match saved settings
       setTheme(settings.theme);

@@ -17,7 +17,11 @@ export const getCart = () =>
 export const updateCart = (data) =>
   CartAPI.put("/addToCart/update", data);
 
-export const removeFromCart = (productId) =>
-  CartAPI.delete(`/addToCart/remove/${productId}`);
+export const removeFromCart = (productId, size) =>
+  CartAPI.delete(`/addToCart/remove/${productId}`, {
+    params: {
+      size,
+    },
+  });
 
 export default CartAPI;

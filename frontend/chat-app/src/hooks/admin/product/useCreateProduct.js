@@ -12,6 +12,7 @@ import { fetchCategory } from "../../../api/user/CategoryApi";
 
 // Theme context
 import { ThemeContext } from "../../../context/ThemeContext";
+import toast from "react-hot-toast";
 
 // Default values for the product form
 const initialState = {
@@ -28,8 +29,7 @@ const initialState = {
 };
 
 // Receive productId from the product page
-export const useCreateProduct = ({ productId }) => {
-
+export const useCreateProduct = ({ productId, setProductFormModelIsOpen }) => {
   // Check whether the form is in edit mode
   const isEdit = Boolean(productId);
 
@@ -71,9 +71,8 @@ export const useCreateProduct = ({ productId }) => {
         isOnSale: product.isOnSale || false,
         variants: product.variants || [],
       });
-
     } catch (error) {
-      console.log("Fetch single product error:", error);
+      toast.error(error?.response?.data?.message || "Something went wrong");
     }
   };
 
@@ -90,7 +89,7 @@ export const useCreateProduct = ({ productId }) => {
 
   // Handle changes in normal form fields
   const handleFormData = (e) => {
-    const { name, value } = e.target;dseeeeeeeee
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -98,7 +97,7 @@ export const useCreateProduct = ({ productId }) => {
   };
 
   // Add or remove a product size
-// Get the selected size and its checked status from the checkbox
+  // Get the selected size and its checked status from the checkbox
   const handleSizeChange = (size, checked) => {
     setFormData((prev) => {
       let updated;
@@ -122,9 +121,7 @@ export const useCreateProduct = ({ productId }) => {
   const handleStockChange = (size, value) => {
     setFormData((prev) => {
       const updated = prev.variants.map((item) =>
-        item.size === size
-          ? { ...item, stock: value }
-          : item
+        item.size === size ? { ...item, stock: value } : item,
       );
 
       return {
@@ -142,7 +139,7 @@ export const useCreateProduct = ({ productId }) => {
       // Store the fetched categories
       setCategory(res.data.fetchedCategory);
     } catch (error) {
-      console.log(error);
+      toast.error(error?.response?.data?.message || "Something went wrong");
     }
   };
 
@@ -159,12 +156,10 @@ export const useCreateProduct = ({ productId }) => {
 
   // Handle product creation and updating
   const handleSubmit = async (e) => {
-
     // Prevent the page from refreshing
     e.preventDefault();
 
     try {
-
       // Create FormData to send product data and images
       const data = new FormData();
 
@@ -191,36 +186,29 @@ export const useCreateProduct = ({ productId }) => {
 
       // Update the product when productId exists
       if (productId) {
-
-        await updateProduct(productId, data);
-
-        alert("Product updated successfully");
+        const res = await updateProduct(productId, data);
+        toast.success(res?.data?.message);
+        setProductFormModelIsOpen(false);
 
         // Refresh the form with updated product data
         fetchProductById();
-
       }
 
       // Create a new product when productId does not exist
       else {
-
-        await createProduct(data);
-
-        alert("Product created successfully");
-
+        const res = await createProduct(data);
+         toast.success(res?.data?.message);
         // Clear the form after creating the product
         resetForm();
+        setProductFormModelIsOpen(false);
       }
-
     } catch (error) {
-
       // Log any error that occurs during submission
-      console.log(error);
+      toast.error(error?.response?.data?.message || "Something went wrong");
     }
   };
 
   return {
-
     // Dark mode status
     isDark,
 

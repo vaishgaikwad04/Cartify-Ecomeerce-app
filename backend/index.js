@@ -16,6 +16,7 @@ import reviewRoutes from "./modules/reviews/reviewRoutes.js";
 import settingsRoutes from "./modules/settings/settingsRoutes.js";
 import addressRoutes from "./modules/address/addressRoutes.js";
 import notificationRoutes from "./modules/notification/notificationRoutes.js";
+import dashboardRoutes from "./modules/Dashboard/dashboardRoutes.js"
 
 dotenv.config();
 
@@ -67,6 +68,7 @@ app.use("/review", reviewRoutes);
 app.use("/settings", settingsRoutes);
 app.use("/address", addressRoutes);
 app.use("/notifications", notificationRoutes);
+app.use("/dashboard", dashboardRoutes);
 
 // ================================
 // SERVER

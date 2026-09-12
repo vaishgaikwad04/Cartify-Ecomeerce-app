@@ -40,7 +40,6 @@ const navigate = useNavigate()
 };
 
 useEffect(() => {
-  console.log("useEffect running");
   fetchSettings();
 }, []);
 
@@ -56,9 +55,8 @@ useEffect(() => {
   // SAVE SETTINGS
   const saveSettings = async () => {
     try {
-      const res = await updateSettings(settings);
+       await updateSettings(settings);
       setTheme(settings.theme);
-      console.log(res.data)
     } catch (error) {
       console.log(error);
     }

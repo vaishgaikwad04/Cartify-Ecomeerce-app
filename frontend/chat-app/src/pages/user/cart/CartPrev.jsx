@@ -112,8 +112,7 @@ const CartPrev = () => {
                   ${isDark ? "text-gray-400" : "text-gray-500"}
                 `}
               >
-                {cartData.length}{" "}
-                {cartData.length === 1 ? "item" : "items"}
+                {cartData.length} {cartData.length === 1 ? "item" : "items"}
               </span>
             </div>
           </div>
@@ -306,7 +305,9 @@ const CartPrev = () => {
                         {/* Remove product */}
                         <button
                           type="button"
-                          onClick={() => handleRemove(item.productId)}
+                          onClick={() =>
+                            handleRemove(item.productId, item.size)
+                          }
                           className={`
                             shrink-0
 
@@ -381,7 +382,9 @@ const CartPrev = () => {
                           {/* Decrease quantity */}
                           <button
                             type="button"
-                            onClick={() => handleDecrease(item.productId)}
+                            onClick={() =>
+                              handleDecrease(item.productId, item.size)
+                            }
                             className={`
                               w-8
                               h-8
@@ -426,7 +429,9 @@ const CartPrev = () => {
                           {/* Increase quantity */}
                           <button
                             type="button"
-                            onClick={() => handleIncrease(item.productId)}
+                            onClick={() =>
+                              handleIncrease(item.productId, item.size)
+                            }
                             className={`
                               w-8
                               h-8
@@ -660,9 +665,7 @@ const CartPrev = () => {
                   sm:text-base
                 "
               >
-                <span
-                  className={isDark ? "text-gray-400" : "text-gray-500"}
-                >
+                <span className={isDark ? "text-gray-400" : "text-gray-500"}>
                   Subtotal
                 </span>
 
@@ -688,9 +691,7 @@ const CartPrev = () => {
                 >
                   <span>Coupon Discount</span>
 
-                  <span className="whitespace-nowrap">
-                    -₹{discountAmount}
-                  </span>
+                  <span className="whitespace-nowrap">-₹{discountAmount}</span>
                 </div>
               )}
 

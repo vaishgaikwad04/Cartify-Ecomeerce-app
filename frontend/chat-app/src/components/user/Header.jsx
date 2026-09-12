@@ -1,5 +1,4 @@
-
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 // Icons
 import { FaChevronDown } from "react-icons/fa";
@@ -161,7 +160,7 @@ const Header = () => {
                 type="button"
                 onClick={() => navigate("/")}
                 className={`
-                  font-serif
+                 font-serif-sarif
                   text-lg
                   tracking-[6px]
                   sm:tracking-[10px]
@@ -371,9 +370,7 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* ==================================
-                RIGHT ACTIONS
-            ================================== */}
+            {/*RIGHT ACTIONS*/}
 
             <div
               className={`
@@ -388,9 +385,7 @@ const Header = () => {
                 ${isDark ? "text-white" : "text-black"}
               `}
             >
-              {/* =====================================================
-    SEARCH
-===================================================== */}
+              {/*SEARCH */}
 
               <button
                 type="button"
@@ -428,10 +423,7 @@ const Header = () => {
                 <FiSearch className="text-[20px] sm:text-[21px]" />
               </button>
 
-              {/* =====================================================
-    CART
-===================================================== */}
-
+              {/* CART*/}
               <button
                 type="button"
                 onClick={() => setIsCartDrawerOpen(true)}
@@ -470,10 +462,7 @@ const Header = () => {
                 <HiOutlineShoppingBag className="text-[21px] sm:text-[22px]" />
               </button>
 
-              {/* ==================================
-                  DESKTOP ACTIONS
-              ================================== */}
-
+              {/*DESKTOP ACTIONS */}
               <div className="hidden lg:flex  items-center gap-3">
                 {/* ORDERS */}
 
@@ -684,10 +673,7 @@ const Header = () => {
                 </button>
               </div>
 
-              {/* ==================================
-                  HAMBURGER
-              ================================== */}
-
+              {/*HAMBURGER*/}
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(true)}
@@ -818,10 +804,7 @@ const Header = () => {
               </button>
             </div>
 
-            {/* ==================================
-                SHOP
-            ================================== */}
-
+            {/*SHOP*/}
             <div className="px-6 pt-7">
               <p
                 className={`
@@ -840,7 +823,6 @@ const Header = () => {
                 {menus.map((menu) => (
                   <div key={menu.title}>
                     {/* MAIN CATEGORY */}
-
                     <button
                       type="button"
                       onClick={() =>
@@ -886,7 +868,6 @@ const Header = () => {
                     </button>
 
                     {/* SUB NAV */}
-
                     <div
                       className={`
                         overflow-hidden
@@ -939,10 +920,7 @@ const Header = () => {
               </nav>
             </div>
 
-            {/* ==================================
-                ACCOUNT ACTIONS
-            ================================== */}
-
+            {/* ACCOUNT ACTIONS */}
             <div className="px-6">
               <div
                 className={`
@@ -1026,7 +1004,6 @@ const Header = () => {
                     >
                       <div className="relative">
                         <FiBell className="text-[22px]" />
-
                         {unreadCount > 0 && (
                           <span
                             className="
@@ -1056,7 +1033,6 @@ const Header = () => {
                   )}
 
                   {/* PROFILE */}
-
                   <button
                     type="button"
                     onClick={() => {
@@ -1107,27 +1083,21 @@ const Header = () => {
         </div>
       )}
 
-      {/* ========================================
-          CART DRAWER
-      ======================================== */}
-
-      <Drawer isOpen={isCartDrawerOpen}>
-        <CartSidebar 
-         isOpen={isCartDrawerOpen}
-        onClose={() => setIsCartDrawerOpen(false)} />
+      {/* CART DRAWER*/}
+      <Drawer
+        isOpen={isCartDrawerOpen}
+        onClose={() => setIsCartDrawerOpen(false)}
+      >
+        <CartSidebar onClose={() => setIsCartDrawerOpen(false)} />
       </Drawer>
 
-      {/* ========================================
-          SEARCH MODAL
-      ======================================== */}
-
+      {/* SEARCH MODAL*/}
       {isSearchModalOpen && (
         <div
           className={`
             fixed
             inset-0
             z-[100]
-
             ${isDark ? "bg-black/70" : "bg-black/40"}
           `}
           onClick={(e) => {
@@ -1144,13 +1114,11 @@ const Header = () => {
               sm:px-6
               py-5
               shadow-xl
-
               ${isDark ? "bg-gray-900" : "bg-white"}
             `}
           >
             <div className="max-w-5xl mx-auto relative">
               {/* SEARCH ICON */}
-
               <FiSearch
                 className={`
                   absolute
@@ -1189,34 +1157,6 @@ const Header = () => {
                   }
                 `}
               />
-
-              {/* CLOSE */}
-
-              <button
-                type="button"
-                onClick={closeSearch}
-                className={`
-                  absolute
-                  right-3
-                  top-1/2
-                  -translate-y-1/2
-                  w-9
-                  h-9
-                  rounded-full
-                  flex
-                  items-center
-                  justify-center
-                  transition
-
-                  ${
-                    isDark
-                      ? "text-gray-400 hover:bg-gray-800 hover:text-white"
-                      : "text-gray-500 hover:bg-gray-100 hover:text-black"
-                  }
-                `}
-              >
-                <FiX size={20} />
-              </button>
 
               {/* SEARCH RESULTS */}
 
@@ -1285,17 +1225,17 @@ const Header = () => {
                           }
                         `}
                       >
-                        {item.image && (
+                        {item.images?.[0] && (
                           <img
-                            src={item.image}
+                            src={item.images[0]}
                             alt={item.name}
                             className="
-                              w-12
-                              h-12
-                              rounded-lg
-                              object-cover
-                              shrink-0
-                            "
+      w-6
+      h-6
+      rounded
+      object-cover
+      shrink-0
+    "
                           />
                         )}
 

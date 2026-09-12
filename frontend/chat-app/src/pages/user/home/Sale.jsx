@@ -48,7 +48,27 @@ const Sale = () => {
               ${isDark ? "bg-gray-900 text-white" : "bg-[#f8f6f6]"}
               `}
             >
-              <Button label="Shop Now" variant="primary" />
+            <Button
+  label="Shop Now"
+  variant="primary"
+className={`
+  transition-all duration-300
+  hover:scale-105
+  hover:shadow-lg
+  ${
+    isDark
+      ? "bg-gray-900 text-white hover:bg-gray-600"
+      : "bg-gray-100 text-gray-900 hover:bg-gray-300"
+  }
+`}
+  onClick={() => {
+    navigate("/");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }}
+/>
             </TextCard>
           </div>
         </div>

@@ -117,7 +117,8 @@ ${
                 <Button
                   label="Save Changes"
                   onClick={saveSettings}
-                  variant="secondary"
+                  variant={isDark ? "secondary" : "primary"}
+                  className="w-1/8"
                 />
               </div>
             </SettingsItem>
@@ -152,7 +153,11 @@ ${
               </div>
 
               <div className="flex justify-end mt-6">
-                <Button label="Update Password" variant="secondary" />
+                <Button
+                  label="Update Password"
+                  variant={isDark ? "secondary" : "primary"}
+                  className="w-1/8"
+                />
               </div>
             </SettingsItem>
 
@@ -210,7 +215,8 @@ ${
                 <Button
                   label="Save Preferences"
                   onClick={saveSettings}
-                  variant="secondary"
+                  variant={isDark ? "secondary" : "primary"}
+                  className="w-1/8"
                 />
               </div>
             </SettingsItem>
@@ -281,7 +287,8 @@ ${
                   <Button
                     label="Save Appearance"
                     onClick={saveSettings}
-                    variant="secondary"
+                    variant={isDark ? "secondary" : "primary"}
+                    className="w-1/8"
                   />
                 </div>
               </div>
@@ -342,7 +349,7 @@ ${
                       label="Logout"
                       onClick={handleLogout}
                       variant="danger"
-                      className="w-1/12"
+                      className="w-1/8"
                     />
                   </div>
                 </div>

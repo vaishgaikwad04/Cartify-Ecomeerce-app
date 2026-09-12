@@ -7,7 +7,7 @@ import {
   FaDribbble,
 } from "react-icons/fa";
 //Navlink and link from react-router-dom
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 //themeContext
 import { ThemeContext } from "../../context/ThemeContext";
 
@@ -16,6 +16,8 @@ const Footer = () => {
   const { theme } = useContext(ThemeContext);
   // Check if dark mode is enabled
   const isDark = theme === "Dark Mode";
+
+  const navigate = useNavigate()
 
   return (
     <footer className="w-full">
@@ -34,7 +36,7 @@ const Footer = () => {
             {/* Contact section with brand info and social media links */}
             <div>
               {/* Brand name */}
-              <h2 className="text-3xl font-serif tracking-[6px] uppercase">
+              <h2 onClick={() => navigate("/")} className="text-3xl font-serif-sarif tracking-[6px] uppercase">
                 Cartify
               </h2>
 
@@ -96,7 +98,7 @@ const Footer = () => {
             {/* Product categories navigation section */}
             <div>
               {/* Section heading */}
-              <h3 className="text-2xl font-medium mb-8">Categories</h3>
+              <h3 className="text-2xl font-medium mb-8">CATEGORIES</h3>
 
               {/* List of category links*/}
               <ul
@@ -144,7 +146,7 @@ const Footer = () => {
             {/* Help and support links section */}
             <div>
               {/* Section heading */}
-              <h3 className="mb-8 text-2xl font-medium">HELP</h3>
+              <h3 onClick={() => navigate("/help")} className="mb-8 text-2xl font-medium">HELP</h3>
 
               {/* Help link list*/}
               <ul
@@ -160,15 +162,15 @@ const Footer = () => {
                     path: "/help/faq",
                   },
                   {
-                    label: "Shipping",
+                    label: "SHIPPING",
                     path: "/help/shipping",
                   },
                   {
-                    label: "Returns",
+                    label: "RETURNS",
                     path: "/help/returns",
                   },
                   {
-                    label: "Order Status",
+                    label: "ORDER STATUS",
                     path: "/help/orders",
                   },
                 ].map((item) => (
@@ -224,7 +226,7 @@ const Footer = () => {
 
               {/* Collection promotional card */}
               <Link to="/new-in-body">
-                <div className="flex gap-4 items-center group cursor-pointer">
+                <div className="flex gap-4 items-center group cursor-pointer mt-2">
                   <img
                     src="https://mafoil.wpbingosite.com/wp-content/plugins/wpbingo/lib/lookbook/images/bwp_lookbook/lookbook-1.jpg"
                     className="w-20 h-20 object-cover group-hover:scale-105 transition"

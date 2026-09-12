@@ -3,6 +3,7 @@ import Carousel from "./ImageCarousel";
 import WishlistButton from "./WishListButton";
 import { ThemeContext } from "../../context/ThemeContext";
 
+
 const Card = ({ product, isWishlisted, onToggleWishlist }) => {
   const { theme } = useContext(ThemeContext);
 
@@ -37,11 +38,15 @@ const Card = ({ product, isWishlisted, onToggleWishlist }) => {
       `}
     >
       {/* Product Images */}
+    
+     
       <div className="relative">
+        
         <Carousel
           product={product}
           images={product.images}
         />
+        
 
         <div className="absolute top-4 right-4 z-10">
           <WishlistButton
@@ -117,6 +122,7 @@ const Card = ({ product, isWishlisted, onToggleWishlist }) => {
           </span>
         </div>
       </div>
+     
     </div>
   );
 };

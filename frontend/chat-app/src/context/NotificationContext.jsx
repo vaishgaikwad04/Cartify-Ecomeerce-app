@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 import {
   getNotifications,
@@ -28,14 +29,14 @@ export const NotificationProvider = ({ children }) => {
       try {
         const res = await getUserSettings();
 
-        console.log("Settings response:", res?.data);
+      
 
         const user = res?.data?.user || res?.data?.data;
 
         //optional chaning If it doesn't exist, use false
-        setAllowNotification(user?.notification ?? false);
+        setAllowNotification(user?.notification ?? true);
       } catch (error) {
-        console.error(
+       toast.error(
           "Notification setting error:",
           error?.response?.data || error.message,
         );
@@ -58,7 +59,7 @@ export const NotificationProvider = ({ children }) => {
 
       const res = await getNotifications();
 
-      console.log("Notifications API response:", res?.data);
+ 
 
       const data = res?.data?.notifications || [];
 
@@ -69,7 +70,7 @@ export const NotificationProvider = ({ children }) => {
 
       setUnreadCount(unread);
     } catch (error) {
-      console.error(
+      toast.error(
         "Notification fetch error:",
         error?.response?.data || error.message,
       );
@@ -110,7 +111,7 @@ export const NotificationProvider = ({ children }) => {
 
       setUnreadCount((prev) => Math.max(prev - 1, 0));
     } catch (error) {
-      console.error(
+      toast.error(
         "Mark notification as read error:",
         error?.response?.data || error.message,
       );
@@ -134,7 +135,7 @@ export const NotificationProvider = ({ children }) => {
 
       setUnreadCount(0);
     } catch (error) {
-      console.error(
+     toast.error(
         "Mark all notifications as read error:",
         error?.response?.data || error.message,
       );

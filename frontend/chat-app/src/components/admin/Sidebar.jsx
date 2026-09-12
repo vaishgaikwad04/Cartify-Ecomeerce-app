@@ -113,10 +113,7 @@ const Sidebar = () => {
           </NavLink>
         </div>
 
-        <NavLink to="/admin/orders" className={navStyle}>
-          <FiShoppingCart size={18} />
-          Orders
-        </NavLink>
+      
 
         <NavLink to="/admin/customers" className={navStyle}>
           <FiUsers size={18} />
@@ -126,6 +123,10 @@ const Sidebar = () => {
         <NavLink to="/admin/reviews" className={navStyle}>
           <FiStar size={18} />
           Reviews
+        </NavLink>
+          <NavLink to="/admin/orders" className={navStyle}>
+          <FiShoppingCart size={18} />
+          Orders
         </NavLink>
 
         <p

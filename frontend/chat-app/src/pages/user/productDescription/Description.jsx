@@ -6,6 +6,10 @@ import Button from "../../../components/ui/Button";
 import { useDescription } from "../../../hooks/user/useDescription";
 import CreateAndUpdateReview from "../review/CreateAndUpdateReview";
 import Modal from "../../../components/ui/Modal";
+import {
+  FiTruck,
+  FiRefreshCcw,
+} from "react-icons/fi";
 
 const DescriptionPage = () => {
   const {
@@ -128,7 +132,74 @@ const DescriptionPage = () => {
                 </span>
               </div>
 
-              {/* SIZE */}
+              <div
+  className={`
+    mt-5
+    pt-5
+    border-t
+    flex
+    items-center
+    gap-6
+    text-xs
+    sm:text-sm
+    ${
+      isDark
+        ? "border-gray-800 text-gray-400"
+        : "border-gray-200 text-gray-500"
+    }
+  `}
+>
+  <span className="flex items-center gap-2">
+    <FiTruck className="text-base" />
+    Free shipping
+  </span>
+
+  <span
+    className={`h-4 w-px ${
+      isDark ? "bg-gray-800" : "bg-gray-200"
+    }`}
+  />
+
+  <span className="flex items-center gap-2">
+    <FiRefreshCcw className="text-base" />
+    Easy returns
+  </span>
+</div>
+
+                 {/* ACTION BUTTONS */}
+
+              <div className="mt-7 sm:mt-8 flex flex-col gap-3">
+                {/* ADD TO CART */}
+
+                <button
+                  onClick={handleCart}
+                  className={`
+                    h-12
+                    sm:h-14
+                    w-full
+                    rounded-xl
+                    font-medium
+                    transition-all
+                    duration-300
+
+                    ${
+                      isDark
+                        ? "bg-white text-black hover:bg-gray-200"
+                        : "bg-black text-white hover:bg-gray-800"
+                    }
+                  `}
+                >
+                  {selectedSize && selectedVariant?.stock <= 0
+                    ? "Out Of Stock"
+                    : "Add To Cart"}
+                </button>
+
+                {/* WISHLIST */}
+
+                <Button label="Add To Wishlist" variant="outlineDark" />
+              </div>
+
+                {/* SIZE */}
 
               {product.variants?.length > 0 && (
                 <div className="mt-7 sm:mt-8">
@@ -187,40 +258,8 @@ const DescriptionPage = () => {
                 </div>
               )}
 
-              {/* ACTION BUTTONS */}
 
-              <div className="mt-7 sm:mt-8 flex flex-col gap-3">
-                {/* ADD TO CART */}
-
-                <button
-                  onClick={handleCart}
-                  className={`
-                    h-12
-                    sm:h-14
-                    w-full
-                    rounded-xl
-                    font-medium
-                    transition-all
-                    duration-300
-
-                    ${
-                      isDark
-                        ? "bg-white text-black hover:bg-gray-200"
-                        : "bg-black text-white hover:bg-gray-800"
-                    }
-                  `}
-                >
-                  {selectedSize && selectedVariant?.stock <= 0
-                    ? "Out Of Stock"
-                    : "Add To Cart"}
-                </button>
-
-                {/* WISHLIST */}
-
-                <Button label="Add To Wishlist" variant="outlineDark" />
-              </div>
-
-              {/* PRODUCT DESCRIPTION */}
+               {/* PRODUCT DESCRIPTION */}
 
               <div
                 className={`
@@ -257,6 +296,11 @@ const DescriptionPage = () => {
                   {product.description}
                 </p>
               </div>
+
+            
+           
+
+             
             </div>
           </div>
         </div>

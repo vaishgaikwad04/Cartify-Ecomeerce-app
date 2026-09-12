@@ -4,6 +4,7 @@ import Dropdown from "../../../components/ui/Dropdown";
 import Modal from "../../../components/ui/Modal";
 import AdminPanelCard from "../../../components/ui/AdminPanelCard";
 import { useOrders } from "../../../hooks/admin/orders/useOrders";
+import Button from "../../../components/ui/Button";
 
 const Order = () => {
   const {
@@ -307,26 +308,13 @@ const Order = () => {
     {
       header: "Action",
       render: (row) => (
-        <button
+        <Button
           type="button"
           onClick={() => handleManageOrder(row)}
-          className={`
-                rounded-md
-                border
-                px-3
-                py-1.5
-                text-xs
-                font-medium
-                transition
-                ${
-                  isDark
-                    ? "border-gray-200 text-gray-300 hover:bg-gray-700"
-                    : "border-gray-200 text-gray-600 hover:bg-gray-50"
-                }
-            `}
-        >
-          Manage
-        </button>
+          variant={isDark ? "outlineDark" : "outline"}
+          label="Manage"
+          className="px-6 text-xs h-2"
+        />
       ),
     },
   ];
@@ -393,12 +381,7 @@ const Order = () => {
 
           {/* SEARCH */}
 
-          <div
-            className="
-                            w-full
-                            md:w-80
-                        "
-          >
+          <div className="w-full md:w-80">
             <SearchBar
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -704,46 +687,14 @@ const Order = () => {
             {/* ACTIONS */}
 
             <div className="flex justify-end gap-3">
-              <button
-                type="button"
-                onClick={() => setShowManageModal(false)}
-                disabled={updatingStatus}
-                className={`
-                        rounded-lg
-                        border
-                        px-4 py-2
-                        text-sm
-                        font-medium
-                        transition
-                        ${
-                          isDark
-                            ? "border-gray-700 text-gray-300 hover:bg-gray-800"
-                            : "border-gray-200 text-gray-600 hover:bg-gray-50"
-                        }
-                    `}
-              >
-                Cancel
-              </button>
-
-              <button
+              <Button
                 type="button"
                 onClick={handleUpdateStatus}
                 disabled={updatingStatus}
-                className="
-                        rounded-lg
-                        bg-gray-200
-                        px-4 py-2
-                        text-sm
-                        font-medium
-                        text-black
-                        transition
-                        hover:bg-gray-300
-                        disabled:cursor-not-allowed
-                        disabled:opacity-50
-                    "
-              >
-                {updatingStatus ? "Updating..." : "Update Status"}
-              </button>
+                label={updatingStatus ? "Updating..." : "Update Status"}
+                variant={isDark? "secondary" : "primary"} 
+                className="w-1/4"
+              />
             </div>
           </div>
         )}

@@ -150,7 +150,7 @@ const CreateCategory = ({ categoryId, onSuccess }) => {
           <Button
             type="submit"
             label={isEditMode ? "Update Category" : "Create Category"}
-            className="w-1/3 text-lg"
+            className="w-1/4 text-lg"
             variant={isDark ? "secondary" : "primary"}
           />
         </div>

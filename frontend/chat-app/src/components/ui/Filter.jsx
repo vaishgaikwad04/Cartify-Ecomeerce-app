@@ -9,7 +9,7 @@ const Filter = ({ title, options = [] }) => {
   return (
     <div>
       <button
-        className="flex justify-between items-center w-full font-medium"
+        className="flex justify-between items-center w-full font-medium mb-4"
         onClick={() => setOpen(!open)}
       >
         <span>{title}</span>

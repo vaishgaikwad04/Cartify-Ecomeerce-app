@@ -2,79 +2,61 @@ import React, { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 
 const Modal = ({ isOpen, onClose, children, className = "" }) => {
-  ///theme
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "Dark Mode";
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
-      {/* BACKDROP */}
+    <div
+      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/40 backdrop-blur-sm p-6"
+      onClick={onClose}
+    >
+      {/* MODAL BOX */}
       <div
-        className="fixed inset-0 bg-black/40 backdrop-blur-sm"
-        onClick={onClose}
-      />
+        className={`
+          relative
+          w-full
+          max-w-3xl
+          max-h-[90vh]
+          rounded-xl
+          shadow-lg
+          flex
+          flex-col
+          overflow-hidden
 
-      {/* MODAL WRAPPER */}
-      <div className="relative flex min-h-full items-start justify-center p-6">
-        {/* MODAL BOX */}
+          ${
+            isDark
+              ? "bg-gray-900 text-white"
+              : "bg-white text-gray-900"
+          }
+
+          ${className}
+        `}
+        onClick={(e) => e.stopPropagation()}
+      >
+       
+
+        {/* CONTENT */}
         <div
           className={`
-            relative
-            w-full
-            max-w-3xl
-            max-h-[90vh]
-            rounded-xl
-            shadow-lg
-            flex
-            flex-col
-            overflow-hidden
-            z-10
+            flex-1
+            min-h-0
+            overflow-y-auto
+            px-6
+            py-5
 
-            ${
-              isDark
-                ? "bg-gray-900 text-white"
-                : "bg-white text-gray-900"
-            }
-
-            ${className}
+            ${isDark ? "text-gray-300" : "text-gray-600"}
           `}
+          style={{
+            scrollbarWidth: "thin",
+            scrollbarColor: isDark
+              ? "#4b5563 #111827"
+              : "#cbd5e1 #f8fafc",
+            colorScheme: isDark ? "dark" : "light",
+          }}
         >
-          {/* CLOSE BUTTON */}
-          <button
-            onClick={onClose}
-            className={`
-              absolute top-3 right-3 z-20
-              w-8 h-8 flex items-center justify-center rounded-full
-
-              ${
-                isDark
-                  ? "text-gray-400 hover:bg-gray-800 hover:text-white"
-                  : "text-gray-500 hover:bg-gray-100 hover:text-gray-800"
-              }
-            `}
-          >
-            ✕
-          </button>
-
-          {/* CONTENT */}
-          <div
-            className={`
-              flex-1
-              overflow-y-auto
-              px-6
-              py-5
-
-              ${
-                isDark
-                  ? "text-gray-300"
-                  : "text-gray-600"
-              }
-            `}
-          >
-            {children}
-          </div>
+          {children}
         </div>
       </div>
     </div>

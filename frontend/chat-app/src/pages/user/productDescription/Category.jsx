@@ -21,7 +21,6 @@ const Category = () => {
 
   return (
     <div className="max-w-[1800px] mx-auto px-6 py-4">
-
       {/* Toggle filter visibility */}
       <button
         onClick={() => setShowFilter(!showFilter)}
@@ -32,12 +31,9 @@ const Category = () => {
       </button>
 
       <div className="flex gap-6">
-
         {/* FILTER */}
         <div
-          className={`${
-            showFilter ? "w-48" : "w-0"
-          } overflow-hidden py-12 `}
+          className={`${showFilter ? "w-48" : "w-0"} overflow-hidden py-12 `}
         >
           {/* Filter products based on stock availability */}
           <Filter
@@ -61,10 +57,17 @@ const Category = () => {
         <div className="flex-1">
           {/* Show loading message while products are loading */}
           {loading ? (
-            <p>Loading...</p>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <p className="text-center">Loading...</p>
+          ) : filteredData.length === 0 ? (
+            <div className="py-16 text-center">
+              <p className="text-lg font-medium text-gray-600">
+                No products found
+              </p>
 
+    
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
               {/* Display filtered products */}
               {filteredData.map((product) => (
                 <Card

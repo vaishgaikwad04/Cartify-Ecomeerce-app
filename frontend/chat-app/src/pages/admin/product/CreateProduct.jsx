@@ -4,7 +4,7 @@ import Button from "../../../components/ui/Button";
 import CheckBox from "../../../components/ui/CheckBox";
 import { useCreateProduct } from "../../../hooks/admin/product/useCreateProduct";
 
-const CreateProduct = ({ productId }) => {
+const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
   const {
     // Dark mode status
     isDark,
@@ -35,7 +35,7 @@ const CreateProduct = ({ productId }) => {
 
     // Category dropdown options
     categoryOptions,
-  } = useCreateProduct({ productId });
+  } = useCreateProduct({ productId,setProductFormModelIsOpen });
 
   ///brand options
   const brands = [
@@ -138,6 +138,8 @@ const CreateProduct = ({ productId }) => {
                 value={formData.price}
                 handleChange={handleFormData}
                 label="Price"
+                min={0}
+              
               />
 
               {/* Discounted price */}
@@ -147,6 +149,7 @@ const CreateProduct = ({ productId }) => {
                 value={formData.discountPrice}
                 handleChange={handleFormData}
                 label="Discount Price"
+                min={0}
               />
             </div>
           </div>
@@ -246,6 +249,7 @@ const CreateProduct = ({ productId }) => {
                     key={item.size}
                     type="number"
                     value={item.stock}
+                    min={0}
                     // Update stock for the selected size
                     handleChange={(e) =>
                       handleStockChange(item.size, e.target.value)
@@ -280,14 +284,17 @@ const CreateProduct = ({ productId }) => {
           {/* ================= SUBMIT BUTTON ================= */}
 
           {/* Button text changes depending on edit/create mode */}
-          <Button
+          <div className="flex justify-end">
+             <Button
             label={isEdit ? "Update Product" : "Create Product"}
             // Makes this button submit the form
             type="submit"
             // Change button style according to theme
             variant={isDark ? "secondary" : "primary"}
-            className="w-full"
+            className="w-1/4"
           />
+          </div>
+         
         </form>
       </div>
     </div>

@@ -1,53 +1,83 @@
 import React, { useState, useEffect, useContext } from "react";
-import { deleteCategory, fetchCategory } from "../../../api/user/CategoryApi";
+import {
+  deleteCategory,
+  fetchCategory,
+} from "../../../api/user/CategoryApi";
 import { ThemeContext } from "../../../context/ThemeContext";
+import toast from "react-hot-toast";
 
 export const useCategory = () => {
-  // Get current theme from ThemeContext
+  // Theme
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "Dark Mode";
 
-  // Store all category data
+  // Category data
   const [categoryData, setCategoryData] = useState([]);
 
-  // Control create/update category modal
-  const [openCreateCategoryFormModal, setOpenCreateCategoryFormModal] =
-    useState(false);
+  // Create / Edit modal
+  const [
+    openCreateCategoryFormModal,
+    setOpenCreateCategoryFormModal,
+  ] = useState(false);
 
-  // Store selected category ID for update
+  // Selected category ID for Edit
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
-  // Store search input value
+  // Selected category object for View
+  const [viewCategory, setViewCategory] = useState(null);
+
+  // View modal
+  const [openViewModel, setOpenViewModel] = useState(false);
+
+  // Search
   const [search, setSearch] = useState("");
 
-  // Store selected category filter
+  // Category filter
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  // Store selected status filter
+  // Status filter
   const [selectedStatus, setSelectedStatus] = useState("");
 
-  // Fetch category data from API
+  // Fetch categories
   const fetchedCategory = async () => {
     try {
       const res = await fetchCategory();
 
-      console.log(res.data.fetchedCategory);
-
-      setCategoryData(res?.data?.fetchedCategory || []);
+      setCategoryData(
+        res?.data?.fetchedCategory || []
+      );
     } catch (error) {
-      console.log(error);
+      toast.error(
+        error?.response?.data?.message ||
+          "Failed to fetch Category"
+      );
     }
   };
 
-  // Fetch categories when component using this hook mounts
+  // Fetch on mount
   useEffect(() => {
     fetchedCategory();
   }, []);
 
-  // Open update category modal
+  // Edit category
   const handleUpdateCategory = (id) => {
     setSelectedCategoryId(id);
     setOpenCreateCategoryFormModal(true);
+  };
+
+  // View category
+  const handleViewCategory = (id) => {
+    const category = categoryData.find(
+      (item) => item._id === id
+    );
+
+    if (!category) {
+      toast.error("Category not found");
+      return;
+    }
+
+    setViewCategory(category);
+    setOpenViewModel(true);
   };
 
   // Delete category
@@ -55,53 +85,76 @@ export const useCategory = () => {
     try {
       await deleteCategory(id);
 
-      // Refresh category data after deletion
       fetchedCategory();
     } catch (error) {
-      console.log(error);
+      toast.error(
+        error?.response?.data?.message ||
+          "Failed to delete Category"
+      );
     }
   };
 
   // Filter category data
   const filteredData = categoryData
-    // Filter by category name
+    // Category filter
     .filter((item) =>
-      selectedCategory ? item.name === selectedCategory : true,
+      selectedCategory
+        ? item.name === selectedCategory
+        : true
     )
 
-    // Filter by status
+    // Status filter
     .filter((item) =>
-      selectedStatus === "" ? true : String(item.status) === selectedStatus,
+      selectedStatus === ""
+        ? true
+        : String(item.status) === selectedStatus
     )
 
-    // Filter by search text
-    .filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
+    // Search
+    .filter((item) =>
+      item.name
+        ?.toLowerCase()
+        .includes(search.toLowerCase())
+    );
 
-  // Return everything required by the component
   return {
     theme,
     isDark,
 
+    // Data
     categoryData,
     filteredData,
 
+    // Create / Edit modal
     openCreateCategoryFormModal,
     setOpenCreateCategoryFormModal,
 
+    // Edit category
     selectedCategoryId,
     setSelectedCategoryId,
 
+    // View category
+    viewCategory,
+    setViewCategory,
+    openViewModel,
+    setOpenViewModel,
+
+    // Search
     search,
     setSearch,
 
+    // Filters
     selectedCategory,
     setSelectedCategory,
-
     selectedStatus,
     setSelectedStatus,
 
+    // API
     fetchedCategory,
+
+    // Actions
     handleUpdateCategory,
     handleDeleteCategory,
+    handleViewCategory,
   };
 };

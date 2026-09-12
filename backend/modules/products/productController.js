@@ -53,6 +53,7 @@ export const createProduct = async (req, res) => {
       variants: variantsData,
       isOnSale: isOnSaleData,
     });
+
     res.status(201).json({
       message: "Product created successfully",
       createdProduct,
@@ -62,17 +63,34 @@ export const createProduct = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
+ 0 
 export const fetchProduct = async (req, res) => {
   try {
     const fetchedProduct = await productModel.find();
 
-    res.status(200).json({
+    // No products
+    if (fetchedProduct.length === 0) {
+      return res.status(200).json({
+        success: true,
+        message: "No products found",
+        fetchedProduct: [],
+      });
+    }
+
+    // Products found
+    return res.status(200).json({
+      success: true,
       message: "Products fetched successfully",
       fetchedProduct,
     });
+
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    console.error("Fetch Products Error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Unable to fetch products. Please try again later.",
+    });
   }
 };
 

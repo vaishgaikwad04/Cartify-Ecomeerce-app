@@ -153,7 +153,7 @@ const Order = () => {
     : "bg-[#f7f7f6]";
 
   const cardBg = darkMode
-    ? "bg-[#111113] border-white/[0.08]"
+    ? "bg-gray-800 border-white/[0.08]"
     : "bg-white border-gray-200";
 
   const heading = darkMode

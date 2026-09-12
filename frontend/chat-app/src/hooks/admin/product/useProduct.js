@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { deleteProduct, fetchProduct } from "../../../api/user/ProductApi";
 import { ThemeContext } from "../../../context/ThemeContext";
 import { fetchCategory } from "../../../api/user/CategoryApi";
+import toast from "react-hot-toast";
 
 export const useProduct = () => {
   //state to store products data array
@@ -20,19 +21,35 @@ export const useProduct = () => {
   const [openCreateProductFormModal, setOpenCreateProductFormModal] = useState(false);
   //state to store selected product id
   const [selectedProductId, setSelectedProductId] = useState(null);
+
+const [openViewModel, setOpenViewModel] = useState(false)
+const [selectedProduct, setSelectedProduct] = useState(null);
   
   //theme
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "Dark Mode";
 
-  ///api to fetch products data 
-  useEffect(() => {
-    const fetchProductData = async () => {
+ useEffect(() => {
+  const fetchProductData = async () => {
+    try {
       const res = await fetchProduct();
-      setProductsData(res.data.fetchedProduct);
-    };
-    fetchProductData();
-  }, []);
+
+      setProductsData(res.data.fetchedProduct || []);
+    } catch (error) {
+      console.error("Fetch Product Error:", error);
+
+      const message =
+        error.response?.data?.message ||
+        "Unable to fetch products. Please try again.";
+
+      toast.error(message);
+
+      setProductsData([]);
+    }
+  };
+
+  fetchProductData();
+}, []);
 
   //extract category options form category api
   useEffect(() => {
@@ -80,58 +97,77 @@ export const useProduct = () => {
     setOpenCreateProductFormModal(true);
   };
 
-  ///call delete api
   const handleDeleteProduct = async (id) => {
-    try {
-      await deleteProduct(id);
-      // optional: update UI after delete
-      setProductsData((prev) => prev.filter((item) => item._id !== id));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    
+  try {
+    const res = await deleteProduct(id);
 
-  return {
-  // Product data fetched from the API
+    // Update UI only after successful deletion
+    setProductsData((prev) =>
+      prev.filter((item) => item._id !== id)
+    );
+
+    toast.success(
+      res.data?.message || "Product deleted successfully"
+    );
+  } catch (error) {
+    toast.error("Delete Product Error:", error);
+
+    const message =
+      error.response?.data?.message ||
+      "Unable to delete product. Please try again.";
+
+    toast.error(message);
+  }
+};
+
+
+const handleViewProduct = (id) => {
+  const product = productsData.find((item) => item._id === id);
+
+  if (!product) {
+    toast.error("Product not found");
+    return;
+  }
+
+  setSelectedProduct(product);
+  setOpenViewModel(true);
+};
+
+ return {
   productsData,
 
-  // Search value and function to update it
   search,
   setSearch,
 
-  // Selected category and function to update it
   category,
   setCategory,
 
-  // Category options used in the category dropdown
   categoryOptions,
 
-  // Selected brand and function to update it
   brand,
   setBrand,
 
-  // Selected product status and function to update it
   productStatus,
   setProductStatus,
 
-  // Controls whether the create/edit product modal is open
   openCreateProductFormModal,
   setOpenCreateProductFormModal,
 
-  // Stores the ID of the product being edited
   selectedProductId,
   setSelectedProductId,
 
-  // Tells the component whether dark mode is active
   isDark,
 
-  // Products after applying search and filters
   filteredProducts,
 
-  // Opens the product form for editing
   handleUpdateProduct,
-
-  // Deletes a product and updates the product list
   handleDeleteProduct,
+
+  // View product
+  handleViewProduct,
+  openViewModel,
+  setOpenViewModel,
+  selectedProduct,
 };
 };

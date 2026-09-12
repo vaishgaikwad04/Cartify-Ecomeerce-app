@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { getAllOrders } from "../../../api/user/OrderApi";
 import { ThemeContext } from "../../../context/ThemeContext";
+import toast from "react-hot-toast";
 
 export const useCustomer = () => {
   const [customers, setCustomers] = useState([]);
@@ -8,6 +9,7 @@ export const useCustomer = () => {
   const [status, setStatus] = useState("");
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [viewCustomerModel, setViewCustomerModel] = useState(false);
 
   //THEME
   const { theme } = useContext(ThemeContext);
@@ -102,7 +104,7 @@ export const useCustomer = () => {
       const customerList = Array.from(customerMap.values());
       setCustomers(customerList);
     } catch (error) {
-      console.log("Error fetching customer data:", error);
+      toast.error(error?.response?.data?.message || "Something went wrong");
     }
   };
 
@@ -113,7 +115,7 @@ export const useCustomer = () => {
   const handleUpdateCustomer = (id) => {
     const customer = customers.find((item) => item._id === id);
     if (!customer) {
-      console.log("Customer not found");
+      toast.error("Customer not found");
       return;
     }
 
@@ -152,6 +154,12 @@ export const useCustomer = () => {
     (customer) => customer?.lastOrderStatus === "delivered",
   ).length;
 
+  const handleViewCustomer = (id) => {
+    const customer = customers.find((customer) => customer._id === id);
+    setSelectedCustomer(customer);
+    setViewCustomerModel(true);
+  };
+
   return {
     // Customer data
     customers,
@@ -182,5 +190,8 @@ export const useCustomer = () => {
     totalOrders,
     totalRevenue,
     deliveredCustomers,
+    handleViewCustomer,
+    viewCustomerModel,
+     setViewCustomerModel
   };
 };

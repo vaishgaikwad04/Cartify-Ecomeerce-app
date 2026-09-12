@@ -26,6 +26,7 @@ export const useCreateCategory = ({ id, onSuccess }) => {
 
   // Store form data
   const [formData, setFormData] = useState(initialState);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null)
 
   // HANDLE INPUT CHANGE
   const handleChange = (e) => {
@@ -108,6 +109,7 @@ export const useCreateCategory = ({ id, onSuccess }) => {
 
   const handleUpdateCategory = (id) => {
     setSelectedCategoryId(id);
+    console.log(selectedCategoryId)
     setOpenCreateCategoryFormModal(true);
   };
 

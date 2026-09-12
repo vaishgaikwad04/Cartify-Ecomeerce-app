@@ -1,8 +1,9 @@
 import { useEffect, useState, useContext } from "react";
 import { ThemeContext } from "../../../context/ThemeContext";
 import { updateCustomer } from "../../../api/user/OrderApi";
+import toast from "react-hot-toast";
 
-export const useUpdateCustomer = (user, onClose, onRefresh) => {
+export const useUpdateCustomer = ({user, onClose, onRefresh}) => {
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "Dark Mode";
 
@@ -24,9 +25,6 @@ export const useUpdateCustomer = (user, onClose, onRefresh) => {
   // Fill form when selected customer changes
   useEffect(() => {
     if (!user) return;
-
-    console.log("USER RECEIVED:", user);
-
     const newFormData = {
       name: user?.name || "",
       email: user?.email || "",
@@ -61,6 +59,7 @@ export const useUpdateCustomer = (user, onClose, onRefresh) => {
       setLoading(true);
       const res = await updateCustomer(user?._id, formData);
       setSuccess(res?.data?.message || "Customer updated successfully.");
+      toast.success(res?.data?.message || "Customer updated successfully.");
       if (onRefresh) {
         await onRefresh();
       }
@@ -70,7 +69,7 @@ export const useUpdateCustomer = (user, onClose, onRefresh) => {
         }
       }, 500);
     } catch (error) {
-      console.log("UPDATE ERROR:", error);
+      toast.error(error?.response?.data?.message || "Unable to update customer.");
       setError(error?.response?.data?.message || "Unable to update customer.");
     } finally {
       setLoading(false);

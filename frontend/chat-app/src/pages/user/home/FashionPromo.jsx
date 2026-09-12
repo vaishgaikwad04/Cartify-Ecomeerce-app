@@ -1,10 +1,13 @@
-///reusable components
+import React from "react";
+
+// Reusable components
 import ImageCard from "../../../components/ui/ImageCard";
 import Card from "../../../components/ui/Card";
 
-//fashionPromo custom hook
+// Fashion Promo custom hook
 import { useFashionPromo } from "../../../hooks/user/useFashionPromo";
-//wishlist custom hook
+
+// Wishlist custom hook
 import { useWishlist } from "../../../hooks/user/useWishList";
 
 // FASHION PROMO IMAGES
@@ -14,7 +17,6 @@ const images = [
 ];
 
 const FashionPromo = () => {
-
   // FASHION PROMO HOOK
   const {
     openProductModel,
@@ -23,7 +25,6 @@ const FashionPromo = () => {
     products,
   } = useFashionPromo();
 
-
   // WISHLIST
   const {
     isWishlisted,
@@ -31,7 +32,6 @@ const FashionPromo = () => {
   } = useWishlist();
 
   return (
-    //main container
     <div
       className={`
         max-w-[1800px]
@@ -51,11 +51,16 @@ const FashionPromo = () => {
         ${isDark ? "bg-gray-950" : "bg-white"}
       `}
     >
-      {/*PROMO IMAGES*/}
+      {/* PROMO IMAGES */}
       {images.map((image, index) => (
         <ImageCard
           key={index}
           image={image}
+          onClick={() => {
+            if (openProductModel !== null) {
+              setOpenProductModel(null);
+            }
+          }}
           className="
             h-[500px]
             sm:h-[600px]
@@ -64,12 +69,14 @@ const FashionPromo = () => {
           "
         >
           <div className="relative z-50">
-            {/*PLUS BUTTON*/}
+
+            {/* PLUS BUTTON */}
             <button
               type="button"
-              onClick={() =>
-                setOpenProductModel(index)
-              }
+              onClick={(e) => {
+                e.stopPropagation();
+                setOpenProductModel(index);
+              }}
               aria-label={`View product ${index + 1}`}
               className={`
                 w-10
@@ -108,6 +115,7 @@ const FashionPromo = () => {
             {openProductModel === index &&
               products?.length > 0 && (
                 <div
+                  onClick={(e) => e.stopPropagation()}
                   className="
                     absolute
                     top-12
@@ -124,8 +132,9 @@ const FashionPromo = () => {
                       w-full
                       rounded-xl
                       shadow-xl
-                      p-3
+                      p-2
                       overflow-hidden
+
                       ${
                         isDark
                           ? "bg-gray-900"
@@ -133,45 +142,10 @@ const FashionPromo = () => {
                       }
                     `}
                   >
-                    {/* CLOSE BUTTON*/}
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setOpenProductModel(null)
-                      }
-                      aria-label="Close product popup"
-                      className={`
-                        absolute
-                        top-2
-                        right-3
-                        z-[10000]
-                        w-7
-                        h-7
-                        flex
-                        items-center
-                        justify-center
-                        rounded-full
-                        text-lg
-                        transition-colors
-                        ${
-                          isDark
-                            ? `
-                              text-gray-300
-                              hover:bg-gray-800
-                              hover:text-white
-                            `
-                            : `
-                              text-gray-500
-                              hover:bg-gray-100
-                              hover:text-black
-                           `
-                        }
-                      `}
-                    >
-                      ×
-                    </button>
 
-                    {/*   PRODUCT CARD */}
+                   
+
+                    {/* PRODUCT CARD */}
                     <Card
                       product={products[0]}
                       isWishlisted={isWishlisted(
@@ -181,9 +155,11 @@ const FashionPromo = () => {
                         toggleWishlist
                       }
                     />
+
                   </div>
                 </div>
               )}
+
           </div>
         </ImageCard>
       ))}

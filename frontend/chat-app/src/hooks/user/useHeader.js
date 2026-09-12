@@ -228,7 +228,10 @@ export const useHeader = () => {
     isSearchModalOpen,
     setIsSearchModalOpen,
     searchTerm,
+     setSearchTerm,
     results,
+   
+
     searchLoading,
     handleSearch,
     closeSearch,

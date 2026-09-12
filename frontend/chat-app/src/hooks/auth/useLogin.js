@@ -3,6 +3,7 @@ import { loginUser } from "../../api/auth/AuthApi";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../../Firebase";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export const useLogin = () => {
   // Router hook for navigation after successful login
@@ -35,14 +36,13 @@ export const useLogin = () => {
     try {
       // Call backend API to authenticate user with email and password
       const res = await loginUser(formData);
-      console.log(res.data);
-
       // Set success message from API response
       setSucess(res.data.message);
 
       // Navigate to home page after successful login
       // Navigate based on user role
       if (res.data.user.role === "admin") {
+           toast.success(res.data.message);
         navigate("/admin");
       } else {
         navigate("/");
@@ -55,31 +55,33 @@ export const useLogin = () => {
       if (error.response) {
         // API returned an error response with message
         setError(error.response.data.message);
+        toast.error(error.response?.data?.message || "Login failed");
       } else {
         // Network error or server not responding
         setError("Server not responding");
+        toast.error("Server not responding");
       }
     }
   };
 
-  //Handler for Google OAuth login via Firebase Google provider
-  const handleLogin = async () => {
-    // Initialize Google authentication provider
-    const provider = new GoogleAuthProvider();
+ // Handler for Google OAuth login via Firebase Google provider
+const handleLogin = async () => {
+  // Initialize Google authentication provider
+  const provider = new GoogleAuthProvider();
+  try {
+    // Trigger Google sign-in popup
+    const result = await signInWithPopup(auth, provider);
+    // Get authenticated user information from Firebase
+    result.user;
+    navigate('/')
 
-    try {
-      // Trigger Google sign-in popup
-      const result = await signInWithPopup(auth, provider);
-
-      // Get authenticated user information from Firebase
-      const user = result.user;
-      console.log("Google User:", user);
-      // TODO: Send Google user data to backend for registration/login
-    } catch (error) {
-      // Log any authentication errors
-      console.log(error.message);
-    }
-  };
+    // TODO: Send Google user data to backend
+  } catch (error) {
+    const message = error?.message || "Google login failed";
+    setError(message);
+    toast.error(message);
+  }
+};
 
   //Return hook state and handlers for use in login component
   return {

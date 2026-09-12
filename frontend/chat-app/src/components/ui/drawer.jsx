@@ -21,6 +21,7 @@ const Drawer = ({
 
       {/* DRAWER */}
       <div
+        onClick={(e) => e.stopPropagation()}
         className={`
           absolute
           top-0
@@ -31,6 +32,7 @@ const Drawer = ({
           flex-col
           transition-transform
           duration-300
+          z-10
 
           ${width}
 

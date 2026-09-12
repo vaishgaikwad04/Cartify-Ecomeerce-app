@@ -6,7 +6,7 @@ import { ThemeContext } from "../../context/ThemeContext";
 import { createCheckoutSession } from "../../api/user/OrderApi";
 
 import { useAddress } from "./useAddress";
-import { useCart } from "./useCart";
+import { useCart } from "../../context/CartContext";
 
 export const useCheckout = () => {
   // Used to navigate between pages.
@@ -19,7 +19,7 @@ export const useCheckout = () => {
   // Get addresses from the address hook.
   const { addresses = [] } = useAddress();
 
-  // Get cart products.
+  // Get cart products from the shared CartContext.
   const { cartData = [] } = useCart();
 
   // Store the selected address.
@@ -35,10 +35,14 @@ export const useCheckout = () => {
       return;
     }
 
-    const defaultAddress = addresses.find((address) => address.isDefault);
+    const defaultAddress = addresses.find(
+      (address) => address.isDefault
+    );
 
     // Select default address or first address.
-    setSelectedAddressId(defaultAddress?._id || addresses[0]._id);
+    setSelectedAddressId(
+      defaultAddress?._id || addresses[0]._id
+    );
   }, [addresses]);
 
   // Select an address manually.
@@ -70,13 +74,17 @@ export const useCheckout = () => {
         img: item.productImage,
         price: Number(item.productPrice),
         quantity: Number(item.quantity),
+        size: item.size,
       }));
 
       console.log("Checkout products:", products);
       console.log("Selected address:", selectedAddressId);
 
       // Create Stripe checkout session.
-      const res = await createCheckoutSession(products, selectedAddressId);
+      const res = await createCheckoutSession(
+        products,
+        selectedAddressId
+      );
 
       console.log("Stripe response:", res.data);
 
@@ -88,9 +96,15 @@ export const useCheckout = () => {
 
       alert("Unable to start payment.");
     } catch (error) {
-      console.error("Checkout error:", error.response?.data || error.message);
+      console.error(
+        "Checkout error:",
+        error?.response?.data || error?.message
+      );
 
-      alert(error.response?.data?.message || "Unable to start payment.");
+      alert(
+        error?.response?.data?.message ||
+          "Unable to start payment."
+      );
     } finally {
       setPaymentLoading(false);
     }

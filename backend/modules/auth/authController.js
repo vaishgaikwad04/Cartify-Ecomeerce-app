@@ -10,7 +10,7 @@ export const registerUser = async (req, res) => {
     const user = await authModel.findOne({ email });
 
     if (user) {
-      return res.status(400).json({
+      return res.status(409).json({
         message: "User already exists!",
       });
     }
@@ -43,7 +43,7 @@ export const loginUser = async (req, res) => {
 
     if (!email || !password) {
       return res.status(400).json({
-        error: "Email and password are required",
+         message: "Email and password are required",
       });
     }
 
@@ -53,7 +53,7 @@ export const loginUser = async (req, res) => {
 
     if (!user) {
       return res.status(401).json({
-        error: "Invalid email or password",
+        message: "Invalid email or password",
       });
     }
 
@@ -61,7 +61,7 @@ export const loginUser = async (req, res) => {
 
     if (!isMatch) {
       return res.status(401).json({
-        error: "Invalid email or password",
+         message: "Invalid email or password",
       });
     }
 
@@ -93,7 +93,7 @@ export const loginUser = async (req, res) => {
     console.error("Login error:", err);
 
     return res.status(500).json({
-      error: "Server error",
+       message: "Server error",
     });
   }
 };

@@ -1,19 +1,17 @@
-import { RxCross2 } from "react-icons/rx";
+
 import Button from "../../../components/ui/Button";
-import { useCart } from "../../../hooks/user/useCart";
 import { useCartSidebar } from "../../../hooks/user/useCartSidebar";
 
-const CartSidebar = ({ onClose,isOpen }) => {
+const CartSidebar = ({ isOpen }) => {
   const {
     isDark,
     navigate,
-    handleSelectCoupon,
-    coupons,
-    selectedCoupon,
-    discountAmount,
     finalAmount,
-  } = useCartSidebar({isOpen});
-  const { cartData, handleIncrease, handleDecrease, handleRemove, totalPrice } = useCart();
+    cartData,
+    handleIncrease,
+    handleDecrease,
+    totalPrice,
+  } = useCartSidebar();
 
   return (
     <div
@@ -23,20 +21,14 @@ const CartSidebar = ({ onClose,isOpen }) => {
         max-w-full
         min-w-0
         overflow-x-hidden
-
         flex
         flex-col
-
         transition-colors
         duration-300
-
         ${isDark ? "bg-gray-950 text-white" : "bg-white text-gray-900"}
       `}
     >
-      {/* =====================================================
-          HEADER
-      ===================================================== */}
-
+      {/*HEADER */}
       <div
         className={`
           w-full
@@ -95,32 +87,9 @@ const CartSidebar = ({ onClose,isOpen }) => {
             ({cartData.length})
           </span>
         </h2>
-
-        {/* CLOSE */}
-
-        <button
-          onClick={onClose}
-          className={`
-            shrink-0
-            text-xl
-
-            transition-colors
-
-            ${
-              isDark
-                ? "text-gray-300 hover:text-white"
-                : "text-gray-700 hover:text-black"
-            }
-          `}
-        >
-          <RxCross2 />
-        </button>
       </div>
 
-      {/* =====================================================
-          CART ITEMS
-      ===================================================== */}
-
+      {/*CART ITEMS */}
       <div
         className="
           flex-1
@@ -201,7 +170,7 @@ const CartSidebar = ({ onClose,isOpen }) => {
 
           cartData.map((item) => (
             <div
-              key={item.productId}
+              key={`${item.productId}-${item.size}`}
               className={`
                 w-full
                 min-w-0
@@ -284,7 +253,7 @@ const CartSidebar = ({ onClose,isOpen }) => {
                     {item.productName}
                   </h3>
 
-                  <button
+                  {/*<button
                     onClick={() => handleRemove(item.productId)}
                     className={`
                       shrink-0
@@ -297,7 +266,7 @@ const CartSidebar = ({ onClose,isOpen }) => {
                     `}
                   >
                     <RxCross2 />
-                  </button>
+                  </button>*/}
                 </div>
 
                 {/* PRODUCT PRICE */}
@@ -349,7 +318,7 @@ const CartSidebar = ({ onClose,isOpen }) => {
                     `}
                   >
                     <button
-                      onClick={() => handleDecrease(item.productId)}
+                      onClick={() => handleDecrease(item.productId, item.size)}
                       className="
                         w-7
                         h-7
@@ -378,7 +347,7 @@ const CartSidebar = ({ onClose,isOpen }) => {
                     </span>
 
                     <button
-                      onClick={() => handleIncrease(item.productId)}
+                      onClick={() => handleIncrease(item.productId, item.size)}
                       className="
                         w-7
                         h-7
@@ -414,169 +383,28 @@ const CartSidebar = ({ onClose,isOpen }) => {
         )}
       </div>
 
-      {/* =====================================================
-          COUPON SECTION
-      ===================================================== */}
-
-      {cartData.length > 0 && (
-        <div
-          className={`
-            w-full
-            max-w-full
-            min-w-0
-
-            rounded-xl
-            border
-
-            p-3
-            sm:p-4
-
-            mt-3
-            mb-3
-
-            ${
-              isDark
-                ? "bg-gray-900 border-gray-800"
-                : "bg-white border-gray-200"
-            }
-          `}
-        >
-          <p className="text-sm font-semibold mb-3">Available Offers</p>
-
-          {/* COUPON LIST */}
-
-          <div
-            className="
-              w-full
-              min-w-0
-
-              flex
-              flex-col
-
-              gap-2
-            "
-          >
-            {coupons.map((coupon) => (
-              <div
-                key={coupon._id}
-                className={`
-                  w-full
-                  max-w-full
-                  min-w-0
-
-                  flex
-                  items-center
-                  justify-between
-
-                  gap-2
-
-                  border
-                  rounded-lg
-
-                  px-2
-                  sm:px-3
-
-                  py-2
-
-                  ${
-                    isDark
-                      ? "border-gray-700 bg-gray-800"
-                      : "border-gray-200 bg-gray-50"
-                  }
-                `}
-              >
-                {/* COUPON DETAILS */}
-
-                <div
-                  className="
-                    min-w-0
-                    flex-1
-                  "
-                >
-                  <p
-                    className="
-                      max-w-full
-
-                      text-sm
-                      font-medium
-                      leading-5
-
-                      break-all
-                    "
-                  >
-                    {coupon.code}
-                  </p>
-
-                  <p
-                    className={`
-                      text-xs
-
-                      ${isDark ? "text-gray-400" : "text-gray-500"}
-                    `}
-                  >
-                    {coupon.discount}% OFF
-                  </p>
-                </div>
-
-                {/* APPLY BUTTON */}
-
-                <button
-                  onClick={() => handleSelectCoupon(coupon.code)}
-                  className={`
-                    shrink-0
-
-                    px-2
-                    sm:px-3
-
-                    py-1
-
-                    text-xs
-
-                    rounded-md
-
-                    ${isDark ? "bg-white text-black" : "bg-black text-white"}
-                  `}
-                >
-                  Apply
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* =====================================================
-          FOOTER
-      ===================================================== */}
-
+    
+      {/* FOOTER*/}
       <div
         className={`
           w-full
           min-w-0
           shrink-0
-
           border-t
-
           p-4
           sm:p-5
-
           shadow-lg
-
           ${isDark ? "bg-gray-950 border-gray-800" : "bg-white border-gray-200"}
         `}
       >
         {/* SUMMARY */}
-
         <div
           className={`
             w-full
             min-w-0
-
             rounded-xl
-
             p-3
             sm:p-4
-
             ${isDark ? "bg-gray-900" : "bg-gray-50"}
           `}
         >
@@ -586,9 +414,7 @@ const CartSidebar = ({ onClose,isOpen }) => {
             className="
               flex
               justify-between
-
               gap-3
-
               text-sm
               mb-2
             "
@@ -600,77 +426,32 @@ const CartSidebar = ({ onClose,isOpen }) => {
             <span className="whitespace-nowrap">₹{totalPrice}</span>
           </div>
 
-          {/* COUPON DISCOUNT */}
-
-          {discountAmount > 0 && (
-            <div
-              className="
-                flex
-                justify-between
-
-                gap-3
-
-                text-sm
-                mb-2
-              "
-            >
-              <span className="text-green-600">Coupon Discount</span>
-
-              <span className="text-green-600 whitespace-nowrap">
-                -₹{discountAmount}
-              </span>
-            </div>
-          )}
-
+    
           {/* DIVIDER */}
-
           <div
             className={`
               border-t
               my-3
-
               ${isDark ? "border-gray-700" : "border-gray-200"}
             `}
           />
 
           {/* TOTAL */}
-
           <div
             className="
               flex
               justify-between
-
               gap-3
-
               font-semibold
-
               text-base
               sm:text-lg
             "
           >
             <span>Total</span>
-
             <span className="whitespace-nowrap">₹{finalAmount}</span>
           </div>
         </div>
-
-        {/* APPLIED COUPON */}
-
-        {selectedCoupon && (
-          <p
-            className="
-              mt-3
-              text-xs
-              text-green-600
-              break-all
-            "
-          >
-            Coupon "{selectedCoupon}" applied successfully
-          </p>
-        )}
-
         {/* VIEW CART BUTTON */}
-
         <Button
           onClick={() => navigate("/cart")}
           label="View Cart"

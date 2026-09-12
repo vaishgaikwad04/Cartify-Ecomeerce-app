@@ -1,21 +1,14 @@
-
 import InputField from "../../../components/ui/InputField";
 import Button from "../../../components/ui/Button";
 import Dropdown from "../../../components/ui/Dropdown";
 import { useCreateCoupon } from "../../../hooks/admin/coupon/useCreateCoupon";
 
-
-const CreateCoupon = ({ onRefresh, selectedCoupon }) => {
-const {
-  formData,
-  handleChange,
-  handleSubmit,
-  isDark,
-} = useCreateCoupon({
-  selectedCoupon,
-  onRefresh,
-});
-
+const CreateCoupon = ({ onRefresh, selectedCoupon , setIsModalOpen}) => {
+  const { formData, handleChange, handleSubmit, isDark } = useCreateCoupon({
+    selectedCoupon,
+    onRefresh,
+     setIsModalOpen
+  });
 
   const discountTypeOptions = [
     { value: "percentage", label: "Percentage" },
@@ -32,11 +25,7 @@ const {
       className={`
         max-w-3xl mx-auto rounded-xl p-6
 
-        ${
-          isDark
-            ? "bg-gray-900 text-white"
-            : "bg-white text-gray-900"
-        }
+        ${isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"}
       `}
     >
       {/* Header */}
@@ -44,22 +33,14 @@ const {
         className={`
           mb-8 pb-4 border-b
 
-          ${
-            isDark
-              ? "border-gray-700"
-              : "border-gray-300"
-          }
+          ${isDark ? "border-gray-700" : "border-gray-300"}
         `}
       >
         <h2
           className={`
             text-3xl font-semibold
 
-            ${
-              isDark
-                ? "text-white"
-                : "text-gray-900"
-            }
+            ${isDark ? "text-white" : "text-gray-900"}
           `}
         >
           {selectedCoupon ? "Update Coupon" : "Create Coupon"}
@@ -69,21 +50,14 @@ const {
           className={`
             text-sm mt-1
 
-            ${
-              isDark
-                ? "text-gray-400"
-                : "text-gray-500"
-            }
+            ${isDark ? "text-gray-400" : "text-gray-500"}
           `}
         >
           Create discount coupons for customers.
         </p>
       </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-6"
-      >
+      <form onSubmit={handleSubmit} className="space-y-6">
         <InputField
           label="Coupon Code"
           type="text"
@@ -136,17 +110,14 @@ const {
           onChange={handleChange}
           options={statusOptions}
         />
-
-        <Button
-          type="submit"
-          variant={isDark ? "secondary" : "primary"}
-          label={
-            selectedCoupon
-              ? "Update Coupon"
-              : "Create Coupon"
-          }
-          className="w-full"
-        />
+        <div className="flex justify-end">
+          <Button
+            type="submit"
+            variant={isDark ? "secondary" : "primary"}
+            label={selectedCoupon ? "Update Coupon" : "Create Coupon"}
+            className="w-1/4"
+          />
+        </div>
       </form>
     </div>
   );

@@ -8,40 +8,48 @@ import Dropdown from "../../../components/ui/Dropdown";
 import ActionMenu from "../../../components/ui/ActionMenu";
 import AdminPanelCard from "../../../components/ui/AdminPanelCard";
 import { useCategory } from "../../../hooks/admin/category/useCategory";
+import ViewModal from "../../../components/ui/ViewModel";
 
 const Category = () => {
   const {
-    isDark,
+  isDark,
 
-    // Category data
-    categoryData,
-    filteredData,
+  // Category data
+  categoryData,
+  filteredData,
 
-    // Modal
-    openCreateCategoryFormModal,
-    setOpenCreateCategoryFormModal,
+  // Modal
+  openCreateCategoryFormModal,
+  setOpenCreateCategoryFormModal,
 
-    // Selected category
-    selectedCategoryId,
-    setSelectedCategoryId,
+  // Selected category
+  selectedCategoryId,
+  setSelectedCategoryId,
 
-    // Search
-    search,
-    setSearch,
+  // View category
+  viewCategory,
+  setViewCategory,
+  setOpenViewModel,
+  openViewModel,
 
-    // Filters
-    selectedCategory,
-    setSelectedCategory,
-    selectedStatus,
-    setSelectedStatus,
+  // Search
+  search,
+  setSearch,
 
-    // Refresh category data
-    fetchedCategory,
+  // Filters
+  selectedCategory,
+  setSelectedCategory,
+  selectedStatus,
+  setSelectedStatus,
 
-    // Category actions
-    handleUpdateCategory,
-    handleDeleteCategory,
-  } = useCategory();
+  // Refresh category data
+  fetchedCategory,
+
+  // Category actions
+  handleUpdateCategory,
+  handleDeleteCategory,
+  handleViewCategory,
+} = useCategory();
 
   // TABLE COLUMNS
   const categoryColumns = [
@@ -101,9 +109,7 @@ const Category = () => {
       label: "Created At",
 
       render: (row) =>
-        row.createdAt
-          ? new Date(row.createdAt).toLocaleDateString()
-          : "-",
+        row.createdAt ? new Date(row.createdAt).toLocaleDateString() : "-",
     },
 
     {
@@ -113,6 +119,7 @@ const Category = () => {
       render: (row) => (
         <ActionMenu
           row={row}
+          onView={handleViewCategory}
           onEdit={handleUpdateCategory}
           onDelete={handleDeleteCategory}
         />
@@ -161,11 +168,7 @@ const Category = () => {
           border
           shadow-sm
           mb-6
-          ${
-            isDark
-              ? "bg-gray-900 border-gray-700"
-              : "bg-white border-gray-200"
-          }
+          ${isDark ? "bg-gray-900 border-gray-700" : "bg-white border-gray-200"}
         `}
       >
         {/* HEADER */}
@@ -296,33 +299,23 @@ const Category = () => {
         "
       >
         {/* TOTAL */}
-        <AdminPanelCard
-          title="Total Categories"
-          value={categoryData.length}
-        />
+        <AdminPanelCard title="Total Categories" value={categoryData.length} />
 
         {/* ACTIVE */}
         <AdminPanelCard
           title="Active Categories"
-          value={
-            categoryData.filter((item) => item.status === true).length
-          }
+          value={categoryData.filter((item) => item.status === true).length}
         />
 
         {/* INACTIVE */}
         <AdminPanelCard
           title="Inactive Categories"
-          value={
-            categoryData.filter((item) => item.status === false).length
-          }
+          value={categoryData.filter((item) => item.status === false).length}
         />
       </div>
 
       {/* TABLE */}
-      <Table
-        columns={categoryColumns}
-        data={filteredData}
-      />
+      <Table columns={categoryColumns} data={filteredData} />
 
       {/* CREATE / EDIT CATEGORY MODAL */}
       {openCreateCategoryFormModal && (
@@ -335,11 +328,7 @@ const Category = () => {
             // Clear selected category
             setSelectedCategoryId(null);
           }}
-          title={
-            selectedCategoryId
-              ? "Edit Category"
-              : "Create Category"
-          }
+          title={selectedCategoryId ? "Edit Category" : "Create Category"}
         >
           <CreateCategory
             categoryId={selectedCategoryId}
@@ -356,6 +345,210 @@ const Category = () => {
           />
         </Modal>
       )}
+
+     {openViewModel && (
+  <ViewModal
+    isOpen={openViewModel}
+    onClose={() => {
+      setOpenViewModel(false);
+      setViewCategory(null);
+    }}
+    title="Category Details"
+  >
+    {viewCategory ? (
+      <div className="space-y-5">
+
+        {/* CATEGORY HEADER */}
+        <div
+          className={`
+            flex items-center gap-4
+            rounded-xl border p-4
+            ${
+              isDark
+                ? "border-gray-700 bg-gray-800"
+                : "border-gray-200 bg-gray-50"
+            }
+          `}
+        >
+          {/* Avatar */}
+          <div
+            className={`
+              flex h-14 w-14 shrink-0
+              items-center justify-center
+              rounded-xl
+              text-xl font-semibold uppercase
+              ${
+                isDark
+                  ? "bg-white text-gray-900"
+                  : "bg-gray-900 text-white"
+              }
+            `}
+          >
+            {viewCategory?.name?.charAt(0) || "C"}
+          </div>
+
+          <div className="min-w-0">
+            <h3
+              className={`
+                truncate text-lg font-semibold
+                ${isDark ? "text-white" : "text-gray-900"}
+              `}
+            >
+              {viewCategory?.name || "-"}
+            </h3>
+
+            <p
+              className={`
+                text-sm
+                ${isDark ? "text-gray-400" : "text-gray-500"}
+              `}
+            >
+              Category
+            </p>
+          </div>
+        </div>
+
+        {/* DETAILS */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+          {/* NAME */}
+          <div>
+            <p
+              className={`
+                mb-1 text-xs font-medium uppercase
+                ${isDark ? "text-gray-400" : "text-gray-500"}
+              `}
+            >
+              Category Name
+            </p>
+
+            <p
+              className={`
+                text-sm font-medium
+                ${isDark ? "text-gray-200" : "text-gray-800"}
+              `}
+            >
+              {viewCategory?.name || "-"}
+            </p>
+          </div>
+
+          {/* SLUG */}
+          <div>
+            <p
+              className={`
+                mb-1 text-xs font-medium uppercase
+                ${isDark ? "text-gray-400" : "text-gray-500"}
+              `}
+            >
+              Slug
+            </p>
+
+            <p
+              className={`
+                text-sm font-medium
+                ${isDark ? "text-gray-200" : "text-gray-800"}
+              `}
+            >
+              {viewCategory?.slug || "-"}
+            </p>
+          </div>
+
+          {/* STATUS */}
+          <div>
+            <p
+              className={`
+                mb-1 text-xs font-medium uppercase
+                ${isDark ? "text-gray-400" : "text-gray-500"}
+              `}
+            >
+              Status
+            </p>
+
+            <span
+              className={`
+                inline-flex rounded-full px-3 py-1
+                text-xs font-medium
+                ${
+                  viewCategory?.status
+                    ? isDark
+                      ? "bg-green-900/40 text-green-400"
+                      : "bg-green-100 text-green-700"
+                    : isDark
+                    ? "bg-red-900/40 text-red-400"
+                    : "bg-red-100 text-red-700"
+                }
+              `}
+            >
+              {viewCategory?.status ? "Active" : "Inactive"}
+            </span>
+          </div>
+
+          {/* CREATED DATE */}
+          <div>
+            <p
+              className={`
+                mb-1 text-xs font-medium uppercase
+                ${isDark ? "text-gray-400" : "text-gray-500"}
+              `}
+            >
+              Created At
+            </p>
+
+            <p
+              className={`
+                text-sm font-medium
+                ${isDark ? "text-gray-200" : "text-gray-800"}
+              `}
+            >
+              {viewCategory?.createdAt
+                ? new Date(
+                    viewCategory.createdAt
+                  ).toLocaleDateString()
+                : "-"}
+            </p>
+          </div>
+        </div>
+
+        {/* DESCRIPTION */}
+        <div>
+          <p
+            className={`
+              mb-2 text-xs font-medium uppercase
+              ${isDark ? "text-gray-400" : "text-gray-500"}
+            `}
+          >
+            Description
+          </p>
+
+          <div
+            className={`
+              rounded-lg border p-3
+              ${
+                isDark
+                  ? "border-gray-700 bg-gray-800 text-gray-300"
+                  : "border-gray-200 bg-gray-50 text-gray-700"
+              }
+            `}
+          >
+            <p className="text-sm leading-6">
+              {viewCategory?.description || "No description available."}
+            </p>
+          </div>
+        </div>
+
+      </div>
+    ) : (
+      <div
+        className={`
+          py-8 text-center text-sm
+          ${isDark ? "text-gray-400" : "text-gray-500"}
+        `}
+      >
+        Category details not available.
+      </div>
+    )}
+  </ViewModal>
+)}
     </div>
   );
 };

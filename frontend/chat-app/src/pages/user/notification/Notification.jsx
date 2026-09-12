@@ -113,43 +113,54 @@ const Notifications = () => {
         {/* Display empty state when loading is complete
             and there are no notifications */}
         {!notificationLoading && notifications.length === 0 && (
-          <div
-            className={`
-              rounded-xl
-              border
-              p-12
-              text-center
-              ${
-                isDark
-                  ? "bg-gray-900 border-gray-800"
-                  : "bg-white border-gray-200"
-              }
-            `}
-          >
-            {/* Empty notification icon */}
-            <FiBell
-              className={`
-                mx-auto
-                text-4xl
-                mb-4
-                ${isDark ? "text-gray-600" : "text-gray-400"}
-              `}
-            />
+     <div
+  className={`
+    flex
+    min-h-[360px]
+    flex-col
+    items-center
+    justify-center
+    rounded-xl
+    border
+    px-6
+    py-12
+    text-center
 
-            <h2 className="text-lg font-medium">
-              No notifications
-            </h2>
+    ${
+      isDark
+        ? "border-gray-800 bg-gray-900"
+        : "border-gray-200 bg-white"
+    }
+  `}
+>
+  {/* Empty notification icon */}
+  <div
+    className={`
+      flex
+      h-16
+      w-16
+      items-center
+      justify-center
+      rounded-full
 
-            <p
-              className={`
-                mt-2
-                text-sm
-                ${isDark ? "text-gray-500" : "text-gray-500"}
-              `}
-            >
-              You're all caught up.
-            </p>
-          </div>
+      ${isDark ? "bg-gray-800" : "bg-gray-100"}
+    `}
+  >
+    <FiBell
+      className={`
+        text-2xl
+
+        ${isDark ? "text-gray-500" : "text-gray-400"}
+      `}
+    />
+  </div>
+
+  {/* Title */}
+  <h2 className="mt-5 text-lg font-semibold">
+    No notifications yet
+  </h2>
+
+</div>
         )}
 
         {/* ==================================

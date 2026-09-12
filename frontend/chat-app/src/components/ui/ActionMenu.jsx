@@ -2,7 +2,7 @@
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 
-const ActionMenu = ({ row, onEdit, onDelete }) => {
+const ActionMenu = ({ row, onEdit,onView, onDelete, disableDelete = false, }) => {
   const [open, setOpen] = useState(false);
 
   const { theme } = useContext(ThemeContext);
@@ -71,11 +71,11 @@ const ActionMenu = ({ row, onEdit, onDelete }) => {
             Edit
           </button>
 
-          {/* VIEW
+           
           <button
             type="button"
             onClick={() => {
-              console.log("View", row);
+              onView(row._id);
               setOpen(false);
             }}
             className={`
@@ -91,29 +91,36 @@ const ActionMenu = ({ row, onEdit, onDelete }) => {
             `}
           >
             View
-          </button> */}
+          </button> 
 
-          {/* DELETE */}
-          <button
-            type="button"
-            onClick={() => {
-              onDelete(row._id);
-              setOpen(false);
-            }}
-            className={`
-              w-full px-4 py-2.5
-              text-left text-sm
-              transition-colors duration-150
+        {/* DELETE */}
+<button
+  type="button"
+  disabled={disableDelete}
+  onClick={() => {
+    if (!disableDelete && onDelete) {
+      onDelete(row._id);
+      setOpen(false);
+    }
+  }}
+  className={`
+    w-full px-4 py-2.5
+    text-left text-sm
+    transition-colors duration-150
 
-              ${
-                isDark
-                  ? "text-red-400 hover:bg-gray-700"
-                  : "text-red-500 hover:bg-red-50"
-              }
-            `}
-          >
-            Delete
-          </button>
+    ${
+      disableDelete
+        ? isDark
+          ? "cursor-not-allowed text-gray-600"
+          : "cursor-not-allowed text-gray-300"
+        : isDark
+          ? "text-red-400 hover:bg-gray-700"
+          : "text-red-500 hover:bg-red-50"
+    }
+  `}
+>
+  Delete
+</button>
         </div>
       )}
     </div>

@@ -1,6 +1,10 @@
 import React, { useContext } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 import { ThemeContext } from "./context/ThemeContext";
 
 // User Layout
@@ -39,6 +43,8 @@ import Settings from "./pages/admin/settings/Settings";
 import Order from "./pages/admin/order/Order";
 import Dashboard from "./pages/admin/Dashboard/Dashboard";
 
+import ScrollToTop from "./components/ui/ScrollToTop";
+
 const App = () => {
   const { theme } = useContext(ThemeContext);
 
@@ -47,88 +53,199 @@ const App = () => {
   return (
     <div className={isDark ? "dark" : ""}>
       <Router>
+
+        {/* Scroll position handler */}
+        <ScrollToTop />
+
+        {/* Routes */}
         <Routes>
+
           {/* =========================
               USER ROUTES
           ========================= */}
 
           <Route path="/" element={<Layout />}>
+
             {/* PUBLIC ROUTES */}
 
             <Route index element={<Home />} />
 
-            <Route path="description/:id" element={<Description />} />
+            <Route
+              path="description/:id"
+              element={<Description />}
+            />
 
-            <Route path=":category" element={<Category />} />
+            <Route
+              path=":category"
+              element={<Category />}
+            />
 
-            <Route path="brand/:brand" element={<BrandPage />} />
+            <Route
+              path="brand/:brand"
+              element={<BrandPage />}
+            />
 
             {/* =========================
-                HELP ROUTES - PUBLIC
+                HELP ROUTES
             ========================= */}
 
-            <Route path="help" element={<Help type="faqs" />} />
+            <Route
+              path="help"
+              element={<Help type="faqs" />}
+            />
 
-            <Route path="help/faq" element={<Help type="faqs" />} />
+            <Route
+              path="help/faq"
+              element={<Help type="faqs" />}
+            />
 
-            <Route path="help/returns" element={<Help type="returns" />} />
+            <Route
+              path="help/returns"
+              element={<Help type="returns" />}
+            />
 
-            <Route path="help/shipping" element={<Help type="shipping" />} />
+            <Route
+              path="help/shipping"
+              element={<Help type="shipping" />}
+            />
 
-            <Route path="help/orders" element={<Help type="orders" />} />
+            <Route
+              path="help/orders"
+              element={<Help type="orders" />}
+            />
 
             {/* =========================
                 PROTECTED ROUTES
             ========================= */}
 
             <Route element={<PrivateRoute />}>
-              <Route path="wishListedItems" element={<WishListedItem />} />
 
-              <Route path="settings" element={<SettingsPage />} />
+              <Route
+                path="wishListedItems"
+                element={<WishListedItem />}
+              />
 
-              <Route path="cart" element={<CartPrev />} />
+              <Route
+                path="settings"
+                element={<SettingsPage />}
+              />
 
-              <Route path="addresses" element={<Address />} />
+              <Route
+                path="cart"
+                element={<CartPrev />}
+              />
 
-              <Route path="checkout" element={<Checkout />} />
+              <Route
+                path="addresses"
+                element={<Address />}
+              />
 
-              <Route path="orders" element={<Orders />} />
+              <Route
+                path="checkout"
+                element={<Checkout />}
+              />
 
-              <Route path="profile" element={<ProfilePage />} />
+              <Route
+                path="orders"
+                element={<Orders />}
+              />
 
-              <Route path="notifications" element={<Notifications />} />
+              <Route
+                path="profile"
+                element={<ProfilePage />}
+              />
+
+              <Route
+                path="notifications"
+                element={<Notifications />}
+              />
+
             </Route>
 
-            {/* =========================
-                PAYMENT RESULT ROUTES
-            ========================= */}
+            {/* PAYMENT RESULT ROUTES */}
 
-            <Route path="success" element={<Success />} />
+            <Route
+              path="success"
+              element={<Success />}
+            />
 
-            <Route path="cancel" element={<Cancel />} />
+            <Route
+              path="cancel"
+              element={<Cancel />}
+            />
+
           </Route>
 
           {/* =========================
               AUTH
           ========================= */}
 
-          <Route path="/auth" element={<Auth />} />
+          <Route
+            path="/auth"
+            element={<Auth />}
+          />
+
+          {/* =========================
+              ADMIN
+          ========================= */}
 
           <Route element={<PrivateRoute />}>
+
             <Route element={<AdminRoute />}>
-              <Route path="/admin" element={<AdminLayout />}>
-                <Route index element={<Dashboard />} />
-                <Route path="products" element={<Products />} />
-                <Route path="categories" element={<Categories />} />
-                <Route path="customers" element={<Customers />} />
-                <Route path="coupons" element={<Coupon />} />
-                <Route path="reviews" element={<Review />} />
-                <Route path="orders" element={<Order />} />
-                <Route path="settings" element={<Settings />} />
+
+              <Route
+                path="/admin"
+                element={<AdminLayout />}
+              >
+
+                <Route
+                  index
+                  element={<Dashboard />}
+                />
+
+                <Route
+                  path="products"
+                  element={<Products />}
+                />
+
+                <Route
+                  path="categories"
+                  element={<Categories />}
+                />
+
+                <Route
+                  path="customers"
+                  element={<Customers />}
+                />
+
+                <Route
+                  path="coupons"
+                  element={<Coupon />}
+                />
+
+                <Route
+                  path="reviews"
+                  element={<Review />}
+                />
+
+                <Route
+                  path="orders"
+                  element={<Order />}
+                />
+
+                <Route
+                  path="settings"
+                  element={<Settings />}
+                />
+
               </Route>
+
             </Route>
+
           </Route>
+
         </Routes>
+
       </Router>
     </div>
   );

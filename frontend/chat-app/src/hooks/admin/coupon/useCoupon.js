@@ -1,26 +1,29 @@
-import React, { useState, useEffect , useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   deleteCoupon,
   getCouponById,
   getCoupons,
 } from "../../../api/user/CouponApi";
 import { ThemeContext } from "../../../context/ThemeContext";
+import toast from "react-hot-toast";
 
 export const useCoupon = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [couponsData, setCouponsData] = useState([]);
   const [selectedCouponId, setSelectedCouponId] = useState(null);
   const [selectedCoupon, setSelectedCoupon] = useState(null);
+  const [viewCoupon, setViewCoupon] = useState(null);
   const [discountType, setDiscountType] = useState("");
   const [status, setStatus] = useState("all");
+  const [viewModelOpen, setViewModelOpen] = useState(false);
 
   const fetchCoupons = async () => {
     try {
       const res = await getCoupons();
       setCouponsData(res.data.coupons);
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.message || "Failed to Fetched  Coupon");
     }
   };
 
@@ -28,14 +31,14 @@ export const useCoupon = () => {
     fetchCoupons();
   }, []);
 
-  
   const fetchCouponById = async (id) => {
     try {
       const res = await getCouponById(id);
       setSelectedCoupon(res.data.coupon);
-      console.log(res.data);
     } catch (error) {
-      console.log(error);
+      toast.error(
+        error.response.data.message || "Failed to Fetched  Coupon By Id",
+      );
     }
   };
 
@@ -55,11 +58,11 @@ export const useCoupon = () => {
       await deleteCoupon(id);
       fetchCoupons();
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.message || "Failed to Delete  Coupon");
     }
   };
 
-    const filteredCoupons = couponsData
+  const filteredCoupons = couponsData
     .filter((item) =>
       !search ? true : item.code.toLowerCase().includes(search.toLowerCase()),
     )
@@ -75,45 +78,53 @@ export const useCoupon = () => {
   const { theme } = useContext(ThemeContext);
 
   const isDark = theme === "Dark Mode";
- 
+
+ const handleViewCoupon = (id) => {
+  const coupon = couponsData.find((item) => item._id === id);
+
+  setViewModelOpen(true);
+  setViewCoupon(coupon);
+};
 
   return {
-  // Modal
-  isModalOpen,
-  setIsModalOpen,
+    // Modal
+    isModalOpen,
+    setIsModalOpen,
 
-  // Search
-  search,
-  setSearch,
+    // Search
+    search,
+    setSearch,
 
-  // Coupons
-  couponsData,
-  setCouponsData,
+    // Coupons
+    couponsData,
+    setCouponsData,
 
-  // Selected coupon
-  selectedCouponId,
-  setSelectedCouponId,
-  selectedCoupon,
-  setSelectedCoupon,
+    // Selected coupon
+    selectedCouponId,
+    setSelectedCouponId,
+    selectedCoupon,
+    setSelectedCoupon,
 
-  // Filters
-  discountType,
-  setDiscountType,
-  status,
-  setStatus,
+    // Filters
+    discountType,
+    setDiscountType,
+    status,
+    setStatus,
 
-  // Functions
-  fetchCoupons,
-  fetchCouponById,
-  handleEditCoupon,
-  handleDeleteCoupon,
+    // Functions
+    fetchCoupons,
+    fetchCouponById,
+    handleEditCoupon,
+    handleDeleteCoupon,
 
-  // Filtered data
-  filteredCoupons,
-
-  // Theme
-  theme,
-  isDark,
+    // Filtered data
+    filteredCoupons,
+    handleViewCoupon,
+    setViewModelOpen,
+    viewModelOpen,
+    // Theme
+    theme,
+    isDark,
+    viewCoupon
+  };
 };
-}
-

@@ -13,7 +13,6 @@ export const useReviews = () => {
  
   const fetchedReviews = async () => {
     const res = await fetchAllReviews();
-    console.log(res.data.fetchedReviews);
    setReviewsData(res.data.fetchedReviews);
   };
 

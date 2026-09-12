@@ -7,8 +7,11 @@ import {
   deleteAddress,
   setDefaultAddress,
 } from "../../api/user/AddressApi";
+import { useNavigate } from "react-router-dom";
+
 
 export const useAddress = () => {
+  const navigate = useNavigate()
   const [addresses, setAddresses] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -76,7 +79,7 @@ export const useAddress = () => {
       } else {
         await createAddress(formData);
       }
-
+navigate('/checkout')
       resetForm();
       await fetchAddresses();
 

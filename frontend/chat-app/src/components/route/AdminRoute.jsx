@@ -15,7 +15,6 @@ const AdminRoute = () => {
             withCredentials: true,
           }
         );
-        console.log(res.data)
 
         if (res.data.user.role === "admin") {
           setIsAdmin(true);

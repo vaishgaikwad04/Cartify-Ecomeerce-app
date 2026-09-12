@@ -4,91 +4,97 @@ import { registerUser } from "../../api/auth/AuthApi";
 import { useNavigate } from "react-router-dom";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../../Firebase";
+import toast from "react-hot-toast";
 
+// Custom hook for handling user registration and Google authentication
 export const useRegister = () => {
-  // Router hook for navigation after successful registration
+  // Navigate user to another page after successful registration
   const navigate = useNavigate();
 
-  // State management for error and success messages
-  const [error, setError] = useState(""); // Error message from API or auth failure
-  const [sucess, setSucess] = useState(""); // Success message after successful registration
+  // Store registration error and success messages
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  // Form data state containing user registration information
+  // Store registration form data
   const [formData, setFormData] = useState({
-    name: "", // User's full name
-    email: "", // User email address
-    password: "", // User password
-    role: "", // User role (user/admin)
+    name: "",
+    email: "",
+    password: "",
+    role: "",
   });
 
-  
-  //Handler for form input changes
+  // Handle changes in registration form inputs
   const handleChange = (e) => {
-    // Update specific field in formData while preserving other fields
+    // Update the changed field while keeping the existing form data
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  
-  //Handler for email/password form submission
+  // Handle registration form submission
   const handleSubmit = async (e) => {
-    // Prevent default form submission behavior
+    // Prevent the browser from refreshing the page
     e.preventDefault();
 
     try {
-      // Call backend API to register new user with form data
+      // Send registration data to the backend API
       const res = await registerUser(formData);
 
-      // Set success message from API response
-      setSucess(res.data.message);
+      // Store and display the success message
+      setSuccess(res.data.message);
+     toast.success(res.data.message);
 
-      // Navigate to home page after successful registration
+      // Redirect the user to the login page
       navigate("/auth?mode=login");
 
-      // Clear any previous errors
+      // Clear any previous error message
       setError("");
     } catch (error) {
-      // Handle errors from API response or network issues
+      // Handle errors returned by the backend
       if (error.response) {
-        // API returned an error response with message
+        // Display the backend error message
         setError(error.response.data.message);
+        toast.error(error.response.data.message);
+        console.log(error);
       } else {
-        // Network error or server not responding
+        // Handle server or network connection errors
         setError("Server not responding");
+        toast.error("Server not responding");
       }
     }
   };
 
-
-  //Authenticates user via Firebase Google provider
+  // Handle Google authentication using Firebase
   const handleLogin = async () => {
-    // Initialize Google authentication provider
+    // Create a Google authentication provider
     const provider = new GoogleAuthProvider();
 
     try {
-      // Trigger Google sign-in popup
+      // Open the Google sign-in popup
       const result = await signInWithPopup(auth, provider);
 
-      // Get authenticated user information from Firebase
+      // Get the authenticated Google user
       const user = result.user;
+
+      // Display Google user information for testing
       console.log("Google User:", user);
-      // TODO: Send Google user data to backend for registration/login
+
+      // TODO: Send Firebase user information/token to the backend
     } catch (error) {
-      // Log any authentication errors
+      // Handle Google authentication errors
       console.log(error.message);
     }
   };
 
-  
-  //Return hook state and handlers for use in register component
+  // Return state and functions so the register component can use them
   return {
-    handleChange, // Form input change handler
-    handleSubmit, // Form submission handler
-    handleLogin, // Google OAuth login handler
-    formData, // Current form data state
-    error, // Error message state
-    sucess, // Success message state
+    handleChange,
+    handleSubmit,
+    handleLogin,
+    formData,
+    error,
+    success,
   };
 };
+
