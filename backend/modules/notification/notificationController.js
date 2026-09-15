@@ -183,25 +183,18 @@ export const deleteNotification = async (req, res) => {
 
 
 export const getAdminPanelNotifications = async (req, res) => {
-  try {
-    console.log("ADMIN ID FROM JWT:", req.user.id);
+  console.log("🔥🔥🔥 NEW ADMIN NOTIFICATION CONTROLLER IS RUNNING 🔥🔥🔥");
 
-    const notifications = await notificationModel.find({
-      user: req.user.id,
-    });
-
-    console.log("FOUND NOTIFICATIONS:", notifications);
-
-    return res.status(200).json({
-      success: true,
-      notifications,
-    });
-  } catch (error) {
-    console.error("GET ADMIN NOTIFICATIONS ERROR:", error);
-
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
+  return res.status(200).json({
+    success: true,
+    notifications: [
+      {
+        _id: "test123",
+        title: "TEST NOTIFICATION",
+        message: "Backend test notification",
+        type: "order",
+        isRead: false,
+      },
+    ],
+  });
 };
