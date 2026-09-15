@@ -278,6 +278,7 @@ export const NotificationProvider = ({ children }) => {
       }
 
       const data = res?.data?.notifications || [];
+      console.log(res?.data?.notifications )
 
       setNotifications(data);
 

@@ -243,37 +243,181 @@ export const getAllOrders = async (req, res) => {
   }
 };
 
+// export const updateOrderStatus = async (req, res) => {
+//   try {
+//     const { status, paymentStatus } = req.body;
+
+//     console.log("========== UPDATE ORDER ==========");
+//     console.log("ORDER ID:", req.params.id);
+//     console.log("BODY:", req.body);
+
+//     const updateData = {};
+
+//     // ------------------------------------------
+//     // UPDATE ORDER STATUS
+//     // ------------------------------------------
+
+//     if (status !== undefined && status !== "") {
+//       updateData.status = status;
+//     }
+
+//     // ------------------------------------------
+//     // UPDATE PAYMENT STATUS
+//     // ------------------------------------------
+
+//     if (
+//       paymentStatus !== undefined &&
+//       paymentStatus !== ""
+//     ) {
+//       updateData.paymentStatus = paymentStatus;
+//     }
+
+//     console.log("UPDATE DATA:", updateData);
+
+//     if (Object.keys(updateData).length === 0) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "No update data provided",
+//       });
+//     }
+
+//     // ------------------------------------------
+//     // UPDATE ORDER
+//     // ------------------------------------------
+
+//     const order = await orderModel.findByIdAndUpdate(
+//       req.params.id,
+//       {
+//         $set: updateData,
+//       },
+//       {
+//         new: true,
+//         runValidators: true,
+//       }
+//     );
+
+//     if (!order) {
+//       return res.status(404).json({
+//         success: false,
+//         message: "Order not found",
+//       });
+//     }
+
+//     console.log("UPDATED ORDER:", order);
+
+//     // ==========================================
+//     // CREATE NOTIFICATION
+//     // ==========================================
+
+//     if (status === "paid") {
+//       await notificationModel.create({
+//         user: order.userId,
+//         title: "Payment Successful",
+//         message:
+//           "Your payment was successful and your order has been confirmed.",
+//         type: "payment",
+//         order: order._id,
+//       });
+
+//       console.log("Payment notification created");
+//     }
+
+//     if (status === "shipped") {
+//       await notificationModel.create({
+//         user: order.userId,
+//         title: "Order Shipped",
+//         message:
+//           "Your order has been shipped and is on its way.",
+//         type: "shipping",
+//         order: order._id,
+//       });
+
+//       console.log("Shipping notification created");
+//     }
+
+//     if (status === "delivered") {
+//       await notificationModel.create({
+//         user: order.userId,
+//         title: "Order Delivered",
+//         message:
+//           "Your order has been delivered successfully.",
+//         type: "delivery",
+//         order: order._id,
+//       });
+
+//       console.log("Delivery notification created");
+//     }
+
+//     if (status === "cancelled") {
+//       await notificationModel.create({
+//         user: order.userId,
+//         title: "Order Cancelled",
+//         message:
+//           "Your order has been cancelled.",
+//         type: "order",
+//         order: order._id,
+//       });
+
+//       console.log("Cancellation notification created");
+//     }
+
+//     console.log("=================================");
+
+//     // ------------------------------------------
+//     // RESPONSE
+//     // ------------------------------------------
+
+//     return res.status(200).json({
+//       success: true,
+//       message: "Order updated successfully",
+//       order,
+//     });
+
+//   } catch (error) {
+//     console.error(
+//       "UPDATE ORDER ERROR:",
+//       error
+//     );
+
+//     return res.status(500).json({
+//       success: false,
+//       message: "Server error",
+//       error: error.message,
+//     });
+//   }
+// };
+
 export const updateOrderStatus = async (req, res) => {
   try {
+    const { id } = req.params;
     const { status, paymentStatus } = req.body;
 
     console.log("========== UPDATE ORDER ==========");
-    console.log("ORDER ID:", req.params.id);
-    console.log("BODY:", req.body);
+    console.log("ORDER ID:", id);
+    console.log("REQUEST BODY:", req.body);
 
+    // -----------------------------------
+    // 1. Prepare only the fields provided
+    // -----------------------------------
     const updateData = {};
 
-    // ------------------------------------------
-    // UPDATE ORDER STATUS
-    // ------------------------------------------
-
+    // Order status
+    // Example: pending, shipped, delivered, cancelled
     if (status !== undefined && status !== "") {
       updateData.status = status;
     }
 
-    // ------------------------------------------
-    // UPDATE PAYMENT STATUS
-    // ------------------------------------------
-
-    if (
-      paymentStatus !== undefined &&
-      paymentStatus !== ""
-    ) {
+    // Payment status
+    // Example: pending, paid, failed
+    if (paymentStatus !== undefined && paymentStatus !== "") {
       updateData.paymentStatus = paymentStatus;
     }
 
     console.log("UPDATE DATA:", updateData);
 
+    // -----------------------------------
+    // 2. Nothing to update
+    // -----------------------------------
     if (Object.keys(updateData).length === 0) {
       return res.status(400).json({
         success: false,
@@ -281,21 +425,21 @@ export const updateOrderStatus = async (req, res) => {
       });
     }
 
-    // ------------------------------------------
-    // UPDATE ORDER
-    // ------------------------------------------
-
+    // -----------------------------------
+    // 3. Find and update the order
+    // -----------------------------------
     const order = await orderModel.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: updateData,
-      },
+      id,
+      { $set: updateData },
       {
         new: true,
         runValidators: true,
       }
     );
 
+    // -----------------------------------
+    // 4. Order not found
+    // -----------------------------------
     if (!order) {
       return res.status(404).json({
         success: false,
@@ -305,79 +449,88 @@ export const updateOrderStatus = async (req, res) => {
 
     console.log("UPDATED ORDER:", order);
 
-    // ==========================================
-    // CREATE NOTIFICATION
-    // ==========================================
+    // -----------------------------------
+    // 5. Create notification
+    // -----------------------------------
+    try {
+      // PAYMENT notification
+      // IMPORTANT:
+      // Check paymentStatus, NOT status
+      if (paymentStatus === "paid") {
+        await notificationModel.create({
+          user: order.userId,
+          title: "Payment Successful",
+          message:
+            "Your payment was successful and your order has been confirmed.",
+          type: "payment",
+          order: order._id,
+        });
 
-    if (status === "paid") {
-      await notificationModel.create({
-        user: order.userId,
-        title: "Payment Successful",
-        message:
-          "Your payment was successful and your order has been confirmed.",
-        type: "payment",
-        order: order._id,
-      });
+        console.log("Payment notification created");
+      }
 
-      console.log("Payment notification created");
-    }
+      // ORDER SHIPPED notification
+      if (status === "shipped") {
+        await notificationModel.create({
+          user: order.userId,
+          title: "Order Shipped",
+          message:
+            "Your order has been shipped and is on its way.",
+          type: "shipping",
+          order: order._id,
+        });
 
-    if (status === "shipped") {
-      await notificationModel.create({
-        user: order.userId,
-        title: "Order Shipped",
-        message:
-          "Your order has been shipped and is on its way.",
-        type: "shipping",
-        order: order._id,
-      });
+        console.log("Shipping notification created");
+      }
 
-      console.log("Shipping notification created");
-    }
+      // ORDER DELIVERED notification
+      if (status === "delivered") {
+        await notificationModel.create({
+          user: order.userId,
+          title: "Order Delivered",
+          message:
+            "Your order has been delivered successfully.",
+          type: "delivery",
+          order: order._id,
+        });
 
-    if (status === "delivered") {
-      await notificationModel.create({
-        user: order.userId,
-        title: "Order Delivered",
-        message:
-          "Your order has been delivered successfully.",
-        type: "delivery",
-        order: order._id,
-      });
+        console.log("Delivery notification created");
+      }
 
-      console.log("Delivery notification created");
-    }
+      // ORDER CANCELLED notification
+      if (status === "cancelled") {
+        await notificationModel.create({
+          user: order.userId,
+          title: "Order Cancelled",
+          message:
+            "Your order has been cancelled.",
+          type: "order",
+          order: order._id,
+        });
 
-    if (status === "cancelled") {
-      await notificationModel.create({
-        user: order.userId,
-        title: "Order Cancelled",
-        message:
-          "Your order has been cancelled.",
-        type: "order",
-        order: order._id,
-      });
-
-      console.log("Cancellation notification created");
+        console.log("Cancellation notification created");
+      }
+    } catch (notificationError) {
+      // Notification failure should not make
+      // the order update fail
+      console.error(
+        "NOTIFICATION CREATION ERROR:",
+        notificationError
+      );
     }
 
     console.log("=================================");
 
-    // ------------------------------------------
-    // RESPONSE
-    // ------------------------------------------
-
+    // -----------------------------------
+    // 6. Send response
+    // -----------------------------------
     return res.status(200).json({
       success: true,
       message: "Order updated successfully",
       order,
     });
-
   } catch (error) {
-    console.error(
-      "UPDATE ORDER ERROR:",
-      error
-    );
+    console.error("UPDATE ORDER ERROR:", error);
 
     return res.status(500).json({
       success: false,
@@ -386,7 +539,6 @@ export const updateOrderStatus = async (req, res) => {
     });
   }
 };
-
 
 
 

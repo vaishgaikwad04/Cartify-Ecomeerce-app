@@ -159,24 +159,49 @@ export const deleteNotification = async (req, res) => {
 };
 
 
+// export const getAdminPanelNotifications = async (req, res) => {
+//   try {
+//     const notifications = await notificationModel
+//       .find({
+//         user: req.user.id,
+//       })
+//       .sort({ createdAt: -1 });
+
+//     return res.status(200).json({
+//       success: true,
+//       notifications,
+//     });
+//   } catch (error) {
+//     console.error("GET NOTIFICATIONS ERROR:", error);
+
+//     return res.status(500).json({
+//       success: false,
+//       message: "Server error",
+//     });
+//   }
+// };
+
+
 export const getAdminPanelNotifications = async (req, res) => {
   try {
-    const notifications = await notificationModel
-      .find({
-        user: req.user.id,
-      })
-      .sort({ createdAt: -1 });
+    console.log("ADMIN ID FROM JWT:", req.user.id);
+
+    const notifications = await notificationModel.find({
+      user: req.user.id,
+    });
+
+    console.log("FOUND NOTIFICATIONS:", notifications);
 
     return res.status(200).json({
       success: true,
       notifications,
     });
   } catch (error) {
-    console.error("GET NOTIFICATIONS ERROR:", error);
+    console.error("GET ADMIN NOTIFICATIONS ERROR:", error);
 
     return res.status(500).json({
       success: false,
-      message: "Server error",
+      message: error.message,
     });
   }
 };
