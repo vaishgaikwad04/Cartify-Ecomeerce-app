@@ -183,18 +183,36 @@ export const deleteNotification = async (req, res) => {
 
 
 export const getAdminPanelNotifications = async (req, res) => {
-  console.log("🔥🔥🔥 NEW ADMIN NOTIFICATION CONTROLLER IS RUNNING 🔥🔥🔥");
+  try {
+    console.log("========== ADMIN NOTIFICATION DEBUG ==========");
 
-  return res.status(200).json({
-    success: true,
-    notifications: [
-      {
-        _id: "test123",
-        title: "TEST NOTIFICATION",
-        message: "Backend test notification",
-        type: "order",
-        isRead: false,
-      },
-    ],
-  });
+    console.log("REQ.USER:", req.user);
+    console.log("REQ.USER.ID:", req.user?.id);
+    console.log("REQ.USER._ID:", req.user?._id);
+
+    const allNotifications = await notificationModel.find();
+
+    console.log("ALL NOTIFICATIONS:", allNotifications);
+
+    const notifications = await notificationModel.find({
+      user: req.user.id,
+    });
+
+    console.log("MATCHED NOTIFICATIONS:", notifications);
+    console.log("MATCHED COUNT:", notifications.length);
+
+    console.log("==============================================");
+
+    return res.status(200).json({
+      success: true,
+      notifications,
+    });
+  } catch (error) {
+    console.error("GET ADMIN NOTIFICATIONS ERROR:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
