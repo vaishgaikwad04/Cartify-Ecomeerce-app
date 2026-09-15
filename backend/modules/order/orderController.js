@@ -158,9 +158,21 @@ export const createCheckoutSession = async (req, res) => {
       order._id
     );
 
-    // ------------------------------------------
-    // RESPONSE
-    // ------------------------------------------
+   // Find admin
+const admin = await authModel.findOne({
+  role: "admin",
+});
+
+// Create notification for admin
+if (admin) {
+  await notificationModel.create({
+    user: admin._id,
+    title: "New Order",
+    message: "A new order requires processing.",
+    type: "order",
+    order: order._id,
+  });
+}
 
     return res.status(200).json({
       success: true,

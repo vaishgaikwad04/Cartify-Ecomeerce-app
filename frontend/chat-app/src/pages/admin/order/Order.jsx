@@ -1,45 +1,49 @@
+//reusable componetns
 import Table from "../../../components/ui/Table";
 import SearchBar from "../../../components/ui/SearchBar";
 import Dropdown from "../../../components/ui/Dropdown";
-import Modal from "../../../components/ui/Modal";
 import AdminPanelCard from "../../../components/ui/AdminPanelCard";
-import { useOrders } from "../../../hooks/admin/orders/useOrders";
 import Button from "../../../components/ui/Button";
+//reusable model
+import Modal from "../../../components/ui/Modal";
+//order custom hook
+import { useOrders } from "../../../hooks/admin/orders/useOrders";
 
 const Order = () => {
+  //order custom hook
   const {
-    isDark,
+    // ORDERS
     orderData,
     filteredData,
+    loading,
 
+    // SEARCH + FILTER
     search,
     setSearch,
-
     selectedStatus,
     setSelectedStatus,
-
     selectedPaymentStatus,
     setSelectedPaymentStatus,
 
-    loading,
-
+    // MANAGE ORDER
     selectedOrder,
-
     showManageModal,
     setShowManageModal,
-
     orderStatus,
     setOrderStatus,
-
     paymentStatus,
     setPaymentStatus,
 
-    updatingStatus,
-    handleUpdateStatus,
-
+    // ACTIONS
     handleManageOrder,
+    handleUpdateStatus,
+    updatingStatus,
+
+    // THEME
+    isDark,
   } = useOrders();
 
+  //order status options
   const statusOptions = [
     {
       label: "All Status",
@@ -67,6 +71,7 @@ const Order = () => {
     },
   ];
 
+  //order payment options
   const paymentStatusOptions = [
     {
       label: "All Payments",
@@ -94,6 +99,7 @@ const Order = () => {
     },
   ];
 
+  //order columns
   const orderColumns = [
     {
       key: "customer",
@@ -319,6 +325,44 @@ const Order = () => {
     },
   ];
 
+  const managePaymentStatusOptions = [
+    {
+      label: "Paid",
+      value: "paid",
+    },
+    {
+      label: "Pending",
+      value: "pending",
+    },
+    {
+      label: "Failed",
+      value: "failed",
+    },
+    {
+      label: "Refunded",
+      value: "refunded",
+    },
+  ];
+
+  const manageOrderStatusOptions = [
+    {
+      label: "Processing",
+      value: "processing",
+    },
+    {
+      label: "Shipped",
+      value: "shipped",
+    },
+    {
+      label: "Delivered",
+      value: "delivered",
+    },
+    {
+      label: "Cancelled",
+      value: "cancelled",
+    },
+  ];
+
   return (
     <div className={isDark ? "text-white" : "text-gray-900"}>
       <div
@@ -380,7 +424,6 @@ const Order = () => {
           </div>
 
           {/* SEARCH */}
-
           <div className="w-full md:w-80">
             <SearchBar
               value={search}
@@ -408,37 +451,28 @@ const Order = () => {
                     `}
         >
           {/* ORDER STATUS */}
-
-          <div
-            className="
-                            w-full
-                            md:w-auto
-                        "
-          >
+          <div className=" w-full md:w-auto">
             <Dropdown
               name="orderStatus"
-              value={selectedStatus}
-              onChange={(e) => setSelectedStatus(e.target.value)}
-              options={statusOptions}
+              label="Order Status"
+              value={orderStatus}
+              onChange={(e) => setOrderStatus(e.target.value)}
+              options={manageOrderStatusOptions}
             />
           </div>
 
           {/* PAYMENT STATUS */}
-
-          <div
-            className="
-                            w-full
-                            md:w-auto
-                        "
-          >
+          <div className=" w-full md:w-auto">
             <Dropdown
               name="paymentStatus"
-              value={selectedPaymentStatus}
-              onChange={(e) => setSelectedPaymentStatus(e.target.value)}
-              options={paymentStatusOptions}
+              label="Payment Status"
+              value={paymentStatus}
+              onChange={(e) => setPaymentStatus(e.target.value)}
+              options={managePaymentStatusOptions}
             />
           </div>
         </div>
+
         {/* STATISTICS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 mb-6">
           <AdminPanelCard title="Total Orders" value={orderData.length} />
@@ -477,36 +511,24 @@ const Order = () => {
       <Modal isOpen={showManageModal} onClose={() => setShowManageModal(false)}>
         {selectedOrder && (
           <div
-            className={`
-                w-full max-w-2xl
-                rounded-xl
-                p-6
-                ${isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"}
-            `}
+            className={`w-full max-w-2xl rounded-x p-6  ${isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"} `}
           >
             {/* HEADER */}
-
             <div className="mb-6">
               <h2 className="text-xl font-semibold">Manage Order</h2>
-
+              {/*show the last 8 characters of the order's _id*/}
               <p
-                className={`
-                        mt-1 text-xs
-                        ${isDark ? "text-gray-500" : "text-gray-400"}
-                    `}
+                className={` mt-1 text-xs ${isDark ? "text-gray-500" : "text-gray-400"} `}
               >
                 Order ID: #{selectedOrder._id?.slice(-8)}
               </p>
             </div>
 
             {/* CUSTOMER */}
-
             <div className="mb-5">
               <h3 className="mb-3 text-sm font-semibold">Customer</h3>
-
               <div
-                className={`
-                        rounded-lg border p-4
+                className={` rounded-lg border p-4
                         ${
                           isDark
                             ? "border-gray-700 bg-gray-800"
@@ -625,63 +647,25 @@ const Order = () => {
             {/* PAYMENT STATUS */}
 
             <div className="mb-6">
-              <label className="mb-2 block text-sm font-medium">
-                Payment Status
-              </label>
-
-              <select
+              <Dropdown
+                name="paymentStatus"
+                label="Payment Status"
                 value={paymentStatus}
                 onChange={(e) => setPaymentStatus(e.target.value)}
-                className={`
-            w-full rounded-lg border
-            px-3 py-2.5
-            text-sm outline-none
-            ${
-              isDark
-                ? "border-gray-700 bg-gray-800 text-white"
-                : "border-gray-200 bg-white text-gray-900"
-            }
-        `}
-              >
-                <option value="pending">Pending</option>
-
-                <option value="paid">Paid</option>
-
-                <option value="failed">Failed</option>
-
-                <option value="refunded">Refunded</option>
-              </select>
+                options={paymentStatusOptions}
+              />
             </div>
 
             {/* ORDER STATUS */}
 
             <div className="mb-6">
-              <label className="mb-2 block text-sm font-medium">
-                Order Status
-              </label>
-
-              <select
+              <Dropdown
+                name="orderStatus"
+                label="Order Status"
                 value={orderStatus}
                 onChange={(e) => setOrderStatus(e.target.value)}
-                className={`
-                        w-full rounded-lg border
-                        px-3 py-2.5
-                        text-sm outline-none
-                        ${
-                          isDark
-                            ? "border-gray-700 bg-gray-800 text-white"
-                            : "border-gray-200 bg-white text-gray-900"
-                        }
-                    `}
-              >
-                <option value="processing">Processing</option>
-
-                <option value="shipped">Shipped</option>
-
-                <option value="delivered">Delivered</option>
-
-                <option value="cancelled">Cancelled</option>
-              </select>
+                options={statusOptions}
+              />
             </div>
 
             {/* ACTIONS */}
@@ -692,7 +676,7 @@ const Order = () => {
                 onClick={handleUpdateStatus}
                 disabled={updatingStatus}
                 label={updatingStatus ? "Updating..." : "Update Status"}
-                variant={isDark? "secondary" : "primary"} 
+                variant={isDark ? "secondary" : "primary"}
                 className="w-1/4"
               />
             </div>

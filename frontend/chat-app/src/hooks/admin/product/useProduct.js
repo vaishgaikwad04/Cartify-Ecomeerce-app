@@ -19,31 +19,30 @@ export const useProduct = () => {
   const [productStatus, setProductStatus] = useState("");
    //state to open product form modal
   const [openCreateProductFormModal, setOpenCreateProductFormModal] = useState(false);
+  //state to store selected product
+  const [selectedProduct, setSelectedProduct] = useState(null);
   //state to store selected product id
   const [selectedProductId, setSelectedProductId] = useState(null);
+  //state to open view model
+  const [openViewModel, setOpenViewModel] = useState(false)
 
-const [openViewModel, setOpenViewModel] = useState(false)
-const [selectedProduct, setSelectedProduct] = useState(null);
   
   //theme
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "Dark Mode";
 
+ //fetch product data function
  useEffect(() => {
   const fetchProductData = async () => {
     try {
       const res = await fetchProduct();
-
       setProductsData(res.data.fetchedProduct || []);
     } catch (error) {
       console.error("Fetch Product Error:", error);
-
       const message =
         error.response?.data?.message ||
         "Unable to fetch products. Please try again.";
-
       toast.error(message);
-
       setProductsData([]);
     }
   };
@@ -73,6 +72,35 @@ const [selectedProduct, setSelectedProduct] = useState(null);
     fetchCategoryOptions();
   }, []);
 
+   //onclick edit open edit product model form and pass selected product id
+  const handleUpdateProduct = (id) => {
+    setSelectedProductId(id);
+    setOpenCreateProductFormModal(true);
+  };
+
+  const handleDeleteProduct = async (id) => {
+  try {
+    const res = await deleteProduct(id);
+    setProductsData((prev) => prev.filter((item) => item._id !== id));
+    toast.success( res.data?.message || "Product deleted successfully");
+  } catch (error) {
+    toast.error("Delete Product Error:", error);
+    const message = error.response?.data?.message || "Unable to delete product. Please try again.";
+    toast.error(message);
+  }
+};
+
+
+const handleViewProduct = (id) => {
+  const product = productsData.find((item) => item._id === id);
+  if (!product) {
+    toast.error("Product not found");
+    return;
+  }
+  setSelectedProduct(product);
+  setOpenViewModel(true);
+};
+
   //filter products
   const filteredProducts = productsData.filter((item) => {
     const categoryMatch = !category || item.category === category;
@@ -91,83 +119,43 @@ const [selectedProduct, setSelectedProduct] = useState(null);
     return categoryMatch && brandMatch && statusMatch && searchMatch;
   });
 
-  //onclick edit open edit product model form and pass selected product id
-  const handleUpdateProduct = (id) => {
-    setSelectedProductId(id);
-    setOpenCreateProductFormModal(true);
-  };
-
-  const handleDeleteProduct = async (id) => {
-    
-  try {
-    const res = await deleteProduct(id);
-
-    // Update UI only after successful deletion
-    setProductsData((prev) =>
-      prev.filter((item) => item._id !== id)
-    );
-
-    toast.success(
-      res.data?.message || "Product deleted successfully"
-    );
-  } catch (error) {
-    toast.error("Delete Product Error:", error);
-
-    const message =
-      error.response?.data?.message ||
-      "Unable to delete product. Please try again.";
-
-    toast.error(message);
-  }
-};
-
-
-const handleViewProduct = (id) => {
-  const product = productsData.find((item) => item._id === id);
-
-  if (!product) {
-    toast.error("Product not found");
-    return;
-  }
-
-  setSelectedProduct(product);
-  setOpenViewModel(true);
-};
+ 
 
  return {
+  //theme
+  isDark,
+  //product data
   productsData,
-
+  //search state
   search,
   setSearch,
-
+  //category state
   category,
   setCategory,
-
   categoryOptions,
-
+  //brand state
   brand,
   setBrand,
-
+  //product state
   productStatus,
   setProductStatus,
-
+  //model
   openCreateProductFormModal,
   setOpenCreateProductFormModal,
-
-  selectedProductId,
-  setSelectedProductId,
-
-  isDark,
-
-  filteredProducts,
-
-  handleUpdateProduct,
-  handleDeleteProduct,
-
-  // View product
-  handleViewProduct,
   openViewModel,
   setOpenViewModel,
+  //state for store selected product id
+  selectedProductId,
+  setSelectedProductId,
+   //state for store selected product 
   selectedProduct,
+  //filte product 
+  filteredProducts,
+
+  //handler for CRUD
+  handleUpdateProduct,
+  handleDeleteProduct,
+  handleViewProduct,
+ 
 };
 };

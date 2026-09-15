@@ -1,55 +1,60 @@
-import CreateCategory from "./CreateCategory";
-import Modal from "../../../components/ui/Modal";
+//reusable button
 import Button from "../../../components/ui/Button";
-import { IoIosAdd } from "react-icons/io";
 import Table from "../../../components/ui/Table";
 import SearchBar from "../../../components/ui/SearchBar";
 import Dropdown from "../../../components/ui/Dropdown";
 import ActionMenu from "../../../components/ui/ActionMenu";
 import AdminPanelCard from "../../../components/ui/AdminPanelCard";
-import { useCategory } from "../../../hooks/admin/category/useCategory";
+//add button icon
+import { IoIosAdd } from "react-icons/io";
+//resuable models
+import Modal from "../../../components/ui/Modal";
 import ViewModal from "../../../components/ui/ViewModel";
+//create category page import
+import CreateCategory from "./CreateCategory";
+//category custom hook
+import { useCategory } from "../../../hooks/admin/category/useCategory";
 
 const Category = () => {
   const {
-  isDark,
+    isDark,
 
-  // Category data
-  categoryData,
-  filteredData,
+    // Category data
+    categoryData,
+    filteredData,
 
-  // Modal
-  openCreateCategoryFormModal,
-  setOpenCreateCategoryFormModal,
+    // Modal
+    openCreateCategoryFormModal,
+    setOpenCreateCategoryFormModal,
 
-  // Selected category
-  selectedCategoryId,
-  setSelectedCategoryId,
+    // Selected category
+    selectedCategoryId,
+    setSelectedCategoryId,
 
-  // View category
-  viewCategory,
-  setViewCategory,
-  setOpenViewModel,
-  openViewModel,
+    // View category
+    viewCategory,
+    setViewCategory,
+    setOpenViewModel,
+    openViewModel,
 
-  // Search
-  search,
-  setSearch,
+    // Search
+    search,
+    setSearch,
 
-  // Filters
-  selectedCategory,
-  setSelectedCategory,
-  selectedStatus,
-  setSelectedStatus,
+    // Filters
+    selectedCategory,
+    setSelectedCategory,
+    selectedStatus,
+    setSelectedStatus,
 
-  // Refresh category data
-  fetchedCategory,
+    // Refresh category data
+    fetchedCategory,
 
-  // Category actions
-  handleUpdateCategory,
-  handleDeleteCategory,
-  handleViewCategory,
-} = useCategory();
+    // Category actions
+    handleUpdateCategory,
+    handleDeleteCategory,
+    handleViewCategory,
+  } = useCategory();
 
   // TABLE COLUMNS
   const categoryColumns = [
@@ -320,25 +325,22 @@ const Category = () => {
       {/* CREATE / EDIT CATEGORY MODAL */}
       {openCreateCategoryFormModal && (
         <Modal
+          title={selectedCategoryId ? "Edit Category" : "Create Category"}
           isOpen={openCreateCategoryFormModal}
           onClose={() => {
             // Close modal
             setOpenCreateCategoryFormModal(false);
-
             // Clear selected category
             setSelectedCategoryId(null);
           }}
-          title={selectedCategoryId ? "Edit Category" : "Create Category"}
         >
           <CreateCategory
             categoryId={selectedCategoryId}
             onSuccess={() => {
               // Refresh category table
               fetchedCategory();
-
               // Close modal
               setOpenCreateCategoryFormModal(false);
-
               // Clear selected category
               setSelectedCategoryId(null);
             }}
@@ -346,21 +348,20 @@ const Category = () => {
         </Modal>
       )}
 
-     {openViewModel && (
-  <ViewModal
-    isOpen={openViewModel}
-    onClose={() => {
-      setOpenViewModel(false);
-      setViewCategory(null);
-    }}
-    title="Category Details"
-  >
-    {viewCategory ? (
-      <div className="space-y-5">
-
-        {/* CATEGORY HEADER */}
-        <div
-          className={`
+      {openViewModel && (
+        <ViewModal
+          isOpen={openViewModel}
+          onClose={() => {
+            setOpenViewModel(false);
+            setViewCategory(null);
+          }}
+          title="Category Details"
+        >
+          {viewCategory ? (
+            <div className="space-y-5">
+              {/* CATEGORY HEADER */}
+              <div
+                className={`
             flex items-center gap-4
             rounded-xl border p-4
             ${
@@ -369,103 +370,98 @@ const Category = () => {
                 : "border-gray-200 bg-gray-50"
             }
           `}
-        >
-          {/* Avatar */}
-          <div
-            className={`
+              >
+                {/* Avatar */}
+                <div
+                  className={`
               flex h-14 w-14 shrink-0
               items-center justify-center
               rounded-xl
               text-xl font-semibold uppercase
-              ${
-                isDark
-                  ? "bg-white text-gray-900"
-                  : "bg-gray-900 text-white"
-              }
+              ${isDark ? "bg-white text-gray-900" : "bg-gray-900 text-white"}
             `}
-          >
-            {viewCategory?.name?.charAt(0) || "C"}
-          </div>
+                >
+                  {viewCategory?.name?.charAt(0) || "C"}
+                </div>
 
-          <div className="min-w-0">
-            <h3
-              className={`
+                <div className="min-w-0">
+                  <h3
+                    className={`
                 truncate text-lg font-semibold
                 ${isDark ? "text-white" : "text-gray-900"}
               `}
-            >
-              {viewCategory?.name || "-"}
-            </h3>
+                  >
+                    {viewCategory?.name || "-"}
+                  </h3>
 
-            <p
-              className={`
+                  <p
+                    className={`
                 text-sm
                 ${isDark ? "text-gray-400" : "text-gray-500"}
               `}
-            >
-              Category
-            </p>
-          </div>
-        </div>
+                  >
+                    Category
+                  </p>
+                </div>
+              </div>
 
-        {/* DETAILS */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-
-          {/* NAME */}
-          <div>
-            <p
-              className={`
+              {/* DETAILS */}
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {/* NAME */}
+                <div>
+                  <p
+                    className={`
                 mb-1 text-xs font-medium uppercase
                 ${isDark ? "text-gray-400" : "text-gray-500"}
               `}
-            >
-              Category Name
-            </p>
+                  >
+                    Category Name
+                  </p>
 
-            <p
-              className={`
+                  <p
+                    className={`
                 text-sm font-medium
                 ${isDark ? "text-gray-200" : "text-gray-800"}
               `}
-            >
-              {viewCategory?.name || "-"}
-            </p>
-          </div>
+                  >
+                    {viewCategory?.name || "-"}
+                  </p>
+                </div>
 
-          {/* SLUG */}
-          <div>
-            <p
-              className={`
+                {/* SLUG */}
+                <div>
+                  <p
+                    className={`
                 mb-1 text-xs font-medium uppercase
                 ${isDark ? "text-gray-400" : "text-gray-500"}
               `}
-            >
-              Slug
-            </p>
+                  >
+                    Slug
+                  </p>
 
-            <p
-              className={`
+                  <p
+                    className={`
                 text-sm font-medium
                 ${isDark ? "text-gray-200" : "text-gray-800"}
               `}
-            >
-              {viewCategory?.slug || "-"}
-            </p>
-          </div>
+                  >
+                    {viewCategory?.slug || "-"}
+                  </p>
+                </div>
 
-          {/* STATUS */}
-          <div>
-            <p
-              className={`
+                {/* STATUS */}
+                <div>
+                  <p
+                    className={`
                 mb-1 text-xs font-medium uppercase
                 ${isDark ? "text-gray-400" : "text-gray-500"}
               `}
-            >
-              Status
-            </p>
+                  >
+                    Status
+                  </p>
 
-            <span
-              className={`
+                  <span
+                    className={`
                 inline-flex rounded-full px-3 py-1
                 text-xs font-medium
                 ${
@@ -474,54 +470,52 @@ const Category = () => {
                       ? "bg-green-900/40 text-green-400"
                       : "bg-green-100 text-green-700"
                     : isDark
-                    ? "bg-red-900/40 text-red-400"
-                    : "bg-red-100 text-red-700"
+                      ? "bg-red-900/40 text-red-400"
+                      : "bg-red-100 text-red-700"
                 }
               `}
-            >
-              {viewCategory?.status ? "Active" : "Inactive"}
-            </span>
-          </div>
+                  >
+                    {viewCategory?.status ? "Active" : "Inactive"}
+                  </span>
+                </div>
 
-          {/* CREATED DATE */}
-          <div>
-            <p
-              className={`
+                {/* CREATED DATE */}
+                <div>
+                  <p
+                    className={`
                 mb-1 text-xs font-medium uppercase
                 ${isDark ? "text-gray-400" : "text-gray-500"}
               `}
-            >
-              Created At
-            </p>
+                  >
+                    Created At
+                  </p>
 
-            <p
-              className={`
+                  <p
+                    className={`
                 text-sm font-medium
                 ${isDark ? "text-gray-200" : "text-gray-800"}
               `}
-            >
-              {viewCategory?.createdAt
-                ? new Date(
-                    viewCategory.createdAt
-                  ).toLocaleDateString()
-                : "-"}
-            </p>
-          </div>
-        </div>
+                  >
+                    {viewCategory?.createdAt
+                      ? new Date(viewCategory.createdAt).toLocaleDateString()
+                      : "-"}
+                  </p>
+                </div>
+              </div>
 
-        {/* DESCRIPTION */}
-        <div>
-          <p
-            className={`
+              {/* DESCRIPTION */}
+              <div>
+                <p
+                  className={`
               mb-2 text-xs font-medium uppercase
               ${isDark ? "text-gray-400" : "text-gray-500"}
             `}
-          >
-            Description
-          </p>
+                >
+                  Description
+                </p>
 
-          <div
-            className={`
+                <div
+                  className={`
               rounded-lg border p-3
               ${
                 isDark
@@ -529,26 +523,25 @@ const Category = () => {
                   : "border-gray-200 bg-gray-50 text-gray-700"
               }
             `}
-          >
-            <p className="text-sm leading-6">
-              {viewCategory?.description || "No description available."}
-            </p>
-          </div>
-        </div>
-
-      </div>
-    ) : (
-      <div
-        className={`
+                >
+                  <p className="text-sm leading-6">
+                    {viewCategory?.description || "No description available."}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div
+              className={`
           py-8 text-center text-sm
           ${isDark ? "text-gray-400" : "text-gray-500"}
         `}
-      >
-        Category details not available.
-      </div>
-    )}
-  </ViewModal>
-)}
+            >
+              Category details not available.
+            </div>
+          )}
+        </ViewModal>
+      )}
     </div>
   );
 };

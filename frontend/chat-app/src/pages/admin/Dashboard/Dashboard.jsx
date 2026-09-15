@@ -13,41 +13,56 @@ import Table from "../../../components/ui/Table";
 
 const Dashboard = () => {
   const {
-  isDark,
-  totalOrders,
-  totalCustomers,
-  totalProducts,
-  processingOrders,
-  shippedOrders,
-  deliveredOrders,
-  cancelledOrders,
-  totalRevenue,
-  recentOrders,
-} = useDashboard();
+    // Dark mode status
+    isDark,
+
+    // Total number of orders
+    totalOrders,
+
+    // Total number of customers
+    totalCustomers,
+
+    // Total number of products
+    totalProducts,
+
+    // Number of orders currently being processed
+    processingOrders,
+
+    // Number of orders that have been shipped
+    shippedOrders,
+
+    // Number of orders that have been delivered
+    deliveredOrders,
+
+    // Number of orders that have been cancelled
+    cancelledOrders,
+
+    // Total revenue generated from orders
+    totalRevenue,
+
+    // List of the most recent orders
+    recentOrders,
+  } = useDashboard();
 
   const orderColumns = [
-    // ---------------------------------------------------
-    // CUSTOMER
-    // ---------------------------------------------------
+    {
+      key: "customer",
+      label: "Customer",
 
-  {
-  key: "customer",
-  label: "Customer",
+      render: (row) => {
+        const customerName =
+          row?.userId?.name.charAt(0).toUpperCase() +
+            row?.userId?.name.slice(1) ||
+          row?.name ||
+          "Unknown User";
 
-  render: (row) => {
-    const customerName =
-      row?.userId?.name.charAt(0).toUpperCase() +  row?.userId?.name.slice(1)  ||
-      row?.name||
-      "Unknown User";
+        const firstLetter = customerName?.charAt(0)?.toUpperCase() || "U";
 
-    const firstLetter =
-      customerName?.charAt(0)?.toUpperCase() || "U";
-
-    return (
-      <div className="flex items-center gap-3">
-        {/* Avatar */}
-        <div
-          className={`
+        return (
+          <div className="flex items-center gap-3">
+            {/* Avatar */}
+            <div
+              className={`
             flex
             h-9
             w-9
@@ -66,31 +81,27 @@ const Dashboard = () => {
                 : "border-gray-200 bg-gray-100 text-gray-700"
             }
           `}
-        >
-          {firstLetter}
-        </div>
+            >
+              {firstLetter}
+            </div>
 
-        {/* Customer Name */}
-        <p
-          className={`
+            {/* Customer Name */}
+            <p
+              className={`
             truncate
             max-w-[180px]
             text-sm
             font-medium
 
-            ${
-              isDark
-                ? "text-gray-200"
-                : "text-gray-800"
-            }
+            ${isDark ? "text-gray-200" : "text-gray-800"}
           `}
-        >
-          {customerName}
-        </p>
-      </div>
-    );
-  },
-},
+            >
+              {customerName}
+            </p>
+          </div>
+        );
+      },
+    },
     // ---------------------------------------------------
     // ORDER ID
     // ---------------------------------------------------
@@ -105,11 +116,7 @@ const Dashboard = () => {
             font-mono
             text-xs
 
-            ${
-              isDark
-                ? "text-gray-400"
-                : "text-gray-500"
-            }
+            ${isDark ? "text-gray-400" : "text-gray-500"}
           `}
         >
           #{row?._id?.slice(-8) || "--------"}
@@ -128,24 +135,13 @@ const Dashboard = () => {
       render: (row) => {
         const totalItems =
           row?.items?.reduce(
-            (total, item) =>
-              total +
-              Number(item?.quantity || 0),
-            0
+            (total, item) => total + Number(item?.quantity || 0),
+            0,
           ) || 0;
 
         return (
-          <span
-            className={
-              isDark
-                ? "text-gray-300"
-                : "text-gray-600"
-            }
-          >
-            {totalItems}{" "}
-            {totalItems === 1
-              ? "item"
-              : "items"}
+          <span className={isDark ? "text-gray-300" : "text-gray-600"}>
+            {totalItems} {totalItems === 1 ? "item" : "items"}
           </span>
         );
       },
@@ -164,17 +160,10 @@ const Dashboard = () => {
           className={`
             font-medium
 
-            ${
-              isDark
-                ? "text-gray-200"
-                : "text-gray-800"
-            }
+            ${isDark ? "text-gray-200" : "text-gray-800"}
           `}
         >
-          ₹
-          {Number(
-            row?.total || 0
-          ).toLocaleString("en-IN")}
+          ₹{Number(row?.total || 0).toLocaleString("en-IN")}
         </span>
       ),
     },
@@ -188,10 +177,7 @@ const Dashboard = () => {
       label: "Payment",
 
       render: (row) => {
-        const status =
-          row?.paymentStatus
-            ?.toLowerCase() ||
-          "pending";
+        const status = row?.paymentStatus?.toLowerCase() || "pending";
 
         const statusStyle = {
           paid: isDark
@@ -246,10 +232,7 @@ const Dashboard = () => {
       label: "Order Status",
 
       render: (row) => {
-        const status =
-          row?.status
-            ?.toLowerCase() ||
-          "processing";
+        const status = row?.status?.toLowerCase() || "processing";
 
         const statusStyle = {
           processing: isDark
@@ -304,24 +287,13 @@ const Dashboard = () => {
       label: "Created At",
 
       render: (row) => (
-        <span
-          className={
-            isDark
-              ? "text-gray-400"
-              : "text-gray-500"
-          }
-        >
+        <span className={isDark ? "text-gray-400" : "text-gray-500"}>
           {row?.createdAt
-            ? new Date(
-                row.createdAt
-              ).toLocaleDateString(
-                "en-IN",
-                {
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                }
-              )
+            ? new Date(row.createdAt).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              })
             : "-"}
         </span>
       ),
@@ -330,32 +302,26 @@ const Dashboard = () => {
     // ---------------------------------------------------
     // ACTION
     // ---------------------------------------------------
-
   ];
-
 
   return (
     <div
       className={`
         min-h-screen
 
-        ${
-          isDark
-            ? "text-white"
-            : "text-gray-900"
-        }
+        ${isDark ? "text-white" : "text-gray-900"}
       `}
     >
       {/*HEADER*/}
-      <div  className={`rounded-2xl p-8 shadow-sm mb-6 border ${
-              isDark
-                ? "bg-gray-800 border-gray-700"
-                : "bg-white border-gray-100"
-            }`}>
+      <div
+        className={`rounded-2xl p-8 shadow-sm mb-6 border ${
+          isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-100"
+        }`}
+      >
         <h1
-         className={`text-3xl font-bold ${
-                isDark ? "text-white" : "text-gray-900"
-              }`}
+          className={`text-3xl font-bold ${
+            isDark ? "text-white" : "text-gray-900"
+          }`}
         >
           Dashboard
         </h1>
@@ -365,11 +331,7 @@ const Dashboard = () => {
             mt-1
             text-sm
 
-            ${
-              isDark
-                ? "text-gray-400"
-                : "text-gray-500"
-            }
+            ${isDark ? "text-gray-400" : "text-gray-500"}
           `}
         >
           Here's an overview of your store.
@@ -389,9 +351,7 @@ const Dashboard = () => {
         {/* TOTAL REVENUE */}
         <AdminPanelCard
           title="Total Revenue"
-          value={`₹${totalRevenue.toLocaleString(
-            "en-IN"
-          )}`}
+          value={`₹${totalRevenue.toLocaleString("en-IN")}`}
           subtitle="Revenue from paid orders"
           icon={<FiDollarSign />}
         />
@@ -473,11 +433,7 @@ const Dashboard = () => {
               text-lg
               font-semibold
 
-              ${
-                isDark
-                  ? "text-white"
-                  : "text-gray-900"
-              }
+              ${isDark ? "text-white" : "text-gray-900"}
             `}
           >
             Recent Orders
@@ -488,21 +444,14 @@ const Dashboard = () => {
               mt-1
               text-sm
 
-              ${
-                isDark
-                  ? "text-gray-400"
-                  : "text-gray-500"
-              }
+              ${isDark ? "text-gray-400" : "text-gray-500"}
             `}
           >
             Latest orders placed by customers.
           </p>
         </div>
 
-        <Table
-          columns={orderColumns}
-          data={recentOrders}
-        />
+        <Table columns={orderColumns} data={recentOrders} />
       </div>
     </div>
   );

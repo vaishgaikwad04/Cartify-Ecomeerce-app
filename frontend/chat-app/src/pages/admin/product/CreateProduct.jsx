@@ -4,7 +4,7 @@ import Button from "../../../components/ui/Button";
 import CheckBox from "../../../components/ui/CheckBox";
 import { useCreateProduct } from "../../../hooks/admin/product/useCreateProduct";
 
-const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
+const CreateProduct = ({ productId, setProductFormModelIsOpen }) => {
   const {
     // Dark mode status
     isDark,
@@ -35,7 +35,7 @@ const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
 
     // Category dropdown options
     categoryOptions,
-  } = useCreateProduct({ productId,setProductFormModelIsOpen });
+  } = useCreateProduct({ productId, setProductFormModelIsOpen });
 
   ///brand options
   const brands = [
@@ -52,14 +52,12 @@ const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
 
   return (
     // Main page container
-    // Changes background and text color according to the theme
     <div
       className={`min-h-screen ${
         isDark ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-900"
       }`}
     >
-      {/* Page title */}
-      {/* Changes between Create Product and Edit Product */}
+      {/* TITLE*/}
       <h2
         className={`text-3xl font-semibold ml-6 p-6 border-b ${
           isDark
@@ -73,9 +71,8 @@ const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
       {/* Form container */}
       <div className="min-h-screen p-6 flex justify-center">
         {/* Product form */}
-        {/* handleSubmit runs when the form is submitted */}
         <form onSubmit={handleSubmit} className="w-full max-w-4xl space-y-5">
-          {/* ================= BASIC INFO ================= */}
+          {/*BASIC INFO*/}
           <div
             className={`p-6 rounded-xl shadow ${
               isDark ? "bg-gray-800" : "bg-white"
@@ -84,7 +81,7 @@ const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
             <h2 className="text-lg font-semibold mb-4">Basic Info</h2>
 
             <div className="grid md:grid-cols-2 gap-4">
-              {/* Product name input */}
+              {/* Product name input FIELD*/}
               <InputField
                 type="text"
                 name="name"
@@ -104,7 +101,7 @@ const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
             </div>
           </div>
 
-          {/* ================= BRAND ================= */}
+          {/*BRAND*/}
           <div
             className={`p-6 rounded-xl shadow ${
               isDark ? "bg-gray-800" : "bg-white"
@@ -112,7 +109,7 @@ const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
           >
             <h2 className="text-lg font-semibold mb-4">Brand</h2>
 
-            {/* Brand dropdown */}
+            {/* Brand dropdown COMPONENT*/}
             <Dropdown
               label="Brand"
               name="brand"
@@ -122,7 +119,7 @@ const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
             />
           </div>
 
-          {/* ================= PRICING ================= */}
+          {/*PRICING*/}
           <div
             className={`p-6 rounded-xl shadow ${
               isDark ? "bg-gray-800" : "bg-white"
@@ -139,7 +136,6 @@ const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
                 handleChange={handleFormData}
                 label="Price"
                 min={0}
-              
               />
 
               {/* Discounted price */}
@@ -154,7 +150,7 @@ const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
             </div>
           </div>
 
-          {/* ================= DESCRIPTION ================= */}
+          {/* DESCRIPTION */}
           <div
             className={`p-6 rounded-xl shadow ${
               isDark ? "bg-gray-800" : "bg-white"
@@ -190,7 +186,7 @@ const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
             />
           </div>
 
-          {/* ================= PRODUCT STATUS ================= */}
+          {/*PRODUCT STATUS*/}
           <div
             className={`p-6 rounded-xl shadow ${
               isDark ? "bg-gray-800" : "bg-white"
@@ -198,20 +194,16 @@ const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
           >
             <h2 className="text-lg font-semibold mb-4">Product Status</h2>
 
-            {/* Checkbox to mark product as on sale */}
+            {/* Checkbox COMPONENT to mark product as on sale */}
             <CheckBox
               label="Is On Sale"
+              name="isOnSale"
               checked={formData.isOnSale}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  isOnSale: e.target.checked,
-                })
-              }
+              onChange={handleFormData}
             />
           </div>
 
-          {/* ================= VARIANTS ================= */}
+          {/*VARIANTS*/}
           <div
             className={`p-6 rounded-xl shadow ${
               isDark ? "bg-gray-800" : "bg-white"
@@ -220,7 +212,7 @@ const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
             <h2 className="text-lg font-semibold mb-4">Variants</h2>
 
             <div className="grid md:grid-cols-2 gap-6">
-              {/* ================= SIZES ================= */}
+              {/* SIZES */}
               <div>
                 <p className="text-sm mb-3 text-gray-500">Sizes</p>
 
@@ -239,7 +231,7 @@ const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
                 ))}
               </div>
 
-              {/* ================= STOCK ================= */}
+              {/*STOCK */}
               <div>
                 <p className="text-sm mb-3 text-gray-500">Stock</p>
 
@@ -260,7 +252,7 @@ const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
             </div>
           </div>
 
-          {/* ================= IMAGES ================= */}
+          {/*  IMAGES */}
           <div
             className={`p-6 rounded-xl shadow ${
               isDark ? "bg-gray-800" : "bg-white"
@@ -281,20 +273,19 @@ const CreateProduct = ({ productId,setProductFormModelIsOpen }) => {
             />
           </div>
 
-          {/* ================= SUBMIT BUTTON ================= */}
+          {/*SUBMIT BUTTON*/}
 
           {/* Button text changes depending on edit/create mode */}
           <div className="flex justify-end">
-             <Button
-            label={isEdit ? "Update Product" : "Create Product"}
-            // Makes this button submit the form
-            type="submit"
-            // Change button style according to theme
-            variant={isDark ? "secondary" : "primary"}
-            className="w-1/4"
-          />
+            <Button
+              label={isEdit ? "Update Product" : "Create Product"}
+              // Makes this button submit the form
+              type="submit"
+              // Change button style according to theme
+              variant={isDark ? "secondary" : "primary"}
+              className="w-1/4"
+            />
           </div>
-         
         </form>
       </div>
     </div>

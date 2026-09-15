@@ -72,18 +72,34 @@ export const useDashboard = () => {
     .slice(0, 5);
 
   return {
+    // Dark mode status
     isDark,
 
+    // Total number of orders
     totalOrders,
+
+    // Total number of customers
     totalCustomers,
+
+    // Total number of products
     totalProducts,
 
+    // Number of orders currently being processed
     processingOrders,
+
+    // Number of orders that have been shipped
     shippedOrders,
+
+    // Number of orders that have been delivered
     deliveredOrders,
+
+    // Number of orders that have been cancelled
     cancelledOrders,
 
+    // Total revenue generated from orders
     totalRevenue,
+
+    // List of the most recent orders
     recentOrders,
   };
 };

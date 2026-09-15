@@ -4,66 +4,53 @@ import Table from "../../../components/ui/Table";
 import AdminPanelCard from "../../../components/ui/AdminPanelCard";
 import SearchBar from "../../../components/ui/SearchBar";
 import Dropdown from "../../../components/ui/Dropdown";
-import Modal from "../../../components/ui/Modal";
 import ActionMenu from "../../../components/ui/ActionMenu";
-
+// reusable model
+import Modal from "../../../components/ui/Modal";
+import ViewModal from "../../../components/ui/ViewModel";
 //icon
 import { IoIosAdd } from "react-icons/io";
-
 //create product page
 import CreateProduct from "../product/CreateProduct";
-
 ///products custom hook
 import { useProduct } from "../../../hooks/admin/product/useProduct";
-import ViewModal from "../../../components/ui/ViewModel";
 
 const FetchProducts = () => {
   const {
-    // Product data fetched from the API
+    //theme
+    isDark,
+    //product data
     productsData,
-    setOpenViewModel,
-    openViewModel,
-
-    handleViewProduct,
-    // Search value and function to update it
+    //search state
     search,
     setSearch,
-
-    // Selected category and function to update it
+    //category state
     category,
     setCategory,
-
-    // Category options used in the category dropdown
     categoryOptions,
-
-    // Selected brand and function to update it
+    //brand state
     brand,
     setBrand,
-
-    // Selected product status and function to update it
+    //product state
     productStatus,
     setProductStatus,
-
-    // Controls whether the create/edit product modal is open
+    //model
     openCreateProductFormModal,
     setOpenCreateProductFormModal,
-
-    // Stores the ID of the product being edited
+    openViewModel,
+    setOpenViewModel,
+    //state for store selected product id
     selectedProductId,
     setSelectedProductId,
-
-    // Tells the component whether dark mode is active
-    isDark,
-
-    // Products after applying search and filters
+    //state for store selected product
+    selectedProduct,
+    //filte product
     filteredProducts,
 
-    // Opens the product form for editing
+    //handler for CRUD
     handleUpdateProduct,
-
-    // Deletes a product and updates the product list
     handleDeleteProduct,
-    selectedProduct,
+    handleViewProduct,
   } = useProduct();
 
   // Main page background and default text color based on the current theme
@@ -225,6 +212,7 @@ const FetchProducts = () => {
               View and manage all products in your admin dashboard.
             </p>
           </div>
+
           {/*SearchBar*/}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
             <div className="w-full sm:w-72">
@@ -233,7 +221,7 @@ const FetchProducts = () => {
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            {/*button to open modal*/}
+            {/*button to open create product form model*/}
             <Button
               className="h-12 w-full sm:w-auto px-5"
               label="Add Product"
@@ -304,17 +292,17 @@ const FetchProducts = () => {
 
         <AdminPanelCard
           title="On Sale"
-          value={productsData.filter((item) => item.isOnSale).length}
+          value={productsData.filter((item) => item.isOnSale).length} //Array → .length
         />
 
         <AdminPanelCard
           title="Brands"
-          value={new Set(productsData.map((item) => item.brand)).size}
+          value={new Set(productsData.map((item) => item.brand)).size} //Set → .size
         />
 
         <AdminPanelCard
           title="Categories"
-          value={new Set(productsData.map((item) => item.category)).size}
+          value={new Set(productsData.map((item) => item.category)).size} //Set → .size
         />
       </div>
 
@@ -325,9 +313,9 @@ const FetchProducts = () => {
       >
         {selectedProduct ? (
           <div className={`${isDark ? "text-white" : "text-gray-900"}`}>
-            {/* ================= PRODUCT ================= */}
+            {/*PRODUCT */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* ================= LEFT : IMAGE ================= */}
+              {/* LEFT : IMAGE */}
               <div>
                 {/* Main Image */}
                 <div
@@ -379,7 +367,7 @@ const FetchProducts = () => {
                 )}
               </div>
 
-              {/* ================= RIGHT : DETAILS ================= */}
+              {/* RIGHT : DETAILS*/}
               <div className="flex flex-col">
                 {/* Brand */}
                 <p
@@ -465,7 +453,7 @@ const FetchProducts = () => {
                   Inclusive of all taxes
                 </p>
 
-                {/* ================= STATUS ================= */}
+                {/* STATUS */}
                 <div className="flex flex-wrap gap-3 mt-6">
                   {/* Sale Status */}
                   {selectedProduct.isOnSale ? (
@@ -502,7 +490,7 @@ const FetchProducts = () => {
                   </span>
                 </div>
 
-                {/* ================= PRODUCT META ================= */}
+                {/* PRODUCT META */}
                 <div
                   className={`grid grid-cols-2 gap-3 mt-6 p-4 rounded-xl border ${
                     isDark
@@ -582,7 +570,7 @@ const FetchProducts = () => {
               </div>
             </div>
 
-            {/* ================= DESCRIPTION ================= */}
+            {/* DESCRIPTION*/}
             <div
               className={`border-t mt-8 pt-7 ${
                 isDark ? "border-gray-700" : "border-gray-200"
@@ -606,7 +594,7 @@ const FetchProducts = () => {
               </p>
             </div>
 
-            {/* ================= ADDITIONAL INFORMATION ================= */}
+            {/*  ADDITIONAL INFORMATION */}
             <div
               className={`border-t mt-7 pt-6 ${
                 isDark ? "border-gray-700" : "border-gray-200"

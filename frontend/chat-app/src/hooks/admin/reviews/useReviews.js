@@ -3,14 +3,16 @@ import { ThemeContext } from "../../../context/ThemeContext";
 import { fetchAllReviews} from "../../../api/user/ReviewApi";
 
 export const useReviews = () => {
-    const [reviewsData, setReviewsData] = useState([]);
+  //STATE
+  const [reviewsData, setReviewsData] = useState([]);
   const [search, setSearch] = useState("");
   const [ratingFilter, setRatingFilter] = useState("");
 
+  //THEME
   const { theme } = useContext(ThemeContext);
-
   const isDark = theme === "Dark Mode";
  
+  //FETCH REVIEW FUNCTION
   const fetchedReviews = async () => {
     const res = await fetchAllReviews();
    setReviewsData(res.data.fetchedReviews);
@@ -20,7 +22,8 @@ export const useReviews = () => {
     fetchedReviews()
   }, []);
 
-    const filteredReviews = reviewsData.filter((review) => {
+  //FILTER REVIEWS
+  const filteredReviews = reviewsData.filter((review) => {
     const matchesSearch =
       review.user?.name?.toLowerCase().includes(search.toLowerCase()) ||
       review.comment?.toLowerCase().includes(search.toLowerCase());

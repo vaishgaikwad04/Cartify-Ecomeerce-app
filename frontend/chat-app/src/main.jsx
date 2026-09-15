@@ -11,14 +11,17 @@ import { NotificationProvider } from "./context/NotificationContext.jsx";
 import { CartProvider } from "./context/CartContext.jsx";
 
 import { Toaster } from "react-hot-toast";
+import {  AuthProvider } from "./context/AuthContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+     <AuthProvider>
     <NotificationProvider>
       <ThemeProvider>
         <ProductProvider>
           <CategoryProvider>
             <CartProvider>
+             
             <App />
 
             <Toaster
@@ -65,10 +68,12 @@ createRoot(document.getElementById("root")).render(
                 },
               }}
             />
+          
             </CartProvider>
           </CategoryProvider>
         </ProductProvider>
       </ThemeProvider>
     </NotificationProvider>
+      </AuthProvider>
   </StrictMode>,
 );

@@ -6,6 +6,7 @@ import {
   markNotificationAsRead,
   markAllNotificationsAsRead,
   deleteNotification,
+   getAdminPanelNotifications
 } from "./notificationController.js";
 
 import {authMiddleware} from "../../middleware/authMiddleware.js";
@@ -45,6 +46,13 @@ router.delete(
   "/:id",
   authMiddleware,
   deleteNotification
+);
+
+
+router.get(
+  "/adminPanel/notification",
+  authMiddleware,
+  getAdminPanelNotifications
 );
 
 export default router;

@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "../../../context/ThemeContext";
-import {
-  getAllOrders,
-  updateOrderStatus,
-} from "../../../api/user/OrderApi";
+import { getAllOrders, updateOrderStatus } from "../../../api/user/OrderApi";
 import toast from "react-hot-toast";
 
 export const useOrders = () => {
@@ -39,7 +36,6 @@ export const useOrders = () => {
   // Update loading state
   const [updatingStatus, setUpdatingStatus] = useState(false);
 
-
   // FETCH ORDERS
   const fetchedOrders = async () => {
     try {
@@ -47,10 +43,7 @@ export const useOrders = () => {
       const res = await getAllOrders();
       setOrderData(res?.data?.allOrders || []);
     } catch (error) {
-     toast.error(
-        "Order fetch error:",
-        error?.response?.data || error
-      );
+      toast.error("Order fetch error:", error?.response?.data || error);
     } finally {
       setLoading(false);
     }
@@ -61,7 +54,6 @@ export const useOrders = () => {
     fetchedOrders();
   }, []);
 
-  
   // OPEN MANAGE ORDER MODAL
   const handleManageOrder = (order) => {
     setSelectedOrder(order);
@@ -70,7 +62,7 @@ export const useOrders = () => {
     setShowManageModal(true);
   };
 
- // UPDATE ORDER STATUS
+  // UPDATE ORDER STATUS
   const handleUpdateStatus = async () => {
     if (!selectedOrder) return;
 
@@ -79,7 +71,7 @@ export const useOrders = () => {
       const res = await updateOrderStatus(
         selectedOrder._id,
         orderStatus,
-        paymentStatus
+        paymentStatus,
       );
 
       toast.success(res?.data?.message);
@@ -93,8 +85,8 @@ export const useOrders = () => {
                 status: orderStatus,
                 paymentStatus: paymentStatus,
               }
-            : order
-        )
+            : order,
+        ),
       );
 
       // Update selected order
@@ -107,15 +99,11 @@ export const useOrders = () => {
       // Close modal
       setShowManageModal(false);
     } catch (error) {
-      toast.error(
-        "Update order error:",
-        error?.response?.data || error
-      );
+      toast.error(error?.response?.data?.message || "Update order failed");
     } finally {
       setUpdatingStatus(false);
     }
   };
-
 
   // FILTER ORDERS
   const filteredData = orderData
@@ -124,31 +112,20 @@ export const useOrders = () => {
       if (!search) {
         return true;
       }
-
       const searchValue = search.toLowerCase();
-
       const orderId = item?._id?.toLowerCase() || "";
-
-      const customerName =
-        item?.userId?.name?.toLowerCase() || "";
-
-      const customerEmail =
-        item?.userId?.email?.toLowerCase() || "";
-
+      const customerName = item?.userId?.name?.toLowerCase() || "";
+      const customerEmail = item?.userId?.email?.toLowerCase() || "";
       return (
         orderId.includes(searchValue) ||
         customerName.includes(searchValue) ||
         customerEmail.includes(searchValue)
       );
     })
-
     // Order status
     .filter((item) => {
-      return selectedStatus === ""
-        ? true
-        : item?.status === selectedStatus;
+      return selectedStatus === "" ? true : item?.status === selectedStatus;
     })
-
     // Payment status
     .filter((item) => {
       return selectedPaymentStatus === ""
@@ -157,49 +134,34 @@ export const useOrders = () => {
     });
 
   return {
-    // Theme
-    theme,
-    isDark,
-
-    // Orders
+    // ORDERS
     orderData,
     filteredData,
-    fetchedOrders,
+    loading,
 
-    // Search
+    // SEARCH + FILTER
     search,
     setSearch,
-
-    // Filters
     selectedStatus,
     setSelectedStatus,
-
     selectedPaymentStatus,
     setSelectedPaymentStatus,
 
-    // Loading
-    loading,
-
-    // Manage modal
+    // MANAGE ORDER
     selectedOrder,
-    setSelectedOrder,
-
     showManageModal,
     setShowManageModal,
-
-    // Order status
     orderStatus,
     setOrderStatus,
-
-    // Payment status
     paymentStatus,
     setPaymentStatus,
 
-    // Update
-    updatingStatus,
-    handleUpdateStatus,
-
-    // Manage
+    // ACTIONS
     handleManageOrder,
+    handleUpdateStatus,
+    updatingStatus,
+
+    // THEME
+    isDark,
   };
 };

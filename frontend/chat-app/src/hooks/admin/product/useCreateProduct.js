@@ -46,57 +46,22 @@ export const useCreateProduct = ({ productId, setProductFormModelIsOpen }) => {
   // Store the product form data
   const [formData, setFormData] = useState(initialState);
 
-  // Reset the form to its initial state
-  const resetForm = () => {
-    setFormData(initialState);
-    setFiles([]);
-  };
-
-  // Fetch the selected product for editing
-  const fetchProductById = async () => {
-    try {
-      const res = await fetchSingleProduct(productId);
-      const product = res.data.product;
-
-      // Fill the form with the fetched product data
-      setFormData({
-        name: product.name || "",
-        price: product.price || "",
-        category: product.category || "",
-        brand: product.brand || "",
-        discountPrice: product.discountPrice || "",
-        description: product.description || "",
-        details: product.details || "",
-        careFit: product.careFit || "",
-        isOnSale: product.isOnSale || false,
-        variants: product.variants || [],
-      });
-    } catch (error) {
-      toast.error(error?.response?.data?.message || "Something went wrong");
-    }
-  };
-
-  // Fetch the product when productId changes
-  useEffect(() => {
-    // Only fetch when editing a product
-    if (productId) {
-      fetchProductById();
-    } else {
-      // Reset the form when creating a new product
-      resetForm();
-    }
-  }, [productId]);
+  // Convert category data into dropdown options
+  const categoryOptions = category.map((cat) => ({
+    label: cat.name,
+    value: cat.slug,
+  }));
 
   // Handle changes in normal form fields
   const handleFormData = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
+
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
-  // Add or remove a product size
   // Get the selected size and its checked status from the checkbox
   const handleSizeChange = (size, checked) => {
     setFormData((prev) => {
@@ -131,12 +96,44 @@ export const useCreateProduct = ({ productId, setProductFormModelIsOpen }) => {
     });
   };
 
+  // Fetch the selected product for editing
+  const fetchProductById = async () => {
+    try {
+      const res = await fetchSingleProduct(productId);
+      const product = res.data.product;
+
+      // Fill the form with the fetched product data
+      setFormData({
+        name: product.name || "",
+        price: product.price || "",
+        category: product.category || "",
+        brand: product.brand || "",
+        discountPrice: product.discountPrice || "",
+        description: product.description || "",
+        details: product.details || "",
+        careFit: product.careFit || "",
+        isOnSale: product.isOnSale || false,
+        variants: product.variants || [],
+      });
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Something went wrong");
+    }
+  };
+
+  // Fetch the product when productId changes
+  useEffect(() => {
+    if (productId) {
+      fetchProductById();
+    } else {
+      // Reset the form when creating a new product
+      resetForm();
+    }
+  }, [productId]);
+
   // Fetch categories from the API
   const fetchCategories = async () => {
     try {
       const res = await fetchCategory();
-
-      // Store the fetched categories
       setCategory(res.data.fetchedCategory);
     } catch (error) {
       toast.error(error?.response?.data?.message || "Something went wrong");
@@ -148,17 +145,9 @@ export const useCreateProduct = ({ productId, setProductFormModelIsOpen }) => {
     fetchCategories();
   }, []);
 
-  // Convert category data into dropdown options
-  const categoryOptions = category.map((cat) => ({
-    label: cat.name,
-    value: cat.slug,
-  }));
-
   // Handle product creation and updating
   const handleSubmit = async (e) => {
-    // Prevent the page from refreshing
     e.preventDefault();
-
     try {
       // Create FormData to send product data and images
       const data = new FormData();
@@ -197,7 +186,7 @@ export const useCreateProduct = ({ productId, setProductFormModelIsOpen }) => {
       // Create a new product when productId does not exist
       else {
         const res = await createProduct(data);
-         toast.success(res?.data?.message);
+        toast.success(res?.data?.message);
         // Clear the form after creating the product
         resetForm();
         setProductFormModelIsOpen(false);
@@ -206,6 +195,12 @@ export const useCreateProduct = ({ productId, setProductFormModelIsOpen }) => {
       // Log any error that occurs during submission
       toast.error(error?.response?.data?.message || "Something went wrong");
     }
+  };
+
+  // Reset the form to its initial state
+  const resetForm = () => {
+    setFormData(initialState);
+    setFiles([]);
   };
 
   return {

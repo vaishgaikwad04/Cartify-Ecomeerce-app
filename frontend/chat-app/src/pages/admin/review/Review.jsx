@@ -21,6 +21,8 @@ const Review = () => {
     // Theme
     isDark,
   } = useReviews();
+
+  //REVIEW COLUMNS
   const reviewsColumns = [
     {
       key: "Customer",
@@ -171,6 +173,7 @@ const Review = () => {
     },
   ];
 
+  //RATING OPTIONS
   const ratingOptions = [
     { label: "All Ratings", value: "" },
     { label: "5 Stars", value: "5" },
@@ -184,18 +187,17 @@ const Review = () => {
     <div className={isDark ? "text-white" : "text-gray-900"}>
       {/* HEADER */}
       <div
-        className={`
+      className={`
       flex flex-col md:flex-row
       md:items-center md:justify-between
       gap-5 p-5 border
-
       ${isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-100"}
     `}
       >
         {/* LEFT */}
         <div>
           <h1
-            className={`
+          className={`
           text-2xl font-semibold
           ${isDark ? "text-white" : "text-gray-900"}
         `}
@@ -204,7 +206,7 @@ const Review = () => {
           </h1>
 
           <p
-            className={`
+          className={`
           text-sm mt-1
           ${isDark ? "text-gray-400" : "text-gray-500"}
         `}
@@ -226,13 +228,10 @@ const Review = () => {
 
       {/* FILTERS */}
       <div
-        className={`
+      className={`
       flex flex-col md:flex-row
       md:items-end gap-5 p-5 border
-
-      ${isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-100"}
-    `}
-      >
+      ${isDark ? "bg-gray-800 border-gray-700" : "bg-white border-gray-100"} `} >
         <div className="w-full md:w-auto">
           <Dropdown
             name="rating"

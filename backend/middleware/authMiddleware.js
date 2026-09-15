@@ -16,9 +16,6 @@ export const authMiddleware = (req, res, next) => {
     );
 
     req.user = decoded;
-
-    console.log("Decoded User:", req.user);
-
     next();
   } catch (error) {
     console.error("Auth middleware error:", error);

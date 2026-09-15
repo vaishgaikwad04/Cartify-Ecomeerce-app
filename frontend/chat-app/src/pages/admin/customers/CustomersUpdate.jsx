@@ -1,6 +1,4 @@
-
 import InputField from "../../../components/ui/InputField";
-import Modal from "../../../components/ui/Modal";
 import { useUpdateCustomer } from "../../../hooks/admin/customer/useCreateCustomer";
 import Button from "../../../components/ui/Button";
 
@@ -23,11 +21,7 @@ const CustomersUpdate = ({ user, onClose, onRefresh }) => {
   } = useUpdateCustomer({ user, onClose, onRefresh });
 
   return (
-    <Modal
-      isOpen={!!user}
-      onClose={onClose}
-      className="max-w-2xl max-h-[90vh]"
-    >
+    <div>
       {/* HEADER */}
       <div
         className={`
@@ -37,9 +31,7 @@ const CustomersUpdate = ({ user, onClose, onRefresh }) => {
           ${isDark ? "border-gray-700" : "border-gray-200"}
         `}
       >
-        <h2 className="text-xl font-semibold">
-          Update Customer
-        </h2>
+        <h2 className="text-xl font-semibold">Update Customer</h2>
 
         <p
           className={`
@@ -54,7 +46,6 @@ const CustomersUpdate = ({ user, onClose, onRefresh }) => {
 
       {/* FORM */}
       <form onSubmit={handleSubmit} className="space-y-5 p-6">
-
         {/* ERROR */}
         {error && (
           <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
@@ -83,9 +74,7 @@ const CustomersUpdate = ({ user, onClose, onRefresh }) => {
           `}
         >
           <div className="mb-5">
-            <h3 className="text-sm font-semibold">
-              Basic Information
-            </h3>
+            <h3 className="text-sm font-semibold">Basic Information</h3>
 
             <p
               className={`
@@ -94,8 +83,7 @@ const CustomersUpdate = ({ user, onClose, onRefresh }) => {
                 ${isDark ? "text-gray-400" : "text-gray-500"}
               `}
             >
-              Enter the customer's basic personal and contact
-              information.
+              Enter the customer's basic personal and contact information.
             </p>
           </div>
 
@@ -140,9 +128,7 @@ const CustomersUpdate = ({ user, onClose, onRefresh }) => {
           `}
         >
           <div className="mb-5">
-            <h3 className="text-sm font-semibold">
-              Address Information
-            </h3>
+            <h3 className="text-sm font-semibold">Address Information</h3>
 
             <p
               className={`
@@ -151,8 +137,7 @@ const CustomersUpdate = ({ user, onClose, onRefresh }) => {
                 ${isDark ? "text-gray-400" : "text-gray-500"}
               `}
             >
-              Enter the customer's current address and location
-              details.
+              Enter the customer's current address and location details.
             </p>
           </div>
 
@@ -215,7 +200,7 @@ const CustomersUpdate = ({ user, onClose, onRefresh }) => {
             type="submit"
             disabled={loading}
             label={loading ? "Updating..." : "Update Customer"}
-            variant={isDark?  "secondary" :"primary"}
+            variant={isDark ? "secondary" : "primary"}
             className="
               shadow-sm
               transition
@@ -224,11 +209,9 @@ const CustomersUpdate = ({ user, onClose, onRefresh }) => {
               disabled:opacity-50
             "
           />
-            
-          
         </div>
       </form>
-    </Modal>
+    </div>
   );
 };
 

@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import {
-  deleteCategory,
-  fetchCategory,
-} from "../../../api/user/CategoryApi";
+import { deleteCategory, fetchCategory } from "../../../api/user/CategoryApi";
 import { ThemeContext } from "../../../context/ThemeContext";
 import toast from "react-hot-toast";
 
@@ -15,10 +12,8 @@ export const useCategory = () => {
   const [categoryData, setCategoryData] = useState([]);
 
   // Create / Edit modal
-  const [
-    openCreateCategoryFormModal,
-    setOpenCreateCategoryFormModal,
-  ] = useState(false);
+  const [openCreateCategoryFormModal, setOpenCreateCategoryFormModal] =
+    useState(false);
 
   // Selected category ID for Edit
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
@@ -43,14 +38,9 @@ export const useCategory = () => {
     try {
       const res = await fetchCategory();
 
-      setCategoryData(
-        res?.data?.fetchedCategory || []
-      );
+      setCategoryData(res?.data?.fetchedCategory || []);
     } catch (error) {
-      toast.error(
-        error?.response?.data?.message ||
-          "Failed to fetch Category"
-      );
+      toast.error(error?.response?.data?.message || "Failed to fetch Category");
     }
   };
 
@@ -67,9 +57,7 @@ export const useCategory = () => {
 
   // View category
   const handleViewCategory = (id) => {
-    const category = categoryData.find(
-      (item) => item._id === id
-    );
+    const category = categoryData.find((item) => item._id === id);
 
     if (!category) {
       toast.error("Category not found");
@@ -88,8 +76,7 @@ export const useCategory = () => {
       fetchedCategory();
     } catch (error) {
       toast.error(
-        error?.response?.data?.message ||
-          "Failed to delete Category"
+        error?.response?.data?.message || "Failed to delete Category",
       );
     }
   };
@@ -98,24 +85,16 @@ export const useCategory = () => {
   const filteredData = categoryData
     // Category filter
     .filter((item) =>
-      selectedCategory
-        ? item.name === selectedCategory
-        : true
+      selectedCategory ? item.name === selectedCategory : true,
     )
 
     // Status filter
     .filter((item) =>
-      selectedStatus === ""
-        ? true
-        : String(item.status) === selectedStatus
+      selectedStatus === "" ? true : String(item.status) === selectedStatus,
     )
 
     // Search
-    .filter((item) =>
-      item.name
-        ?.toLowerCase()
-        .includes(search.toLowerCase())
-    );
+    .filter((item) => item.name?.toLowerCase().includes(search.toLowerCase()));
 
   return {
     theme,

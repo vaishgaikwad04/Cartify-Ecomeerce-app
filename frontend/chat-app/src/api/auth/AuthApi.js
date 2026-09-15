@@ -11,6 +11,9 @@ export const loginUser = (data) => AuthAPI.post("/auth/login", data);
 
 export const logoutUser = () => AuthAPI.post("/auth/logout");
 
+export const getCurrentUser = () =>
+  AuthAPI.get("/auth/me");
+
 export const getUsers = () => AuthAPI.get("/auth/users");
 
 export const getUserById = (id) => AuthAPI.get(`/auth/${id}`);

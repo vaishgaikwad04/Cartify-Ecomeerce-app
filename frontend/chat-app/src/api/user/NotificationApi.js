@@ -6,8 +6,7 @@ const NotificationAPI = axios.create({
 });
 
 // Get all notifications
-export const getNotifications = () =>
-  NotificationAPI.get("/");
+export const getNotifications = () => NotificationAPI.get("/");
 
 // Get unread count
 export const getUnreadNotificationCount = () =>
@@ -22,7 +21,10 @@ export const markAllNotificationsAsRead = () =>
   NotificationAPI.patch("/read-all");
 
 // Delete notification
-export const deleteNotification = (id) =>
-  NotificationAPI.delete(`/${id}`);
+export const deleteNotification = (id) => NotificationAPI.delete(`/${id}`);
+
+// Get admin panel notifications
+export const getAdminPanelNotifications = () =>
+  NotificationAPI.get("/adminPanel/notification");
 
 export default NotificationAPI;

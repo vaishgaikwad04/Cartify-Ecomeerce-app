@@ -18,8 +18,7 @@ export const useHeader = () => {
 
   // ==========================================
   // THEME
-  // ==========================================
-
+ 
   const { theme } = useContext(ThemeContext);
 
   const isDark = theme === "Dark Mode";

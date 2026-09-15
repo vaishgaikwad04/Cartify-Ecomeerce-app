@@ -5,6 +5,7 @@ import Dropdown from "../../../components/ui/Dropdown";
 import AdminPanelCard from "../../../components/ui/AdminPanelCard";
 import { useCustomer } from "../../../hooks/admin/customer/useCustomer";
 import CustomersUpdate from "./CustomersUpdate";
+import Modal from "../../../components/ui/Modal";
 import ViewModel from "../../../components/ui/ViewModel";
 
 const Customers = () => {
@@ -281,9 +282,7 @@ const Customers = () => {
 
   return (
     <div className={isDark ? "text-white" : "text-gray-900"}>
-      {/* =====================================================
-          HEADER
-      ===================================================== */}
+      {/* HEADER*/}
       <div
         className={`
           flex flex-col md:flex-row
@@ -320,9 +319,8 @@ const Customers = () => {
           />
         </div>
       </div>
-      {/* =====================================================
-          FILTER
-      ===================================================== */}
+
+      {/* FILTER */}
       <div
         className={`
           flex flex-col md:flex-row
@@ -340,9 +338,8 @@ const Customers = () => {
           />
         </div>
       </div>
-      {/* =====================================================
-          STATS
-      ===================================================== */}
+
+      {/* STATISTICS*/}
       <div
         className="
           grid
@@ -362,18 +359,26 @@ const Customers = () => {
 
         <AdminPanelCard title="Delivered" value={deliveredCustomers} />
       </div>
-      {/* =====================================================
-          CUSTOMERS TABLE
-      ===================================================== */}
+
+      {/* CUSTOMERS TABLE */}
       <Table columns={columns} data={filteredData} />
+
+      {/*EDIT  CUSTOMERS MODEL */}
       {showUpdateModal && selectedCustomer && (
-        <CustomersUpdate
-          user={selectedCustomer}
+        <Modal
+          isOpen={() => setShowUpdateModal(true)}
           onClose={() => setShowUpdateModal(false)}
-          onRefresh={fetchCustomers}
-        />
+          className="max-w-2xl max-h-[90vh]"
+        >
+          <CustomersUpdate
+            user={selectedCustomer}
+            onClose={() => setShowUpdateModal(false)}
+            onRefresh={fetchCustomers}
+          />
+        </Modal>
       )}
 
+      {/*VIEW CUSTOMERS MODEL */}
       <ViewModel
         isOpen={viewCustomerModel}
         onClose={() => setViewCustomerModel(false)}
@@ -609,7 +614,7 @@ const Customers = () => {
                   </div>
 
                   <div className="space-y-4 p-5">
-                      <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-start justify-between gap-4">
                       <span className="text-xs text-gray-500">Customer ID</span>
 
                       <span
@@ -655,8 +660,6 @@ const Customers = () => {
                         {selectedCustomer.phone || "-"}
                       </span>
                     </div>
-
-                  
                   </div>
                 </section>
 

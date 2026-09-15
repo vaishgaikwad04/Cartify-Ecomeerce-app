@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback, useContext } from "react";
+//category api
 import {
   createCategory,
   updateCategory,
   getCategoryById,
 } from "../../../api/user/CategoryApi";
+//theme context
 import { ThemeContext } from "../../../context/ThemeContext";
 
 export const useCreateCategory = ({ id, onSuccess }) => {
@@ -42,12 +44,9 @@ export const useCreateCategory = ({ id, onSuccess }) => {
   const fetchCategory = useCallback(async () => {
     // Don't fetch when creating a new category
     if (!id) return;
-
     try {
       const res = await getCategoryById(id);
-
       const data = res?.data?.data;
-
       // Set fetched category data into form
       setFormData({
         name: data?.name || "",

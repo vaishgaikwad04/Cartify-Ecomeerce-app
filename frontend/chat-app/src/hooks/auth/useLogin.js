@@ -38,9 +38,6 @@ export const useLogin = () => {
       const res = await loginUser(formData);
       // Set success message from API response
       setSucess(res.data.message);
-
-      // Navigate to home page after successful login
-      // Navigate based on user role
       if (res.data.user.role === "admin") {
            toast.success(res.data.message);
         navigate("/admin");

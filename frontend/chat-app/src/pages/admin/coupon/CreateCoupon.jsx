@@ -3,11 +3,11 @@ import Button from "../../../components/ui/Button";
 import Dropdown from "../../../components/ui/Dropdown";
 import { useCreateCoupon } from "../../../hooks/admin/coupon/useCreateCoupon";
 
-const CreateCoupon = ({ onRefresh, selectedCoupon , setIsModalOpen}) => {
+const CreateCoupon = ({ onRefresh, selectedCoupon, setIsModalOpen }) => {
   const { formData, handleChange, handleSubmit, isDark } = useCreateCoupon({
     selectedCoupon,
     onRefresh,
-     setIsModalOpen
+    setIsModalOpen,
   });
 
   const discountTypeOptions = [
@@ -24,9 +24,7 @@ const CreateCoupon = ({ onRefresh, selectedCoupon , setIsModalOpen}) => {
     <div
       className={`
         max-w-3xl mx-auto rounded-xl p-6
-
-        ${isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"}
-      `}
+        ${isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"} `}
     >
       {/* Header */}
       <div

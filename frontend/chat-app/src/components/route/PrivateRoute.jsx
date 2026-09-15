@@ -25,7 +25,7 @@ const PrivateRoute = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="text-center">Loading...</div>;
   }
 
   return authenticated ? <Outlet /> : <Navigate to="/auth?mode=login" replace />;

@@ -157,9 +157,7 @@ const Coupon = () => {
     <div
       className={`
         rounded-xl overflow-hidden
-
-        ${isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"}
-    `}
+        ${isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"}`}
     >
       {/* HEADER */}
       <div

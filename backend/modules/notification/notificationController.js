@@ -157,3 +157,26 @@ export const deleteNotification = async (req, res) => {
     });
   }
 };
+
+
+export const getAdminPanelNotifications = async (req, res) => {
+  try {
+    const notifications = await notificationModel
+      .find({
+        user: req.user.id,
+      })
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      notifications,
+    });
+  } catch (error) {
+    console.error("GET NOTIFICATIONS ERROR:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+};
