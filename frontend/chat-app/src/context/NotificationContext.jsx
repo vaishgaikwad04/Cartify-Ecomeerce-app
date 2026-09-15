@@ -254,58 +254,55 @@ export const NotificationProvider = ({ children }) => {
   // FETCH NOTIFICATIONS
   // =====================================================
 
-  const fetchNotifications = async () => {
-    // Don't make API request if user isn't logged in
-    if (!user) {
+ const fetchNotifications = async () => {
+  if (!user) {
+    setNotifications([]);
+    setUnreadCount(0);
+    return;
+  }
+
+  try {
+    setNotificationLoading(true);
+
+    let res;
+
+    if (user.role === "user") {
+      res = await getNotifications();
+    } else if (user.role === "admin") {
+      res = await getAdminPanelNotifications();
+    } else {
       setNotifications([]);
       setUnreadCount(0);
       return;
     }
 
-    try {
-      setNotificationLoading(true);
+    console.log("FULL NOTIFICATION RESPONSE:", res);
+    console.log("NOTIFICATION RESPONSE DATA:", res?.data);
+    console.log("NOTIFICATIONS:", res?.data?.notifications);
 
-      let res;
+    const data = Array.isArray(res?.data?.notifications)
+      ? res.data.notifications
+      : [];
 
-      // Regular user notifications
-      if (user.role === "user") {
-        res = await getNotifications();
-      }
+    setNotifications(data);
 
-      // Admin notifications
-      if (user.role === "admin") {
-        res = await getAdminPanelNotifications();
-      }
+    const unread = data.filter(
+      (notification) => !notification.isRead
+    ).length;
 
-      const data = res?.data?.notifications || [];
-      console.log(res?.data?.notifications )
+    setUnreadCount(unread);
+  } catch (error) {
+    console.error(
+      "Notification fetch error:",
+      error?.response?.data || error?.message
+    );
 
-      setNotifications(data);
-
-      // Calculate unread notifications
-      const unread = data.filter(
-        (notification) => !notification.isRead
-      ).length;
-
-      setUnreadCount(unread);
-    } catch (error) {
-      console.error(
-        "Notification fetch error:",
-        error?.response?.data || error?.message
-      );
-
-      setNotifications([]);
-      setUnreadCount(0);
-
-      // Don't show an annoying toast for background requests
-      // toast.error(
-      //   error?.response?.data?.message ||
-      //   "Failed to fetch notifications"
-      // );
-    } finally {
-      setNotificationLoading(false);
-    }
-  };
+    setNotifications([]);
+    setUnreadCount(0);
+  } finally {
+    setNotificationLoading(false);
+  }
+};
 
   // =====================================================
   // FETCH NOTIFICATIONS WHEN USER IS AUTHENTICATED
