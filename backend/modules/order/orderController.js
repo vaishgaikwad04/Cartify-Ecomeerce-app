@@ -158,13 +158,9 @@ export const createCheckoutSession = async (req, res) => {
       order._id
     );
 
-   // Find admin
-const admin = await authModel.findOne({
-  role: "admin",
-});
+const admins = await authModel.find({ role: "admin" });
 
-// Create notification for admin
-if (admin) {
+for (const admin of admins) {
   await notificationModel.create({
     user: admin._id,
     title: "New Order",
