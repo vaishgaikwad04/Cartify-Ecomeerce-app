@@ -184,27 +184,25 @@ export const deleteNotification = async (req, res) => {
 
 export const getAdminPanelNotifications = async (req, res) => {
   try {
-    console.log("========== ADMIN NOTIFICATION DEBUG ==========");
+    const adminId = req.user.id;
 
-    console.log("REQ.USER:", req.user);
-    console.log("REQ.USER.ID:", req.user?.id);
-    console.log("REQ.USER._ID:", req.user?._id);
+    const allNotifications = await notificationModel
+      .find()
+      .sort({ createdAt: -1 });
 
-    const allNotifications = await notificationModel.find();
-
-    console.log("ALL NOTIFICATIONS:", allNotifications);
-
-    const notifications = await notificationModel.find({
-      user: req.user.id,
-    });
-
-    console.log("MATCHED NOTIFICATIONS:", notifications);
-    console.log("MATCHED COUNT:", notifications.length);
-
-    console.log("==============================================");
+    const notifications = await notificationModel
+      .find({ user: adminId })
+      .sort({ createdAt: -1 });
 
     return res.status(200).json({
       success: true,
+
+      debug: {
+        adminId,
+        totalNotifications: allNotifications.length,
+        matchedNotifications: notifications.length,
+      },
+
       notifications,
     });
   } catch (error) {
