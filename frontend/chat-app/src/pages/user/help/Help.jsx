@@ -259,29 +259,72 @@ const getTheme = (theme) => {
 // COMMON STYLES
 // =====================================================
 
+
 const styles = {
+  // =====================================================
+  // PAGE
+  // =====================================================
+
   page: (isDark) =>
-    isDark ? "bg-[#18191c] text-gray-100" : "bg-[#f7f7f8] text-gray-900",
+    isDark
+      ? "bg-[#111111] text-white"
+      : "bg-[#f8f8f8] text-gray-900",
+
+  // =====================================================
+  // CARD
+  // =====================================================
 
   card: (isDark) =>
-    isDark ? "border-[#34363a] bg-[#202124]" : "border-gray-200 bg-white",
+    isDark
+      ? "border-[#292929] bg-[#191919]"
+      : "border-gray-200 bg-white",
+
+  // =====================================================
+  // CARD HOVER
+  // =====================================================
 
   cardHover: (isDark) =>
     isDark
-      ? "hover:border-[#46494e] hover:bg-[#26272a]"
+      ? "hover:border-[#363636] hover:bg-[#1d1d1d]"
       : "hover:border-gray-300 hover:shadow-sm",
 
-  muted: (isDark) => (isDark ? "text-gray-400" : "text-gray-500"),
+  // =====================================================
+  // MUTED TEXT
+  // =====================================================
 
-  heading: (isDark) => (isDark ? "text-gray-50" : "text-gray-950"),
+  muted: (isDark) =>
+    isDark
+      ? "text-gray-400"
+      : "text-gray-500",
 
-  border: (isDark) => (isDark ? "border-[#34363a]" : "border-gray-200"),
+  // =====================================================
+  // MAIN HEADING
+  // =====================================================
+
+  heading: (isDark) =>
+    isDark
+      ? "text-gray-100"
+      : "text-gray-950",
+
+  // =====================================================
+  // BORDER
+  // =====================================================
+
+  border: (isDark) =>
+    isDark
+      ? "border-[#292929]"
+      : "border-gray-200",
+
+  // =====================================================
+  // ICON BOX
+  // =====================================================
 
   iconBox: (isDark) =>
     isDark
-      ? "border-[#3a3c40] bg-[#292b2f] text-gray-200"
+      ? "border-[#303030] bg-[#202020] text-gray-200"
       : "border-gray-200 bg-gray-50 text-gray-700",
 };
+
 
 // =====================================================
 // PAGE WRAPPER
