@@ -28,7 +28,7 @@ export const addToCart = async (req, res) => {
     if (quantity < 0) {
       return res.status(400).json({
         success: false,
-      message: "Quantity cannot be less than 0",
+        message: "Quantity cannot be less than 0",
       });
     }
 
@@ -43,9 +43,7 @@ export const addToCart = async (req, res) => {
     }
 
     // Find selected variant
-    const variant = product.variants.find(
-      (v) => v.size === size
-    );
+    const variant = product.variants.find((v) => v.size === size);
 
     if (!variant) {
       return res.status(400).json({
@@ -97,15 +95,12 @@ export const addToCart = async (req, res) => {
 
     // Check same product + same size
     const productIndex = cart.items.findIndex(
-      (item) =>
-        item.productId.toString() === productId &&
-        item.size === size
+      (item) => item.productId.toString() === productId && item.size === size,
     );
 
     // If item already exists
     if (productIndex > -1) {
-      const newQuantity =
-        cart.items[productIndex].quantity + quantity;
+      const newQuantity = cart.items[productIndex].quantity + quantity;
 
       // Prevent exceeding stock
       if (newQuantity > variant.stock) {
@@ -145,10 +140,7 @@ export const addToCart = async (req, res) => {
   }
 };
 
-
-// =========================
 // GET CART
-// =========================
 export const getCart = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -180,10 +172,7 @@ export const getCart = async (req, res) => {
   }
 };
 
-
-// =========================
 // UPDATE CART
-// =========================
 export const updateCart = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -216,9 +205,7 @@ export const updateCart = async (req, res) => {
 
     // Find cart item using product + size
     const item = cart.items.find(
-      (i) =>
-        i.productId.toString() === productId &&
-        i.size === size
+      (i) => i.productId.toString() === productId && i.size === size,
     );
 
     if (!item) {
@@ -239,9 +226,7 @@ export const updateCart = async (req, res) => {
     }
 
     // Find selected variant
-    const variant = product.variants.find(
-      (v) => v.size === size
-    );
+    const variant = product.variants.find((v) => v.size === size);
 
     if (!variant) {
       return res.status(400).json({
@@ -294,10 +279,7 @@ export const updateCart = async (req, res) => {
   }
 };
 
-
-// =========================
 // REMOVE FROM CART
-// =========================
 export const removeFromCart = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -330,9 +312,7 @@ export const removeFromCart = async (req, res) => {
 
     // Check item exists
     const itemExists = cart.items.some(
-      (item) =>
-        item.productId.toString() === productId &&
-        item.size === size
+      (item) => item.productId.toString() === productId && item.size === size,
     );
 
     if (!itemExists) {
@@ -345,10 +325,7 @@ export const removeFromCart = async (req, res) => {
     // Remove product + size combination
     cart.items = cart.items.filter(
       (item) =>
-        !(
-          item.productId.toString() === productId &&
-          item.size === size
-        )
+        !(item.productId.toString() === productId && item.size === size),
     );
 
     await cart.save();
@@ -367,3 +344,4 @@ export const removeFromCart = async (req, res) => {
     });
   }
 };
+

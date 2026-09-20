@@ -1,9 +1,6 @@
 import notificationModel from "./notificationModel.js";
 
-// =====================================================
 // GET USER NOTIFICATIONS
-// =====================================================
-
 export const getUserNotifications = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -28,10 +25,7 @@ export const getUserNotifications = async (req, res) => {
   }
 };
 
-// =====================================================
 // GET UNREAD NOTIFICATION COUNT
-// =====================================================
-
 export const getUnreadNotificationCount = async (req, res) => {
   try {
     ///find based on userId
@@ -55,10 +49,7 @@ export const getUnreadNotificationCount = async (req, res) => {
   }
 };
 
-// =====================================================
 // MARK SINGLE NOTIFICATION AS READ
-// =====================================================
-
 export const markNotificationAsRead = async (req, res) => {
   try {
     const { id } = req.params;
@@ -96,10 +87,7 @@ export const markNotificationAsRead = async (req, res) => {
   }
 };
 
-// =====================================================
 // MARK ALL NOTIFICATIONS AS READ
-// =====================================================
-
 export const markAllNotificationsAsRead = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -126,10 +114,7 @@ export const markAllNotificationsAsRead = async (req, res) => {
   }
 };
 
-// =====================================================
 // DELETE NOTIFICATION
-// =====================================================
-
 export const deleteNotification = async (req, res) => {
   try {
     const { id } = req.params;
@@ -158,7 +143,6 @@ export const deleteNotification = async (req, res) => {
   }
 };
 
-
 export const getAdminPanelNotifications = async (req, res) => {
   try {
     const notifications = await notificationModel
@@ -181,4 +165,125 @@ export const getAdminPanelNotifications = async (req, res) => {
   }
 };
 
+export const getUnreadAdminNotificationCount = async (req, res) => {
+  try {
+    const adminId = req.user.id;
 
+    const isReadCount = await notificationModel.countDocuments({
+      user: adminId,
+      isRead: false,
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Unread admin notification count fetched successfully",
+      count: isReadCount,
+    });
+  } catch (error) {
+    console.error("GET UNREAD ADMIN NOTIFICATIONS ERROR:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+};
+
+export const markAdminNotificationAsRead = async (req, res) => {
+  try {
+    const adminId = req.user.id;
+    const { notificationId } = req.params;
+
+    const notification = await notificationModel.findOneAndUpdate(
+      {
+        _id: notificationId,
+        user: adminId,
+      },
+      {
+        isRead: true,
+      },
+      {
+        new: true,
+      },
+    );
+
+    if (!notification) {
+      return res.status(404).json({
+        success: false,
+        message: "Notification not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Admin notification marked as read",
+      notification,
+    });
+  } catch (error) {
+    console.error("MARK ADMIN NOTIFICATION AS READ ERROR:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+};
+
+export const markAllAdminNotificationAsRead = async (req, res) => {
+  try {
+    const adminId = req.user.id;
+
+    await notificationModel.updateMany(
+      {
+        user: adminId,
+        isRead: false,
+      },
+      {
+        isRead: true,
+      },
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "All admin notifications marked as read",
+    });
+  } catch (error) {
+    console.error("MARK ALL ADMIN NOTIFICATIONS AS READ ERROR:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+};
+
+export const deleteAdminNotification = async (req, res) => {
+  try {
+    const adminId = req.user.id;
+    const { notificationId } = req.params;
+
+    const notification = await notificationModel.findOneAndDelete({
+      _id: notificationId,
+      user: adminId,
+    });
+
+    if (!notification) {
+      return res.status(404).json({
+        success: false,
+        message: "Notification not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Admin notification deleted successfully",
+    });
+  } catch (error) {
+    console.error("DELETE ADMIN NOTIFICATION ERROR:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+};

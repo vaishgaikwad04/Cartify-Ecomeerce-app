@@ -5,26 +5,52 @@ const NotificationAPI = axios.create({
   withCredentials: true,
 });
 
-// Get all notifications
-export const getNotifications = () => NotificationAPI.get("/");
+// =====================================================
+// USER NOTIFICATIONS
+// =====================================================
 
-// Get unread count
+// Get all user notifications
+export const getNotifications = () =>
+  NotificationAPI.get("/");
+
+// Get unread user notification count
 export const getUnreadNotificationCount = () =>
   NotificationAPI.get("/unread-count");
 
-// Mark one notification as read
+// Mark one user notification as read
 export const markNotificationAsRead = (id) =>
   NotificationAPI.patch(`/${id}/read`);
 
-// Mark all notifications as read
+// Mark all user notifications as read
 export const markAllNotificationsAsRead = () =>
   NotificationAPI.patch("/read-all");
 
-// Delete notification
-export const deleteNotification = (id) => NotificationAPI.delete(`/${id}`);
+// Delete one user notification
+export const deleteNotification = (id) =>
+  NotificationAPI.delete(`/${id}`);
 
-// Get admin panel notifications
+// =====================================================
+// ADMIN PANEL NOTIFICATIONS
+// =====================================================
+
+// Get all admin notifications
 export const getAdminPanelNotifications = () =>
   NotificationAPI.get("/adminPanel/notification");
+
+// Get unread admin notification count
+export const getUnreadAdminNotificationCount = () =>
+  NotificationAPI.get("/adminPanel/unread-count");
+
+// Mark one admin notification as read
+export const markAdminNotificationAsRead = (notificationId) =>
+  NotificationAPI.patch(`/adminPanel/${notificationId}/read`);
+
+// Mark all admin notifications as read
+export const markAllAdminNotificationsAsRead = () =>
+  NotificationAPI.patch("/adminPanel/read-all");
+
+// Delete one admin notification
+export const deleteAdminNotification = (notificationId) =>
+  NotificationAPI.delete(`/adminPanel/${notificationId}`);
 
 export default NotificationAPI;

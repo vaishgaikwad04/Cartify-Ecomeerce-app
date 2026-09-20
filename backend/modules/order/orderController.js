@@ -1,6 +1,5 @@
-
 import cartModel from "../cart/cartModel.js";
-import authModel from "../auth/authModel.js"
+import authModel from "../auth/authModel.js";
 import orderModel from "./orderModel.js";
 import Stripe from "stripe";
 import addressModel from "../address/addressModel.js";
@@ -12,15 +11,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET);
 export const createCheckoutSession = async (req, res) => {
   try {
     const { products, addressId } = req.body;
-
-    console.log("Products:", products);
-    console.log("Address ID:", addressId);
-    console.log("User ID:", req.user.id);
-
-    // ------------------------------------------
     // VALIDATE CART
-    // ------------------------------------------
-
     if (!products || products.length === 0) {
       return res.status(400).json({
         success: false,
@@ -28,10 +19,7 @@ export const createCheckoutSession = async (req, res) => {
       });
     }
 
-    // ------------------------------------------
     // VALIDATE ADDRESS ID
-    // ------------------------------------------
-
     if (!addressId) {
       return res.status(400).json({
         success: false,
@@ -39,16 +27,11 @@ export const createCheckoutSession = async (req, res) => {
       });
     }
 
-    // ------------------------------------------
     // FETCH USER ADDRESS
-    // ------------------------------------------
-
     const address = await addressModel.findOne({
       _id: addressId,
       userId: req.user.id,
     });
-
-    console.log("Selected Address:", address);
 
     if (!address) {
       return res.status(404).json({
@@ -57,67 +40,42 @@ export const createCheckoutSession = async (req, res) => {
       });
     }
 
-    // ------------------------------------------
     // CALCULATE TOTAL
-    // ------------------------------------------
-
     const total = products.reduce(
-      (sum, product) =>
-        sum + product.price * product.quantity,
-      0
+      (sum, product) => sum + product.price * product.quantity,
+      0,
     );
 
-    // ------------------------------------------
     // STRIPE LINE ITEMS
-    // ------------------------------------------
-
     const line_items = products.map((product) => ({
       price_data: {
         currency: "inr",
 
         product_data: {
           name: product.name,
-          images: product.img
-            ? [product.img]
-            : [],
+          images: product.img ? [product.img] : [],
         },
 
-        unit_amount: Math.round(
-          product.price * 100
-        ),
+        unit_amount: Math.round(product.price * 100),
       },
 
       quantity: product.quantity,
     }));
 
-    // ------------------------------------------
     // CREATE STRIPE SESSION
-    // ------------------------------------------
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      mode: "payment",
+      line_items,
+      success_url: "http://localhost:5173/success",
+      cancel_url: "http://localhost:5173/cancel",
+      metadata: {
+        userId: req.user.id,
+        addressId: address._id.toString(),
+      },
+    });
 
-    const session =
-      await stripe.checkout.sessions.create({
-        payment_method_types: ["card"],
-
-        mode: "payment",
-
-        line_items,
-
-        success_url:
-          "http://localhost:5173/success",
-
-        cancel_url:
-          "http://localhost:5173/cancel",
-
-        metadata: {
-          userId: req.user.id,
-          addressId: address._id.toString(),
-        },
-      });
-
-    // ------------------------------------------
     // CREATE ORDER
-    // ------------------------------------------
-
     const order = await orderModel.create({
       userId: req.user.id,
 
@@ -145,46 +103,30 @@ export const createCheckoutSession = async (req, res) => {
       })),
 
       total: total,
-
       status: "pending",
-
       paymentStatus: "pending",
-
       stripeSessionId: session.id,
     });
 
-    console.log(
-      "Order created:",
-      order._id
-    );
+    const ADMIN_ID = "6a940d8105501c31149acfc0";
 
-const admins = await authModel.find({ role: "admin" });
-
-for (const admin of admins) {
-  await notificationModel.create({
-    user: admin._id,
-    title: "New Order",
-    message: "A new order requires processing.",
-    type: "order",
-    order: order._id,
-  });
-}
+    await notificationModel.create({
+      user: ADMIN_ID,
+      title: "New Order",
+      message: "A new order has been placed",
+      type: "order",
+      order: order._id,
+    });
 
     return res.status(200).json({
       success: true,
       message: "Checkout session created successfully",
-
       id: session.id,
-
       url: session.url,
-
       orderId: order._id,
     });
   } catch (error) {
-    console.log(
-      "Stripe / Order Error:",
-      error
-    );
+    console.log("Stripe / Order Error:", error);
 
     return res.status(500).json({
       success: false,
@@ -430,7 +372,7 @@ export const updateOrderStatus = async (req, res) => {
       {
         new: true,
         runValidators: true,
-      }
+      },
     );
 
     // -----------------------------------
@@ -470,8 +412,7 @@ export const updateOrderStatus = async (req, res) => {
         await notificationModel.create({
           user: order.userId,
           title: "Order Shipped",
-          message:
-            "Your order has been shipped and is on its way.",
+          message: "Your order has been shipped and is on its way.",
           type: "shipping",
           order: order._id,
         });
@@ -484,8 +425,7 @@ export const updateOrderStatus = async (req, res) => {
         await notificationModel.create({
           user: order.userId,
           title: "Order Delivered",
-          message:
-            "Your order has been delivered successfully.",
+          message: "Your order has been delivered successfully.",
           type: "delivery",
           order: order._id,
         });
@@ -498,8 +438,7 @@ export const updateOrderStatus = async (req, res) => {
         await notificationModel.create({
           user: order.userId,
           title: "Order Cancelled",
-          message:
-            "Your order has been cancelled.",
+          message: "Your order has been cancelled.",
           type: "order",
           order: order._id,
         });
@@ -509,10 +448,7 @@ export const updateOrderStatus = async (req, res) => {
     } catch (notificationError) {
       // Notification failure should not make
       // the order update fail
-      console.error(
-        "NOTIFICATION CREATION ERROR:",
-        notificationError
-      );
+      console.error("NOTIFICATION CREATION ERROR:", notificationError);
     }
 
     console.log("=================================");
@@ -535,9 +471,6 @@ export const updateOrderStatus = async (req, res) => {
     });
   }
 };
-
-
-
 
 export const updateCustomer = async (req, res) => {
   try {
@@ -579,17 +512,19 @@ export const updateCustomer = async (req, res) => {
     // These fields belong to auth/user collection
     // ------------------------------------------
 
-    const updatedUser = await authModel.findByIdAndUpdate(
-      id,
-      {
-        name,
-        email,
-      },
-      {
-        new: true,
-        runValidators: true,
-      }
-    ).select("name email");
+    const updatedUser = await authModel
+      .findByIdAndUpdate(
+        id,
+        {
+          name,
+          email,
+        },
+        {
+          new: true,
+          runValidators: true,
+        },
+      )
+      .select("name email");
 
     if (!updatedUser) {
       return res.status(404).json({
@@ -615,7 +550,7 @@ export const updateCustomer = async (req, res) => {
           "shippingAddress.postalCode": postalCode,
           "shippingAddress.country": country,
         },
-      }
+      },
     );
 
     // ------------------------------------------

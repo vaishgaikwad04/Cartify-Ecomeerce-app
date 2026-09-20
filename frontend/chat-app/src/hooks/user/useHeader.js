@@ -10,67 +10,37 @@ import { ThemeContext } from "../../context/ThemeContext";
 import { NotificationContext } from "../../context/NotificationContext";
 
 export const useHeader = () => {
-  // ==========================================
   // NAVIGATION
-  // ==========================================
-
   const navigate = useNavigate();
 
-  // ==========================================
   // THEME
- 
   const { theme } = useContext(ThemeContext);
-
   const isDark = theme === "Dark Mode";
 
-  // ==========================================
   // NOTIFICATIONS
-  // ==========================================
-
   const { allowNotification, unreadCount } = useContext(NotificationContext);
 
-  // ==========================================
   // MOBILE MENU
-  // ==========================================
-
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   const [openMobileMenu, setOpenMobileMenu] = useState(null);
 
-  // ==========================================
   // PROFILE
-  // ==========================================
-
   const [profileData, setProfileData] = useState(null);
 
-  // ==========================================
   // CART DRAWER
-  // ==========================================
-
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
 
-  // ==========================================
   // SEARCH
-  // ==========================================
-
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
-
   const [searchTerm, setSearchTerm] = useState("");
-
   const [results, setResults] = useState([]);
-
   const [searchLoading, setSearchLoading] = useState(false);
 
-  // ==========================================
   // FETCH PROFILE
-  // ==========================================
-
   const fetchProfile = async () => {
     try {
       const res = await getUserSettings();
-
       const data = res?.data?.data;
-
       if (!data) {
         setProfileData(null);
         return;
@@ -91,18 +61,12 @@ export const useHeader = () => {
     }
   };
 
-  // ==========================================
   // FETCH PROFILE ON MOUNT
-  // ==========================================
-
   useEffect(() => {
     fetchProfile();
   }, []);
 
-  // ==========================================
   // SEARCH PRODUCTS
-  // ==========================================
-
   const handleSearch = async (value) => {
     setSearchTerm(value);
 
@@ -127,43 +91,30 @@ export const useHeader = () => {
     }
   };
 
-  // ==========================================
   // CLOSE SEARCH
-  // ==========================================
-
   const closeSearch = () => {
     setIsSearchModalOpen(false);
     setSearchTerm("");
     setResults([]);
   };
 
-  // ==========================================
   // PRODUCT CLICK
-  // ==========================================
-
   const handleProductClick = (id) => {
     navigate(`/description/${id}`);
 
     closeSearch();
   };
 
-  // ==========================================
   // CLOSE MOBILE MENU
-  // ==========================================
-
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
     setOpenMobileMenu(null);
   };
 
-  // ==========================================
   // BODY SCROLL LOCK
-  // ==========================================
-
   useEffect(() => {
     const shouldLockScroll =
       isCartDrawerOpen || isSearchModalOpen || isMobileMenuOpen;
-
     document.body.style.overflow = shouldLockScroll ? "hidden" : "auto";
 
     return () => {
@@ -171,18 +122,12 @@ export const useHeader = () => {
     };
   }, [isCartDrawerOpen, isSearchModalOpen, isMobileMenuOpen]);
 
-  // ==========================================
   // ESCAPE KEY
-  // ==========================================
-
   useEffect(() => {
     const handleEscape = (event) => {
       if (event.key !== "Escape") return;
-
       closeSearch();
-
       setIsCartDrawerOpen(false);
-
       closeMobileMenu();
     };
 
@@ -193,10 +138,7 @@ export const useHeader = () => {
     };
   }, []);
 
-  // ==========================================
   // RETURN
-  // ==========================================
-
   return {
     // Navigation
     navigate,
@@ -227,9 +169,8 @@ export const useHeader = () => {
     isSearchModalOpen,
     setIsSearchModalOpen,
     searchTerm,
-     setSearchTerm,
+    setSearchTerm,
     results,
-   
 
     searchLoading,
     handleSearch,

@@ -19,7 +19,6 @@ const Notifications = () => {
     isDark,
   } = useNotification();
 
- 
   const getNotificationIcon = (notification) => {
     const title = notification?.title?.toLowerCase() || "";
 
@@ -53,19 +52,11 @@ const Notifications = () => {
     >
       {/* Main page container */}
       <div className="max-w-[1800px] mx-auto">
-
-        {/*
-            PAGE HEADER
-        */}
-
+        {/*PAGE HEADER*/}
         <div className="flex items-center justify-between mb-8">
-
           {/* Page title and description */}
           <div>
-            <h1 className="text-2xl font-semibold">
-              Notifications
-            </h1>
-
+            <h1 className="text-2xl font-semibold">Notifications</h1>
             <p
               className={`
                 mt-1
@@ -77,8 +68,7 @@ const Notifications = () => {
             </p>
           </div>
 
-          {/* Show "Mark all as read" only when
-              unread notifications are available */}
+          {/* Show "Mark all as read" only when unread notifications are available */}
           {unreadCount > 0 && (
             <button
               type="button"
@@ -98,23 +88,15 @@ const Notifications = () => {
           )}
         </div>
 
-      
-
-        {/* Display loading message while
-            notifications are being fetched */}
+        {/* Display loading message while notifications are being fetched */}
         {notificationLoading && (
-          <div className="py-20 text-center">
-            Loading notifications...
-          </div>
+          <div className="py-20 text-center">Loading notifications...</div>
         )}
 
-     
-
-        {/* Display empty state when loading is complete
-            and there are no notifications */}
+        {/* Display empty state when loading is complete and there are no notifications */}
         {!notificationLoading && notifications.length === 0 && (
-     <div
-  className={`
+          <div
+            className={`
     flex
     min-h-[360px]
     flex-col
@@ -126,16 +108,12 @@ const Notifications = () => {
     py-12
     text-center
 
-    ${
-      isDark
-        ? "border-gray-800 bg-gray-900"
-        : "border-gray-200 bg-white"
-    }
+    ${isDark ? "border-gray-800 bg-gray-900" : "border-gray-200 bg-white"}
   `}
->
-  {/* Empty notification icon */}
-  <div
-    className={`
+          >
+            {/* Empty notification icon */}
+            <div
+              className={`
       flex
       h-16
       w-16
@@ -145,40 +123,30 @@ const Notifications = () => {
 
       ${isDark ? "bg-gray-800" : "bg-gray-100"}
     `}
-  >
-    <FiBell
-      className={`
+            >
+              <FiBell
+                className={`
         text-2xl
 
         ${isDark ? "text-gray-500" : "text-gray-400"}
       `}
-    />
-  </div>
+              />
+            </div>
 
-  {/* Title */}
-  <h2 className="mt-5 text-lg font-semibold">
-    No notifications yet
-  </h2>
-
-</div>
+            {/* Title */}
+            <h2 className="mt-5 text-lg font-semibold">No notifications yet</h2>
+          </div>
         )}
 
-        {/* ==================================
-            NOTIFICATION LIST
-        ================================== */}
-
+        {/* NOTIFICATION LIST*/}
         <div className="space-y-3">
-
-          {/* Render notifications only after
-              loading has finished */}
           {!notificationLoading &&
             notifications.map((notification) => (
               <button
                 type="button"
                 key={notification._id}
                 onClick={() => {
-                  // Mark notification as read only if
-                  // it has not already been read
+                  // Mark notification as read only if  it has not already been read
                   if (!notification.isRead) {
                     handleMarkAsRead(notification._id);
                   }
@@ -204,10 +172,7 @@ const Notifications = () => {
                   }
                 `}
               >
-                {/* ==================================
-                    NOTIFICATION ICON
-                ================================== */}
-
+                {/* NOTIFICATION ICON */}
                 <div
                   className={`
                     w-10
@@ -225,20 +190,14 @@ const Notifications = () => {
                     }
                   `}
                 >
-                  {/* Select icon according to
-                      notification type */}
+                  {/* Select icon according to notification type */}
                   {getNotificationIcon(notification)}
                 </div>
 
-                {/* ==================================
-                    NOTIFICATION CONTENT
-                ================================== */}
-
+                {/*NOTIFICATION CONTENT */}
                 <div className="flex-1">
-
                   {/* Notification title and unread indicator */}
                   <div className="flex items-start justify-between gap-4">
-
                     <h3
                       className={`
                         text-sm
