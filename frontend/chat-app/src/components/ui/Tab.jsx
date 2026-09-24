@@ -1,4 +1,3 @@
-
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 
@@ -13,8 +12,8 @@ const Tabs = ({ tabs = [] }) => {
       className={`
         w-full
         max-w-5xl
-        mt-12
-        sm:mt-16
+        mt-10
+        sm:mt-14
         lg:mt-20
         transition-colors
         duration-300
@@ -24,79 +23,103 @@ const Tabs = ({ tabs = [] }) => {
       {/* TAB HEADER */}
       <div
         className={`
-          flex
-          gap-6
-          sm:gap-10
+          w-full
+          overflow-x-auto
+          scrollbar-thin
           border-b
-          ${isDark ? "border-gray-800" : "border-gray-200"}
+          ${
+            isDark
+              ? "border-gray-800"
+              : "border-gray-200"
+          }
         `}
       >
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`
-              relative
-              pb-3
-              sm:pb-4
-              font-medium
-              text-sm
-              sm:text-base
-              whitespace-nowrap
-              transition-colors
-              duration-300
+        <div className="flex w-max min-w-full gap-5 sm:gap-8 lg:gap-10">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`
+                relative
+                shrink-0
 
-              ${
-                activeTab === tab.id
-                  ? isDark
-                    ? "text-white"
-                    : "text-black"
-                  : isDark
-                  ? "text-gray-500 hover:text-gray-300"
-                  : "text-gray-500 hover:text-black"
-              }
+                pb-2.5
+                sm:pb-3
+                lg:pb-4
 
-              after:absolute
-              after:bottom-0
-              after:left-0
-              after:h-[1.5px]
-              after:bg-current
-              after:transition-all
-              after:duration-300
+                font-medium
+                text-xs
+                sm:text-sm
+                md:text-base
 
-              ${
-                activeTab === tab.id
-                  ? "after:w-full"
-                  : "after:w-0"
-              }
-            `}
-          >
-            {tab.label}
-          </button>
-        ))}
+                whitespace-nowrap
+
+                transition-colors
+                duration-300
+
+                ${
+                  activeTab === tab.id
+                    ? isDark
+                      ? "text-white"
+                      : "text-black"
+                    : isDark
+                    ? "text-gray-500 hover:text-gray-300"
+                    : "text-gray-500 hover:text-black"
+                }
+
+                after:absolute
+                after:bottom-0
+                after:left-0
+                after:h-[1.5px]
+                after:bg-current
+                after:transition-all
+                after:duration-300
+
+                ${
+                  activeTab === tab.id
+                    ? "after:w-full"
+                    : "after:w-0"
+                }
+              `}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* TAB CONTENT */}
       <div
         className={`
-          mt-6
-          sm:mt-8
+          mt-5
+          sm:mt-7
+          lg:mt-8
           transition-colors
           duration-300
         `}
       >
         <div
           className={`
-            leading-7
-            sm:leading-8
-            text-sm
-            sm:text-[15px]
+            text-[11px]
+            sm:text-xs
+            md:text-[15px]
+
+            leading-5
+            sm:leading-6
+            md:leading-7
+
             break-words
 
-            ${isDark ? "text-gray-300" : "text-gray-600"}
+            ${
+              isDark
+                ? "text-gray-300"
+                : "text-gray-600"
+            }
           `}
         >
-          {tabs.find((tab) => tab.id === activeTab)?.content}
+          {tabs.find(
+            (tab) => tab.id === activeTab
+          )?.content}
         </div>
       </div>
     </div>

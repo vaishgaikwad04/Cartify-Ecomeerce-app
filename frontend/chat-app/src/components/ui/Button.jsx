@@ -12,16 +12,23 @@ const Button = ({
 }) => {
   const { isDark } = useContext(ThemeContext);
 
+  // Responsive button sizing
   const baseStyle =
-    "px-4 py-4 font-medium transition-all duration-300 flex items-center justify-center gap-2 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed";
+    "px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-medium transition-all duration-300 flex items-center justify-center gap-2 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed";
 
   const variants = {
-    primary: "bg-black text-white hover:bg-gray-900 rounded-md",
-    secondary: "bg-gray-200 text-black hover:bg-gray-300 rounded-md",
+    primary:
+      "bg-black text-white hover:bg-gray-900 rounded-md",
+
+    secondary:
+      "bg-gray-200 text-black hover:bg-gray-300 rounded-md",
+
     outline:
       "border border-black text-black hover:bg-black hover:text-white rounded-md",
+
     outlineDark:
       "border border-white text-white hover:bg-white hover:text-black rounded-md",
+
     danger:
       "bg-red-800 text-white hover:bg-red-900 border-none rounded-md",
   };

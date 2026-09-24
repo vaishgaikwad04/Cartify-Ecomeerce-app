@@ -1,650 +1,3 @@
-// import React, { useContext } from "react";
-// import Tabs from "../../../components/ui/Tab";
-// import ImagePreview from "../../../components/ui/ImagePreview";
-// import Recommendation from "../../user/productDescription/Recommendation";
-// import Button from "../../../components/ui/Button";
-// import { useDescription } from "../../../hooks/user/useDescription";
-// import CreateAndUpdateReview from "../review/CreateAndUpdateReview";
-// import Modal from "../../../components/ui/Modal";
-// import { FiTruck, FiRefreshCcw } from "react-icons/fi";
-// import { AuthContext } from "../../../context/AuthContext";
-
-// const DescriptionPage = () => {
-//   const {
-//     product,
-//     selectedSize,
-//     setSelectedSize,
-//     handleCart,
-//     finalPrice,
-//     selectedVariant,
-
-//     isDark,
-//     currentUserId,
-
-//     reviews,
-//     fetchReviews,
-
-//     isReviewModalOpen,
-//     setIsReviewModalOpen,
-
-//     selectedReview,
-//     handleDelete,
-//     handleUpdate,
-//   } = useDescription();
-//   const { user } = useContext(AuthContext);
-
-//   // Show loading state until product data is available
-//   if (!product) {
-//     return (
-//       <div className="flex justify-center items-center h-[60vh]">
-//         <p className="text-lg text-gray-500">Loading product...</p>
-//       </div>
-//     );
-//   }
-
-//   console.log("Review User ID:", reviews.user?._id);
-// console.log("Current User ID:", currentUserId);
-// console.log(
-//   "MATCH:",
-//   String(reviews.user?._id) === String(currentUserId)
-// );
-
-//   return (
-//     <>
-//       <div
-//         className={`
-//           w-full
-//           max-w-[1800px]
-//           mx-auto
-//           px-4
-//           transition-colors
-//           duration-300
-//           ${isDark ? "bg-gray-950 text-white" : "bg-white text-gray-900"}
-//         `}
-//       >
-//         {/* PRODUCT SECTION */}
-
-//         <div className="py-8 sm:py-10 lg:py-12">
-//           <div
-//             className="
-//               grid
-//               grid-cols-1
-//               lg:grid-cols-2
-//               gap-10
-//               sm:gap-12
-//               lg:gap-24
-//             "
-//           >
-//             {/* PRODUCT IMAGE */}
-
-//             <ImagePreview Images={product?.images || []} />
-
-//             {/* PRODUCT DETAILS */}
-
-//             <div className="lg:sticky lg:top-24 lg:h-fit">
-//               {/* BREADCRUMB */}
-
-//               <p className="text-xs sm:text-sm text-gray-400 mb-4">
-//                 Home / {product.category} / {product.name}
-//               </p>
-
-//               {/* PRODUCT NAME */}
-
-//               <h1
-//                 className={`
-//                   text-2xl
-//                   sm:text-3xl
-//                   lg:text-4xl
-//                   font-semibold
-//                   leading-tight
-//                   ${isDark ? "text-white" : "text-gray-900"}
-//                 `}
-//               >
-//                 {product.name}
-//               </h1>
-
-//               {/* PRICE */}
-
-//               <div
-//                 className="
-//                   flex
-//                   items-center
-//                   flex-wrap
-//                   gap-3
-//                   sm:gap-4
-//                   mt-5
-//                   sm:mt-6
-//                 "
-//               >
-//                 {/* ORIGINAL PRICE */}
-
-//                 {product.discountPrice && (
-//                   <span className="line-through text-gray-400 text-sm sm:text-base">
-//                     ₹{product.price}
-//                   </span>
-//                 )}
-
-//                 {/* FINAL PRICE */}
-
-//                 <span
-//                   className={`
-//                     text-lg
-//                     sm:text-xl
-//                     font-bold
-//                     ${isDark ? "text-white" : "text-black"}
-//                   `}
-//                 >
-//                   ₹{finalPrice}
-//                 </span>
-//               </div>
-
-//               <div
-//                 className={`
-//     mt-5
-//     pt-5
-//     border-t
-//     flex
-//     items-center
-//     gap-6
-//     text-xs
-//     sm:text-sm
-//     ${
-//       isDark ? "border-gray-800 text-gray-400" : "border-gray-200 text-gray-500"
-//     }
-//   `}
-//               >
-//                 <span className="flex items-center gap-2">
-//                   <FiTruck className="text-base" />
-//                   Free shipping
-//                 </span>
-
-//                 <span
-//                   className={`h-4 w-px ${
-//                     isDark ? "bg-gray-800" : "bg-gray-200"
-//                   }`}
-//                 />
-
-//                 <span className="flex items-center gap-2">
-//                   <FiRefreshCcw className="text-base" />
-//                   Easy returns
-//                 </span>
-//               </div>
-
-//               {/* ACTION BUTTONS */}
-
-//               <div className="mt-7 sm:mt-8 flex flex-col gap-3">
-//                 {/* ADD TO CART */}
-
-//                 <button
-//                   onClick={handleCart}
-//                   className={`
-//                     h-12
-//                     sm:h-14
-//                     w-full
-//                     rounded-xl
-//                     font-medium
-//                     transition-all
-//                     duration-300
-
-//                     ${
-//                       isDark
-//                         ? "bg-white text-black hover:bg-gray-200"
-//                         : "bg-black text-white hover:bg-gray-800"
-//                     }
-//                   `}
-//                 >
-//                   {selectedSize && selectedVariant?.stock <= 0
-//                     ? "Out Of Stock"
-//                     : "Add To Cart"}
-//                 </button>
-
-//                 {/* WISHLIST */}
-
-//                 <Button label="Add To Wishlist" variant="outlineDark" />
-//               </div>
-
-//               {/* SIZE */}
-
-//               {product.variants?.length > 0 && (
-//                 <div className="mt-7 sm:mt-8">
-//                   <h3
-//                     className={`
-//                       font-medium
-//                       mb-4
-//                       ${isDark ? "text-white" : "text-gray-900"}
-//                     `}
-//                   >
-//                     Select Size
-//                   </h3>
-
-//                   {/* SIZE BUTTONS */}
-
-//                   <div className="flex flex-wrap gap-2 sm:gap-3">
-//                     {product.variants.map((item) => (
-//                       <button
-//                         key={item._id}
-//                         disabled={item.stock <= 0}
-//                         onClick={() => setSelectedSize(item.size)}
-//                         className={`
-//                           min-w-[64px]
-//                           sm:min-w-[70px]
-//                           h-10
-//                           sm:h-11
-//                           px-3
-//                           sm:px-4
-//                           rounded-lg
-//                           border
-//                           font-medium
-//                           text-sm
-//                           sm:text-base
-//                           transition-all
-//                           duration-200
-
-//                           ${
-//                             selectedSize === item.size
-//                               ? isDark
-//                                 ? "bg-white text-black border-white shadow-md"
-//                                 : "bg-black text-white border-black shadow-sm"
-//                               : item.stock <= 0
-//                                 ? isDark
-//                                   ? "bg-gray-900 text-gray-600 border-gray-800 cursor-not-allowed"
-//                                   : "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
-//                                 : isDark
-//                                   ? "bg-gray-950 text-white border-gray-700 hover:border-white hover:bg-gray-900"
-//                                   : "bg-white text-gray-900 border-gray-300 hover:border-black"
-//                           }
-//                         `}
-//                       >
-//                         {item.size}
-//                       </button>
-//                     ))}
-//                   </div>
-//                 </div>
-//               )}
-
-//               {/* PRODUCT DESCRIPTION */}
-
-//               <div
-//                 className={`
-//                   mt-7
-//                   sm:mt-8
-//                   rounded-2xl
-//                   p-4
-//                   sm:p-6
-//                   ${isDark ? "bg-gray-900" : "bg-gray-50"}
-//                 `}
-//               >
-//                 <h3
-//                   className={`
-//                     font-semibold
-//                     mb-3
-//                     ${isDark ? "text-white" : "text-gray-900"}
-//                   `}
-//                 >
-//                   Product Description
-//                 </h3>
-
-//                 <p
-//                   className={`
-//                     text-sm
-//                     sm:text-base
-//                     leading-7
-//                     sm:leading-8
-//                     tracking-wide
-//                     transition-colors
-//                     duration-300
-//                     ${isDark ? "text-gray-300" : "text-gray-600"}
-//                   `}
-//                 >
-//                   {product.description}
-//                 </p>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* TABS */}
-
-//         <div className="mt-10">
-//           <Tabs
-//             tabs={[
-//               {
-//                 id: "description",
-//                 label: "Description",
-//                 content: (
-//                   <p>{product.description || "No description available"}</p>
-//                 ),
-//               },
-
-//               {
-//                 id: "details",
-//                 label: "Details",
-//                 content: product.details ? (
-//                   <ul className="list-disc pl-5">
-//                     {product.details
-//                       .split(".")
-//                       .filter((item) => item.trim())
-//                       .map((item, index) => (
-//                         <li key={index}>{item.trim()}</li>
-//                       ))}
-//                   </ul>
-//                 ) : (
-//                   <p>No details available</p>
-//                 ),
-//               },
-
-//               {
-//                 id: "careFit",
-//                 label: "Care Fit",
-//                 content: product.careFit ? (
-//                   <ul className="list-disc pl-5">
-//                     {product.careFit
-//                       .split(".")
-//                       .filter((item) => item.trim())
-//                       .map((item, index) => (
-//                         <li key={index}>{item.trim()}</li>
-//                       ))}
-//                   </ul>
-//                 ) : (
-//                   <p>No care fit available</p>
-//                 ),
-//               },
-//             ]}
-//           />
-//         </div>
-
-//         {/* RECOMMENDED PRODUCTS */}
-
-//         <Recommendation currentId={product._id} category={product.category} />
-//         {/* REVIEWS */}
-
-//         <div className="w-full max-w-[1800px] mx-auto py-12 sm:py-16 lg:py-24">
-//           {/* REVIEW HEADER */}
-
-//           <div
-//             className="
-//               flex
-//               flex-col
-//               gap-5
-//               sm:flex-row
-//               sm:items-center
-//               sm:justify-between
-//               mb-8
-//               sm:mb-10
-//             "
-//           >
-//             <div>
-//               <h2
-//                 className={`
-//                   text-2xl
-//                   sm:text-3xl
-//                   font-semibold
-//                   ${isDark ? "text-white" : "text-gray-900"}
-//                 `}
-//               >
-//                 Customer Reviews
-//               </h2>
-
-//               <p
-//                 className={`
-//                   mt-2
-//                   text-sm
-//                   sm:text-base
-//                   ${isDark ? "text-gray-400" : "text-gray-500"}
-//                 `}
-//               >
-//                 See what customers are saying about this product.
-//               </p>
-//             </div>
-
-//             <Button
-//               label="Write a Review"
-//               variant="secondary"
-//               onClick={() => setIsReviewModalOpen(true)}
-//               className="w-full sm:w-auto"
-//             />
-//           </div>
-
-//           {/* RATING SUMMARY */}
-
-//           <div
-//             className={`
-//               border
-//               rounded-xl
-//               p-5
-//               sm:p-8
-//               mb-8
-
-//               flex
-//               flex-col
-//               gap-6
-
-//               sm:flex-row
-//               sm:items-center
-//               sm:justify-between
-
-//               ${
-//                 isDark
-//                   ? "bg-gray-900 border-gray-700"
-//                   : "bg-gray-50 border-gray-200"
-//               }
-//             `}
-//           >
-//             {/* AVERAGE RATING */}
-
-//             <div>
-//               <h3 className="text-3xl sm:text-4xl font-bold">
-//                 {reviews.length
-//                   ? (
-//                       reviews.reduce((sum, review) => sum + review.rating, 0) /
-//                       reviews.length
-//                     ).toFixed(1)
-//                   : "0.0"}
-//               </h3>
-
-//               <p className="text-yellow-500 mt-2 text-sm sm:text-base">★★★★★</p>
-//             </div>
-
-//             {/* TOTAL REVIEWS */}
-
-//             <div className="sm:text-right">
-//               <p className="text-lg sm:text-xl font-semibold">
-//                 {reviews.length}
-//               </p>
-
-//               <p
-//                 className={
-//                   isDark
-//                     ? "text-sm sm:text-base text-gray-400"
-//                     : "text-sm sm:text-base text-gray-500"
-//                 }
-//               >
-//                 Total Reviews
-//               </p>
-//             </div>
-//           </div>
-
-//           {/* REVIEW LIST */}
-
-//           <div className="max-h-[600px] overflow-x-hidden overflow-y-auto scrollbar-thin">
-//             {reviews.length === 0 ? (
-//               /* NO REVIEWS */
-
-//               <div
-//                 className={`
-//                   border
-//                   border-dashed
-//                   rounded-2xl
-//                   sm:rounded-3xl
-//                   py-16
-//                   sm:py-20
-//                   px-4
-//                   text-center
-//                   ${isDark ? "border-gray-700" : "border-gray-300"}
-//                 `}
-//               >
-//                 <h3 className="font-medium">No reviews yet</h3>
-
-//                 <p
-//                   className={
-//                     isDark
-//                       ? "text-sm sm:text-base text-gray-400 mt-2"
-//                       : "text-sm sm:text-base text-gray-500 mt-2"
-//                   }
-//                 >
-//                   Be the first to share your experience.
-//                 </p>
-//               </div>
-//             ) : (
-//               /* REVIEWS */
-
-//               <div className="space-y-4 sm:space-y-5">
-//                 {reviews.map((review) => (
-//                   <div
-//                     key={review._id}
-//                     className={`
-//                       border
-//                       rounded-xl
-//                       p-4
-//                       sm:p-6
-
-//                       ${
-//                         isDark
-//                           ? "bg-gray-900 border-gray-700"
-//                           : "bg-white border-gray-200"
-//                       }
-//                     `}
-//                   >
-//                     {/* REVIEW TOP */}
-
-//                     <div
-//                       className="
-//                         flex
-//                         flex-col
-//                         gap-4
-//                         sm:flex-row
-//                         sm:items-start
-//                         sm:justify-between
-//                       "
-//                     >
-//                       {/* USER INFO */}
-
-//                       <div className="flex gap-3 sm:gap-4 min-w-0">
-//                         {/* AVATAR */}
-
-//                         <div
-//                           className={`
-//                             flex
-//                             h-10
-//                             w-10
-//                             sm:h-12
-//                             sm:w-12
-//                             shrink-0
-//                             items-center
-//                             justify-center
-//                             rounded-full
-//                             font-semibold
-
-//                             ${
-//                               isDark
-//                                 ? "bg-gray-800 text-white"
-//                                 : "bg-gray-100 text-gray-900"
-//                             }
-//                           `}
-//                         >
-//                           {review.user?.name?.charAt(0)?.toUpperCase() || "U"}
-//                         </div>
-
-//                         {/* USER DETAILS */}
-
-//                         <div className="min-w-0">
-//                           <h4
-//                             className={`
-//                               font-semibold
-//                               truncate
-//                               ${isDark ? "text-white" : "text-gray-900"}
-//                             `}
-//                           >
-//                             {review.user?.name}
-//                           </h4>
-
-//                           {/* RATING */}
-
-//                           <div className="text-yellow-500 text-sm mt-1">
-//                             {"★".repeat(review.rating)}
-//                             {"☆".repeat(5 - review.rating)}
-//                           </div>
-
-//                           {/* DATE */}
-
-//                           <p className="text-xs text-gray-400 mt-1">
-//                             {new Date(review.createdAt).toLocaleDateString()}
-//                           </p>
-//                         </div>
-//                       </div>
-
-//                       {/* EDIT / DELETE */}
-
-//                       {String(review.user?._id) === String(currentUserId) && (
-//                         <div className="flex items-center gap-4 sm:gap-3">
-//                           <button
-//                             onClick={() => handleUpdate(review._id)}
-//                             className="text-sm text-blue-600 hover:text-blue-700 transition-colors"
-//                           >
-//                             Edit
-//                           </button>
-
-//                           <button
-//                             onClick={() => handleDelete(review._id)}
-//                             className="text-sm text-red-600 hover:text-red-700 transition-colors"
-//                           >
-//                             Delete
-//                           </button>
-//                         </div>
-//                       )}
-//                     </div>
-
-//                     {/* REVIEW COMMENT */}
-
-//                     <p
-//                       className={`
-//                         mt-4
-//                         text-sm
-//                         sm:text-base
-//                         leading-relaxed
-//                         break-words
-//                         ${isDark ? "text-gray-300" : "text-gray-600"}
-//                       `}
-//                     >
-//                       {review.comment}
-//                     </p>
-//                   </div>
-//                 ))}
-//               </div>
-//             )}
-//           </div>
-//         </div>
-
-//         {/* REVIEW MODAL */}
-
-//         <Modal
-//           isOpen={isReviewModalOpen}
-//           onClose={() => setIsReviewModalOpen(false)}
-//         >
-//           <CreateAndUpdateReview
-//             productId={product._id}
-//             reviewData={selectedReview}
-//             onRefresh={() => fetchReviews(product._id)}
-//             onClose={() => setIsReviewModalOpen(false)}
-//           />
-//         </Modal>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default DescriptionPage;
-
 import React, { useContext } from "react";
 import Tabs from "../../../components/ui/Tab";
 import ImagePreview from "../../../components/ui/ImagePreview";
@@ -665,41 +18,23 @@ const DescriptionPage = () => {
     handleCart,
     finalPrice,
     selectedVariant,
-
     isDark,
-
     reviews,
     fetchReviews,
-
     isReviewModalOpen,
     setIsReviewModalOpen,
-
     selectedReview,
     handleDelete,
     handleUpdate,
   } = useDescription();
 
-  // Get logged-in user from AuthContext
   const { user } = useContext(AuthContext);
-
-  // Support either _id or id depending on your AuthContext
   const currentUserId = user?._id || user?.id;
 
-  // Debugging
-  console.log("Logged in user:", user);
-  console.log("Current User ID:", currentUserId);
-  console.log("Reviews:", reviews);
-
-  reviews.forEach((review) => {
-    console.log("Review User ID:", review.user?._id);
-    console.log("MATCH:", String(review.user?._id) === String(currentUserId));
-  });
-
-  // Show loading state until product data is available
   if (!product) {
     return (
       <div className="flex justify-center items-center h-[60vh]">
-        <p className="text-lg text-gray-500">Loading product...</p>
+        <p className="text-base text-gray-500">Loading product...</p>
       </div>
     );
   }
@@ -711,47 +46,56 @@ const DescriptionPage = () => {
           w-full
           max-w-[1800px]
           mx-auto
-          px-4
+          px-3
+          sm:px-4
+          md:px-6
+          lg:px-8
           transition-colors
           duration-300
           ${isDark ? "bg-gray-950 text-white" : "bg-white text-gray-900"}
         `}
       >
-        {/* PRODUCT SECTION */}
-
-        <div className="py-8 sm:py-10 lg:py-12">
+        {/* =====================================================
+            PRODUCT SECTION
+        ===================================================== */}
+        <div className="py-6 sm:py-8 lg:py-12">
           <div
             className="
               grid
               grid-cols-1
               lg:grid-cols-2
-              gap-10
-              sm:gap-12
-              lg:gap-24
+              gap-8
+              sm:gap-10
+              lg:gap-20
+              xl:gap-24
             "
           >
-            {/* PRODUCT IMAGE */}
+            {/* =================================================
+                PRODUCT IMAGE
+            ================================================= */}
+            <div className="w-full min-w-0">
+              <ImagePreview Images={product?.images || []} />
+            </div>
 
-            <ImagePreview Images={product?.images || []} />
-
-            {/* PRODUCT DETAILS */}
-
-            <div className="lg:sticky lg:top-24 lg:h-fit">
+            {/* =================================================
+                PRODUCT DETAILS
+            ================================================= */}
+            <div className="w-full min-w-0 lg:sticky lg:top-24 lg:h-fit">
               {/* BREADCRUMB */}
-
-              <p className="text-xs sm:text-sm text-gray-400 mb-4">
+              <p className="text-[11px] sm:text-xs md:text-sm text-gray-400 mb-3 sm:mb-4 break-words">
                 Home / {product.category} / {product.name}
               </p>
 
               {/* PRODUCT NAME */}
-
               <h1
                 className={`
-                  text-2xl
-                  sm:text-3xl
-                  lg:text-4xl
+                  text-lg
+                  sm:text-xl
+                  md:text-2xl
+                  lg:text-2xl
                   font-semibold
                   leading-tight
+                  break-words
                   ${isDark ? "text-white" : "text-gray-900"}
                 `}
               >
@@ -759,28 +103,18 @@ const DescriptionPage = () => {
               </h1>
 
               {/* PRICE */}
-
-              <div
-                className="
-                  flex
-                  items-center
-                  flex-wrap
-                  gap-3
-                  sm:gap-4
-                  mt-5
-                  sm:mt-6
-                "
-              >
+              <div className="flex items-center flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-5">
                 {product.discountPrice && (
-                  <span className="line-through text-gray-400 text-sm sm:text-base">
+                  <span className="line-through text-gray-400 text-xs sm:text-sm md:text-base">
                     ₹{product.price}
                   </span>
                 )}
 
                 <span
                   className={`
-                    text-lg
-                    sm:text-xl
+                    text-base
+                    sm:text-lg
+                    md:text-xl
                     font-bold
                     ${isDark ? "text-white" : "text-black"}
                   `}
@@ -790,17 +124,21 @@ const DescriptionPage = () => {
               </div>
 
               {/* SHIPPING / RETURNS */}
-
               <div
                 className={`
-                  mt-5
-                  pt-5
+                  mt-4
+                  sm:mt-5
+                  pt-4
+                  sm:pt-5
                   border-t
                   flex
+                  flex-wrap
                   items-center
-                  gap-6
-                  text-xs
-                  sm:text-sm
+                  gap-x-4
+                  gap-y-2
+                  text-[11px]
+                  sm:text-xs
+                  md:text-sm
                   ${
                     isDark
                       ? "border-gray-800 text-gray-400"
@@ -808,34 +146,41 @@ const DescriptionPage = () => {
                   }
                 `}
               >
-                <span className="flex items-center gap-2">
-                  <FiTruck className="text-base" />
+                <span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
+                  <FiTruck className="text-sm sm:text-base shrink-0" />
                   Free shipping
                 </span>
 
                 <span
-                  className={`h-4 w-px ${
-                    isDark ? "bg-gray-800" : "bg-gray-200"
-                  }`}
+                  className={`
+                    hidden
+                    sm:block
+                    h-4
+                    w-px
+                    ${isDark ? "bg-gray-800" : "bg-gray-200"}
+                  `}
                 />
 
-                <span className="flex items-center gap-2">
-                  <FiRefreshCcw className="text-base" />
+                <span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
+                  <FiRefreshCcw className="text-sm sm:text-base shrink-0" />
                   Easy returns
                 </span>
               </div>
 
               {/* ACTION BUTTONS */}
-
-              <div className="mt-7 sm:mt-8 flex flex-col gap-3">
+              <div className="mt-5 sm:mt-7 flex flex-col gap-2.5 sm:gap-3">
                 <button
                   onClick={handleCart}
                   className={`
-                    h-12
-                    sm:h-14
+                    h-11
+                    sm:h-12
+                    md:h-13
                     w-full
-                    rounded-xl
+                    rounded-lg
+                    sm:rounded-xl
                     font-medium
+                    text-xs
+                    sm:text-sm
                     transition-all
                     duration-300
                     ${
@@ -850,41 +195,55 @@ const DescriptionPage = () => {
                     : "Add To Cart"}
                 </button>
 
-                <Button label="Add To Wishlist" variant={isDark? "outlineDark" : "outline"}/>
+                <Button
+                  label="Add To Wishlist"
+                  variant={isDark ? "outlineDark" : "outline"}
+                  className="w-full"
+                />
               </div>
 
               {/* SIZE */}
-
               {product.variants?.length > 0 && (
-                <div className="mt-7 sm:mt-8">
+                <div className="mt-6 sm:mt-7">
                   <h3
                     className={`
+                      text-xs
+                      sm:text-sm
+                      md:text-base
                       font-medium
-                      mb-4
+                      mb-3
+                      sm:mb-4
                       ${isDark ? "text-white" : "text-gray-900"}
                     `}
                   >
                     Select Size
                   </h3>
 
-                  <div className="flex flex-wrap gap-2 sm:gap-3">
+                  <div className="flex flex-wrap gap-2 sm:gap-2.5">
                     {product.variants.map((item) => (
                       <button
                         key={item._id}
                         disabled={item.stock <= 0}
                         onClick={() => setSelectedSize(item.size)}
                         className={`
-                          min-w-[64px]
-                          sm:min-w-[70px]
-                          h-10
-                          sm:h-11
+                          min-w-[52px]
+                          sm:min-w-[60px]
+                          md:min-w-[64px]
+
+                          h-9
+                          sm:h-10
+
                           px-3
                           sm:px-4
+
                           rounded-lg
                           border
+
                           font-medium
-                          text-sm
-                          sm:text-base
+
+                          text-xs
+                          sm:text-sm
+
                           transition-all
                           duration-200
 
@@ -911,38 +270,58 @@ const DescriptionPage = () => {
               )}
 
               {/* PRODUCT DESCRIPTION */}
-
               <div
                 className={`
-                  mt-7
-                  sm:mt-8
-                  rounded-2xl
-                  p-4
-                  sm:p-6
-                  ${isDark ? "bg-gray-900" : "bg-gray-50"}
-                `}
+    mt-6
+    sm:mt-8
+    rounded-xl
+    sm:rounded-2xl
+    p-4
+    sm:p-5
+    md:p-6
+    border
+    ${isDark ? "bg-gray-900 border-gray-800" : "bg-gray-50 border-gray-100"}
+  `}
               >
-                <h3
-                  className={`
-                    font-semibold
-                    mb-3
-                    ${isDark ? "text-white" : "text-gray-900"}
-                  `}
-                >
-                  Product Description
-                </h3>
+                {/* HEADER */}
+                <div className="flex items-center justify-between gap-3 mb-3 sm:mb-4">
+                  <h3
+                    className={`
+        text-sm
+        sm:text-base
+        font-semibold
+        tracking-tight
+        ${isDark ? "text-white" : "text-gray-900"}
+      `}
+                  >
+                    Product Description
+                  </h3>
 
+                  {/* Small decorative line */}
+                  <div
+                    className={`
+        h-px
+        flex-1
+        max-w-12
+        ${isDark ? "bg-gray-700" : "bg-gray-200"}
+      `}
+                  />
+                </div>
+
+                {/* DESCRIPTION */}
                 <p
                   className={`
-                    text-sm
-                    sm:text-base
-                    leading-7
-                    sm:leading-8
-                    tracking-wide
-                    transition-colors
-                    duration-300
-                    ${isDark ? "text-gray-300" : "text-gray-600"}
-                  `}
+      text-[11px]
+      sm:text-xs
+      md:text-sm
+      leading-5
+      sm:leading-6
+      tracking-normal
+      break-words
+      transition-colors
+      duration-300
+      ${isDark ? "text-gray-300" : "text-gray-600"}
+    `}
                 >
                   {product.description}
                 </p>
@@ -951,9 +330,10 @@ const DescriptionPage = () => {
           </div>
         </div>
 
-        {/* TABS */}
-
-        <div className="mt-10">
+        {/* =====================================================
+            TABS
+        ===================================================== */}
+        <div className="mt-8 sm:mt-10">
           <Tabs
             tabs={[
               {
@@ -963,7 +343,6 @@ const DescriptionPage = () => {
                   <p>{product.description || "No description available"}</p>
                 ),
               },
-
               {
                 id: "details",
                 label: "Details",
@@ -980,7 +359,6 @@ const DescriptionPage = () => {
                   <p>No details available</p>
                 ),
               },
-
               {
                 id: "careFit",
                 label: "Care Fit",
@@ -1001,83 +379,94 @@ const DescriptionPage = () => {
           />
         </div>
 
-        {/* RECOMMENDED PRODUCTS */}
-
+        {/* =====================================================
+            RECOMMENDED PRODUCTS
+        ===================================================== */}
         <Recommendation currentId={product._id} category={product.category} />
 
-        {/* REVIEWS */}
-
-        <div className="w-full max-w-[1800px] mx-auto py-12 sm:py-16 lg:py-24">
+        {/* =====================================================
+            REVIEWS
+        ===================================================== */}
+        <div className="w-full max-w-[1800px] mx-auto py-10 sm:py-12 lg:py-20">
           {/* REVIEW HEADER */}
-
-          <div
-            className="
-              flex
-              flex-col
-              gap-5
-              sm:flex-row
-              sm:items-center
-              sm:justify-between
-              mb-8
-              sm:mb-10
-            "
-          >
-            <div>
+          <div className="flex items-center justify-between gap-3 mb-7 sm:mb-10">
+            {/* LEFT SIDE */}
+            <div className="min-w-0">
               <h2
                 className={`
-                  text-2xl
-                  sm:text-3xl
-                  font-semibold
-                  ${isDark ? "text-white" : "text-gray-900"}
-                `}
+        text-base
+        sm:text-xl
+        md:text-2xl
+        font-semibold
+        truncate
+        ${isDark ? "text-white" : "text-gray-900"}
+      `}
               >
                 Customer Reviews
               </h2>
 
               <p
                 className={`
-                  mt-2
-                  text-sm
-                  sm:text-base
-                  ${isDark ? "text-gray-400" : "text-gray-500"}
-                `}
+        mt-1
+        text-[10px]
+        sm:text-xs
+        md:text-sm
+        truncate
+        ${isDark ? "text-gray-400" : "text-gray-500"}
+      `}
               >
                 See what customers are saying about this product.
               </p>
             </div>
 
+            {/* RIGHT SIDE */}
             <Button
               label="Write a Review"
               variant={isDark ? "secondary" : "primary"}
               onClick={() => setIsReviewModalOpen(true)}
-              className="w-full sm:w-auto"
+              className="
+      shrink-0
+      whitespace-nowrap
+      text-[10px]
+      sm:text-xs
+      md:text-sm
+      px-3
+      sm:px-4
+    "
             />
           </div>
 
           {/* RATING SUMMARY */}
-
           <div
             className={`
-              border
-              rounded-xl
-              p-5
-              sm:p-8
-              mb-8
-              flex
-              flex-col
-              gap-6
-              sm:flex-row
-              sm:items-center
-              sm:justify-between
-              ${
-                isDark
-                  ? "bg-gray-900 border-gray-700"
-                  : "bg-gray-50 border-gray-200"
-              }
-            `}
+    border
+    rounded-xl
+
+    p-4
+    sm:p-5
+    md:p-6
+
+    mb-7
+    sm:mb-8
+
+    flex
+    items-center
+    justify-between
+    gap-4
+
+    ${isDark ? "bg-gray-900 border-gray-700" : "bg-gray-50 border-gray-200"}
+  `}
           >
-            <div>
-              <h3 className="text-3xl sm:text-4xl font-bold">
+            {/* RATING */}
+            <div className="min-w-0">
+              <h3
+                className="
+        text-xl
+        sm:text-2xl
+        md:text-3xl
+        font-bold
+      "
+              >
                 {reviews.length
                   ? (
                       reviews.reduce((sum, review) => sum + review.rating, 0) /
@@ -1086,20 +475,22 @@ const DescriptionPage = () => {
                   : "0.0"}
               </h3>
 
-              <p className="text-yellow-500 mt-2 text-sm sm:text-base">★★★★★</p>
+              <p className="text-yellow-500 mt-1 text-xs sm:text-sm">★★★★★</p>
             </div>
 
-            <div className="sm:text-right">
-              <p className="text-lg sm:text-xl font-semibold">
+            {/* TOTAL REVIEWS */}
+            <div className="text-right shrink-0">
+              <p className="text-sm sm:text-base md:text-lg font-semibold">
                 {reviews.length}
               </p>
 
               <p
-                className={
-                  isDark
-                    ? "text-sm sm:text-base text-gray-400"
-                    : "text-sm sm:text-base text-gray-500"
-                }
+                className={`
+        text-[10px]
+        sm:text-xs
+        md:text-sm
+        ${isDark ? "text-gray-400" : "text-gray-500"}
+      `}
               >
                 Total Reviews
               </p>
@@ -1107,36 +498,37 @@ const DescriptionPage = () => {
           </div>
 
           {/* REVIEW LIST */}
-
           <div className="max-h-[600px] overflow-x-hidden overflow-y-auto scrollbar-thin">
             {reviews.length === 0 ? (
               <div
                 className={`
                   border
                   border-dashed
-                  rounded-2xl
-                  sm:rounded-3xl
-                  py-16
-                  sm:py-20
+                  rounded-xl
+                  sm:rounded-2xl
+                  py-12
+                  sm:py-16
                   px-4
                   text-center
                   ${isDark ? "border-gray-700" : "border-gray-300"}
                 `}
               >
-                <h3 className="font-medium">No reviews yet</h3>
+                <h3 className="text-sm sm:text-base font-medium">
+                  No reviews yet
+                </h3>
 
                 <p
                   className={
                     isDark
-                      ? "text-sm sm:text-base text-gray-400 mt-2"
-                      : "text-sm sm:text-base text-gray-500 mt-2"
+                      ? "text-xs sm:text-sm text-gray-400 mt-2"
+                      : "text-xs sm:text-sm text-gray-500 mt-2"
                   }
                 >
                   Be the first to share your experience.
                 </p>
               </div>
             ) : (
-              <div className="space-y-4 sm:space-y-5">
+              <div className="space-y-3 sm:space-y-5">
                 {reviews.map((review) => {
                   const reviewUserId = review.user?._id;
 
@@ -1147,100 +539,112 @@ const DescriptionPage = () => {
                     <div
                       key={review._id}
                       className={`
-                        border
-                        rounded-xl
-                        p-4
-                        sm:p-6
-                        ${
-                          isDark
-                            ? "bg-gray-900 border-gray-700"
-                            : "bg-white border-gray-200"
-                        }
-                      `}
+    border
+    rounded-lg
+    sm:rounded-xl
+
+    p-3
+    sm:p-4
+    md:p-5
+    lg:p-6
+
+    ${isDark ? "bg-gray-900 border-gray-700" : "bg-white border-gray-200"}
+  `}
                     >
-                      {/* REVIEW TOP */}
-
-                      <div
-                        className="
-                          flex
-                          flex-col
-                          gap-4
-                          sm:flex-row
-                          sm:items-start
-                          sm:justify-between
-                        "
-                      >
-                        {/* USER INFO */}
-
-                        <div className="flex gap-3 sm:gap-4 min-w-0">
-                          {/* AVATAR */}
-
+                      <div className="flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-start sm:justify-between">
+                        <div className="flex gap-2.5 sm:gap-3 md:gap-4 min-w-0">
+                          {/* USER AVATAR */}
                           <div
                             className={`
-                              flex
-                              h-10
-                              w-10
-                              sm:h-12
-                              sm:w-12
-                              shrink-0
-                              items-center
-                              justify-center
-                              rounded-full
-                              font-semibold
-                              ${
-                                isDark
-                                  ? "bg-gray-800 text-white"
-                                  : "bg-gray-100 text-gray-900"
-                              }
-                            `}
+          flex
+          h-8
+          w-8
+          sm:h-9
+          sm:w-9
+          md:h-10
+          md:w-10
+          lg:h-11
+          lg:w-11
+
+          shrink-0
+
+          items-center
+          justify-center
+
+          rounded-full
+
+          font-semibold
+
+          text-xs
+          sm:text-sm
+
+          ${isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-900"}
+        `}
                           >
                             {review.user?.name?.charAt(0)?.toUpperCase() || "U"}
                           </div>
 
-                          {/* USER DETAILS */}
-
                           <div className="min-w-0">
+                            {/* USER NAME */}
                             <h4
                               className={`
-                                font-semibold
-                                truncate
-                                ${isDark ? "text-white" : "text-gray-900"}
-                              `}
+            text-xs
+            sm:text-sm
+            md:text-base
+
+            font-semibold
+            truncate
+
+            ${isDark ? "text-white" : "text-gray-900"}
+          `}
                             >
                               {review.user?.name || "User"}
                             </h4>
 
                             {/* RATING */}
-
-                            <div className="text-yellow-500 text-sm mt-1">
+                            <div
+                              className="
+            text-yellow-500
+            text-[10px]
+            sm:text-xs
+            md:text-sm
+            mt-0.5
+            sm:mt-1
+          "
+                            >
                               {"★".repeat(review.rating)}
                               {"☆".repeat(5 - review.rating)}
                             </div>
 
                             {/* DATE */}
+                            <p
+                              className="
+            text-[9px]
+            sm:text-[10px]
+            md:text-xs
 
-                            <p className="text-xs text-gray-400 mt-1">
+            text-gray-400
+
+            mt-0.5
+            sm:mt-1
+          "
+                            >
                               {new Date(review.createdAt).toLocaleDateString()}
                             </p>
                           </div>
                         </div>
 
-                        {/* EDIT / DELETE */}
-
-                        {/* EDIT / DELETE ACTIONS */}
-
+                        {/* ACTION MENU */}
                         <div
                           className="
-    flex
-    flex-col
-    gap-4
-    sm:flex-row
-    sm:items-start
-    sm:justify-between
-  "
+        flex
+        flex-col
+        gap-3
+        sm:flex-row
+        sm:items-start
+        sm:justify-between
+      "
                         >
-                          {/* ACTION MENU */}
-
                           {String(review.user?._id) ===
                             String(currentUserId) && (
                             <ActionMenu
@@ -1254,16 +658,25 @@ const DescriptionPage = () => {
                       </div>
 
                       {/* REVIEW COMMENT */}
-
                       <p
                         className={`
-                          mt-4
-                          text-sm
-                          sm:text-base
-                          leading-relaxed
-                          break-words
-                          ${isDark ? "text-gray-300" : "text-gray-600"}
-                        `}
+      mt-2.5
+      sm:mt-3
+      md:mt-4
+
+      text-[11px]
+      sm:text-xs
+      md:text-sm
+      lg:text-base
+
+      leading-5
+      sm:leading-5
+      md:leading-6
+
+      break-words
+
+      ${isDark ? "text-gray-300" : "text-gray-600"}
+    `}
                       >
                         {review.comment}
                       </p>
@@ -1275,8 +688,9 @@ const DescriptionPage = () => {
           </div>
         </div>
 
-        {/* REVIEW MODAL */}
-
+        {/* =====================================================
+            REVIEW MODAL
+        ===================================================== */}
         <Modal
           isOpen={isReviewModalOpen}
           onClose={() => setIsReviewModalOpen(false)}

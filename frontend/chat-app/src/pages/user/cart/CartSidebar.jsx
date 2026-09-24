@@ -1,8 +1,8 @@
-
 import Button from "../../../components/ui/Button";
 import { useCartSidebar } from "../../../hooks/user/useCartSidebar";
+import { FiX } from "react-icons/fi";
 
-const CartSidebar = ({ isOpen }) => {
+const CartSidebar = ({ isOpen, onClose }) => {
   const {
     isDark,
     navigate,
@@ -87,6 +87,29 @@ const CartSidebar = ({ isOpen }) => {
             ({cartData.length})
           </span>
         </h2>
+
+        <button
+          type="button"
+          onClick={() => onClose()}
+          className={`
+                          w-9
+                          h-9
+                          rounded-full
+                          flex
+                          items-center
+                          justify-center
+                          transition
+        
+                          ${
+                            isDark
+                              ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                          }
+                        `}
+          aria-label="Close menu"
+        >
+          <FiX className="text-sm sm:text-base md:text-lg" />
+        </button>
       </div>
 
       {/*CART ITEMS */}
@@ -383,7 +406,6 @@ const CartSidebar = ({ isOpen }) => {
         )}
       </div>
 
-    
       {/* FOOTER*/}
       <div
         className={`
@@ -426,7 +448,6 @@ const CartSidebar = ({ isOpen }) => {
             <span className="whitespace-nowrap">₹{totalPrice}</span>
           </div>
 
-    
           {/* DIVIDER */}
           <div
             className={`

@@ -812,7 +812,7 @@ const Header = () => {
                   Navigation
                 </p>
 
-                <h2 className="text-base sm:text-lg font-semibold tracking-[3px] uppercase">
+                <h2 className="text-sm sm:text-base md:text-lg font-semibold tracking-[3px] uppercase">
                   Cartify
                 </h2>
               </div>
@@ -837,7 +837,7 @@ const Header = () => {
                 `}
                 aria-label="Close menu"
               >
-                <FiX className="text-lg" />
+                <FiX className="text-sm sm:text-base md:text-lg" />
               </button>
             </div>
 
@@ -893,8 +893,7 @@ const Header = () => {
                     >
                       <span
                         className="
-                          text-base
-                          sm:text-lg
+                         text-sm sm:text-base md:text-lg
                           font-medium
                           tracking-wide
                         "
