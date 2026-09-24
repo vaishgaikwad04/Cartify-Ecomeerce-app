@@ -25,124 +25,121 @@ const FashionPromo = () => {
   const { isWishlisted, toggleWishlist } = useWishlist();
 
   return (
-    <div
-      className={`
-        max-w-[1800px]
-        mx-auto
-        px-4
-        sm:px-6
-        lg:px-10
-        py-12
-        grid
-        grid-cols-2
-        md:grid-cols-2
-        sm:gap-2
-        md:gap-3
-        lg:gap-4
+   <div
+  className={`
+    max-w-[1800px]
+    mx-auto
+    px-4
+    sm:px-6
+    lg:px-10
+    py-12
 
-        transition-colors
-        duration-300
+    grid
+    grid-cols-2
 
-        ${isDark ? "bg-gray-950" : "bg-white"}
-      `}
+    sm:gap-2
+    md:gap-3
+    lg:gap-4
+
+    ${isDark ? "bg-gray-950" : "bg-white"}
+  `}
+>
+  {images.map((image, index) => (
+  <div
+    key={index}
+    className="relative min-w-0"
+  >
+    {/* IMAGE */}
+    <ImageCard
+      image={image}
+      onClick={() => {
+        if (openProductModel !== null) {
+          setOpenProductModel(null);
+        }
+      }}
+      className="
+        aspect-[3/4]
+        w-full
+        rounded
+      "
     >
-      {/* PROMO IMAGES */}
-      {images.map((image, index) => (
-        <ImageCard
-          key={index}
-          image={image}
-          onClick={() => {
-            if (openProductModel !== null) {
-              setOpenProductModel(null);
-            }
-          }}
-          className="
-  aspect-[3/4]
-  w-full
-  rounded
-"
+      {/* PLUS BUTTON */}
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          setOpenProductModel(index);
+        }}
+        aria-label={`View product ${index + 1}`}
+        className={`
+          w-7 h-7
+          sm:w-8 sm:h-8
+          md:w-9 md:h-9
+          lg:w-10 lg:h-10
+
+          rounded-full
+          flex items-center justify-center
+          shadow-md
+
+          text-sm
+          sm:text-base
+          md:text-lg
+          lg:text-xl
+
+          ${
+            isDark
+              ? "bg-gray-900 text-white hover:bg-gray-800"
+              : "bg-white text-black hover:bg-gray-100"
+          }
+        `}
+      >
+        +
+      </button>
+    </ImageCard>
+
+    {/* POPUP — RIGHT SIDE */}
+    {openProductModel === index && products?.length > 0 && (
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="
+          absolute
+          top-12
+          left-10
+          sm:left-12
+          md:left-14
+          lg:left-16
+
+          z-[99999]
+
+          w-[90px]
+          sm:w-[120px]
+          md:w-[150px]
+          lg:w-[172px]
+        "
+      >
+        <div
+          className={`
+            w-full
+            rounded-lg
+            shadow-xl
+            p-1
+            sm:p-1.5
+            md:p-2
+
+            ${isDark ? "bg-gray-900" : "bg-white"}
+          `}
         >
-          <div className="relative z-50">
-            {/* PLUS BUTTON */}
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setOpenProductModel(index);
-              }}
-              aria-label={`View product ${index + 1}`}
-              className={`
-                w-10
-                h-10
-                rounded-full
-
-                flex
-                items-center
-                justify-center
-
-                shadow-md
-                text-xl
-
-                transition-all
-                duration-200
-
-                ${
-                  isDark
-                    ? `
-                      bg-gray-900
-                      text-white
-                      hover:bg-gray-800
-                    `
-                    : `
-                      bg-white
-                      text-black
-                      hover:bg-gray-100
-                    `
-                }
-              `}
-            >
-              +
-            </button>
-
-            {/* PRODUCT POPUP */}
-            {openProductModel === index && products?.length > 0 && (
-              <div
-                onClick={(e) => e.stopPropagation()}
-                className="
-                    absolute
-                    top-12
-                    left-0
-                    z-[9999]
-                    w-[192px]
-                    sm:w-[172px]
-                    max-w-[calc(100vw-2rem)]
-                  "
-              >
-                <div
-                  className={`
-                      relative
-                      w-full
-                      rounded-xl
-                      shadow-xl
-                      p-2
-                      overflow-hidden
-
-                      ${isDark ? "bg-gray-900" : "bg-white"}
-                    `}
-                >
-                  {/* PRODUCT CARD */}
-                  <Card
-                    product={products[0]}
-                    isWishlisted={isWishlisted(products[0]._id)}
-                    onToggleWishlist={toggleWishlist}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-        </ImageCard>
-      ))}
-    </div>
+          <Card
+            product={products[0]}
+            isWishlisted={isWishlisted(products[0]._id)}
+            onToggleWishlist={toggleWishlist}
+          />
+        </div>
+      </div>
+    )}
+  </div>
+))}
+</div>
   );
 };
 
