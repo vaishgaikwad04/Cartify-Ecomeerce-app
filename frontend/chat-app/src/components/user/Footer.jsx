@@ -1,3 +1,4 @@
+
 import React, { useContext } from "react";
 
 import {
@@ -35,50 +36,44 @@ const Footer = () => {
           }
         `}
       >
-        {/* =========================================================
+        {/* =====================================================
             FOOTER CONTAINER
-        ========================================================= */}
+        ===================================================== */}
         <div
           className="
             w-full
             max-w-[1800px]
             mx-auto
-
-            px-4
-            sm:px-6
-            md:px-8
+            px-2
+            sm:px-4
+            md:px-6
             lg:px-10
             xl:px-12
-
-            py-8
-            sm:py-10
-            md:py-12
-            lg:py-14
+            py-6
+            sm:py-8
+            md:py-10
+            lg:py-12
           "
         >
           {/* =====================================================
               FOOTER GRID
 
-              Mobile  : 2 columns
-              Tablet  : 2 columns
+              Mobile  : 4 columns
+              Tablet  : 4 columns
               Desktop : 4 columns
           ===================================================== */}
           <div
             className="
               grid
-              grid-cols-4
-              lg:grid-cols-4
+              grid-cols-[1.25fr_0.85fr_0.8fr_1.2fr]
+              items-start
 
-              gap-x-6
-              gap-y-8
-
-              sm:gap-x-8
-              sm:gap-y-10
-
-              md:gap-x-10
-
+              gap-x-2
+              sm:gap-x-4
+              md:gap-x-8
               lg:gap-x-12
-              lg:gap-y-0
+
+              gap-y-4
             "
           >
             {/* ===================================================
@@ -90,20 +85,19 @@ const Footer = () => {
                 onClick={() => navigate("/")}
                 className="
                   cursor-pointer
-
-                  text-sm
-                  sm:text-base
-                  md:text-lg
+                  text-[10px]
+                  sm:text-sm
+                  md:text-base
+                  lg:text-lg
 
                   font-serif
                   font-medium
 
-                  tracking-[3px]
-                  sm:tracking-[4px]
-                  md:tracking-[5px]
+                  tracking-[1.5px]
+                  sm:tracking-[3px]
+                  md:tracking-[4px]
 
                   uppercase
-
                   whitespace-nowrap
                 "
               >
@@ -113,15 +107,20 @@ const Footer = () => {
               {/* DESCRIPTION */}
               <p
                 className={`
-                  mt-3
+                  mt-2
+                  sm:mt-3
 
-                  max-w-[280px]
+                  max-w-[150px]
+                  sm:max-w-[220px]
+                  md:max-w-[260px]
 
-                  text-[10px]
-                  sm:text-xs
-                  md:text-sm
+                  text-[7px]
+                  sm:text-[9px]
+                  md:text-xs
 
-                  leading-relaxed
+                  leading-[1.45]
+
+                  line-clamp-6
 
                   ${
                     isDark
@@ -135,20 +134,17 @@ const Footer = () => {
                 styles all in one place.
               </p>
 
-              {/* =================================================
-                  SOCIAL ICONS
-              ================================================= */}
+              {/* SOCIAL ICONS */}
               <div
                 className={`
                   flex
                   items-center
-
-                  gap-2
-                  sm:gap-2.5
+                  gap-1
+                  sm:gap-2
                   md:gap-3
 
-                  mt-4
-                  sm:mt-5
+                  mt-3
+                  sm:mt-4
 
                   ${
                     isDark
@@ -181,22 +177,20 @@ const Footer = () => {
                       flex
                       items-center
                       justify-center
-
                       shrink-0
 
-                      w-7
-                      h-7
-
-                      sm:w-8
-                      sm:h-8
-
-                      md:w-9
-                      md:h-9
+                      w-5
+                      h-5
+                      sm:w-7
+                      sm:h-7
+                      md:w-8
+                      md:h-8
 
                       rounded-full
 
-                      text-[10px]
-                      sm:text-xs
+                      text-[7px]
+                      sm:text-[9px]
+                      md:text-[10px]
 
                       cursor-pointer
 
@@ -225,16 +219,16 @@ const Footer = () => {
             <div className="min-w-0">
               <h3
                 className="
-                  text-xs
-                  sm:text-sm
-                  md:text-base
-                  lg:text-lg
+                  text-[8px]
+                  sm:text-xs
+                  md:text-sm
+                  lg:text-base
 
                   font-medium
 
-                  mb-3
-                  sm:mb-4
-                  md:mb-5
+                  mb-2
+                  sm:mb-3
+                  md:mb-4
                 "
               >
                 CATEGORIES
@@ -242,13 +236,13 @@ const Footer = () => {
 
               <ul
                 className={`
-                  space-y-2
-                  sm:space-y-2.5
-                  md:space-y-3
+                  space-y-1.5
+                  sm:space-y-2
+                  md:space-y-2.5
 
-                  text-[10px]
-                  sm:text-xs
-                  md:text-sm
+                  text-[7px]
+                  sm:text-[9px]
+                  md:text-xs
 
                   ${
                     isDark
@@ -321,16 +315,16 @@ const Footer = () => {
                 className="
                   cursor-pointer
 
-                  text-xs
-                  sm:text-sm
-                  md:text-base
-                  lg:text-lg
+                  text-[8px]
+                  sm:text-xs
+                  md:text-sm
+                  lg:text-base
 
                   font-medium
 
-                  mb-3
-                  sm:mb-4
-                  md:mb-5
+                  mb-2
+                  sm:mb-3
+                  md:mb-4
                 "
               >
                 HELP
@@ -338,13 +332,13 @@ const Footer = () => {
 
               <ul
                 className={`
-                  space-y-2
-                  sm:space-y-2.5
-                  md:space-y-3
+                  space-y-1.5
+                  sm:space-y-2
+                  md:space-y-2.5
 
-                  text-[10px]
-                  sm:text-xs
-                  md:text-sm
+                  text-[7px]
+                  sm:text-[9px]
+                  md:text-xs
 
                   ${
                     isDark
@@ -400,10 +394,9 @@ const Footer = () => {
             <div
               className="
                 min-w-0
-
-                space-y-3
-                sm:space-y-4
-                md:space-y-5
+                space-y-2
+                sm:space-y-3
+                md:space-y-4
               "
             >
               {/* =================================================
@@ -415,12 +408,13 @@ const Footer = () => {
                     flex
                     items-center
 
-                    gap-2
-                    sm:gap-2.5
-                    md:gap-3
+                    gap-1
+                    sm:gap-2
+                    md:gap-2.5
 
                     group
                     cursor-pointer
+                    min-w-0
                   "
                 >
                   {/* IMAGE */}
@@ -434,19 +428,18 @@ const Footer = () => {
                       src="https://mafoil.wpbingosite.com/wp-content/uploads/2022/11/banner-11.jpg"
                       alt="Accessories"
                       className="
-                        w-10
-                        h-10
+                        w-7
+                        h-7
 
-                        sm:w-12
-                        sm:h-12
+                        sm:w-10
+                        sm:h-10
 
-                        md:w-14
-                        md:h-14
+                        md:w-12
+                        md:h-12
 
                         object-cover
 
                         group-hover:scale-105
-
                         transition-transform
                         duration-300
                       "
@@ -457,16 +450,15 @@ const Footer = () => {
                   <div className="min-w-0">
                     <p
                       className={`
-                        text-[7px]
-                        sm:text-[8px]
-                        md:text-[9px]
+                        text-[5px]
+                        sm:text-[7px]
+                        md:text-[8px]
 
-                        tracking-[1.5px]
-                        sm:tracking-[2px]
-                        md:tracking-[3px]
+                        tracking-[1px]
+                        sm:tracking-[1.5px]
+                        md:tracking-[2px]
 
                         uppercase
-
                         leading-none
 
                         ${
@@ -483,12 +475,11 @@ const Footer = () => {
                       className={`
                         mt-1
 
-                        text-[10px]
-                        sm:text-[11px]
+                        text-[8px]
+                        sm:text-[10px]
                         md:text-xs
 
                         font-normal
-
                         truncate
 
                         ${
@@ -513,12 +504,13 @@ const Footer = () => {
                     flex
                     items-center
 
-                    gap-2
-                    sm:gap-2.5
-                    md:gap-3
+                    gap-1
+                    sm:gap-2
+                    md:gap-2.5
 
                     group
                     cursor-pointer
+                    min-w-0
                   "
                 >
                   {/* IMAGE */}
@@ -532,19 +524,18 @@ const Footer = () => {
                       src="https://mafoil.wpbingosite.com/wp-content/plugins/wpbingo/lib/lookbook/images/bwp_lookbook/lookbook-1.jpg"
                       alt="Collection"
                       className="
-                        w-10
-                        h-10
+                        w-7
+                        h-7
 
-                        sm:w-12
-                        sm:h-12
+                        sm:w-10
+                        sm:h-10
 
-                        md:w-14
-                        md:h-14
+                        md:w-12
+                        md:h-12
 
                         object-cover
 
                         group-hover:scale-105
-
                         transition-transform
                         duration-300
                       "
@@ -555,16 +546,15 @@ const Footer = () => {
                   <div className="min-w-0">
                     <p
                       className={`
-                        text-[7px]
-                        sm:text-[8px]
-                        md:text-[9px]
+                        text-[5px]
+                        sm:text-[7px]
+                        md:text-[8px]
 
-                        tracking-[1.5px]
-                        sm:tracking-[2px]
-                        md:tracking-[3px]
+                        tracking-[1px]
+                        sm:tracking-[1.5px]
+                        md:tracking-[2px]
 
                         uppercase
-
                         leading-none
 
                         ${
@@ -581,12 +571,11 @@ const Footer = () => {
                       className={`
                         mt-1
 
-                        text-[10px]
-                        sm:text-[11px]
+                        text-[8px]
+                        sm:text-[10px]
                         md:text-xs
 
                         font-normal
-
                         truncate
 
                         ${
@@ -624,36 +613,34 @@ const Footer = () => {
               max-w-[1800px]
               mx-auto
 
-              px-4
-              sm:px-6
-              md:px-8
+              px-2
+              sm:px-4
+              md:px-6
               lg:px-10
               xl:px-12
 
-              py-4
-              sm:py-5
-              md:py-6
+              py-3
+              sm:py-4
+              md:py-5
 
               flex
-              flex-col
-              sm:flex-row
+              flex-row
 
               justify-between
               items-center
 
-              gap-3
+              gap-2
               sm:gap-4
             "
           >
             {/* COPYRIGHT */}
             <p
               className={`
-                text-[9px]
-                sm:text-[10px]
+                text-[7px]
+                sm:text-[9px]
                 md:text-xs
 
-                text-center
-                sm:text-left
+                whitespace-nowrap
 
                 transition-colors
 
@@ -667,23 +654,23 @@ const Footer = () => {
               © 2026 Cartify. Crafted with care.
             </p>
 
-            {/* =====================================================
-                PAYMENT METHODS
-            ===================================================== */}
+            {/* PAYMENT METHODS */}
             <div
               className={`
                 flex
                 items-center
+                justify-end
+                gap-1.5
+                sm:gap-3
+                md:gap-4
 
-                gap-3
-                sm:gap-4
-                md:gap-5
-
-                text-[9px]
-                sm:text-[10px]
+                text-[7px]
+                sm:text-[9px]
                 md:text-xs
 
                 font-semibold
+
+                whitespace-nowrap
 
                 ${
                   isDark
