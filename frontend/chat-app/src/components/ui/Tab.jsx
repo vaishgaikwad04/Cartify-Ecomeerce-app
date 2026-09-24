@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 
@@ -20,26 +21,14 @@ const Tabs = ({ tabs = [] }) => {
         ${isDark ? "text-white" : "text-black"}
       `}
     >
-      {/* ==========================
-          TAB HEADER
-      ========================== */}
+      {/* TAB HEADER */}
       <div
         className={`
           flex
-          gap-1
-          sm:gap-2
-          p-1
-          sm:p-2
-          rounded-xl
-          sm:rounded-2xl
-          transition-colors
-          duration-300
-
-          ${
-            isDark
-              ? "bg-gray-900 border border-gray-800"
-              : "bg-gray-100 border border-gray-200"
-          }
+          gap-6
+          sm:gap-10
+          border-b
+          ${isDark ? "border-gray-800" : "border-gray-200"}
         `}
       >
         {tabs.map((tab) => (
@@ -47,28 +36,38 @@ const Tabs = ({ tabs = [] }) => {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`
-              flex-1
-              min-w-0
-              py-2.5
-              sm:py-3
-              px-2
-              sm:px-5
-              rounded-lg
-              sm:rounded-xl
+              relative
+              pb-3
+              sm:pb-4
               font-medium
               text-sm
               sm:text-base
-              transition-all
+              whitespace-nowrap
+              transition-colors
               duration-300
 
               ${
                 activeTab === tab.id
                   ? isDark
-                    ? "bg-white text-black"
-                    : "bg-black text-white"
+                    ? "text-white"
+                    : "text-black"
                   : isDark
-                  ? "text-gray-400 hover:bg-gray-800 hover:text-white"
-                  : "text-gray-600 hover:bg-white hover:text-black"
+                  ? "text-gray-500 hover:text-gray-300"
+                  : "text-gray-500 hover:text-black"
+              }
+
+              after:absolute
+              after:bottom-0
+              after:left-0
+              after:h-[1.5px]
+              after:bg-current
+              after:transition-all
+              after:duration-300
+
+              ${
+                activeTab === tab.id
+                  ? "after:w-full"
+                  : "after:w-0"
               }
             `}
           >
@@ -77,26 +76,13 @@ const Tabs = ({ tabs = [] }) => {
         ))}
       </div>
 
-      {/* ==========================
-          TAB CONTENT
-      ========================== */}
+      {/* TAB CONTENT */}
       <div
         className={`
-          mt-4
-          sm:mt-6
-          rounded-xl
-          sm:rounded-2xl
-          p-4
-          sm:p-6
-          lg:p-8
+          mt-6
+          sm:mt-8
           transition-colors
           duration-300
-
-          ${
-            isDark
-              ? "bg-gray-900 border border-gray-800"
-              : "bg-white border border-gray-200"
-          }
         `}
       >
         <div

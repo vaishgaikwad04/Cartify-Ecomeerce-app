@@ -1,30 +1,45 @@
-import { useContext, useState } from "react";
-import { createReview } from "../../api/user/ReviewApi";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
-import { NotificationContext } from "../../context/NotificationContext";
-
 import toast from "react-hot-toast";
 
-export const useCreateReview = ({ productId, onRefresh, onClose }) => {
-  // THEME
+import { createReview, updateReview } from "../../api/user/ReviewApi";
+
+export const useCreateReview = ({
+  productId,
+  reviewData,
+  onRefresh,
+  onClose,
+}) => {
   const { theme } = useContext(ThemeContext);
+
   const isDark = theme === "Dark Mode";
 
+  const [loading, setLoading] = useState(false);
 
-  // NOTIFICATION
-  const { allowNotification } = useContext(NotificationContext);
-
-  // FORM STATE
   const [formData, setFormData] = useState({
     rating: "",
     comment: "",
   });
 
+  // IMPORTANT:
+  // Fill the form when editing
+  useEffect(() => {
+    if (reviewData?._id) {
+      console.log("SETTING EDIT FORM:", reviewData);
 
-  // LOADING STATE
-  const [loading, setLoading] = useState(false);
+      setFormData({
+        rating: reviewData.rating ?? "",
+        comment: reviewData.comment ?? "",
+      });
+    } else {
+      // New review
+      setFormData({
+        rating: "",
+        comment: "",
+      });
+    }
+  }, [reviewData]);
 
-  // HANDLE INPUT CHANGE
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -34,66 +49,80 @@ export const useCreateReview = ({ productId, onRefresh, onClose }) => {
     }));
   };
 
-
-  // RESET FORM
-  const resetForm = () => {
-    setFormData({
-      rating: "",
-      comment: "",
-    });
-  };
-
-  // SUBMIT REVIEW
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.rating) {
+      toast.error("Please enter a rating");
+      return;
+    }
+
+    if (Number(formData.rating) < 1 || Number(formData.rating) > 5) {
+      toast.error("Rating must be between 1 and 5");
+      return;
+    }
+
+    if (!formData.comment.trim()) {
+      toast.error("Please write a comment");
+      return;
+    }
 
     try {
       setLoading(true);
 
-      const payload = {
-        product: productId,
-        rating: Number(formData.rating),
-        comment: formData.comment.trim(),
-      };
+      let res;
 
-      await createReview(payload);
-
-      // Success notification
-      if (allowNotification) {
-        toast.success("Review submitted successfully");
+      if (reviewData?._id) {
+        // EDIT
+        res = await updateReview(reviewData._id, {
+          rating: Number(formData.rating),
+          comment: formData.comment,
+        });
+      } else {
+        // CREATE
+        res = await createReview({
+          product: productId,
+          rating: Number(formData.rating),
+          comment: formData.comment,
+        });
       }
 
-      // Reset form after successful submission
-      resetForm();
+      console.log("REVIEW RESPONSE:", res?.data);
 
-      // Refresh reviews
+      toast.success(
+        reviewData?._id
+          ? "Review updated successfully"
+          : "Review submitted successfully",
+      );
+
+      // Refresh review list
       if (onRefresh) {
-        onRefresh();
+        await onRefresh();
       }
 
-      // Close modal/form
+      // Close modal
       if (onClose) {
         onClose();
       }
-    } catch (error) {
-      console.error("Review submission error:", error);
 
-      if (allowNotification) {
-        toast.error(
-          error?.response?.data?.message || "Failed to submit review",
-        );
-      }
+      // Reset form
+      setFormData({
+        rating: "",
+        comment: "",
+      });
+    } catch (error) {
+      console.error("REVIEW ERROR:", error?.response?.data || error);
+
+      toast.error(error?.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
   };
 
-  // RETURN
   return {
     formData,
     handleChange,
     handleSubmit,
-    resetForm,
     isDark,
     loading,
   };

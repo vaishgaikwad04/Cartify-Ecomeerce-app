@@ -18,18 +18,11 @@ const images = [
 
 const FashionPromo = () => {
   // FASHION PROMO HOOK
-  const {
-    openProductModel,
-    setOpenProductModel,
-    isDark,
-    products,
-  } = useFashionPromo();
+  const { openProductModel, setOpenProductModel, isDark, products } =
+    useFashionPromo();
 
   // WISHLIST
-  const {
-    isWishlisted,
-    toggleWishlist,
-  } = useWishlist();
+  const { isWishlisted, toggleWishlist } = useWishlist();
 
   return (
     <div
@@ -41,9 +34,11 @@ const FashionPromo = () => {
         lg:px-10
         py-12
         grid
-        grid-cols-1
+        grid-cols-2
         md:grid-cols-2
-        gap-6
+        sm:gap-2
+        md:gap-3
+        lg:gap-4
 
         transition-colors
         duration-300
@@ -62,14 +57,13 @@ const FashionPromo = () => {
             }
           }}
           className="
-            h-[500px]
-            sm:h-[600px]
+            h-[400px]
+            sm:h-[400px]
             lg:h-[720px]
             rounded
           "
         >
           <div className="relative z-50">
-
             {/* PLUS BUTTON */}
             <button
               type="button"
@@ -112,22 +106,21 @@ const FashionPromo = () => {
             </button>
 
             {/* PRODUCT POPUP */}
-            {openProductModel === index &&
-              products?.length > 0 && (
-                <div
-                  onClick={(e) => e.stopPropagation()}
-                  className="
+            {openProductModel === index && products?.length > 0 && (
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="
                     absolute
                     top-12
                     left-0
                     z-[9999]
                     w-[192px]
-                    sm:w-[272px]
+                    sm:w-[172px]
                     max-w-[calc(100vw-2rem)]
                   "
-                >
-                  <div
-                    className={`
+              >
+                <div
+                  className={`
                       relative
                       w-full
                       rounded-xl
@@ -135,31 +128,18 @@ const FashionPromo = () => {
                       p-2
                       overflow-hidden
 
-                      ${
-                        isDark
-                          ? "bg-gray-900"
-                          : "bg-white"
-                      }
+                      ${isDark ? "bg-gray-900" : "bg-white"}
                     `}
-                  >
-
-                   
-
-                    {/* PRODUCT CARD */}
-                    <Card
-                      product={products[0]}
-                      isWishlisted={isWishlisted(
-                        products[0]._id
-                      )}
-                      onToggleWishlist={
-                        toggleWishlist
-                      }
-                    />
-
-                  </div>
+                >
+                  {/* PRODUCT CARD */}
+                  <Card
+                    product={products[0]}
+                    isWishlisted={isWishlisted(products[0]._id)}
+                    onToggleWishlist={toggleWishlist}
+                  />
                 </div>
-              )}
-
+              </div>
+            )}
           </div>
         </ImageCard>
       ))}

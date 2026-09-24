@@ -1,65 +1,135 @@
 import React, { useContext } from "react";
-//icons
+
 import {
   FaInstagram,
   FaFacebookF,
   FaTwitter,
   FaDribbble,
 } from "react-icons/fa";
-//Navlink and link from react-router-dom
+
 import { NavLink, Link, useNavigate } from "react-router-dom";
-//themeContext
+
 import { ThemeContext } from "../../context/ThemeContext";
 
 const Footer = () => {
-  // Get current theme from context
   const { theme } = useContext(ThemeContext);
-  // Check if dark mode is enabled
+
   const isDark = theme === "Dark Mode";
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <footer className="w-full">
-   
-      {/* Main footer section*/}
+      {/* ================= MAIN FOOTER ================= */}
       <section
         className={`
-          transition-colors duration-300
-          ${isDark ? "bg-gray-900 text-white" : "bg-[#f5f5f5] text-gray-900"}
+          transition-colors
+          duration-300
+
+          ${
+            isDark
+              ? "bg-gray-900 text-white"
+              : "bg-[#f5f5f5] text-gray-900"
+          }
         `}
       >
-        {/* Container*/}
-        <div className="max-w-[1800px] mx-auto px-8 py-24">
-          {/*grid based structure*/}
-          <div className="grid lg:grid-cols-4 gap-16">
-            {/* Contact section with brand info and social media links */}
+        {/* ================= CONTAINER ================= */}
+        <div
+          className="
+            max-w-[1800px]
+            mx-auto
+
+            px-4
+            sm:px-6
+            md:px-8
+            lg:px-10
+
+            py-10
+            sm:py-12
+            md:py-14
+            lg:py-16
+          "
+        >
+          {/* ================= FOOTER GRID ================= */}
+          <div
+            className="
+              grid
+              grid-cols-4
+
+              sm:grid-cols-4
+
+              lg:grid-cols-4
+
+              gap-8
+              sm:gap-10
+              lg:gap-12
+            "
+          >
+            {/* ================================================= */}
+            {/* BRAND / CONTACT */}
+            {/* ================================================= */}
             <div>
-              {/* Brand name */}
-              <h2 onClick={() => navigate("/")} className="text-3xl font-serif-sarif tracking-[6px] uppercase">
+              {/* Brand */}
+              <h2
+                onClick={() => navigate("/")}
+                className="
+                  cursor-pointer
+
+                  text-sm
+                  sm:text-md
+                  md:text-lg
+
+                  font-serif
+                  tracking-[4px]
+                  sm:tracking-[5px]
+
+                  uppercase
+                "
+              >
                 Cartify
               </h2>
 
-              {/* Brand description*/}
+              {/* Description */}
               <p
                 className={`
-                  mt-4 text-sm leading-relaxed max-w-sm
-                  ${isDark ? "text-gray-400" : "text-gray-500"}
+                  mt-3
+
+                  text-xs
+                  sm:text-xs
+
+                  leading-5
+                  sm:leading-sm
+
+                  max-w-[280px]
+
+                  ${
+                    isDark
+                      ? "text-gray-400"
+                      : "text-gray-500"
+                  }
                 `}
               >
                 Your destination for modern fashion, beauty, and lifestyle.
                 Discover curated collections, premium quality, and trending
-                styles all in onep lace.
+                styles all in one place.
               </p>
 
-              {/* Social media icon*/}
+              {/* ================= SOCIAL ICONS ================= */}
               <div
                 className={`
-                  flex gap-5 mt-4
-                  ${isDark ? "text-gray-300" : "text-gray-600"}
+                  flex
+                  gap-2
+                  sm:gap-3
+
+                  mt-4
+
+                  ${
+                    isDark
+                      ? "text-gray-300"
+                      : "text-gray-600"
+                  }
                 `}
               >
-                {/* Array of social media platforms with icons and hover colors */}
                 {[
                   {
                     icon: <FaTwitter />,
@@ -77,40 +147,81 @@ const Footer = () => {
                     icon: <FaDribbble />,
                     hover: "hover:text-pink-400",
                   },
-                  ///map on array of social media icons
                 ].map((item, index) => (
                   <div
                     key={index}
                     className={`
-                        w-12 h-12 flex items-center justify-center
-                        rounded-full cursor-pointer
-                        hover:scale-110 transition
-                        ${isDark ? "bg-gray-800" : "bg-gray-100"}
-                      `}
+                      w-8
+                      h-8
+
+                      sm:w-9
+                      sm:h-9
+
+                      flex
+                      items-center
+                      justify-center
+
+                      rounded-full
+
+                      text-xs
+                      sm:text-xs
+
+                      cursor-pointer
+
+                      hover:scale-110
+                      transition
+
+                      ${
+                        isDark
+                          ? "bg-gray-800"
+                          : "bg-gray-100"
+                      }
+                    `}
                   >
-                    {/* Icon with hover color */}
-                    <span className={item.hover}>{item.icon}</span>
+                    <span className={item.hover}>
+                      {item.icon}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Product categories navigation section */}
+            {/* ================================================= */}
+            {/* CATEGORIES */}
+            {/* ================================================= */}
             <div>
-              {/* Section heading */}
-              <h3 className="text-2xl font-medium mb-8">CATEGORIES</h3>
+              <h3
+                className="
+                 text-sm
+                  sm:text-md
+                  md:text-lg
 
-              {/* List of category links*/}
+                  font-medium
+
+                  mb-4
+                  sm:mb-5
+                "
+              >
+                CATEGORIES
+              </h3>
+
               <ul
                 className={`
-                  space-y-4
-                  ${isDark ? "text-gray-400" : "text-gray-600"}
+                  space-y-2
+                  sm:space-y-3
+
+                  text-xs
+                  sm:text-xs
+
+                  ${
+                    isDark
+                      ? "text-gray-400"
+                      : "text-gray-600"
+                  }
                 `}
               >
-                {/* Category paths to iterate and render as links */}
                 {[
                   "/decor",
-
                   "/beauty",
                   "/new-in-body",
                   "/accessories",
@@ -120,22 +231,41 @@ const Footer = () => {
                     <NavLink
                       to={path}
                       className={`
-                          relative group inline-block transition
-                          ${isDark ? "hover:text-white" : "hover:text-black"}
-                        `}
+                        relative
+                        group
+                        inline-block
+                        transition
+
+                        ${
+                          isDark
+                            ? "hover:text-white"
+                            : "hover:text-black"
+                        }
+                      `}
                     >
-                      {/* Display category name in uppercase */}
                       {path.replace("/", "").toUpperCase()}
 
-                      {/* Animated underline that expands on hover */}
+                      {/* Hover underline */}
                       <span
                         className={`
-                            absolute left-0 -bottom-1
-                            w-0 h-[1px]
-                            group-hover:w-full
-                            transition-all duration-300
-                            ${isDark ? "bg-white" : "bg-black"}
-                          `}
+                          absolute
+                          left-0
+                          -bottom-1
+
+                          w-0
+                          h-[1px]
+
+                          group-hover:w-full
+
+                          transition-all
+                          duration-300
+
+                          ${
+                            isDark
+                              ? "bg-white"
+                              : "bg-black"
+                          }
+                        `}
                       />
                     </NavLink>
                   </li>
@@ -143,19 +273,43 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Help and support links section */}
+            {/* ================================================= */}
+            {/* HELP */}
+            {/* ================================================= */}
             <div>
-              {/* Section heading */}
-              <h3 onClick={() => navigate("/help")} className="mb-8 text-2xl font-medium">HELP</h3>
+              <h3
+                onClick={() => navigate("/help")}
+                className="
+                  cursor-pointer
 
-              {/* Help link list*/}
+                text-sm
+                  sm:text-md
+                  md:text-lg
+
+                  font-medium
+
+                  mb-4
+                  sm:mb-5
+                "
+              >
+                HELP
+              </h3>
+
               <ul
                 className={`
-                space-y-4
-                ${isDark ? "text-gray-400" : "text-gray-600"}
+                  space-y-2
+                  sm:space-y-3
+
+                  text-xs
+                  sm:text-xs
+
+                  ${
+                    isDark
+                      ? "text-gray-400"
+                      : "text-gray-600"
+                  }
                 `}
               >
-                {/* Array of help topics with labels and paths */}
                 {[
                   {
                     label: "FAQ",
@@ -178,10 +332,15 @@ const Footer = () => {
                     <Link
                       to={item.path}
                       className={`
-                      inline-block
-                      transition-colors
-                      duration-200
-                      ${isDark ? "hover:text-white" : "hover:text-black"}
+                        inline-block
+                        transition-colors
+                        duration-200
+
+                        ${
+                          isDark
+                            ? "hover:text-white"
+                            : "hover:text-black"
+                        }
                       `}
                     >
                       {item.label}
@@ -191,84 +350,203 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Promotional image cards with category links */}
-            <div className="space-y-8">
-              {/* Accessories promotional card */}
-              <Link to="/accessories">
-                <div className="flex gap-4 items-center group cursor-pointer">
-                  <img
-                    src="https://mafoil.wpbingosite.com/wp-content/uploads/2022/11/banner-11.jpg"
-                    className="w-20 h-20 object-cover group-hover:scale-105 transition"
-                  />
+            {/* ================================================= */}
+            {/* PROMOTIONAL CARDS */}
+            {/* ================================================= */}
+          <div className="space-y-3 sm:space-y-4">
+  {/* ================= ACCESSORIES ================= */}
+  <Link to="/accessories">
+    <div className="flex items-center gap-2.5 sm:gap-3 group cursor-pointer">
+      
+      {/* IMAGE */}
+      <div className="shrink-0 overflow-hidden">
+        <img
+          src="https://mafoil.wpbingosite.com/wp-content/uploads/2022/11/banner-11.jpg"
+          alt="Accessories"
+          className="
+            w-12
+            h-12
 
-                  {/* Card text content with category and title */}
-                  <div>
-                    <p
-                      className={`
-                        text-xs tracking-[6px]
-                        uppercase
-                        ${isDark ? "text-gray-400" : "text-gray-500"}
-                      `}
-                    >
-                      Accessories
-                    </p>
-                    <h4
-                      className={`
-                        font-medium mt-1 text-sm
-                        ${isDark ? "text-white" : "text-gray-800"}
-                      `}
-                    >
-                      Fashion Magic Everyday
-                    </h4>
-                  </div>
-                </div>
-              </Link>
+            sm:w-14
+            sm:h-14
 
-              {/* Collection promotional card */}
-              <Link to="/new-in-body">
-                <div className="flex gap-4 items-center group cursor-pointer mt-2">
-                  <img
-                    src="https://mafoil.wpbingosite.com/wp-content/plugins/wpbingo/lib/lookbook/images/bwp_lookbook/lookbook-1.jpg"
-                    className="w-20 h-20 object-cover group-hover:scale-105 transition"
-                  />
+            object-cover
 
-                  {/* Card text content with category and title */}
-                  <div>
-                    <p
-                      className={`
-                        text-xs tracking-[6px]
-                        uppercase
-                        ${isDark ? "text-gray-400" : "text-gray-500"}
-                      `}
-                    >
-                      Collection
-                    </p>
-                    <h4
-                      className={`
-                        font-medium mt-1 text-sm
-                        ${isDark ? "text-white" : "text-gray-800"}
-                      `}
-                    >
-                      Her Style Choice
-                    </h4>
-                  </div>
-                </div>
-              </Link>
-            </div>
+            group-hover:scale-105
+            transition-transform
+            duration-300
+          "
+        />
+      </div>
+
+      {/* TEXT */}
+      <div className="min-w-0">
+        <p
+          className={`
+            text-[8px]
+            sm:text-[9px]
+
+            tracking-[2px]
+            sm:tracking-[3px]
+
+            uppercase
+            leading-none
+
+            ${
+              isDark
+                ? "text-gray-400"
+                : "text-gray-500"
+            }
+          `}
+        >
+          Accessories
+        </p>
+
+        <h4
+          className={`
+            mt-1
+
+            text-[11px]
+            sm:text-xs
+
+            font-normal
+           
+
+            ${
+              isDark
+                ? "text-white"
+                : "text-gray-800"
+            }
+          `}
+        >
+          Fashion 
+        </h4>
+      </div>
+    </div>
+  </Link>
+
+  {/* ================= COLLECTION ================= */}
+  <Link to="/new-in-body">
+    <div className="flex items-center gap-2.5 sm:gap-3 group cursor-pointer">
+      
+      {/* IMAGE */}
+      <div className="shrink-0 overflow-hidden">
+        <img
+          src="https://mafoil.wpbingosite.com/wp-content/plugins/wpbingo/lib/lookbook/images/bwp_lookbook/lookbook-1.jpg"
+          alt="Collection"
+          className="
+            w-12
+            h-12
+
+            sm:w-14
+            sm:h-14
+
+            object-cover
+
+            group-hover:scale-105
+            transition-transform
+            duration-300
+          "
+        />
+      </div>
+
+      {/* TEXT */}
+      <div className="min-w-0">
+        <p
+          className={`
+            text-[8px]
+            sm:text-[9px]
+
+            tracking-[2px]
+            sm:tracking-[3px]
+
+            uppercase
+            leading-none
+
+            ${
+              isDark
+                ? "text-gray-400"
+                : "text-gray-500"
+            }
+          `}
+        >
+          Collection
+        </p>
+
+        <h4
+          className={`
+            mt-1
+
+            text-[11px]
+            sm:text-xs
+
+            font-normal
+      
+
+         
+
+            ${
+              isDark
+                ? "text-white"
+                : "text-gray-800"
+            }
+          `}
+        >
+          Her Style Choice
+        </h4>
+      </div>
+    </div>
+  </Link>
+</div>
           </div>
         </div>
 
-        {/* Footer bottom with copyright and payment methods */}
+        {/* ================= FOOTER BOTTOM ================= */}
         <div
           className={`
             border-t
-            ${isDark ? "border-gray-700" : "border-gray-300"}
+
+            ${
+              isDark
+                ? "border-gray-700"
+                : "border-gray-300"
+            }
           `}
         >
-          <div className="max-w-[1800px] mx-auto px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div
+            className="
+              max-w-[1800px]
+              mx-auto
+
+              px-4
+              sm:px-6
+              md:px-8
+              lg:px-10
+
+              py-4
+              sm:py-5
+              md:py-6
+
+              flex
+              flex-col
+              sm:flex-row
+
+              justify-between
+              items-center
+
+              gap-3
+            "
+          >
+            {/* COPYRIGHT */}
             <p
               className={`
-                transition cursor-default
+                text-[10px]
+                sm:text-xs
+                md:text-xs
+
+                transition
+                cursor-default
+
                 ${
                   isDark
                     ? "text-gray-400 hover:text-white"
@@ -279,24 +557,34 @@ const Footer = () => {
               © 2026 Cartify. Crafted with care.
             </p>
 
-            {/* Payment method badges section */}
+            {/* ================= PAYMENT METHODS ================= */}
             <div
               className={`
-                flex gap-8 font-semibold text-lg
-                ${isDark ? "text-gray-500" : "text-gray-400"}
+                flex
+
+                gap-4
+                sm:gap-5
+
+                text-xs
+                sm:text-xs
+
+                font-semibold
+
+                ${
+                  isDark
+                    ? "text-gray-500"
+                    : "text-gray-400"
+                }
               `}
             >
-              {/* Mastercard*/}
               <span className="hover:text-black transition cursor-pointer">
                 Mastercard
               </span>
 
-              {/* VISA*/}
               <span className="hover:text-black transition cursor-pointer">
                 VISA
               </span>
 
-              {/* PayPal*/}
               <span className="hover:text-black transition cursor-pointer">
                 PayPal
               </span>
@@ -304,7 +592,6 @@ const Footer = () => {
           </div>
         </div>
       </section>
-   
     </footer>
   );
 };

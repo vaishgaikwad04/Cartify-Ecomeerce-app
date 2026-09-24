@@ -69,14 +69,15 @@ export const useDescription = () => {
     try {
       const res = await fetchReview(productId);
 
-      console.log(res.data);
+      console.log(res.data.fetchedReview);
 
-      setReviews(res.data.fetchedReview || []);
+      setReviews(res.data.fetchedReview|| []);
     } catch (error) {
       console.log(error);
     }
   };
 
+  
   // Fetch reviews whenever the product is available
   useEffect(() => {
     if (product?._id) {
@@ -147,12 +148,9 @@ export const useDescription = () => {
         }),
       };
 
-      console.log("ADDING TO CART:", cartData);
-
+  
       // Add product to cart
       const res = await addToCart(cartData);
-
-      console.log("ADD CART RESPONSE:", res?.data);
 
       // Refresh product data
       await getProduct();
@@ -205,11 +203,21 @@ export const useDescription = () => {
     }
   };
 
-  // Open the edit review modal
-  const handleUpdate = (reviewId) => {
+ const handleUpdate = async (reviewId) => {
+  try {
+    const res = await fetchSingleReview(reviewId);
+
+    const review = res.data.fetchedSingleReview;
+
+    console.log("EDIT REVIEW:", review);
+
     setSelectedReviewId(reviewId);
+    setSelectedReview(review);
     setIsReviewModalOpen(true);
-  };
+  } catch (error) {
+    console.error("FETCH SINGLE REVIEW ERROR:", error);
+  }
+};
 
   // Fetch a single review
   const getSingleReview = async () => {
@@ -222,12 +230,7 @@ export const useDescription = () => {
     }
   };
 
-  // Fetch selected review when its ID changes
-  useEffect(() => {
-    if (selectedReviewId) {
-      getSingleReview();
-    }
-  }, [selectedReviewId]);
+
 
   // Calculate final product price
   const finalPrice = product?.discountPrice || product?.price;

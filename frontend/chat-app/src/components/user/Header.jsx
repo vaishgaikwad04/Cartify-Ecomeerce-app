@@ -1,3 +1,4 @@
+
 import { NavLink } from "react-router-dom";
 
 // Icons
@@ -9,7 +10,6 @@ import {
   FiX,
   FiBell,
   FiMenu,
-  FiUser,
 } from "react-icons/fi";
 
 import { useHeader } from "../../hooks/user/useHeader";
@@ -47,7 +47,7 @@ const Header = () => {
     handleProductClick,
   } = useHeader();
 
-  // Navigation menu structure with categories and subcategories
+  // Navigation menu structure
   const menus = [
     {
       title: "Home",
@@ -114,13 +114,14 @@ const Header = () => {
     },
   ];
 
-  // Dynamic styling for navigation links based on active state and theme
+  // Responsive navigation link styling
   const navClass = ({ isActive }) => `
     transition-all
     duration-300
     flex
     items-center
-    gap-1
+    gap-1.5
+    whitespace-nowrap
 
     ${
       isActive
@@ -128,13 +129,16 @@ const Header = () => {
           ? "text-white"
           : "text-red-900"
         : isDark
-          ? "text-gray-300 hover:text-white"
-          : "text-neutral-700 hover:text-red-900"
+        ? "text-gray-300 hover:text-white"
+        : "text-neutral-700 hover:text-red-900"
     }
   `;
 
   return (
     <>
+      {/* =====================================================
+          HEADER
+      ===================================================== */}
       <header
         className={`
           sticky
@@ -152,22 +156,29 @@ const Header = () => {
           }
         `}
       >
-        <div className="max-w-[1800px] mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between min-h-[80px] lg:min-h-[90px]">
-            {/*  LOGO*/}
-            <div className="lg:w-[280px] shrink-0">
+        <div className="max-w-[1800px] mx-auto px-3 sm:px-5 lg:px-6">
+          <div className="flex items-center justify-between h-16 sm:h-[68px] lg:h-[72px]">
+
+            {/* =================================================
+                LOGO
+            ================================================= */}
+            <div className="lg:w-[220px] xl:w-[260px] shrink-0">
               <button
                 type="button"
                 onClick={() => navigate("/")}
                 className={`
-                 font-serif-sarif
-                  text-lg
-                  tracking-[6px]
-                  sm:tracking-[10px]
+                  font-serif-sarif
+                  text-sm
+                  sm:text-base
+                  lg:text-lg
+                  tracking-[4px]
+                  sm:tracking-[5px]
+                  lg:tracking-[6px]
                   font-semibold
                   uppercase
                   cursor-pointer
                   transition-colors
+                  whitespace-nowrap
 
                   ${
                     isDark
@@ -180,7 +191,9 @@ const Header = () => {
               </button>
             </div>
 
-            {/*DESKTOP NAVIGATION*/}
+            {/* =================================================
+                DESKTOP NAVIGATION
+            ================================================= */}
             <nav
               className={`
                 hidden
@@ -188,18 +201,20 @@ const Header = () => {
                 flex-1
                 justify-center
                 items-center
-                gap-12
-                xl:gap-20
+                gap-6
+                xl:gap-10
+                2xl:gap-14
 
-                text-[16px]
+                text-xs
+                xl:text-sm
                 font-medium
-                tracking-[3.5px]
+                tracking-[2px]
+                xl:tracking-[2.5px]
                 uppercase
 
                 ${isDark ? "text-gray-300" : "text-neutral-700"}
               `}
             >
-              {/*fetch menu*/}
               {menus.map((menu) => (
                 <div
                   key={menu.title}
@@ -218,11 +233,13 @@ const Header = () => {
                       relative
                       flex
                       items-center
-                      gap-2
-                      py-10
+                      gap-1.5
+                      py-6
+                      xl:py-7
                       transition-all
                       duration-500
-                      hover:tracking-[4px]
+                      hover:tracking-[2.5px]
+                      xl:hover:tracking-[3px]
 
                       ${navClass}
                     `}
@@ -234,8 +251,8 @@ const Header = () => {
                       className={`
                         absolute
                         left-0
-                        bottom-6
-                        h-[2px]
+                        bottom-4
+                        h-[1px]
                         w-0
                         transition-all
                         duration-500
@@ -247,7 +264,8 @@ const Header = () => {
 
                     <FaChevronDown
                       className="
-                        text-[9px]
+                        text-[7px]
+                        sm:text-[8px]
                         opacity-60
                         transition-all
                         duration-500
@@ -257,36 +275,40 @@ const Header = () => {
                     />
                   </NavLink>
 
-                  {/* DESKTOP DROPDOWN*/}
-
+                  {/* =================================================
+                      DESKTOP DROPDOWN
+                  ================================================= */}
                   <div
                     className="
                       absolute
                       top-full
                       left-1/2
                       -translate-x-1/2
-                      pt-5
+                      pt-3
 
                       opacity-0
                       invisible
-                      translate-y-5
+                      translate-y-3
 
                       group-hover:opacity-100
                       group-hover:visible
                       group-hover:translate-y-0
 
                       transition-all
-                      duration-500
+                      duration-300
 
-                      w-[420px]
+                      w-[300px]
+                      sm:w-[340px]
+                      lg:w-[360px]
                       z-50
                     "
                   >
                     <div
                       className={`
                         rounded-xl
-                        p-10
-                        shadow-[0_30px_80px_rgba(0,0,0,0.18)]
+                        p-5
+                        sm:p-6
+                        shadow-[0_25px_60px_rgba(0,0,0,0.15)]
                         backdrop-blur-xl
                         border
 
@@ -298,15 +320,19 @@ const Header = () => {
                       `}
                     >
                       {/* DROPDOWN HEADER */}
-
-                      <div className="mb-8">
+                      <div className="mb-5">
                         <h3
                           className={`
-                            text-2xl
+                            text-lg
+                            sm:text-xl
                             font-semibold
                             tracking-normal
 
-                            ${isDark ? "text-white" : "text-gray-900"}
+                            ${
+                              isDark
+                                ? "text-white"
+                                : "text-gray-900"
+                            }
                           `}
                         >
                           {menu.heading}
@@ -314,11 +340,16 @@ const Header = () => {
 
                         <p
                           className={`
-                            mt-2
-                            text-xs
+                            mt-1.5
+                            text-[10px]
+                            sm:text-xs
                             tracking-normal
 
-                            ${isDark ? "text-gray-400" : "text-gray-500"}
+                            ${
+                              isDark
+                                ? "text-gray-400"
+                                : "text-gray-500"
+                            }
                           `}
                         >
                           {menu.subtitle}
@@ -326,8 +357,7 @@ const Header = () => {
                       </div>
 
                       {/* DROPDOWN LINKS */}
-
-                      <div className="space-y-4">
+                      <div className="space-y-3">
                         {menu.items.map((item) => (
                           <NavLink
                             key={item.name}
@@ -337,11 +367,12 @@ const Header = () => {
                               flex
                               justify-between
                               items-center
-                              text-sm
+                              text-xs
+                              sm:text-sm
                               tracking-normal
                               transition-all
                               duration-300
-                              hover:translate-x-2
+                              hover:translate-x-1.5
 
                               ${
                                 isDark
@@ -370,108 +401,99 @@ const Header = () => {
               ))}
             </nav>
 
-            {/*RIGHT ACTIONS*/}
-
+            {/* =================================================
+                RIGHT ACTIONS
+            ================================================= */}
             <div
               className={`
-                lg:w-[320px]
+                lg:w-[220px]
+                xl:w-[260px]
                 flex
                 justify-end
                 items-center
-                gap-2
-                sm:gap-4
+                gap-1.5
+                sm:gap-2.5
+                lg:gap-2
                 shrink-0
 
                 ${isDark ? "text-white" : "text-black"}
               `}
             >
-              {/*SEARCH */}
-
+              {/* SEARCH */}
               <button
                 type="button"
                 onClick={() => setIsSearchModalOpen(true)}
                 className={`
-    flex
-    items-center
-    justify-center
+                  flex
+                  items-center
+                  justify-center
 
-    w-10
-    h-10
-    sm:w-11
-    sm:h-11
+                  w-9
+                  h-9
+                  sm:w-10
+                  sm:h-10
+                  lg:w-10
+                  lg:h-10
 
-    shrink-0
-    rounded-full
+                  shrink-0
+                  rounded-full
+                  transition-all
+                  duration-200
 
-    transition-all
-    duration-200
-
-    ${
-      isDark
-        ? `
-          text-gray-200
-          hover:bg-gray-800
-        `
-        : `
-          text-gray-700
-          hover:bg-gray-100
-        `
-    }
-  `}
+                  ${
+                    isDark
+                      ? "text-gray-200 hover:bg-gray-800"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }
+                `}
                 aria-label="Search"
               >
-                <FiSearch className="text-[20px] sm:text-[21px]" />
+                <FiSearch className="text-[17px] sm:text-[18px] lg:text-[19px]" />
               </button>
 
-              {/* CART*/}
+              {/* CART */}
               <button
                 type="button"
                 onClick={() => setIsCartDrawerOpen(true)}
                 className={`
-    flex
-    items-center
-    justify-center
+                  flex
+                  items-center
+                  justify-center
 
-    w-10
-    h-10
-    sm:w-11
-    sm:h-11
+                  w-9
+                  h-9
+                  sm:w-10
+                  sm:h-10
+                  lg:w-10
+                  lg:h-10
 
-    shrink-0
-    rounded-full
+                  shrink-0
+                  rounded-full
+                  transition-all
+                  duration-200
 
-    transition-all
-    duration-200
-
-    ${
-      isDark
-        ? `
-          bg-gray-800
-          text-gray-200
-          hover:bg-gray-700
-        `
-        : `
-          bg-gray-100
-          text-gray-700
-          hover:bg-gray-200
-        `
-    }
-  `}
+                  ${
+                    isDark
+                      ? "bg-gray-800 text-gray-200 hover:bg-gray-700"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }
+                `}
                 aria-label="Cart"
               >
-                <HiOutlineShoppingBag className="text-[21px] sm:text-[22px]" />
+                <HiOutlineShoppingBag className="text-[18px] sm:text-[19px] lg:text-[20px]" />
               </button>
 
-              {/*DESKTOP ACTIONS */}
-              <div className="hidden lg:flex  items-center gap-3">
+              {/* =================================================
+                  DESKTOP ACTIONS
+              ================================================= */}
+              <div className="hidden lg:flex items-center gap-2">
                 {/* ORDERS */}
-
                 <button
                   type="button"
                   onClick={() => navigate("/orders")}
                   className={`
-                    w-11
-                    h-11
+                    w-10
+                    h-10
                     rounded-full
                     flex
                     items-center
@@ -481,25 +503,24 @@ const Header = () => {
 
                     ${
                       isDark
-                        ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white hover:scale-105"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black hover:scale-105"
+                        ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black"
                     }
                   `}
                   aria-label="Orders"
                 >
-                  <FiPackage className="text-[22px]" />
+                  <FiPackage className="text-[19px] lg:text-[20px]" />
                 </button>
 
                 {/* NOTIFICATIONS */}
-
                 {allowNotification && (
                   <button
                     type="button"
                     onClick={() => navigate("/notifications")}
                     className={`
                       relative
-                      w-11
-                      h-11
+                      w-10
+                      h-10
                       rounded-full
                       flex
                       items-center
@@ -509,15 +530,17 @@ const Header = () => {
 
                       ${
                         isDark
-                          ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white hover:scale-105"
-                          : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black hover:scale-105"
+                          ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black"
                       }
                     `}
                     aria-label={`Notifications${
-                      unreadCount > 0 ? `, ${unreadCount} unread` : ""
+                      unreadCount > 0
+                        ? `, ${unreadCount} unread`
+                        : ""
                     }`}
                   >
-                    <FiBell className="text-[21px]" />
+                    <FiBell className="text-[18px] lg:text-[19px]" />
 
                     {unreadCount > 0 && (
                       <span
@@ -525,13 +548,13 @@ const Header = () => {
                           absolute
                           -top-1
                           -right-1
-                          min-w-[19px]
-                          h-[19px]
+                          min-w-[17px]
+                          h-[17px]
                           px-1
                           rounded-full
                           bg-red-500
                           text-white
-                          text-[10px]
+                          text-[9px]
                           font-bold
                           flex
                           items-center
@@ -548,7 +571,6 @@ const Header = () => {
                 )}
 
                 {/* PROFILE */}
-
                 <button
                   type="button"
                   onClick={() => navigate("/profile")}
@@ -556,10 +578,10 @@ const Header = () => {
                     group
                     flex
                     items-center
-                    gap-3
-                    pl-1.5
-                    pr-4
-                    py-1.5
+                    gap-2
+                    pl-1
+                    pr-3
+                    py-1
                     rounded-full
                     border
                     cursor-pointer
@@ -575,19 +597,20 @@ const Header = () => {
                   `}
                 >
                   {/* AVATAR */}
-
                   <div className="relative shrink-0">
                     <div
                       className={`
-                        w-10
-                        h-10
+                        w-8
+                        h-8
+                        lg:w-9
+                        lg:h-9
                         rounded-full
                         flex
                         items-center
                         justify-center
                         text-white
                         font-semibold
-                        text-sm
+                        text-xs
                         uppercase
                         shadow-sm
                         transition-transform
@@ -601,7 +624,9 @@ const Header = () => {
                         }
                       `}
                     >
-                      {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
+                      {profileData?.name
+                        ?.charAt(0)
+                        ?.toUpperCase() || "U"}
                     </div>
 
                     <span
@@ -609,8 +634,8 @@ const Header = () => {
                         absolute
                         bottom-0
                         right-0
-                        w-3
-                        h-3
+                        w-2.5
+                        h-2.5
                         rounded-full
                         border-2
 
@@ -624,13 +649,12 @@ const Header = () => {
                   </div>
 
                   {/* USER INFO */}
-
                   <div className="hidden xl:flex flex-col items-start min-w-0 leading-tight">
                     <span
                       className={`
-                        max-w-[110px]
+                        max-w-[100px]
                         truncate
-                        text-sm
+                        text-xs
                         font-semibold
 
                         ${
@@ -646,12 +670,16 @@ const Header = () => {
                     <span
                       className={`
                         mt-0.5
-                        text-[11px]
+                        text-[9px]
                         font-medium
                         tracking-wide
                         uppercase
 
-                        ${isDark ? "text-gray-500" : "text-gray-400"}
+                        ${
+                          isDark
+                            ? "text-gray-500"
+                            : "text-gray-400"
+                        }
                       `}
                     >
                       Account
@@ -662,10 +690,14 @@ const Header = () => {
                     className={`
                       hidden
                       xl:block
-                      ml-1
-                      text-xs
+                      ml-0.5
+                      text-[10px]
 
-                      ${isDark ? "text-gray-500" : "text-gray-400"}
+                      ${
+                        isDark
+                          ? "text-gray-500"
+                          : "text-gray-400"
+                      }
                     `}
                   >
                     →
@@ -673,16 +705,18 @@ const Header = () => {
                 </button>
               </div>
 
-              {/*HAMBURGER*/}
+              {/* =================================================
+                  HAMBURGER
+              ================================================= */}
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(true)}
                 className={`
                   lg:hidden
-                  w-10
-                  h-10
-                  sm:w-11
-                  sm:h-11
+                  w-9
+                  h-9
+                  sm:w-10
+                  sm:h-10
                   rounded-full
                   flex
                   items-center
@@ -698,14 +732,16 @@ const Header = () => {
                 `}
                 aria-label="Open menu"
               >
-                <FiMenu className="text-[22px]" />
+                <FiMenu className="text-[19px] sm:text-[20px]" />
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      {/*MOBILE MENU*/}
+      {/* =====================================================
+          MOBILE MENU
+      ===================================================== */}
       {isMobileMenuOpen && (
         <div
           className="
@@ -724,17 +760,21 @@ const Header = () => {
               top-0
               right-0
               h-full
-              w-[88%]
-              max-w-[400px]
+              w-[85%]
+              sm:w-[380px]
+              max-w-[380px]
               overflow-y-auto
               shadow-2xl
 
-              ${isDark ? "bg-gray-950 text-white" : "bg-white text-gray-900"}
+              ${
+                isDark
+                  ? "bg-gray-950 text-white"
+                  : "bg-white text-gray-900"
+              }
             `}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* MOBILE HEADER*/}
-
+            {/* MOBILE HEADER */}
             <div
               className={`
                 sticky
@@ -743,8 +783,8 @@ const Header = () => {
                 flex
                 items-center
                 justify-between
-                px-6
-                py-6
+                px-5
+                py-4
                 border-b
 
                 ${
@@ -757,25 +797,22 @@ const Header = () => {
               <div>
                 <p
                   className={`
-                    text-[10px]
-                    tracking-[3px]
+                    text-[9px]
+                    tracking-[2.5px]
                     uppercase
                     mb-1
 
-                    ${isDark ? "text-gray-500" : "text-gray-400"}
+                    ${
+                      isDark
+                        ? "text-gray-500"
+                        : "text-gray-400"
+                    }
                   `}
                 >
                   Navigation
                 </p>
 
-                <h2
-                  className="
-                    text-lg
-                    font-semibold
-                    tracking-[4px]
-                    uppercase
-                  "
-                >
+                <h2 className="text-base sm:text-lg font-semibold tracking-[3px] uppercase">
                   Cartify
                 </h2>
               </div>
@@ -784,8 +821,8 @@ const Header = () => {
                 type="button"
                 onClick={closeMobileMenu}
                 className={`
-                  w-10
-                  h-10
+                  w-9
+                  h-9
                   rounded-full
                   flex
                   items-center
@@ -800,20 +837,26 @@ const Header = () => {
                 `}
                 aria-label="Close menu"
               >
-                <FiX className="text-xl" />
+                <FiX className="text-lg" />
               </button>
             </div>
 
-            {/*SHOP*/}
-            <div className="px-6 pt-7">
+            {/* =================================================
+                SHOP
+            ================================================= */}
+            <div className="px-5 pt-6">
               <p
                 className={`
-                  text-[10px]
-                  tracking-[3px]
+                  text-[9px]
+                  tracking-[2.5px]
                   uppercase
                   mb-3
 
-                  ${isDark ? "text-gray-500" : "text-gray-400"}
+                  ${
+                    isDark
+                      ? "text-gray-500"
+                      : "text-gray-400"
+                  }
                 `}
               >
                 Shop
@@ -827,7 +870,9 @@ const Header = () => {
                       type="button"
                       onClick={() =>
                         setOpenMobileMenu(
-                          openMobileMenu === menu.title ? null : menu.title,
+                          openMobileMenu === menu.title
+                            ? null
+                            : menu.title
                         )
                       }
                       className={`
@@ -835,7 +880,7 @@ const Header = () => {
                         flex
                         items-center
                         justify-between
-                        py-5
+                        py-4
                         text-left
                         transition-colors
 
@@ -848,7 +893,8 @@ const Header = () => {
                     >
                       <span
                         className="
-                          text-lg
+                          text-base
+                          sm:text-lg
                           font-medium
                           tracking-wide
                         "
@@ -858,11 +904,15 @@ const Header = () => {
 
                       <FaChevronDown
                         className={`
-                          text-xs
+                          text-[10px]
                           transition-transform
                           duration-300
 
-                          ${openMobileMenu === menu.title ? "rotate-180" : ""}
+                          ${
+                            openMobileMenu === menu.title
+                              ? "rotate-180"
+                              : ""
+                          }
                         `}
                       />
                     </button>
@@ -876,7 +926,7 @@ const Header = () => {
 
                         ${
                           openMobileMenu === menu.title
-                            ? "max-h-96 opacity-100 pb-4"
+                            ? "max-h-96 opacity-100 pb-3"
                             : "max-h-0 opacity-0"
                         }
                       `}
@@ -887,7 +937,11 @@ const Header = () => {
                           pl-4
                           border-l
 
-                          ${isDark ? "border-gray-800" : "border-gray-200"}
+                          ${
+                            isDark
+                              ? "border-gray-800"
+                              : "border-gray-200"
+                          }
                         `}
                       >
                         {menu.items.map((item) => (
@@ -898,8 +952,9 @@ const Header = () => {
                             className={`
                               flex
                               items-center
-                              py-3
-                              text-sm
+                              py-2.5
+                              text-xs
+                              sm:text-sm
                               transition-all
                               duration-200
 
@@ -920,33 +975,42 @@ const Header = () => {
               </nav>
             </div>
 
-            {/* ACCOUNT ACTIONS */}
-            <div className="px-6">
+            {/* =================================================
+                ACCOUNT ACTIONS
+            ================================================= */}
+            <div className="px-5">
               <div
                 className={`
-                  mt-5
-                  pt-6
+                  mt-4
+                  pt-5
                   border-t
 
-                  ${isDark ? "border-gray-800" : "border-gray-200"}
+                  ${
+                    isDark
+                      ? "border-gray-800"
+                      : "border-gray-200"
+                  }
                 `}
               >
                 <p
                   className={`
-                    text-[10px]
-                    tracking-[3px]
+                    text-[9px]
+                    tracking-[2.5px]
                     uppercase
-                    mb-4
+                    mb-3
 
-                    ${isDark ? "text-gray-500" : "text-gray-400"}
+                    ${
+                      isDark
+                        ? "text-gray-500"
+                        : "text-gray-400"
+                    }
                   `}
                 >
                   Account
                 </p>
 
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-3 gap-1.5">
                   {/* ORDERS */}
-
                   <button
                     type="button"
                     onClick={() => {
@@ -958,8 +1022,8 @@ const Header = () => {
                       flex-col
                       items-center
                       justify-center
-                      gap-2
-                      py-4
+                      gap-1.5
+                      py-3
                       rounded-xl
                       transition-all
 
@@ -970,13 +1034,14 @@ const Header = () => {
                       }
                     `}
                   >
-                    <FiPackage className="text-[22px]" />
+                    <FiPackage className="text-[19px] sm:text-[20px]" />
 
-                    <span className="text-[11px]">Orders</span>
+                    <span className="text-[10px] sm:text-[11px]">
+                      Orders
+                    </span>
                   </button>
 
                   {/* NOTIFICATIONS */}
-
                   {allowNotification && (
                     <button
                       type="button"
@@ -990,8 +1055,8 @@ const Header = () => {
                         flex-col
                         items-center
                         justify-center
-                        gap-2
-                        py-4
+                        gap-1.5
+                        py-3
                         rounded-xl
                         transition-all
 
@@ -1003,32 +1068,37 @@ const Header = () => {
                       `}
                     >
                       <div className="relative">
-                        <FiBell className="text-[22px]" />
+                        <FiBell className="text-[19px] sm:text-[20px]" />
+
                         {unreadCount > 0 && (
                           <span
                             className="
                               absolute
                               -top-2
                               -right-2
-                              min-w-[17px]
-                              h-[17px]
+                              min-w-[16px]
+                              h-[16px]
                               px-1
                               rounded-full
                               bg-red-500
                               text-white
-                              text-[9px]
+                              text-[8px]
                               font-bold
                               flex
                               items-center
                               justify-center
                             "
                           >
-                            {unreadCount > 99 ? "99+" : unreadCount}
+                            {unreadCount > 99
+                              ? "99+"
+                              : unreadCount}
                           </span>
                         )}
                       </div>
 
-                      <span className="text-[11px]">Notifications</span>
+                      <span className="text-[10px] sm:text-[11px]">
+                        Notifications
+                      </span>
                     </button>
                   )}
 
@@ -1044,8 +1114,8 @@ const Header = () => {
                       flex-col
                       items-center
                       justify-center
-                      gap-2
-                      py-4
+                      gap-1.5
+                      py-3
                       rounded-xl
                       transition-all
 
@@ -1065,16 +1135,24 @@ const Header = () => {
                         items-center
                         justify-center
                         text-white
-                        text-xs
+                        text-[10px]
                         font-semibold
 
-                        ${isDark ? "bg-gray-700" : "bg-gray-800"}
+                        ${
+                          isDark
+                            ? "bg-gray-700"
+                            : "bg-gray-800"
+                        }
                       `}
                     >
-                      {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
+                      {profileData?.name
+                        ?.charAt(0)
+                        ?.toUpperCase() || "U"}
                     </div>
 
-                    <span className="text-[11px]">Profile</span>
+                    <span className="text-[10px] sm:text-[11px]">
+                      Profile
+                    </span>
                   </button>
                 </div>
               </div>
@@ -1083,15 +1161,21 @@ const Header = () => {
         </div>
       )}
 
-      {/* CART DRAWER*/}
+      {/* =====================================================
+          CART DRAWER
+      ===================================================== */}
       <Drawer
         isOpen={isCartDrawerOpen}
         onClose={() => setIsCartDrawerOpen(false)}
       >
-        <CartSidebar onClose={() => setIsCartDrawerOpen(false)} />
+        <CartSidebar
+          onClose={() => setIsCartDrawerOpen(false)}
+        />
       </Drawer>
 
-      {/* SEARCH MODAL*/}
+      {/* =====================================================
+          SEARCH MODAL
+      ===================================================== */}
       {isSearchModalOpen && (
         <div
           className={`
@@ -1110,10 +1194,13 @@ const Header = () => {
             className={`
               relative
               w-full
-              px-4
-              sm:px-6
-              py-5
+              px-3
+              sm:px-5
+              lg:px-6
+              py-4
+              sm:py-5
               shadow-xl
+
               ${isDark ? "bg-gray-900" : "bg-white"}
             `}
           >
@@ -1122,17 +1209,22 @@ const Header = () => {
               <FiSearch
                 className={`
                   absolute
-                  left-4
+                  left-3
+                  sm:left-4
                   top-1/2
                   -translate-y-1/2
-                  text-lg
+                  text-base
+                  sm:text-lg
 
-                  ${isDark ? "text-gray-400" : "text-gray-500"}
+                  ${
+                    isDark
+                      ? "text-gray-400"
+                      : "text-gray-500"
+                  }
                 `}
               />
 
               {/* SEARCH INPUT */}
-
               <input
                 autoFocus
                 type="text"
@@ -1141,13 +1233,16 @@ const Header = () => {
                 placeholder="Search products, brands, categories..."
                 className={`
                   w-full
-                  pl-12
-                  pr-14
-                  py-4
+                  pl-10
+                  sm:pl-12
+                  pr-12
+                  py-3
+                  sm:py-4
                   bg-transparent
                   border-b
                   outline-none
-                  text-sm
+                  text-xs
+                  sm:text-sm
                   font-medium
 
                   ${
@@ -1159,7 +1254,6 @@ const Header = () => {
               />
 
               {/* SEARCH RESULTS */}
-
               {(searchLoading || results.length > 0) && (
                 <div
                   className={`
@@ -1167,7 +1261,7 @@ const Header = () => {
                     top-full
                     left-0
                     right-0
-                    mt-3
+                    mt-2
                     rounded-xl
                     shadow-2xl
                     border
@@ -1182,16 +1276,20 @@ const Header = () => {
                   `}
                 >
                   {/* LOADING */}
-
                   {searchLoading && (
                     <div
                       className={`
-                        px-5
-                        py-6
+                        px-4
+                        py-5
                         text-center
-                        text-sm
+                        text-xs
+                        sm:text-sm
 
-                        ${isDark ? "text-gray-400" : "text-gray-500"}
+                        ${
+                          isDark
+                            ? "text-gray-400"
+                            : "text-gray-500"
+                        }
                       `}
                     >
                       Searching...
@@ -1199,20 +1297,24 @@ const Header = () => {
                   )}
 
                   {/* RESULTS */}
-
                   {!searchLoading &&
                     results.map((item) => (
                       <button
                         type="button"
                         key={item._id}
-                        onClick={() => handleProductClick(item._id)}
+                        onClick={() =>
+                          handleProductClick(item._id)
+                        }
                         className={`
                           w-full
-                          px-5
-                          py-4
+                          px-4
+                          sm:px-5
+                          py-3
+                          sm:py-4
                           flex
                           items-center
-                          gap-4
+                          gap-3
+                          sm:gap-4
                           text-left
                           border-b
                           last:border-b-0
@@ -1230,24 +1332,33 @@ const Header = () => {
                             src={item.images[0]}
                             alt={item.name}
                             className="
-      w-6
-      h-6
-      rounded
-      object-cover
-      shrink-0
-    "
+                              w-7
+                              h-7
+                              sm:w-8
+                              sm:h-8
+                              rounded
+                              object-cover
+                              shrink-0
+                            "
                           />
                         )}
 
-                        <div className="flex-1">
-                          <p className="text-sm font-medium">{item.name}</p>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs sm:text-sm font-medium truncate">
+                            {item.name}
+                          </p>
                         </div>
 
                         <span
                           className={`
-                            text-lg
+                            text-base
+                            sm:text-lg
 
-                            ${isDark ? "text-gray-500" : "text-gray-400"}
+                            ${
+                              isDark
+                                ? "text-gray-500"
+                                : "text-gray-400"
+                            }
                           `}
                         >
                           →

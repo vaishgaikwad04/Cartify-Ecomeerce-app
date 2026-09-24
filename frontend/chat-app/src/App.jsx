@@ -1,3 +1,12 @@
+
+
+// 320–639px	No prefix Mobile
+// 640–767px	sm: Large mobile / small tablet
+// 768–1023px	md:	Tablet
+// 1024–1279px	lg:	Laptop
+// 1280–1535px	xl: Desktop
+// 1536px+	2xl: Large desktop
+
 import React, { useContext } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -123,27 +132,25 @@ const App = () => {
               ADMIN
           ========================= */}
 
-          <Route element={<PrivateRoute />}>
-            <Route element={<AdminRoute />}>
-              <Route path="/admin" element={<AdminLayout />}>
-                <Route index element={<Dashboard />} />
+          <Route element={<AdminRoute />}>
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<Dashboard />} />
 
-                <Route path="products" element={<Products />} />
+              <Route path="products" element={<Products />} />
 
-                <Route path="categories" element={<Categories />} />
+              <Route path="categories" element={<Categories />} />
 
-                <Route path="customers" element={<Customers />} />
+              <Route path="customers" element={<Customers />} />
 
-                <Route path="coupons" element={<Coupon />} />
+              <Route path="coupons" element={<Coupon />} />
 
-                <Route path="reviews" element={<Review />} />
+              <Route path="reviews" element={<Review />} />
 
-                <Route path="orders" element={<Order />} />
+              <Route path="orders" element={<Order />} />
 
-                <Route path="settings" element={<Settings />} />
+              <Route path="settings" element={<Settings />} />
 
-                <Route path="notifications" element={<Notification />} />
-              </Route>
+              <Route path="notifications" element={<Notification />} />
             </Route>
           </Route>
         </Routes>

@@ -1,263 +1,348 @@
 import React, { useState } from "react";
-import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
+import {
+  FaArrowLeftLong,
+  FaArrowRightLong,
+} from "react-icons/fa6";
+import { useNavigate, Link } from "react-router-dom";
 import Button from "./Button";
-import { Link} from "react-router-dom";
 
-
-const Carousel = ({ images = [], product }) => {
-
+const Carousel = ({
+  images = [],
+  product,
+}) => {
   const navigate = useNavigate();
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-
-
-  if (!images.length) return null;
-
-
-
-  const nextSlide = () => {
-
-    setCurrentIndex((prev)=>
-      prev === images.length - 1 ? 0 : prev + 1
-    );
-
-  };
-
-
-
-  const prevSlide = () => {
-
-    setCurrentIndex((prev)=>
-      prev === 0 ? images.length - 1 : prev - 1
-    );
-
-  };
-
-
-
-  const handleMouseEnter = () => {
-
-    if(images.length > 1){
-
-      setCurrentIndex(1);
-
-    }
-
-  };
-
-
-
-  const handleMouseLeave = () => {
-
-    setCurrentIndex(0);
-
-  };
-
-
-
-
-
-return (
-
-<div
-
-className="
-relative
-w-full
-mx-auto
-group
-cursor-pointer
-"
-
-onMouseEnter={handleMouseEnter}
-
-onMouseLeave={handleMouseLeave}
-
->
-
-
-{/* IMAGE CONTAINER */}
-
-
-{/* IMAGE CONTAINER */}
-<div
-  className="
-    relative
-    overflow-hidden
-    aspect-[4/5]
-    rounded-sm
-  "
->
-  {/* CLICKABLE IMAGE */}
-  <Link
-    to={`/description/${product._id}`}
-    className="absolute inset-0 block"
-  >
-    {images.map((img, index) => (
-      <img
-        key={index}
-        src={img}
-        alt={`product-${index}`}
-        className={`
-          absolute
-          inset-0
+  // No images
+  if (!images.length) {
+    return (
+      <div
+        className="
           w-full
-          h-full
-          object-cover
+          h-[160px]
+          sm:h-[190px]
+          md:h-[240px]
+          lg:h-[290px]
+          xl:h-[320px]
+          2xl:h-[350px]
 
-          transition-all
-          duration-700
-          ease-in-out
+          flex
+          items-center
+          justify-center
 
-          group-hover:scale-105
+          bg-gray-100
+        "
+      >
+        <span className="text-xs text-gray-400">
+          No Image
+        </span>
+      </div>
+    );
+  }
 
-          ${
-            index === currentIndex
-              ? "opacity-100"
-              : "opacity-0"
+  // Next image
+  const nextSlide = () => {
+    setCurrentIndex((prev) =>
+      prev === images.length - 1
+        ? 0
+        : prev + 1
+    );
+  };
+
+  // Previous image
+  const prevSlide = () => {
+    setCurrentIndex((prev) =>
+      prev === 0
+        ? images.length - 1
+        : prev - 1
+    );
+  };
+
+  // Show second image when hovering
+  const handleMouseEnter = () => {
+    if (images.length > 1) {
+      setCurrentIndex(1);
+    }
+  };
+
+  // Return to first image
+  const handleMouseLeave = () => {
+    setCurrentIndex(0);
+  };
+
+  return (
+    <div
+      className="
+        relative
+        w-full
+        max-w-full
+        overflow-hidden
+        group
+      "
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* ================= IMAGE CONTAINER ================= */}
+      <div
+        className="
+          relative
+          w-full
+          overflow-hidden
+
+          /* Mobile */
+          h-[160px]
+
+          /* Small phones */
+          sm:h-[290px]
+
+          /* Tablet */
+          md:h-[240px]
+
+          /* Desktop */
+          lg:h-[346px]
+
+          /* Large desktop */
+          xl:h-[320px]
+
+          /* Extra large */
+          2xl:h-[350px]
+        "
+      >
+        {/* ================= PRODUCT LINK ================= */}
+        <Link
+          to={`/description/${product?._id}`}
+          className="
+            absolute
+            inset-0
+            block
+          "
+        >
+          {images.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt={`${product?.name || "Product"} ${index + 1}`}
+              className={`
+                absolute
+                inset-0
+
+                w-full
+                h-full
+
+                object-cover
+
+                transition-all
+                duration-700
+                ease-in-out
+
+                group-hover:scale-[1.03]
+
+                ${
+                  index === currentIndex
+                    ? "opacity-100"
+                    : "opacity-0"
+                }
+              `}
+            />
+          ))}
+        </Link>
+
+        {/* ================= HOVER OVERLAY ================= */}
+        <div
+          className="
+            absolute
+            inset-0
+            pointer-events-none
+
+            bg-black/0
+            group-hover:bg-black/10
+
+            transition-all
+            duration-500
+          "
+        />
+
+        {/* ================= QUICK ADD ================= */}
+        <Button
+          label="Quick Add"
+          variant="secondary"
+          onClick={() =>
+            navigate(
+              `/description/${product?._id}`
+            )
           }
-        `}
-      />
-    ))}
-  </Link>
+          className="
+            absolute
+            left-1/2
+            -translate-x-1/2
 
-  {/* OVERLAY */}
-  <div
-    className="
-      absolute
-      inset-0
-      pointer-events-none
+            bottom-1
+            sm:bottom-1.5
+            md:bottom-2
 
-      bg-black/0
-      group-hover:bg-black/10
-      dark:group-hover:bg-black/30
+            !w-[calc(100%-8px)]
+            sm:!w-[calc(100%-12px)]
+            md:!w-[calc(100%-16px)]
+            lg:!w-[calc(100%-18px)]
 
-      transition-all
-      duration-500
-    "
-  />
+            !h-[24px]
+            sm:!h-[27px]
+            md:!h-[30px]
 
-  {/* QUICK ADD */}
-  <Button
-    label="Quick Add"
-    variant="secondary"
-    onClick={() => navigate(`/description/${product._id}`)}
-    className="
-      absolute
-      bottom-0
-      left-1/2
-      -translate-x-1/2
-      w-full
+            !min-h-0
 
-      opacity-100
-      translate-y-0
+            !px-2
+            !py-0
 
-      sm:opacity-0
-      sm:translate-y-6
+            !text-[8px]
+            sm:!text-[9px]
+            md:!text-[10px]
 
-      sm:group-hover:opacity-100
-      sm:group-hover:translate-y-0
+            opacity-100
+            translate-y-0
 
-      transition-all
-      duration-500
-    "
-  />
+            sm:opacity-0
+            sm:translate-y-2
 
-  {/* LEFT ARROW */}
-  <button
-    onClick={(e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      prevSlide();
-    }}
-    className="
-      absolute
-      left-4
-      top-1/2
-      -translate-y-1/2
+            sm:group-hover:opacity-100
+            sm:group-hover:translate-y-0
 
-      w-10
-      h-10
-      rounded-full
+            transition-all
+            duration-300
+          "
+        />
 
-      bg-white/90
-      dark:bg-gray-900/90
+        {/* ================= PREVIOUS BUTTON ================= */}
+        {images.length > 1 && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              prevSlide();
+            }}
+            aria-label="Previous image"
+            className="
+              absolute
 
-      text-gray-900
-      dark:text-white
+              left-1
+              sm:left-1.5
+              md:left-2
 
-      flex
-      items-center
-      justify-center
+              top-1/2
+              -translate-y-1/2
 
-      shadow-md
-      dark:shadow-black/40
+              w-5
+              h-5
 
-      opacity-0
-      group-hover:opacity-100
+              sm:w-6
+              sm:h-6
 
-      transition-all
-      duration-300
+              md:w-7
+              md:h-7
 
-      hover:scale-110
-    "
-  >
-    <FaArrowLeftLong size={14} />
-  </button>
+              rounded-full
 
-  {/* RIGHT ARROW */}
-  <button
-    onClick={(e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      nextSlide();
-    }}
-    className="
-      absolute
-      right-4
-      top-1/2
-      -translate-y-1/2
+              bg-white/90
+              dark:bg-gray-900/90
 
-      w-10
-      h-10
-      rounded-full
+              text-gray-900
+              dark:text-white
 
-      bg-white/90
-      dark:bg-gray-900/90
+              flex
+              items-center
+              justify-center
 
-      text-gray-900
-      dark:text-white
+              shadow-sm
 
-      flex
-      items-center
-      justify-center
+              opacity-0
+              group-hover:opacity-100
 
-      shadow-md
-      dark:shadow-black/40
+              transition-all
+              duration-300
 
-      opacity-0
-      group-hover:opacity-100
+              hover:scale-105
 
-      transition-all
-      duration-300
+              z-10
+            "
+          >
+            <FaArrowLeftLong
+              className="
+                text-[7px]
+                sm:text-[8px]
+                md:text-[9px]
+              "
+            />
+          </button>
+        )}
 
-      hover:scale-110
-    "
-  >
-    <FaArrowRightLong size={14} />
-  </button>
-</div>
+        {/* ================= NEXT BUTTON ================= */}
+        {images.length > 1 && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              nextSlide();
+            }}
+            aria-label="Next image"
+            className="
+              absolute
 
+              right-1
+              sm:right-1.5
+              md:right-2
 
+              top-1/2
+              -translate-y-1/2
 
+              w-5
+              h-5
 
-</div>
+              sm:w-6
+              sm:h-6
 
-);
+              md:w-7
+              md:h-7
 
+              rounded-full
+
+              bg-white/90
+              dark:bg-gray-900/90
+
+              text-gray-900
+              dark:text-white
+
+              flex
+              items-center
+              justify-center
+
+              shadow-sm
+
+              opacity-0
+              group-hover:opacity-100
+
+              transition-all
+              duration-300
+
+              hover:scale-105
+
+              z-10
+            "
+          >
+            <FaArrowRightLong
+              className="
+                text-[7px]
+                sm:text-[8px]
+                md:text-[9px]
+              "
+            />
+          </button>
+        )}
+      </div>
+    </div>
+  );
 };
-
 
 export default Carousel;

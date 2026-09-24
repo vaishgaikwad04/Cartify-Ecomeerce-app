@@ -74,18 +74,11 @@ const PrivateRoute = () => {
     );
   }
 
-  // Not logged in
   if (!user) {
-    return <Navigate to="/auth?mode=login" replace />;
-  }
+  return <Navigate to="/auth?mode=login" replace />;
+}
 
-  // Admin trying to access user-only route
-  if (user.role === "admin") {
-    return <Navigate to="/admin" replace />;
-  }
-
-  // Normal user
-  return <Outlet />;
+return <Outlet />;
 };
 
 export default PrivateRoute;

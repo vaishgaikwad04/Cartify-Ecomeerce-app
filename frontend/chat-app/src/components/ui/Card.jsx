@@ -3,8 +3,11 @@ import Carousel from "./ImageCarousel";
 import WishlistButton from "./WishListButton";
 import { ThemeContext } from "../../context/ThemeContext";
 
-
-const Card = ({ product, isWishlisted, onToggleWishlist }) => {
+const Card = ({
+  product,
+  isWishlisted,
+  onToggleWishlist,
+}) => {
   const { theme } = useContext(ThemeContext);
 
   const isDark = theme === "Dark Mode";
@@ -12,9 +15,17 @@ const Card = ({ product, isWishlisted, onToggleWishlist }) => {
   return (
     <div
       className={`
+        group
         w-full
-        rounded-xl
+        min-w-0
         overflow-hidden
+
+        rounded
+        sm:rounded-md
+        md:rounded-lg
+
+        border
+
         transition-all
         duration-300
 
@@ -22,33 +33,41 @@ const Card = ({ product, isWishlisted, onToggleWishlist }) => {
           isDark
             ? `
               bg-gray-900
-              border
               border-gray-800
               hover:border-gray-700
-              hover:shadow-2xl
-              `
+              hover:shadow-md
+            `
             : `
               bg-white
-              border
               border-gray-200
               hover:border-gray-300
-              hover:shadow-lg
-              `
+              hover:shadow-sm
+            `
         }
       `}
     >
-      {/* Product Images */}
-    
-     
-      <div className="relative">
-        
+      {/* ================= PRODUCT IMAGE ================= */}
+      <div className="relative w-full min-w-0">
         <Carousel
           product={product}
-          images={product.images}
+          images={product?.images || []}
         />
-        
 
-        <div className="absolute top-4 right-4 z-10">
+        {/* ================= WISHLIST ================= */}
+        <div
+          className="
+            absolute
+            top-1
+            right-1
+            sm:top-1
+            sm:right-1
+            md:top-1.5
+            md:right-1.5
+            lg:top-2
+            lg:right-2
+            z-20
+          "
+        >
           <WishlistButton
             productId={product._id}
             isWishlisted={isWishlisted}
@@ -57,14 +76,49 @@ const Card = ({ product, isWishlisted, onToggleWishlist }) => {
         </div>
       </div>
 
-      {/* Product Details */}
-      <div className="p-5 text-center">
+      {/* ================= PRODUCT DETAILS ================= */}
+      <div
+        className="
+          w-full
+          min-w-0
+          text-center
+
+          px-1
+          py-1.5
+
+          sm:px-1.5
+          sm:py-2
+
+          md:px-2
+          md:py-2.5
+
+          lg:px-3
+          lg:py-3
+
+          xl:px-3
+          xl:py-3.5
+        "
+      >
+        {/* Product Name */}
         <h2
           className={`
-            text-lg
+            text-[8px]
+            sm:text-[9px]
+            md:text-[11px]
+            lg:text-xs
+            xl:text-sm
+
             font-semibold
-            mb-2
-            transition-colors
+            leading-tight
+
+            line-clamp-2
+
+            min-h-[1.25rem]
+            sm:min-h-[1.4rem]
+            md:min-h-[1.7rem]
+
+            mb-0.5
+            sm:mb-1
 
             ${
               isDark
@@ -73,13 +127,24 @@ const Card = ({ product, isWishlisted, onToggleWishlist }) => {
             }
           `}
         >
-          {product.name}
+          {product?.name}
         </h2>
 
+        {/* Brand */}
         <p
           className={`
-            text-sm
-            mb-4
+            text-[7px]
+            sm:text-[8px]
+            md:text-[9px]
+            lg:text-[10px]
+            xl:text-[11px]
+
+            leading-tight
+            truncate
+
+            mb-1
+            sm:mb-1.5
+            md:mb-2
 
             ${
               isDark
@@ -88,13 +153,31 @@ const Card = ({ product, isWishlisted, onToggleWishlist }) => {
             }
           `}
         >
-          {product.brand}
+          {product?.brand}
         </p>
 
-        <div className="flex items-center justify-center gap-3">
+        {/* ================= PRICE ================= */}
+        <div
+          className="
+            flex
+            items-center
+            justify-center
+            gap-0.5
+            sm:gap-1
+            md:gap-1.5
+            lg:gap-2
+
+            whitespace-nowrap
+          "
+        >
+          {/* Original price */}
           <del
             className={`
-              text-sm
+              text-[7px]
+              sm:text-[8px]
+              md:text-[9px]
+              lg:text-[10px]
+              xl:text-[11px]
 
               ${
                 isDark
@@ -103,12 +186,18 @@ const Card = ({ product, isWishlisted, onToggleWishlist }) => {
               }
             `}
           >
-            ₹{product.price}
+            ₹{product?.price}
           </del>
 
+          {/* Discount price */}
           <span
             className={`
-              text-xl
+              text-[8px]
+              sm:text-[9px]
+              md:text-[10px]
+              lg:text-xs
+              xl:text-sm
+
               font-bold
 
               ${
@@ -118,11 +207,10 @@ const Card = ({ product, isWishlisted, onToggleWishlist }) => {
               }
             `}
           >
-            ₹{product.discountPrice}
+            ₹{product?.discountPrice}
           </span>
         </div>
       </div>
-     
     </div>
   );
 };

@@ -1,8 +1,14 @@
-
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 
-const ActionMenu = ({ row, onEdit,onView, onDelete, disableDelete = false, }) => {
+const ActionMenu = ({
+  row,
+  onEdit,
+  onView,
+  onDelete,
+  disableDelete = false,
+  showView = true,
+}) => {
   const [open, setOpen] = useState(false);
 
   const { theme } = useContext(ThemeContext);
@@ -71,39 +77,40 @@ const ActionMenu = ({ row, onEdit,onView, onDelete, disableDelete = false, }) =>
             Edit
           </button>
 
-           
+          {showView && onView && (
+            <button
+              type="button"
+              onClick={() => {
+                onView(row._id);
+                setOpen(false);
+              }}
+              className={`
+      w-full px-4 py-2.5
+      text-left text-sm
+      transition-colors duration-150
+
+      ${
+        isDark
+          ? "text-gray-200 hover:bg-gray-700"
+          : "text-gray-700 hover:bg-gray-100"
+      }
+    `}
+            >
+              View
+            </button>
+          )}
+
+          {/* DELETE */}
           <button
             type="button"
+            disabled={disableDelete}
             onClick={() => {
-              onView(row._id);
-              setOpen(false);
+              if (!disableDelete && onDelete) {
+                onDelete(row._id);
+                setOpen(false);
+              }
             }}
             className={`
-              w-full px-4 py-2.5
-              text-left text-sm
-              transition-colors duration-150
-
-              ${
-                isDark
-                  ? "text-gray-200 hover:bg-gray-700"
-                  : "text-gray-700 hover:bg-gray-100"
-              }
-            `}
-          >
-            View
-          </button> 
-
-        {/* DELETE */}
-<button
-  type="button"
-  disabled={disableDelete}
-  onClick={() => {
-    if (!disableDelete && onDelete) {
-      onDelete(row._id);
-      setOpen(false);
-    }
-  }}
-  className={`
     w-full px-4 py-2.5
     text-left text-sm
     transition-colors duration-150
@@ -118,9 +125,9 @@ const ActionMenu = ({ row, onEdit,onView, onDelete, disableDelete = false, }) =>
           : "text-red-500 hover:bg-red-50"
     }
   `}
->
-  Delete
-</button>
+          >
+            Delete
+          </button>
         </div>
       )}
     </div>

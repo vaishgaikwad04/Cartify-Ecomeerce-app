@@ -1,3 +1,4 @@
+
 import React, {
   useEffect,
   useState,
@@ -20,7 +21,10 @@ export const useCartPrev = () => {
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "Dark Mode";
 
-  // Get cart data and cart functions from CartContext
+  // ============================================
+  // CART CONTEXT
+  // ============================================
+
   const {
     cartData,
     handleIncrease,
@@ -30,20 +34,37 @@ export const useCartPrev = () => {
     fetchCart,
   } = useCart();
 
-  // Coupon states
+  // ============================================
+  // FETCH CART WHEN CART PAGE OPENS
+  // ============================================
+
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
+  // ============================================
+  // COUPON STATES
+  // ============================================
+
   const [coupons, setCoupons] = useState([]);
   const [selectedCoupon, setSelectedCoupon] = useState(null);
   const [discountAmount, setDiscountAmount] = useState(0);
   const [finalAmount, setFinalAmount] = useState(0);
 
-  // Calculate final amount
+  // ============================================
+  // CALCULATE FINAL AMOUNT
+  // ============================================
+
   useEffect(() => {
     setFinalAmount(
       Math.max(0, totalPrice - discountAmount)
     );
   }, [totalPrice, discountAmount]);
 
-  // Fetch available coupons
+  // ============================================
+  // FETCH AVAILABLE COUPONS
+  // ============================================
+
   const fetchCouponsData = async () => {
     try {
       const res = await getCoupons();
@@ -68,7 +89,10 @@ export const useCartPrev = () => {
     fetchCouponsData();
   }, []);
 
-  // Apply coupon
+  // ============================================
+  // APPLY COUPON
+  // ============================================
+
   const handleSelectCoupon = async (code) => {
     try {
       const res = await applyCoupon({
@@ -86,15 +110,25 @@ export const useCartPrev = () => {
       setSelectedCoupon(code);
       setDiscountAmount(discount);
       setFinalAmount(total);
+
+      toast.success("Coupon applied successfully");
     } catch (error) {
       console.error(
         "Coupon apply error:",
         error?.response?.data || error?.message
       );
+
+      toast.error(
+        error?.response?.data?.message ||
+          "Unable to apply coupon"
+      );
     }
   };
 
-  // Checkout
+  // ============================================
+  // CHECKOUT
+  // ============================================
+
   const handleCheckout = () => {
     if (!cartData || cartData.length === 0) {
       toast.error("Your cart is empty");
@@ -106,8 +140,12 @@ export const useCartPrev = () => {
     navigate("/checkout");
   };
 
+  // ============================================
+  // RETURN
+  // ============================================
+
   return {
-    // Cart Context
+    // Cart
     cartData,
     handleIncrease,
     handleDecrease,
