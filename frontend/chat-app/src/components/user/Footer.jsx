@@ -20,12 +20,14 @@ const Footer = () => {
 
   return (
     <footer className="w-full">
-      {/* ================= MAIN FOOTER ================= */}
+      {/* =========================================================
+          MAIN FOOTER
+      ========================================================= */}
       <section
         className={`
+          w-full
           transition-colors
           duration-300
-
           ${
             isDark
               ? "bg-gray-900 text-white"
@@ -33,9 +35,12 @@ const Footer = () => {
           }
         `}
       >
-        {/* ================= CONTAINER ================= */}
+        {/* =========================================================
+            FOOTER CONTAINER
+        ========================================================= */}
         <div
           className="
+            w-full
             max-w-[1800px]
             mx-auto
 
@@ -43,64 +48,80 @@ const Footer = () => {
             sm:px-6
             md:px-8
             lg:px-10
+            xl:px-12
 
-            py-10
-            sm:py-12
-            md:py-14
-            lg:py-16
+            py-8
+            sm:py-10
+            md:py-12
+            lg:py-14
           "
         >
-          {/* ================= FOOTER GRID ================= */}
+          {/* =====================================================
+              FOOTER GRID
+
+              Mobile  : 2 columns
+              Tablet  : 2 columns
+              Desktop : 4 columns
+          ===================================================== */}
           <div
             className="
               grid
               grid-cols-4
-
-              sm:grid-cols-4
-
               lg:grid-cols-4
 
-              gap-8
-              sm:gap-10
-              lg:gap-12
+              gap-x-6
+              gap-y-8
+
+              sm:gap-x-8
+              sm:gap-y-10
+
+              md:gap-x-10
+
+              lg:gap-x-12
+              lg:gap-y-0
             "
           >
-            {/* ================================================= */}
-            {/* BRAND / CONTACT */}
-            {/* ================================================= */}
-            <div>
-              {/* Brand */}
+            {/* ===================================================
+                BRAND / CONTACT
+            =================================================== */}
+            <div className="min-w-0">
+              {/* BRAND */}
               <h2
                 onClick={() => navigate("/")}
                 className="
                   cursor-pointer
 
                   text-sm
-                  sm:text-md
+                  sm:text-base
                   md:text-lg
 
                   font-serif
-                  tracking-[4px]
-                  sm:tracking-[5px]
+                  font-medium
+
+                  tracking-[3px]
+                  sm:tracking-[4px]
+                  md:tracking-[5px]
 
                   uppercase
+
+                  whitespace-nowrap
                 "
               >
                 Cartify
               </h2>
 
-              {/* Description */}
+              {/* DESCRIPTION */}
               <p
                 className={`
                   mt-3
 
-                  text-xs
-                  sm:text-xs
-
-                  leading-5
-                  sm:leading-sm
-
                   max-w-[280px]
+
+                  text-[10px]
+                  sm:text-xs
+                  md:text-sm
+
+                  leading-relaxed
 
                   ${
                     isDark
@@ -114,14 +135,20 @@ const Footer = () => {
                 styles all in one place.
               </p>
 
-              {/* ================= SOCIAL ICONS ================= */}
+              {/* =================================================
+                  SOCIAL ICONS
+              ================================================= */}
               <div
                 className={`
                   flex
+                  items-center
+
                   gap-2
-                  sm:gap-3
+                  sm:gap-2.5
+                  md:gap-3
 
                   mt-4
+                  sm:mt-5
 
                   ${
                     isDark
@@ -151,25 +178,31 @@ const Footer = () => {
                   <div
                     key={index}
                     className={`
-                      w-8
-                      h-8
-
-                      sm:w-9
-                      sm:h-9
-
                       flex
                       items-center
                       justify-center
 
+                      shrink-0
+
+                      w-7
+                      h-7
+
+                      sm:w-8
+                      sm:h-8
+
+                      md:w-9
+                      md:h-9
+
                       rounded-full
 
-                      text-xs
+                      text-[10px]
                       sm:text-xs
 
                       cursor-pointer
 
                       hover:scale-110
-                      transition
+                      transition-transform
+                      duration-200
 
                       ${
                         isDark
@@ -186,20 +219,22 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* ================================================= */}
-            {/* CATEGORIES */}
-            {/* ================================================= */}
-            <div>
+            {/* ===================================================
+                CATEGORIES
+            =================================================== */}
+            <div className="min-w-0">
               <h3
                 className="
-                 text-sm
-                  sm:text-md
-                  md:text-lg
+                  text-xs
+                  sm:text-sm
+                  md:text-base
+                  lg:text-lg
 
                   font-medium
 
-                  mb-4
-                  sm:mb-5
+                  mb-3
+                  sm:mb-4
+                  md:mb-5
                 "
               >
                 CATEGORIES
@@ -208,10 +243,12 @@ const Footer = () => {
               <ul
                 className={`
                   space-y-2
-                  sm:space-y-3
+                  sm:space-y-2.5
+                  md:space-y-3
 
-                  text-xs
+                  text-[10px]
                   sm:text-xs
+                  md:text-sm
 
                   ${
                     isDark
@@ -234,7 +271,9 @@ const Footer = () => {
                         relative
                         group
                         inline-block
-                        transition
+
+                        transition-colors
+                        duration-200
 
                         ${
                           isDark
@@ -245,7 +284,7 @@ const Footer = () => {
                     >
                       {path.replace("/", "").toUpperCase()}
 
-                      {/* Hover underline */}
+                      {/* HOVER UNDERLINE */}
                       <span
                         className={`
                           absolute
@@ -253,7 +292,7 @@ const Footer = () => {
                           -bottom-1
 
                           w-0
-                          h-[1px]
+                          h-px
 
                           group-hover:w-full
 
@@ -273,23 +312,25 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* ================================================= */}
-            {/* HELP */}
-            {/* ================================================= */}
-            <div>
+            {/* ===================================================
+                HELP
+            =================================================== */}
+            <div className="min-w-0">
               <h3
                 onClick={() => navigate("/help")}
                 className="
                   cursor-pointer
 
-                text-sm
-                  sm:text-md
-                  md:text-lg
+                  text-xs
+                  sm:text-sm
+                  md:text-base
+                  lg:text-lg
 
                   font-medium
 
-                  mb-4
-                  sm:mb-5
+                  mb-3
+                  sm:mb-4
+                  md:mb-5
                 "
               >
                 HELP
@@ -298,10 +339,12 @@ const Footer = () => {
               <ul
                 className={`
                   space-y-2
-                  sm:space-y-3
+                  sm:space-y-2.5
+                  md:space-y-3
 
-                  text-xs
+                  text-[10px]
                   sm:text-xs
+                  md:text-sm
 
                   ${
                     isDark
@@ -333,6 +376,7 @@ const Footer = () => {
                       to={item.path}
                       className={`
                         inline-block
+
                         transition-colors
                         duration-200
 
@@ -350,158 +394,220 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* ================================================= */}
-            {/* PROMOTIONAL CARDS */}
-            {/* ================================================= */}
-          <div className="space-y-3 sm:space-y-4">
-  {/* ================= ACCESSORIES ================= */}
-  <Link to="/accessories">
-    <div className="flex items-center gap-2.5 sm:gap-3 group cursor-pointer">
-      
-      {/* IMAGE */}
-      <div className="shrink-0 overflow-hidden">
-        <img
-          src="https://mafoil.wpbingosite.com/wp-content/uploads/2022/11/banner-11.jpg"
-          alt="Accessories"
-          className="
-            w-12
-            h-12
+            {/* ===================================================
+                PROMOTIONAL CARDS
+            =================================================== */}
+            <div
+              className="
+                min-w-0
 
-            sm:w-14
-            sm:h-14
+                space-y-3
+                sm:space-y-4
+                md:space-y-5
+              "
+            >
+              {/* =================================================
+                  ACCESSORIES
+              ================================================= */}
+              <Link to="/accessories">
+                <div
+                  className="
+                    flex
+                    items-center
 
-            object-cover
+                    gap-2
+                    sm:gap-2.5
+                    md:gap-3
 
-            group-hover:scale-105
-            transition-transform
-            duration-300
-          "
-        />
-      </div>
+                    group
+                    cursor-pointer
+                  "
+                >
+                  {/* IMAGE */}
+                  <div
+                    className="
+                      shrink-0
+                      overflow-hidden
+                    "
+                  >
+                    <img
+                      src="https://mafoil.wpbingosite.com/wp-content/uploads/2022/11/banner-11.jpg"
+                      alt="Accessories"
+                      className="
+                        w-10
+                        h-10
 
-      {/* TEXT */}
-      <div className="min-w-0">
-        <p
-          className={`
-            text-[8px]
-            sm:text-[9px]
+                        sm:w-12
+                        sm:h-12
 
-            tracking-[2px]
-            sm:tracking-[3px]
+                        md:w-14
+                        md:h-14
 
-            uppercase
-            leading-none
+                        object-cover
 
-            ${
-              isDark
-                ? "text-gray-400"
-                : "text-gray-500"
-            }
-          `}
-        >
-          Accessories
-        </p>
+                        group-hover:scale-105
 
-        <h4
-          className={`
-            mt-1
+                        transition-transform
+                        duration-300
+                      "
+                    />
+                  </div>
 
-            text-[11px]
-            sm:text-xs
+                  {/* TEXT */}
+                  <div className="min-w-0">
+                    <p
+                      className={`
+                        text-[7px]
+                        sm:text-[8px]
+                        md:text-[9px]
 
-            font-normal
-           
+                        tracking-[1.5px]
+                        sm:tracking-[2px]
+                        md:tracking-[3px]
 
-            ${
-              isDark
-                ? "text-white"
-                : "text-gray-800"
-            }
-          `}
-        >
-          Fashion 
-        </h4>
-      </div>
-    </div>
-  </Link>
+                        uppercase
 
-  {/* ================= COLLECTION ================= */}
-  <Link to="/new-in-body">
-    <div className="flex items-center gap-2.5 sm:gap-3 group cursor-pointer">
-      
-      {/* IMAGE */}
-      <div className="shrink-0 overflow-hidden">
-        <img
-          src="https://mafoil.wpbingosite.com/wp-content/plugins/wpbingo/lib/lookbook/images/bwp_lookbook/lookbook-1.jpg"
-          alt="Collection"
-          className="
-            w-12
-            h-12
+                        leading-none
 
-            sm:w-14
-            sm:h-14
+                        ${
+                          isDark
+                            ? "text-gray-400"
+                            : "text-gray-500"
+                        }
+                      `}
+                    >
+                      Accessories
+                    </p>
 
-            object-cover
+                    <h4
+                      className={`
+                        mt-1
 
-            group-hover:scale-105
-            transition-transform
-            duration-300
-          "
-        />
-      </div>
+                        text-[10px]
+                        sm:text-[11px]
+                        md:text-xs
 
-      {/* TEXT */}
-      <div className="min-w-0">
-        <p
-          className={`
-            text-[8px]
-            sm:text-[9px]
+                        font-normal
 
-            tracking-[2px]
-            sm:tracking-[3px]
+                        truncate
 
-            uppercase
-            leading-none
+                        ${
+                          isDark
+                            ? "text-white"
+                            : "text-gray-800"
+                        }
+                      `}
+                    >
+                      Fashion
+                    </h4>
+                  </div>
+                </div>
+              </Link>
 
-            ${
-              isDark
-                ? "text-gray-400"
-                : "text-gray-500"
-            }
-          `}
-        >
-          Collection
-        </p>
+              {/* =================================================
+                  COLLECTION
+              ================================================= */}
+              <Link to="/new-in-body">
+                <div
+                  className="
+                    flex
+                    items-center
 
-        <h4
-          className={`
-            mt-1
+                    gap-2
+                    sm:gap-2.5
+                    md:gap-3
 
-            text-[11px]
-            sm:text-xs
+                    group
+                    cursor-pointer
+                  "
+                >
+                  {/* IMAGE */}
+                  <div
+                    className="
+                      shrink-0
+                      overflow-hidden
+                    "
+                  >
+                    <img
+                      src="https://mafoil.wpbingosite.com/wp-content/plugins/wpbingo/lib/lookbook/images/bwp_lookbook/lookbook-1.jpg"
+                      alt="Collection"
+                      className="
+                        w-10
+                        h-10
 
-            font-normal
-      
+                        sm:w-12
+                        sm:h-12
 
-         
+                        md:w-14
+                        md:h-14
 
-            ${
-              isDark
-                ? "text-white"
-                : "text-gray-800"
-            }
-          `}
-        >
-          Her Style Choice
-        </h4>
-      </div>
-    </div>
-  </Link>
-</div>
+                        object-cover
+
+                        group-hover:scale-105
+
+                        transition-transform
+                        duration-300
+                      "
+                    />
+                  </div>
+
+                  {/* TEXT */}
+                  <div className="min-w-0">
+                    <p
+                      className={`
+                        text-[7px]
+                        sm:text-[8px]
+                        md:text-[9px]
+
+                        tracking-[1.5px]
+                        sm:tracking-[2px]
+                        md:tracking-[3px]
+
+                        uppercase
+
+                        leading-none
+
+                        ${
+                          isDark
+                            ? "text-gray-400"
+                            : "text-gray-500"
+                        }
+                      `}
+                    >
+                      Collection
+                    </p>
+
+                    <h4
+                      className={`
+                        mt-1
+
+                        text-[10px]
+                        sm:text-[11px]
+                        md:text-xs
+
+                        font-normal
+
+                        truncate
+
+                        ${
+                          isDark
+                            ? "text-white"
+                            : "text-gray-800"
+                        }
+                      `}
+                    >
+                      Her Style Choice
+                    </h4>
+                  </div>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* ================= FOOTER BOTTOM ================= */}
+        {/* =========================================================
+            FOOTER BOTTOM
+        ========================================================= */}
         <div
           className={`
             border-t
@@ -522,6 +628,7 @@ const Footer = () => {
               sm:px-6
               md:px-8
               lg:px-10
+              xl:px-12
 
               py-4
               sm:py-5
@@ -535,17 +642,20 @@ const Footer = () => {
               items-center
 
               gap-3
+              sm:gap-4
             "
           >
             {/* COPYRIGHT */}
             <p
               className={`
-                text-[10px]
-                sm:text-xs
+                text-[9px]
+                sm:text-[10px]
                 md:text-xs
 
-                transition
-                cursor-default
+                text-center
+                sm:text-left
+
+                transition-colors
 
                 ${
                   isDark
@@ -557,16 +667,21 @@ const Footer = () => {
               © 2026 Cartify. Crafted with care.
             </p>
 
-            {/* ================= PAYMENT METHODS ================= */}
+            {/* =====================================================
+                PAYMENT METHODS
+            ===================================================== */}
             <div
               className={`
                 flex
+                items-center
 
-                gap-4
-                sm:gap-5
+                gap-3
+                sm:gap-4
+                md:gap-5
 
-                text-xs
-                sm:text-xs
+                text-[9px]
+                sm:text-[10px]
+                md:text-xs
 
                 font-semibold
 
@@ -577,15 +692,15 @@ const Footer = () => {
                 }
               `}
             >
-              <span className="hover:text-black transition cursor-pointer">
+              <span className="hover:text-black transition-colors cursor-pointer">
                 Mastercard
               </span>
 
-              <span className="hover:text-black transition cursor-pointer">
+              <span className="hover:text-black transition-colors cursor-pointer">
                 VISA
               </span>
 
-              <span className="hover:text-black transition cursor-pointer">
+              <span className="hover:text-black transition-colors cursor-pointer">
                 PayPal
               </span>
             </div>

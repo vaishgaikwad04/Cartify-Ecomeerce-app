@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-import {
-  FaArrowLeftLong,
-  FaArrowRightLong,
-} from "react-icons/fa6";
+import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate, Link } from "react-router-dom";
 import Button from "./Button";
 
-const Carousel = ({
-  images = [],
-  product,
-}) => {
+const Carousel = ({ images = [], product }) => {
   const navigate = useNavigate();
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -34,29 +28,19 @@ const Carousel = ({
           bg-gray-100
         "
       >
-        <span className="text-xs text-gray-400">
-          No Image
-        </span>
+        <span className="text-xs text-gray-400">No Image</span>
       </div>
     );
   }
 
   // Next image
   const nextSlide = () => {
-    setCurrentIndex((prev) =>
-      prev === images.length - 1
-        ? 0
-        : prev + 1
-    );
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
   // Previous image
   const prevSlide = () => {
-    setCurrentIndex((prev) =>
-      prev === 0
-        ? images.length - 1
-        : prev - 1
-    );
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
   // Show second image when hovering
@@ -86,28 +70,11 @@ const Carousel = ({
       {/* ================= IMAGE CONTAINER ================= */}
       <div
         className="
-          relative
-          w-full
-          overflow-hidden
-
-          /* Mobile */
-          h-[160px]
-
-          /* Small phones */
-          sm:h-[290px]
-
-          /* Tablet */
-          md:h-[240px]
-
-          /* Desktop */
-          lg:h-[346px]
-
-          /* Large desktop */
-          xl:h-[320px]
-
-          /* Extra large */
-          2xl:h-[350px]
-        "
+    relative
+    w-full
+    aspect-[4/5]
+    overflow-hidden
+  "
       >
         {/* ================= PRODUCT LINK ================= */}
         <Link
@@ -138,11 +105,7 @@ const Carousel = ({
 
                 group-hover:scale-[1.03]
 
-                ${
-                  index === currentIndex
-                    ? "opacity-100"
-                    : "opacity-0"
-                }
+                ${index === currentIndex ? "opacity-100" : "opacity-0"}
               `}
             />
           ))}
@@ -167,11 +130,7 @@ const Carousel = ({
         <Button
           label="Quick Add"
           variant="secondary"
-          onClick={() =>
-            navigate(
-              `/description/${product?._id}`
-            )
-          }
+          onClick={() => navigate(`/description/${product?._id}`)}
           className="
             absolute
             left-1/2

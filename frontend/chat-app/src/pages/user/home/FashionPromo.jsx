@@ -57,11 +57,10 @@ const FashionPromo = () => {
             }
           }}
           className="
-            h-[400px]
-            sm:h-[400px]
-            lg:h-[720px]
-            rounded
-          "
+  aspect-[3/4]
+  w-full
+  rounded
+"
         >
           <div className="relative z-50">
             {/* PLUS BUTTON */}

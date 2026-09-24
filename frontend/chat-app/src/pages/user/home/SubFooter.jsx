@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from "react";
 
 import Button from "../../../components/ui/Button";
@@ -25,6 +26,7 @@ const SubFooter = () => {
       return;
     }
 
+    // Validate email
     if (!/\S+@\S+\.\S+/.test(email)) {
       toast.error("Please enter a valid email address.");
       return;
@@ -43,12 +45,12 @@ const SubFooter = () => {
           w-full
           transition-colors
           duration-300
-
           ${isDark ? "bg-black text-white" : "bg-[#1f1f21] text-white"}
         `}
       >
         <div
           className="
+            w-full
             max-w-[1800px]
             mx-auto
 
@@ -63,31 +65,32 @@ const SubFooter = () => {
             lg:py-12
           "
         >
+          {/* ================= CONTENT ================= */}
           <div
             className="
               grid
               grid-cols-3
-              md:grid-cols-3
-
               items-center
 
-              gap-4
-              sm:gap-5
+              gap-3
+              sm:gap-4
               md:gap-6
               lg:gap-8
             "
           >
             {/* ================= TITLE ================= */}
-            <div>
+            <div className="min-w-0">
               <h2
                 className="
-                  text-xs
-                  sm:text-sm
-                  md:text-md
+                  text-[10px]
+                  sm:text-xs
+                  md:text-sm
                   lg:text-lg
 
                   font-light
                   tracking-wide
+
+                  whitespace-nowrap
                 "
               >
                 NEWSLETTER
@@ -95,22 +98,28 @@ const SubFooter = () => {
             </div>
 
             {/* ================= DESCRIPTION ================= */}
-            <div>
+            <div className="min-w-0">
               <p
                 className={`
+                  w-full
                   max-w-[240px]
 
-                  text-xs
-                  sm:text-xs
-                  md:text-sm
+                  text-[9px]
+                  sm:text-[10px]
+                  md:text-xs
+                  lg:text-sm
 
-                  leading-5
-                  sm:leading-5
+                  leading-relaxed
 
-                  ${isDark ? "text-gray-300" : "text-gray-200"}
+                  ${
+                    isDark
+                      ? "text-gray-300"
+                      : "text-gray-200"
+                  }
                 `}
               >
-                Subscribe to the weekly newsletter for all the latest updates
+                Subscribe to the weekly newsletter for all the latest
+                updates
               </p>
             </div>
 
@@ -118,15 +127,19 @@ const SubFooter = () => {
             <form
               onSubmit={handleSubscribe}
               className="
-    flex
-    flex-col
-    sm:flex-row
-    items-stretch
-    w-full
-    max-w-[390px]
-  "
+                flex
+                flex-row
+                items-center
+
+                w-full
+                min-w-0
+                max-w-[390px]
+
+                gap-1
+                sm:gap-1.5
+              "
             >
-              {/* EMAIL */}
+              {/* ================= EMAIL ================= */}
               <InputField
                 type="email"
                 value={email}
@@ -134,44 +147,57 @@ const SubFooter = () => {
                 placeholder="Email..."
                 disabled={isSubscribed}
                 className={`
-      !h-[30px]
-      !min-h-[30px]
-      !px-2
-      !py-0
-      !text-[11px]
-      !leading-none
+                  w-full
+                  min-w-0
 
-      ${
-        isDark
-          ? "bg-gray-900 text-white border-gray-700"
-          : "bg-[#f5f5f5] text-black"
-      }
-    `}
+                  !h-[30px]
+                  !min-h-[30px]
+
+                  !px-2
+                  !py-0
+
+                  !text-[9px]
+                  sm:!text-[10px]
+                  md:!text-[11px]
+
+                  !leading-none
+
+                  ${
+                    isDark
+                      ? "bg-gray-900 text-white border-gray-700"
+                      : "bg-[#f5f5f5] text-black"
+                  }
+                `}
               />
 
-              {/* SUBSCRIBE */}
+              {/* ================= SUBSCRIBE ================= */}
               <Button
                 type="submit"
                 label={isSubscribed ? "Subscribed" : "Subscribe"}
                 variant="danger"
                 disabled={isSubscribed}
                 className="
-      !w-full
-      sm:!w-auto
+                  !w-auto
+                  !min-w-[65px]
+                  sm:!min-w-[75px]
 
-      !min-w-[75px]
-      !h-[30px]
-      !min-h-[30px]
+                  !h-[30px]
+                  !min-h-[30px]
 
-      !px-2
-      !py-0
-      !mt-0
-      !ml-0
-      sm:!ml-1
+                  !px-2
+                  sm:!px-2.5
 
-      !text-[10px]
-      sm:!text-[11px]
-    "
+                  !py-0
+
+                  !mt-0
+                  !ml-0
+
+                  !text-[9px]
+                  sm:!text-[10px]
+                  md:!text-[11px]
+
+                  whitespace-nowrap
+                "
               />
             </form>
           </div>
