@@ -30,32 +30,38 @@ const Category = () => {
         {showFilter ? "Hide Filter" : "Show Filter"}
       </button>
 
-      <div className="flex gap-6">
+      <div className="flex gap-4 md:gap-6">
         {/* FILTER */}
         <div
-          className={`${showFilter ? "w-48" : "w-0"} overflow-hidden py-12 `}
+          className={`
+            shrink-0
+            overflow-hidden
+            transition-all
+            duration-300
+            ${showFilter ? "w-32 sm:w-40 md:w-44 lg:w-48" : "w-0"}
+          `}
         >
-          {/* Filter products based on stock availability */}
-          <Filter
-            title="Availability"
-            options={[
-              {
-                label: "In Stock",
-                checked: stockFilter === "inStock",
-                onChange: () => setStockFilter("inStock"),
-              },
-              {
-                label: "Out Of Stock",
-                checked: stockFilter === "outOfStock",
-                onChange: () => setStockFilter("outOfStock"),
-              },
-            ]}
-          />
+          <div className="py-4">
+            <Filter
+              title="Availability"
+              options={[
+                {
+                  label: "In Stock",
+                  checked: stockFilter === "inStock",
+                  onChange: () => setStockFilter("inStock"),
+                },
+                {
+                  label: "Out Of Stock",
+                  checked: stockFilter === "outOfStock",
+                  onChange: () => setStockFilter("outOfStock"),
+                },
+              ]}
+            />
+          </div>
         </div>
 
         {/* PRODUCTS */}
-        <div className="flex-1">
-          {/* Show loading message while products are loading */}
+        <div className="flex-1 min-w-0">
           {loading ? (
             <p className="text-center">Loading...</p>
           ) : filteredData.length === 0 ? (
@@ -63,12 +69,9 @@ const Category = () => {
               <p className="text-lg font-medium text-gray-600">
                 No products found
               </p>
-
-    
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
-              {/* Display filtered products */}
+            <div className="grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
               {filteredData.map((product) => (
                 <Card
                   key={product._id}

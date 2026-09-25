@@ -36,11 +36,10 @@ const Profile = () => {
       icon: <FiMapPin />,
       path: "/addresses",
     },
-
     {
       title: "Help & Support",
       description: "Get help with your orders and account",
-      icon: <CircleHelp size={20} />,
+      icon: <CircleHelp size={18} />,
       path: "/help",
     },
     {
@@ -60,39 +59,38 @@ const Profile = () => {
           flex
           items-center
           justify-center
-
+          px-3
           ${isDark ? "bg-gray-950 text-white" : "bg-gray-50 text-gray-900"}
         `}
       >
-        <p className="text-sm opacity-60">Loading profile...</p>
+        <p className="text-xs sm:text-sm opacity-60">Loading profile...</p>
       </div>
     );
   }
 
-  // MAIN UI
   return (
     <div
       className={`
         min-h-screen
-        px-4
-        sm:px-6
-        py-10
+        px-3
+        sm:px-4
+        py-4
+        sm:py-5
         transition-colors
         duration-300
-
         ${isDark ? "bg-gray-950 text-white" : "bg-gray-50 text-gray-900"}
       `}
     >
-      <div className="max-w-[1800px] mx-auto">
-        {/* PAGE HEADER*/}
-        <div className="mb-8">
+      <div className="max-w-[1200px] mx-auto">
+        {/* ================= PAGE HEADER ================= */}
+        <div className="mb-4 sm:mb-5">
           <p
             className={`
-              text-xs
+              text-[10px]
+              sm:text-xs
               uppercase
-              tracking-[3px]
+              tracking-[2px]
               font-medium
-
               ${isDark ? "text-gray-500" : "text-gray-400"}
             `}
           >
@@ -101,9 +99,10 @@ const Profile = () => {
 
           <h1
             className="
-              mt-2
-              text-3xl
-              md:text-4xl
+              mt-1
+              text-xl
+              sm:text-2xl
+              md:text-3xl
               font-semibold
               tracking-tight
             "
@@ -113,9 +112,9 @@ const Profile = () => {
 
           <p
             className={`
-              mt-2
-              text-sm
-
+              mt-1
+              text-xs
+              sm:text-sm
               ${isDark ? "text-gray-400" : "text-gray-500"}
             `}
           >
@@ -123,16 +122,15 @@ const Profile = () => {
           </p>
         </div>
 
-        {/*PROFILE CARD*/}
+        {/* ================= PROFILE CARD ================= */}
         <div
           className={`
-            rounded-2xl
+            rounded-xl
             border
-            p-6
-            md:p-8
-            mb-6
+            p-3
+            sm:p-4
+            mb-4
             shadow-sm
-
             ${
               isDark
                 ? "bg-gray-800 border-gray-800"
@@ -140,125 +138,131 @@ const Profile = () => {
             }
           `}
         >
-          <div className="flex flex-col md:flex-row md:items-center gap-6">
-            {/* ==================================
-                AVATAR
-            ================================== */}
-
+          <div
+            className="
+    grid
+    grid-cols-[1fr_auto]
+    sm:grid-cols-[1fr_auto]
+    items-center
+    gap-3
+    sm:gap-4
+  "
+          >
+            {/* AVATAR + USER INFORMATION */}
             <div
-              className={`
-                w-20
-                h-20
-                rounded-full
-                flex
-                items-center
-                justify-center
-                shrink-0
-
-                text-2xl
-                font-semibold
-                text-white
-
-                ${
-                  isDark
-                    ? "bg-gradient-to-br from-gray-600 to-black"
-                    : "bg-gray-900"
-                }
-              `}
+              className="
+      grid
+      grid-cols-[auto_1fr]
+      items-center
+      gap-3
+      min-w-0
+    "
             >
-              {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
-            </div>
+              {/* AVATAR */}
+              <div
+                className={`
+        w-10
+        h-10
+        sm:w-14
+        sm:h-14
+        rounded-full
+        flex
+        items-center
+        justify-center
+        shrink-0
+        text-lg
+        sm:text-xl
+        font-semibold
+        text-white
+        ${isDark ? "bg-gradient-to-br from-gray-600 to-black" : "bg-gray-900"}
+      `}
+              >
+                {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
+              </div>
 
-            {/* ==================================
-                USER INFORMATION
-            ================================== */}
+              {/* USER INFORMATION */}
+              <div className="min-w-0">
+                <h2 className="text-base sm:text-lg font-semibold truncate">
+                  {profileData?.name || "User"}
+                </h2>
 
-            <div className="flex-1 min-w-0">
-              <h2 className="text-2xl font-semibold">
-                {profileData?.name || "User"}
-              </h2>
+                <div className="mt-1.5 grid gap-1">
+                  {/* EMAIL */}
+                  {profileData?.email && (
+                    <div
+                      className={`
+              grid
+              grid-cols-[auto_1fr]
+              items-center
+              gap-1.5
+              text-xs
+              sm:text-sm
+              break-all
+              ${isDark ? "text-gray-400" : "text-gray-500"}
+            `}
+                    >
+                      <FiMail className="text-xs" />
+                      <span className="text-xs">{profileData.email}</span>
+                    </div>
+                  )}
 
-              <div className="mt-3 flex flex-col gap-2">
-                {/* EMAIL */}
-
-                {profileData?.email && (
-                  <div
-                    className={`
-                      flex
-                      items-center
-                      gap-2
-                      text-sm
-                      break-all
-
-                      ${isDark ? "text-gray-400" : "text-gray-500"}
-                    `}
-                  >
-                    <FiMail className="shrink-0" />
-
-                    <span>{profileData.email}</span>
-                  </div>
-                )}
-
-                {/* PHONE */}
-
-                {profileData?.phone && (
-                  <div
-                    className={`
-                      flex
-                      items-center
-                      gap-2
-                      text-sm
-
-                      ${isDark ? "text-gray-400" : "text-gray-500"}
-                    `}
-                  >
-                    <FiPhone className="shrink-0" />
-
-                    <span>{profileData.phone}</span>
-                  </div>
-                )}
+                  {/* PHONE */}
+                  {profileData?.phone && (
+                    <div
+                      className={`
+              grid
+              grid-cols-[auto_1fr]
+              items-center
+              gap-1.5
+              text-xs
+              sm:text-sm
+              ${isDark ? "text-gray-400" : "text-gray-500"}
+            `}
+                    >
+                      <FiPhone className="text-sm" />
+                      <span>{profileData.phone}</span>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
-            {/* ==================================
-                EDIT PROFILE
-            ================================== */}
-
+            {/* EDIT PROFILE */}
             <button
               type="button"
               onClick={() => navigate("/settings")}
               className={`
-                w-full
-                md:w-auto
-
-                px-5
-                py-2.5
-                rounded-lg
-                text-sm
-                font-medium
-                border
-                transition-all
-
-                ${
-                  isDark
-                    ? "border-gray-700 hover:bg-gray-800"
-                    : "border-gray-200 hover:bg-gray-50"
-                }
-              `}
+      w-auto
+      shrink-0
+      px-3
+      sm:px-4
+      py-1.5
+      sm:py-2
+      rounded-lg
+      text-xs
+      sm:text-sm
+      font-medium
+      border
+      transition-all
+      ${
+        isDark
+          ? "border-gray-700 hover:bg-gray-700"
+          : "border-gray-200 hover:bg-gray-50"
+      }
+    `}
             >
               Edit Profile
             </button>
           </div>
         </div>
 
-        {/* ACCOUNT MENU */}
+        {/* ================= ACCOUNT MENU ================= */}
         <div
           className={`
-            rounded-2xl
+            rounded-xl
             border
             overflow-hidden
             shadow-sm
-
             ${
               isDark
                 ? "bg-gray-800 border-gray-800"
@@ -267,15 +271,14 @@ const Profile = () => {
           `}
         >
           {/* ACCOUNT HEADER */}
-
-          <div className="px-6 pt-6 pb-3">
-            <h2 className="text-lg font-semibold">Account</h2>
+          <div className="px-4 pt-4 pb-2">
+            <h2 className="text-sm sm:text-base font-semibold">Account</h2>
 
             <p
               className={`
-                mt-1
-                text-sm
-
+                mt-0.5
+                text-xs
+                sm:text-sm
                 ${isDark ? "text-gray-400" : "text-gray-500"}
               `}
             >
@@ -284,8 +287,7 @@ const Profile = () => {
           </div>
 
           {/* ACCOUNT ITEMS */}
-
-          <div className="p-4">
+          <div className="p-2 sm:p-3">
             {accountItems.map((item) => (
               <button
                 key={item.title}
@@ -295,32 +297,33 @@ const Profile = () => {
                   w-full
                   flex
                   items-center
-                  gap-4
-                  p-4
-                  rounded-xl
+                  gap-2.5
+                  sm:gap-3
+                  p-2.5
+                  sm:p-3
+                  rounded-lg
                   text-left
                   transition-all
                   group
-
-                  ${isDark ? "hover:bg-gray-800" : "hover:bg-gray-50"}
+                  ${isDark ? "hover:bg-gray-700" : "hover:bg-gray-50"}
                 `}
               >
                 {/* ICON */}
-
                 <div
                   className={`
-                    w-11
-                    h-11
-                    rounded-xl
+                    w-9
+                    h-9
+                    sm:w-10
+                    sm:h-10
+                    rounded-lg
                     flex
                     items-center
                     justify-center
-                    text-lg
+                    text-base
                     shrink-0
-
                     ${
                       isDark
-                        ? "bg-gray-800 text-gray-300"
+                        ? "bg-gray-700 text-gray-300"
                         : "bg-gray-100 text-gray-700"
                     }
                   `}
@@ -329,15 +332,16 @@ const Profile = () => {
                 </div>
 
                 {/* CONTENT */}
-
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-medium">{item.title}</h3>
+                  <h3 className="text-xs sm:text-sm font-medium">
+                    {item.title}
+                  </h3>
 
                   <p
                     className={`
-                      mt-1
-                      text-sm
-
+                      mt-0.5
+                      text-[11px]
+                      sm:text-xs
                       ${isDark ? "text-gray-500" : "text-gray-500"}
                     `}
                   >
@@ -346,15 +350,13 @@ const Profile = () => {
                 </div>
 
                 {/* ARROW */}
-
                 <FiChevronRight
                   className={`
-                    text-lg
+                    text-base
                     shrink-0
                     transition-transform
                     duration-300
                     group-hover:translate-x-1
-
                     ${isDark ? "text-gray-600" : "text-gray-400"}
                   `}
                 />
@@ -363,14 +365,14 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* LOGOUT*/}
+        {/* ================= LOGOUT ================= */}
         <div
           className={`
-            mt-6
-            rounded-2xl
+            mt-4
+            rounded-xl
             border
-            p-4
-
+            p-2
+            sm:p-3
             ${
               isDark
                 ? "bg-gray-800 border-gray-800"
@@ -385,47 +387,46 @@ const Profile = () => {
               w-full
               flex
               items-center
-              gap-4
-              p-3
-              rounded-xl
+              gap-2.5
+              sm:gap-3
+              p-2
+              rounded-lg
               text-left
               transition
-
               ${
                 isDark
-                  ? "text-red-400 hover:bg-gray-500/10"
+                  ? "text-red-400 hover:bg-red-500/10"
                   : "text-red-600 hover:bg-red-50"
               }
             `}
           >
             {/* LOGOUT ICON */}
-
             <div
               className={`
-                w-11
-                h-11
-                rounded-xl
+                w-9
+                h-9
+                sm:w-10
+                sm:h-10
+                rounded-lg
                 flex
                 items-center
                 justify-center
                 shrink-0
-
                 ${isDark ? "bg-red-500/10" : "bg-red-50"}
               `}
             >
-              <FiLogOut className="text-lg" />
+              <FiLogOut className="text-base" />
             </div>
 
             {/* LOGOUT CONTENT */}
-
             <div>
-              <h3 className="font-medium">Logout</h3>
+              <h3 className="text-xs sm:text-sm font-medium">Logout</h3>
 
               <p
                 className={`
-                  text-sm
-                  mt-1
-
+                  text-[11px]
+                  sm:text-xs
+                  mt-0.5
                   ${isDark ? "text-gray-500" : "text-gray-500"}
                 `}
               >

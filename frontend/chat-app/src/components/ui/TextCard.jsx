@@ -16,22 +16,22 @@ const TextCard = ({
 
   return (
     <div
-      className={`flex flex-col justify-center ${alignClasses[align]} ${className}`}
+      className={`flex flex-col justify-center  ${alignClasses[align]} ${className}`}
     >
       {subtitle && (
-        <p className="uppercase tracking-[4px] text-sm mb-2 text-gray-500">
+        <p className="uppercase tracking-[4px] text-xs sm:text-sm md:text-md lg:text-lg mb-2 text-gray-500 mt-12">
           {subtitle}
         </p>
       )}
 
       {title && (
-        <h2 className="text-3xl md:text-5xl font-light mb-4 leading-tight">
+        <h2 className="text-xl sm:2xl md:text-3xl lg:text-4xl font-light mb-4 leading-tight">
           {title}
         </h2>
       )}
 
       {description && (
-        <p className="text-gray-600 text-sm md:text-base mb-6 max-w-md">
+        <p className="text-gray-600 text-xs sm:text-sm md:text-md lg:text-lg mb-6 max-w-md">
           {description}
         </p>
       )}

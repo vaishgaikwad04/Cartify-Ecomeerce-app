@@ -9,7 +9,7 @@ import {
 import { useNotification } from "../../../hooks/user/useNotification";
 
 const Notifications = () => {
-  // from the custom notification hook
+  // From the custom notification hook
   const {
     notifications,
     unreadCount,
@@ -45,22 +45,52 @@ const Notifications = () => {
     <div
       className={`
         min-h-screen
-        px-4
-        py-10
+        px-3
+        py-4
+        sm:px-4
+        sm:py-5
+        lg:px-5
         ${isDark ? "bg-gray-950 text-white" : "bg-gray-50 text-gray-900"}
       `}
     >
       {/* Main page container */}
-      <div className="max-w-[1800px] mx-auto">
-        {/*PAGE HEADER*/}
-        <div className="flex items-center justify-between mb-8">
+      <div className="mx-auto w-full max-w-[1200px]">
+
+        {/* PAGE HEADER */}
+        <div
+          className={`
+            mb-4
+            flex
+            items-center
+            justify-between
+            gap-3
+            border-b
+            pb-4
+            sm:mb-5
+            sm:pb-5
+            ${isDark ? "border-white/[0.08]" : "border-gray-200"}
+          `}
+        >
           {/* Page title and description */}
-          <div>
-            <h1 className="text-2xl font-semibold">Notifications</h1>
+          <div className="min-w-0">
+            <h1
+              className={`
+                text-base
+                font-semibold
+                tracking-tight
+                sm:text-lg
+                md:text-xl
+              `}
+            >
+              Notifications
+            </h1>
+
             <p
               className={`
-                mt-1
-                text-sm
+                mt-0.5
+                text-[10px]
+                leading-4
+                sm:text-xs
                 ${isDark ? "text-gray-400" : "text-gray-500"}
               `}
             >
@@ -68,14 +98,17 @@ const Notifications = () => {
             </p>
           </div>
 
-          {/* Show "Mark all as read" only when unread notifications are available */}
+          {/* Mark all as read */}
           {unreadCount > 0 && (
             <button
               type="button"
               onClick={handleMarkAllAsRead}
               className={`
-                text-sm
+                shrink-0
+                text-[10px]
                 font-medium
+                transition-colors
+                sm:text-xs
                 ${
                   isDark
                     ? "text-gray-300 hover:text-white"
@@ -88,78 +121,101 @@ const Notifications = () => {
           )}
         </div>
 
-        {/* Display loading message while notifications are being fetched */}
+        {/* LOADING STATE */}
         {notificationLoading && (
-          <div className="py-20 text-center">Loading notifications...</div>
+          <div
+            className={`
+              py-12
+              text-center
+              text-[10px]
+              sm:py-16
+              sm:text-xs
+              ${isDark ? "text-gray-400" : "text-gray-500"}
+            `}
+          >
+            Loading notifications...
+          </div>
         )}
 
-        {/* Display empty state when loading is complete and there are no notifications */}
+        {/* EMPTY STATE */}
         {!notificationLoading && notifications.length === 0 && (
           <div
             className={`
-    flex
-    min-h-[360px]
-    flex-col
-    items-center
-    justify-center
-    rounded-xl
-    border
-    px-6
-    py-12
-    text-center
-
-    ${isDark ? "border-gray-800 bg-gray-900" : "border-gray-200 bg-white"}
-  `}
+              flex
+              min-h-[260px]
+              flex-col
+              items-center
+              justify-center
+              rounded-xl
+              border
+              px-4
+              py-10
+              text-center
+              sm:min-h-[300px]
+              sm:px-5
+              sm:py-12
+              ${
+                isDark
+                  ? "border-gray-800 bg-gray-900"
+                  : "border-gray-200 bg-white"
+              }
+            `}
           >
             {/* Empty notification icon */}
             <div
               className={`
-      flex
-      h-16
-      w-16
-      items-center
-      justify-center
-      rounded-full
-
-      ${isDark ? "bg-gray-800" : "bg-gray-100"}
-    `}
+                flex
+                h-11
+                w-11
+                items-center
+                justify-center
+                rounded-full
+                sm:h-12
+                sm:w-12
+                ${isDark ? "bg-gray-800" : "bg-gray-100"}
+              `}
             >
               <FiBell
                 className={`
-        text-2xl
-
-        ${isDark ? "text-gray-500" : "text-gray-400"}
-      `}
+                  text-lg
+                  sm:text-xl
+                  ${isDark ? "text-gray-500" : "text-gray-400"}
+                `}
               />
             </div>
 
             {/* Title */}
-            <h2 className="mt-5 text-lg font-semibold">No notifications yet</h2>
+            <h2 className="mt-3 text-sm font-semibold sm:text-base">
+              No notifications yet
+            </h2>
           </div>
         )}
 
-        {/* NOTIFICATION LIST*/}
-        <div className="space-y-3">
+        {/* NOTIFICATION LIST */}
+        <div className="space-y-2.5 sm:space-y-3">
           {!notificationLoading &&
             notifications.map((notification) => (
               <button
                 type="button"
                 key={notification._id}
                 onClick={() => {
-                  // Mark notification as read only if  it has not already been read
+                  // Mark notification as read only if it has not already been read
                   if (!notification.isRead) {
                     handleMarkAsRead(notification._id);
                   }
                 }}
                 className={`
+                  grid
                   w-full
-                  text-left
+                  grid-cols-[auto_1fr]
+                  gap-2.5
                   rounded-xl
                   border
-                  p-5
-                  flex
-                  gap-4
+                  p-3
+                  text-left
                   transition
+                  sm:gap-3
+                  sm:p-4
 
                   ${
                     notification.isRead
@@ -175,14 +231,15 @@ const Notifications = () => {
                 {/* NOTIFICATION ICON */}
                 <div
                   className={`
-                    w-10
-                    h-10
-                    shrink-0
-                    rounded-full
                     flex
+                    h-8
+                    w-8
+                    shrink-0
                     items-center
                     justify-center
-
+                    rounded-full
+                    sm:h-9
+                    sm:w-9
                     ${
                       isDark
                         ? "bg-gray-700 text-white"
@@ -190,18 +247,22 @@ const Notifications = () => {
                     }
                   `}
                 >
-                  {/* Select icon according to notification type */}
-                  {getNotificationIcon(notification)}
+                  <span className="text-sm sm:text-base">
+                    {getNotificationIcon(notification)}
+                  </span>
                 </div>
 
-                {/*NOTIFICATION CONTENT */}
-                <div className="flex-1">
+                {/* NOTIFICATION CONTENT */}
+                <div className="min-w-0">
                   {/* Notification title and unread indicator */}
-                  <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-start justify-between gap-2">
                     <h3
                       className={`
-                        text-sm
+                        min-w-0
+                        truncate
+                        text-[11px]
                         font-semibold
+                        sm:text-xs
                         ${isDark ? "text-gray-100" : "text-gray-900"}
                       `}
                     >
@@ -212,12 +273,14 @@ const Notifications = () => {
                     {!notification.isRead && (
                       <span
                         className="
-                          w-2
-                          h-2
+                          mt-1
+                          h-1.5
+                          w-1.5
+                          shrink-0
                           rounded-full
                           bg-red-500
-                          shrink-0
-                          mt-1.5
+                          sm:h-2
+                          sm:w-2
                         "
                       />
                     )}
@@ -226,8 +289,13 @@ const Notifications = () => {
                   {/* Notification message */}
                   <p
                     className={`
-                      mt-1
-                      text-sm
+                      mt-0.5
+                      break-words
+                      text-[10px]
+                      leading-4
+                      sm:mt-1
+                      sm:text-xs
+                      sm:leading-5
                       ${isDark ? "text-gray-400" : "text-gray-600"}
                     `}
                   >
@@ -237,8 +305,10 @@ const Notifications = () => {
                   {/* Notification date and time */}
                   <p
                     className={`
-                      mt-2
-                      text-xs
+                      mt-1.5
+                      text-[8px]
+                      sm:mt-2
+                      sm:text-[10px]
                       ${isDark ? "text-gray-500" : "text-gray-400"}
                     `}
                   >

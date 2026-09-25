@@ -185,72 +185,87 @@ const Order = () => {
       <main
         className={`
           min-h-screen
-          px-4
-          py-6
-          sm:px-6
-          sm:py-8
-          lg:px-8
+          px-3
+          py-4
+          sm:px-4
+          sm:py-5
+          lg:px-5
           ${pageBg}
           transition-colors
           duration-300
         `}
       >
-        <div className="mx-auto w-full max-w-6xl animate-pulse">
+        <div className="mx-auto w-full max-w-[1200px] animate-pulse">
 
           {/* HEADER SKELETON */}
 
-          <div className="border-b pb-6 border-gray-200 dark:border-white/[0.08]">
-            <div
-              className={`
-                h-10
-                w-10
-                rounded-xl
-                ${
-                  darkMode
-                    ? "bg-white/[0.08]"
-                    : "bg-gray-200"
-                }
-              `}
-            />
+          <div
+            className={`
+              mb-4
+              border-b
+              pb-4
+              sm:mb-5
+              sm:pb-5
+              ${border}
+            `}
+          >
+            <div className="grid grid-cols-[auto_1fr] items-center gap-2.5">
 
-            <div
-              className={`
-                mt-5
-                h-7
-                w-32
-                rounded
-                ${
-                  darkMode
-                    ? "bg-white/[0.08]"
-                    : "bg-gray-200"
-                }
-              `}
-            />
+              <div
+                className={`
+                  h-8
+                  w-8
+                  rounded-lg
+                  sm:h-9
+                  sm:w-9
+                  ${
+                    darkMode
+                      ? "bg-white/[0.08]"
+                      : "bg-gray-200"
+                  }
+                `}
+              />
 
-            <div
-              className={`
-                mt-3
-                h-4
-                w-64
-                max-w-full
-                rounded
-                ${
-                  darkMode
-                    ? "bg-white/[0.06]"
-                    : "bg-gray-200"
-                }
-              `}
-            />
+              <div className="min-w-0">
+                <div
+                  className={`
+                    h-4
+                    w-24
+                    rounded
+                    ${
+                      darkMode
+                        ? "bg-white/[0.08]"
+                        : "bg-gray-200"
+                    }
+                  `}
+                />
+
+                <div
+                  className={`
+                    mt-1.5
+                    h-2.5
+                    w-48
+                    max-w-full
+                    rounded
+                    ${
+                      darkMode
+                        ? "bg-white/[0.06]"
+                        : "bg-gray-200"
+                    }
+                  `}
+                />
+              </div>
+            </div>
           </div>
 
           {/* ORDER SKELETONS */}
 
-          <div className="mt-6 space-y-4">
+          <div className="space-y-3">
             {[1, 2].map((item) => (
               <div
                 key={item}
                 className={`
-                  h-64
+                  h-48
                   rounded-xl
                   border
                   ${cardBg}
@@ -271,17 +286,17 @@ const Order = () => {
     <main
       className={`
         min-h-screen
-        px-4
-        py-6
-        sm:px-6
-        sm:py-8
-        lg:px-8
+        px-3
+        py-4
+        sm:px-4
+        sm:py-5
+        lg:px-5
         ${pageBg}
         transition-colors
         duration-300
       `}
     >
-      <div className="mx-auto w-full max-w-[1800px]">
+      <div className="mx-auto w-full max-w-[1200px]">
 
         {/* =================================================
             PAGE HEADER
@@ -289,28 +304,36 @@ const Order = () => {
 
         <header
           className={`
-            mb-6
+            mb-4
             border-b
-            pb-6
-            sm:mb-8
+            pb-4
+            sm:mb-5
+            sm:pb-5
             ${border}
           `}
         >
-          <div className="flex items-start gap-3 sm:gap-4">
+          <div
+            className="
+              grid
+              grid-cols-[auto_1fr]
+              items-center
+              gap-2.5
+            "
+          >
 
             {/* ICON */}
 
             <div
               className={`
                 flex
-                h-10
-                w-10
+                h-8
+                w-8
                 shrink-0
                 items-center
                 justify-center
-                rounded-xl
-                sm:h-11
-                sm:w-11
+                rounded-lg
+                sm:h-9
+                sm:w-9
                 ${
                   darkMode
                     ? "bg-white text-black"
@@ -318,7 +341,7 @@ const Order = () => {
                 }
               `}
             >
-              <FiPackage size={19} />
+              <FiPackage size={15} />
             </div>
 
             {/* TITLE */}
@@ -327,10 +350,11 @@ const Order = () => {
 
               <h1
                 className={`
-                  text-xl
+                  text-base
                   font-semibold
                   tracking-tight
-                  sm:text-2xl
+                  sm:text-lg
+                  md:text-xl
                   ${heading}
                 `}
               >
@@ -339,11 +363,10 @@ const Order = () => {
 
               <p
                 className={`
-                  mt-1
-                  max-w-xl
-                  text-xs
-                  leading-5
-                  sm:text-sm
+                  mt-0.5
+                  text-[10px]
+                  leading-4
+                  sm:text-xs
                   ${bodyText}
                 `}
               >
@@ -359,8 +382,9 @@ const Order = () => {
           {orders.length > 0 && (
             <p
               className={`
-                mt-5
-                text-sm
+                mt-2.5
+                text-[10px]
+                sm:text-xs
                 ${bodyText}
               `}
             >
@@ -388,16 +412,16 @@ const Order = () => {
             className={`
               rounded-xl
               border
-              px-5
-              py-16
+              px-4
+              py-10
               text-center
-              sm:px-6
-              sm:py-20
+              sm:px-5
+              sm:py-12
               ${cardBg}
             `}
           >
             <FiPackage
-              size={34}
+              size={25}
               className={`
                 mx-auto
                 ${
@@ -410,9 +434,10 @@ const Order = () => {
 
             <h2
               className={`
-                mt-5
-                text-lg
+                mt-3
+                text-sm
                 font-semibold
+                sm:text-base
                 ${heading}
               `}
             >
@@ -422,10 +447,11 @@ const Order = () => {
             <p
               className={`
                 mx-auto
-                mt-2
+                mt-1
                 max-w-md
-                text-sm
-                leading-6
+                text-[10px]
+                leading-5
+                sm:text-xs
                 ${bodyText}
               `}
             >
@@ -439,7 +465,7 @@ const Order = () => {
              ORDERS LIST
           ================================================= */
 
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
 
             {orders.map((order) => {
 
@@ -476,20 +502,19 @@ const Order = () => {
                   <div
                     className={`
                       border-b
-                      px-4
-                      py-4
-                      sm:px-6
+                      px-3
+                      py-2.5
+                      sm:px-4
+                      sm:py-3
                       ${border}
                     `}
                   >
                     <div
                       className="
-                        flex
-                        flex-col
-                        gap-4
-                        sm:flex-row
+                        grid
+                        gap-2.5
+                        sm:grid-cols-[1fr_auto]
                         sm:items-center
-                        sm:justify-between
                       "
                     >
 
@@ -497,11 +522,13 @@ const Order = () => {
 
                       <div
                         className="
-                          flex
-                          flex-wrap
-                          items-center
-                          gap-x-8
-                          gap-y-3
+                          grid
+                          grid-cols-2
+                          gap-3
+                          sm:flex
+                          sm:flex-wrap
+                          sm:items-center
+                          sm:gap-5
                         "
                       >
 
@@ -510,10 +537,11 @@ const Order = () => {
                         <div>
                           <p
                             className={`
-                              text-[10px]
+                              text-[8px]
                               font-medium
                               uppercase
                               tracking-wider
+                              sm:text-[9px]
                               ${mutedText}
                             `}
                           >
@@ -522,9 +550,10 @@ const Order = () => {
 
                           <p
                             className={`
-                              mt-1
+                              mt-0.5
                               font-mono
-                              text-xs
+                              text-[10px]
+                              sm:text-[11px]
                               ${secondaryText}
                             `}
                           >
@@ -539,10 +568,11 @@ const Order = () => {
                         <div>
                           <p
                             className={`
-                              text-[10px]
+                              text-[8px]
                               font-medium
                               uppercase
                               tracking-wider
+                              sm:text-[9px]
                               ${mutedText}
                             `}
                           >
@@ -551,8 +581,9 @@ const Order = () => {
 
                           <p
                             className={`
-                              mt-1
-                              text-sm
+                              mt-0.5
+                              text-[10px]
+                              sm:text-xs
                               ${secondaryText}
                             `}
                           >
@@ -571,7 +602,8 @@ const Order = () => {
                           flex
                           flex-wrap
                           items-center
-                          gap-2
+                          gap-1
+                          sm:justify-end
                         "
                       >
 
@@ -581,10 +613,13 @@ const Order = () => {
                           className={`
                             rounded-full
                             border
-                            px-3
-                            py-1.5
-                            text-[11px]
+                            px-2
+                            py-0.5
+                            text-[9px]
                             font-medium
+                            sm:px-2.5
+                            sm:py-1
+                            sm:text-[10px]
                             ${
                               order.paymentStatus ===
                               "paid"
@@ -609,17 +644,20 @@ const Order = () => {
                           className={`
                             flex
                             items-center
-                            gap-1.5
+                            gap-1
                             rounded-full
                             border
-                            px-3
-                            py-1.5
-                            text-[11px]
+                            px-2
+                            py-0.5
+                            text-[9px]
                             font-medium
+                            sm:px-2.5
+                            sm:py-1
+                            sm:text-[10px]
                             ${status.className}
                           `}
                         >
-                          <StatusIcon size={13} />
+                          <StatusIcon size={11} />
 
                           {status.label}
                         </span>
@@ -651,13 +689,15 @@ const Order = () => {
                             `${order._id}-${index}`
                           }
                           className="
-                            flex
+                            grid
+                            grid-cols-[auto_1fr_auto]
                             items-center
-                            gap-3
-                            px-4
-                            py-4
-                            sm:gap-4
-                            sm:px-6
+                            gap-2
+                            px-3
+                            py-2.5
+                            sm:gap-3
+                            sm:px-4
+                            sm:py-3
                           "
                         >
 
@@ -665,14 +705,14 @@ const Order = () => {
 
                           <div
                             className={`
-                              h-14
-                              w-14
+                              h-10
+                              w-10
                               shrink-0
                               overflow-hidden
                               rounded-lg
                               border
-                              sm:h-16
-                              sm:w-16
+                              sm:h-12
+                              sm:w-12
                               ${border}
                               ${
                                 darkMode
@@ -699,11 +739,13 @@ const Order = () => {
                                 className="
                                   flex
                                   h-full
+                                  w-full
                                   items-center
                                   justify-center
                                 "
                               >
                                 <FiPackage
+                                  size={14}
                                   className={
                                     darkMode
                                       ? "text-gray-600"
@@ -716,17 +758,14 @@ const Order = () => {
 
                           {/* PRODUCT INFO */}
 
-                          <div
-                            className="
-                              min-w-0
-                              flex-1
-                            "
-                          >
+                          <div className="min-w-0">
+
                             <h3
                               className={`
                                 truncate
-                                text-sm
+                                text-[11px]
                                 font-medium
+                                sm:text-xs
                                 ${heading}
                               `}
                             >
@@ -736,8 +775,9 @@ const Order = () => {
 
                             <p
                               className={`
-                                mt-1
-                                text-xs
+                                mt-0.5
+                                text-[9px]
+                                sm:text-[10px]
                                 ${bodyText}
                               `}
                             >
@@ -747,6 +787,7 @@ const Order = () => {
                               )}{" "}
                               × {item.quantity}
                             </p>
+
                           </div>
 
                           {/* ITEM TOTAL */}
@@ -754,8 +795,9 @@ const Order = () => {
                           <p
                             className={`
                               shrink-0
-                              text-sm
+                              text-[11px]
                               font-semibold
+                              sm:text-xs
                               ${heading}
                             `}
                           >
@@ -769,6 +811,7 @@ const Order = () => {
                                 )
                             )}
                           </p>
+
                         </div>
                       )
                     )}
@@ -794,12 +837,14 @@ const Order = () => {
                         w-full
                         items-center
                         justify-center
-                        gap-2
+                        gap-1
                         border-t
-                        py-3
-                        text-xs
+                        py-2
+                        text-[10px]
                         font-medium
                         transition-colors
+                        sm:py-2.5
+                        sm:text-[11px]
                         ${border}
                         ${
                           darkMode
@@ -813,7 +858,7 @@ const Order = () => {
                           Show less
 
                           <FiChevronUp
-                            size={14}
+                            size={12}
                           />
                         </>
                       ) : (
@@ -827,7 +872,7 @@ const Order = () => {
                             : "items"}
 
                           <FiChevronDown
-                            size={14}
+                            size={12}
                           />
                         </>
                       )}
@@ -840,16 +885,15 @@ const Order = () => {
 
                   <div
                     className={`
-                      flex
-                      flex-col
-                      gap-4
+                      grid
+                      grid-cols-2
+                      items-center
+                      gap-3
                       border-t
-                      px-4
-                      py-4
-                      sm:flex-row
-                      sm:items-center
-                      sm:justify-between
-                      sm:px-6
+                      px-3
+                      py-2.5
+                      sm:px-4
+                      sm:py-3
                       ${border}
                       ${
                         darkMode
@@ -864,10 +908,11 @@ const Order = () => {
                     <div>
                       <p
                         className={`
-                          text-[10px]
+                          text-[8px]
                           font-medium
                           uppercase
                           tracking-wider
+                          sm:text-[9px]
                           ${mutedText}
                         `}
                       >
@@ -876,8 +921,9 @@ const Order = () => {
 
                       <p
                         className={`
-                          mt-1
-                          text-sm
+                          mt-0.5
+                          text-[10px]
+                          sm:text-xs
                           ${secondaryText}
                         `}
                       >
@@ -890,18 +936,15 @@ const Order = () => {
 
                     {/* TOTAL */}
 
-                    <div
-                      className="
-                        text-left
-                        sm:text-right
-                      "
-                    >
+                    <div className="text-right">
+
                       <p
                         className={`
-                          text-[10px]
+                          text-[8px]
                           font-medium
                           uppercase
                           tracking-wider
+                          sm:text-[9px]
                           ${mutedText}
                         `}
                       >
@@ -910,9 +953,10 @@ const Order = () => {
 
                       <p
                         className={`
-                          mt-1
-                          text-lg
+                          mt-0.5
+                          text-sm
                           font-semibold
+                          sm:text-base
                           ${heading}
                         `}
                       >
@@ -921,9 +965,11 @@ const Order = () => {
                           order.total
                         )}
                       </p>
+
                     </div>
 
                   </div>
+
                 </article>
               );
             })}

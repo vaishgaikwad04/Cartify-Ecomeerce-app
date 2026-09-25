@@ -511,6 +511,7 @@ const Footer = () => {
                     group
                     cursor-pointer
                     min-w-0
+                    mt-1
                   "
                 >
                   {/* IMAGE */}

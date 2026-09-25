@@ -15,15 +15,24 @@ const Settings = () => {
     setActiveTab,
     handleChange,
     saveSettings,
-     setAllowNotification
+    setAllowNotification,
   } = useSettings();
+
   const inputClass = `
-w-full px-4 py-3 rounded-lg border outline-none transition-colors
-${
-  isDark
-    ? "bg-[#1f2937] border-gray-700 text-white placeholder-gray-400 focus:border-blue-500"
-    : "bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500"
-}`;
+    w-full
+    px-3 sm:px-4
+    py-2.5 sm:py-3
+    rounded-lg
+    border
+    outline-none
+    transition-colors
+    text-xs sm:text-sm md:text-base
+    ${
+      isDark
+        ? "bg-[#1f2937] border-gray-700 text-white placeholder-gray-400 focus:border-blue-500"
+        : "bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500"
+    }
+  `;
 
   return (
     <div
@@ -34,38 +43,47 @@ ${
       }
     >
       <div
-        className={`min-h-screen  p-6 ${isDark ? "bg-gray-900" : "bg-gray-50"}`}
+        className={`min-h-screen p-3 sm:p-4 md:p-5 ${
+          isDark ? "bg-gray-900" : "bg-gray-50"
+        }`}
       >
-        <div className="max-w-[1800px] mx-auto">
+        <div className="max-w-[1400px] mx-auto">
+
+          {/* ================= HEADER ================= */}
           <div
-            className={`rounded-2xl p-8 shadow-sm mb-6 border ${
+            className={`rounded-2xl p-4 sm:p-5 md:p-6 shadow-sm mb-4 sm:mb-5 border ${
               isDark
                 ? "bg-gray-800 border-gray-700"
                 : "bg-white border-gray-100"
             }`}
           >
             <h1
-              className={`text-3xl font-bold ${
+              className={`text-xl sm:text-2xl md:text-3xl font-bold ${
                 isDark ? "text-white" : "text-gray-900"
               }`}
             >
               Settings
             </h1>
 
-            <p className={`mt-2 ${isDark ? "text-gray-400" : "text-gray-500"}`}>
+            <p
+              className={`mt-1 sm:mt-2 text-xs sm:text-sm md:text-base ${
+                isDark ? "text-gray-400" : "text-gray-500"
+              }`}
+            >
               Manage your account preferences and application settings.
             </p>
           </div>
 
-          {/* Tabs */}
+          {/* ================= SETTINGS CONTAINER ================= */}
           <div
-            className={`rounded-2xl border shadow-sm p-6 space-y-5 ${
+            className={`rounded-2xl border shadow-sm p-3 sm:p-4 md:p-5 space-y-3 sm:space-y-4 ${
               isDark
                 ? "bg-gray-800 border-gray-700"
                 : "bg-white border-gray-100"
             }`}
           >
-            {/* PROFILE */}
+
+            {/* ================= PROFILE ================= */}
             <SettingsItem
               icon={<FiUser />}
               title="Profile"
@@ -74,18 +92,27 @@ ${
               setActiveTab={setActiveTab}
               isDark={isDark}
             >
-              <div className="grid md:grid-cols-2 gap-5 pt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 pt-4">
                 <input
                   name="name"
                   value={settings.name}
                   onChange={handleChange}
                   placeholder="Full Name"
-                  className={`w-full px-4 py-3 rounded-xl border outline-none transition
-        ${
-          isDark
-            ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-white"
-            : "bg-gray-50 border-gray-200 text-gray-900 placeholder-gray-500 focus:border-gray-400"
-        }`}
+                  className={`
+                    w-full
+                    px-3 sm:px-4
+                    py-2.5 sm:py-3
+                    rounded-xl
+                    border
+                    outline-none
+                    transition
+                    text-xs sm:text-sm md:text-base
+                    ${
+                      isDark
+                        ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-white"
+                        : "bg-gray-50 border-gray-200 text-gray-900 placeholder-gray-500 focus:border-gray-400"
+                    }
+                  `}
                 />
 
                 <input
@@ -94,16 +121,25 @@ ${
                   onChange={handleChange}
                   placeholder="Email Address"
                   type="email"
-                  className={`w-full px-4 py-3 rounded-xl border outline-none transition
-        ${
-          isDark
-            ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-white"
-            : "bg-gray-50 border-gray-200 text-gray-900 placeholder-gray-500 focus:border-gray-400"
-        }`}
+                  className={`
+                    w-full
+                    px-3 sm:px-4
+                    py-2.5 sm:py-3
+                    rounded-xl
+                    border
+                    outline-none
+                    transition
+                    text-xs sm:text-sm md:text-base
+                    ${
+                      isDark
+                        ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-white"
+                        : "bg-gray-50 border-gray-200 text-gray-900 placeholder-gray-500 focus:border-gray-400"
+                    }
+                  `}
                 />
               </div>
 
-              <div className="flex justify-end mt-6">
+              <div className="flex justify-end mt-4">
                 <Button
                   label="Save Changes"
                   onClick={saveSettings}
@@ -112,7 +148,7 @@ ${
               </div>
             </SettingsItem>
 
-            {/* PASSWORD */}
+            {/* ================= PASSWORD ================= */}
             <SettingsItem
               icon={<FiLock />}
               title="Password"
@@ -121,7 +157,7 @@ ${
               setActiveTab={setActiveTab}
               isDark={isDark}
             >
-              <div className="space-y-4 pt-6">
+              <div className="space-y-3 pt-4">
                 <input
                   placeholder="Current Password"
                   type="password"
@@ -141,12 +177,15 @@ ${
                 />
               </div>
 
-              <div className="flex justify-end mt-6">
-                <Button label="Update Password" variant="secondary" />
+              <div className="flex justify-end mt-4">
+                <Button
+                  label="Update Password"
+                  variant="secondary"
+                />
               </div>
             </SettingsItem>
 
-            {/* NOTIFICATIONS */}
+            {/* ================= NOTIFICATIONS ================= */}
             <SettingsItem
               icon={<FiBell />}
               title="Notification"
@@ -155,15 +194,27 @@ ${
               setActiveTab={setActiveTab}
               isDark={isDark}
             >
-              <div className="pt-6">
+              <div className="pt-4">
                 <div
-                  className={`flex items-center justify-between p-4 rounded-xl ${
-                    isDark ? "bg-gray-700" : "bg-gray-50"
-                  }`}
+                  className={`
+                    flex
+                    flex-col
+                    sm:flex-row
+                    sm:items-center
+                    sm:justify-between
+                    gap-3
+                    p-3 sm:p-4
+                    rounded-xl
+                    ${
+                      isDark
+                        ? "bg-gray-700"
+                        : "bg-gray-50"
+                    }
+                  `}
                 >
-                  <div>
+                  <div className="min-w-0">
                     <h4
-                      className={`font-semibold ${
+                      className={`font-semibold text-sm sm:text-base md:text-lg ${
                         isDark ? "text-white" : "text-gray-900"
                       }`}
                     >
@@ -171,7 +222,7 @@ ${
                     </h4>
 
                     <p
-                      className={`text-sm ${
+                      className={`text-xs sm:text-sm md:text-base mt-1 ${
                         isDark ? "text-gray-400" : "text-gray-500"
                       }`}
                     >
@@ -180,23 +231,25 @@ ${
                     </p>
                   </div>
 
-                  <ToggleSwitch
-                    checked={settings.notification}
-                    onChange={() => {
-                      const value = !settings.notification;
+                  <div className="shrink-0">
+                    <ToggleSwitch
+                      checked={settings.notification}
+                      onChange={() => {
+                        const value = !settings.notification;
 
-                      setSettings((prev) => ({
-                        ...prev,
-                        notification: value,
-                      }));
+                        setSettings((prev) => ({
+                          ...prev,
+                          notification: value,
+                        }));
 
-                      setAllowNotification(value);
-                    }}
-                  />
+                        setAllowNotification(value);
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div className="flex justify-end mt-6">
+              <div className="flex justify-end mt-4">
                 <Button
                   label="Save Preferences"
                   onClick={saveSettings}
@@ -205,7 +258,7 @@ ${
               </div>
             </SettingsItem>
 
-            {/* APPEARANCE */}
+            {/* ================= APPEARANCE ================= */}
             <SettingsItem
               icon={<FiMoon />}
               title="Appearance"
@@ -214,31 +267,38 @@ ${
               setActiveTab={setActiveTab}
               isDark={isDark}
             >
-              <div className="pt-6">
+              <div className="pt-4">
                 <h3
-                  className={`font-semibold mb-4 ${
+                  className={`font-semibold mb-3 sm:mb-4 text-sm sm:text-base md:text-lg ${
                     isDark ? "text-white" : "text-gray-900"
                   }`}
                 >
                   Choose Theme
                 </h3>
 
-                <div className="flex flex-col gap-4">
-                  {["Light Mode", "Dark Mode", "System Default"].map((item) => (
+                <div className="flex flex-col gap-2 sm:gap-3">
+                  {[
+                    "Light Mode",
+                    "Dark Mode",
+                    "System Default",
+                  ].map((item) => (
                     <label
                       key={item}
                       className={`
-                                    p-5 rounded-2xl
-                                    border
-                                    cursor-pointer
-                                    transition
-                                    flex items-center gap-3
-                                    ${
-                                      isDark
-                                        ? "bg-gray-700 border-gray-600 hover:border-white"
-                                        : "bg-white border-gray-200 hover:border-black"
-                                    }
-                                    `}
+                        p-3 sm:p-4
+                        rounded-xl
+                        border
+                        cursor-pointer
+                        transition
+                        flex
+                        items-center
+                        gap-3
+                        ${
+                          isDark
+                            ? "bg-gray-700 border-gray-600 hover:border-white"
+                            : "bg-white border-gray-200 hover:border-black"
+                        }
+                      `}
                     >
                       <input
                         type="radio"
@@ -253,11 +313,11 @@ ${
                             theme: item,
                           }));
                         }}
-                        className="w-4 h-4 accent-black"
+                        className="w-4 h-4 accent-black shrink-0"
                       />
 
                       <span
-                        className={`font-medium ${
+                        className={`font-medium text-xs sm:text-sm md:text-base ${
                           isDark ? "text-white" : "text-gray-900"
                         }`}
                       >
@@ -267,7 +327,7 @@ ${
                   ))}
                 </div>
 
-                <div className="flex justify-end mt-6">
+                <div className="flex justify-end mt-4">
                   <Button
                     label="Save Appearance"
                     onClick={saveSettings}
