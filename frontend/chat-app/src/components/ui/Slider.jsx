@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const Slider = ({
-  items = [],
-  visibleItems = 4,
-  renderItem,
-}) => {
+const Slider = ({ items = [], visibleItems = 4, renderItem }) => {
   const [startIndex, setStartIndex] = useState(0);
-  const [currentVisibleItems, setCurrentVisibleItems] =
-    useState(visibleItems);
+  const [currentVisibleItems, setCurrentVisibleItems] = useState(visibleItems);
 
   const safeItems = Array.isArray(items) ? items : [];
 
@@ -40,10 +35,7 @@ const Slider = ({
 
   // ================= NEXT =================
   const nextSlide = () => {
-    if (
-      startIndex + currentVisibleItems <
-      safeItems.length
-    ) {
+    if (startIndex + currentVisibleItems < safeItems.length) {
       setStartIndex((prev) => prev + 1);
     }
   };
@@ -57,12 +49,11 @@ const Slider = ({
 
   const visibleProducts = safeItems.slice(
     startIndex,
-    startIndex + currentVisibleItems
+    startIndex + currentVisibleItems,
   );
 
   return (
     <div className="relative w-full min-w-0">
-
       {/* ================= PREVIOUS BUTTON ================= */}
       <button
         type="button"
@@ -120,7 +111,7 @@ const Slider = ({
       <div
         className="
           grid
-          grid-cols-1
+          grid-cols-2
           sm:grid-cols-2
           lg:grid-cols-4
 
@@ -154,10 +145,7 @@ const Slider = ({
       <button
         type="button"
         onClick={nextSlide}
-        disabled={
-          startIndex + currentVisibleItems >=
-          safeItems.length
-        }
+        disabled={startIndex + currentVisibleItems >= safeItems.length}
         aria-label="Next products"
         className="
           absolute

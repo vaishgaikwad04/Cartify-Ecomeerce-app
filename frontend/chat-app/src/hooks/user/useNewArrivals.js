@@ -19,14 +19,11 @@ export const useNewArrivals = () => {
   useEffect(() => {
     const loadCategories = async () => {
       try {
-        const data = await fetchCategoryData("new-in-body");
+        const data = await fetchCategoryData("decor");
 
         setCategories(data || []);
       } catch (error) {
-        console.error(
-          "Failed to fetch new arrivals:",
-          error
-        );
+        console.error("Failed to fetch new arrivals:", error);
 
         setCategories([]);
       }
@@ -34,7 +31,6 @@ export const useNewArrivals = () => {
 
     loadCategories();
   }, [fetchCategoryData]);
-
 
   // RETURN
   return {
