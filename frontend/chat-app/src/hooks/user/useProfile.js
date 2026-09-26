@@ -67,20 +67,42 @@ export const useProfile = () => {
 
 
   // LOGOUT
-  const handleLogout = async () => {
+  // const handleLogout = async () => {
+  //   try {
+  //     // Call logout API
+  //     await logoutUser();
+
+  //     // Navigate to authentication page
+  //     navigate("/auth");
+  //   } catch (error) {
+  //     console.error(
+  //       "Logout error:",
+  //       error?.response?.data || error?.message
+  //     );
+  //   }
+  // };
+
+    const handleLogout = async () => {
     try {
-      // Call logout API
+      // Clear Cartify JWT cookie
       await logoutUser();
 
-      // Navigate to authentication page
-      navigate("/auth");
+      // Clear Firebase/Google authentication
+      await signOut(auth);
+
+      // Clear React user state
+      setUser(null);
+
+      toast.success("Logged out successfully");
+      navigate("/auth?mode=login");
     } catch (error) {
-      console.error(
-        "Logout error:",
-        error?.response?.data || error?.message
-      );
+      console.error("Logout error:", error);
+      toast.error("Logout failed");
     }
   };
+
+  return { handleLogout };
+};
 
   // RETURN
   return {
@@ -90,4 +112,3 @@ export const useProfile = () => {
     isDark,
     navigate,
   };
-};

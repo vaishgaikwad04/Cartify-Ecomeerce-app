@@ -11,6 +11,8 @@ import {
 import { CircleHelp } from "lucide-react";
 
 import { useProfile } from "../../../hooks/user/useProfile";
+import { signOut } from "firebase/auth";
+import { auth } from "../../Firebase";
 
 const Profile = () => {
   // PROFILE HOOK
