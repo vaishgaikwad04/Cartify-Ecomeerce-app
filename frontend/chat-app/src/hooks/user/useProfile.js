@@ -8,6 +8,10 @@ import { getUserSettings } from "../../api/user/SettingsApi";
 // Context
 import { ThemeContext } from "../../context/ThemeContext";
 
+import { signOut } from "firebase/auth";
+import { auth } from "../../Firebase";
+import toast from "react-hot-toast";
+
 export const useProfile = () => {
   // NAVIGATION
   const navigate = useNavigate();
