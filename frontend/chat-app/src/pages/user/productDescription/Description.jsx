@@ -167,7 +167,7 @@ const DescriptionPage = () => {
                 </span>
               </div>
 
-               {/* SIZE */}
+              {/* SIZE */}
               {product.variants?.length > 0 && (
                 <div className="mt-6 sm:mt-7">
                   <h3
@@ -262,71 +262,67 @@ const DescriptionPage = () => {
                     : "Add To Cart"}
                 </button>
 
-                <Button
+                {/* <Button
                   label="Add To Wishlist"
                   variant={isDark ? "outlineDark" : "outline"}
                   className="w-full"
-                />
+                /> */}
               </div>
 
-             
-
-              {/* PRODUCT DESCRIPTION */}
               <div
                 className={`
-    mt-6
-    sm:mt-8
+   
     rounded-xl
     sm:rounded-2xl
-    p-4
-    sm:p-5
-    md:p-6
     border
     ${isDark ? "bg-gray-900 border-gray-800" : "bg-gray-50 border-gray-100"}
   `}
               >
-                {/* HEADER */}
-                <div className="flex items-center justify-between gap-3 mb-3 sm:mb-4">
-                  <h3
-                    className={`
-        text-sm
-        sm:text-base
-        font-semibold
-        tracking-tight
-        ${isDark ? "text-white" : "text-gray-900"}
-      `}
-                  >
-                    Product Description
-                  </h3>
-
-                  {/* Small decorative line */}
-                  <div
-                    className={`
-        h-px
-        flex-1
-        max-w-12
-        ${isDark ? "bg-gray-700" : "bg-gray-200"}
-      `}
-                  />
-                </div>
-
-                {/* DESCRIPTION */}
-                <p
-                  className={`
-      text-[11px]
-      sm:text-xs
-      md:text-sm
-      leading-5
-      sm:leading-6
-      tracking-normal
-      break-words
-      transition-colors
-      duration-300
-      ${isDark ? "text-gray-300" : "text-gray-600"}
-    `}
-                >
-                  {product.description}
-                </p>
+                <Tabs
+                  tabs={[
+                    {
+                      id: "description",
+                      label: "Description",
+                      content: (
+                        <p>
+                          {product.description || "No description available"}
+                        </p>
+                      ),
+                    },
+                    {
+                      id: "details",
+                      label: "Details",
+                      content: product.details ? (
+                        <ul className="list-disc pl-5">
+                          {product.details
+                            .split(".")
+                            .filter((item) => item.trim())
+                            .map((item, index) => (
+                              <li key={index}>{item.trim()}</li>
+                            ))}
+                        </ul>
+                      ) : (
+                        <p>No details available</p>
+                      ),
+                    },
+                    {
+                      id: "careFit",
+                      label: "Care Fit",
+                      content: product.careFit ? (
+                        <ul className="list-disc pl-5">
+                          {product.careFit
+                            .split(".")
+                            .filter((item) => item.trim())
+                            .map((item, index) => (
+                              <li key={index}>{item.trim()}</li>
+                            ))}
+                        </ul>
+                      ) : (
+                        <p>No care fit available</p>
+                      ),
+                    },
+                  ]}
+                />
               </div>
             </div>
           </div>
@@ -335,7 +331,7 @@ const DescriptionPage = () => {
         {/* =====================================================
             TABS
         ===================================================== */}
-        <div className="mt-8 sm:mt-10">
+        {/* <div className="mt-8 sm:mt-10">
           <Tabs
             tabs={[
               {
@@ -379,7 +375,7 @@ const DescriptionPage = () => {
               },
             ]}
           />
-        </div>
+        </div> */}
 
         {/* =====================================================
             RECOMMENDED PRODUCTS

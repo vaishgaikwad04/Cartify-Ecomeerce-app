@@ -1,12 +1,18 @@
 import Card from "../../../components/ui/Card";
+
+// Hooks
 import { useRecommendation } from "../../../hooks/user/useRecommendation";
+import { useWishlist } from "../../../hooks/user/useWishList";
 
 const Recommendation = ({ currentId, category }) => {
-  // Get recommended products and current theme
+  // ================= RECOMMENDATIONS =================
   const { products, isDark } = useRecommendation({
     currentId,
     category,
   });
+
+  // ================= WISHLIST =================
+  const { isWishlisted, toggleWishlist } = useWishlist();
 
   return (
     <div
@@ -29,10 +35,7 @@ const Recommendation = ({ currentId, category }) => {
         ${isDark ? "bg-gray-950" : "bg-white"}
       `}
     >
-
-      {/* =====================================================
-          SECTION TITLE
-      ===================================================== */}
+      {/* ================= SECTION TITLE ================= */}
       <h2
         className={`
           text-base
@@ -49,20 +52,13 @@ const Recommendation = ({ currentId, category }) => {
           sm:mb-7
           lg:mb-8
 
-          ${
-            isDark
-              ? "text-white"
-              : "text-gray-800"
-          }
+          ${isDark ? "text-white" : "text-gray-800"}
         `}
       >
         RELATED PRODUCTS
       </h2>
 
-
-      {/* =====================================================
-          RECOMMENDED PRODUCTS
-      ===================================================== */}
+      {/* ================= RECOMMENDED PRODUCTS ================= */}
       <div
         className="
           grid
@@ -79,19 +75,16 @@ const Recommendation = ({ currentId, category }) => {
         "
       >
         {products.length > 0 ? (
-
           products.map((item) => (
             <Card
               key={item._id}
               product={item}
+              isWishlisted={isWishlisted(item._id)}
+              onToggleWishlist={toggleWishlist}
             />
           ))
-
         ) : (
-
-          /* =================================================
-              EMPTY STATE
-          ================================================= */
+          /* ================= EMPTY STATE ================= */
           <p
             className={`
               col-span-full
@@ -104,19 +97,13 @@ const Recommendation = ({ currentId, category }) => {
 
               text-center
 
-              ${
-                isDark
-                  ? "text-gray-400"
-                  : "text-gray-500"
-              }
+              ${isDark ? "text-gray-400" : "text-gray-500"}
             `}
           >
             No related products
           </p>
-
         )}
       </div>
-
     </div>
   );
 };

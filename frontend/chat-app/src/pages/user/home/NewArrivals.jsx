@@ -5,18 +5,11 @@ import { useWishlist } from "../../../hooks/user/useWishList";
 import { useNewArrivals } from "../../../hooks/user/useNewArrivals";
 
 const NewArrivals = () => {
-
   // NEW ARRIVALS HOOK
-  const {
-    categories,
-    isDark,
-  } = useNewArrivals();
+  const { categories, isDark } = useNewArrivals();
 
   // WISHLIST HOOK
-  const {
-    isWishlisted,
-    toggleWishlist,
-  } = useWishlist();
+  const { isWishlisted, toggleWishlist } = useWishlist();
 
   return (
     <section
@@ -47,11 +40,7 @@ const NewArrivals = () => {
 
             font-semibold
 
-            ${
-              isDark
-                ? "text-white"
-                : "text-gray-800"
-            }
+            ${isDark ? "text-white" : "text-gray-800"}
           `}
         >
           New Arrivals
@@ -63,11 +52,7 @@ const NewArrivals = () => {
             text-sm
             sm:text-base
 
-            ${
-              isDark
-                ? "text-gray-400"
-                : "text-gray-500"
-            }
+            ${isDark ? "text-gray-400" : "text-gray-500"}
           `}
         >
           Explore our newest arrivals
@@ -82,12 +67,8 @@ const NewArrivals = () => {
           <Card
             key={product._id}
             product={product}
-            isWishlisted={isWishlisted(
-              product._id
-            )}
-            onToggleWishlist={
-              toggleWishlist
-            }
+            isWishlisted={isWishlisted(product._id)}
+            onToggleWishlist={toggleWishlist}
           />
         )}
       />

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { loginUser } from "../../api/auth/AuthApi";
+import { loginUser ,  googleLogin} from "../../api/auth/AuthApi";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../../Firebase";
 import { useNavigate } from "react-router-dom";
@@ -62,19 +62,50 @@ export const useLogin = () => {
   };
 
  // Handler for Google OAuth login via Firebase Google provider
-const handleLogin = async () => {
-  // Initialize Google authentication provider
-  const provider = new GoogleAuthProvider();
-  try {
-    // Trigger Google sign-in popup
-    const result = await signInWithPopup(auth, provider);
-    // Get authenticated user information from Firebase
-    result.user;
-    navigate('/')
+// const handleLogin = async () => {
+//   // Initialize Google authentication provider
+//   const provider = new GoogleAuthProvider();
+//   try {
+//     // Trigger Google sign-in popup
+//     const result = await signInWithPopup(auth, provider);
+//     // Get authenticated user information from Firebase
+//     result.user;
+//     navigate('/')
 
-    // TODO: Send Google user data to backend
+//     // TODO: Send Google user data to backend
+//   } catch (error) {
+//     const message = error?.message || "Google login failed";
+//     setError(message);
+//     toast.error(message);
+//   }
+// };
+
+const handleLogin = async () => {
+  const provider = new GoogleAuthProvider();
+
+  try {
+    // 1. Authenticate with Google/Firebase
+    const result = await signInWithPopup(auth, provider);
+
+    const googleUser = result.user;
+
+    // 2. Send Google user to YOUR backend
+    const res = await googleLogin({
+      name: googleUser.displayName,
+      email: googleUser.email,
+    });
+
+    // 3. Backend has now created YOUR JWT cookie
+    toast.success(res.data.message);
+
+    // 4. Go to application
+    navigate("/");
   } catch (error) {
-    const message = error?.message || "Google login failed";
+    const message =
+      error?.response?.data?.message ||
+      error?.message ||
+      "Google login failed";
+
     setError(message);
     toast.error(message);
   }
@@ -84,7 +115,8 @@ const handleLogin = async () => {
   return {
     handleChange, // Form input change handler
     handleSubmit, // Form submission handler
-    handleLogin, // Google OAuth login handler
+    handleLogin,
+     // Google OAuth login handler
     error, // Error message state
     sucess, // Success message state
     formData, // Current form data state

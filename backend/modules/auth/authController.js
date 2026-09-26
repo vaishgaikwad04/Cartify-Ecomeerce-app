@@ -136,3 +136,74 @@ export const getCurrentUser = async (req, res) => {
     });
   }
 };
+
+
+
+// GOOGLE LOGIN
+export const googleLogin = async (req, res) => {
+  try {
+    const { name, email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        message: "Google account email is required",
+      });
+    }
+
+    const normalizedEmail = email.toLowerCase();
+
+    // Check whether this Google user already exists
+    let user = await authModel.findOne({
+      email: normalizedEmail,
+    });
+
+    // Create account if user doesn't exist
+    if (!user) {
+      user = await authModel.create({
+        name,
+        email: normalizedEmail,
+
+        // Google users don't have a normal password
+        password: await bcrypt.hash(
+          `google-${Date.now()}-${Math.random()}`,
+          10
+        ),
+
+        role: "user",
+      });
+    }
+
+    // Create YOUR application's JWT
+    const token = jwt.sign(
+      {
+        id: user._id,
+        email: user.email,
+      },
+      process.env.JWT_SECRET
+    );
+
+    // Store YOUR JWT in the same cookie
+    // used by normal login
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
+
+    return res.status(200).json({
+      message: "Google login successful",
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    console.error("Google login error:", error);
+
+    return res.status(500).json({
+      message: "Google login failed",
+    });
+  }
+};

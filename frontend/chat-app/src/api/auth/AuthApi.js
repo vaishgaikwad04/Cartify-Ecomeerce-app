@@ -28,4 +28,14 @@ export const getSettings = () => AuthAPI.get("/auth/settings");
 export const updateSettings = (data) =>
   AuthAPI.put("/auth/settings", data);
 
+export const googleLogin = (userData) => {
+  return axios.post(
+    `${import.meta.env.VITE_API_URL}/auth/google`,
+    userData,
+    {
+      withCredentials: true,
+    }
+  );
+};
+
 export default AuthAPI;

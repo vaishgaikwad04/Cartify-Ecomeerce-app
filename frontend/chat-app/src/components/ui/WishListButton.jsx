@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
+import { toast } from "react-hot-toast";
+import { AuthContext } from "../../context/AuthContext";
 
-const WishlistButton = ({ productId, isWishlisted, onToggleWishlist = () => {},}) => {
+const WishlistButton = ({
+  productId,
+  isWishlisted,
+  onToggleWishlist = () => {},
+}) => {
+  const { user, authLoading } = useContext(AuthContext);
+
   const handleClick = (e) => {
     e.stopPropagation();
 
-   onToggleWishlist(productId, isWishlisted);
+    // Don't do anything while authentication is being checked
+    if (authLoading) return;
+
+    // User is not logged in
+    if (!user) {
+      toast.error("Please login to add items to your wishlist.");
+      return;
+    }
+
+    // User is logged in → toggle wishlist
+    onToggleWishlist(productId, isWishlisted);
   };
 
   return (
@@ -23,6 +41,7 @@ const WishlistButton = ({ productId, isWishlisted, onToggleWishlist = () => {},}
         hover:scale-110
         active:scale-95
         group
+
         ${
           isWishlisted
             ? "bg-red-50 text-red-500"
@@ -30,16 +49,10 @@ const WishlistButton = ({ productId, isWishlisted, onToggleWishlist = () => {},}
         }
       `}
     >
-      {/* Icon with smooth transition */}
       <span className="transition-transform duration-200 group-hover:scale-110">
-        {isWishlisted ? (
-          <FaHeart className="text-red-500" />
-        ) : (
-          <FaRegHeart />
-        )}
+        {isWishlisted ? <FaHeart className="text-red-500" /> : <FaRegHeart />}
       </span>
 
-      {/* subtle pulse effect when wishlisted */}
       {isWishlisted && (
         <span className="absolute inset-0 rounded-full bg-red-200 opacity-30 animate-ping" />
       )}

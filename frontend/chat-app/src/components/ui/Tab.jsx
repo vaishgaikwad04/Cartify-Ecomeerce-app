@@ -12,9 +12,9 @@ const Tabs = ({ tabs = [] }) => {
       className={`
         w-full
         max-w-5xl
-        mt-10
-        sm:mt-14
-        lg:mt-20
+        mt-6
+        sm:mt-8
+        lg:mt-12
         transition-colors
         duration-300
         ${isDark ? "text-white" : "text-black"}

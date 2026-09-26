@@ -1,32 +1,55 @@
-import { useEffect, useState , useContext} from "react";
+import { useEffect, useState, useContext } from "react";
+
+// API
 import {
   fetchWishListedItem,
   createWishList,
   removeWishListedItem,
 } from "../../api/user/WishListedItemApi";
+
+// Context
 import { ThemeContext } from "../../context/ThemeContext";
 
 export const useWishlist = () => {
-  ///state to store wishlist item
+  // ================= WISHLIST STATE =================
   const [wishlist, setWishlist] = useState([]);
-  //theme
+
+  // ================= THEME =================
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "Dark Mode";
 
-    // CHECK IF WISHLISTED
-  const isWishlisted = (productId) =>
-    wishlist.some(
+  // ================= CHECK IF WISHLISTED =================
+  const isWishlisted = (productId) => {
+    return wishlist.some(
       (item) =>
-        String(item.productId?._id || item.productId) === String(productId)
+        String(item.productId?._id || item.productId) ===
+        String(productId)
     );
+  };
 
-  // TOGGLE
-  const toggleWishlist = async (productId, isWishlisted) => {
+  // ================= LOAD WISHLIST =================
+  const loadWishlist = async () => {
     try {
-      if (isWishlisted) {
+      const res = await fetchWishListedItem();
+
+      setWishlist(res?.data?.wishlistedItems || []);
+    } catch (err) {
+      console.log("Failed to load wishlist:", err);
+    }
+  };
+
+  // ================= TOGGLE WISHLIST =================
+  const toggleWishlist = async (productId) => {
+    try {
+      // Check current state directly from wishlist
+      const alreadyWishlisted = isWishlisted(productId);
+
+      // ================= REMOVE =================
+      if (alreadyWishlisted) {
         const item = wishlist.find(
           (w) =>
-            String(w.productId?._id || w.productId) === String(productId)
+            String(w.productId?._id || w.productId) ===
+            String(productId)
         );
 
         if (item) {
@@ -36,40 +59,31 @@ export const useWishlist = () => {
             prev.filter((w) => w._id !== item._id)
           );
         }
-      } else {
-        await createWishList(productId);
 
-        // optional: re-fetch or optimistic add
-        loadWishlist();
+        return;
       }
+
+      // ================= ADD =================
+      await createWishList(productId);
+
+      // Refresh wishlist after adding
+      await loadWishlist();
     } catch (err) {
-      console.log(err);
+      console.log("Wishlist toggle failed:", err);
     }
   };
 
-  ///fetch wishlist item
-  const loadWishlist = async () => {
-    try {
-      const res = await fetchWishListedItem();
-      setWishlist(res?.data?.wishlistedItems || []);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  
-  // LOAD WISHLIST
+  // ================= INITIAL LOAD =================
   useEffect(() => {
     loadWishlist();
   }, []);
 
-  
-
+  // ================= RETURN =================
   return {
     wishlist,
     isWishlisted,
     toggleWishlist,
     reloadWishlist: loadWishlist,
-    isDark
+    isDark,
   };
 };
