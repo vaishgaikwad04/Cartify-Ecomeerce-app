@@ -28,7 +28,7 @@ const HeroSection = () => {
     <section className="w-full max-w-[1800px] mx-auto px-2 sm:px-3 lg:px-5">
       <div className="grid grid-cols-2">
         {banners.map((banner, index) => (
-          <ImageCard key={index} image={banner.image} className="aspect-[3/4]">
+          <ImageCard key={index} image={banner.image} className="aspect-[5/4]">
             <div
               className="
             absolute

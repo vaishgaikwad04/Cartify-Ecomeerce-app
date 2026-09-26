@@ -1,16 +1,9 @@
-
 import { NavLink } from "react-router-dom";
 
 // Icons
 import { FaChevronDown } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
-import {
-  FiSearch,
-  FiPackage,
-  FiX,
-  FiBell,
-  FiMenu,
-} from "react-icons/fi";
+import { FiSearch, FiPackage, FiX, FiBell, FiMenu } from "react-icons/fi";
 
 import { useHeader } from "../../hooks/user/useHeader";
 
@@ -129,8 +122,8 @@ const Header = () => {
           ? "text-white"
           : "text-red-900"
         : isDark
-        ? "text-gray-300 hover:text-white"
-        : "text-neutral-700 hover:text-red-900"
+          ? "text-gray-300 hover:text-white"
+          : "text-neutral-700 hover:text-red-900"
     }
   `;
 
@@ -158,237 +151,229 @@ const Header = () => {
       >
         <div className="max-w-[1800px] mx-auto px-3 sm:px-5 lg:px-6">
           <div className="flex items-center justify-between h-16 sm:h-[68px] lg:h-[72px]">
-
             {/* =================================================
                 LOGO
-            ================================================= */}
-            <div className="lg:w-[220px] xl:w-[260px] shrink-0">
-              <button
-                type="button"
-                onClick={() => navigate("/")}
-                className={`
-                  font-serif-sarif
-                  text-sm
-                  sm:text-base
-                  lg:text-lg
-                  tracking-[4px]
-                  sm:tracking-[5px]
-                  lg:tracking-[6px]
-                  font-semibold
-                  uppercase
-                  cursor-pointer
-                  transition-colors
-                  whitespace-nowrap
+        {/* =================================================
+    LOGO
+================================================= */}
+<div className="lg:w-[200px] xl:w-[230px] shrink-0">
+  <button
+    type="button"
+    onClick={() => navigate("/")}
+    className={`
+      font-serif-sarif
+      text-xs
+      sm:text-sm
+      lg:text-base
+      tracking-[3px]
+      sm:tracking-[3.5px]
+      lg:tracking-[4px]
+      font-semibold
+      uppercase
+      cursor-pointer
+      transition-colors
+      whitespace-nowrap
 
-                  ${
-                    isDark
-                      ? "text-gray-300 hover:text-white"
-                      : "text-gray-900 hover:text-black"
-                  }
-                `}
-              >
-                Cartify
-              </button>
-            </div>
+      ${
+        isDark
+          ? "text-gray-300 hover:text-white"
+          : "text-gray-900 hover:text-black"
+      }
+    `}
+  >
+    Cartify
+  </button>
+</div>
 
             {/* =================================================
                 DESKTOP NAVIGATION
             ================================================= */}
             <nav
               className={`
-                hidden
-                lg:flex
-                flex-1
-                justify-center
-                items-center
-                gap-6
-                xl:gap-10
-                2xl:gap-14
+    hidden
+    lg:flex
+    flex-1
+    justify-center
+    items-center
+    gap-4
+    xl:gap-6
+    2xl:gap-8
 
-                text-xs
-                xl:text-sm
-                font-medium
-                tracking-[2px]
-                xl:tracking-[2.5px]
-                uppercase
+    text-[11px]
+    xl:text-xs
+    font-medium
+    tracking-[1.5px]
+    xl:tracking-[2px]
+    uppercase
 
-                ${isDark ? "text-gray-300" : "text-neutral-700"}
-              `}
+    ${isDark ? "text-gray-300" : "text-neutral-700"}
+  `}
             >
               {menus.map((menu) => (
                 <div
                   key={menu.title}
                   className="
-                    group
-                    relative
-                    flex
-                    items-center
-                    h-full
-                  "
+        group
+        relative
+        flex
+        items-center
+        h-full
+      "
                 >
                   {/* MENU TITLE */}
                   <NavLink
                     to={menu.items[0]?.path || "/"}
                     className={`
-                      relative
-                      flex
-                      items-center
-                      gap-1.5
-                      py-6
-                      xl:py-7
-                      transition-all
-                      duration-500
-                      hover:tracking-[2.5px]
-                      xl:hover:tracking-[3px]
+          relative
+          flex
+          items-center
+          gap-1
+          py-5
+          xl:py-6
+          transition-all
+          duration-500
+          hover:tracking-[2px]
+          xl:hover:tracking-[2.5px]
 
-                      ${navClass}
-                    `}
+          ${navClass}
+        `}
                   >
                     {menu.title}
 
                     {/* UNDERLINE */}
                     <span
                       className={`
-                        absolute
-                        left-0
-                        bottom-4
-                        h-[1px]
-                        w-0
-                        transition-all
-                        duration-500
-                        group-hover:w-full
+            absolute
+            left-0
+            bottom-3
+            h-[1px]
+            w-0
+            transition-all
+            duration-500
+            group-hover:w-full
 
-                        ${isDark ? "bg-white" : "bg-neutral-900"}
-                      `}
+            ${isDark ? "bg-white" : "bg-neutral-900"}
+          `}
                     />
 
                     <FaChevronDown
                       className="
-                        text-[7px]
-                        sm:text-[8px]
-                        opacity-60
-                        transition-all
-                        duration-500
-                        group-hover:rotate-180
-                        group-hover:opacity-100
-                      "
+            text-[6px]
+            sm:text-[7px]
+            opacity-60
+            transition-all
+            duration-500
+            group-hover:rotate-180
+            group-hover:opacity-100
+          "
                     />
                   </NavLink>
 
-                  {/* =================================================
-                      DESKTOP DROPDOWN
-                  ================================================= */}
+                  {/* DESKTOP DROPDOWN */}
                   <div
                     className="
-                      absolute
-                      top-full
-                      left-1/2
-                      -translate-x-1/2
-                      pt-3
+          absolute
+          top-full
+          left-1/2
+          -translate-x-1/2
+          pt-2
 
-                      opacity-0
-                      invisible
-                      translate-y-3
+          opacity-0
+          invisible
+          translate-y-2
 
-                      group-hover:opacity-100
-                      group-hover:visible
-                      group-hover:translate-y-0
+          group-hover:opacity-100
+          group-hover:visible
+          group-hover:translate-y-0
 
-                      transition-all
-                      duration-300
+          transition-all
+          duration-300
 
-                      w-[300px]
-                      sm:w-[340px]
-                      lg:w-[360px]
-                      z-50
-                    "
+          w-[250px]
+          xl:w-[280px]
+          2xl:w-[300px]
+
+          z-50
+        "
                   >
                     <div
                       className={`
-                        rounded-xl
-                        p-5
-                        sm:p-6
-                        shadow-[0_25px_60px_rgba(0,0,0,0.15)]
-                        backdrop-blur-xl
-                        border
+            rounded-lg
+            p-4
+            xl:p-5
+            shadow-[0_18px_45px_rgba(0,0,0,0.12)]
+            backdrop-blur-xl
+            border
 
-                        ${
-                          isDark
-                            ? "bg-neutral-950/95 border-neutral-800"
-                            : "bg-white/95 border-neutral-100"
-                        }
-                      `}
+            ${
+              isDark
+                ? "bg-neutral-950/95 border-neutral-800"
+                : "bg-white/95 border-neutral-100"
+            }
+          `}
                     >
                       {/* DROPDOWN HEADER */}
-                      <div className="mb-5">
+                      <div className="mb-4">
                         <h3
                           className={`
-                            text-lg
-                            sm:text-xl
-                            font-semibold
-                            tracking-normal
+                text-base
+                xl:text-lg
+                font-semibold
+                tracking-normal
 
-                            ${
-                              isDark
-                                ? "text-white"
-                                : "text-gray-900"
-                            }
-                          `}
+                ${isDark ? "text-white" : "text-gray-900"}
+              `}
                         >
                           {menu.heading}
                         </h3>
 
                         <p
                           className={`
-                            mt-1.5
-                            text-[10px]
-                            sm:text-xs
-                            tracking-normal
+                mt-1
+                text-[9px]
+                xl:text-[10px]
+                tracking-normal
 
-                            ${
-                              isDark
-                                ? "text-gray-400"
-                                : "text-gray-500"
-                            }
-                          `}
+                ${isDark ? "text-gray-400" : "text-gray-500"}
+              `}
                         >
                           {menu.subtitle}
                         </p>
                       </div>
 
                       {/* DROPDOWN LINKS */}
-                      <div className="space-y-3">
+                      <div className="space-y-2.5">
                         {menu.items.map((item) => (
                           <NavLink
                             key={item.name}
                             to={item.path}
                             className={`
-                              group/item
-                              flex
-                              justify-between
-                              items-center
-                              text-xs
-                              sm:text-sm
-                              tracking-normal
-                              transition-all
-                              duration-300
-                              hover:translate-x-1.5
+                  group/item
+                  flex
+                  justify-between
+                  items-center
+                  text-[11px]
+                  xl:text-xs
+                  tracking-normal
+                  transition-all
+                  duration-300
+                  hover:translate-x-1
 
-                              ${
-                                isDark
-                                  ? "text-gray-300 hover:text-white"
-                                  : "text-gray-700 hover:text-black"
-                              }
-                            `}
+                  ${
+                    isDark
+                      ? "text-gray-300 hover:text-white"
+                      : "text-gray-700 hover:text-black"
+                  }
+                `}
                           >
                             <span>{item.name}</span>
 
                             <span
                               className="
-                                opacity-0
-                                group-hover/item:opacity-100
-                                transition-all
-                              "
+                    opacity-0
+                    group-hover/item:opacity-100
+                    transition-all
+                  "
                             >
                               →
                             </span>
@@ -402,53 +387,53 @@ const Header = () => {
             </nav>
 
             {/* =================================================
-                RIGHT ACTIONS
-            ================================================= */}
+    RIGHT ACTIONS
+================================================= */}
             <div
               className={`
-                lg:w-[220px]
-                xl:w-[260px]
-                flex
-                justify-end
-                items-center
-                gap-1.5
-                sm:gap-2.5
-                lg:gap-2
-                shrink-0
+    lg:w-[200px]
+    xl:w-[230px]
+    flex
+    justify-end
+    items-center
+    gap-1
+    sm:gap-1.5
+    lg:gap-1.5
+    shrink-0
 
-                ${isDark ? "text-white" : "text-black"}
-              `}
+    ${isDark ? "text-white" : "text-black"}
+  `}
             >
               {/* SEARCH */}
               <button
                 type="button"
                 onClick={() => setIsSearchModalOpen(true)}
                 className={`
-                  flex
-                  items-center
-                  justify-center
+      flex
+      items-center
+      justify-center
 
-                  w-9
-                  h-9
-                  sm:w-10
-                  sm:h-10
-                  lg:w-10
-                  lg:h-10
+      w-8
+      h-8
+      sm:w-9
+      sm:h-9
+      lg:w-9
+      lg:h-9
 
-                  shrink-0
-                  rounded-full
-                  transition-all
-                  duration-200
+      shrink-0
+      rounded-full
+      transition-all
+      duration-200
 
-                  ${
-                    isDark
-                      ? "text-gray-200 hover:bg-gray-800"
-                      : "text-gray-700 hover:bg-gray-100"
-                  }
-                `}
+      ${
+        isDark
+          ? "text-gray-200 hover:bg-gray-800"
+          : "text-gray-700 hover:bg-gray-100"
+      }
+    `}
                 aria-label="Search"
               >
-                <FiSearch className="text-[17px] sm:text-[18px] lg:text-[19px]" />
+                <FiSearch className="text-[16px] sm:text-[17px] lg:text-[18px]" />
               </button>
 
               {/* CART */}
@@ -456,60 +441,60 @@ const Header = () => {
                 type="button"
                 onClick={() => setIsCartDrawerOpen(true)}
                 className={`
-                  flex
-                  items-center
-                  justify-center
+      flex
+      items-center
+      justify-center
 
-                  w-9
-                  h-9
-                  sm:w-10
-                  sm:h-10
-                  lg:w-10
-                  lg:h-10
+      w-8
+      h-8
+      sm:w-9
+      sm:h-9
+      lg:w-9
+      lg:h-9
 
-                  shrink-0
-                  rounded-full
-                  transition-all
-                  duration-200
+      shrink-0
+      rounded-full
+      transition-all
+      duration-200
 
-                  ${
-                    isDark
-                      ? "bg-gray-800 text-gray-200 hover:bg-gray-700"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }
-                `}
+      ${
+        isDark
+          ? "bg-gray-800 text-gray-200 hover:bg-gray-700"
+          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+      }
+    `}
                 aria-label="Cart"
               >
-                <HiOutlineShoppingBag className="text-[18px] sm:text-[19px] lg:text-[20px]" />
+                <HiOutlineShoppingBag className="text-[17px] sm:text-[18px] lg:text-[19px]" />
               </button>
 
               {/* =================================================
-                  DESKTOP ACTIONS
-              ================================================= */}
-              <div className="hidden lg:flex items-center gap-2">
+      DESKTOP ACTIONS
+  ================================================= */}
+              <div className="hidden lg:flex items-center gap-1.5">
                 {/* ORDERS */}
                 <button
                   type="button"
                   onClick={() => navigate("/orders")}
                   className={`
-                    w-10
-                    h-10
-                    rounded-full
-                    flex
-                    items-center
-                    justify-center
-                    transition-all
-                    duration-300
+        w-9
+        h-9
+        rounded-full
+        flex
+        items-center
+        justify-center
+        transition-all
+        duration-300
 
-                    ${
-                      isDark
-                        ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black"
-                    }
-                  `}
+        ${
+          isDark
+            ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white"
+            : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black"
+        }
+      `}
                   aria-label="Orders"
                 >
-                  <FiPackage className="text-[19px] lg:text-[20px]" />
+                  <FiPackage className="text-[18px]" />
                 </button>
 
                 {/* NOTIFICATIONS */}
@@ -518,51 +503,49 @@ const Header = () => {
                     type="button"
                     onClick={() => navigate("/notifications")}
                     className={`
-                      relative
-                      w-10
-                      h-10
-                      rounded-full
-                      flex
-                      items-center
-                      justify-center
-                      transition-all
-                      duration-300
+          relative
+          w-9
+          h-9
+          rounded-full
+          flex
+          items-center
+          justify-center
+          transition-all
+          duration-300
 
-                      ${
-                        isDark
-                          ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white"
-                          : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black"
-                      }
-                    `}
+          ${
+            isDark
+              ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black"
+          }
+        `}
                     aria-label={`Notifications${
-                      unreadCount > 0
-                        ? `, ${unreadCount} unread`
-                        : ""
+                      unreadCount > 0 ? `, ${unreadCount} unread` : ""
                     }`}
                   >
-                    <FiBell className="text-[18px] lg:text-[19px]" />
+                    <FiBell className="text-[17px]" />
 
                     {unreadCount > 0 && (
                       <span
                         className="
-                          absolute
-                          -top-1
-                          -right-1
-                          min-w-[17px]
-                          h-[17px]
-                          px-1
-                          rounded-full
-                          bg-red-500
-                          text-white
-                          text-[9px]
-                          font-bold
-                          flex
-                          items-center
-                          justify-center
-                          border-2
-                          border-white
-                          leading-none
-                        "
+              absolute
+              -top-1
+              -right-1
+              min-w-[15px]
+              h-[15px]
+              px-1
+              rounded-full
+              bg-red-500
+              text-white
+              text-[8px]
+              font-bold
+              flex
+              items-center
+              justify-center
+              border-2
+              border-white
+              leading-none
+            "
                       >
                         {unreadCount > 99 ? "99+" : unreadCount}
                       </span>
@@ -575,76 +558,74 @@ const Header = () => {
                   type="button"
                   onClick={() => navigate("/profile")}
                   className={`
-                    group
-                    flex
-                    items-center
-                    gap-2
-                    pl-1
-                    pr-3
-                    py-1
-                    rounded-full
-                    border
-                    cursor-pointer
-                    transition-all
-                    duration-300
-                    shadow-sm
+        group
+        flex
+        items-center
+        gap-1.5
+        pl-1
+        pr-2.5
+        py-1
+        rounded-full
+        border
+        cursor-pointer
+        transition-all
+        duration-300
+        shadow-sm
 
-                    ${
-                      isDark
-                        ? "bg-gray-900 border-gray-800 hover:border-gray-600 hover:bg-gray-800 hover:shadow-lg"
-                        : "bg-white border-gray-200 hover:border-gray-300 hover:bg-gray-50 hover:shadow-md"
-                    }
-                  `}
+        ${
+          isDark
+            ? "bg-gray-900 border-gray-800 hover:border-gray-600 hover:bg-gray-800 hover:shadow-lg"
+            : "bg-white border-gray-200 hover:border-gray-300 hover:bg-gray-50 hover:shadow-md"
+        }
+      `}
                 >
                   {/* AVATAR */}
                   <div className="relative shrink-0">
                     <div
                       className={`
-                        w-8
-                        h-8
-                        lg:w-9
-                        lg:h-9
-                        rounded-full
-                        flex
-                        items-center
-                        justify-center
-                        text-white
-                        font-semibold
-                        text-xs
-                        uppercase
-                        shadow-sm
-                        transition-transform
-                        duration-300
-                        group-hover:scale-105
+            w-7
+            h-7
+            lg:w-8
+            lg:h-8
+            rounded-full
+            flex
+            items-center
+            justify-center
+            text-white
+            font-semibold
+            text-[10px]
+            uppercase
+            shadow-sm
+            transition-transform
+            duration-300
+            group-hover:scale-105
 
-                        ${
-                          isDark
-                            ? "bg-gradient-to-br from-gray-500 via-gray-700 to-black"
-                            : "bg-gradient-to-br from-gray-800 to-black"
-                        }
-                      `}
+            ${
+              isDark
+                ? "bg-gradient-to-br from-gray-500 via-gray-700 to-black"
+                : "bg-gradient-to-br from-gray-800 to-black"
+            }
+          `}
                     >
-                      {profileData?.name
-                        ?.charAt(0)
-                        ?.toUpperCase() || "U"}
+                      {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
                     </div>
 
                     <span
                       className={`
-                        absolute
-                        bottom-0
-                        right-0
-                        w-2.5
-                        h-2.5
-                        rounded-full
-                        border-2
+            absolute
+            bottom-0
+            right-0
+            w-2
+            h-2
+            rounded-full
+            border-[1.5px]
 
-                        ${
-                          isDark
-                            ? "bg-green-500 border-gray-900"
-                            : "bg-green-500 border-white"
-                        }
-                      `}
+            ${
+              isDark
+                ? "bg-green-500 border-gray-900"
+                : "bg-green-500 border-white"
+            }
+          `}
                     />
                   </div>
 
@@ -652,35 +633,31 @@ const Header = () => {
                   <div className="hidden xl:flex flex-col items-start min-w-0 leading-tight">
                     <span
                       className={`
-                        max-w-[100px]
-                        truncate
-                        text-xs
-                        font-semibold
+            max-w-[90px]
+            truncate
+            text-[11px]
+            font-semibold
 
-                        ${
-                          isDark
-                            ? "text-gray-100 group-hover:text-white"
-                            : "text-gray-900 group-hover:text-black"
-                        }
-                      `}
+            ${
+              isDark
+                ? "text-gray-100 group-hover:text-white"
+                : "text-gray-900 group-hover:text-black"
+            }
+          `}
                     >
                       {profileData?.name || "User"}
                     </span>
 
                     <span
                       className={`
-                        mt-0.5
-                        text-[9px]
-                        font-medium
-                        tracking-wide
-                        uppercase
+            mt-0.5
+            text-[8px]
+            font-medium
+            tracking-wide
+            uppercase
 
-                        ${
-                          isDark
-                            ? "text-gray-500"
-                            : "text-gray-400"
-                        }
-                      `}
+            ${isDark ? "text-gray-500" : "text-gray-400"}
+          `}
                     >
                       Account
                     </span>
@@ -688,17 +665,13 @@ const Header = () => {
 
                   <span
                     className={`
-                      hidden
-                      xl:block
-                      ml-0.5
-                      text-[10px]
+          hidden
+          xl:block
+          ml-0.5
+          text-[9px]
 
-                      ${
-                        isDark
-                          ? "text-gray-500"
-                          : "text-gray-400"
-                      }
-                    `}
+          ${isDark ? "text-gray-500" : "text-gray-400"}
+        `}
                   >
                     →
                   </span>
@@ -706,33 +679,33 @@ const Header = () => {
               </div>
 
               {/* =================================================
-                  HAMBURGER
-              ================================================= */}
+      HAMBURGER
+  ================================================= */}
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(true)}
                 className={`
-                  lg:hidden
-                  w-9
-                  h-9
-                  sm:w-10
-                  sm:h-10
-                  rounded-full
-                  flex
-                  items-center
-                  justify-center
-                  transition-all
-                  duration-300
+      lg:hidden
+      w-8
+      h-8
+      sm:w-9
+      sm:h-9
+      rounded-full
+      flex
+      items-center
+      justify-center
+      transition-all
+      duration-300
 
-                  ${
-                    isDark
-                      ? "bg-gray-800 text-gray-200 hover:bg-gray-700"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }
-                `}
+      ${
+        isDark
+          ? "bg-gray-800 text-gray-200 hover:bg-gray-700"
+          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+      }
+    `}
                 aria-label="Open menu"
               >
-                <FiMenu className="text-[19px] sm:text-[20px]" />
+                <FiMenu className="text-[18px] sm:text-[19px]" />
               </button>
             </div>
           </div>
@@ -766,11 +739,7 @@ const Header = () => {
               overflow-y-auto
               shadow-2xl
 
-              ${
-                isDark
-                  ? "bg-gray-950 text-white"
-                  : "bg-white text-gray-900"
-              }
+              ${isDark ? "bg-gray-950 text-white" : "bg-white text-gray-900"}
             `}
             onClick={(e) => e.stopPropagation()}
           >
@@ -802,11 +771,7 @@ const Header = () => {
                     uppercase
                     mb-1
 
-                    ${
-                      isDark
-                        ? "text-gray-500"
-                        : "text-gray-400"
-                    }
+                    ${isDark ? "text-gray-500" : "text-gray-400"}
                   `}
                 >
                   Navigation
@@ -852,11 +817,7 @@ const Header = () => {
                   uppercase
                   mb-3
 
-                  ${
-                    isDark
-                      ? "text-gray-500"
-                      : "text-gray-400"
-                  }
+                  ${isDark ? "text-gray-500" : "text-gray-400"}
                 `}
               >
                 Shop
@@ -870,9 +831,7 @@ const Header = () => {
                       type="button"
                       onClick={() =>
                         setOpenMobileMenu(
-                          openMobileMenu === menu.title
-                            ? null
-                            : menu.title
+                          openMobileMenu === menu.title ? null : menu.title,
                         )
                       }
                       className={`
@@ -907,11 +866,7 @@ const Header = () => {
                           transition-transform
                           duration-300
 
-                          ${
-                            openMobileMenu === menu.title
-                              ? "rotate-180"
-                              : ""
-                          }
+                          ${openMobileMenu === menu.title ? "rotate-180" : ""}
                         `}
                       />
                     </button>
@@ -936,11 +891,7 @@ const Header = () => {
                           pl-4
                           border-l
 
-                          ${
-                            isDark
-                              ? "border-gray-800"
-                              : "border-gray-200"
-                          }
+                          ${isDark ? "border-gray-800" : "border-gray-200"}
                         `}
                       >
                         {menu.items.map((item) => (
@@ -984,11 +935,7 @@ const Header = () => {
                   pt-5
                   border-t
 
-                  ${
-                    isDark
-                      ? "border-gray-800"
-                      : "border-gray-200"
-                  }
+                  ${isDark ? "border-gray-800" : "border-gray-200"}
                 `}
               >
                 <p
@@ -998,11 +945,7 @@ const Header = () => {
                     uppercase
                     mb-3
 
-                    ${
-                      isDark
-                        ? "text-gray-500"
-                        : "text-gray-400"
-                    }
+                    ${isDark ? "text-gray-500" : "text-gray-400"}
                   `}
                 >
                   Account
@@ -1035,9 +978,7 @@ const Header = () => {
                   >
                     <FiPackage className="text-[19px] sm:text-[20px]" />
 
-                    <span className="text-[10px] sm:text-[11px]">
-                      Orders
-                    </span>
+                    <span className="text-[10px] sm:text-[11px]">Orders</span>
                   </button>
 
                   {/* NOTIFICATIONS */}
@@ -1088,9 +1029,7 @@ const Header = () => {
                               justify-center
                             "
                           >
-                            {unreadCount > 99
-                              ? "99+"
-                              : unreadCount}
+                            {unreadCount > 99 ? "99+" : unreadCount}
                           </span>
                         )}
                       </div>
@@ -1137,21 +1076,13 @@ const Header = () => {
                         text-[10px]
                         font-semibold
 
-                        ${
-                          isDark
-                            ? "bg-gray-700"
-                            : "bg-gray-800"
-                        }
+                        ${isDark ? "bg-gray-700" : "bg-gray-800"}
                       `}
                     >
-                      {profileData?.name
-                        ?.charAt(0)
-                        ?.toUpperCase() || "U"}
+                      {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
                     </div>
 
-                    <span className="text-[10px] sm:text-[11px]">
-                      Profile
-                    </span>
+                    <span className="text-[10px] sm:text-[11px]">Profile</span>
                   </button>
                 </div>
               </div>
@@ -1167,9 +1098,7 @@ const Header = () => {
         isOpen={isCartDrawerOpen}
         onClose={() => setIsCartDrawerOpen(false)}
       >
-        <CartSidebar
-          onClose={() => setIsCartDrawerOpen(false)}
-        />
+        <CartSidebar onClose={() => setIsCartDrawerOpen(false)} />
       </Drawer>
 
       {/* =====================================================
@@ -1215,11 +1144,7 @@ const Header = () => {
                   text-base
                   sm:text-lg
 
-                  ${
-                    isDark
-                      ? "text-gray-400"
-                      : "text-gray-500"
-                  }
+                  ${isDark ? "text-gray-400" : "text-gray-500"}
                 `}
               />
 
@@ -1284,11 +1209,7 @@ const Header = () => {
                         text-xs
                         sm:text-sm
 
-                        ${
-                          isDark
-                            ? "text-gray-400"
-                            : "text-gray-500"
-                        }
+                        ${isDark ? "text-gray-400" : "text-gray-500"}
                       `}
                     >
                       Searching...
@@ -1301,9 +1222,7 @@ const Header = () => {
                       <button
                         type="button"
                         key={item._id}
-                        onClick={() =>
-                          handleProductClick(item._id)
-                        }
+                        onClick={() => handleProductClick(item._id)}
                         className={`
                           w-full
                           px-4
@@ -1353,11 +1272,7 @@ const Header = () => {
                             text-base
                             sm:text-lg
 
-                            ${
-                              isDark
-                                ? "text-gray-500"
-                                : "text-gray-400"
-                            }
+                            ${isDark ? "text-gray-500" : "text-gray-400"}
                           `}
                         >
                           →

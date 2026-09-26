@@ -46,12 +46,9 @@ const Settings = () => {
       }
     >
       <div
-        className={`min-h-screen p-6 ${
-          isDark ? "bg-gray-900" : "bg-gray-50"
-        }`}
+        className={`min-h-screen p-6 ${isDark ? "bg-gray-900" : "bg-gray-50"}`}
       >
         <div className="w-full mx-auto">
-
           {/* PAGE HEADER */}
           <div
             className={`rounded-2xl p-8 shadow-sm mb-6 border ${
@@ -68,11 +65,7 @@ const Settings = () => {
               Settings
             </h1>
 
-            <p
-              className={`mt-2 ${
-                isDark ? "text-gray-400" : "text-gray-500"
-              }`}
-            >
+            <p className={`mt-2 ${isDark ? "text-gray-400" : "text-gray-500"}`}>
               Manage your account preferences and application settings.
             </p>
           </div>
@@ -85,7 +78,6 @@ const Settings = () => {
                 : "bg-white border-gray-100"
             }`}
           >
-
             {/* ================= PROFILE ================= */}
             <SettingsItem
               icon={<FiUser />}
@@ -96,7 +88,6 @@ const Settings = () => {
               isDark={isDark}
             >
               <div className="grid md:grid-cols-2 gap-5 pt-6">
-
                 {/* NAME */}
                 <input
                   name="name"
@@ -130,7 +121,7 @@ const Settings = () => {
                   label="Save Changes"
                   onClick={saveSettings}
                   variant={isDark ? "secondary" : "primary"}
-                  className="w-1/8"
+                  className="w-1/2 sm:w-1/2 md:w-1-8 lg:w-1/8 text-xs sm:text-xs md:text-sm lg:text-lg"
                 />
               </div>
             </SettingsItem>
@@ -145,7 +136,6 @@ const Settings = () => {
               isDark={isDark}
             >
               <div className="space-y-4 pt-6">
-
                 <input
                   placeholder="Current Password"
                   type="password"
@@ -163,14 +153,13 @@ const Settings = () => {
                   type="password"
                   className={inputClass}
                 />
-
               </div>
 
               <div className="flex justify-end mt-6">
                 <Button
                   label="Update Password"
                   variant={isDark ? "secondary" : "primary"}
-                  className="w-1/8"
+                  className="w-1/2 sm:w-1/2 md:w-1-8 lg:w-1/8 text-xs sm:text-xs md:text-sm lg:text-lg"
                 />
               </div>
             </SettingsItem>
@@ -185,14 +174,12 @@ const Settings = () => {
               isDark={isDark}
             >
               <div className="pt-6">
-
                 <div
                   className={`flex items-center justify-between p-4 rounded-xl ${
                     isDark ? "bg-gray-700" : "bg-gray-50"
                   }`}
                 >
                   <div>
-
                     <h4
                       className={`font-semibold ${
                         isDark ? "text-white" : "text-gray-900"
@@ -209,7 +196,6 @@ const Settings = () => {
                       Receive notifications about your account, orders and
                       updates.
                     </p>
-
                   </div>
 
                   <ToggleSwitch
@@ -227,9 +213,7 @@ const Settings = () => {
                       setAllowNotification(value);
                     }}
                   />
-
                 </div>
-
               </div>
 
               <div className="flex justify-end mt-6">
@@ -237,7 +221,7 @@ const Settings = () => {
                   label="Save Preferences"
                   onClick={saveSettings}
                   variant={isDark ? "secondary" : "primary"}
-                  className="w-1/8"
+                  className="w-1/2 sm:w-1/2 md:w-1-8 lg:w-1/8 text-xs sm:text-xs md:text-sm lg:text-lg"
                 />
               </div>
             </SettingsItem>
@@ -252,7 +236,6 @@ const Settings = () => {
               isDark={isDark}
             >
               <div className="pt-6">
-
                 <h3
                   className={`font-semibold mb-4 ${
                     isDark ? "text-white" : "text-gray-900"
@@ -262,48 +245,42 @@ const Settings = () => {
                 </h3>
 
                 <div className="flex flex-col gap-4">
+                  {["Light Mode", "Dark Mode", "System Default"].map((item) => (
+                    <label
+                      key={item}
+                      className={`p-5 rounded-2xl border cursor-pointer transition flex items-center gap-3 ${
+                        isDark
+                          ? "bg-gray-700 border-gray-600 hover:border-white"
+                          : "bg-white border-gray-200 hover:border-black"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="theme"
+                        value={item}
+                        checked={settings.theme === item}
+                        onChange={() => {
+                          // Change theme immediately
+                          setTheme(item);
 
-                  {["Light Mode", "Dark Mode", "System Default"].map(
-                    (item) => (
-                      <label
-                        key={item}
-                        className={`p-5 rounded-2xl border cursor-pointer transition flex items-center gap-3 ${
-                          isDark
-                            ? "bg-gray-700 border-gray-600 hover:border-white"
-                            : "bg-white border-gray-200 hover:border-black"
+                          // Update settings state
+                          setSettings((prev) => ({
+                            ...prev,
+                            theme: item,
+                          }));
+                        }}
+                        className="w-4 h-4 accent-black"
+                      />
+
+                      <span
+                        className={`font-medium ${
+                          isDark ? "text-white" : "text-gray-900"
                         }`}
                       >
-
-                        <input
-                          type="radio"
-                          name="theme"
-                          value={item}
-                          checked={settings.theme === item}
-                          onChange={() => {
-                            // Change theme immediately
-                            setTheme(item);
-
-                            // Update settings state
-                            setSettings((prev) => ({
-                              ...prev,
-                              theme: item,
-                            }));
-                          }}
-                          className="w-4 h-4 accent-black"
-                        />
-
-                        <span
-                          className={`font-medium ${
-                            isDark ? "text-white" : "text-gray-900"
-                          }`}
-                        >
-                          {item}
-                        </span>
-
-                      </label>
-                    )
-                  )}
-
+                        {item}
+                      </span>
+                    </label>
+                  ))}
                 </div>
 
                 <div className="flex justify-end mt-6">
@@ -311,10 +288,9 @@ const Settings = () => {
                     label="Save Appearance"
                     onClick={saveSettings}
                     variant={isDark ? "secondary" : "primary"}
-                    className="w-1/8"
+                    className="w-1/2 sm:w-1/2 md:w-1-8 lg:w-1/8 text-xs sm:text-xs md:text-sm lg:text-lg"
                   />
                 </div>
-
               </div>
             </SettingsItem>
 
@@ -328,7 +304,6 @@ const Settings = () => {
               isDark={isDark}
             >
               <div className="pt-6">
-
                 <div
                   className={`rounded-2xl border p-5 ${
                     isDark
@@ -336,11 +311,8 @@ const Settings = () => {
                       : "bg-gray-50 border-gray-200"
                   }`}
                 >
-
                   <div className="flex items-center justify-between gap-4">
-
                     <div className="flex items-center gap-4 min-w-0">
-
                       <div
                         className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${
                           isDark
@@ -352,7 +324,6 @@ const Settings = () => {
                       </div>
 
                       <div className="min-w-0">
-
                         <h3
                           className={`font-semibold ${
                             isDark ? "text-white" : "text-gray-900"
@@ -368,25 +339,19 @@ const Settings = () => {
                         >
                           Sign out securely from your account
                         </p>
-
                       </div>
-
                     </div>
 
                     <Button
                       label="Logout"
                       onClick={handleLogout}
                       variant="danger"
-                      className="w-1/8"
+                      className="w-1/2 sm:w-1/2 md:w-1-8 lg:w-1/8  text-xs sm:text-xs md:text-sm lg:text-lg"
                     />
-
                   </div>
-
                 </div>
-
               </div>
             </SettingsItem>
-
           </div>
         </div>
       </div>

@@ -167,42 +167,7 @@ const DescriptionPage = () => {
                 </span>
               </div>
 
-              {/* ACTION BUTTONS */}
-              <div className="mt-5 sm:mt-7 flex flex-col gap-2.5 sm:gap-3">
-                <button
-                  onClick={handleCart}
-                  className={`
-                    h-11
-                    sm:h-12
-                    md:h-13
-                    w-full
-                    rounded-lg
-                    sm:rounded-xl
-                    font-medium
-                    text-xs
-                    sm:text-sm
-                    transition-all
-                    duration-300
-                    ${
-                      isDark
-                        ? "bg-white text-black hover:bg-gray-200"
-                        : "bg-black text-white hover:bg-gray-800"
-                    }
-                  `}
-                >
-                  {selectedSize && selectedVariant?.stock <= 0
-                    ? "Out Of Stock"
-                    : "Add To Cart"}
-                </button>
-
-                <Button
-                  label="Add To Wishlist"
-                  variant={isDark ? "outlineDark" : "outline"}
-                  className="w-full"
-                />
-              </div>
-
-              {/* SIZE */}
+               {/* SIZE */}
               {product.variants?.length > 0 && (
                 <div className="mt-6 sm:mt-7">
                   <h3
@@ -268,6 +233,43 @@ const DescriptionPage = () => {
                   </div>
                 </div>
               )}
+
+              {/* ACTION BUTTONS */}
+              <div className="mt-5 sm:mt-7 flex flex-col gap-2.5 sm:gap-3">
+                <button
+                  onClick={handleCart}
+                  className={`
+                    h-11
+                    sm:h-12
+                    md:h-13
+                    w-full
+                    rounded-lg
+                    sm:rounded-xl
+                    font-medium
+                    text-xs
+                    sm:text-sm
+                    transition-all
+                    duration-300
+                    ${
+                      isDark
+                        ? "bg-white text-black hover:bg-gray-200"
+                        : "bg-black text-white hover:bg-gray-800"
+                    }
+                  `}
+                >
+                  {selectedSize && selectedVariant?.stock <= 0
+                    ? "Out Of Stock"
+                    : "Add To Cart"}
+                </button>
+
+                <Button
+                  label="Add To Wishlist"
+                  variant={isDark ? "outlineDark" : "outline"}
+                  className="w-full"
+                />
+              </div>
+
+             
 
               {/* PRODUCT DESCRIPTION */}
               <div

@@ -433,205 +433,197 @@ const Header = () => {
   // =====================================================
 
   return (
-    <header
+   <header
+  className={`
+    sticky
+    top-0
+    z-40
+    flex
+    items-center
+    justify-between
+    border-b
+    px-3
+    py-3
+    sm:px-4
+    sm:py-4
+    lg:px-6
+    backdrop-blur-md
+    transition-colors
+    duration-300
+
+    ${
+      isDark
+        ? "border-gray-800 bg-gray-900/95"
+        : "border-gray-200 bg-white/95"
+    }
+  `}
+>
+  {/* =====================================================
+      LEFT SIDE
+  ===================================================== */}
+
+  <div className="min-w-0 flex-1">
+    {/* Your page title can stay here */}
+  </div>
+
+  {/* =====================================================
+      RIGHT SIDE
+  ===================================================== */}
+
+  <div className="flex shrink-0 items-center gap-2 sm:gap-4">
+
+    {/* =====================================================
+        NOTIFICATION
+    ===================================================== */}
+
+    {allowNotification && (
+      <button
+        type="button"
+        onClick={handleNotificationClick}
+        className={`
+          relative
+          flex
+          h-10
+          w-10
+          shrink-0
+          items-center
+          justify-center
+          rounded-full
+          transition-all
+          duration-200
+          sm:h-11
+          sm:w-11
+
+          ${
+            isDark
+              ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black"
+          }
+        `}
+        aria-label={`Notifications${
+          unreadCount > 0
+            ? `, ${unreadCount} unread`
+            : ""
+        }`}
+      >
+        <FiBell className="text-[19px] sm:text-[21px]" />
+
+        {unreadCount > 0 && (
+          <span
+            className="
+              absolute
+              -right-1
+              -top-1
+              flex
+              h-[18px]
+              min-w-[18px]
+              items-center
+              justify-center
+              rounded-full
+              border-2
+              border-white
+              bg-red-500
+              px-1
+              text-[9px]
+              font-bold
+              leading-none
+              text-white
+              sm:h-[19px]
+              sm:min-w-[19px]
+              sm:text-[10px]
+            "
+          >
+            {unreadCount > 99 ? "99+" : unreadCount}
+          </span>
+        )}
+      </button>
+    )}
+
+    {/* =====================================================
+        PROFILE
+    ===================================================== */}
+
+    <div
       className={`
-        sticky
-        top-0
-        z-40
         flex
+        shrink-0
+        cursor-pointer
         items-center
-        justify-between
-        border-b
-        px-6
-        py-4
-        backdrop-blur-md
-        transition-colors
-        duration-300
+        gap-2
+        rounded-xl
+        border
+        px-2
+        py-1.5
+        transition
+        sm:gap-3
+        sm:px-3
+        sm:py-2
 
         ${
           isDark
-            ? "border-gray-800 bg-gray-900/95"
-            : "border-gray-200 bg-white/95"
+            ? "border-gray-700 hover:bg-gray-800"
+            : "border-gray-200 hover:bg-gray-50"
         }
       `}
     >
 
-      {/* =====================================================
-          LEFT SIDE
-      ===================================================== */}
+      {/* PROFILE INITIAL */}
 
-      <div>
-        <h1
-          className={`
-            text-2xl
-            font-bold
-            tracking-tight
-            ${isDark ? "text-white" : "text-gray-900"}
-          `}
-        >
-          Products
-        </h1>
-
-        <p
-          className={`
-            mt-1
-            text-sm
-            ${isDark ? "text-gray-400" : "text-gray-500"}
-          `}
-        >
-          Manage inventory and product listings
-        </p>
+      <div
+        className="
+          flex
+          h-8
+          w-8
+          shrink-0
+          items-center
+          justify-center
+          rounded-full
+          bg-black
+          text-sm
+          font-semibold
+          text-white
+          sm:h-9
+          sm:w-9
+        "
+      >
+        {profileData?.name
+          ?.charAt(0)
+          .toUpperCase()}
       </div>
 
-      {/* =====================================================
-          RIGHT SIDE
-      ===================================================== */}
+      {/* PROFILE INFORMATION */}
 
-      <div className="flex items-center gap-4">
-
-        {/* =====================================================
-            NOTIFICATION
-        ===================================================== */}
-
-        {allowNotification && (
-          <button
-            type="button"
-            onClick={handleNotificationClick}
-            className={`
-              relative
-              flex
-              h-11
-              w-11
-              items-center
-              justify-center
-              rounded-full
-              transition-all
-              duration-200
-
-              ${
-                isDark
-                  ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black"
-              }
-            `}
-            aria-label={`Notifications${
-              unreadCount > 0
-                ? `, ${unreadCount} unread`
-                : ""
-            }`}
-          >
-            <FiBell className="text-[21px]" />
-
-            {/* UNREAD BADGE */}
-
-            {unreadCount > 0 && (
-              <span
-                className="
-                  absolute
-                  -right-1
-                  -top-1
-                  flex
-                  h-[19px]
-                  min-w-[19px]
-                  items-center
-                  justify-center
-                  rounded-full
-                  border-2
-                  border-white
-                  bg-red-500
-                  px-1
-                  text-[10px]
-                  font-bold
-                  leading-none
-                  text-white
-                "
-              >
-                {unreadCount > 99 ? "99+" : unreadCount}
-              </span>
-            )}
-          </button>
-        )}
-
-        {/* =====================================================
-            PROFILE
-        ===================================================== */}
-
-        <div
+      <div className="hidden md:block">
+        <p
           className={`
-            flex
-            cursor-pointer
-            items-center
-            gap-3
-            rounded-xl
-            border
-            px-3
-            py-2
-            transition
-
+            text-sm
+            font-medium
             ${
               isDark
-                ? "border-gray-700 hover:bg-gray-800"
-                : "border-gray-200 hover:bg-gray-50"
+                ? "text-white"
+                : "text-gray-800"
             }
           `}
         >
+          {profileData?.name}
+        </p>
 
-          {/* PROFILE INITIAL */}
-
-          <div
-            className="
-              flex
-              h-9
-              w-9
-              items-center
-              justify-center
-              rounded-full
-              bg-black
-              font-semibold
-              text-white
-            "
-          >
-            {profileData?.name
-              ?.charAt(0)
-              .toUpperCase()}
-          </div>
-
-          {/* PROFILE INFORMATION */}
-
-          <div className="hidden md:block">
-
-            <p
-              className={`
-                text-sm
-                font-medium
-                ${
-                  isDark
-                    ? "text-white"
-                    : "text-gray-800"
-                }
-              `}
-            >
-              {profileData?.name}
-            </p>
-
-            <p
-              className={`
-                text-xs
-                ${
-                  isDark
-                    ? "text-gray-400"
-                    : "text-gray-500"
-                }
-              `}
-            >
-              Administrator
-            </p>
-
-          </div>
-        </div>
-
+        <p
+          className={`
+            text-xs
+            ${
+              isDark
+                ? "text-gray-400"
+                : "text-gray-500"
+            }
+          `}
+        >
+          Administrator
+        </p>
       </div>
-    </header>
+    </div>
+  </div>
+</header>
   );
 };
 

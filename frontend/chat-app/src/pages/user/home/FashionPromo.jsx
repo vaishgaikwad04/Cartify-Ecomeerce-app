@@ -58,7 +58,7 @@ const FashionPromo = () => {
         }
       }}
       className="
-        aspect-[3/4]
+        aspect-[5/4]
         w-full
         rounded
       "
@@ -97,46 +97,44 @@ const FashionPromo = () => {
       </button>
     </ImageCard>
 
-    {/* POPUP — RIGHT SIDE */}
-    {openProductModel === index && products?.length > 0 && (
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className="
-          absolute
-          top-12
-          left-10
-          sm:left-12
-          md:left-14
-          lg:left-16
+   {/* POPUP — RIGHT SIDE */}
+{openProductModel === index && products?.length > 0 && (
+  <div
+  onClick={(e) => e.stopPropagation()}
+  className="
+    absolute
+    top-94
+    left-112
+    ml-3
 
-          z-[99999]
+    z-[99999]
 
-          w-[90px]
-          sm:w-[120px]
-          md:w-[150px]
-          lg:w-[172px]
-        "
-      >
-        <div
-          className={`
-            w-full
-            rounded-lg
-            shadow-xl
-            p-1
-            sm:p-1.5
-            md:p-2
+    w-[90px]
+    sm:w-[120px]
+    md:w-[150px]
+    lg:w-[172px]
+  "
+>
+    <div
+      className={`
+        w-full
+        rounded-lg
+        shadow-xl
+        p-1
+        sm:p-1.5
+        md:p-2
 
-            ${isDark ? "bg-gray-900" : "bg-white"}
-          `}
-        >
-          <Card
-            product={products[0]}
-            isWishlisted={isWishlisted(products[0]._id)}
-            onToggleWishlist={toggleWishlist}
-          />
-        </div>
-      </div>
-    )}
+        ${isDark ? "bg-gray-900" : "bg-white"}
+      `}
+    >
+      <Card
+        product={products[0]}
+        isWishlisted={isWishlisted(products[0]._id)}
+        onToggleWishlist={toggleWishlist}
+      />
+    </div>
+  </div>
+)}
   </div>
 ))}
 </div>

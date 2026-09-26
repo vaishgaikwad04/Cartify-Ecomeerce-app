@@ -46,7 +46,7 @@ const ImagePreview = ({ Images = [] }) => {
       </div>
 
       {/* Main Image */}
-      <div className="flex-1 min-w-0 aspect-[3/4] overflow-hidden rounded-md shadow-sm">
+      <div className="flex-1 min-w-0 aspect-[4/4] overflow-hidden rounded-md shadow-sm">
         <img
           src={activeImage}
           alt="active preview"

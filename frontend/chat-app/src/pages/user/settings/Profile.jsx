@@ -14,7 +14,8 @@ import { useProfile } from "../../../hooks/user/useProfile";
 
 const Profile = () => {
   // PROFILE HOOK
-  const { profileData, loading, handleLogout, isDark, navigate } = useProfile();
+  const { profileData, loading, handleLogout, isDark, navigate } =
+    useProfile();
 
   // ACCOUNT MENU
   const accountItems = [
@@ -39,7 +40,7 @@ const Profile = () => {
     {
       title: "Help & Support",
       description: "Get help with your orders and account",
-      icon: <CircleHelp size={18} />,
+      icon: <CircleHelp size={16} />,
       path: "/help",
     },
     {
@@ -50,7 +51,9 @@ const Profile = () => {
     },
   ];
 
+  // ============================================================
   // LOADING STATE
+  // ============================================================
   if (loading) {
     return (
       <div
@@ -59,11 +62,14 @@ const Profile = () => {
           flex
           items-center
           justify-center
-          px-3
+          px-2
+          sm:px-3
           ${isDark ? "bg-gray-950 text-white" : "bg-gray-50 text-gray-900"}
         `}
       >
-        <p className="text-xs sm:text-sm opacity-60">Loading profile...</p>
+        <p className="text-[10px] sm:text-xs opacity-60">
+          Loading profile...
+        </p>
       </div>
     );
   }
@@ -72,25 +78,44 @@ const Profile = () => {
     <div
       className={`
         min-h-screen
-        px-3
-        sm:px-4
-        py-4
-        sm:py-5
+
+        px-2
+        sm:px-3
+        md:px-4
+
+        py-3
+        sm:py-4
+        md:py-5
+
         transition-colors
         duration-300
+
         ${isDark ? "bg-gray-950 text-white" : "bg-gray-50 text-gray-900"}
       `}
     >
-      <div className="max-w-[1200px] mx-auto">
-        {/* ================= PAGE HEADER ================= */}
-        <div className="mb-4 sm:mb-5">
+      <div className="max-w-[1800px] mx-auto">
+
+        {/* =====================================================
+            PAGE HEADER
+        ===================================================== */}
+        <div
+          className="
+            mb-3
+            sm:mb-4
+            md:mb-5
+          "
+        >
           <p
             className={`
-              text-[10px]
-              sm:text-xs
+              text-[8px]
+              sm:text-[9px]
+              md:text-[10px]
+
               uppercase
-              tracking-[2px]
+              tracking-[1.5px]
+              sm:tracking-[2px]
               font-medium
+
               ${isDark ? "text-gray-500" : "text-gray-400"}
             `}
           >
@@ -99,10 +124,13 @@ const Profile = () => {
 
           <h1
             className="
-              mt-1
-              text-xl
-              sm:text-2xl
+              mt-0.5
+              sm:mt-1
+
+              text-base
+              sm:text-lg
               md:text-3xl
+
               font-semibold
               tracking-tight
             "
@@ -112,9 +140,13 @@ const Profile = () => {
 
           <p
             className={`
-              mt-1
-              text-xs
-              sm:text-sm
+              mt-0.5
+              sm:mt-1
+
+              text-[9px]
+              sm:text-[10px]
+              md:text-sm
+
               ${isDark ? "text-gray-400" : "text-gray-500"}
             `}
           >
@@ -122,15 +154,25 @@ const Profile = () => {
           </p>
         </div>
 
-        {/* ================= PROFILE CARD ================= */}
+        {/* =====================================================
+            PROFILE CARD
+        ===================================================== */}
         <div
           className={`
-            rounded-xl
+            rounded-lg
+            sm:rounded-xl
+
             border
-            p-3
-            sm:p-4
-            mb-4
+
+            p-2.5
+            sm:p-3
+            md:p-4
+
+            mb-3
+            sm:mb-4
+
             shadow-sm
+
             ${
               isDark
                 ? "bg-gray-800 border-gray-800"
@@ -140,69 +182,126 @@ const Profile = () => {
         >
           <div
             className="
-    grid
-    grid-cols-[1fr_auto]
-    sm:grid-cols-[1fr_auto]
-    items-center
-    gap-3
-    sm:gap-4
-  "
+              grid
+              grid-cols-[1fr_auto]
+
+              items-center
+
+              gap-2
+              sm:gap-3
+              md:gap-4
+            "
           >
-            {/* AVATAR + USER INFORMATION */}
+            {/* =================================================
+                AVATAR + USER INFORMATION
+            ================================================= */}
             <div
               className="
-      grid
-      grid-cols-[auto_1fr]
-      items-center
-      gap-3
-      min-w-0
-    "
+                grid
+                grid-cols-[auto_1fr]
+
+                items-center
+
+                gap-2
+                sm:gap-2.5
+                md:gap-3
+
+                min-w-0
+              "
             >
               {/* AVATAR */}
               <div
                 className={`
-        w-10
-        h-10
-        sm:w-14
-        sm:h-14
-        rounded-full
-        flex
-        items-center
-        justify-center
-        shrink-0
-        text-lg
-        sm:text-xl
-        font-semibold
-        text-white
-        ${isDark ? "bg-gradient-to-br from-gray-600 to-black" : "bg-gray-900"}
-      `}
+                  w-8
+                  h-8
+
+                  sm:w-11
+                  sm:h-11
+
+                  md:w-14
+                  md:h-14
+
+                  rounded-full
+
+                  flex
+                  items-center
+                  justify-center
+
+                  shrink-0
+
+                  text-sm
+                  sm:text-base
+                  md:text-xl
+
+                  font-semibold
+                  text-white
+
+                  ${
+                    isDark
+                      ? "bg-gradient-to-br from-gray-600 to-black"
+                      : "bg-gray-900"
+                  }
+                `}
               >
                 {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
               </div>
 
               {/* USER INFORMATION */}
               <div className="min-w-0">
-                <h2 className="text-base sm:text-lg font-semibold truncate">
+
+                <h2
+                  className="
+                    text-xs
+                    sm:text-sm
+                    md:text-lg
+
+                    font-semibold
+                    truncate
+                  "
+                >
                   {profileData?.name || "User"}
                 </h2>
 
-                <div className="mt-1.5 grid gap-1">
+                <div
+                  className="
+                    mt-1
+                    sm:mt-1.5
+
+                    grid
+                    gap-0.5
+                    sm:gap-1
+                  "
+                >
                   {/* EMAIL */}
                   {profileData?.email && (
                     <div
                       className={`
-              grid
-              grid-cols-[auto_1fr]
-              items-center
-              gap-1.5
-              text-xs
-              sm:text-sm
-              break-all
-              ${isDark ? "text-gray-400" : "text-gray-500"}
-            `}
+                        grid
+                        grid-cols-[auto_1fr]
+
+                        items-center
+
+                        gap-1
+                        sm:gap-1.5
+
+                        text-[9px]
+                        sm:text-[10px]
+                        md:text-xs
+
+                        break-all
+
+                        ${
+                          isDark
+                            ? "text-gray-400"
+                            : "text-gray-500"
+                        }
+                      `}
                     >
-                      <FiMail className="text-xs" />
-                      <span className="text-xs">{profileData.email}</span>
+                      <FiMail className="text-[9px] sm:text-[10px]" />
+
+                      <span>
+                        {profileData.email}
+                      </span>
                     </div>
                   )}
 
@@ -210,59 +309,90 @@ const Profile = () => {
                   {profileData?.phone && (
                     <div
                       className={`
-              grid
-              grid-cols-[auto_1fr]
-              items-center
-              gap-1.5
-              text-xs
-              sm:text-sm
-              ${isDark ? "text-gray-400" : "text-gray-500"}
-            `}
+                        grid
+                        grid-cols-[auto_1fr]
+
+                        items-center
+
+                        gap-1
+                        sm:gap-1.5
+
+                        text-[9px]
+                        sm:text-[10px]
+                        md:text-xs
+
+                        ${
+                          isDark
+                            ? "text-gray-400"
+                            : "text-gray-500"
+                        }
+                      `}
                     >
-                      <FiPhone className="text-sm" />
-                      <span>{profileData.phone}</span>
+                      <FiPhone className="text-[9px] sm:text-[10px]" />
+
+                      <span>
+                        {profileData.phone}
+                      </span>
                     </div>
                   )}
                 </div>
               </div>
             </div>
 
-            {/* EDIT PROFILE */}
+            {/* =================================================
+                EDIT PROFILE
+            ================================================= */}
             <button
               type="button"
               onClick={() => navigate("/settings")}
               className={`
-      w-auto
-      shrink-0
-      px-3
-      sm:px-4
-      py-1.5
-      sm:py-2
-      rounded-lg
-      text-xs
-      sm:text-sm
-      font-medium
-      border
-      transition-all
-      ${
-        isDark
-          ? "border-gray-700 hover:bg-gray-700"
-          : "border-gray-200 hover:bg-gray-50"
-      }
-    `}
+                w-auto
+                shrink-0
+
+                px-2
+                sm:px-2.5
+                md:px-4
+
+                py-1
+                sm:py-1.5
+                md:py-2
+
+                rounded-md
+                sm:rounded-lg
+
+                text-[9px]
+                sm:text-[10px]
+                md:text-xs
+
+                font-medium
+
+                border
+                transition-all
+
+                ${
+                  isDark
+                    ? "border-gray-700 hover:bg-gray-700"
+                    : "border-gray-200 hover:bg-gray-50"
+                }
+              `}
             >
               Edit Profile
             </button>
           </div>
         </div>
 
-        {/* ================= ACCOUNT MENU ================= */}
+        {/* =====================================================
+            ACCOUNT MENU
+        ===================================================== */}
         <div
           className={`
-            rounded-xl
+            rounded-lg
+            sm:rounded-xl
+
             border
             overflow-hidden
             shadow-sm
+
             ${
               isDark
                 ? "bg-gray-800 border-gray-800"
@@ -271,14 +401,40 @@ const Profile = () => {
           `}
         >
           {/* ACCOUNT HEADER */}
-          <div className="px-4 pt-4 pb-2">
-            <h2 className="text-sm sm:text-base font-semibold">Account</h2>
+          <div
+            className="
+              px-3
+              sm:px-3.5
+              md:px-4
+
+              pt-3
+              sm:pt-3.5
+              md:pt-4
+
+              pb-1.5
+              sm:pb-2
+            "
+          >
+            <h2
+              className="
+                text-xs
+                sm:text-sm
+                md:text-base
+
+                font-semibold
+              "
+            >
+              Account
+            </h2>
 
             <p
               className={`
                 mt-0.5
-                text-xs
-                sm:text-sm
+
+                text-[9px]
+                sm:text-[10px]
+                md:text-xs
+
                 ${isDark ? "text-gray-400" : "text-gray-500"}
               `}
             >
@@ -287,7 +443,13 @@ const Profile = () => {
           </div>
 
           {/* ACCOUNT ITEMS */}
-          <div className="p-2 sm:p-3">
+          <div
+            className="
+              p-1.5
+              sm:p-2
+              md:p-3
+            "
+          >
             {accountItems.map((item) => (
               <button
                 key={item.title}
@@ -295,32 +457,54 @@ const Profile = () => {
                 onClick={() => navigate(item.path)}
                 className={`
                   w-full
+
                   flex
                   items-center
-                  gap-2.5
-                  sm:gap-3
-                  p-2.5
-                  sm:p-3
-                  rounded-lg
+
+                  gap-2
+                  sm:gap-2.5
+                  md:gap-3
+
+                  p-2
+                  sm:p-2.5
+                  md:p-3
+
+                  rounded-md
+                  sm:rounded-lg
+
                   text-left
+
                   transition-all
                   group
+
                   ${isDark ? "hover:bg-gray-700" : "hover:bg-gray-50"}
                 `}
               >
                 {/* ICON */}
                 <div
                   className={`
-                    w-9
-                    h-9
-                    sm:w-10
-                    sm:h-10
-                    rounded-lg
+                    w-7
+                    h-7
+
+                    sm:w-8
+                    sm:h-8
+
+                    md:w-10
+                    md:h-10
+
+                    rounded-md
+                    sm:rounded-lg
+
                     flex
                     items-center
                     justify-center
-                    text-base
+
+                    text-xs
+                    sm:text-sm
+                    md:text-base
+
                     shrink-0
+
                     ${
                       isDark
                         ? "bg-gray-700 text-gray-300"
@@ -333,15 +517,29 @@ const Profile = () => {
 
                 {/* CONTENT */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-xs sm:text-sm font-medium">
+
+                  <h3
+                    className="
+                      text-[10px]
+                      sm:text-xs
+                      md:text-sm
+
+                      font-medium
+                    "
+                  >
                     {item.title}
                   </h3>
 
                   <p
                     className={`
                       mt-0.5
-                      text-[11px]
-                      sm:text-xs
+
+                      text-[8px]
+                      sm:text-[10px]
+                      md:text-xs
+
+                      truncate
+
                       ${isDark ? "text-gray-500" : "text-gray-500"}
                     `}
                   >
@@ -352,11 +550,17 @@ const Profile = () => {
                 {/* ARROW */}
                 <FiChevronRight
                   className={`
-                    text-base
+                    text-xs
+                    sm:text-sm
+                    md:text-base
+
                     shrink-0
+
                     transition-transform
                     duration-300
+
                     group-hover:translate-x-1
+
                     ${isDark ? "text-gray-600" : "text-gray-400"}
                   `}
                 />
@@ -365,14 +569,23 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* ================= LOGOUT ================= */}
+        {/* =====================================================
+            LOGOUT
+        ===================================================== */}
         <div
           className={`
-            mt-4
-            rounded-xl
+            mt-3
+            sm:mt-4
+
+            rounded-lg
+            sm:rounded-xl
+
             border
-            p-2
-            sm:p-3
+
+            p-1.5
+            sm:p-2
+            md:p-3
+
             ${
               isDark
                 ? "bg-gray-800 border-gray-800"
@@ -385,14 +598,24 @@ const Profile = () => {
             onClick={handleLogout}
             className={`
               w-full
+
               flex
               items-center
-              gap-2.5
-              sm:gap-3
-              p-2
-              rounded-lg
+
+              gap-2
+              sm:gap-2.5
+              md:gap-3
+
+              p-1.5
+              sm:p-2
+
+              rounded-md
+              sm:rounded-lg
+
               text-left
+
               transition
+
               ${
                 isDark
                   ? "text-red-400 hover:bg-red-500/10"
@@ -403,30 +626,56 @@ const Profile = () => {
             {/* LOGOUT ICON */}
             <div
               className={`
-                w-9
-                h-9
-                sm:w-10
-                sm:h-10
-                rounded-lg
+                w-7
+                h-7
+
+                sm:w-8
+                sm:h-8
+
+                md:w-10
+                md:h-10
+
+                rounded-md
+                sm:rounded-lg
+
                 flex
                 items-center
                 justify-center
+
                 shrink-0
+
+                text-xs
+                sm:text-sm
+                md:text-base
+
                 ${isDark ? "bg-red-500/10" : "bg-red-50"}
               `}
             >
-              <FiLogOut className="text-base" />
+              <FiLogOut />
             </div>
 
             {/* LOGOUT CONTENT */}
             <div>
-              <h3 className="text-xs sm:text-sm font-medium">Logout</h3>
+              <h3
+                className="
+                  text-[10px]
+                  sm:text-xs
+                  md:text-sm
+
+                  font-medium
+                "
+              >
+                Logout
+              </h3>
 
               <p
                 className={`
-                  text-[11px]
-                  sm:text-xs
+                  text-[8px]
+                  sm:text-[10px]
+                  md:text-xs
+
                   mt-0.5
+
                   ${isDark ? "text-gray-500" : "text-gray-500"}
                 `}
               >
@@ -435,6 +684,7 @@ const Profile = () => {
             </div>
           </button>
         </div>
+
       </div>
     </div>
   );

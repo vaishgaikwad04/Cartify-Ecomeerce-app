@@ -41,9 +41,9 @@ const NewArrivals = () => {
       <div className="text-center mb-8">
         <h2
           className={`
-            text-2xl
-            sm:text-3xl
-            lg:text-4xl
+            text-lg
+            sm:text-xl
+            lg:text-2xl
 
             font-semibold
 

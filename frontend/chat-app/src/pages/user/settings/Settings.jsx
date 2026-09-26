@@ -18,15 +18,31 @@ const Settings = () => {
     setAllowNotification,
   } = useSettings();
 
+  // ============================================================
+  // INPUT STYLE
+  // ============================================================
   const inputClass = `
     w-full
-    px-3 sm:px-4
-    py-2.5 sm:py-3
-    rounded-lg
+    px-2.5
+    sm:px-3
+    md:px-4
+
+    py-1.5
+    sm:py-2
+    md:py-2.5
+
+    rounded-md
+    sm:rounded-lg
+    md:rounded-xl
+
     border
     outline-none
     transition-colors
-    text-xs sm:text-sm md:text-base
+
+    text-[10px]
+    sm:text-xs
+    md:text-sm
+
     ${
       isDark
         ? "bg-[#1f2937] border-gray-700 text-white placeholder-gray-400 focus:border-blue-500"
@@ -43,47 +59,108 @@ const Settings = () => {
       }
     >
       <div
-        className={`min-h-screen p-3 sm:p-4 md:p-5 ${
-          isDark ? "bg-gray-900" : "bg-gray-50"
-        }`}
-      >
-        <div className="max-w-[1400px] mx-auto">
+        className={`
+          min-h-screen
 
-          {/* ================= HEADER ================= */}
+          p-2
+          sm:p-3
+          md:p-5
+
+          ${isDark ? "bg-gray-900" : "bg-gray-50"}
+        `}
+      >
+        <div className="max-w-[1800px] mx-auto">
+
+          {/* =====================================================
+              HEADER
+          ===================================================== */}
           <div
-            className={`rounded-2xl p-4 sm:p-5 md:p-6 shadow-sm mb-4 sm:mb-5 border ${
-              isDark
-                ? "bg-gray-800 border-gray-700"
-                : "bg-white border-gray-100"
-            }`}
+            className={`
+              rounded-lg
+              sm:rounded-xl
+              md:rounded-2xl
+
+              p-2.5
+              sm:p-3
+              md:p-6
+
+              shadow-sm
+
+              mb-2
+              sm:mb-3
+              md:mb-5
+
+              border
+
+              ${
+                isDark
+                  ? "bg-gray-800 border-gray-700"
+                  : "bg-white border-gray-100"
+              }
+            `}
           >
             <h1
-              className={`text-xl sm:text-2xl md:text-3xl font-bold ${
-                isDark ? "text-white" : "text-gray-900"
-              }`}
+              className={`
+                text-sm
+                sm:text-sm
+                md:text-3xl
+
+                font-bold
+
+                ${isDark ? "text-white" : "text-gray-900"}
+              `}
             >
               Settings
             </h1>
 
             <p
-              className={`mt-1 sm:mt-2 text-xs sm:text-sm md:text-base ${
-                isDark ? "text-gray-400" : "text-gray-500"
-              }`}
+              className={`
+                mt-0.5
+                sm:mt-1
+                md:mt-2
+
+                text-[9px]
+                sm:text-[10px]
+                md:text-base
+
+                ${isDark ? "text-gray-400" : "text-gray-500"}
+              `}
             >
               Manage your account preferences and application settings.
             </p>
           </div>
 
-          {/* ================= SETTINGS CONTAINER ================= */}
+          {/* =====================================================
+              SETTINGS CONTAINER
+          ===================================================== */}
           <div
-            className={`rounded-2xl border shadow-sm p-3 sm:p-4 md:p-5 space-y-3 sm:space-y-4 ${
-              isDark
-                ? "bg-gray-800 border-gray-700"
-                : "bg-white border-gray-100"
-            }`}
+            className={`
+              rounded-lg
+              sm:rounded-xl
+              md:rounded-2xl
+
+              border
+              shadow-sm
+
+              p-2
+              sm:p-3
+              md:p-5
+
+              space-y-2
+              sm:space-y-3
+              md:space-y-4
+
+              ${
+                isDark
+                  ? "bg-gray-800 border-gray-700"
+                  : "bg-white border-gray-100"
+              }
+            `}
           >
 
-            {/* ================= PROFILE ================= */}
+            {/* =================================================
+                PROFILE
+            ================================================= */}
             <SettingsItem
               icon={<FiUser />}
               title="Profile"
@@ -92,7 +169,22 @@ const Settings = () => {
               setActiveTab={setActiveTab}
               isDark={isDark}
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 pt-4">
+              <div
+                className="
+                  grid
+                  grid-cols-1
+                  md:grid-cols-2
+
+                  gap-2
+                  sm:gap-2.5
+                  md:gap-4
+
+                  pt-2.5
+                  sm:pt-3
+                  md:pt-4
+                "
+              >
+                {/* NAME */}
                 <input
                   name="name"
                   value={settings.name}
@@ -100,13 +192,27 @@ const Settings = () => {
                   placeholder="Full Name"
                   className={`
                     w-full
-                    px-3 sm:px-4
-                    py-2.5 sm:py-3
-                    rounded-xl
+
+                    px-2.5
+                    sm:px-3
+                    md:px-4
+
+                    py-1.5
+                    sm:py-2
+                    md:py-2.5
+
+                    rounded-md
+                    sm:rounded-lg
+                    md:rounded-xl
+
                     border
                     outline-none
                     transition
-                    text-xs sm:text-sm md:text-base
+
+                    text-[10px]
+                    sm:text-xs
+                    md:text-sm
+
                     ${
                       isDark
                         ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-white"
@@ -115,6 +221,7 @@ const Settings = () => {
                   `}
                 />
 
+                {/* EMAIL */}
                 <input
                   name="email"
                   value={settings.email}
@@ -123,13 +230,27 @@ const Settings = () => {
                   type="email"
                   className={`
                     w-full
-                    px-3 sm:px-4
-                    py-2.5 sm:py-3
-                    rounded-xl
+
+                    px-2.5
+                    sm:px-3
+                    md:px-4
+
+                    py-1.5
+                    sm:py-2
+                    md:py-2.5
+
+                    rounded-md
+                    sm:rounded-lg
+                    md:rounded-xl
+
                     border
                     outline-none
                     transition
-                    text-xs sm:text-sm md:text-base
+
+                    text-[10px]
+                    sm:text-xs
+                    md:text-sm
+
                     ${
                       isDark
                         ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-white"
@@ -139,7 +260,7 @@ const Settings = () => {
                 />
               </div>
 
-              <div className="flex justify-end mt-4">
+              <div className="flex justify-end mt-2.5 sm:mt-3 md:mt-4">
                 <Button
                   label="Save Changes"
                   onClick={saveSettings}
@@ -148,7 +269,9 @@ const Settings = () => {
               </div>
             </SettingsItem>
 
-            {/* ================= PASSWORD ================= */}
+            {/* =================================================
+                PASSWORD
+            ================================================= */}
             <SettingsItem
               icon={<FiLock />}
               title="Password"
@@ -157,7 +280,17 @@ const Settings = () => {
               setActiveTab={setActiveTab}
               isDark={isDark}
             >
-              <div className="space-y-3 pt-4">
+              <div
+                className="
+                  space-y-2
+                  sm:space-y-2.5
+                  md:space-y-3
+
+                  pt-2.5
+                  sm:pt-3
+                  md:pt-4
+                "
+              >
                 <input
                   placeholder="Current Password"
                   type="password"
@@ -177,7 +310,7 @@ const Settings = () => {
                 />
               </div>
 
-              <div className="flex justify-end mt-4">
+              <div className="flex justify-end mt-2.5 sm:mt-3 md:mt-4">
                 <Button
                   label="Update Password"
                   variant="secondary"
@@ -185,7 +318,9 @@ const Settings = () => {
               </div>
             </SettingsItem>
 
-            {/* ================= NOTIFICATIONS ================= */}
+            {/* =================================================
+                NOTIFICATIONS
+            ================================================= */}
             <SettingsItem
               icon={<FiBell />}
               title="Notification"
@@ -194,17 +329,28 @@ const Settings = () => {
               setActiveTab={setActiveTab}
               isDark={isDark}
             >
-              <div className="pt-4">
+              <div className="pt-2.5 sm:pt-3 md:pt-4">
                 <div
                   className={`
                     flex
+
                     flex-col
                     sm:flex-row
+
                     sm:items-center
                     sm:justify-between
-                    gap-3
-                    p-3 sm:p-4
-                    rounded-xl
+
+                    gap-2
+                    sm:gap-3
+
+                    p-2
+                    sm:p-2.5
+                    md:p-4
+
+                    rounded-md
+                    sm:rounded-lg
+                    md:rounded-xl
+
                     ${
                       isDark
                         ? "bg-gray-700"
@@ -214,24 +360,39 @@ const Settings = () => {
                 >
                   <div className="min-w-0">
                     <h4
-                      className={`font-semibold text-sm sm:text-base md:text-lg ${
-                        isDark ? "text-white" : "text-gray-900"
-                      }`}
+                      className={`
+                        font-semibold
+
+                        text-[10px]
+                        sm:text-xs
+                        md:text-lg
+
+                        ${isDark ? "text-white" : "text-gray-900"}
+                      `}
                     >
                       Allow Notifications
                     </h4>
 
                     <p
-                      className={`text-xs sm:text-sm md:text-base mt-1 ${
-                        isDark ? "text-gray-400" : "text-gray-500"
-                      }`}
+                      className={`
+                        text-[8px]
+                        sm:text-[10px]
+                        md:text-sm
+
+                        mt-0.5
+                        sm:mt-1
+
+                        leading-relaxed
+
+                        ${isDark ? "text-gray-400" : "text-gray-500"}
+                      `}
                     >
                       Receive notifications about your account, orders and
                       updates.
                     </p>
                   </div>
 
-                  <div className="shrink-0">
+                  <div className="shrink-0 self-end sm:self-auto">
                     <ToggleSwitch
                       checked={settings.notification}
                       onChange={() => {
@@ -249,7 +410,7 @@ const Settings = () => {
                 </div>
               </div>
 
-              <div className="flex justify-end mt-4">
+              <div className="flex justify-end mt-2.5 sm:mt-3 md:mt-4">
                 <Button
                   label="Save Preferences"
                   onClick={saveSettings}
@@ -258,7 +419,9 @@ const Settings = () => {
               </div>
             </SettingsItem>
 
-            {/* ================= APPEARANCE ================= */}
+            {/* =================================================
+                APPEARANCE
+            ================================================= */}
             <SettingsItem
               icon={<FiMoon />}
               title="Appearance"
@@ -267,16 +430,36 @@ const Settings = () => {
               setActiveTab={setActiveTab}
               isDark={isDark}
             >
-              <div className="pt-4">
+              <div className="pt-2.5 sm:pt-3 md:pt-4">
+
                 <h3
-                  className={`font-semibold mb-3 sm:mb-4 text-sm sm:text-base md:text-lg ${
-                    isDark ? "text-white" : "text-gray-900"
-                  }`}
+                  className={`
+                    font-semibold
+
+                    mb-2
+                    sm:mb-2.5
+                    md:mb-4
+
+                    text-[10px]
+                    sm:text-xs
+                    md:text-lg
+
+                    ${isDark ? "text-white" : "text-gray-900"}
+                  `}
                 >
                   Choose Theme
                 </h3>
 
-                <div className="flex flex-col gap-2 sm:gap-3">
+                <div
+                  className="
+                    flex
+                    flex-col
+
+                    gap-1.5
+                    sm:gap-2
+                    md:gap-3
+                  "
+                >
                   {[
                     "Light Mode",
                     "Dark Mode",
@@ -285,14 +468,25 @@ const Settings = () => {
                     <label
                       key={item}
                       className={`
-                        p-3 sm:p-4
-                        rounded-xl
+                        p-2
+                        sm:p-2.5
+                        md:p-4
+
+                        rounded-md
+                        sm:rounded-lg
+                        md:rounded-xl
+
                         border
                         cursor-pointer
                         transition
+
                         flex
                         items-center
-                        gap-3
+
+                        gap-2
+                        sm:gap-2.5
+                        md:gap-3
+
                         ${
                           isDark
                             ? "bg-gray-700 border-gray-600 hover:border-white"
@@ -313,13 +507,29 @@ const Settings = () => {
                             theme: item,
                           }));
                         }}
-                        className="w-4 h-4 accent-black shrink-0"
+                        className="
+                          w-3
+                          h-3
+                          sm:w-3.5
+                          sm:h-3.5
+                          md:w-4
+                          md:h-4
+
+                          accent-black
+                          shrink-0
+                        "
                       />
 
                       <span
-                        className={`font-medium text-xs sm:text-sm md:text-base ${
-                          isDark ? "text-white" : "text-gray-900"
-                        }`}
+                        className={`
+                          font-medium
+
+                          text-[9px]
+                          sm:text-[10px]
+                          md:text-base
+
+                          ${isDark ? "text-white" : "text-gray-900"}
+                        `}
                       >
                         {item}
                       </span>
@@ -327,13 +537,14 @@ const Settings = () => {
                   ))}
                 </div>
 
-                <div className="flex justify-end mt-4">
+                <div className="flex justify-end mt-2.5 sm:mt-3 md:mt-4">
                   <Button
                     label="Save Appearance"
                     onClick={saveSettings}
                     variant="secondary"
                   />
                 </div>
+
               </div>
             </SettingsItem>
 
