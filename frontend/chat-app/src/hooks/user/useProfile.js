@@ -7,44 +7,54 @@ import { getUserSettings } from "../../api/user/SettingsApi";
 
 // Context
 import { ThemeContext } from "../../context/ThemeContext";
+import { AuthContext } from "../../context/AuthContext";
 
+// Firebase
 import { signOut } from "firebase/auth";
 import { auth } from "../../Firebase";
+
+// Toast
 import toast from "react-hot-toast";
 
 export const useProfile = () => {
+  // ============================================================
   // NAVIGATION
+  // ============================================================
   const navigate = useNavigate();
 
+  // ============================================================
   // THEME
+  // ============================================================
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "Dark Mode";
 
-  // PROFILE STATE
-  const [profileData, setProfileData] = useState(null);
+  // ============================================================
+  // AUTH
+  // ============================================================
+  const { setUser } = useContext(AuthContext);
 
-  // Controls profile loading state
+  // ============================================================
+  // PROFILE STATE
+  // ============================================================
+  const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-
+  // ============================================================
   // FETCH USER PROFILE
+  // ============================================================
   const fetchProfile = async () => {
     try {
       setLoading(true);
 
-      // Fetch logged-in user's profile/settings
       const res = await getUserSettings();
 
-      // Extract profile data from API response
       const data = res?.data?.data;
 
-      // If no profile data is returned
       if (!data) {
         setProfileData(null);
         return;
       }
 
-      // Store only the data required by Profile page
       setProfileData({
         name: data.name || "User",
         email: data.email || "",
@@ -58,57 +68,47 @@ export const useProfile = () => {
 
       setProfileData(null);
     } finally {
-      // Stop loading after API request completes
       setLoading(false);
     }
   };
 
-
+  // ============================================================
   // FETCH PROFILE ON MOUNT
+  // ============================================================
   useEffect(() => {
     fetchProfile();
   }, []);
 
-
+  // ============================================================
   // LOGOUT
-  // const handleLogout = async () => {
-  //   try {
-  //     // Call logout API
-  //     await logoutUser();
-
-  //     // Navigate to authentication page
-  //     navigate("/auth");
-  //   } catch (error) {
-  //     console.error(
-  //       "Logout error:",
-  //       error?.response?.data || error?.message
-  //     );
-  //   }
-  // };
-
-    const handleLogout = async () => {
+  // ============================================================
+  const handleLogout = async () => {
     try {
-      // Clear Cartify JWT cookie
+      // 1. Clear Cartify JWT cookie
       await logoutUser();
 
-      // Clear Firebase/Google authentication
+      // 2. Sign out from Firebase
+      //    This matters for users who logged in with Google.
       await signOut(auth);
 
-      // Clear React user state
+      // 3. Clear React authentication state
       setUser(null);
 
+      // 4. Show success message
       toast.success("Logged out successfully");
+
+      // 5. Navigate to login
       navigate("/auth?mode=login");
     } catch (error) {
       console.error("Logout error:", error);
+
       toast.error("Logout failed");
     }
   };
 
-  return { handleLogout };
-};
-
+  // ============================================================
   // RETURN
+  // ============================================================
   return {
     profileData,
     loading,
@@ -116,3 +116,4 @@ export const useProfile = () => {
     isDark,
     navigate,
   };
+};

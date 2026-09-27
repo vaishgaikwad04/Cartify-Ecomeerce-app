@@ -94,31 +94,83 @@ export const fetchProduct = async (req, res) => {
   }
 };
 
+// export const fetchProductBasedOnCategory = async (req, res) => {
+//   try {
+//     const { category } = req.params;
+
+//     // fetch products based on category
+//     const categoryData = await productModel.find({
+//       category: category.toLowerCase(),
+//     });
+
+//     // if no products found
+//     if (!categoryData || categoryData.length === 0) {
+//       return res.status(404).json({
+//         success: false,
+//         message: "No products found for this category",
+//         data: [],
+//       });
+//     }
+
+//     // success response
+//     return res.status(200).json({
+//       success: true,
+//       message: "Products fetched successfully",
+//       data: categoryData,
+//     });
+//   } catch (error) {
+//     return res.status(500).json({
+//       success: false,
+//       message: "Server error while fetching products",
+//       error: error.message,
+//     });
+//   }
+// };
+
+
 export const fetchProductBasedOnCategory = async (req, res) => {
   try {
     const { category } = req.params;
 
-    // fetch products based on category
-    const categoryData = await productModel.find({
+    // Pagination
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 8;
+
+    const skip = (page - 1) * limit;
+
+    // Category filter
+    const filter = {
       category: category.toLowerCase(),
-    });
+    };
 
-    // if no products found
-    if (!categoryData || categoryData.length === 0) {
-      return res.status(404).json({
-        success: false,
-        message: "No products found for this category",
-        data: [],
-      });
-    }
+    // Count all products in this category
+    const totalProducts = await productModel.countDocuments(filter);
 
-    // success response
+    // Get only products for the requested page
+    const categoryData = await productModel
+      .find(filter)
+      .skip(skip)
+      .limit(limit);
+
+    // Calculate number of pages
+    const totalPages = Math.ceil(totalProducts / limit);
+
     return res.status(200).json({
       success: true,
       message: "Products fetched successfully",
+
+      // Products for current page
       data: categoryData,
+
+      // Pagination information
+      currentPage: page,
+      totalPages,
+      totalProducts,
+      limit,
     });
   } catch (error) {
+    console.error("Fetch Category Products Error:", error);
+
     return res.status(500).json({
       success: false,
       message: "Server error while fetching products",
@@ -347,6 +399,37 @@ export const getProductsByBrand = async (req, res) => {
   } catch (error) {
     console.log(error);
 
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export const getProducts = async (req, res) => {
+  try {
+    // Which page does the user want?
+    const page = Number(req.query.page) || 1;
+
+    // How many products should be shown on one page?
+    const limit = Number(req.query.limit) || 5;
+
+    // How many products should MongoDB skip?
+    const skip = (page - 1) * limit;
+
+    // Get products for this page
+    const products = await productModel
+      .find()
+      .skip(skip)
+      .limit(limit);
+
+    res.status(200).json({
+      success: true,
+      products,
+      currentPage: page,
+      limit,
+    });
+  } catch (error) {
     res.status(500).json({
       success: false,
       message: error.message,

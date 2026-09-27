@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
-
+import React,{useContext} from "react";
 // Icons
 import { FaChevronDown } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
-import { FiSearch, FiPackage, FiX, FiBell, FiMenu } from "react-icons/fi";
+import { FiSearch, FiPackage, FiX, FiBell, FiMenu, FiUser } from "react-icons/fi";
 
 import { useHeader } from "../../hooks/user/useHeader";
 
@@ -11,7 +11,11 @@ import { useHeader } from "../../hooks/user/useHeader";
 import Drawer from "../ui/drawer";
 import CartSidebar from "../../pages/user/cart/CartSidebar";
 
+
+import { AuthContext } from "../../context/AuthContext";
+
 const Header = () => {
+  const { user } = useContext(AuthContext);
   const {
     navigate,
     isDark,
@@ -298,7 +302,7 @@ const Header = () => {
                   >
                     <div
                       className={`
-            rounded-lg
+            
             p-4
             xl:p-5
             shadow-[0_18px_45px_rgba(0,0,0,0.12)]
@@ -553,129 +557,156 @@ const Header = () => {
                   </button>
                 )}
 
-                {/* PROFILE */}
-                <button
-                  type="button"
-                  onClick={() => navigate("/profile")}
-                  className={`
-        group
-        flex
-        items-center
-        gap-1.5
-        pl-1
-        pr-2.5
-        py-1
-        rounded-full
-        border
-        cursor-pointer
-        transition-all
-        duration-300
-        shadow-sm
+             {/* PROFILE */}
+{user ? (
+  // LOGGED IN → PROFILE
+  <button
+    type="button"
+    onClick={() => navigate("/profile")}
+    className={`
+      group
+      flex
+      items-center
+      gap-2
+      rounded-full
+      border
+      px-1.5
+      py-1.5
+      cursor-pointer
+      transition-all
+      duration-200
 
-        ${
-          isDark
-            ? "bg-gray-900 border-gray-800 hover:border-gray-600 hover:bg-gray-800 hover:shadow-lg"
-            : "bg-white border-gray-200 hover:border-gray-300 hover:bg-gray-50 hover:shadow-md"
-        }
-      `}
-                >
-                  {/* AVATAR */}
-                  <div className="relative shrink-0">
-                    <div
-                      className={`
-            w-7
-            h-7
-            lg:w-8
-            lg:h-8
-            rounded-full
-            flex
-            items-center
-            justify-center
-            text-white
-            font-semibold
-            text-[10px]
-            uppercase
-            shadow-sm
-            transition-transform
-            duration-300
-            group-hover:scale-105
+      ${
+        isDark
+          ? "bg-gray-900/80 border-gray-800 hover:border-gray-700 hover:bg-gray-800"
+          : "bg-white border-gray-200 hover:border-gray-300 hover:bg-gray-50"
+      }
+    `}
+  >
+    {/* AVATAR */}
+    <div className="relative shrink-0">
+      <div
+        className={`
+          w-8
+          h-8
+          rounded-full
+          flex
+          items-center
+          justify-center
+          text-[11px]
+          font-semibold
+          uppercase
+          text-white
+          transition-transform
+          duration-200
+          group-hover:scale-105
 
-            ${
-              isDark
-                ? "bg-gradient-to-br from-gray-500 via-gray-700 to-black"
-                : "bg-gradient-to-br from-gray-800 to-black"
-            }
-          `}
-                    >
-                      {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
-                    </div>
+          ${
+            isDark
+              ? "bg-gradient-to-br from-gray-500 via-gray-700 to-black"
+              : "bg-gradient-to-br from-gray-800 to-black"
+          }
+        `}
+      >
+        {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
+      </div>
 
-                    <span
-                      className={`
-            absolute
-            bottom-0
-            right-0
-            w-2
-            h-2
-            rounded-full
-            border-[1.5px]
+      {/* ONLINE */}
+      <span
+        className={`
+          absolute
+          right-0
+          bottom-0
+          w-2
+          h-2
+          rounded-full
+          border-2
+          bg-green-500
 
-            ${
-              isDark
-                ? "bg-green-500 border-gray-900"
-                : "bg-green-500 border-white"
-            }
-          `}
-                    />
-                  </div>
+          ${isDark ? "border-gray-900" : "border-white"}
+        `}
+      />
+    </div>
 
-                  {/* USER INFO */}
-                  <div className="hidden xl:flex flex-col items-start min-w-0 leading-tight">
-                    <span
-                      className={`
-            max-w-[90px]
-            truncate
-            text-[11px]
-            font-semibold
+    {/* USER INFO */}
+    <div className="hidden xl:flex flex-col min-w-0 pr-1">
+      <span
+        className={`
+          max-w-[100px]
+          truncate
+          text-[11px]
+          font-semibold
+          leading-none
 
-            ${
-              isDark
-                ? "text-gray-100 group-hover:text-white"
-                : "text-gray-900 group-hover:text-black"
-            }
-          `}
-                    >
-                      {profileData?.name || "User"}
-                    </span>
+          ${isDark ? "text-gray-100" : "text-gray-900"}
+        `}
+      >
+        {profileData?.name || "User"}
+      </span>
 
-                    <span
-                      className={`
-            mt-0.5
-            text-[8px]
-            font-medium
-            tracking-wide
-            uppercase
-
-            ${isDark ? "text-gray-500" : "text-gray-400"}
-          `}
-                    >
-                      Account
-                    </span>
-                  </div>
-
-                  <span
-                    className={`
-          hidden
-          xl:block
-          ml-0.5
-          text-[9px]
+      <span
+        className={`
+          mt-1
+          text-[8px]
+          uppercase
+          tracking-[0.12em]
+          leading-none
 
           ${isDark ? "text-gray-500" : "text-gray-400"}
         `}
-                  >
-                    →
-                  </span>
-                </button>
+      >
+        Profile
+      </span>
+    </div>
+
+    {/* CHEVRON */}
+    <span
+      className={`
+        hidden
+        xl:block
+        mr-1
+        text-[11px]
+        transition-transform
+        duration-200
+        group-hover:translate-x-0.5
+
+        ${isDark ? "text-gray-500" : "text-gray-400"}
+      `}
+    >
+      ›
+    </span>
+  </button>
+) : (
+  // NOT LOGGED IN → LOGIN
+  <button
+    type="button"
+    onClick={() => navigate("/auth?mode=login")}
+    className={`
+      flex
+      items-center
+      gap-2
+      rounded-full
+      border
+      px-3
+      py-2
+      cursor-pointer
+      transition-all
+      duration-200
+
+      ${
+        isDark
+          ? "bg-gray-900/80 border-gray-800 text-gray-200 hover:border-gray-700 hover:bg-gray-800"
+          : "bg-white border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50"
+      }
+    `}
+  >
+    <FiUser className="text-[17px]" />
+
+    <span className="hidden xl:block text-[11px] font-semibold">
+      LogIn
+    </span>
+  </button>
+)}
               </div>
 
               {/* =================================================
@@ -1040,50 +1071,86 @@ const Header = () => {
                     </button>
                   )}
 
-                  {/* PROFILE */}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      closeMobileMenu();
-                      navigate("/profile");
-                    }}
-                    className={`
-                      flex
-                      flex-col
-                      items-center
-                      justify-center
-                      gap-1.5
-                      py-3
-                      rounded-xl
-                      transition-all
+               {user ? (
+  /* PROFILE */
+  <button
+    type="button"
+    onClick={() => {
+      closeMobileMenu();
+      navigate("/profile");
+    }}
+    className={`
+      flex
+      flex-col
+      items-center
+      justify-center
+      gap-1.5
+      py-3
+      rounded-xl
+      transition-all
 
-                      ${
-                        isDark
-                          ? "text-gray-400 hover:bg-gray-900 hover:text-white"
-                          : "text-gray-600 hover:bg-gray-100 hover:text-black"
-                      }
-                    `}
-                  >
-                    <div
-                      className={`
-                        w-7
-                        h-7
-                        rounded-full
-                        flex
-                        items-center
-                        justify-center
-                        text-white
-                        text-[10px]
-                        font-semibold
+      ${
+        isDark
+          ? "text-gray-400 hover:bg-gray-900 hover:text-white"
+          : "text-gray-600 hover:bg-gray-100 hover:text-black"
+      }
+    `}
+  >
+    <div
+      className={`
+        w-7
+        h-7
+        rounded-full
+        flex
+        items-center
+        justify-center
+        text-white
+        text-[10px]
+        font-semibold
 
-                        ${isDark ? "bg-gray-700" : "bg-gray-800"}
-                      `}
-                    >
-                      {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
-                    </div>
+        ${isDark ? "bg-gray-700" : "bg-gray-800"}
+      `}
+    >
+      {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
+    </div>
 
-                    <span className="text-[10px] sm:text-[11px]">Profile</span>
-                  </button>
+    <span className="text-[10px] sm:text-[11px]">
+      Profile
+    </span>
+  </button>
+) : (
+  /* LOGIN */
+  <button
+    type="button"
+    onClick={() => {
+      closeMobileMenu();
+      navigate("/login");
+    }}
+    className={`
+      flex
+      flex-col
+      items-center
+      justify-center
+      gap-1.5
+      py-3
+      rounded-xl
+      transition-all
+
+      ${
+        isDark
+          ? "text-gray-400 hover:bg-gray-900 hover:text-white"
+          : "text-gray-600 hover:bg-gray-100 hover:text-black"
+      }
+    `}
+  >
+    <FiUser className="text-[19px] sm:text-[20px]" />
+
+    <span className="text-[10px] sm:text-[11px]">
+      Login
+    </span>
+  </button>
+)}
+                  
                 </div>
               </div>
             </div>

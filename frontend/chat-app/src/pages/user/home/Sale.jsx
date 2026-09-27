@@ -53,7 +53,7 @@ const Sale = () => {
 
           {/* LARGE PROMOTIONAL IMAGE */}
           <ImageCard
-            image="https://mafoil.wpbingosite.com/wp-content/uploads/2022/11/banner-21.jpg"
+            image="https://shopjonesandco.com/cdn/shop/files/jones-co-plumping-eye-masks-hyaluronic-acid-skincare-a1b2c3d4_dae5af66-a0d7-4602-9d22-20b8d0a34b4f.jpg?v=1780606122&width=3000"
             className="
               h-[280px]
               sm:h-[360px]
@@ -61,7 +61,7 @@ const Sale = () => {
               lg:h-[440px]
               xl:h-[500px]
             "
-            onClick={() => navigate("/body")}
+            onClick={() => navigate("/beauty")}
           />
 
           {/* SMALL IMAGE + TEXT CARD */}
@@ -75,7 +75,7 @@ const Sale = () => {
           >
             {/* SECOND BANNER */}
             <ImageCard
-              image="https://mafoil.wpbingosite.com/wp-content/uploads/2022/11/banner-22.jpg"
+              image="https://shopjonesandco.com/cdn/shop/files/jones-plus-co-rider-s-taupe-leather-bag_50f3d876-73b8-4b79-be64-0f742840c07c.png?v=1790204313&width=3000"
               className="
                 h-[220px]
                 sm:h-[280px]

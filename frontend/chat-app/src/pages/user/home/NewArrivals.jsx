@@ -12,67 +12,68 @@ const NewArrivals = () => {
   const { isWishlisted, toggleWishlist } = useWishlist();
 
   return (
-    <section
+  <section
+  className={`
+    max-w-[1800px]
+    mx-auto
+
+    px-4
+    sm:px-6
+    lg:px-10
+
+    py-3
+    sm:py-4
+
+    transition-colors
+    duration-300
+
+    ${isDark ? "bg-gray-950" : "bg-white"}
+  `}
+>
+  {/* SECTION HEADER */}
+  <div className="text-center mb-4 sm:mb-5">
+    <h2
       className={`
-        max-w-[1800px]
-        mx-auto
+        text-base
+        sm:text-lg
+        lg:text-xl
 
-        px-4
-        sm:px-6
-        lg:px-10
+        font-semibold
 
-        py-12
-        sm:py-16
-
-        transition-colors
-        duration-300
-
-        ${isDark ? "bg-gray-950" : "bg-white"}
+        ${isDark ? "text-white" : "text-gray-800"}
       `}
     >
-      {/*SECTION HEADER*/}
-      <div className="text-center mb-8">
-        <h2
-          className={`
-            text-lg
-            sm:text-xl
-            lg:text-2xl
+      New Arrivals
+    </h2>
 
-            font-semibold
+    <p
+      className={`
+        mt-1
+        text-[11px]
+        sm:text-xs
+        lg:text-sm
 
-            ${isDark ? "text-white" : "text-gray-800"}
-          `}
-        >
-          New Arrivals
-        </h2>
+        ${isDark ? "text-gray-400" : "text-gray-500"}
+      `}
+    >
+      Explore our newest arrivals
+    </p>
+  </div>
 
-        <p
-          className={`
-            mt-2
-            text-sm
-            sm:text-base
-
-            ${isDark ? "text-gray-400" : "text-gray-500"}
-          `}
-        >
-          Explore our newest arrivals
-        </p>
-      </div>
-
-      {/*PRODUCT SLIDER */}
-      <Slider
-        items={categories}
-        visibleItems={4}
-        renderItem={(product) => (
-          <Card
-            key={product._id}
-            product={product}
-            isWishlisted={isWishlisted(product._id)}
-            onToggleWishlist={toggleWishlist}
-          />
-        )}
+  {/* PRODUCT SLIDER */}
+  <Slider
+    items={categories}
+    visibleItems={4}
+    renderItem={(product) => (
+      <Card
+        key={product._id}
+        product={product}
+        isWishlisted={isWishlisted(product._id)}
+        onToggleWishlist={toggleWishlist}
       />
-    </section>
+    )}
+  />
+</section>
   );
 };
 

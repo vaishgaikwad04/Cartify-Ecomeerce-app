@@ -243,8 +243,9 @@ const Login = ({ isLogin, setIsLogin }) => {
           type="button"
           onClick={handleLogin}
           className={`
+            hidden
             w-full
-            flex
+            sm:flex
             items-center
             justify-center
             gap-1.5

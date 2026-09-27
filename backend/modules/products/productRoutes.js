@@ -1,6 +1,6 @@
 // routes/userRoutes.js
 import express from "express";
-import { createProduct, fetchProduct, fetchProductBasedOnCategory ,getProductsByBrand , deleteProduct, updateProduct, getProductById,getDashboardStats, handleToggle, searchProducts } from "./productController.js";
+import { getProducts, createProduct, fetchProduct, fetchProductBasedOnCategory ,getProductsByBrand , deleteProduct, updateProduct, getProductById,getDashboardStats, handleToggle, searchProducts } from "./productController.js";
 import { authMiddleware } from "../../middleware/authMiddleware.js";
 import upload from "../../middleware/upload.js";
 
@@ -16,5 +16,6 @@ router.get("/stats", getDashboardStats);
 router.put("/toggle/:id",handleToggle);
 router.get("/search", searchProducts);
 router.get("/brand", getProductsByBrand);
+router.get("/", getProducts);
 
 export default router;
