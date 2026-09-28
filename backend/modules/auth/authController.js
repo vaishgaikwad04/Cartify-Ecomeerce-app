@@ -57,14 +57,20 @@ export const registerUser = async (req, res) => {
 // =========================
 export const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
 
-    if (!email || !password) {
+    // =========================
+    // VALIDATION
+    // =========================
+    if (!email || !password || !role) {
       return res.status(400).json({
-        message: "Email and password are required",
+        message: "Email, password and role are required",
       });
     }
 
+    // =========================
+    // FIND USER
+    // =========================
     const user = await authModel.findOne({
       email: email.toLowerCase(),
     });
@@ -75,6 +81,9 @@ export const loginUser = async (req, res) => {
       });
     }
 
+    // =========================
+    // PASSWORD
+    // =========================
     const isMatch = await bcrypt.compare(
       password,
       user.password
@@ -83,6 +92,15 @@ export const loginUser = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({
         message: "Invalid email or password",
+      });
+    }
+
+    // =========================
+    // ROLE CHECK
+    // =========================
+    if (user.role !== role) {
+      return res.status(403).json({
+        message: "Selected role does not match your account",
       });
     }
 
@@ -107,6 +125,9 @@ export const loginUser = async (req, res) => {
       sameSite: "none",
     });
 
+    // =========================
+    // RESPONSE
+    // =========================
     return res.status(200).json({
       message: "Login successful",
 
@@ -125,7 +146,6 @@ export const loginUser = async (req, res) => {
     });
   }
 };
-
 // =========================
 // LOGOUT
 // =========================

@@ -1,3 +1,4 @@
+
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,39 +9,64 @@ import { searchProducts } from "../../api/user/ProductApi";
 // Context
 import { ThemeContext } from "../../context/ThemeContext";
 import { NotificationContext } from "../../context/NotificationContext";
+import { AuthContext } from "../../context/AuthContext";
 
 export const useHeader = () => {
+  // =====================================================
   // NAVIGATION
+  // =====================================================
   const navigate = useNavigate();
 
+  // =====================================================
   // THEME
+  // =====================================================
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "Dark Mode";
 
-  // NOTIFICATIONS
-  const { allowNotification, unreadCount } = useContext(NotificationContext);
+  // =====================================================
+  // AUTH
+  // =====================================================
+  const { user } = useContext(AuthContext);
 
+  // =====================================================
+  // NOTIFICATIONS
+  // =====================================================
+  const { allowNotification, unreadCount } =
+    useContext(NotificationContext);
+
+  // =====================================================
   // MOBILE MENU
+  // =====================================================
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMobileMenu, setOpenMobileMenu] = useState(null);
 
+  // =====================================================
   // PROFILE
+  // =====================================================
   const [profileData, setProfileData] = useState(null);
 
+  // =====================================================
   // CART DRAWER
+  // =====================================================
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
 
+  // =====================================================
   // SEARCH
+  // =====================================================
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
 
+  // =====================================================
   // FETCH PROFILE
+  // =====================================================
   const fetchProfile = async () => {
     try {
       const res = await getUserSettings();
+
       const data = res?.data?.data;
+
       if (!data) {
         setProfileData(null);
         return;
@@ -54,19 +80,29 @@ export const useHeader = () => {
     } catch (error) {
       console.error(
         "Profile fetch error:",
-        error?.response?.data || error?.message,
+        error?.response?.data || error?.message
       );
 
       setProfileData(null);
     }
   };
 
-  // FETCH PROFILE ON MOUNT
+  // =====================================================
+  // FETCH PROFILE WHEN USER LOGIN STATE CHANGES
+  // =====================================================
   useEffect(() => {
-    fetchProfile();
-  }, []);
+    // User is logged in
+    if (user) {
+      fetchProfile();
+    } else {
+      // User logged out
+      setProfileData(null);
+    }
+  }, [user]);
 
+  // =====================================================
   // SEARCH PRODUCTS
+  // =====================================================
   const handleSearch = async (value) => {
     setSearchTerm(value);
 
@@ -83,7 +119,10 @@ export const useHeader = () => {
 
       setResults(res?.data?.data || []);
     } catch (error) {
-      console.error("Search error:", error?.response?.data || error?.message);
+      console.error(
+        "Search error:",
+        error?.response?.data || error?.message
+      );
 
       setResults([]);
     } finally {
@@ -91,41 +130,61 @@ export const useHeader = () => {
     }
   };
 
+  // =====================================================
   // CLOSE SEARCH
+  // =====================================================
   const closeSearch = () => {
     setIsSearchModalOpen(false);
     setSearchTerm("");
     setResults([]);
   };
 
+  // =====================================================
   // PRODUCT CLICK
+  // =====================================================
   const handleProductClick = (id) => {
     navigate(`/description/${id}`);
 
     closeSearch();
   };
 
+  // =====================================================
   // CLOSE MOBILE MENU
+  // =====================================================
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
     setOpenMobileMenu(null);
   };
 
+  // =====================================================
   // BODY SCROLL LOCK
+  // =====================================================
   useEffect(() => {
     const shouldLockScroll =
-      isCartDrawerOpen || isSearchModalOpen || isMobileMenuOpen;
-    document.body.style.overflow = shouldLockScroll ? "hidden" : "auto";
+      isCartDrawerOpen ||
+      isSearchModalOpen ||
+      isMobileMenuOpen;
+
+    document.body.style.overflow = shouldLockScroll
+      ? "hidden"
+      : "auto";
 
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [isCartDrawerOpen, isSearchModalOpen, isMobileMenuOpen]);
+  }, [
+    isCartDrawerOpen,
+    isSearchModalOpen,
+    isMobileMenuOpen,
+  ]);
 
+  // =====================================================
   // ESCAPE KEY
+  // =====================================================
   useEffect(() => {
     const handleEscape = (event) => {
       if (event.key !== "Escape") return;
+
       closeSearch();
       setIsCartDrawerOpen(false);
       closeMobileMenu();
@@ -138,10 +197,15 @@ export const useHeader = () => {
     };
   }, []);
 
+  // =====================================================
   // RETURN
+  // =====================================================
   return {
     // Navigation
     navigate,
+
+    // Auth
+    user,
 
     // Theme
     theme,
@@ -171,7 +235,6 @@ export const useHeader = () => {
     searchTerm,
     setSearchTerm,
     results,
-
     searchLoading,
     handleSearch,
     closeSearch,
