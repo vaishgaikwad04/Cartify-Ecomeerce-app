@@ -1,62 +1,146 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import { useParams } from "react-router-dom";
-import { categoryData } from "../../api/user/ProductApi";
+
+import { categoryData } from "../../api/user/CategoryApi";
+import { ThemeContext } from "../../context/ThemeContext";
 
 export const useCategory = () => {
-  // Get the category name from the URL
+  const { theme } = useContext(ThemeContext);
+  const isDark = theme === "Dark Mode";
   const { category } = useParams();
 
-  // Store products and category filter states
+  // =========================
+  // PRODUCTS
+  // =========================
   const [products, setProducts] = useState([]);
+
+  // =========================
+  // LOADING
+  // =========================
   const [loading, setLoading] = useState(false);
+
+  // =========================
+  // FILTER
+  // =========================
   const [showFilter, setShowFilter] = useState(false);
   const [stockFilter, setStockFilter] = useState("");
+  const [priceFilter, setPriceFilter] = useState("all");
 
+  // =========================
+  // PAGINATION
+  // =========================
+
+  // Current page
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Total pages coming from backend
+  const [totalPages, setTotalPages] = useState(1);
+
+  // Products shown on one page
+  const limit = 5;
+
+  // =========================
+  // FETCH PRODUCTS
+  // =========================
   useEffect(() => {
-    // Fetch products for the selected category
     const fetchProducts = async () => {
       try {
-        // Show loading state while fetching products
         setLoading(true);
 
-        const res = await categoryData(category?.toLowerCase());
+        const res = await categoryData(
+          category?.toLowerCase(),
+          currentPage,
+          limit
+        );
 
-        // Store products received from the API
+        // Products for current page
         setProducts(res?.data?.data || []);
+
+        // Total pages from backend
+        setTotalPages(
+          Number(res?.data?.totalPages) || 1
+        );
       } catch (error) {
-        // Log API or fetching errors
-        console.log(error);
+        console.log("Category products error:", error);
+
+        setProducts([]);
+        setTotalPages(1);
       } finally {
-        // Hide loading state after the request completes
         setLoading(false);
       }
     };
 
-    // Fetch products only when a category is available
     if (category) {
       fetchProducts();
     }
+  }, [category, currentPage]);
+
+  // =========================
+  // RESET PAGE WHEN CATEGORY CHANGES
+  // =========================
+  useEffect(() => {
+    setCurrentPage(1);
   }, [category]);
 
-  // Filter products based on their stock availability
+  // =========================
+  // STOCK FILTER
+  // =========================
   const filteredData = products.filter((product) => {
-    const isInStock = product?.variants?.some(
-      (variant) => variant.stock > 0
-    );
+  // STOCK FILTER
+  const isInStock = product?.variants?.some(
+    (variant) => variant.stock > 0
+  );
 
-    if (stockFilter === "inStock") return isInStock;
-    if (stockFilter === "outOfStock") return !isInStock;
+  if (stockFilter === "inStock" && !isInStock) {
+    return false;
+  }
 
-    return true;
-  });
+  if (stockFilter === "outOfStock" && isInStock) {
+    return false;
+  }
 
-  // Return data and filter controls to the component
+  // PRICE
+  const price = Number(product?.price || 0);
+
+  if (priceFilter === "under1000" && price >= 1000) {
+    return false;
+  }
+
+  if (priceFilter === "1000to2000" && (price < 1000 || price > 2000)) {
+    return false;
+  }
+
+  if (priceFilter === "2000to5000" && (price < 2000 || price > 5000)) {
+    return false;
+  }
+
+  if (priceFilter === "above5000" && price <= 5000) {
+    return false;
+  }
+
+  return true;
+});
+
+  // =========================
+  // RETURN
+  // =========================
   return {
     loading,
+    isDark,
+    // Filter
     showFilter,
     setShowFilter,
     stockFilter,
     setStockFilter,
+    priceFilter,
+    setPriceFilter,
+
+    // Products
     filteredData,
+
+    // Pagination
+    currentPage,
+    totalPages,
+    setCurrentPage,
   };
 };

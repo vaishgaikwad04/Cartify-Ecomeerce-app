@@ -1,4 +1,3 @@
-
 import Button from "../../../components/ui/Button";
 import ImageCard from "../../../components/ui/ImageCard";
 import TextCard from "../../../components/ui/TextCard";
@@ -10,7 +9,13 @@ import { useWishlist } from "../../../hooks/user/useWishList";
 
 const Sale = () => {
   // SALE CUSTOM HOOK
-  const { isDark, navigate, categories } = useSale();
+  const {
+    isDark,
+    navigate,
+    categories,
+    openProductModel,
+    setOpenProductModel,
+  } = useSale();
 
   // WISHLIST CUSTOM HOOK
   const { isWishlisted, toggleWishlist } = useWishlist();
@@ -50,19 +55,125 @@ const Sale = () => {
       >
         {/* LEFT SIDE: PROMOTIONAL BANNERS */}
         <div className="flex flex-col gap-4 sm:gap-5 lg:gap-6">
-
           {/* LARGE PROMOTIONAL IMAGE */}
-          <ImageCard
-            image="https://shopjonesandco.com/cdn/shop/files/jones-co-plumping-eye-masks-hyaluronic-acid-skincare-a1b2c3d4_dae5af66-a0d7-4602-9d22-20b8d0a34b4f.jpg?v=1780606122&width=3000"
-            className="
-              h-[280px]
-              sm:h-[360px]
-              md:h-[420px]
-              lg:h-[440px]
-              xl:h-[500px]
-            "
-            onClick={() => navigate("/beauty")}
-          />
+          <div className="relative" onClick={() => setOpenProductModel(null)}>
+       <div
+  className="
+    relative
+    overflow-hidden
+    h-[280px]
+    sm:h-[360px]
+    md:h-[420px]
+    lg:h-[440px]
+    xl:h-[500px]
+  "
+>
+  <video
+    src="https://shopjonesandco.com/cdn/shop/videos/c/vp/0213a0b961b8456587d256593cc7e79e/0213a0b961b8456587d256593cc7e79e.HD-720p-4.5Mbps-84848524.mp4?v=0"
+    autoPlay
+    muted
+    loop
+    playsInline
+    className="
+      w-full
+      h-full
+      object-cover
+    "
+  />
+
+{/* PLUS BUTTON */}
+<button
+  type="button"
+  onClick={(e) => {
+    e.stopPropagation();
+    setOpenProductModel("sale-banner");
+  }}
+  aria-label="View sale product"
+  className={`
+    absolute
+
+    /* MOBILE */
+    top-20
+    right-34
+    sm:right-84
+    sm:top-24
+
+    /* LARGE — KEEP YOUR EXISTING POSITION */
+    lg:top-46
+    lg:left-88
+
+    w-7 h-7
+    sm:w-8 sm:h-8
+    md:w-9 md:h-9
+    lg:w-10 lg:h-10
+
+    rounded-full
+    flex
+    items-center
+    justify-center
+    shadow-md
+
+    text-sm
+    sm:text-base
+    md:text-lg
+    lg:text-xl
+
+    ${
+      isDark
+        ? "bg-gray-900 text-white hover:bg-gray-800"
+        : "bg-white text-black hover:bg-gray-100"
+    }
+  `}
+>
+  +
+</button>
+</div>
+
+            {/* PRODUCT POPUP */}
+            {openProductModel === "sale-banner" && categories?.[0] && (
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="
+        absolute
+        z-[99999]
+
+
+        left-44
+        top-58
+        sm:left-102
+        sm:top-64
+        lg:top-114
+        lg:left-102
+        -translate-y-1/2
+
+
+        w-[140px]
+        sm:w-[140px]
+        md:w-[240px]
+        lg:w-[272px]
+      "
+              >
+                <div
+                  className={`
+          w-full
+          rounded-lg
+          shadow-xl
+          p-1
+          sm:p-1.5
+          md:p-2
+
+          ${isDark ? "bg-gray-900" : "bg-white"}
+        `}
+                >
+                  <Card
+                    product={categories[0]}
+                    isWishlisted={isWishlisted(categories[0]._id)}
+                    onToggleWishlist={toggleWishlist}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* SMALL IMAGE + TEXT CARD */}
           <div
@@ -102,11 +213,7 @@ const Sale = () => {
                 sm:!p-4
                 md:!p-5
 
-                ${
-                  isDark
-                    ? "bg-gray-900 text-white"
-                    : "bg-[#f8f6f6]"
-                }
+                ${isDark ? "bg-gray-900 text-white" : "bg-[#f8f6f6]"}
               `}
             >
               <Button
@@ -163,10 +270,7 @@ const Sale = () => {
               "
             >
               {categories.slice(0, 4).map((product) => (
-                <div
-                  key={product._id}
-                  className="min-w-0"
-                >
+                <div key={product._id} className="min-w-0">
                   <Card
                     product={product}
                     isWishlisted={isWishlisted(product._id)}
@@ -182,11 +286,7 @@ const Sale = () => {
                   text-sm
                   sm:text-base
 
-                  ${
-                    isDark
-                      ? "text-gray-300"
-                      : "text-gray-700"
-                  }
+                  ${isDark ? "text-gray-300" : "text-gray-700"}
                 `}
               >
                 No categories found

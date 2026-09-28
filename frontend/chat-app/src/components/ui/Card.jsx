@@ -19,10 +19,7 @@ const Card = ({
         w-full
         min-w-0
         overflow-hidden
-
-        rounded
-        sm:rounded-md
-        md:rounded-lg
+        
 
         border
 

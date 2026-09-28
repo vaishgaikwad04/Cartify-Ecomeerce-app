@@ -134,7 +134,7 @@ export const fetchProductBasedOnCategory = async (req, res) => {
 
     // Pagination
     const page = Number(req.query.page) || 1;
-    const limit = Number(req.query.limit) || 8;
+    const limit = Number(req.query.limit) || 5;
 
     const skip = (page - 1) * limit;
 

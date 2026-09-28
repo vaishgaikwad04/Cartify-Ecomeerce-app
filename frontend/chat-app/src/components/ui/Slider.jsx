@@ -11,7 +11,7 @@ const Slider = ({ items = [], visibleItems = 4, renderItem }) => {
   useEffect(() => {
     const updateVisibleItems = () => {
       if (window.innerWidth < 640) {
-        setCurrentVisibleItems(1);
+        setCurrentVisibleItems(2);
       } else if (window.innerWidth < 1024) {
         setCurrentVisibleItems(2);
       } else {

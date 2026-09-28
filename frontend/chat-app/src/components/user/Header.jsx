@@ -1,16 +1,22 @@
 import { NavLink } from "react-router-dom";
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 // Icons
 import { FaChevronDown } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
-import { FiSearch, FiPackage, FiX, FiBell, FiMenu, FiUser } from "react-icons/fi";
+import {
+  FiSearch,
+  FiPackage,
+  FiX,
+  FiBell,
+  FiMenu,
+  FiUser,
+} from "react-icons/fi";
 
 import { useHeader } from "../../hooks/user/useHeader";
 
 // Components
 import Drawer from "../ui/drawer";
 import CartSidebar from "../../pages/user/cart/CartSidebar";
-
 
 import { AuthContext } from "../../context/AuthContext";
 
@@ -66,6 +72,43 @@ const Header = () => {
         {
           name: "Books",
           path: "/books",
+        },
+      ],
+    },
+
+    {
+      title: "Clothing",
+      subtitle: "Everyday Essentials",
+      heading: "Clothing",
+      items: [
+        {
+          name: "Tops",
+          path: "/tops",
+        },
+        {
+          name: "Basics & Loungewear",
+          path: "/basics-loungewear",
+        },
+        {
+          name: "Pants & Shorts",
+          path: "/pants-shorts",
+        },
+        {
+          name: "Dresses & Skirts",
+          path: "/dresses-skirts",
+        },
+        {
+          name: "Sweaters",
+          path: "/sweaters",
+        },
+
+        {
+          name: "Kids",
+          path: "/kids",
+        },
+        {
+          name: "Sale",
+          path: "/sale",
         },
       ],
     },
@@ -153,22 +196,22 @@ const Header = () => {
           }
         `}
       >
-        <div className="max-w-[1800px] mx-auto px-3 sm:px-5 lg:px-6">
+        <div className="max-w-[1700px] mx-auto px-3 sm:px-5 lg:px-6">
           <div className="flex items-center justify-between h-16 sm:h-[68px] lg:h-[72px]">
             {/* =================================================
                 LOGO
         {/* =================================================
     LOGO
 ================================================= */}
-<div className="lg:w-[200px] xl:w-[230px] shrink-0">
-  <button
-    type="button"
-    onClick={() => navigate("/")}
-    className={`
+            <div className="lg:w-[200px] xl:w-[230px] shrink-0">
+              <button
+                type="button"
+                onClick={() => navigate("/")}
+                className={`
       font-serif-sarif
-      text-xs
-      sm:text-sm
-      lg:text-base
+      text-lg
+      sm:text-lg
+      lg:text-2xl
       tracking-[3px]
       sm:tracking-[3.5px]
       lg:tracking-[4px]
@@ -184,10 +227,10 @@ const Header = () => {
           : "text-gray-900 hover:text-black"
       }
     `}
-  >
-    Cartify
-  </button>
-</div>
+              >
+                Cartify
+              </button>
+            </div>
 
             {/* =================================================
                 DESKTOP NAVIGATION
@@ -204,7 +247,7 @@ const Header = () => {
     2xl:gap-8
 
     text-[11px]
-    xl:text-xs
+    xl:text-sm
     font-medium
     tracking-[1.5px]
     xl:tracking-[2px]
@@ -395,110 +438,130 @@ const Header = () => {
 ================================================= */}
             <div
               className={`
-    lg:w-[200px]
-    xl:w-[230px]
+    lg:w-auto
+    xl:w-auto
     flex
     justify-end
     items-center
-    gap-1
-    sm:gap-1.5
-    lg:gap-1.5
+    gap-1.5
+    sm:gap-2
     shrink-0
 
-    ${isDark ? "text-white" : "text-black"}
+    ${isDark ? "text-white" : "text-gray-900"}
   `}
             >
-              {/* SEARCH */}
+              {/* =================================================
+      SEARCH
+  ================================================= */}
               <button
                 type="button"
                 onClick={() => setIsSearchModalOpen(true)}
-                className={`
-      flex
-      items-center
-      justify-center
-
-      w-8
-      h-8
-      sm:w-9
-      sm:h-9
-      lg:w-9
-      lg:h-9
-
-      shrink-0
-      rounded-full
-      transition-all
-      duration-200
-
-      ${
-        isDark
-          ? "text-gray-200 hover:bg-gray-800"
-          : "text-gray-700 hover:bg-gray-100"
-      }
-    `}
                 aria-label="Search"
-              >
-                <FiSearch className="text-[16px] sm:text-[17px] lg:text-[18px]" />
-              </button>
-
-              {/* CART */}
-              <button
-                type="button"
-                onClick={() => setIsCartDrawerOpen(true)}
                 className={`
+      group
+      w-9
+      h-9
+      sm:w-10
+      sm:h-10
+
+      rounded-full
       flex
       items-center
       justify-center
 
-      w-8
-      h-8
-      sm:w-9
-      sm:h-9
-      lg:w-9
-      lg:h-9
-
-      shrink-0
-      rounded-full
       transition-all
       duration-200
 
       ${
         isDark
-          ? "bg-gray-800 text-gray-200 hover:bg-gray-700"
-          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+          ? "text-gray-300 hover:bg-gray-800 hover:text-white"
+          : "text-gray-600 hover:bg-gray-100 hover:text-black"
       }
     `}
-                aria-label="Cart"
               >
-                <HiOutlineShoppingBag className="text-[17px] sm:text-[18px] lg:text-[19px]" />
+                <FiSearch
+                  className="
+        text-[17px]
+        sm:text-[18px]
+        transition-transform
+        duration-200
+        group-hover:scale-105
+      "
+                />
               </button>
 
               {/* =================================================
-      DESKTOP ACTIONS
+      MAIN ACTION GROUP
   ================================================= */}
-              <div className="hidden lg:flex items-center gap-1.5">
-                {/* ORDERS */}
+              <div
+                className={`
+      hidden
+      lg:flex
+      items-center
+      gap-0.5
+      rounded-full
+      p-1
+
+      border
+
+      ${
+        isDark ? "bg-gray-900/80 border-gray-800" : "bg-gray-50 border-gray-200"
+      }
+    `}
+              >
+                {/* CART */}
                 <button
                   type="button"
-                  onClick={() => navigate("/orders")}
+                  onClick={() => setIsCartDrawerOpen(true)}
+                  aria-label="Cart"
                   className={`
+        relative
         w-9
         h-9
+
         rounded-full
         flex
         items-center
         justify-center
+
         transition-all
-        duration-300
+        duration-200
 
         ${
           isDark
-            ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white"
-            : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black"
+            ? "text-gray-300 hover:bg-gray-800 hover:text-white"
+            : "text-gray-600 hover:bg-white hover:text-black hover:shadow-sm"
         }
       `}
-                  aria-label="Orders"
                 >
-                  <FiPackage className="text-[18px]" />
+                  <HiOutlineShoppingBag className="text-[18px]" />
+                </button>
+
+                {/* ORDERS */}
+                <button
+                  type="button"
+                  onClick={() => navigate("/orders")}
+                  aria-label="Orders"
+                  className={`
+        w-9
+        h-9
+
+        rounded-full
+        flex
+        items-center
+        justify-center
+
+        transition-all
+        duration-200
+
+        ${
+          isDark
+            ? "text-gray-300 hover:bg-gray-800 hover:text-white"
+            : "text-gray-600 hover:bg-white hover:text-black hover:shadow-sm"
+        }
+      `}
+                >
+                  <FiPackage className="text-[17px]" />
                 </button>
 
                 {/* NOTIFICATIONS */}
@@ -506,26 +569,28 @@ const Header = () => {
                   <button
                     type="button"
                     onClick={() => navigate("/notifications")}
+                    aria-label={`Notifications${
+                      unreadCount > 0 ? `, ${unreadCount} unread` : ""
+                    }`}
                     className={`
           relative
           w-9
           h-9
+
           rounded-full
           flex
           items-center
           justify-center
+
           transition-all
-          duration-300
+          duration-200
 
           ${
             isDark
-              ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black"
+              ? "text-gray-300 hover:bg-gray-800 hover:text-white"
+              : "text-gray-600 hover:bg-white hover:text-black hover:shadow-sm"
           }
         `}
-                    aria-label={`Notifications${
-                      unreadCount > 0 ? `, ${unreadCount} unread` : ""
-                    }`}
                   >
                     <FiBell className="text-[17px]" />
 
@@ -533,21 +598,27 @@ const Header = () => {
                       <span
                         className="
               absolute
-              -top-1
-              -right-1
+              top-0
+              right-0
+
               min-w-[15px]
               h-[15px]
               px-1
+
               rounded-full
               bg-red-500
               text-white
+
               text-[8px]
               font-bold
+
               flex
               items-center
               justify-center
+
               border-2
               border-white
+
               leading-none
             "
                       >
@@ -556,22 +627,31 @@ const Header = () => {
                     )}
                   </button>
                 )}
+              </div>
 
-             {/* PROFILE */}
-{user ? (
-  // LOGGED IN → PROFILE
-  <button
-    type="button"
-    onClick={() => navigate("/profile")}
-    className={`
+              {/* =================================================
+      PROFILE / LOGIN
+  ================================================= */}
+              {/* =================================================
+    PROFILE / SIGN IN
+================================================= */}
+              {user ? (
+                // LOGGED IN → PROFILE
+                <button
+                  type="button"
+                  onClick={() => navigate("/profile")}
+                  className={`
       group
       flex
       items-center
       gap-2
+
       rounded-full
       border
+
       px-1.5
       py-1.5
+
       cursor-pointer
       transition-all
       duration-200
@@ -582,23 +662,28 @@ const Header = () => {
           : "bg-white border-gray-200 hover:border-gray-300 hover:bg-gray-50"
       }
     `}
-  >
-    {/* AVATAR */}
-    <div className="relative shrink-0">
-      <div
-        className={`
+                >
+                  {/* AVATAR */}
+                  <div className="relative shrink-0">
+                    <div
+                      className={`
           w-8
           h-8
+
           rounded-full
+
           flex
           items-center
           justify-center
+
           text-[11px]
           font-semibold
           uppercase
           text-white
+
           transition-transform
           duration-200
+
           group-hover:scale-105
 
           ${
@@ -607,46 +692,50 @@ const Header = () => {
               : "bg-gradient-to-br from-gray-800 to-black"
           }
         `}
-      >
-        {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
-      </div>
+                    >
+                      {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
+                    </div>
 
-      {/* ONLINE */}
-      <span
-        className={`
+                    {/* ONLINE */}
+                    <span
+                      className={`
           absolute
           right-0
           bottom-0
+
           w-2
           h-2
+
           rounded-full
           border-2
           bg-green-500
 
           ${isDark ? "border-gray-900" : "border-white"}
         `}
-      />
-    </div>
+                    />
+                  </div>
 
-    {/* USER INFO */}
-    <div className="hidden xl:flex flex-col min-w-0 pr-1">
-      <span
-        className={`
+                  {/* USER INFO */}
+                  <div className="hidden xl:flex flex-col min-w-0 pr-1">
+                    <span
+                      className={`
           max-w-[100px]
           truncate
+
           text-[11px]
           font-semibold
           leading-none
 
           ${isDark ? "text-gray-100" : "text-gray-900"}
         `}
-      >
-        {profileData?.name || "User"}
-      </span>
+                    >
+                      {profileData?.name || "User"}
+                    </span>
 
-      <span
-        className={`
+                    <span
+                      className={`
           mt-1
+
           text-[8px]
           uppercase
           tracking-[0.12em]
@@ -654,41 +743,47 @@ const Header = () => {
 
           ${isDark ? "text-gray-500" : "text-gray-400"}
         `}
-      >
-        Profile
-      </span>
-    </div>
+                    >
+                      Profile
+                    </span>
+                  </div>
 
-    {/* CHEVRON */}
-    <span
-      className={`
+                  {/* CHEVRON */}
+                  <span
+                    className={`
         hidden
         xl:block
         mr-1
+
         text-[11px]
+
         transition-transform
         duration-200
+
         group-hover:translate-x-0.5
 
         ${isDark ? "text-gray-500" : "text-gray-400"}
       `}
-    >
-      ›
-    </span>
-  </button>
-) : (
-  // NOT LOGGED IN → LOGIN
-  <button
-    type="button"
-    onClick={() => navigate("/auth?mode=login")}
-    className={`
+                  >
+                    ›
+                  </span>
+                </button>
+              ) : (
+                // NOT LOGGED IN → SIGN IN
+                <button
+                  type="button"
+                  onClick={() => navigate("/auth?mode=login")}
+                  className={`
       flex
       items-center
       gap-2
+
       rounded-full
       border
+
       px-3
       py-2
+
       cursor-pointer
       transition-all
       duration-200
@@ -699,34 +794,38 @@ const Header = () => {
           : "bg-white border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50"
       }
     `}
-  >
-    <FiUser className="text-[17px]" />
+                >
+                  <FiUser className="text-[17px]" />
 
-    <span className="hidden xl:block text-[11px] font-semibold">
-      LogIn
-    </span>
-  </button>
-)}
-              </div>
+                  <span className="hidden xl:block text-[11px] font-semibold">
+                    Sign In
+                  </span>
+                </button>
+              )}
 
               {/* =================================================
-      HAMBURGER
+      MOBILE HAMBURGER
   ================================================= */}
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(true)}
+                aria-label="Open menu"
                 className={`
       lg:hidden
-      w-8
-      h-8
-      sm:w-9
-      sm:h-9
+
+      w-9
+      h-9
+      sm:w-10
+      sm:h-10
+
       rounded-full
+
       flex
       items-center
       justify-center
+
       transition-all
-      duration-300
+      duration-200
 
       ${
         isDark
@@ -734,7 +833,6 @@ const Header = () => {
           : "bg-gray-100 text-gray-700 hover:bg-gray-200"
       }
     `}
-                aria-label="Open menu"
               >
                 <FiMenu className="text-[18px] sm:text-[19px]" />
               </button>
@@ -1071,15 +1169,15 @@ const Header = () => {
                     </button>
                   )}
 
-               {user ? (
-  /* PROFILE */
-  <button
-    type="button"
-    onClick={() => {
-      closeMobileMenu();
-      navigate("/profile");
-    }}
-    className={`
+                  {user ? (
+                    /* PROFILE */
+                    <button
+                      type="button"
+                      onClick={() => {
+                        closeMobileMenu();
+                        navigate("/profile");
+                      }}
+                      className={`
       flex
       flex-col
       items-center
@@ -1095,9 +1193,9 @@ const Header = () => {
           : "text-gray-600 hover:bg-gray-100 hover:text-black"
       }
     `}
-  >
-    <div
-      className={`
+                    >
+                      <div
+                        className={`
         w-7
         h-7
         rounded-full
@@ -1110,23 +1208,23 @@ const Header = () => {
 
         ${isDark ? "bg-gray-700" : "bg-gray-800"}
       `}
-    >
-      {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
-    </div>
+                      >
+                        {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
+                      </div>
 
-    <span className="text-[10px] sm:text-[11px]">
-      Profile
-    </span>
-  </button>
-) : (
-  /* LOGIN */
-  <button
-    type="button"
-    onClick={() => {
-      closeMobileMenu();
-      navigate("/login");
-    }}
-    className={`
+                      <span className="text-[10px] sm:text-[11px]">
+                        Profile
+                      </span>
+                    </button>
+                  ) : (
+                    /* LOGIN */
+                    <button
+                      type="button"
+                      onClick={() => {
+                        closeMobileMenu();
+                        navigate("/login");
+                      }}
+                      className={`
       flex
       flex-col
       items-center
@@ -1142,15 +1240,12 @@ const Header = () => {
           : "text-gray-600 hover:bg-gray-100 hover:text-black"
       }
     `}
-  >
-    <FiUser className="text-[19px] sm:text-[20px]" />
+                    >
+                      <FiUser className="text-[19px] sm:text-[20px]" />
 
-    <span className="text-[10px] sm:text-[11px]">
-      Login
-    </span>
-  </button>
-)}
-                  
+                      <span className="text-[10px] sm:text-[11px]">Login</span>
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

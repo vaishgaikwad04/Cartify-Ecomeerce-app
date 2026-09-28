@@ -2,12 +2,28 @@ import authModel from "./authModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-// REGISTER
+// =========================
+// REGISTER USER
+// =========================
 export const registerUser = async (req, res) => {
-  const { name, email, password, role } = req.body;
-
   try {
-    const user = await authModel.findOne({ email });
+    const { name, email, password } = req.body;
+
+    // ROLE IS NOT ACCEPTED FROM FRONTEND
+    // Every normal registration is a user
+    const role = "user";
+
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        message: "Name, email and password are required",
+      });
+    }
+
+    const normalizedEmail = email.toLowerCase();
+
+    const user = await authModel.findOne({
+      email: normalizedEmail,
+    });
 
     if (user) {
       return res.status(409).json({
@@ -19,16 +35,16 @@ export const registerUser = async (req, res) => {
 
     await authModel.create({
       name,
-      email: email.toLowerCase(),
+      email: normalizedEmail,
       password: hashedPassword,
-      role,
+      role, // ALWAYS "user"
     });
 
     return res.status(201).json({
       message: "User registered successfully!",
     });
   } catch (error) {
-    console.error(error);
+    console.error("Register error:", error);
 
     return res.status(500).json({
       message: "Something went wrong.",
@@ -36,14 +52,16 @@ export const registerUser = async (req, res) => {
   }
 };
 
+// =========================
 // LOGIN
+// =========================
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({
-         message: "Email and password are required",
+        message: "Email and password are required",
       });
     }
 
@@ -57,23 +75,32 @@ export const loginUser = async (req, res) => {
       });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(
+      password,
+      user.password
+    );
 
     if (!isMatch) {
       return res.status(401).json({
-         message: "Invalid email or password",
+        message: "Invalid email or password",
       });
     }
 
+    // =========================
+    // JWT
+    // =========================
     const token = jwt.sign(
       {
         id: user._id,
         email: user.email,
+        role: user.role,
       },
       process.env.JWT_SECRET
     );
 
-    // Production: frontend and backend are on different sites
+    // =========================
+    // COOKIE
+    // =========================
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,
@@ -82,6 +109,7 @@ export const loginUser = async (req, res) => {
 
     return res.status(200).json({
       message: "Login successful",
+
       user: {
         _id: user._id,
         name: user.name,
@@ -93,12 +121,14 @@ export const loginUser = async (req, res) => {
     console.error("Login error:", err);
 
     return res.status(500).json({
-       message: "Server error",
+      message: "Server error",
     });
   }
 };
 
+// =========================
 // LOGOUT
+// =========================
 export const logout = (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
@@ -112,7 +142,9 @@ export const logout = (req, res) => {
   });
 };
 
+// =========================
 // GET CURRENT USER
+// =========================
 export const getCurrentUser = async (req, res) => {
   try {
     const user = await authModel
@@ -129,7 +161,10 @@ export const getCurrentUser = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.error("Get current user error:", error);
+    console.error(
+      "Get current user error:",
+      error
+    );
 
     return res.status(500).json({
       message: "Server error",
@@ -137,9 +172,9 @@ export const getCurrentUser = async (req, res) => {
   }
 };
 
-
-
+// =========================
 // GOOGLE LOGIN
+// =========================
 export const googleLogin = async (req, res) => {
   try {
     const { name, email } = req.body;
@@ -152,38 +187,48 @@ export const googleLogin = async (req, res) => {
 
     const normalizedEmail = email.toLowerCase();
 
-    // Check whether this Google user already exists
+    // =========================
+    // FIND USER
+    // =========================
     let user = await authModel.findOne({
       email: normalizedEmail,
     });
 
-    // Create account if user doesn't exist
+    // =========================
+    // CREATE GOOGLE USER
+    // =========================
     if (!user) {
       user = await authModel.create({
         name,
         email: normalizedEmail,
 
-        // Google users don't have a normal password
+        // Google users don't have
+        // a normal password
         password: await bcrypt.hash(
           `google-${Date.now()}-${Math.random()}`,
           10
         ),
 
+        // GOOGLE USERS ARE ALWAYS USERS
         role: "user",
       });
     }
 
-    // Create YOUR application's JWT
+    // =========================
+    // JWT
+    // =========================
     const token = jwt.sign(
       {
         id: user._id,
         email: user.email,
+        role: user.role,
       },
       process.env.JWT_SECRET
     );
 
-    // Store YOUR JWT in the same cookie
-    // used by normal login
+    // =========================
+    // COOKIE
+    // =========================
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,
@@ -192,6 +237,7 @@ export const googleLogin = async (req, res) => {
 
     return res.status(200).json({
       message: "Google login successful",
+
       user: {
         _id: user._id,
         name: user.name,
@@ -200,7 +246,10 @@ export const googleLogin = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Google login error:", error);
+    console.error(
+      "Google login error:",
+      error
+    );
 
     return res.status(500).json({
       message: "Google login failed",

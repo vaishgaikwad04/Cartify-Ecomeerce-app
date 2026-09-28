@@ -11,6 +11,7 @@ import { categoryData } from "../../api/user/ProductApi";
 export const useSale = () => {
    //navigation
   const navigate = useNavigate();
+    const [openProductModel, setOpenProductModel] = useState(null);
 
   //theme
   const { theme } = useContext(ThemeContext);
@@ -22,7 +23,7 @@ export const useSale = () => {
   //function to fetch category Data
   useEffect(() => {
     const load = async () => {
-      const res = await categoryData("beauty");
+      const res = await categoryData("body-care");
       setCategories(res.data.data);
     };
     load();
@@ -33,5 +34,7 @@ export const useSale = () => {
     isDark,
     navigate,
     categories,
+      openProductModel,
+      setOpenProductModel
   };
 };

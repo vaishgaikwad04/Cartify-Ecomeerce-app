@@ -3,11 +3,11 @@ import { IoIosAdd } from "react-icons/io";
 import { VscDash } from "react-icons/vsc";
 import Checkbox from "./CheckBox";
 
-const Filter = ({ title, options = [] }) => {
+const Filter = ({ title, options = []}) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div>
+    <div className="mb-6">
       <button
         className="flex justify-between items-center w-full font-medium mb-4"
         onClick={() => setOpen(!open)}

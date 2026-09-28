@@ -7,7 +7,7 @@ import ImageCard from "../../../components/ui/ImageCard";
 const banners = [
   {
     image:
-      "https://shopjonesandco.com/cdn/shop/files/166N02D_EASTON-JACKET_DARK-WASH_043.png?v=1789410585&width=3000",
+      "https://mafoil.wpbingosite.com/wp-content/uploads/2023/02/banner-54-1.jpg",
     title: "Clothing",
     subtitle: "New Collection",
     route: "/body",
@@ -25,13 +25,13 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="w-full max-w-[1800px] mx-auto px-2 sm:px-3 lg:px-5">
+    <section className="w-full max-w-[1700px] mx-auto px-2 sm:px-3 lg:px-5 lg:mt-2">
       <div className="grid grid-cols-2">
         {banners.map((banner, index) => (
           <ImageCard
             key={index}
             image={banner.image}
-            className="aspect-[3/4] lg:aspect-[5/4]"
+            className="aspect-[3/4] lg:aspect-[4/4]"
           >
             <div
               className="
@@ -40,7 +40,7 @@ const HeroSection = () => {
             bottom-4
             sm:bottom-6
             md:bottom-8
-            lg:bottom-10
+            lg:bottom-48
             z-10
             flex
             flex-col
