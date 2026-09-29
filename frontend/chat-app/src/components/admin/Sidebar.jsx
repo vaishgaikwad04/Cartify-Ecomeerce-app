@@ -134,20 +134,12 @@ const Sidebar = () => {
           duration-300
           ease-in-out
 
-          ${
-            isSidebarOpen
-              ? "translate-x-0"
-              : "-translate-x-full"
-          }
+          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
 
           lg:static
           lg:translate-x-0
 
-          ${
-            isDark
-              ? "bg-gray-900 border-gray-700"
-              : "bg-white border-gray-200"
-          }
+          ${isDark ? "bg-gray-900 border-gray-700" : "bg-white border-gray-200"}
         `}
       >
         {/* =====================================================
@@ -182,28 +174,18 @@ const Sidebar = () => {
             py-6
             border-b
 
-            ${
-              isDark
-                ? "border-gray-700"
-                : "border-gray-100"
-            }
+            ${isDark ? "border-gray-700" : "border-gray-100"}
           `}
         >
-          <Link
-            to="/"
-            onClick={closeSidebar}
-          >
+          <Link to="
+          " onClick={closeSidebar}>
             <h1
               className={`
                 text-2xl
                 font-bold
                 tracking-tight
 
-                ${
-                  isDark
-                    ? "text-white"
-                    : "text-gray-900"
-                }
+                ${isDark ? "text-white" : "text-gray-900"}
               `}
             >
               Ecommerce
@@ -214,11 +196,7 @@ const Sidebar = () => {
                 text-sm
                 mt-1
 
-                ${
-                  isDark
-                    ? "text-gray-400"
-                    : "text-gray-500"
-                }
+                ${isDark ? "text-gray-400" : "text-gray-500"}
               `}
             >
               Inventory Management
@@ -230,7 +208,6 @@ const Sidebar = () => {
             MENU
         ===================================================== */}
         <nav className="flex-1 px-4 py-6 overflow-y-auto">
-
           {/* ================= MANAGEMENT ================= */}
           <p
             className={`
@@ -242,24 +219,15 @@ const Sidebar = () => {
               uppercase
               tracking-wider
 
-              ${
-                isDark
-                  ? "text-gray-500"
-                  : "text-gray-400"
-              }
+              ${isDark ? "text-gray-500" : "text-gray-400"}
             `}
           >
             Management
           </p>
 
           <div className="space-y-2">
-
             {/* Dashboard */}
-            <NavLink
-              to="/admin"
-              className={navStyle}
-              onClick={closeSidebar}
-            >
+            <NavLink to="/admin" className={navStyle} onClick={closeSidebar}>
               <MdDashboard size={18} />
               <span>Dashboard</span>
             </NavLink>
@@ -323,7 +291,6 @@ const Sidebar = () => {
               <FiShoppingCart size={18} />
               <span>Orders</span>
             </NavLink>
-
           </div>
 
           {/* ================= ACCOUNT ================= */}
@@ -338,18 +305,13 @@ const Sidebar = () => {
               uppercase
               tracking-wider
 
-              ${
-                isDark
-                  ? "text-gray-500"
-                  : "text-gray-400"
-              }
+              ${isDark ? "text-gray-500" : "text-gray-400"}
             `}
           >
             Account
           </p>
 
           <div className="space-y-2">
-
             {/* Settings */}
             <NavLink
               to="/admin/settings"
@@ -359,7 +321,6 @@ const Sidebar = () => {
               <FiSettings size={18} />
               <span>Settings</span>
             </NavLink>
-
           </div>
         </nav>
 
@@ -371,11 +332,7 @@ const Sidebar = () => {
             p-4
             border-t
 
-            ${
-              isDark
-                ? "border-gray-700"
-                : "border-gray-100"
-            }
+            ${isDark ? "border-gray-700" : "border-gray-100"}
           `}
         >
           <div
@@ -387,11 +344,7 @@ const Sidebar = () => {
               p-3
               rounded-xl
 
-              ${
-                isDark
-                  ? "bg-gray-800"
-                  : "bg-gray-50"
-              }
+              ${isDark ? "bg-gray-800" : "bg-gray-50"}
             `}
           >
             {/* Avatar */}
@@ -414,9 +367,7 @@ const Sidebar = () => {
                 flex-shrink-0
               "
             >
-              {profileData?.name
-                ?.charAt(0)
-                .toUpperCase()}
+              {profileData?.name?.charAt(0).toUpperCase()}
             </div>
 
             {/* User Information */}
@@ -427,11 +378,7 @@ const Sidebar = () => {
                   font-semibold
                   truncate
 
-                  ${
-                    isDark
-                      ? "text-white"
-                      : "text-gray-800"
-                  }
+                  ${isDark ? "text-white" : "text-gray-800"}
                 `}
               >
                 {profileData?.name}
@@ -441,11 +388,7 @@ const Sidebar = () => {
                 className={`
                   text-xs
 
-                  ${
-                    isDark
-                      ? "text-gray-400"
-                      : "text-gray-500"
-                  }
+                  ${isDark ? "text-gray-400" : "text-gray-500"}
                 `}
               >
                 Administrator

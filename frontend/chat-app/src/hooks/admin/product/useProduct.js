@@ -25,6 +25,7 @@ export const useProduct = () => {
   const [selectedProductId, setSelectedProductId] = useState(null);
   //state to open view model
   const [openViewModel, setOpenViewModel] = useState(false)
+  const [isOpenConfirmDeleteModel, setIsOpenConfirmDeleteModel] = useState(false)
 
   
   //theme
@@ -144,6 +145,7 @@ const handleViewProduct = (id) => {
   setOpenCreateProductFormModal,
   openViewModel,
   setOpenViewModel,
+  isOpenConfirmDeleteModel, setIsOpenConfirmDeleteModel,
   //state for store selected product id
   selectedProductId,
   setSelectedProductId,

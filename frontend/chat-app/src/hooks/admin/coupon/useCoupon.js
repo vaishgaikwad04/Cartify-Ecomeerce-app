@@ -17,6 +17,8 @@ export const useCoupon = () => {
   const [discountType, setDiscountType] = useState("");
   const [status, setStatus] = useState("all");
   const [viewModelOpen, setViewModelOpen] = useState(false);
+  const [isOpenConfirmDeleteModel, setIsOpenConfirmDeleteModel] =
+  useState(false);
 
   const fetchCoupons = async () => {
     try {
@@ -122,6 +124,8 @@ export const useCoupon = () => {
     handleViewCoupon,
     setViewModelOpen,
     viewModelOpen,
+    isOpenConfirmDeleteModel,
+setIsOpenConfirmDeleteModel,
     // Theme
     theme,
     isDark,

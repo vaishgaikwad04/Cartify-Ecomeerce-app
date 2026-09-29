@@ -10,6 +10,7 @@ import { useDashboard } from "../../../hooks/admin/dashboard/useDashboard";
 
 import AdminPanelCard from "../../../components/ui/AdminPanelCard";
 import Table from "../../../components/ui/Table";
+import RevenueChart from "./RevenueChart";
 
 const Dashboard = () => {
   const {
@@ -425,34 +426,10 @@ const Dashboard = () => {
         />
       </div>
 
-      {/*RECENT ORDERS*/}
-      <div className="mt-8">
-        <div className="mb-4">
-          <h2
-            className={`
-              text-lg
-              font-semibold
-
-              ${isDark ? "text-white" : "text-gray-900"}
-            `}
-          >
-            Recent Orders
-          </h2>
-
-          <p
-            className={`
-              mt-1
-              text-sm
-
-              ${isDark ? "text-gray-400" : "text-gray-500"}
-            `}
-          >
-            Latest orders placed by customers.
-          </p>
-        </div>
-
-        <Table columns={orderColumns} data={recentOrders} />
-      </div>
+    <div className="mt-6">
+      <RevenueChart/>
+    </div>
+      
     </div>
   );
 };

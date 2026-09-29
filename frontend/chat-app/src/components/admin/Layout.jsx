@@ -19,26 +19,26 @@ const Layout = () => {
         ${isDark ? "bg-gray-900" : "bg-slate-50"}
       `}
     >
+      {/* SIDEBAR */}
       <Sidebar />
 
-      {/* MAIN AREA */}
-      <div className="flex min-w-0 flex-1 flex-col">
-        <Header />
+    <div className="flex min-w-0 min-h-0 flex-1 flex-col overflow-hidden">
+  <Header />
 
-        <main
-          className={`
-            min-w-0
-            flex-1
-            overflow-y-auto
-            p-3
-            sm:p-4
-            lg:p-6
-            ${isDark ? "bg-gray-900" : "bg-slate-50"}
-          `}
-        >
-          <Outlet />
-        </main>
-      </div>
+  <main
+    className={`
+      min-w-0
+      min-h-0
+      flex-1
+      overflow-y-hidden
+      overflow-x-hidden
+      p-3 sm:p-4 lg:p-6
+      ${isDark ? "bg-gray-900" : "bg-slate-50"}
+    `}
+  >
+    <Outlet />
+  </main>
+</div>
     </div>
   );
 };

@@ -195,7 +195,7 @@ const Order = () => {
           duration-300
         `}
       >
-        <div className="mx-auto w-full max-w-[1200px] animate-pulse">
+        <div className="mx-auto  max-w-[1700px]  px-12 animate-pulse">
 
           {/* HEADER SKELETON */}
 
@@ -296,7 +296,7 @@ const Order = () => {
         duration-300
       `}
     >
-      <div className="mx-auto w-full max-w-[1200px]">
+      <div className="mx-auto w-full max-w-[1700px] px-6">
 
         {/* =================================================
             PAGE HEADER

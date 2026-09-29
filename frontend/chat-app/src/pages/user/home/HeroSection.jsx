@@ -10,7 +10,7 @@ const banners = [
       "https://mafoil.wpbingosite.com/wp-content/uploads/2023/02/banner-54-1.jpg",
     title: "Clothing",
     subtitle: "New Collection",
-    route: "/body",
+    route: "/new-in-body",
   },
   {
     image:

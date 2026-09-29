@@ -13,6 +13,7 @@ export const useCategory = () => {
   // PRODUCTS
   // =========================
   const [products, setProducts] = useState([]);
+ 
 
   // =========================
   // LOADING
@@ -134,6 +135,7 @@ export const useCategory = () => {
     setStockFilter,
     priceFilter,
     setPriceFilter,
+   
 
     // Products
     filteredData,

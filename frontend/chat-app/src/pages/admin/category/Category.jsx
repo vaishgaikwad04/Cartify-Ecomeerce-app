@@ -27,6 +27,9 @@ const Category = () => {
     openCreateCategoryFormModal,
     setOpenCreateCategoryFormModal,
 
+    isOpenConfirmDeleteModel,
+    setIsOpenConfirmDeleteModel,
+
     // Selected category
     selectedCategoryId,
     setSelectedCategoryId,
@@ -126,7 +129,10 @@ const Category = () => {
           row={row}
           onView={handleViewCategory}
           onEdit={handleUpdateCategory}
-          onDelete={handleDeleteCategory}
+          onDelete={(id) => {
+            setSelectedCategoryId(id);
+            setIsOpenConfirmDeleteModel(true);
+          }}
         />
       ),
     },
@@ -358,61 +364,102 @@ const Category = () => {
           title="Category Details"
         >
           {viewCategory ? (
-            <div className="space-y-5">
-              {/* CATEGORY HEADER */}
+            <div
+              className={`
+          space-y-7
+          ${isDark ? "text-white" : "text-gray-900"}
+        `}
+            >
+              {/* =====================================================
+            CATEGORY INTRO
+        ====================================================== */}
               <div
                 className={`
-            flex items-center gap-4
-            rounded-xl border p-4
-            ${
-              isDark
-                ? "border-gray-700 bg-gray-800"
-                : "border-gray-200 bg-gray-50"
-            }
+            border-b pb-6
+            ${isDark ? "border-gray-800" : "border-gray-200"}
           `}
               >
-                {/* Avatar */}
-                <div
-                  className={`
-              flex h-14 w-14 shrink-0
-              items-center justify-center
-              rounded-xl
-              text-xl font-semibold uppercase
-              ${isDark ? "bg-white text-gray-900" : "bg-gray-900 text-white"}
-            `}
-                >
-                  {viewCategory?.name?.charAt(0) || "C"}
-                </div>
+                <div className="flex items-start justify-between gap-4">
+                  <div className="min-w-0">
+                    {/* Small editorial label */}
+                    <p
+                      className={`
+                  mb-2 text-[10px] font-medium uppercase
+                  tracking-[0.25em]
+                  ${isDark ? "text-gray-500" : "text-gray-400"}
+                `}
+                    >
+                      Collection Category
+                    </p>
 
-                <div className="min-w-0">
-                  <h3
-                    className={`
-                truncate text-lg font-semibold
-                ${isDark ? "text-white" : "text-gray-900"}
-              `}
-                  >
-                    {viewCategory?.name || "-"}
-                  </h3>
+                    {/* Category Name */}
+                    <h2
+                      className={`
+                  truncate text-2xl font-medium tracking-tight
+                  ${isDark ? "text-white" : "text-gray-950"}
+                `}
+                    >
+                      {viewCategory?.name || "-"}
+                    </h2>
 
-                  <p
-                    className={`
-                text-sm
-                ${isDark ? "text-gray-400" : "text-gray-500"}
-              `}
-                  >
-                    Category
-                  </p>
+                    {/* Slug */}
+                    <p
+                      className={`
+                  mt-2 text-xs
+                  ${isDark ? "text-gray-500" : "text-gray-400"}
+                `}
+                    >
+                      /{viewCategory?.slug || "-"}
+                    </p>
+                  </div>
+
+                  {/* Status */}
+                  <div className="shrink-0 pt-1">
+                    <span
+                      className={`
+                  inline-flex items-center gap-2
+                  text-[10px] font-medium uppercase
+                  tracking-[0.16em]
+                  ${
+                    viewCategory?.status
+                      ? isDark
+                        ? "text-gray-300"
+                        : "text-gray-700"
+                      : isDark
+                        ? "text-gray-500"
+                        : "text-gray-400"
+                  }
+                `}
+                    >
+                      <span
+                        className={`
+                    h-1.5 w-1.5 rounded-full
+                    ${viewCategory?.status ? "bg-green-500" : "bg-gray-400"}
+                  `}
+                      />
+
+                      {viewCategory?.status ? "Active" : "Inactive"}
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              {/* DETAILS */}
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {/* NAME */}
+              {/* =====================================================
+            CATEGORY INFORMATION
+        ====================================================== */}
+              <div
+                className={`
+            grid grid-cols-1 gap-6
+            sm:grid-cols-2
+          `}
+              >
+                {/* CATEGORY NAME */}
                 <div>
                   <p
                     className={`
-                mb-1 text-xs font-medium uppercase
-                ${isDark ? "text-gray-400" : "text-gray-500"}
+                mb-2 text-[10px] font-medium uppercase
+                tracking-[0.18em]
+                ${isDark ? "text-gray-500" : "text-gray-400"}
               `}
                   >
                     Category Name
@@ -420,7 +467,7 @@ const Category = () => {
 
                   <p
                     className={`
-                text-sm font-medium
+                text-sm
                 ${isDark ? "text-gray-200" : "text-gray-800"}
               `}
                   >
@@ -432,8 +479,9 @@ const Category = () => {
                 <div>
                   <p
                     className={`
-                mb-1 text-xs font-medium uppercase
-                ${isDark ? "text-gray-400" : "text-gray-500"}
+                mb-2 text-[10px] font-medium uppercase
+                tracking-[0.18em]
+                ${isDark ? "text-gray-500" : "text-gray-400"}
               `}
                   >
                     Slug
@@ -441,11 +489,11 @@ const Category = () => {
 
                   <p
                     className={`
-                text-sm font-medium
-                ${isDark ? "text-gray-200" : "text-gray-800"}
+                break-all text-sm
+                ${isDark ? "text-gray-300" : "text-gray-700"}
               `}
                   >
-                    {viewCategory?.slug || "-"}
+                    /{viewCategory?.slug || "-"}
                   </p>
                 </div>
 
@@ -453,38 +501,39 @@ const Category = () => {
                 <div>
                   <p
                     className={`
-                mb-1 text-xs font-medium uppercase
-                ${isDark ? "text-gray-400" : "text-gray-500"}
+                mb-2 text-[10px] font-medium uppercase
+                tracking-[0.18em]
+                ${isDark ? "text-gray-500" : "text-gray-400"}
               `}
                   >
                     Status
                   </p>
 
-                  <span
+                  <p
                     className={`
-                inline-flex rounded-full px-3 py-1
-                text-xs font-medium
+                text-sm
                 ${
                   viewCategory?.status
                     ? isDark
-                      ? "bg-green-900/40 text-green-400"
-                      : "bg-green-100 text-green-700"
+                      ? "text-gray-200"
+                      : "text-gray-800"
                     : isDark
-                      ? "bg-red-900/40 text-red-400"
-                      : "bg-red-100 text-red-700"
+                      ? "text-gray-500"
+                      : "text-gray-400"
                 }
               `}
                   >
                     {viewCategory?.status ? "Active" : "Inactive"}
-                  </span>
+                  </p>
                 </div>
 
                 {/* CREATED DATE */}
                 <div>
                   <p
                     className={`
-                mb-1 text-xs font-medium uppercase
-                ${isDark ? "text-gray-400" : "text-gray-500"}
+                mb-2 text-[10px] font-medium uppercase
+                tracking-[0.18em]
+                ${isDark ? "text-gray-500" : "text-gray-400"}
               `}
                   >
                     Created At
@@ -492,49 +541,58 @@ const Category = () => {
 
                   <p
                     className={`
-                text-sm font-medium
-                ${isDark ? "text-gray-200" : "text-gray-800"}
+                text-sm
+                ${isDark ? "text-gray-300" : "text-gray-700"}
               `}
                   >
                     {viewCategory?.createdAt
-                      ? new Date(viewCategory.createdAt).toLocaleDateString()
+                      ? new Date(viewCategory.createdAt).toLocaleDateString(
+                          "en-GB",
+                          {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                          },
+                        )
                       : "-"}
                   </p>
                 </div>
               </div>
 
-              {/* DESCRIPTION */}
-              <div>
+              {/* =====================================================
+            DESCRIPTION
+        ====================================================== */}
+              <div
+                className={`
+            border-t pt-6
+            ${isDark ? "border-gray-800" : "border-gray-200"}
+          `}
+              >
                 <p
                   className={`
-              mb-2 text-xs font-medium uppercase
-              ${isDark ? "text-gray-400" : "text-gray-500"}
+              mb-3 text-[10px] font-medium uppercase
+              tracking-[0.2em]
+              ${isDark ? "text-gray-500" : "text-gray-400"}
             `}
                 >
-                  Description
+                  About This Category
                 </p>
 
-                <div
+                <p
                   className={`
-              rounded-lg border p-3
-              ${
-                isDark
-                  ? "border-gray-700 bg-gray-800 text-gray-300"
-                  : "border-gray-200 bg-gray-50 text-gray-700"
-              }
+              max-w-2xl text-sm leading-7
+              ${isDark ? "text-gray-300" : "text-gray-600"}
             `}
                 >
-                  <p className="text-sm leading-6">
-                    {viewCategory?.description || "No description available."}
-                  </p>
-                </div>
+                  {viewCategory?.description || "No description available."}
+                </p>
               </div>
             </div>
           ) : (
             <div
               className={`
-          py-8 text-center text-sm
-          ${isDark ? "text-gray-400" : "text-gray-500"}
+          py-10 text-center text-sm
+          ${isDark ? "text-gray-500" : "text-gray-400"}
         `}
             >
               Category details not available.
@@ -542,6 +600,59 @@ const Category = () => {
           )}
         </ViewModal>
       )}
+
+      <Modal
+        isOpen={isOpenConfirmDeleteModel}
+        onClose={() => {
+          setIsOpenConfirmDeleteModel(false);
+          setSelectedCategoryId(null);
+        }}
+      >
+        <div className="p-6 sm:p-7">
+          {/* TITLE */}
+          <div>
+            <h2
+              className={`text-lg font-semibold tracking-tight ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}
+            >
+              Delete category?
+            </h2>
+
+            <p
+              className={`mt-2 max-w-sm text-sm leading-6 ${
+                isDark ? "text-gray-400" : "text-gray-500"
+              }`}
+            >
+              This category will be permanently removed from your catalog. This
+              action cannot be undone.
+            </p>
+          </div>
+
+          {/* ACTIONS */}
+          <div className="mt-7 flex items-center justify-end gap-2">
+            <Button
+              label="Cancel"
+              variant={isDark ? "secondary" : "outline"}
+              onClick={() => {
+                setIsOpenConfirmDeleteModel(false);
+                setSelectedCategoryId(null);
+              }}
+            />
+
+            <Button
+              label="Delete"
+              variant="danger"
+              onClick={async () => {
+                await handleDeleteCategory(selectedCategoryId);
+
+                setIsOpenConfirmDeleteModel(false);
+                setSelectedCategoryId(null);
+              }}
+            />
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

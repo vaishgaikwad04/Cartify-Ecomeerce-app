@@ -57,6 +57,9 @@ export const registerUser = async (req, res) => {
 // =========================
 export const loginUser = async (req, res) => {
   try {
+    // =========================
+    // GET LOGIN DATA
+    // =========================
     const { email, password, role } = req.body;
 
     // =========================
@@ -68,11 +71,15 @@ export const loginUser = async (req, res) => {
       });
     }
 
+    // Normalize values
+    const normalizedEmail = email.trim().toLowerCase();
+    const selectedRole = role.trim().toLowerCase();
+
     // =========================
     // FIND USER
     // =========================
     const user = await authModel.findOne({
-      email: email.toLowerCase(),
+      email: normalizedEmail,
     });
 
     if (!user) {
@@ -82,7 +89,7 @@ export const loginUser = async (req, res) => {
     }
 
     // =========================
-    // PASSWORD
+    // PASSWORD CHECK
     // =========================
     const isMatch = await bcrypt.compare(
       password,
@@ -98,11 +105,30 @@ export const loginUser = async (req, res) => {
     // =========================
     // ROLE CHECK
     // =========================
-    if (user.role !== role) {
+
+    // Role stored in MongoDB
+    const accountRole = String(user.role)
+      .trim()
+      .toLowerCase();
+
+    console.log("========== LOGIN ROLE CHECK ==========");
+    console.log("Email:", normalizedEmail);
+    console.log("Selected role:", selectedRole);
+    console.log("Database role:", accountRole);
+    console.log("Role match:", accountRole === selectedRole);
+    console.log("======================================");
+
+    // IMPORTANT:
+    // Do NOT create JWT if roles don't match
+    if (accountRole !== selectedRole) {
+      console.log("❌ ROLE MISMATCH - LOGIN REJECTED");
+
       return res.status(403).json({
-        message: "Selected role does not match your account",
+        message: `This account is registered as ${accountRole}`,
       });
     }
+
+    console.log("✅ ROLE MATCH - LOGIN ALLOWED");
 
     // =========================
     // JWT
@@ -111,7 +137,7 @@ export const loginUser = async (req, res) => {
       {
         id: user._id,
         email: user.email,
-        role: user.role,
+        role: accountRole,
       },
       process.env.JWT_SECRET
     );
@@ -126,7 +152,7 @@ export const loginUser = async (req, res) => {
     });
 
     // =========================
-    // RESPONSE
+    // SUCCESS RESPONSE
     // =========================
     return res.status(200).json({
       message: "Login successful",
@@ -135,7 +161,7 @@ export const loginUser = async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        role: user.role,
+        role: accountRole,
       },
     });
   } catch (err) {

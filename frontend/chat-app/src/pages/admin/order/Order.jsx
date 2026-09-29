@@ -472,8 +472,9 @@ const Order = () => {
             />
           </div>
         </div>
+      </div>
 
-        {/* STATISTICS */}
+       {/* STATISTICS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 mb-6">
           <AdminPanelCard title="Total Orders" value={orderData.length} />
 
@@ -505,7 +506,6 @@ const Order = () => {
             }
           />
         </div>
-      </div>
 
       {/*model*/}
       <Modal isOpen={showManageModal} onClose={() => setShowManageModal(false)}>

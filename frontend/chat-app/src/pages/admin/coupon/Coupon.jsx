@@ -27,6 +27,10 @@ const Coupon = () => {
     selectedCoupon,
     setSelectedCoupon,
     setSelectedCouponId,
+    selectedCouponId,
+
+    isOpenConfirmDeleteModel,
+    setIsOpenConfirmDeleteModel,
 
     // Filters
     discountType,
@@ -135,7 +139,10 @@ const Coupon = () => {
           row={row}
           onView={() => handleViewCoupon(row._id)}
           onEdit={handleEditCoupon}
-          onDelete={handleDeleteCoupon}
+          onDelete={(id) => {
+            setSelectedCouponId(id);
+            setIsOpenConfirmDeleteModel(true);
+          }}
         />
       ),
     },
@@ -293,221 +300,272 @@ const Coupon = () => {
           onClose={() => setViewModelOpen(false)}
           title="Coupon Details"
         >
-          {viewCoupon && (
-            <div className="space-y-6">
-              {/* Coupon Header */}
-              <div
-                className={`rounded-xl border p-5 ${
-                  isDark
-                    ? "border-gray-700 bg-gray-800"
-                    : "border-gray-200 bg-gray-50"
-                }`}
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-4">
-                    <div>
-                      <p
-                        className={`text-xs font-medium uppercase tracking-wider ${
-                          isDark ? "text-gray-400" : "text-gray-500"
-                        }`}
-                      >
-                        Coupon Code
-                      </p>
+         {viewCoupon && (
+  <div className="space-y-6">
 
-                      <h2
-                        className={`mt-1 text-xl font-bold tracking-wide ${
-                          isDark ? "text-white" : "text-gray-900"
-                        }`}
-                      >
-                        {viewCoupon.code}
-                      </h2>
-                    </div>
-                  </div>
+    {/* Coupon Header */}
+    <div
+      className={`rounded-xl border p-5 ${
+        isDark
+          ? "border-gray-700 bg-gray-800"
+          : "border-gray-200 bg-gray-50"
+      }`}
+    >
+      <div className="flex items-center justify-between gap-4">
+        <div>
+          <p
+            className={`text-xs font-medium uppercase tracking-wider ${
+              isDark ? "text-gray-400" : "text-gray-500"
+            }`}
+          >
+            Coupon Code
+          </p>
 
-                  {/* Status */}
-                  <span
-                    className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
-                      selectedCoupon.isActive
-                        ? isDark
-                          ? "bg-green-900/40 text-green-400"
-                          : "bg-green-100 text-green-700"
-                        : isDark
-                          ? "bg-red-900/40 text-red-400"
-                          : "bg-red-100 text-red-700"
-                    }`}
-                  >
-                    {selectedCoupon.isActive ? "Active" : "Inactive"}
-                  </span>
-                </div>
-              </div>
+          <h2
+            className={`mt-1 text-xl font-bold tracking-wide ${
+              isDark ? "text-white" : "text-gray-900"
+            }`}
+          >
+            {viewCoupon.code}
+          </h2>
+        </div>
 
-              {/* Discount Highlight */}
-              <div
-                className={`rounded-xl border p-5 ${
-                  isDark
-                    ? "border-gray-700 bg-gray-800"
-                    : "border-gray-200 bg-white"
-                }`}
-              >
-                <p
-                  className={`text-sm ${
-                    isDark ? "text-gray-400" : "text-gray-500"
-                  }`}
-                >
-                  Discount Offer
-                </p>
+        {/* Status */}
+        <span
+          className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
+            viewCoupon.isActive
+              ? isDark
+                ? "bg-green-900/40 text-green-400"
+                : "bg-green-100 text-green-700"
+              : isDark
+                ? "bg-red-900/40 text-red-400"
+                : "bg-red-100 text-red-700"
+          }`}
+        >
+          {viewCoupon.isActive ? "Active" : "Inactive"}
+        </span>
+      </div>
+    </div>
 
-                <div className="mt-2 flex items-end gap-2">
-                  <span
-                    className={`text-3xl font-bold ${
-                      isDark ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    {selectedCoupon.discountType === "percentage"
-                      ? `${selectedCoupon.discount}%`
-                      : `₹${selectedCoupon.discount}`}
-                  </span>
+    {/* Discount Highlight */}
+    <div
+      className={`rounded-xl border p-5 ${
+        isDark
+          ? "border-gray-700 bg-gray-800"
+          : "border-gray-200 bg-white"
+      }`}
+    >
+      <p
+        className={`text-sm ${
+          isDark ? "text-gray-400" : "text-gray-500"
+        }`}
+      >
+        Discount Offer
+      </p>
 
-                  <span
-                    className={`mb-1 text-sm ${
-                      isDark ? "text-gray-400" : "text-gray-500"
-                    }`}
-                  >
-                    {selectedCoupon.discountType === "percentage"
-                      ? "OFF"
-                      : "discount"}
-                  </span>
-                </div>
+      <div className="mt-2 flex items-end gap-2">
+        <span
+          className={`text-3xl font-bold ${
+            isDark ? "text-white" : "text-gray-900"
+          }`}
+        >
+          {viewCoupon.discountType === "percentage"
+            ? `${viewCoupon.discount}%`
+            : `₹${viewCoupon.discount}`}
+        </span>
 
-                <span
-                  className={`mt-3 inline-block rounded-md px-2.5 py-1 text-xs font-medium ${
-                    isDark
-                      ? "bg-gray-700 text-gray-300"
-                      : "bg-gray-100 text-gray-600"
-                  }`}
-                >
-                  {selectedCoupon.discountType === "percentage"
-                    ? "Percentage Discount"
-                    : "Fixed Amount Discount"}
-                </span>
-              </div>
+        <span
+          className={`mb-1 text-sm ${
+            isDark ? "text-gray-400" : "text-gray-500"
+          }`}
+        >
+          {viewCoupon.discountType === "percentage"
+            ? "OFF"
+            : "discount"}
+        </span>
+      </div>
 
-              {/* Coupon Information */}
-              <div>
-                <h3
-                  className={`mb-3 text-sm font-semibold ${
-                    isDark ? "text-gray-200" : "text-gray-800"
-                  }`}
-                >
-                  Coupon Information
-                </h3>
+      <span
+        className={`mt-3 inline-block rounded-md px-2.5 py-1 text-xs font-medium ${
+          isDark
+            ? "bg-gray-700 text-gray-300"
+            : "bg-gray-100 text-gray-600"
+        }`}
+      >
+        {viewCoupon.discountType === "percentage"
+          ? "Percentage Discount"
+          : "Fixed Amount Discount"}
+      </span>
+    </div>
 
-                <div
-                  className={`overflow-hidden rounded-xl border ${
-                    isDark ? "border-gray-700" : "border-gray-200"
-                  }`}
-                >
-                  {/* Minimum Order */}
-                  <div
-                    className={`flex items-center justify-between px-4 py-4 ${
-                      isDark
-                        ? "border-b border-gray-700"
-                        : "border-b border-gray-100"
-                    }`}
-                  >
-                    <span
-                      className={`text-sm ${
-                        isDark ? "text-gray-400" : "text-gray-500"
-                      }`}
-                    >
-                      Minimum Order Amount
-                    </span>
+    {/* Coupon Information */}
+    <div>
+      <h3
+        className={`mb-3 text-sm font-semibold ${
+          isDark ? "text-gray-200" : "text-gray-800"
+        }`}
+      >
+        Coupon Information
+      </h3>
 
-                    <span
-                      className={`text-sm font-semibold ${
-                        isDark ? "text-white" : "text-gray-900"
-                      }`}
-                    >
-                      ₹{selectedCoupon.minOrderAmount ?? 0}
-                    </span>
-                  </div>
+      <div
+        className={`overflow-hidden rounded-xl border ${
+          isDark ? "border-gray-700" : "border-gray-200"
+        }`}
+      >
+        {/* Minimum Order */}
+        <div
+          className={`flex items-center justify-between px-4 py-4 ${
+            isDark
+              ? "border-b border-gray-700"
+              : "border-b border-gray-100"
+          }`}
+        >
+          <span
+            className={`text-sm ${
+              isDark ? "text-gray-400" : "text-gray-500"
+            }`}
+          >
+            Minimum Order Amount
+          </span>
 
-                  {/* Expiry */}
-                  <div
-                    className={`flex items-center justify-between px-4 py-4 ${
-                      isDark
-                        ? "border-b border-gray-700"
-                        : "border-b border-gray-100"
-                    }`}
-                  >
-                    <span
-                      className={`text-sm ${
-                        isDark ? "text-gray-400" : "text-gray-500"
-                      }`}
-                    >
-                      Expiry Date
-                    </span>
+          <span
+            className={`text-sm font-semibold ${
+              isDark ? "text-white" : "text-gray-900"
+            }`}
+          >
+            ₹{viewCoupon.minOrderAmount ?? 0}
+          </span>
+        </div>
 
-                    <span
-                      className={`text-sm font-semibold ${
-                        isDark ? "text-white" : "text-gray-900"
-                      }`}
-                    >
-                      {selectedCoupon.expiryDate
-                        ? new Date(
-                            selectedCoupon.expiryDate,
-                          ).toLocaleDateString()
-                        : "-"}
-                    </span>
-                  </div>
+        {/* Expiry */}
+        <div
+          className={`flex items-center justify-between px-4 py-4 ${
+            isDark
+              ? "border-b border-gray-700"
+              : "border-b border-gray-100"
+          }`}
+        >
+          <span
+            className={`text-sm ${
+              isDark ? "text-gray-400" : "text-gray-500"
+            }`}
+          >
+            Expiry Date
+          </span>
 
-                  {/* Created */}
-                  <div className="flex items-center justify-between px-4 py-4">
-                    <span
-                      className={`text-sm ${
-                        isDark ? "text-gray-400" : "text-gray-500"
-                      }`}
-                    >
-                      Created Date
-                    </span>
+          <span
+            className={`text-sm font-semibold ${
+              isDark ? "text-white" : "text-gray-900"
+            }`}
+          >
+            {viewCoupon.expiryDate
+              ? new Date(viewCoupon.expiryDate).toLocaleDateString()
+              : "-"}
+          </span>
+        </div>
 
-                    <span
-                      className={`text-sm font-semibold ${
-                        isDark ? "text-white" : "text-gray-900"
-                      }`}
-                    >
-                      {selectedCoupon.createdAt
-                        ? new Date(
-                            selectedCoupon.createdAt,
-                          ).toLocaleDateString()
-                        : "-"}
-                    </span>
-                  </div>
-                </div>
-              </div>
+        {/* Created */}
+        <div className="flex items-center justify-between px-4 py-4">
+          <span
+            className={`text-sm ${
+              isDark ? "text-gray-400" : "text-gray-500"
+            }`}
+          >
+            Created Date
+          </span>
 
-              {/* Coupon Summary */}
-              <div
-                className={`rounded-xl px-4 py-3 text-sm ${
-                  isDark
-                    ? "bg-gray-800 text-gray-400"
-                    : "bg-gray-50 text-gray-500"
-                }`}
-              >
-                This coupon is currently{" "}
-                <span
-                  className={`font-semibold ${
-                    selectedCoupon.isActive ? "text-green-600" : "text-red-600"
-                  }`}
-                >
-                  {selectedCoupon.isActive ? "active" : "inactive"}
-                </span>{" "}
-                and can be managed from the coupon actions menu.
-              </div>
-            </div>
-          )}
+          <span
+            className={`text-sm font-semibold ${
+              isDark ? "text-white" : "text-gray-900"
+            }`}
+          >
+            {viewCoupon.createdAt
+              ? new Date(viewCoupon.createdAt).toLocaleDateString()
+              : "-"}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    {/* Coupon Summary */}
+    <div
+      className={`rounded-xl px-4 py-3 text-sm ${
+        isDark
+          ? "bg-gray-800 text-gray-400"
+          : "bg-gray-50 text-gray-500"
+      }`}
+    >
+      This coupon is currently{" "}
+      <span
+        className={`font-semibold ${
+          viewCoupon.isActive
+            ? "text-green-600"
+            : "text-red-600"
+        }`}
+      >
+        {viewCoupon.isActive ? "active" : "inactive"}
+      </span>{" "}
+      and can be managed from the coupon actions menu.
+    </div>
+
+  </div>
+)}
         </ViewModel>
       )}
+
+      <Modal
+        isOpen={isOpenConfirmDeleteModel}
+        onClose={() => {
+          setIsOpenConfirmDeleteModel(false);
+          setSelectedCouponId(null);
+        }}
+      >
+        <div className="p-6 sm:p-7">
+          {/* TITLE */}
+          <div>
+            <h2
+              className={`text-lg font-semibold tracking-tight ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}
+            >
+              Delete coupon?
+            </h2>
+
+            <p
+              className={`mt-2 max-w-sm text-sm leading-6 ${
+                isDark ? "text-gray-400" : "text-gray-500"
+              }`}
+            >
+              This coupon will be permanently removed from your catalog. This
+              action cannot be undone.
+            </p>
+          </div>
+
+          {/* ACTIONS */}
+          <div className="mt-7 flex items-center justify-end gap-2">
+            <Button
+              label="Cancel"
+              variant={isDark ? "secondary" : "outline"}
+              onClick={() => {
+                setIsOpenConfirmDeleteModel(false);
+                setSelectedCouponId(null);
+              }}
+            />
+
+            <Button
+              label="Delete"
+              variant="danger"
+              onClick={async () => {
+                await handleDeleteCoupon(selectedCouponId);
+
+                setIsOpenConfirmDeleteModel(false);
+                setSelectedCouponId(null);
+              }}
+            />
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

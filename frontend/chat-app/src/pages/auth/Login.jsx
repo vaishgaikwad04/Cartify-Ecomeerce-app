@@ -161,6 +161,7 @@ const Login = ({ isLogin, setIsLogin }) => {
             value={formData.email}
             handleChange={handleChange}
             label="Email"
+            placeholder='admin@cartify.com'
           />
 
           {/* Password */}
@@ -170,6 +171,7 @@ const Login = ({ isLogin, setIsLogin }) => {
             value={formData.password}
             handleChange={handleChange}
             label="Password"
+            placeholder='cartify'
           />
 
           {/* Role */}
@@ -179,6 +181,7 @@ const Login = ({ isLogin, setIsLogin }) => {
             value={formData.role}
             onChange={handleChange}
             options={roleOptions}
+        
           />
 
           {/* LOGIN BUTTON */}

@@ -57,7 +57,7 @@ const FashionPromo = () => {
             className="
         aspect-[2/4] lg:aspect-[5/4]
         w-full
-        rounded
+        rounded 
       "
           >
             {/* PLUS BUTTON */}

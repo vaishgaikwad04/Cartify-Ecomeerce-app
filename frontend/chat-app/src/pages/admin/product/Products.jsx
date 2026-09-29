@@ -39,6 +39,8 @@ const FetchProducts = () => {
     setOpenCreateProductFormModal,
     openViewModel,
     setOpenViewModel,
+    isOpenConfirmDeleteModel,
+    setIsOpenConfirmDeleteModel,
     //state for store selected product id
     selectedProductId,
     setSelectedProductId,
@@ -189,14 +191,17 @@ const FetchProducts = () => {
           row={row}
           onView={handleViewProduct}
           onEdit={handleUpdateProduct}
-          onDelete={handleDeleteProduct}
+          onDelete={() => {
+            setSelectedProductId(row._id);
+            setIsOpenConfirmDeleteModel(true);
+          }}
         />
       ),
     },
   ];
 
   return (
-    <div className={`min-h-screen p-6 transition-all duration-300 ${pageBg}`}>
+   <div className={`w-full p-6 transition-all duration-300 ${pageBg}`}>
       {/* Header */}
       <div className={`space-y-0 rounded shadow-sm border ${cardBg}`}>
         {/* Heading + search bar */}
@@ -239,7 +244,7 @@ const FetchProducts = () => {
             setOpenCreateProductFormModal(false);
             setSelectedProductId(null);
           }}
-          className="h-[90vh]"
+          
         >
           {/* pass product id for edit product */}
           <CreateProduct
@@ -306,386 +311,987 @@ const FetchProducts = () => {
         />
       </div>
 
-      <ViewModal
-        isOpen={openViewModel}
-        onClose={() => setOpenViewModel(false)}
-        title="View Product"
-      >
-        {selectedProduct ? (
-          <div className={`${isDark ? "text-white" : "text-gray-900"}`}>
-            {/*PRODUCT */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* LEFT : IMAGE */}
-              <div>
-                {/* Main Image */}
-                <div
-                  className={`rounded-2xl border overflow-hidden ${
+    <ViewModal
+  isOpen={openViewModel}
+  onClose={() => setOpenViewModel(false)}
+  title="View Product"
+>
+  {selectedProduct ? (
+    <div
+      className={`
+        ${
+          isDark
+            ? "text-white"
+            : "text-gray-900"
+        }
+      `}
+    >
+      {/* =====================================================
+          PRODUCT OVERVIEW
+      ====================================================== */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+        {/* =====================================================
+            LEFT — PRODUCT IMAGES
+        ====================================================== */}
+        <div>
+
+          {/* Main Image */}
+          <div
+            className={`
+              relative
+              rounded-2xl
+              border
+              overflow-hidden
+              ${
+                isDark
+                  ? "bg-gray-950 border-gray-800"
+                  : "bg-gray-50 border-gray-200"
+              }
+            `}
+          >
+            {/* Sale Label */}
+            {selectedProduct.isOnSale && (
+              <div
+                className={`
+                  absolute
+                  top-4
+                  left-4
+                  z-10
+                  px-3
+                  py-1.5
+                  rounded-full
+                  text-[10px]
+                  font-medium
+                  uppercase
+                  tracking-[0.15em]
+                  border
+                  ${
                     isDark
-                      ? "bg-gray-900 border-gray-700"
-                      : "bg-white border-gray-200"
-                  }`}
-                >
-                  <div className="aspect-square flex items-center justify-center p-6">
-                    {selectedProduct.images?.[0] ? (
-                      <img
-                        src={selectedProduct.images[0]}
-                        alt={selectedProduct.name}
-                        className="w-full h-full object-contain rounded-xl"
-                      />
-                    ) : (
-                      <div
-                        className={`flex items-center justify-center w-full h-full ${
-                          isDark ? "text-gray-500" : "text-gray-400"
-                        }`}
-                      >
-                        No Image Available
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Image Thumbnails */}
-                {selectedProduct.images?.length > 1 && (
-                  <div className="flex gap-3 mt-4 overflow-x-auto">
-                    {selectedProduct.images.map((image, index) => (
-                      <div
-                        key={index}
-                        className={`w-16 h-16 flex-shrink-0 rounded-lg border overflow-hidden ${
-                          isDark
-                            ? "border-gray-700 bg-gray-900"
-                            : "border-gray-200 bg-white"
-                        }`}
-                      >
-                        <img
-                          src={image}
-                          alt={`${selectedProduct.name}-${index}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                )}
+                      ? "bg-gray-950 border-gray-700 text-gray-300"
+                      : " bg-black text-white"
+                  }
+                `}
+              >
+                Sale
               </div>
+            )}
 
-              {/* RIGHT : DETAILS*/}
-              <div className="flex flex-col">
-                {/* Brand */}
-                <p
-                  className={`text-sm font-medium mb-2 ${
-                    isDark ? "text-gray-400" : "text-gray-500"
-                  }`}
-                >
-                  {selectedProduct.brand || "Brand"}
-                </p>
-
-                {/* Product Name */}
-                <h1
-                  className={`text-2xl sm:text-3xl font-bold leading-tight ${
-                    isDark ? "text-white" : "text-gray-900"
-                  }`}
-                >
-                  {selectedProduct.name}
-                </h1>
-
-                {/* Rating */}
-                <div className="flex items-center gap-3 mt-4">
-                  <div className="flex items-center gap-1 bg-green-600 text-white px-2.5 py-1 rounded-md text-sm font-medium">
-                    <span>★</span>
-                    <span>{selectedProduct.rating || "4.5"}</span>
-                  </div>
-
-                  <span
-                    className={`text-sm ${
-                      isDark ? "text-gray-400" : "text-gray-500"
-                    }`}
-                  >
-                    Customer Rating
-                  </span>
-                </div>
-
-                {/* Divider */}
-                <div
-                  className={`border-t my-5 ${
-                    isDark ? "border-gray-700" : "border-gray-200"
-                  }`}
+            {/* Image */}
+            <div className="aspect-square flex items-center justify-center p-6 sm:p-8">
+              {selectedProduct.images?.[0] ? (
+                <img
+                  src={selectedProduct.images[0]}
+                  alt={selectedProduct.name}
+                  className="
+                    w-full
+                    h-full
+                    object-contain
+                    rounded-xl
+                    transition-transform
+                    duration-500
+                    hover:scale-[1.02]
+                  "
                 />
-
-                {/* Price */}
-                <div className="flex items-center gap-3">
-                  <span
-                    className={`text-3xl font-bold ${
-                      isDark ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    ₹{selectedProduct.discountPrice || selectedProduct.price}
-                  </span>
-
-                  {selectedProduct.discountPrice &&
-                    selectedProduct.price > selectedProduct.discountPrice && (
-                      <>
-                        <span
-                          className={`text-lg line-through ${
-                            isDark ? "text-gray-500" : "text-gray-400"
-                          }`}
-                        >
-                          ₹{selectedProduct.price}
-                        </span>
-
-                        <span className="text-sm font-semibold text-green-600">
-                          {Math.round(
-                            ((selectedProduct.price -
-                              selectedProduct.discountPrice) /
-                              selectedProduct.price) *
-                              100,
-                          )}
-                          % OFF
-                        </span>
-                      </>
-                    )}
-                </div>
-
-                {/* Tax */}
-                <p
-                  className={`text-xs mt-2 ${
-                    isDark ? "text-gray-500" : "text-gray-400"
-                  }`}
-                >
-                  Inclusive of all taxes
-                </p>
-
-                {/* STATUS */}
-                <div className="flex flex-wrap gap-3 mt-6">
-                  {/* Sale Status */}
-                  {selectedProduct.isOnSale ? (
-                    <span
-                      className={`px-3 py-1.5 rounded-full text-xs font-semibold ${
-                        isDark
-                          ? "bg-green-900/40 text-green-300"
-                          : "bg-green-100 text-green-700"
-                      }`}
-                    >
-                      ● On Sale
-                    </span>
-                  ) : (
-                    <span
-                      className={`px-3 py-1.5 rounded-full text-xs font-semibold ${
-                        isDark
-                          ? "bg-gray-700 text-gray-300"
-                          : "bg-gray-100 text-gray-600"
-                      }`}
-                    >
-                      ● Regular
-                    </span>
-                  )}
-
-                  {/* Stock */}
-                  <span
-                    className={`px-3 py-1.5 rounded-full text-xs font-semibold ${
-                      isDark
-                        ? "bg-blue-900/40 text-blue-300"
-                        : "bg-blue-100 text-blue-700"
-                    }`}
-                  >
-                    ✓ Available
-                  </span>
-                </div>
-
-                {/* PRODUCT META */}
+              ) : (
                 <div
-                  className={`grid grid-cols-2 gap-3 mt-6 p-4 rounded-xl border ${
-                    isDark
-                      ? "bg-gray-900 border-gray-700"
-                      : "bg-white border-gray-200"
-                  }`}
+                  className={`
+                    flex
+                    items-center
+                    justify-center
+                    w-full
+                    h-full
+                    text-sm
+                    ${
+                      isDark
+                        ? "text-gray-600"
+                        : "text-gray-400"
+                    }
+                  `}
                 >
-                  <div>
-                    <p
-                      className={`text-xs ${
-                        isDark ? "text-gray-500" : "text-gray-400"
-                      }`}
-                    >
-                      Category
-                    </p>
-
-                    <p
-                      className={`text-sm font-semibold mt-1 ${
-                        isDark ? "text-gray-200" : "text-gray-800"
-                      }`}
-                    >
-                      {selectedProduct.category || "N/A"}
-                    </p>
-                  </div>
-
-                  <div>
-                    <p
-                      className={`text-xs ${
-                        isDark ? "text-gray-500" : "text-gray-400"
-                      }`}
-                    >
-                      Brand
-                    </p>
-
-                    <p
-                      className={`text-sm font-semibold mt-1 ${
-                        isDark ? "text-gray-200" : "text-gray-800"
-                      }`}
-                    >
-                      {selectedProduct.brand || "N/A"}
-                    </p>
-                  </div>
-
-                  <div>
-                    <p
-                      className={`text-xs ${
-                        isDark ? "text-gray-500" : "text-gray-400"
-                      }`}
-                    >
-                      Product ID
-                    </p>
-
-                    <p
-                      className={`text-xs font-medium mt-1 truncate ${
-                        isDark ? "text-gray-300" : "text-gray-600"
-                      }`}
-                      title={selectedProduct._id}
-                    >
-                      {selectedProduct._id || "N/A"}
-                    </p>
-                  </div>
-
-                  <div>
-                    <p
-                      className={`text-xs ${
-                        isDark ? "text-gray-500" : "text-gray-400"
-                      }`}
-                    >
-                      Availability
-                    </p>
-
-                    <p className="text-sm font-semibold text-green-500 mt-1">
-                      In Stock
-                    </p>
-                  </div>
+                  No Image Available
                 </div>
-              </div>
+              )}
+            </div>
+          </div>
+
+          {/* =================================================
+              IMAGE THUMBNAILS
+          ================================================== */}
+          {selectedProduct.images?.length > 1 && (
+            <div className="flex gap-3 mt-4 overflow-x-auto pb-1">
+
+              {selectedProduct.images.map(
+                (image, index) => (
+                  <button
+                    type="button"
+                    key={index}
+                    className={`
+                      flex-shrink-0
+                      w-16
+                      h-16
+                      sm:w-18
+                      sm:h-18
+                      rounded-xl
+                      overflow-hidden
+                      border
+                      transition-all
+                      ${
+                        index === 0
+                          ? isDark
+                            ? "border-white"
+                            : "border-gray-900"
+                          : isDark
+                            ? "border-gray-800 hover:border-gray-600"
+                            : "border-gray-200 hover:border-gray-400"
+                      }
+                    `}
+                  >
+                    <img
+                      src={image}
+                      alt={`${selectedProduct.name}-${index}`}
+                      className="
+                        w-full
+                        h-full
+                        object-cover
+                      "
+                    />
+                  </button>
+                )
+              )}
+
+            </div>
+          )}
+        </div>
+
+        {/* =====================================================
+            RIGHT — PRODUCT DETAILS
+        ====================================================== */}
+        <div className="flex flex-col">
+
+          {/* Brand */}
+          <p
+            className={`
+              text-[10px]
+              uppercase
+              tracking-[0.2em]
+              font-medium
+              mb-2
+              ${
+                isDark
+                  ? "text-gray-500"
+                  : "text-gray-400"
+              }
+            `}
+          >
+            {selectedProduct.brand || "Brand"}
+          </p>
+
+          {/* Product Name */}
+          <h1
+            className={`
+              text-2xl
+              sm:text-3xl
+              font-semibold
+              tracking-tight
+              leading-tight
+              ${
+                isDark
+                  ? "text-white"
+                  : "text-gray-950"
+              }
+            `}
+          >
+            {selectedProduct.name}
+          </h1>
+
+          {/* =================================================
+              RATING
+          ================================================== */}
+          <div className="flex items-center gap-3 mt-4">
+
+            <span
+              className={`
+                text-sm
+                font-medium
+                ${
+                  isDark
+                    ? "text-white"
+                    : "text-gray-900"
+                }
+              `}
+            >
+              ★ {selectedProduct.rating || "4.5"}
+            </span>
+
+            <span
+              className={`
+                text-xs
+                ${
+                  isDark
+                    ? "text-gray-500"
+                    : "text-gray-400"
+                }
+              `}
+            >
+              Customer Rating
+            </span>
+
+          </div>
+
+          {/* =================================================
+              PRICE
+          ================================================== */}
+          <div
+            className={`
+              mt-6
+              pt-6
+              border-t
+              ${
+                isDark
+                  ? "border-gray-800"
+                  : "border-gray-200"
+              }
+            `}
+          >
+            <div className="flex flex-wrap items-baseline gap-3">
+
+              {/* Selling Price */}
+              <span
+                className={`
+                  text-3xl
+                  font-semibold
+                  tracking-tight
+                  ${
+                    isDark
+                      ? "text-white"
+                      : "text-gray-950"
+                  }
+                `}
+              >
+                ₹
+                {selectedProduct.discountPrice ||
+                  selectedProduct.price ||
+                  0}
+              </span>
+
+              {/* Original Price */}
+              {selectedProduct.discountPrice &&
+                Number(selectedProduct.price) >
+                  Number(
+                    selectedProduct.discountPrice
+                  ) && (
+                  <>
+                    <span
+                      className={`
+                        text-base
+                        line-through
+                        ${
+                          isDark
+                            ? "text-gray-600"
+                            : "text-gray-400"
+                        }
+                      `}
+                    >
+                      ₹{selectedProduct.price}
+                    </span>
+
+                    {/* Discount */}
+                    <span
+                      className={`
+                        text-xs
+                        font-medium
+                        ${
+                          isDark
+                            ? "text-gray-400"
+                            : "text-gray-500"
+                        }
+                      `}
+                    >
+                      {Math.round(
+                        ((selectedProduct.price -
+                          selectedProduct.discountPrice) /
+                          selectedProduct.price) *
+                          100
+                      )}
+                      % OFF
+                    </span>
+                  </>
+                )}
+
             </div>
 
-            {/* DESCRIPTION*/}
-            <div
-              className={`border-t mt-8 pt-7 ${
-                isDark ? "border-gray-700" : "border-gray-200"
-              }`}
+            <p
+              className={`
+                text-[11px]
+                mt-2
+                ${
+                  isDark
+                    ? "text-gray-600"
+                    : "text-gray-400"
+                }
+              `}
             >
-              <h3
-                className={`text-lg font-semibold mb-3 ${
-                  isDark ? "text-white" : "text-gray-900"
-                }`}
+              Inclusive of all taxes
+            </p>
+          </div>
+
+          {/* =================================================
+              STATUS
+          ================================================== */}
+          <div className="flex flex-wrap items-center gap-2 mt-5">
+
+            {/* Sale */}
+            {selectedProduct.isOnSale && (
+              <span
+                className={`
+                  px-3
+                  py-1.5
+                  rounded-full
+                  text-[10px]
+                  uppercase
+                  tracking-[0.12em]
+                  font-medium
+                  border
+                  ${
+                    isDark
+                      ? "border-gray-600 text-gray-300"
+                      : "border-gray-300 text-gray-700"
+                  }
+                `}
               >
-                Product Description
-              </h3>
+                On Sale
+              </span>
+            )}
+
+            {/* Regular */}
+            {!selectedProduct.isOnSale && (
+              <span
+                className={`
+                  px-3
+                  py-1.5
+                  rounded-full
+                  text-[10px]
+                  uppercase
+                  tracking-[0.12em]
+                  font-medium
+                  border
+                  ${
+                    isDark
+                      ? "border-gray-800 text-gray-500"
+                      : "border-gray-200 text-gray-500"
+                  }
+                `}
+              >
+                Regular Price
+              </span>
+            )}
+
+            {/* Stock */}
+            <span
+              className={`
+                px-3
+                py-1.5
+                rounded-full
+                text-[10px]
+                uppercase
+                tracking-[0.12em]
+                font-medium
+                border
+                ${
+                  isDark
+                    ? "border-gray-800 text-gray-400"
+                    : "border-gray-200 text-gray-500"
+                }
+              `}
+            >
+              In Stock
+            </span>
+
+          </div>
+
+          {/* =================================================
+              PRODUCT INFORMATION
+          ================================================== */}
+          <div
+            className={`
+              grid
+              grid-cols-2
+              mt-6
+              border-y
+              ${
+                isDark
+                  ? "border-gray-800"
+                  : "border-gray-200"
+              }
+            `}
+          >
+
+            {/* Category */}
+            <div
+              className={`
+                py-4
+                pr-4
+                border-r
+                ${
+                  isDark
+                    ? "border-gray-800"
+                    : "border-gray-200"
+                }
+              `}
+            >
+              <p
+                className={`
+                  text-[10px]
+                  uppercase
+                  tracking-[0.15em]
+                  ${
+                    isDark
+                      ? "text-gray-600"
+                      : "text-gray-400"
+                  }
+                `}
+              >
+                Category
+              </p>
 
               <p
-                className={`text-sm leading-7 ${
-                  isDark ? "text-gray-300" : "text-gray-600"
-                }`}
+                className={`
+                  text-sm
+                  font-medium
+                  mt-1.5
+                  truncate
+                  ${
+                    isDark
+                      ? "text-gray-200"
+                      : "text-gray-800"
+                  }
+                `}
               >
-                {selectedProduct.description ||
-                  "No description available for this product."}
+                {selectedProduct.category || "N/A"}
               </p>
             </div>
 
-            {/*  ADDITIONAL INFORMATION */}
+            {/* Brand */}
+            <div className="py-4 pl-4">
+              <p
+                className={`
+                  text-[10px]
+                  uppercase
+                  tracking-[0.15em]
+                  ${
+                    isDark
+                      ? "text-gray-600"
+                      : "text-gray-400"
+                  }
+                `}
+              >
+                Brand
+              </p>
+
+              <p
+                className={`
+                  text-sm
+                  font-medium
+                  mt-1.5
+                  truncate
+                  ${
+                    isDark
+                      ? "text-gray-200"
+                      : "text-gray-800"
+                  }
+                `}
+              >
+                {selectedProduct.brand || "N/A"}
+              </p>
+            </div>
+
+            {/* Product ID */}
             <div
-              className={`border-t mt-7 pt-6 ${
-                isDark ? "border-gray-700" : "border-gray-200"
+              className={`
+                py-4
+                pr-4
+                border-t
+                border-r
+                ${
+                  isDark
+                    ? "border-gray-800"
+                    : "border-gray-200"
+                }
+              `}
+            >
+              <p
+                className={`
+                  text-[10px]
+                  uppercase
+                  tracking-[0.15em]
+                  ${
+                    isDark
+                      ? "text-gray-600"
+                      : "text-gray-400"
+                  }
+                `}
+              >
+                Product ID
+              </p>
+
+              <p
+                className={`
+                  text-xs
+                  font-medium
+                  mt-1.5
+                  truncate
+                  ${
+                    isDark
+                      ? "text-gray-300"
+                      : "text-gray-600"
+                  }
+                `}
+                title={selectedProduct._id}
+              >
+                {selectedProduct._id || "N/A"}
+              </p>
+            </div>
+
+            {/* Availability */}
+            <div
+              className={`
+                py-4
+                pl-4
+                border-t
+                ${
+                  isDark
+                    ? "border-gray-800"
+                    : "border-gray-200"
+                }
+              `}
+            >
+              <p
+                className={`
+                  text-[10px]
+                  uppercase
+                  tracking-[0.15em]
+                  ${
+                    isDark
+                      ? "text-gray-600"
+                      : "text-gray-400"
+                  }
+                `}
+              >
+                Availability
+              </p>
+
+              <p
+                className={`
+                  text-sm
+                  font-medium
+                  mt-1.5
+                  ${
+                    isDark
+                      ? "text-gray-300"
+                      : "text-gray-700"
+                  }
+                `}
+              >
+                In Stock
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* =====================================================
+          DESCRIPTION
+      ====================================================== */}
+      <div
+        className={`
+          border-t
+          mt-8
+          pt-7
+          ${
+            isDark
+              ? "border-gray-800"
+              : "border-gray-200"
+          }
+        `}
+      >
+        <h3
+          className={`
+            text-base
+            font-semibold
+            mb-3
+            ${
+              isDark
+                ? "text-white"
+                : "text-gray-950"
+            }
+          `}
+        >
+          Product Description
+        </h3>
+
+        <p
+          className={`
+            max-w-4xl
+            text-sm
+            leading-7
+            ${
+              isDark
+                ? "text-gray-400"
+                : "text-gray-600"
+            }
+          `}
+        >
+          {selectedProduct.description ||
+            "No description available for this product."}
+        </p>
+      </div>
+
+      {/* =====================================================
+          ADDITIONAL INFORMATION
+      ====================================================== */}
+      <div
+        className={`
+          border-t
+          mt-7
+          pt-7
+          ${
+            isDark
+              ? "border-gray-800"
+              : "border-gray-200"
+          }
+        `}
+      >
+        <h3
+          className={`
+            text-base
+            font-semibold
+            mb-4
+            ${
+              isDark
+                ? "text-white"
+                : "text-gray-950"
+            }
+          `}
+        >
+          Pricing Information
+        </h3>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+
+          {/* Regular Price */}
+          <div
+            className={`
+              p-4
+              rounded-xl
+              ${
+                isDark
+                  ? "bg-gray-900"
+                  : "bg-gray-50"
+              }
+            `}
+          >
+            <p
+              className={`
+                text-[10px]
+                uppercase
+                tracking-[0.15em]
+                ${
+                  isDark
+                    ? "text-gray-600"
+                    : "text-gray-400"
+                }
+              `}
+            >
+              Regular Price
+            </p>
+
+            <p
+              className={`
+                text-lg
+                font-semibold
+                mt-2
+                ${
+                  isDark
+                    ? "text-white"
+                    : "text-gray-900"
+                }
+              `}
+            >
+              ₹{selectedProduct.price || 0}
+            </p>
+          </div>
+
+          {/* Selling Price */}
+          <div
+            className={`
+              p-4
+              rounded-xl
+              ${
+                isDark
+                  ? "bg-gray-900"
+                  : "bg-gray-50"
+              }
+            `}
+          >
+            <p
+              className={`
+                text-[10px]
+                uppercase
+                tracking-[0.15em]
+                ${
+                  isDark
+                    ? "text-gray-600"
+                    : "text-gray-400"
+                }
+              `}
+            >
+              Selling Price
+            </p>
+
+            <p
+              className={`
+                text-lg
+                font-semibold
+                mt-2
+                ${
+                  isDark
+                    ? "text-gray-200"
+                    : "text-gray-800"
+                }
+              `}
+            >
+              ₹
+              {selectedProduct.discountPrice ||
+                selectedProduct.price ||
+                0}
+            </p>
+          </div>
+
+          {/* Sale Status */}
+          <div
+            className={`
+              p-4
+              rounded-xl
+              ${
+                isDark
+                  ? "bg-gray-900"
+                  : "bg-gray-50"
+              }
+            `}
+          >
+            <p
+              className={`
+                text-[10px]
+                uppercase
+                tracking-[0.15em]
+                ${
+                  isDark
+                    ? "text-gray-600"
+                    : "text-gray-400"
+                }
+              `}
+            >
+              Sale Status
+            </p>
+
+            <p
+              className={`
+                text-sm
+                font-semibold
+                mt-2
+                ${
+                  selectedProduct.isOnSale
+                    ? "text-green-600"
+                    : isDark
+                      ? "text-gray-300"
+                      : "text-gray-700"
+                }
+              `}
+            >
+              {selectedProduct.isOnSale
+                ? "On Sale"
+                : "Regular Price"}
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      {/* =====================================================
+          VARIANTS / SIZES
+      ====================================================== */}
+      {selectedProduct.variants?.length > 0 && (
+        <div
+          className={`
+            border-t
+            mt-7
+            pt-7
+            ${
+              isDark
+                ? "border-gray-800"
+                : "border-gray-200"
+            }
+          `}
+        >
+          <div className="flex items-center justify-between mb-4">
+
+            <h3
+              className={`
+                text-base
+                font-semibold
+                ${
+                  isDark
+                    ? "text-white"
+                    : "text-gray-950"
+                }
+              `}
+            >
+              Available Sizes
+            </h3>
+
+            <span
+              className={`
+                text-xs
+                ${
+                  isDark
+                    ? "text-gray-600"
+                    : "text-gray-400"
+                }
+              `}
+            >
+              {selectedProduct.variants.length} variants
+            </span>
+
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+
+            {selectedProduct.variants.map(
+              (variant, index) => (
+                <div
+                  key={index}
+                  className={`
+                    min-w-[72px]
+                    px-3
+                    py-2.5
+                    rounded-lg
+                    border
+                    text-center
+                    ${
+                      isDark
+                        ? "bg-gray-950 border-gray-800"
+                        : "bg-white border-gray-200"
+                    }
+                  `}
+                >
+                  <p
+                    className={`
+                      text-sm
+                      font-medium
+                      ${
+                        isDark
+                          ? "text-gray-200"
+                          : "text-gray-800"
+                      }
+                    `}
+                  >
+                    {variant.size}
+                  </p>
+
+                  <p
+                    className={`
+                      text-[10px]
+                      mt-1
+                      ${
+                        variant.stock > 0
+                          ? "text-green-600"
+                          : "text-red-500"
+                      }
+                    `}
+                  >
+                    {variant.stock > 0
+                      ? `${variant.stock} in stock`
+                      : "Out of stock"}
+                  </p>
+                </div>
+              )
+            )}
+
+          </div>
+        </div>
+      )}
+    </div>
+  ) : (
+    <div
+      className={`
+        py-16
+        text-center
+        ${
+          isDark
+            ? "text-gray-500"
+            : "text-gray-400"
+        }
+      `}
+    >
+      Product not found.
+    </div>
+  )}
+</ViewModal>
+
+      <Modal
+        isOpen={isOpenConfirmDeleteModel}
+        onClose={() => {
+          setIsOpenConfirmDeleteModel(false);
+          setSelectedProductId(null);
+        }}
+      >
+        <div className="p-6 sm:p-7">
+          {/* TITLE */}
+          <div>
+            <h2
+              className={`text-lg font-semibold tracking-tight ${
+                isDark ? "text-white" : "text-gray-900"
               }`}
             >
-              <h3
-                className={`text-lg font-semibold mb-4 ${
-                  isDark ? "text-white" : "text-gray-900"
-                }`}
-              >
-                Additional Information
-              </h3>
+              Delete product?
+            </h2>
 
-              <div className={`grid grid-cols-1 sm:grid-cols-3 gap-4`}>
-                <div
-                  className={`p-4 rounded-xl ${
-                    isDark ? "bg-gray-900" : "bg-gray-100"
-                  }`}
-                >
-                  <p
-                    className={`text-xs ${
-                      isDark ? "text-gray-500" : "text-gray-400"
-                    }`}
-                  >
-                    Regular Price
-                  </p>
-
-                  <p className="font-semibold mt-1">
-                    ₹{selectedProduct.price || 0}
-                  </p>
-                </div>
-
-                <div
-                  className={`p-4 rounded-xl ${
-                    isDark ? "bg-gray-900" : "bg-gray-100"
-                  }`}
-                >
-                  <p
-                    className={`text-xs ${
-                      isDark ? "text-gray-500" : "text-gray-400"
-                    }`}
-                  >
-                    Selling Price
-                  </p>
-
-                  <p className="font-semibold text-green-500 mt-1">
-                    ₹
-                    {selectedProduct.discountPrice ||
-                      selectedProduct.price ||
-                      0}
-                  </p>
-                </div>
-
-                <div
-                  className={`p-4 rounded-xl ${
-                    isDark ? "bg-gray-900" : "bg-gray-100"
-                  }`}
-                >
-                  <p
-                    className={`text-xs ${
-                      isDark ? "text-gray-500" : "text-gray-400"
-                    }`}
-                  >
-                    Sale Status
-                  </p>
-
-                  <p
-                    className={`font-semibold mt-1 ${
-                      selectedProduct.isOnSale
-                        ? "text-green-500"
-                        : isDark
-                          ? "text-gray-300"
-                          : "text-gray-700"
-                    }`}
-                  >
-                    {selectedProduct.isOnSale ? "On Sale" : "Regular Price"}
-                  </p>
-                </div>
-              </div>
-            </div>
+            <p
+              className={`mt-2 max-w-sm text-sm leading-6 ${
+                isDark ? "text-gray-400" : "text-gray-500"
+              }`}
+            >
+              This product will be permanently removed from your catalog. This
+              action cannot be undone.
+            </p>
           </div>
-        ) : (
-          <div
-            className={`py-16 text-center ${
-              isDark ? "text-gray-400" : "text-gray-500"
-            }`}
-          >
-            Product not found.
+
+          {/* ACTIONS */}
+          <div className="mt-7 flex items-center justify-end gap-2">
+            <Button
+              label="Cancel"
+              variant={isDark ? "secondary" : "outline"}
+              onClick={() => {
+                setIsOpenConfirmDeleteModel(false);
+                setSelectedProductId(null);
+              }}
+            />
+
+            <Button
+              label="Delete"
+              variant="danger"
+              onClick={async () => {
+                await handleDeleteProduct(selectedProductId);
+
+                setIsOpenConfirmDeleteModel(false);
+                setSelectedProductId(null);
+              }}
+            />
           </div>
-        )}
-      </ViewModal>
+        </div>
+      </Modal>
 
       {/*table*/}
       <Table data={filteredProducts} columns={productColumns} />

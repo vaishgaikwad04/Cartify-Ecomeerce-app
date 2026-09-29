@@ -24,6 +24,8 @@ export const useCategory = () => {
   // View modal
   const [openViewModel, setOpenViewModel] = useState(false);
 
+   const [isOpenConfirmDeleteModel, setIsOpenConfirmDeleteModel] = useState(false)
+
   // Search
   const [search, setSearch] = useState("");
 
@@ -111,6 +113,7 @@ export const useCategory = () => {
     // Edit category
     selectedCategoryId,
     setSelectedCategoryId,
+      isOpenConfirmDeleteModel, setIsOpenConfirmDeleteModel,
 
     // View category
     viewCategory,

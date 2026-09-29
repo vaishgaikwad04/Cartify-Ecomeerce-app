@@ -12,28 +12,56 @@ const Checkbox = ({
 
   const isDark = theme === "Dark Mode";
 
-  return (
-    <label
-      className={`flex items-center gap-3 cursor-pointer select-none
-        text-sm
-        ${isDark ? "text-gray-300" : "text-gray-700"}
-        ${className}`}
-    >
-      <input
-        type="checkbox"
-        name={name}
-        checked={checked}
-        onChange={onChange}
-        className="sr-only peer"
-      />
+  // Handle checkbox click ourselves.
+  // This prevents the browser from focusing the hidden
+  // native checkbox and moving the modal scroll position.
+  const handleClick = () => {
+    onChange({
+      target: {
+        name,
+        checked: !checked,
+      },
+    });
+  };
 
+  return (
+    <div
+      role="checkbox"
+      aria-checked={checked}
+      tabIndex={0}
+      onClick={handleClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleClick();
+        }
+      }}
+      className={`
+        flex
+        items-center
+        gap-3
+        h-6
+        cursor-pointer
+        select-none
+        text-sm
+        outline-none
+        ${isDark ? "text-gray-300" : "text-gray-700"}
+        ${className}
+      `}
+    >
+      {/* Checkbox UI */}
       <div
         className={`
-          w-4 h-4
+          w-4
+          h-4
+          flex-shrink-0
           rounded-[4px]
-          flex items-center justify-center
+          flex
+          items-center
+          justify-center
           border
-          transition-all duration-200
+          transition-colors
+          duration-200
 
           ${
             checked
@@ -44,9 +72,6 @@ const Checkbox = ({
                 ? "bg-gray-900 border-gray-600 hover:border-gray-400"
                 : "bg-white border-gray-300 hover:border-gray-500"
           }
-
-          peer-focus-visible:ring-2
-          ${isDark ? "peer-focus-visible:ring-gray-500" : "peer-focus-visible:ring-gray-400"}
         `}
       >
         {checked && (
@@ -67,8 +92,9 @@ const Checkbox = ({
         )}
       </div>
 
+      {/* Label */}
       <span>{label}</span>
-    </label>
+    </div>
   );
 };
 

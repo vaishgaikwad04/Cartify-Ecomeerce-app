@@ -54,7 +54,7 @@ const Notifications = () => {
       `}
     >
       {/* Main page container */}
-      <div className="mx-auto w-full max-w-[1200px]">
+      <div className="mx-auto w-full max-w-[1700px] px-6">
 
         {/* PAGE HEADER */}
         <div

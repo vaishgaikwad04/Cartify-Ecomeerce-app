@@ -127,7 +127,7 @@ const Address = () => {
         ${pageBg}
       `}
     >
-      <div className="mx-auto max-w-[1800px]">
+      <div className="mx-auto max-w-[1700px] px-6">
 
         {/* =================================================
             HEADER
