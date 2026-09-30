@@ -30,7 +30,7 @@ const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://peppy-quokka-eb689e.netlify.app",
+  "https://lighthearted-frangipane-d87f28.netlify.app/",
 ];
 
 app.use(

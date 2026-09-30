@@ -58,6 +58,7 @@ const FashionPromo = () => {
         aspect-[2/4] lg:aspect-[5/4]
         w-full
         rounded 
+           
       "
           >
             {/* PLUS BUTTON */}
@@ -68,28 +69,31 @@ const FashionPromo = () => {
                 setOpenProductModel(index);
               }}
               aria-label={`View product ${index + 1}`}
-              className={`
-          w-7 h-7
-          sm:w-8 sm:h-8
-          md:w-9 md:h-9
-          lg:w-10 lg:h-10
-          lg:mb-32
+         className={`
+  w-7 h-7
+  sm:w-8 sm:h-8
+  md:w-9 md:h-9
+  lg:w-10 lg:h-10
 
-          rounded-full
-          flex items-center justify-center
-          shadow-md
+  -translate-x-4
 
-          text-sm
-          sm:text-base
-          md:text-lg
-          lg:text-xl
+  lg:mb-32
 
-          ${
-            isDark
-              ? "bg-gray-900 text-white hover:bg-gray-800"
-              : "bg-white text-black hover:bg-gray-100"
-          }
-        `}
+  rounded-full
+  flex items-center justify-center
+  shadow-md
+
+  text-sm
+  sm:text-base
+  md:text-lg
+  lg:text-xl
+
+  ${
+    isDark
+      ? "bg-gray-900 text-white hover:bg-gray-800"
+      : "bg-white text-black hover:bg-gray-100"
+  }
+`}
             >
               +
             </button>
@@ -108,12 +112,17 @@ const FashionPromo = () => {
 
       lg:top-72
       lg:left-112
+
+        min-[500px]:max-[670px]:left-30
+          min-[500px]:max-[670px]:top-80
+
       lg:right-auto
       lg:ml-3
 
       w-[90px]
       sm:w-[120px]
       md:w-[150px]
+       min-[500px]:max-[670px]:w-[180px]
       lg:w-[272px]
     `}
             >

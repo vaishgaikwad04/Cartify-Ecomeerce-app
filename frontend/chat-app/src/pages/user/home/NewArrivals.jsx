@@ -1,12 +1,13 @@
 import Card from "../../../components/ui/Card";
 import Slider from "../../../components/ui/Slider";
-//hooks
+
+// hooks
 import { useWishlist } from "../../../hooks/user/useWishList";
 import { useNewArrivals } from "../../../hooks/user/useNewArrivals";
 
 const NewArrivals = () => {
   // NEW ARRIVALS HOOK
-  const { categories, isDark } = useNewArrivals();
+  const { categories, isDark, loading } = useNewArrivals();
 
   // WISHLIST HOOK
   const { isWishlisted, toggleWishlist } = useWishlist();
@@ -59,19 +60,49 @@ const NewArrivals = () => {
       </div>
 
       {/* PRODUCT SLIDER */}
-      <Slider
-        items={categories}
-        visibleItems={4}
-        renderItem={(product) => (
-          <Card
-            key={product._id}
-            product={product}
-            isWishlisted={isWishlisted(product._id)}
-            onToggleWishlist={toggleWishlist}
+      {loading ? (
+        <div className="flex items-center justify-center py-16">
+          <div
+            className={`
+              w-8
+              h-8
+              rounded-full
+              border-2
+              animate-spin
+              ${
+                isDark
+                  ? "border-gray-700 border-t-white"
+                  : "border-gray-200 border-t-black"
+              }
+            `}
           />
-        )}
-      />
+        </div>
+      ) : categories?.length === 0 ? (
+        <div className="text-center py-16">
+          <p
+            className={`text-sm ${
+              isDark ? "text-gray-400" : "text-gray-500"
+            }`}
+          >
+            No new arrivals found.
+          </p>
+        </div>
+      ) : (
+        <Slider
+          items={categories}
+          visibleItems={4}
+          renderItem={(product) => (
+            <Card
+              key={product._id}
+              product={product}
+              isWishlisted={isWishlisted(product._id)}
+              onToggleWishlist={toggleWishlist}
+            />
+          )}
+        />
+      )}
     </section>
   );
 };
+
 export default NewArrivals;

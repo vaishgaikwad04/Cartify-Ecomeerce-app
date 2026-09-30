@@ -19,7 +19,7 @@ const Category = () => {
     stockFilter,
     setStockFilter,
     filteredData,
-     priceFilter,
+    priceFilter,
     setPriceFilter,
 
     // Pagination
@@ -49,73 +49,68 @@ const Category = () => {
    {/* =========================
     FILTER SIDEBAR
 ========================= */}
-<div
+        <div
   className={`
     shrink-0
     overflow-hidden
     transition-all
     duration-300
     ease-in-out
-    ${
-      showFilter
-        ? "w-32 sm:w-40 md:w-44 lg:w-48"
-        : "w-0"
-    }
+
+    ${showFilter ? "w-36 sm:w-40 md:w-48 lg:w-48" : "w-0"}
   `}
 >
-  <div className="py-4 ml-2">
+          <div className="py-4 ml-2">
+            {/* AVAILABILITY */}
+            <Filter
+              title="Availability"
+              options={[
+                {
+                  label: "In Stock",
+                  checked: stockFilter === "inStock",
+                  onChange: () => setStockFilter("inStock"),
+                },
+                {
+                  label: "Out Of Stock",
+                  checked: stockFilter === "outOfStock",
+                  onChange: () => setStockFilter("outOfStock"),
+                },
+              ]}
+            />
 
-    {/* AVAILABILITY */}
-    <Filter
-      title="Availability"
-      options={[
-        {
-          label: "In Stock",
-          checked: stockFilter === "inStock",
-          onChange: () => setStockFilter("inStock"),
-        },
-        {
-          label: "Out Of Stock",
-          checked: stockFilter === "outOfStock",
-          onChange: () => setStockFilter("outOfStock"),
-        },
-      ]}
-    />
-
-    {/* PRICE */}
-    <Filter
-      title="Price"
-      options={[
-        {
-          label: "All Prices",
-          checked: priceFilter === "all",
-          onChange: () => setPriceFilter("all"),
-        },
-        {
-          label: "Under ₹1,000",
-          checked: priceFilter === "under1000",
-          onChange: () => setPriceFilter("under1000"),
-        },
-        {
-          label: "₹1,000 - ₹2,000",
-          checked: priceFilter === "1000to2000",
-          onChange: () => setPriceFilter("1000to2000"),
-        },
-        {
-          label: "₹2,000 - ₹5,000",
-          checked: priceFilter === "2000to5000",
-          onChange: () => setPriceFilter("2000to5000"),
-        },
-        {
-          label: "Above ₹5,000",
-          checked: priceFilter === "above5000",
-          onChange: () => setPriceFilter("above5000"),
-        },
-      ]}
-    />
-
-  </div>
-</div>
+            {/* PRICE */}
+            <Filter
+              title="Price"
+              options={[
+                {
+                  label: "All Prices",
+                  checked: priceFilter === "all",
+                  onChange: () => setPriceFilter("all"),
+                },
+                {
+                  label: "Under ₹1,000",
+                  checked: priceFilter === "under1000",
+                  onChange: () => setPriceFilter("under1000"),
+                },
+                {
+                  label: "₹1,000 - ₹2,000",
+                  checked: priceFilter === "1000to2000",
+                  onChange: () => setPriceFilter("1000to2000"),
+                },
+                {
+                  label: "₹2,000 - ₹5,000",
+                  checked: priceFilter === "2000to5000",
+                  onChange: () => setPriceFilter("2000to5000"),
+                },
+                {
+                  label: "Above ₹5,000",
+                  checked: priceFilter === "above5000",
+                  onChange: () => setPriceFilter("above5000"),
+                },
+              ]}
+            />
+          </div>
+        </div>
 
         {/* =========================
             PRODUCTS
@@ -146,23 +141,19 @@ const Category = () => {
               {/* =========================
     PAGINATION
 ========================= */}
-             {/* =========================
+              {/* =========================
     PAGINATION
 ========================= */}
-{totalPages > 1 && (
-  <div className="flex items-center justify-center mt-12 pb-10">
-
-    <div className="flex items-center gap-2">
-
-      {/* PREVIOUS */}
-      <button
-        type="button"
-        onClick={() =>
-          setCurrentPage((prev) => prev - 1)
-        }
-        disabled={currentPage === 1}
-        aria-label="Previous page"
-        className={`
+              {totalPages > 1 && (
+                <div className="flex items-center justify-center mt-12 pb-10">
+                  <div className="flex items-center gap-2">
+                    {/* PREVIOUS */}
+                    <button
+                      type="button"
+                      onClick={() => setCurrentPage((prev) => prev - 1)}
+                      disabled={currentPage === 1}
+                      aria-label="Previous page"
+                      className={`
           w-9
           h-9
           flex
@@ -183,22 +174,21 @@ const Category = () => {
                 : "text-gray-500 hover:bg-gray-100 hover:text-black"
           }
         `}
-      >
-        ←
-      </button>
+                    >
+                      ←
+                    </button>
 
-      {/* DESKTOP PAGE NUMBERS */}
-      <div className="hidden sm:flex items-center gap-1.5">
-
-        {Array.from(
-          { length: totalPages },
-          (_, index) => index + 1
-        ).map((page) => (
-          <button
-            key={page}
-            type="button"
-            onClick={() => setCurrentPage(page)}
-            className={`
+                    {/* DESKTOP PAGE NUMBERS */}
+                    <div className="hidden sm:flex items-center gap-1.5">
+                      {Array.from(
+                        { length: totalPages },
+                        (_, index) => index + 1,
+                      ).map((page) => (
+                        <button
+                          key={page}
+                          type="button"
+                          onClick={() => setCurrentPage(page)}
+                          className={`
               min-w-9
               h-9
               px-2
@@ -218,39 +208,33 @@ const Category = () => {
                     : "text-gray-500 hover:text-black hover:bg-gray-100"
               }
             `}
-          >
-            {page}
-          </button>
-        ))}
-      </div>
+                        >
+                          {page}
+                        </button>
+                      ))}
+                    </div>
 
-      {/* MOBILE PAGE INDICATOR */}
-      <span
-        className={`
+                    {/* MOBILE PAGE INDICATOR */}
+                    <span
+                      className={`
           sm:hidden
           min-w-16
           text-center
           text-xs
           font-medium
-          ${
-            isDark
-              ? "text-gray-300"
-              : "text-gray-600"
-          }
+          ${isDark ? "text-gray-300" : "text-gray-600"}
         `}
-      >
-        {currentPage} / {totalPages}
-      </span>
+                    >
+                      {currentPage} / {totalPages}
+                    </span>
 
-      {/* NEXT */}
-      <button
-        type="button"
-        onClick={() =>
-          setCurrentPage((prev) => prev + 1)
-        }
-        disabled={currentPage === totalPages}
-        aria-label="Next page"
-        className={`
+                    {/* NEXT */}
+                    <button
+                      type="button"
+                      onClick={() => setCurrentPage((prev) => prev + 1)}
+                      disabled={currentPage === totalPages}
+                      aria-label="Next page"
+                      className={`
           w-9
           h-9
           flex
@@ -271,13 +255,12 @@ const Category = () => {
                 : "text-gray-500 hover:bg-gray-100 hover:text-black"
           }
         `}
-      >
-        →
-      </button>
-
-    </div>
-  </div>
-)}
+                    >
+                      →
+                    </button>
+                  </div>
+                </div>
+              )}
             </>
           )}
         </div>
