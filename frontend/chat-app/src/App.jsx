@@ -50,6 +50,7 @@ import Dashboard from "./pages/admin/Dashboard/Dashboard";
 
 import ScrollToTop from "./components/ui/ScrollToTop";
 import Notification from "./pages/admin/notification/Notification";
+import CustomCursor from "./components/ui/CustomCursor";
 
 const App = () => {
   const { theme } = useContext(ThemeContext);
@@ -61,6 +62,7 @@ const App = () => {
       <Router>
         {/* Scroll position handler */}
         <ScrollToTop />
+         <CustomCursor />
 
         {/* Routes */}
         <Routes>

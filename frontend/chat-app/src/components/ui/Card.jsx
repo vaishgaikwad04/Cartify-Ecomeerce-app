@@ -103,7 +103,8 @@ const Card = ({
             sm:text-[9px]
             md:text-[11px]
             lg:text-xs
-            xl:text-sm
+            xl:text-xs
+             min-[500px]:max-[670px]:text-sm
 
             font-semibold
             leading-tight

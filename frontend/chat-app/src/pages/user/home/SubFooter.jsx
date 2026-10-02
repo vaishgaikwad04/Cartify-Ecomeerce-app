@@ -1,43 +1,50 @@
-
 import React, { useContext, useState } from "react";
 
 import Button from "../../../components/ui/Button";
 import InputField from "../../../components/ui/InputField";
 
 import { ThemeContext } from "../../../context/ThemeContext";
+
 import toast from "react-hot-toast";
 
 const SubFooter = () => {
   const { theme } = useContext(ThemeContext);
+
   const isDark = theme === "Dark Mode";
 
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
 
+  // ================= SUBSCRIBE =================
   const handleSubscribe = (e) => {
     e.preventDefault();
 
+    // Prevent submitting again
     if (isSubscribed) return;
 
+    // Empty email
     if (!email.trim()) {
       toast.error("Please enter your email address.");
       return;
     }
 
     // Validate email
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
+    if (!/^\S+@\S+\.\S+$/.test(email.trim())) {
       toast.error("Please enter a valid email address.");
       return;
     }
 
     setIsSubscribed(true);
-    toast.success("Subscribed successfully!");
     setEmail("");
+
+    toast.success("Subscribed successfully!");
   };
 
   return (
     <div>
-      {/* ================= NEWSLETTER ================= */}
+      {/* =====================================================
+          NEWSLETTER
+      ===================================================== */}
       <section
         className={`
           w-full
@@ -49,25 +56,26 @@ const SubFooter = () => {
         <div
           className="
             w-full
-            max-w-[1800px]
+            max-w-[1700px]
             mx-auto
 
-            px-3
+            px-4
             sm:px-5
-            md:px-8
-            lg:px-12
-            xl:px-16
+            md:px-6
+            lg:px-8
+            xl:px-10
 
             py-6
             sm:py-7
-            md:py-8
-            lg:py-10
-            xl:py-11
+            md:py-7
+            lg:py-8
+            xl:py-8
           "
         >
           <div
             className="
               grid
+
               grid-cols-1
               sm:grid-cols-[auto_1fr]
               lg:grid-cols-[auto_minmax(220px,1fr)_auto]
@@ -79,18 +87,20 @@ const SubFooter = () => {
               sm:gap-y-4
               md:gap-x-10
               lg:gap-x-12
-              xl:gap-x-16
+              xl:gap-x-14
             "
           >
-            {/* ================= TITLE ================= */}
+            {/* =================================================
+                TITLE
+            ================================================= */}
             <div className="min-w-0">
               <h2
                 className="
                   text-[11px]
                   sm:text-xs
-                  md:text-sm
-                  lg:text-base
-                  xl:text-lg
+                  md:text-xs
+                  lg:text-sm
+                  xl:text-sm
 
                   font-medium
                   tracking-[0.12em]
@@ -102,23 +112,25 @@ const SubFooter = () => {
               </h2>
             </div>
 
-            {/* ================= DESCRIPTION ================= */}
+            {/* =================================================
+                DESCRIPTION
+            ================================================= */}
             <div className="min-w-0">
               <p
                 className={`
                   w-full
 
-                  max-w-[260px]
+                  max-w-[280px]
                   sm:max-w-[320px]
-                  md:max-w-[400px]
-                  lg:max-w-[460px]
-                  xl:max-w-[520px]
+                  md:max-w-[380px]
+                  lg:max-w-[420px]
+                  xl:max-w-[460px]
 
                   text-[10px]
                   sm:text-[11px]
-                  md:text-xs
-                  lg:text-sm
-                  xl:text-base
+                  md:text-[11px]
+                  lg:text-xs
+                  xl:text-xs
 
                   leading-relaxed
 
@@ -129,7 +141,9 @@ const SubFooter = () => {
               </p>
             </div>
 
-            {/* ================= FORM ================= */}
+            {/* =================================================
+                SUBSCRIBE FORM
+            ================================================= */}
             <form
               onSubmit={handleSubscribe}
               className="
@@ -141,11 +155,12 @@ const SubFooter = () => {
 
                 min-w-0
 
-                gap-2
-                sm:gap-2.5
-                md:gap-3
+                gap-1
+                sm:gap-1
+                md:gap-1
               "
             >
+              {/* EMAIL INPUT */}
               <InputField
                 type="email"
                 value={email}
@@ -154,41 +169,45 @@ const SubFooter = () => {
                 disabled={isSubscribed}
                 className={`
                   w-full
+
                   sm:w-[180px]
-                  md:w-[210px]
-                  lg:w-[230px]
-                  xl:w-[260px]
+                  md:w-[195px]
+                  lg:w-[210px]
+                  xl:w-[220px]
 
                   min-w-0
 
                   !h-[34px]
-                  sm:!h-[36px]
-                  md:!h-[38px]
-                  lg:!h-[40px]
+                  sm:!h-[35px]
+                  md:!h-[36px]
+                  lg:!h-[36px]
+                  xl:!h-[36px]
 
                   !min-h-0
 
                   !px-2.5
                   sm:!px-3
-                  md:!px-3.5
+                  md:!px-3
 
                   !py-0
 
                   !text-[10px]
-                  sm:!text-[11px]
-                  md:!text-xs
-                  lg:!text-sm
+                  sm:!text-[10px]
+                  md:!text-[11px]
+                  lg:!text-[11px]
+                  xl:!text-[11px]
 
                   !leading-none
 
                   ${
                     isDark
                       ? "bg-gray-900 text-white border-gray-700"
-                      : "bg-[#f5f5f5] text-black"
+                      : "bg-[#f5f5f5] text-black border-gray-300"
                   }
                 `}
               />
 
+              {/* SUBSCRIBE BUTTON */}
               <Button
                 type="submit"
                 label={isSubscribed ? "Subscribed" : "Subscribe"}
@@ -197,23 +216,23 @@ const SubFooter = () => {
                 className="
                   !w-auto
 
-                  !min-w-[72px]
-                  sm:!min-w-[82px]
-                  md:!min-w-[92px]
-                  lg:!min-w-[100px]
-                  xl:!min-w-[110px]
+                  !min-w-[75px]
+                  sm:!min-w-[80px]
+                  md:!min-w-[85px]
+                  lg:!min-w-[88px]
+                  xl:!min-w-[90px]
 
                   !h-[34px]
-                  sm:!h-[36px]
-                  md:!h-[38px]
-                  lg:!h-[40px]
+                  sm:!h-[35px]
+                  md:!h-[36px]
+                  lg:!h-[36px]
+                  xl:!h-[36px]
 
                   !min-h-0
 
                   !px-2
                   sm:!px-2.5
-                  md:!px-3
-                  lg:!px-3.5
+                  md:!px-2.5
 
                   !py-0
 
@@ -222,8 +241,9 @@ const SubFooter = () => {
 
                   !text-[9px]
                   sm:!text-[10px]
-                  md:!text-xs
-                  lg:!text-sm
+                  md:!text-[10px]
+                  lg:!text-[10px]
+                  xl:!text-[10px]
 
                   whitespace-nowrap
                 "

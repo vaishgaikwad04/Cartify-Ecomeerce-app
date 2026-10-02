@@ -3,7 +3,7 @@ const Drawer = ({
   onClose,
   children,
   position = "right",
-  width = "w-full sm:w-[400px]",
+  width = "w-[94vw] sm:w-[400px]",
 }) => {
   return (
     <div
@@ -47,9 +47,7 @@ const Drawer = ({
           }
         `}
       >
-        <div className="flex flex-col h-full min-h-0">
-          {children}
-        </div>
+        <div className="flex flex-col h-full min-h-0">{children}</div>
       </div>
     </div>
   );

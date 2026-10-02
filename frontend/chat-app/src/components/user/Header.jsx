@@ -19,6 +19,7 @@ import Drawer from "../ui/drawer";
 import CartSidebar from "../../pages/user/cart/CartSidebar";
 
 import { AuthContext } from "../../context/AuthContext";
+import AuthModal from "../../components/ui/AuthModal";
 
 const Header = () => {
   const { user } = useContext(AuthContext);
@@ -48,6 +49,11 @@ const Header = () => {
     handleSearch,
     closeSearch,
     handleProductClick,
+    isAuthModalOpen,
+    setIsAuthModalOpen,
+
+    isLogin,
+    setIsLogin,
   } = useHeader();
 
   // Navigation menu structure
@@ -772,28 +778,28 @@ const Header = () => {
                 // NOT LOGGED IN → SIGN IN
                 <button
                   type="button"
-                  onClick={() => navigate("/auth?mode=login")}
+                  onClick={() => {
+                    setIsLogin(true);
+                    setIsAuthModalOpen(true);
+                  }}
                   className={`
-      flex
-      items-center
-      gap-2
+    flex
+    items-center
+    gap-2
+    rounded-full
+    border
+    px-3
+    py-2
+    cursor-pointer
+    transition-all
+    duration-200
 
-      rounded-full
-      border
-
-      px-3
-      py-2
-
-      cursor-pointer
-      transition-all
-      duration-200
-
-      ${
-        isDark
-          ? "bg-gray-900/80 border-gray-800 text-gray-200 hover:border-gray-700 hover:bg-gray-800"
-          : "bg-white border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50"
-      }
-    `}
+    ${
+      isDark
+        ? "bg-gray-900/80 border-gray-800 text-gray-200 hover:border-gray-700 hover:bg-gray-800"
+        : "bg-white border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50"
+    }
+  `}
                 >
                   <FiUser className="text-[17px]" />
 
@@ -1222,7 +1228,8 @@ const Header = () => {
                       type="button"
                       onClick={() => {
                         closeMobileMenu();
-                        navigate("/login");
+                        setIsLogin(true);
+                        setIsAuthModalOpen(true);
                       }}
                       className={`
       flex
@@ -1262,6 +1269,10 @@ const Header = () => {
       >
         <CartSidebar onClose={() => setIsCartDrawerOpen(false)} />
       </Drawer>
+
+      {/* =====================================================
+          AUTH MODAL
+      ===================================================== */}
 
       {/* =====================================================
           SEARCH MODAL
@@ -1447,6 +1458,13 @@ const Header = () => {
           </div>
         </div>
       )}
+
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        setIsOpen={setIsAuthModalOpen}
+        isLogin={isLogin}
+        setIsLogin={setIsLogin}
+      />
     </>
   );
 };

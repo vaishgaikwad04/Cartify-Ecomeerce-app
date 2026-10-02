@@ -57,6 +57,8 @@ export const useHeader = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
+const [isLogin, setIsLogin] = useState(true);
 
   // =====================================================
   // FETCH PROFILE
@@ -239,5 +241,9 @@ export const useHeader = () => {
     handleSearch,
     closeSearch,
     handleProductClick,
+isAuthModalOpen,
+setIsAuthModalOpen,
+
+  isLogin, setIsLogin
   };
 };

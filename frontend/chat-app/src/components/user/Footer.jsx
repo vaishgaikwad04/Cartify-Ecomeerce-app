@@ -1,4 +1,3 @@
-
 import React, { useContext } from "react";
 
 import {
@@ -29,6 +28,7 @@ const Footer = () => {
           w-full
           transition-colors
           duration-300
+
           ${
             isDark
               ? "bg-gray-900 text-white"
@@ -44,34 +44,36 @@ const Footer = () => {
             w-full
             max-w-[1800px]
             mx-auto
+
             px-2
             sm:px-4
             md:px-6
             lg:px-10
             xl:px-12
+
             py-6
             sm:py-8
             md:py-10
-            lg:py-12
+            lg:py-8
+            xl:py-9
           "
         >
           {/* =====================================================
               FOOTER GRID
-
-              Mobile  : 4 columns
-              Tablet  : 4 columns
-              Desktop : 4 columns
           ===================================================== */}
           <div
             className="
               grid
+
               grid-cols-[1.25fr_0.85fr_0.8fr_1.2fr]
+
               items-start
 
               gap-x-2
               sm:gap-x-4
               md:gap-x-8
-              lg:gap-x-12
+              lg:gap-x-10
+              xl:gap-x-12
 
               gap-y-4
             "
@@ -85,10 +87,11 @@ const Footer = () => {
                 onClick={() => navigate("/")}
                 className="
                   cursor-pointer
+
                   text-[10px]
                   sm:text-sm
                   md:text-base
-                  lg:text-lg
+                  lg:text-base
 
                   font-serif
                   font-medium
@@ -96,6 +99,7 @@ const Footer = () => {
                   tracking-[1.5px]
                   sm:tracking-[3px]
                   md:tracking-[4px]
+                  lg:tracking-[3px]
 
                   uppercase
                   whitespace-nowrap
@@ -113,14 +117,16 @@ const Footer = () => {
                   max-w-[150px]
                   sm:max-w-[220px]
                   md:max-w-[260px]
+                  lg:max-w-[230px]
 
                   text-[7px]
                   sm:text-[9px]
                   md:text-xs
+                  lg:text-[10px]
 
-                  leading-[1.45]
+                  leading-[1.5]
 
-                  line-clamp-6
+                  line-clamp-5
 
                   ${
                     isDark
@@ -139,9 +145,11 @@ const Footer = () => {
                 className={`
                   flex
                   items-center
+
                   gap-1
                   sm:gap-2
                   md:gap-3
+                  lg:gap-2.5
 
                   mt-3
                   sm:mt-4
@@ -181,20 +189,27 @@ const Footer = () => {
 
                       w-5
                       h-5
+
                       sm:w-7
                       sm:h-7
+
                       md:w-8
                       md:h-8
+
+                      lg:w-7
+                      lg:h-7
 
                       rounded-full
 
                       text-[7px]
                       sm:text-[9px]
                       md:text-[10px]
+                      lg:text-[9px]
 
                       cursor-pointer
 
                       hover:scale-110
+
                       transition-transform
                       duration-200
 
@@ -222,13 +237,16 @@ const Footer = () => {
                   text-[8px]
                   sm:text-xs
                   md:text-sm
-                  lg:text-base
+                  lg:text-xs
 
                   font-medium
+
+                  tracking-[0.5px]
 
                   mb-2
                   sm:mb-3
                   md:mb-4
+                  lg:mb-3
                 "
               >
                 CATEGORIES
@@ -239,10 +257,12 @@ const Footer = () => {
                   space-y-1.5
                   sm:space-y-2
                   md:space-y-2.5
+                  lg:space-y-2
 
                   text-[7px]
                   sm:text-[9px]
                   md:text-xs
+                  lg:text-[10px]
 
                   ${
                     isDark
@@ -282,6 +302,7 @@ const Footer = () => {
                       <span
                         className={`
                           absolute
+
                           left-0
                           -bottom-1
 
@@ -318,13 +339,16 @@ const Footer = () => {
                   text-[8px]
                   sm:text-xs
                   md:text-sm
-                  lg:text-base
+                  lg:text-xs
 
                   font-medium
+
+                  tracking-[0.5px]
 
                   mb-2
                   sm:mb-3
                   md:mb-4
+                  lg:mb-3
                 "
               >
                 HELP
@@ -335,10 +359,12 @@ const Footer = () => {
                   space-y-1.5
                   sm:space-y-2
                   md:space-y-2.5
+                  lg:space-y-2
 
                   text-[7px]
                   sm:text-[9px]
                   md:text-xs
+                  lg:text-[10px]
 
                   ${
                     isDark
@@ -394,9 +420,11 @@ const Footer = () => {
             <div
               className="
                 min-w-0
+
                 space-y-2
                 sm:space-y-3
                 md:space-y-4
+                lg:space-y-3
               "
             >
               {/* =================================================
@@ -411,6 +439,7 @@ const Footer = () => {
                     gap-1
                     sm:gap-2
                     md:gap-2.5
+                    lg:gap-2
 
                     group
                     cursor-pointer
@@ -437,9 +466,13 @@ const Footer = () => {
                         md:w-12
                         md:h-12
 
+                        lg:w-10
+                        lg:h-10
+
                         object-cover
 
                         group-hover:scale-105
+
                         transition-transform
                         duration-300
                       "
@@ -453,10 +486,12 @@ const Footer = () => {
                         text-[5px]
                         sm:text-[7px]
                         md:text-[8px]
+                        lg:text-[7px]
 
                         tracking-[1px]
                         sm:tracking-[1.5px]
                         md:tracking-[2px]
+                        lg:tracking-[1.5px]
 
                         uppercase
                         leading-none
@@ -478,6 +513,7 @@ const Footer = () => {
                         text-[8px]
                         sm:text-[10px]
                         md:text-xs
+                        lg:text-[10px]
 
                         font-normal
                         truncate
@@ -507,10 +543,12 @@ const Footer = () => {
                     gap-1
                     sm:gap-2
                     md:gap-2.5
+                    lg:gap-2
 
                     group
                     cursor-pointer
                     min-w-0
+
                     mt-1
                   "
                 >
@@ -534,9 +572,13 @@ const Footer = () => {
                         md:w-12
                         md:h-12
 
+                        lg:w-10
+                        lg:h-10
+
                         object-cover
 
                         group-hover:scale-105
+
                         transition-transform
                         duration-300
                       "
@@ -550,10 +592,12 @@ const Footer = () => {
                         text-[5px]
                         sm:text-[7px]
                         md:text-[8px]
+                        lg:text-[7px]
 
                         tracking-[1px]
                         sm:tracking-[1.5px]
                         md:tracking-[2px]
+                        lg:tracking-[1.5px]
 
                         uppercase
                         leading-none
@@ -575,6 +619,7 @@ const Footer = () => {
                         text-[8px]
                         sm:text-[10px]
                         md:text-xs
+                        lg:text-[10px]
 
                         font-normal
                         truncate
@@ -623,6 +668,7 @@ const Footer = () => {
               py-3
               sm:py-4
               md:py-5
+              lg:py-3.5
 
               flex
               flex-row
@@ -640,6 +686,7 @@ const Footer = () => {
                 text-[7px]
                 sm:text-[9px]
                 md:text-xs
+                lg:text-[10px]
 
                 whitespace-nowrap
 
@@ -661,13 +708,16 @@ const Footer = () => {
                 flex
                 items-center
                 justify-end
+
                 gap-1.5
                 sm:gap-3
                 md:gap-4
+                lg:gap-3
 
                 text-[7px]
                 sm:text-[9px]
                 md:text-xs
+                lg:text-[10px]
 
                 font-semibold
 

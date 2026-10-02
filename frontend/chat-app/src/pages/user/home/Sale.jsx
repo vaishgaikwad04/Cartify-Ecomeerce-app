@@ -208,6 +208,7 @@ const Sale = () => {
 
             {/* TEXT CARD */}
             <TextCard
+          
               subtitle="Limited Offer"
               title="Summer Sale"
               description="Up to 50% off on selected items"
@@ -226,42 +227,36 @@ const Sale = () => {
       `}
             >
               <Button
-                label="Shop Now"
-                variant="primary"
-                className={`
-          !ml-0
+  onClick={() => {
+    navigate("/sale");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }}
+  label="Shop Now"
+  variant="primary"
+  className={`
+    !ml-0
 
-          !px-3
-          !py-1.5
-          !text-[10px]
+    !px-3
+    !py-1.5
+    !text-[10px]
 
-          sm:!px-4
-          sm:!py-2
-          sm:!text-xs
+    sm:!px-4
+    sm:!py-2
+    sm:!text-xs
 
-          md:!px-5
-          md:!py-2
-          md:!text-sm
+    md:!px-5
+    md:!py-2
+    md:!text-sm
 
-          transition-all
-          duration-300
-          hover:scale-105
-          hover:shadow-lg
-
-          ${
-            isDark
-              ? "bg-gray-900 text-white hover:bg-gray-600"
-              : "bg-gray-100 text-gray-900 hover:bg-gray-300"
-          }
-        `}
-                onClick={() => {
-                  navigate("/");
-                  window.scrollTo({
-                    top: 0,
-                    behavior: "smooth",
-                  });
-                }}
-              />
+    transition-all
+    duration-300
+    hover:scale-105
+    hover:shadow-lg
+  `}
+/>
             </TextCard>
           </div>
         </div>

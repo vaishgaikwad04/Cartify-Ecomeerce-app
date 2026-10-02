@@ -40,6 +40,7 @@ const HeroSection = () => {
             bottom-4
             sm:bottom-6
             md:bottom-8
+             min-[500px]:max-[670px]:top-42
             lg:bottom-48
             z-10
             flex
@@ -48,6 +49,7 @@ const HeroSection = () => {
             text-center
             text-white
             px-2
+            
           "
             >
               <p
@@ -59,6 +61,7 @@ const HeroSection = () => {
               text-[8px]
               sm:text-[9px]
               md:text-xs
+              
               mb-1
               sm:mb-2
             "
@@ -71,7 +74,7 @@ const HeroSection = () => {
               text-base
               sm:text-lg
               md:text-2xl
-              lg:text-4xl
+              lg:text-2xl
               xl:text-5xl
               font-semibold
               leading-tight
