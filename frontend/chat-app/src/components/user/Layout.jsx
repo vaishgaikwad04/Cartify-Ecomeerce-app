@@ -4,7 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { ThemeContext } from "../../context/ThemeContext";
 
-const Layout = () => {
+const Layout = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
   //thme
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "Dark Mode";
@@ -18,7 +18,12 @@ const Layout = () => {
       `}
     >
       {/*header*/}
-      <Header />
+      <Header
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        isLogin={isLogin}
+        setIsLogin={setIsLogin}
+      />
       {/*outlet*/}
       <main>
         <Outlet />

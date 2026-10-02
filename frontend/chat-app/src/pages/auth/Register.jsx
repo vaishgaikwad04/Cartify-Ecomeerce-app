@@ -10,7 +10,7 @@ const Register = ({ isLogin, setIsLogin }) => {
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "Dark Mode";
 
-  const { formik, error, success, handleLogin } = useRegister();
+  const { formik, error, success, handleLogin } = useRegister( {setIsLogin });
 
   const roleOptions = [
     {

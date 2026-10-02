@@ -1,9 +1,6 @@
 import React, { useContext, useState } from "react";
 import { loginUser, googleLogin } from "../../api/auth/AuthApi";
-import {
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../../Firebase";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -17,7 +14,7 @@ const initialValues = {
   role: "",
 };
 
-export const useLogin = () => {
+export const useLogin = ({ setIsOpen }) => {
   const navigate = useNavigate();
 
   const { setUser } = useContext(AuthContext);
@@ -25,69 +22,52 @@ export const useLogin = () => {
   const [error, setError] = useState("");
   const [sucess, setSucess] = useState("");
 
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-  } = useFormik({
-    initialValues,
-    validationSchema: authSchema,
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
+    useFormik({
+      initialValues,
+      validationSchema: authSchema,
 
-    onSubmit: async (values, actions) => {
-      console.log("FORM VALUES:", values);
+      onSubmit: async (values, actions) => {
+        console.log("FORM VALUES:", values);
 
-      try {
-        const res = await loginUser(values);
+        try {
+          const res = await loginUser(values);
 
-        setUser(res.data.user);
+          setUser(res.data.user);
 
-        setSucess(res.data.message);
-        setError("");
+          setSucess(res.data.message);
+          setError("");
 
-        toast.success(res.data.message);
+          toast.success(res.data.message);
 
-        if (res.data.user.role === "admin") {
-          navigate("/admin");
-        } else {
-          navigate("/");
+          if (res.data.user.role === "admin") {
+            navigate("/admin");
+          } else {
+            navigate("/");
+          }
+          setIsOpen(false);
+          actions.resetForm();
+        } catch (error) {
+          console.log("LOGIN ERROR:", error.response?.data);
+
+          if (error.response) {
+            setError(error.response.data.message);
+
+            toast.error(error.response?.data?.message || "Login failed");
+          } else {
+            setError("Server not responding");
+            toast.error("Server not responding");
+          }
         }
-
-        actions.resetForm();
-      } catch (error) {
-        console.log(
-          "LOGIN ERROR:",
-          error.response?.data
-        );
-
-        if (error.response) {
-          setError(
-            error.response.data.message
-          );
-
-          toast.error(
-            error.response?.data?.message ||
-              "Login failed"
-          );
-        } else {
-          setError("Server not responding");
-          toast.error("Server not responding");
-        }
-      }
-    },
-  });
+      },
+    });
 
   // Google Login
   const handleLogin = async () => {
     const provider = new GoogleAuthProvider();
 
     try {
-      const result = await signInWithPopup(
-        auth,
-        provider
-      );
+      const result = await signInWithPopup(auth, provider);
 
       const googleUser = result.user;
 

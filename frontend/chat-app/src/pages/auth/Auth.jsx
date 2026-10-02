@@ -1,47 +1,50 @@
-import React, { useContext } from "react";
-import { useSearchParams } from "react-router-dom";
-import Register from "./Register";
-import Login from "./Login";
-import { ThemeContext } from "../../context/ThemeContext";
+import { Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const Auth = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+const PrivateRoute = ({ setIsOpen, setIsLogin }) => {
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
-  const mode = searchParams.get("mode") || "register";
-  const isLogin = mode === "login";
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/auth/me`, {
+          withCredentials: true,
+        });
 
-  const { theme } = useContext(ThemeContext);
-  const isDark = theme === "Dark Mode";
+        setUser(res.data?.user || null);
+      } catch (error) {
+        console.error("Authentication check failed:", error);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const setIsLogin = (value) => {
-    setSearchParams({
-      mode: value ? "login" : "register",
-    });
-  };
+    checkAuth();
+  }, []);
 
-  return (
-    <div
-      className={`min-h-screen flex items-center justify-center px-4 py-8 transition-all duration-300 ${
-        isDark
-          ? "bg-gray-950"
-          : "bg-gradient-to-br from-slate-100 via-gray-50 to-slate-200"
-      }`}
-    >
-      <div className="w-full">
-        {isLogin ? (
-          <Login
-            isLogin={isLogin}
-            setIsLogin={setIsLogin}
-          />
-        ) : (
-          <Register
-            isLogin={isLogin}
-            setIsLogin={setIsLogin}
-          />
-        )}
+  useEffect(() => {
+    if (!loading && !user) {
+      setIsLogin(true);
+      setIsOpen(true);
+    }
+  }, [loading, user, setIsOpen, setIsLogin]);
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        Loading...
       </div>
-    </div>
-  );
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
+
+  return <Outlet />;
 };
 
-export default Auth;
+export default PrivateRoute;

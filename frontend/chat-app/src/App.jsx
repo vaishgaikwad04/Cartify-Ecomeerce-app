@@ -1,5 +1,3 @@
-
-
 // 320–639px	No prefix Mobile
 // 640–767px	sm: Large mobile / small tablet
 // 768–1023px	md:	Tablet
@@ -7,7 +5,7 @@
 // 1280–1535px	xl: Desktop
 // 1536px+	2xl: Large desktop
 
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeContext } from "./context/ThemeContext";
@@ -54,15 +52,17 @@ import CustomCursor from "./components/ui/CustomCursor";
 
 const App = () => {
   const { theme } = useContext(ThemeContext);
-
   const isDark = theme === "dark";
+
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   return (
     <div className={isDark ? "dark" : ""}>
       <Router>
         {/* Scroll position handler */}
         <ScrollToTop />
-         <CustomCursor />
+        <CustomCursor />
 
         {/* Routes */}
         <Routes>
@@ -70,7 +70,17 @@ const App = () => {
               USER ROUTES
           ========================= */}
 
-          <Route path="/" element={<Layout />}>
+          <Route
+            path="/"
+            element={
+              <Layout
+                isOpen={isAuthModalOpen}
+                setIsOpen={setIsAuthModalOpen}
+                isLogin={isLogin}
+                setIsLogin={setIsLogin}
+              />
+            }
+          >
             {/* PUBLIC ROUTES */}
 
             <Route index element={<Home />} />
@@ -99,7 +109,14 @@ const App = () => {
                 PROTECTED ROUTES
             ========================= */}
 
-            <Route element={<PrivateRoute />}>
+            <Route
+              element={
+                <PrivateRoute
+                  setIsOpen={setIsAuthModalOpen}
+                  setIsLogin={setIsLogin}
+                />
+              }
+            >
               <Route path="wishListedItems" element={<WishListedItem />} />
 
               <Route path="settings" element={<SettingsPage />} />
@@ -128,7 +145,17 @@ const App = () => {
               AUTH
           ========================= */}
 
-          <Route path="/auth" element={<Auth />} />
+          <Route
+            path="/auth"
+            element={
+              <Auth
+                isOpen={isAuthModalOpen}
+                setIsOpen={setIsAuthModalOpen}
+                isLogin={isLogin}
+                setIsLogin={setIsLogin}
+              />
+            }
+          />
 
           {/* =========================
               ADMIN

@@ -21,7 +21,7 @@ import CartSidebar from "../../pages/user/cart/CartSidebar";
 import { AuthContext } from "../../context/AuthContext";
 import AuthModal from "../../components/ui/AuthModal";
 
-const Header = () => {
+const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
   const { user } = useContext(AuthContext);
   const {
     navigate,
@@ -49,11 +49,6 @@ const Header = () => {
     handleSearch,
     closeSearch,
     handleProductClick,
-    isAuthModalOpen,
-    setIsAuthModalOpen,
-
-    isLogin,
-    setIsLogin,
   } = useHeader();
 
   // Navigation menu structure
@@ -780,7 +775,7 @@ const Header = () => {
                   type="button"
                   onClick={() => {
                     setIsLogin(true);
-                    setIsAuthModalOpen(true);
+                    setIsOpen(true);
                   }}
                   className={`
     flex
@@ -1229,7 +1224,7 @@ const Header = () => {
                       onClick={() => {
                         closeMobileMenu();
                         setIsLogin(true);
-                        setIsAuthModalOpen(true);
+                        setIsOpen(true);
                       }}
                       className={`
       flex
@@ -1460,8 +1455,8 @@ const Header = () => {
       )}
 
       <AuthModal
-        isOpen={isAuthModalOpen}
-        setIsOpen={setIsAuthModalOpen}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
         isLogin={isLogin}
         setIsLogin={setIsLogin}
       />

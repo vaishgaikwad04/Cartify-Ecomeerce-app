@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 
 import { authSchema} from "../../validations/auth/RegisterSchema";
@@ -17,8 +16,8 @@ const initialValues = {
   role: "",
 };
 
-export const useRegister = () => {
-  const navigate = useNavigate();
+export const useRegister = ({ setIsLogin }) => {
+ 
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -46,7 +45,7 @@ export const useRegister = () => {
 
         actions.resetForm();
 
-        navigate("/auth?mode=login");
+       setIsLogin(true)
       } catch (error) {
         console.error("Registration error:", error);
 

@@ -5,7 +5,7 @@ import Login from "../../pages/auth/Login";
 import Register from "../../pages/auth/Register";
 import { ThemeContext } from "../../context/ThemeContext";
 
-const AuthModal = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
+const AuthModal = ({ isOpen, setIsOpen, isLogin, setIsLogin, }) => {
   if (!isOpen) return null;
 
   const { theme } = useContext(ThemeContext);
@@ -75,7 +75,7 @@ const AuthModal = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
         {/* AUTH CONTENT */}
         {isLogin ? (
-          <Login isLogin={isLogin} setIsLogin={setIsLogin} />
+          <Login isLogin={isLogin} setIsLogin={setIsLogin} setIsOpen={setIsOpen} />
         ) : (
           <Register isLogin={isLogin} setIsLogin={setIsLogin} />
         )}

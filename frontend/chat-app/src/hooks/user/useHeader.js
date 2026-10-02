@@ -1,4 +1,3 @@
-
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -31,8 +30,7 @@ export const useHeader = () => {
   // =====================================================
   // NOTIFICATIONS
   // =====================================================
-  const { allowNotification, unreadCount } =
-    useContext(NotificationContext);
+  const { allowNotification, unreadCount } = useContext(NotificationContext);
 
   // =====================================================
   // MOBILE MENU
@@ -57,9 +55,6 @@ export const useHeader = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
-const [isLogin, setIsLogin] = useState(true);
-
   // =====================================================
   // FETCH PROFILE
   // =====================================================
@@ -82,7 +77,7 @@ const [isLogin, setIsLogin] = useState(true);
     } catch (error) {
       console.error(
         "Profile fetch error:",
-        error?.response?.data || error?.message
+        error?.response?.data || error?.message,
       );
 
       setProfileData(null);
@@ -121,10 +116,7 @@ const [isLogin, setIsLogin] = useState(true);
 
       setResults(res?.data?.data || []);
     } catch (error) {
-      console.error(
-        "Search error:",
-        error?.response?.data || error?.message
-      );
+      console.error("Search error:", error?.response?.data || error?.message);
 
       setResults([]);
     } finally {
@@ -163,22 +155,14 @@ const [isLogin, setIsLogin] = useState(true);
   // =====================================================
   useEffect(() => {
     const shouldLockScroll =
-      isCartDrawerOpen ||
-      isSearchModalOpen ||
-      isMobileMenuOpen;
+      isCartDrawerOpen || isSearchModalOpen || isMobileMenuOpen;
 
-    document.body.style.overflow = shouldLockScroll
-      ? "hidden"
-      : "auto";
+    document.body.style.overflow = shouldLockScroll ? "hidden" : "auto";
 
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [
-    isCartDrawerOpen,
-    isSearchModalOpen,
-    isMobileMenuOpen,
-  ]);
+  }, [isCartDrawerOpen, isSearchModalOpen, isMobileMenuOpen]);
 
   // =====================================================
   // ESCAPE KEY
@@ -241,9 +225,5 @@ const [isLogin, setIsLogin] = useState(true);
     handleSearch,
     closeSearch,
     handleProductClick,
-isAuthModalOpen,
-setIsAuthModalOpen,
-
-  isLogin, setIsLogin
   };
 };

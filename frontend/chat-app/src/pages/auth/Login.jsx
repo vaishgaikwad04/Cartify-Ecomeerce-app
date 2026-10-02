@@ -4,7 +4,7 @@ import { useLogin } from "../../hooks/auth/useLogin";
 import { ThemeContext } from "../../context/ThemeContext";
 import Dropdown from "../../components/ui/Dropdown";
 
-const Login = ({ isLogin, setIsLogin }) => {
+const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "Dark Mode";
 
@@ -18,7 +18,7 @@ const Login = ({ isLogin, setIsLogin }) => {
     errors,
     touched,
     handleBlur,
-  } = useLogin();
+  } = useLogin({setIsOpen});
 
   const roleOptions = [
     { label: "User", value: "user" },

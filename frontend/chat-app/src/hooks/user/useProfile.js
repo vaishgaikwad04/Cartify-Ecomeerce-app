@@ -98,7 +98,7 @@ export const useProfile = () => {
       toast.success("Logged out successfully");
 
       // 5. Navigate to login
-      navigate("/auth?mode=login");
+      navigate("/");
     } catch (error) {
       console.error("Logout error:", error);
 
