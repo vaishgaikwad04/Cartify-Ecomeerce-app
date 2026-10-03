@@ -108,7 +108,7 @@ export const useSettings = () => {
       await logoutUser();
 
       // Navigate to authentication page
-      navigate("/auth");
+      navigate("/");
     } catch (error) {
       console.error(
         "Logout error:",

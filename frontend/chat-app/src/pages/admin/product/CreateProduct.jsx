@@ -3,6 +3,7 @@ import Dropdown from "../../../components/ui/Dropdown";
 import Button from "../../../components/ui/Button";
 import CheckBox from "../../../components/ui/CheckBox";
 import { useCreateProduct } from "../../../hooks/admin/product/useCreateProduct";
+import { FiPackage, FiEdit3 } from "react-icons/fi";
 
 const CreateProduct = ({ productId, setProductFormModelIsOpen }) => {
   const {
@@ -69,23 +70,43 @@ const CreateProduct = ({ productId, setProductFormModelIsOpen }) => {
             BASIC INFORMATION
         ====================================================== */}
         <div className="mb-4 py-4">
-          <h1
-            className={`text-2xl font-semibold tracking-tight ${
-              isDark ? "text-white" : "text-gray-900"
-            }`}
-          >
-            {isEdit ? "Edit Product" : "Create Product"}
-          </h1>
+          <div className="flex items-start gap-3">
+            {/* Product Icon */}
+            <div
+              className={`mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border mt-2 ${
+                isDark
+                  ? "border-gray-700 bg-gray-800/70 text-gray-200"
+                  : "border-gray-200 bg-gray-50 text-gray-700"
+              }`}
+            >
+              {isEdit ? (
+                <FiEdit3 className="text-xl" />
+              ) : (
+                <FiPackage className="text-xl" />
+              )}
+            </div>
 
-          <p
-            className={`mt-1 text-sm ${
-              isDark ? "text-gray-400" : "text-gray-500"
-            }`}
-          >
-            {isEdit
-              ? "Update the product information, pricing, variants, and images."
-              : "Add a new product to your catalog with its details, pricing, variants, and images."}
-          </p>
+            {/* Heading Content */}
+            <div>
+              <h1
+                className={`text-2xl font-semibold tracking-tight ${
+                  isDark ? "text-white" : "text-gray-900"
+                }`}
+              >
+                {isEdit ? "Edit Product" : "Create Product"}
+              </h1>
+
+              <p
+                className={`mt-1 text-sm leading-6 ${
+                  isDark ? "text-gray-400" : "text-gray-500"
+                }`}
+              >
+                {isEdit
+                  ? "Update the product information, pricing, variants, and images."
+                  : "Add a new product to your catalog with its details, pricing, variants, and images."}
+              </p>
+            </div>
+          </div>
         </div>
         <section
           className={`

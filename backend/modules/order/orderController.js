@@ -108,10 +108,10 @@ export const createCheckoutSession = async (req, res) => {
       stripeSessionId: session.id,
     });
 
-    const ADMIN_ID = "6a940d8105501c31149acfc0";
+   
 
     await notificationModel.create({
-      user: ADMIN_ID,
+      user:  process.env.ADMIN_ID,
       title: "New Order",
       message: "A new order has been placed",
       type: "order",

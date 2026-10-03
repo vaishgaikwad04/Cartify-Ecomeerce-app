@@ -8,6 +8,7 @@ import Button from "../../../components/ui/Button";
 import Modal from "../../../components/ui/Modal";
 //order custom hook
 import { useOrders } from "../../../hooks/admin/orders/useOrders";
+import { FiPackage } from "react-icons/fi";
 
 const Order = () => {
   //order custom hook
@@ -474,38 +475,36 @@ const Order = () => {
         </div>
       </div>
 
-       {/* STATISTICS */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 mb-6">
-          <AdminPanelCard title="Total Orders" value={orderData.length} />
+      {/* STATISTICS */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 mb-6">
+        <AdminPanelCard title="Total Orders" value={orderData.length} />
 
-          <AdminPanelCard
-            title="Processing"
-            value={
-              orderData.filter((item) => item?.status === "processing").length
-            }
-          />
+        <AdminPanelCard
+          title="Processing"
+          value={
+            orderData.filter((item) => item?.status === "processing").length
+          }
+        />
 
-          <AdminPanelCard
-            title="Shipped"
-            value={
-              orderData.filter((item) => item?.status === "shipped").length
-            }
-          />
+        <AdminPanelCard
+          title="Shipped"
+          value={orderData.filter((item) => item?.status === "shipped").length}
+        />
 
-          <AdminPanelCard
-            title="Delivered"
-            value={
-              orderData.filter((item) => item?.status === "delivered").length
-            }
-          />
+        <AdminPanelCard
+          title="Delivered"
+          value={
+            orderData.filter((item) => item?.status === "delivered").length
+          }
+        />
 
-          <AdminPanelCard
-            title="Cancelled"
-            value={
-              orderData.filter((item) => item?.status === "cancelled").length
-            }
-          />
-        </div>
+        <AdminPanelCard
+          title="Cancelled"
+          value={
+            orderData.filter((item) => item?.status === "cancelled").length
+          }
+        />
+      </div>
 
       {/*model*/}
       <Modal isOpen={showManageModal} onClose={() => setShowManageModal(false)}>
@@ -515,13 +514,37 @@ const Order = () => {
           >
             {/* HEADER */}
             <div className="mb-6">
-              <h2 className="text-xl font-semibold">Manage Order</h2>
-              {/*show the last 8 characters of the order's _id*/}
-              <p
-                className={` mt-1 text-xs ${isDark ? "text-gray-500" : "text-gray-400"} `}
-              >
-                Order ID: #{selectedOrder._id?.slice(-8)}
-              </p>
+              <div className="flex items-start gap-3">
+                {/* Order Icon */}
+                <div
+                  className={`mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${
+                    isDark
+                      ? "border-gray-700 bg-gray-800/70 text-gray-200"
+                      : "border-gray-200 bg-gray-50 text-gray-700"
+                  }`}
+                >
+                  <FiPackage className="text-lg" />
+                </div>
+
+                {/* Header Content */}
+                <div>
+                  <h2
+                    className={`text-xl font-semibold ${
+                      isDark ? "text-white" : "text-gray-900"
+                    }`}
+                  >
+                    Manage Order
+                  </h2>
+
+                  <p
+                    className={`mt-1 text-xs ${
+                      isDark ? "text-gray-500" : "text-gray-400"
+                    }`}
+                  >
+                    Order ID: #{selectedOrder._id?.slice(-8)}
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* CUSTOMER */}
