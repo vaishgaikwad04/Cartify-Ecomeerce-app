@@ -800,7 +800,7 @@ const DescriptionPage = () => {
                   text-lg
                   sm:text-xl
                   md:text-2xl
-                  lg:text-xl
+                  lg:text-lg
                   font-semibold
                   leading-tight
                   break-words
@@ -813,7 +813,7 @@ const DescriptionPage = () => {
               {/* PRICE */}
               <div className="flex items-center flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-5">
                 {product.discountPrice && (
-                  <span className="line-through text-gray-400 text-xs sm:text-sm md:text-base lg:text-sm">
+                  <span className="line-through text-gray-400 text-xs sm:text-sm md:text-base lg:text-xs">
                     ₹{product.price}
                   </span>
                 )}
@@ -823,7 +823,7 @@ const DescriptionPage = () => {
                     text-base
                     sm:text-lg
                     md:text-xl
-                    lg:text-lg
+                    lg:text-xs
                     font-bold
                     ${isDark ? "text-white" : "text-black"}
                   `}
