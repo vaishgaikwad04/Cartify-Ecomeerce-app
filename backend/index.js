@@ -30,8 +30,10 @@ const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = [
   "http://localhost:5173",
-  // "https://serene-faloodeh-5f8f3a.netlify.app",
-  'https://cartify-ecommerce-app.netlify.app'
+   "https://cartify-ecomeerce-app-9qyv.onrender.com",
+ {/* "https://serene-faloodeh-5f8f3a.netlify.app",
+  'https://cartify-ecommerce-app.netlify.app',*/}
+ 
 ];
 
 app.use(
