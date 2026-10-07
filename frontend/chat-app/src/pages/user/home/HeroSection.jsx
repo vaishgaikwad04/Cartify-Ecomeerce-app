@@ -75,7 +75,7 @@ const HeroSection = () => {
               sm:text-lg
               md:text-2xl
               lg:text-2xl
-              xl:text-5xl
+              xl:text-4xl
               font-semibold
               leading-tight
               mb-2

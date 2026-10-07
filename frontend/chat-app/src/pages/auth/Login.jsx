@@ -4,7 +4,7 @@ import { useLogin } from "../../hooks/auth/useLogin";
 import { ThemeContext } from "../../context/ThemeContext";
 import Dropdown from "../../components/ui/Dropdown";
 
-const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
+const Login = ({ isLogin, setIsLogin, setIsOpen }) => {
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "Dark Mode";
 
@@ -18,7 +18,7 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
     errors,
     touched,
     handleBlur,
-  } = useLogin({setIsOpen});
+  } = useLogin({ setIsOpen });
 
   const roleOptions = [
     { label: "User", value: "user" },
@@ -26,19 +26,19 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
   ];
 
   return (
- <div
-  className={`
-    w-full
-    transition-all
-    duration-300
-    ${isDark ? "bg-gray-900" : "bg-white"}
-  `}
->
+    <div
+      className={`
+        w-full
+        transition-all
+        duration-300
+        ${isDark ? "bg-gray-900" : "bg-white"}
+      `}
+    >
       {/* ================= MAIN CARD ================= */}
       <div
         className={`
           w-full
-          max-w-[500px]
+          max-w-[440px]
           overflow-hidden
           shadow-2xl
           transition-all
@@ -47,7 +47,7 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
         `}
       >
         {/* ================= TOP IMAGE ================= */}
-        <div className="w-full h-[200px] sm:h-[220px] overflow-hidden">
+        <div className="w-full h-[150px] sm:h-[170px] overflow-hidden">
           <img
             src="https://mafoil.wpbingosite.com/wp-content/uploads/2023/01/sign-in.jpg"
             alt="Sign in"
@@ -61,14 +61,14 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
         </div>
 
         {/* ================= FORM CONTENT ================= */}
-        <div className="px-8 py-8 sm:px-10 sm:py-9">
+        <div className="px-6 py-5 sm:px-7 sm:py-6">
           {/* ================= REGISTER / LOGIN TITLE ================= */}
-          <div className="mb-7">
+          <div className="mb-5">
             <h2
               className={`
-                text-xl
-                sm:text-2xl
-                tracking-[0.25em]
+                text-lg
+                sm:text-xl
+                tracking-[0.22em]
                 font-medium
                 uppercase
                 ${isDark ? "text-white" : "text-gray-900"}
@@ -82,10 +82,10 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
           {error && (
             <div
               className={`
-                mb-5
-                px-4
-                py-3
-                text-sm
+                mb-4
+                px-3
+                py-2.5
+                text-xs
                 border
                 ${
                   isDark
@@ -102,10 +102,10 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
           {sucess && (
             <div
               className={`
-                mb-5
-                px-4
-                py-3
-                text-sm
+                mb-4
+                px-3
+                py-2.5
+                text-xs
                 border
                 ${
                   isDark
@@ -119,7 +119,7 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
           )}
 
           {/* ================= LOGIN FORM ================= */}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             {/* EMAIL */}
             <div>
               <InputField
@@ -133,7 +133,9 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
               />
 
               {touched.email && errors.email && (
-                <p className="mt-1.5 text-xs text-red-500">{errors.email}</p>
+                <p className="mt-1 text-[11px] text-red-500">
+                  {errors.email}
+                </p>
               )}
             </div>
 
@@ -150,7 +152,9 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
               />
 
               {touched.password && errors.password && (
-                <p className="mt-1.5 text-xs text-red-500">{errors.password}</p>
+                <p className="mt-1 text-[11px] text-red-500">
+                  {errors.password}
+                </p>
               )}
             </div>
 
@@ -166,7 +170,9 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
               />
 
               {touched.role && errors.role && (
-                <p className="mt-1.5 text-xs text-red-500">{errors.role}</p>
+                <p className="mt-1 text-[11px] text-red-500">
+                  {errors.role}
+                </p>
               )}
             </div>
 
@@ -175,12 +181,12 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
               type="submit"
               className="
                 w-full
-                h-[50px]
+                h-[44px]
                 mt-1
                 bg-[#222222]
                 hover:bg-black
                 text-white
-                text-sm
+                text-xs
                 font-semibold
                 uppercase
                 tracking-wide
@@ -191,13 +197,15 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
             >
               Log In
             </button>
+
+            {/* ================= REGISTER / LOGIN SWITCH ================= */}
             <button
               type="button"
               onClick={() => setIsLogin(!isLogin)}
               className={`
                 w-full
-                h-[50px]
-                text-sm
+                h-[44px]
+                text-xs
                 font-semibold
                 uppercase
                 tracking-wide
@@ -210,12 +218,14 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
                 }
               `}
             >
-             {isLogin ? "Don't Have An Account?" : "Already Have An Account?"}
+              {isLogin
+                ? "Don't Have An Account?"
+                : "Already Have An Account?"}
             </button>
           </form>
 
           {/* ================= DIVIDER ================= */}
-          <div className="flex items-center gap-3 my-6">
+          <div className="flex items-center gap-3 my-4">
             <div
               className={`
                 flex-1
@@ -226,7 +236,7 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
 
             <span
               className={`
-                text-xs
+                text-[11px]
                 ${isDark ? "text-gray-500" : "text-gray-400"}
               `}
             >
@@ -276,7 +286,10 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
             `}
           >
             {/* Google logo */}
-            <svg className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" viewBox="0 0 48 48">
+            <svg
+              className="w-4 h-4 sm:w-5 sm:h-5 shrink-0"
+              viewBox="0 0 48 48"
+            >
               {/* Yellow */}
               <path
                 fill="#FFC107"
@@ -301,6 +314,7 @@ const Login = ({ isLogin, setIsLogin,setIsOpen }) => {
                 d="M43.6 20.5H42V20H24v8h11.3c-1 2.7-3 5-5.9 6.5l6.4 5.3C39.9 37.5 45.5 31.2 45.5 24c0-1.4-.1-2.6-.4-3.5z"
               />
             </svg>
+
             Continue with Google
           </button>
 

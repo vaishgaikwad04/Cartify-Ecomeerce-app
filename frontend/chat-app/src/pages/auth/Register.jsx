@@ -10,7 +10,9 @@ const Register = ({ isLogin, setIsLogin }) => {
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "Dark Mode";
 
-  const { formik, error, success, handleLogin } = useRegister( {setIsLogin });
+  const { formik, error, success, handleLogin } = useRegister({
+    setIsLogin,
+  });
 
   const roleOptions = [
     {
@@ -24,21 +26,21 @@ const Register = ({ isLogin, setIsLogin }) => {
   ];
 
   return (
-  <div
-  className={`
-    w-full
-    overflow-hidden
-    transition-all
-    duration-300
-    ${isDark ? "bg-gray-900" : "bg-white"}
-  `}
->
+    <div
+      className={`
+        w-full
+        overflow-hidden
+        transition-all
+        duration-300
+        ${isDark ? "bg-gray-900" : "bg-white"}
+      `}
+    >
       {/* ================= MAIN CARD ================= */}
 
       <div
         className={`
           w-full
-          max-w-[500px]
+          max-w-[440px]
           overflow-hidden
           shadow-2xl
           transition-all
@@ -48,7 +50,7 @@ const Register = ({ isLogin, setIsLogin }) => {
       >
         {/* ================= TOP IMAGE ================= */}
 
-        <div className="w-full h-[200px] sm:h-[220px] overflow-hidden">
+        <div className="w-full h-[150px] sm:h-[170px] overflow-hidden">
           <img
             src="https://mafoil.wpbingosite.com/wp-content/uploads/2023/01/sign-in.jpg"
             alt="Register"
@@ -63,23 +65,19 @@ const Register = ({ isLogin, setIsLogin }) => {
 
         {/* ================= FORM CONTENT ================= */}
 
-        <div className="px-8 py-8 sm:px-10 sm:py-9">
+        <div className="px-6 py-5 sm:px-7 sm:py-6">
 
           {/* ================= TITLE ================= */}
 
-          <div className="mb-7">
+          <div className="mb-5">
             <h2
               className={`
-                text-xl
-                sm:text-2xl
-                tracking-[0.25em]
+                text-lg
+                sm:text-xl
+                tracking-[0.22em]
                 font-medium
                 uppercase
-                ${
-                  isDark
-                    ? "text-white"
-                    : "text-gray-900"
-                }
+                ${isDark ? "text-white" : "text-gray-900"}
               `}
             >
               Register
@@ -91,10 +89,10 @@ const Register = ({ isLogin, setIsLogin }) => {
           {error && (
             <div
               className={`
-                mb-5
-                px-4
-                py-3
-                text-sm
+                mb-4
+                px-3
+                py-2.5
+                text-xs
                 border
                 ${
                   isDark
@@ -112,10 +110,10 @@ const Register = ({ isLogin, setIsLogin }) => {
           {success && (
             <div
               className={`
-                mb-5
-                px-4
-                py-3
-                text-sm
+                mb-4
+                px-3
+                py-2.5
+                text-xs
                 border
                 ${
                   isDark
@@ -132,7 +130,7 @@ const Register = ({ isLogin, setIsLogin }) => {
 
           <form
             onSubmit={formik.handleSubmit}
-            className="flex flex-col gap-4"
+            className="flex flex-col gap-3"
           >
             {/* NAME */}
 
@@ -148,7 +146,7 @@ const Register = ({ isLogin, setIsLogin }) => {
               />
 
               {formik.touched.name && formik.errors.name && (
-                <p className="mt-1.5 text-xs text-red-500">
+                <p className="mt-1 text-[11px] text-red-500">
                   {formik.errors.name}
                 </p>
               )}
@@ -168,7 +166,7 @@ const Register = ({ isLogin, setIsLogin }) => {
               />
 
               {formik.touched.email && formik.errors.email && (
-                <p className="mt-1.5 text-xs text-red-500">
+                <p className="mt-1 text-[11px] text-red-500">
                   {formik.errors.email}
                 </p>
               )}
@@ -188,7 +186,7 @@ const Register = ({ isLogin, setIsLogin }) => {
               />
 
               {formik.touched.password && formik.errors.password && (
-                <p className="mt-1.5 text-xs text-red-500">
+                <p className="mt-1 text-[11px] text-red-500">
                   {formik.errors.password}
                 </p>
               )}
@@ -207,7 +205,7 @@ const Register = ({ isLogin, setIsLogin }) => {
               />
 
               {formik.touched.role && formik.errors.role && (
-                <p className="mt-1.5 text-xs text-red-500">
+                <p className="mt-1 text-[11px] text-red-500">
                   {formik.errors.role}
                 </p>
               )}
@@ -220,12 +218,12 @@ const Register = ({ isLogin, setIsLogin }) => {
               disabled={formik.isSubmitting}
               className="
                 w-full
-                h-[50px]
+                h-[44px]
                 mt-1
                 bg-[#222222]
                 hover:bg-black
                 text-white
-                text-sm
+                text-xs
                 font-semibold
                 uppercase
                 tracking-wide
@@ -236,17 +234,18 @@ const Register = ({ isLogin, setIsLogin }) => {
                 disabled:cursor-not-allowed
               "
             >
-              {formik.isSubmitting
-                ? "Registering..."
-                : "Register"}
+              {formik.isSubmitting ? "Registering..." : "Register"}
             </button>
+
+            {/* ================= LOGIN BUTTON ================= */}
+
             <button
               type="button"
               onClick={() => setIsLogin(true)}
               className={`
                 w-full
-                h-[50px]
-                text-sm
+                h-[44px]
+                text-xs
                 font-semibold
                 uppercase
                 tracking-wide
@@ -261,12 +260,11 @@ const Register = ({ isLogin, setIsLogin }) => {
             >
               Already Has An Account
             </button>
-          
           </form>
 
           {/* ================= DIVIDER ================= */}
 
-          <div className="flex items-center gap-3 my-6">
+          <div className="flex items-center gap-3 my-4">
             <div
               className={`
                 flex-1
@@ -277,7 +275,7 @@ const Register = ({ isLogin, setIsLogin }) => {
 
             <span
               className={`
-                text-xs
+                text-[11px]
                 ${isDark ? "text-gray-500" : "text-gray-400"}
               `}
             >
@@ -358,13 +356,6 @@ const Register = ({ isLogin, setIsLogin }) => {
 
             Continue with Google
           </button>
-          
-
-          {/* ================= LOGIN BUTTON ================= */}
-
-          
-
-         
         </div>
       </div>
     </div>

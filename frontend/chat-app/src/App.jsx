@@ -38,7 +38,7 @@ import Help from "./pages/user/help/Help";
 // Admin Pages
 import AdminLayout from "./components/admin/Layout";
 import Products from "./pages/admin/product/Products";
-import Categories from "./pages/admin/Category/Category";
+import Categories from "./pages/admin/category/Category";
 import Customers from "./pages/admin/customers/Customers";
 import Coupon from "./pages/admin/coupon/Coupon";
 import Review from "./pages/admin/review/Review";

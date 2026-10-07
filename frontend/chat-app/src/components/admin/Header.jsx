@@ -1,5 +1,3 @@
-                                                                                                                
-
 // import React, { useState, useEffect, useContext } from "react";
 // import { FiBell } from "react-icons/fi";
 
@@ -36,14 +34,10 @@
 //     }
 //   };
 
-
-
-
 //     useEffect(() => {
 //     fetchSettings();
 //   }, []);
 
- 
 //   return (
 //      <header
 //       className={`
@@ -92,7 +86,7 @@
 //             NOTIFICATIONS
 //         ========================================== */}
 
-//         {allowNotification  &&  notifications.map((notification) => ( 
+//         {allowNotification  &&  notifications.map((notification) => (
 //           <div className="relative">
 //              onClick={() => handleMarkAsRead(notification._id)}
 
@@ -370,8 +364,6 @@
 
 // export default Header;
 
-
-
 import React, { useState, useEffect, useContext } from "react";
 import { FiBell } from "react-icons/fi";
 
@@ -387,10 +379,7 @@ const Header = () => {
   // CONTEXT
   // =====================================================
 
-  const {
-    allowNotification,
-    unreadCount,
-  } = useContext(NotificationContext);
+  const { allowNotification, unreadCount } = useContext(NotificationContext);
 
   const { theme } = useContext(ThemeContext);
 
@@ -433,8 +422,8 @@ const Header = () => {
   // =====================================================
 
   return (
-   <header
-  className={`
+    <header
+      className={`
     sticky
     top-0
     z-40
@@ -451,36 +440,31 @@ const Header = () => {
     transition-colors
     duration-300
 
-    ${
-      isDark
-        ? "border-gray-800 bg-gray-900/95"
-        : "border-gray-200 bg-white/95"
-    }
+    ${isDark ? "border-gray-800 bg-gray-900/95" : "border-gray-200 bg-white/95"}
   `}
->
-  {/* =====================================================
+    >
+      {/* =====================================================
       LEFT SIDE
   ===================================================== */}
 
-  <div className="min-w-0 flex-1">
-    {/* Your page title can stay here */}
-  </div>
+      <div className="min-w-0 flex-1">
+        {/* Your page title can stay here */}
+      </div>
 
-  {/* =====================================================
+      {/* =====================================================
       RIGHT SIDE
   ===================================================== */}
 
-  <div className="flex shrink-0 items-center gap-2 sm:gap-4">
-
-    {/* =====================================================
+      <div className="flex shrink-0 items-center gap-2 sm:gap-4">
+        {/* =====================================================
         NOTIFICATION
     ===================================================== */}
 
-    {allowNotification && (
-      <button
-        type="button"
-        onClick={handleNotificationClick}
-        className={`
+        {allowNotification && (
+          <button
+            type="button"
+            onClick={handleNotificationClick}
+            className={`
           relative
           flex
           h-10
@@ -500,17 +484,15 @@ const Header = () => {
               : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black"
           }
         `}
-        aria-label={`Notifications${
-          unreadCount > 0
-            ? `, ${unreadCount} unread`
-            : ""
-        }`}
-      >
-        <FiBell className="text-[19px] sm:text-[21px]" />
+            aria-label={`Notifications${
+              unreadCount > 0 ? `, ${unreadCount} unread` : ""
+            }`}
+          >
+            <FiBell className="text-[19px] sm:text-[21px]" />
 
-        {unreadCount > 0 && (
-          <span
-            className="
+            {unreadCount > 0 && (
+              <span
+                className="
               absolute
               -right-1
               -top-1
@@ -532,20 +514,19 @@ const Header = () => {
               sm:min-w-[19px]
               sm:text-[10px]
             "
-          >
-            {unreadCount > 99 ? "99+" : unreadCount}
-          </span>
-         
+              >
+                {unreadCount > 99 ? "99+" : unreadCount}
+              </span>
+            )}
+          </button>
         )}
-      </button>
-    )}
 
-    {/* =====================================================
+        {/* =====================================================
         PROFILE
     ===================================================== */}
 
-    <div
-      className={`
+        <div
+          className={`
         flex
         shrink-0
         cursor-pointer
@@ -566,12 +547,11 @@ const Header = () => {
             : "border-gray-200 hover:bg-gray-50"
         }
       `}
-    >
+        >
+          {/* PROFILE INITIAL */}
 
-      {/* PROFILE INITIAL */}
-
-      <div
-        className="
+          <div
+            className="
           flex
           h-8
           w-8
@@ -586,45 +566,35 @@ const Header = () => {
           sm:h-9
           sm:w-9
         "
-      >
-        {profileData?.name
-          ?.charAt(0)
-          .toUpperCase()}
-      </div>
+          >
+            {profileData?.name?.charAt(0).toUpperCase()}
+          </div>
 
-      {/* PROFILE INFORMATION */}
+          {/* PROFILE INFORMATION */}
 
-      <div className="hidden md:block">
-        <p
-          className={`
+          <div className="hidden md:block">
+            <p
+              className={`
             text-sm
             font-medium
-            ${
-              isDark
-                ? "text-white"
-                : "text-gray-800"
-            }
+            ${isDark ? "text-white" : "text-gray-800"}
           `}
-        >
-          {profileData?.name}
-        </p>
+            >
+              {profileData?.name}
+            </p>
 
-        <p
-          className={`
+            <p
+              className={`
             text-xs
-            ${
-              isDark
-                ? "text-gray-400"
-                : "text-gray-500"
-            }
+            ${isDark ? "text-gray-400" : "text-gray-500"}
           `}
-        >
-          Administrator
-        </p>
+            >
+              Administrator
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</header>
+    </header>
   );
 };
 
