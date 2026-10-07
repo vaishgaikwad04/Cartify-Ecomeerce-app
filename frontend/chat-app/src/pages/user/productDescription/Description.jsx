@@ -271,7 +271,7 @@
 
 //               <div
 //                 className={`
-   
+
 //     rounded-xl
 //     sm:rounded-2xl
 //     border
@@ -742,9 +742,7 @@ const DescriptionPage = () => {
   if (!product) {
     return (
       <div className="flex justify-center items-center h-[60vh]">
-        <p className="text-base lg:text-sm text-gray-500">
-          Loading product...
-        </p>
+        <p className="text-base lg:text-sm text-gray-500">Loading product...</p>
       </div>
     );
   }
@@ -880,62 +878,65 @@ const DescriptionPage = () => {
                 <div className="mt-6 sm:mt-7">
                   <h3
                     className={`
-                      text-xs
-                      sm:text-sm
-                      md:text-base
-                      lg:text-sm
-                      font-medium
-                      mb-3
-                      sm:mb-4
-                      ${isDark ? "text-white" : "text-gray-900"}
-                    `}
+        text-xs
+        sm:text-sm
+        md:text-base
+        lg:text-sm
+        font-medium
+        mb-3
+        sm:mb-4
+        ${isDark ? "text-white" : "text-gray-900"}
+      `}
                   >
                     Select Size
                   </h3>
 
-                  <div className="flex flex-wrap gap-2 sm:gap-2.5">
+                  <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-2">
                     {product.variants.map((item) => (
                       <button
                         key={item._id}
                         disabled={item.stock <= 0}
                         onClick={() => setSelectedSize(item.size)}
                         className={`
-                          min-w-[52px]
-                          sm:min-w-[60px]
-                          md:min-w-[64px]
+            min-w-[52px]
+            sm:min-w-[60px]
+            md:min-w-[64px]
+            lg:min-w-[52px]
 
-                          h-9
-                          sm:h-10
+            h-9
+            sm:h-10
+            lg:h-8
 
-                          px-3
-                          sm:px-4
+            px-3
+            sm:px-4
+            lg:px-3
 
-                          rounded-lg
-                          border
+            rounded-lg
+            border
 
-                          font-medium
+            font-medium
 
-                          text-xs
-                          sm:text-sm
-                          lg:text-xs
+            text-xs
+            sm:text-sm
+            lg:text-xs
 
-                          transition-all
-                          duration-200
+            transition-all
+            duration-200
 
-                          ${
-                            selectedSize === item.size
-                              ? isDark
-                                ? "bg-white text-black border-white shadow-md"
-                                : "bg-black text-white border-black shadow-sm"
-                              : item.stock <= 0
-                                ? isDark
-                                  ? "bg-gray-900 text-gray-600 border-gray-800 cursor-not-allowed"
-                                  : "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
-                                : isDark
-                                  ? "bg-gray-950 text-white border-gray-700 hover:border-white hover:bg-gray-900"
-                                  : "bg-white text-gray-900 border-gray-300 hover:border-black"
-                          }
-                        `}
+            ${
+              selectedSize === item.size
+                ? isDark
+                  ? "bg-white text-black border-white shadow-md"
+                  : "bg-black text-white border-black shadow-sm"
+                : item.stock <= 0
+                  ? isDark
+                    ? "bg-gray-900 text-gray-600 border-gray-800 cursor-not-allowed"
+                    : "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
+                  : isDark
+                    ? "bg-gray-950 text-white border-gray-700 hover:border-white hover:bg-gray-900"
+                    : "bg-white text-gray-900 border-gray-300 hover:border-black"
+            }
+          `}
                       >
                         {item.size}
                       </button>
@@ -996,8 +997,7 @@ const DescriptionPage = () => {
                       label: "Description",
                       content: (
                         <p className="lg:text-sm">
-                          {product.description ||
-                            "No description available"}
+                          {product.description || "No description available"}
                         </p>
                       ),
                     },
@@ -1014,9 +1014,7 @@ const DescriptionPage = () => {
                             ))}
                         </ul>
                       ) : (
-                        <p className="lg:text-sm">
-                          No details available
-                        </p>
+                        <p className="lg:text-sm">No details available</p>
                       ),
                     },
                     {
@@ -1032,9 +1030,7 @@ const DescriptionPage = () => {
                             ))}
                         </ul>
                       ) : (
-                        <p className="lg:text-sm">
-                          No care fit available
-                        </p>
+                        <p className="lg:text-sm">No care fit available</p>
                       ),
                     },
                   ]}
@@ -1096,10 +1092,7 @@ const DescriptionPage = () => {
         {/* =====================================================
             RECOMMENDED PRODUCTS
         ===================================================== */}
-        <Recommendation
-          currentId={product._id}
-          category={product.category}
-        />
+        <Recommendation currentId={product._id} category={product.category} />
 
         {/* =====================================================
             REVIEWS
@@ -1190,10 +1183,8 @@ const DescriptionPage = () => {
               >
                 {reviews.length
                   ? (
-                      reviews.reduce(
-                        (sum, review) => sum + review.rating,
-                        0
-                      ) / reviews.length
+                      reviews.reduce((sum, review) => sum + review.rating, 0) /
+                      reviews.length
                     ).toFixed(1)
                   : "0.0"}
               </h3>
@@ -1308,9 +1299,7 @@ const DescriptionPage = () => {
                               ${isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-900"}
                             `}
                           >
-                            {review.user?.name
-                              ?.charAt(0)
-                              ?.toUpperCase() || "U"}
+                            {review.user?.name?.charAt(0)?.toUpperCase() || "U"}
                           </div>
 
                           <div className="min-w-0">
@@ -1361,9 +1350,7 @@ const DescriptionPage = () => {
                                 sm:mt-1
                               "
                             >
-                              {new Date(
-                                review.createdAt
-                              ).toLocaleDateString()}
+                              {new Date(review.createdAt).toLocaleDateString()}
                             </p>
                           </div>
                         </div>
