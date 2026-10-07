@@ -742,7 +742,9 @@ const DescriptionPage = () => {
   if (!product) {
     return (
       <div className="flex justify-center items-center h-[60vh]">
-        <p className="text-base text-gray-500">Loading product...</p>
+        <p className="text-base lg:text-sm text-gray-500">
+          Loading product...
+        </p>
       </div>
     );
   }
@@ -778,16 +780,12 @@ const DescriptionPage = () => {
               xl:gap-24
             "
           >
-            {/* =================================================
-                PRODUCT IMAGE
-            ================================================= */}
+            {/* PRODUCT IMAGE */}
             <div className="w-full min-w-0">
               <ImagePreview Images={product?.images || []} />
             </div>
 
-            {/* =================================================
-                PRODUCT DETAILS
-            ================================================= */}
+            {/* PRODUCT DETAILS */}
             <div className="w-full min-w-0 lg:sticky lg:top-24 lg:h-fit">
               {/* BREADCRUMB */}
               <p className="text-[11px] sm:text-xs md:text-sm lg:text-xs text-gray-400 mb-3 sm:mb-4 break-words">
@@ -800,7 +798,7 @@ const DescriptionPage = () => {
                   text-lg
                   sm:text-xl
                   md:text-2xl
-                  lg:text-lg
+                  lg:text-xl
                   font-semibold
                   leading-tight
                   break-words
@@ -813,7 +811,7 @@ const DescriptionPage = () => {
               {/* PRICE */}
               <div className="flex items-center flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-5">
                 {product.discountPrice && (
-                  <span className="line-through text-gray-400 text-xs sm:text-sm md:text-base lg:text-xs">
+                  <span className="line-through text-gray-400 text-xs sm:text-sm md:text-base lg:text-sm">
                     ₹{product.price}
                   </span>
                 )}
@@ -823,7 +821,7 @@ const DescriptionPage = () => {
                     text-base
                     sm:text-lg
                     md:text-xl
-                    lg:text-xs
+                    lg:text-lg
                     font-bold
                     ${isDark ? "text-white" : "text-black"}
                   `}
@@ -857,7 +855,7 @@ const DescriptionPage = () => {
                 `}
               >
                 <span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
-                  <FiTruck className="text-sm sm:text-base shrink-0" />
+                  <FiTruck className="text-sm sm:text-base lg:text-sm shrink-0" />
                   Free shipping
                 </span>
 
@@ -872,7 +870,7 @@ const DescriptionPage = () => {
                 />
 
                 <span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
-                  <FiRefreshCcw className="text-sm sm:text-base shrink-0" />
+                  <FiRefreshCcw className="text-sm sm:text-base lg:text-sm shrink-0" />
                   Easy returns
                 </span>
               </div>
@@ -982,14 +980,14 @@ const DescriptionPage = () => {
                 /> */}
               </div>
 
+              {/* PRODUCT TABS */}
               <div
                 className={`
-   
-    rounded-xl
-    sm:rounded-2xl
-    border
-    ${isDark ? "bg-gray-900 border-gray-800" : "bg-gray-50 border-gray-100"}
-  `}
+                  rounded-xl
+                  sm:rounded-2xl
+                  border
+                  ${isDark ? "bg-gray-900 border-gray-800" : "bg-gray-50 border-gray-100"}
+                `}
               >
                 <Tabs
                   tabs={[
@@ -998,7 +996,8 @@ const DescriptionPage = () => {
                       label: "Description",
                       content: (
                         <p className="lg:text-sm">
-                          {product.description || "No description available"}
+                          {product.description ||
+                            "No description available"}
                         </p>
                       ),
                     },
@@ -1015,7 +1014,9 @@ const DescriptionPage = () => {
                             ))}
                         </ul>
                       ) : (
-                        <p className="lg:text-sm">No details available</p>
+                        <p className="lg:text-sm">
+                          No details available
+                        </p>
                       ),
                     },
                     {
@@ -1031,7 +1032,9 @@ const DescriptionPage = () => {
                             ))}
                         </ul>
                       ) : (
-                        <p className="lg:text-sm">No care fit available</p>
+                        <p className="lg:text-sm">
+                          No care fit available
+                        </p>
                       ),
                     },
                   ]}
@@ -1042,7 +1045,7 @@ const DescriptionPage = () => {
         </div>
 
         {/* =====================================================
-            TABS
+            OLD TABS - KEPT UNCHANGED
         ===================================================== */}
         {/* <div className="mt-8 sm:mt-10">
           <Tabs
@@ -1093,7 +1096,10 @@ const DescriptionPage = () => {
         {/* =====================================================
             RECOMMENDED PRODUCTS
         ===================================================== */}
-        <Recommendation currentId={product._id} category={product.category} />
+        <Recommendation
+          currentId={product._id}
+          category={product.category}
+        />
 
         {/* =====================================================
             REVIEWS
@@ -1184,8 +1190,10 @@ const DescriptionPage = () => {
               >
                 {reviews.length
                   ? (
-                      reviews.reduce((sum, review) => sum + review.rating, 0) /
-                      reviews.length
+                      reviews.reduce(
+                        (sum, review) => sum + review.rating,
+                        0
+                      ) / reviews.length
                     ).toFixed(1)
                   : "0.0"}
               </h3>
@@ -1300,7 +1308,9 @@ const DescriptionPage = () => {
                               ${isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-900"}
                             `}
                           >
-                            {review.user?.name?.charAt(0)?.toUpperCase() || "U"}
+                            {review.user?.name
+                              ?.charAt(0)
+                              ?.toUpperCase() || "U"}
                           </div>
 
                           <div className="min-w-0">
@@ -1351,7 +1361,9 @@ const DescriptionPage = () => {
                                 sm:mt-1
                               "
                             >
-                              {new Date(review.createdAt).toLocaleDateString()}
+                              {new Date(
+                                review.createdAt
+                              ).toLocaleDateString()}
                             </p>
                           </div>
                         </div>
