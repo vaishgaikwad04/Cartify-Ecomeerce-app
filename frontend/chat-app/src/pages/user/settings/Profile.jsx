@@ -135,6 +135,7 @@ const Profile = () => {
               text-base
               sm:text-lg
               md:text-3xl
+              lg:text-lg
 
               font-semibold
               tracking-tight
