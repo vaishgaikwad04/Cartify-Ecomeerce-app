@@ -151,8 +151,8 @@ const Sale = () => {
           min-[500px]:max-[670px]:left-80
           min-[500px]:max-[670px]:top-74
 
-          lg:top-114
-          lg:left-102
+          lg:top-94
+          lg:left-94
           -translate-y-1/2
 
           w-[140px]
@@ -208,7 +208,6 @@ const Sale = () => {
 
             {/* TEXT CARD */}
             <TextCard
-          
               subtitle="Limited Offer"
               title="Summer Sale"
               description="Up to 50% off on selected items"
@@ -227,16 +226,16 @@ const Sale = () => {
       `}
             >
               <Button
-  onClick={() => {
-    navigate("/sale");
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }}
-  label="Shop Now"
-  variant="primary"
-  className={`
+                onClick={() => {
+                  navigate("/sale");
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  });
+                }}
+                label="Shop Now"
+                variant="primary"
+                className={`
     !ml-0
 
     !px-3
@@ -256,7 +255,7 @@ const Sale = () => {
     hover:scale-105
     hover:shadow-lg
   `}
-/>
+              />
             </TextCard>
           </div>
         </div>
