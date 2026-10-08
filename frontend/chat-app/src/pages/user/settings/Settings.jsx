@@ -42,7 +42,7 @@ const Settings = () => {
     text-[10px]
     sm:text-xs
     md:text-sm
-    lg:text-xs
+    lg:text-[10px]
 
     ${
       isDark
@@ -60,15 +60,12 @@ const Settings = () => {
       }
     >
       <div
-        className={`
+        className="
           min-h-screen
-
           p-2
           sm:p-3
           md:p-5
-
-          ${isDark ? "bg-gray-900" : "bg-gray-50"}
-        `}
+        "
       >
         <div className="max-w-[1800px] mx-auto">
 
@@ -105,7 +102,7 @@ const Settings = () => {
                 text-sm
                 sm:text-sm
                 md:text-3xl
-                lg:text-xl
+                lg:text-lg
 
                 font-bold
 
@@ -124,7 +121,7 @@ const Settings = () => {
                 text-[9px]
                 sm:text-[10px]
                 md:text-base
-                lg:text-xs
+                lg:text-[10px]
 
                 ${isDark ? "text-gray-400" : "text-gray-500"}
               `}
@@ -187,6 +184,7 @@ const Settings = () => {
                   md:pt-4
                 "
               >
+
                 {/* NAME */}
                 <input
                   name="name"
@@ -215,7 +213,7 @@ const Settings = () => {
                     text-[10px]
                     sm:text-xs
                     md:text-sm
-                    lg:text-xs
+                    lg:text-[10px]
 
                     ${
                       isDark
@@ -254,7 +252,7 @@ const Settings = () => {
                     text-[10px]
                     sm:text-xs
                     md:text-sm
-                    lg:text-xs
+                    lg:text-[10px]
 
                     ${
                       isDark
@@ -371,7 +369,7 @@ const Settings = () => {
                         text-[10px]
                         sm:text-xs
                         md:text-lg
-                        lg:text-sm
+                        lg:text-xs
 
                         ${isDark ? "text-white" : "text-gray-900"}
                       `}
@@ -384,7 +382,7 @@ const Settings = () => {
                         text-[8px]
                         sm:text-[10px]
                         md:text-sm
-                        lg:text-xs
+                        lg:text-[10px]
 
                         mt-0.5
                         sm:mt-1
@@ -450,7 +448,7 @@ const Settings = () => {
                     text-[10px]
                     sm:text-xs
                     md:text-lg
-                    lg:text-sm
+                    lg:text-xs
 
                     ${isDark ? "text-white" : "text-gray-900"}
                   `}
@@ -535,7 +533,7 @@ const Settings = () => {
                           text-[9px]
                           sm:text-[10px]
                           md:text-base
-                          lg:text-xs
+                          lg:text-[10px]
 
                           ${isDark ? "text-white" : "text-gray-900"}
                         `}
