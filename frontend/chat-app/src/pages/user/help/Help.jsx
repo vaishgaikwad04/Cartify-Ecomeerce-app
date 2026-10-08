@@ -259,76 +259,42 @@ const getTheme = (theme) => {
 // COMMON STYLES
 // =====================================================
 
-
 const styles = {
-  // =====================================================
-  // PAGE
-  // =====================================================
-
   page: (isDark) =>
     isDark
       ? "bg-[#111111] text-white"
       : "bg-[#f8f8f8] text-gray-900",
-
-  // =====================================================
-  // CARD
-  // =====================================================
 
   card: (isDark) =>
     isDark
       ? "border-[#292929] bg-[#191919]"
       : "border-gray-200 bg-white",
 
-  // =====================================================
-  // CARD HOVER
-  // =====================================================
-
   cardHover: (isDark) =>
     isDark
       ? "hover:border-[#363636] hover:bg-[#1d1d1d]"
       : "hover:border-gray-300 hover:shadow-sm",
-
-  // =====================================================
-  // MUTED TEXT
-  // =====================================================
 
   muted: (isDark) =>
     isDark
       ? "text-gray-400"
       : "text-gray-500",
 
-  // =====================================================
-  // MAIN HEADING
-  // =====================================================
-
   heading: (isDark) =>
     isDark
       ? "text-gray-100"
       : "text-gray-950",
-
-  // =====================================================
-  // BORDER
-  // =====================================================
 
   border: (isDark) =>
     isDark
       ? "border-[#292929]"
       : "border-gray-200",
 
-  // =====================================================
-  // ICON BOX
-  // =====================================================
-
   iconBox: (isDark) =>
     isDark
       ? "border-[#303030] bg-[#202020] text-gray-200"
       : "border-gray-200 bg-gray-50 text-gray-700",
 };
-
-
-// =====================================================
-// PAGE WRAPPER
-// =====================================================
 
 // =====================================================
 // PAGE WRAPPER
@@ -370,6 +336,7 @@ const HelpPageWrapper = ({ isDark, children }) => {
                 px-4
                 py-3
                 text-sm
+                lg:text-xs
                 font-medium
                 transition-all
                 duration-300
@@ -433,7 +400,7 @@ const PageHeader = ({ isDark, icon, title, description }) => {
 
         <div>
           <h1
-            className={`text-2xl font-bold tracking-tight sm:text-3xl ${styles.heading(
+            className={`text-2xl font-bold tracking-tight sm:text-3xl lg:text-xl ${styles.heading(
               isDark,
             )}`}
           >
@@ -441,7 +408,7 @@ const PageHeader = ({ isDark, icon, title, description }) => {
           </h1>
 
           <p
-            className={`mt-1.5 max-w-2xl text-sm leading-6 ${styles.muted(
+            className={`mt-1.5 max-w-2xl text-sm leading-6 lg:text-xs lg:leading-5 ${styles.muted(
               isDark,
             )}`}
           >
@@ -486,7 +453,7 @@ const HelpHome = ({ isDark }) => {
 
           <div>
             <h1
-              className={`text-2xl font-semibold font-serif-sarif tracking-tight sm:text-3xl ${styles.heading(
+              className={`text-2xl font-semibold font-serif-sarif tracking-tight sm:text-3xl lg:text-xl ${styles.heading(
                 isDark,
               )}`}
             >
@@ -494,7 +461,7 @@ const HelpHome = ({ isDark }) => {
             </h1>
 
             <p
-              className={`mt-2 max-w-2xl text-sm leading-6 ${styles.muted(
+              className={`mt-2 max-w-2xl text-sm leading-6 lg:text-xs lg:leading-5 ${styles.muted(
                 isDark,
               )}`}
             >
@@ -554,7 +521,7 @@ const HelpHome = ({ isDark }) => {
                     {/* TITLE */}
 
                     <h3
-                      className={`mt-5 text-base font-semibold ${styles.heading(
+                      className={`mt-5 text-base font-semibold lg:text-sm ${styles.heading(
                         isDark,
                       )}`}
                     >
@@ -564,7 +531,7 @@ const HelpHome = ({ isDark }) => {
                     {/* DESCRIPTION */}
 
                     <p
-                      className={`mt-2 max-w-xl text-sm leading-6 ${styles.muted(
+                      className={`mt-2 max-w-xl text-sm leading-6 lg:text-xs lg:leading-5 ${styles.muted(
                         isDark,
                       )}`}
                     >
@@ -574,7 +541,7 @@ const HelpHome = ({ isDark }) => {
                     {/* LINK */}
 
                     <div
-                      className={`mt-5 inline-flex items-center gap-2 text-xs font-semibold ${
+                      className={`mt-5 inline-flex items-center gap-2 text-xs font-semibold lg:text-[10px] ${
                         isDark ? "text-gray-300" : "text-gray-700"
                       }`}
                     >
@@ -616,14 +583,14 @@ const QuickHelpCard = ({ isDark, icon, title, description }) => {
 
       <div>
         <p
-          className={`text-sm font-semibold ${
+          className={`text-sm font-semibold lg:text-xs ${
             isDark ? "text-gray-100" : "text-gray-800"
           }`}
         >
           {title}
         </p>
 
-        <p className={`mt-0.5 text-xs ${styles.muted(isDark)}`}>
+        <p className={`mt-0.5 text-xs lg:text-[10px] ${styles.muted(isDark)}`}>
           {description}
         </p>
       </div>
@@ -678,7 +645,7 @@ const FAQPage = ({ isDark }) => {
 
                   <div>
                     <span
-                      className={`block pt-1 text-sm font-semibold ${
+                      className={`block pt-1 text-sm font-semibold lg:text-xs ${
                         active
                           ? isDark
                             ? "text-white"
@@ -692,7 +659,7 @@ const FAQPage = ({ isDark }) => {
                     </span>
 
                     <span
-                      className={`mt-1 block text-[11px] ${
+                      className={`mt-1 block text-[11px] lg:text-[9px] ${
                         isDark ? "text-gray-500" : "text-gray-400"
                       }`}
                     >
@@ -724,7 +691,7 @@ const FAQPage = ({ isDark }) => {
               {active && (
                 <div className="px-5 pb-6 pl-16 pr-8 sm:px-6 sm:pl-[4.5rem]">
                   <p
-                    className={`max-w-3xl text-sm leading-7 ${styles.muted(
+                    className={`max-w-3xl text-sm leading-7 lg:text-xs lg:leading-6 ${styles.muted(
                       isDark,
                     )}`}
                   >
@@ -766,20 +733,28 @@ const ReturnsPage = ({ isDark }) => {
           >
             <div>
               <div
-                className={`mb-2 text-[10px] font-bold tracking-[0.16em] ${
+                className={`mb-2 text-[10px] lg:text-[8px] font-bold tracking-[0.16em] ${
                   isDark ? "text-gray-500" : "text-gray-400"
                 }`}
               >
                 SECTION {String(index + 1).padStart(2, "0")}
               </div>
 
-              <h2 className={`text-sm font-semibold ${styles.heading(isDark)}`}>
+              <h2
+                className={`text-sm lg:text-xs font-semibold ${styles.heading(
+                  isDark,
+                )}`}
+              >
                 {section.title}
               </h2>
             </div>
 
             <div>
-              <p className={`text-sm leading-7 ${styles.muted(isDark)}`}>
+              <p
+                className={`text-sm leading-7 lg:text-xs lg:leading-6 ${styles.muted(
+                  isDark,
+                )}`}
+              >
                 {section.text}
               </p>
 
@@ -787,7 +762,7 @@ const ReturnsPage = ({ isDark }) => {
                 {section.points.map((point) => (
                   <li
                     key={point}
-                    className={`flex items-start gap-3 text-sm ${
+                    className={`flex items-start gap-3 text-sm lg:text-xs ${
                       isDark ? "text-gray-300" : "text-gray-700"
                     }`}
                   >
@@ -839,7 +814,7 @@ const ShippingPage = ({ isDark }) => {
           >
             <div className="flex items-start gap-3">
               <span
-                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[10px] font-bold ${styles.iconBox(
+                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[10px] lg:text-[8px] font-bold ${styles.iconBox(
                   isDark,
                 )}`}
               >
@@ -847,7 +822,7 @@ const ShippingPage = ({ isDark }) => {
               </span>
 
               <h2
-                className={`pt-1.5 text-sm font-semibold ${styles.heading(
+                className={`pt-1.5 text-sm lg:text-xs font-semibold ${styles.heading(
                   isDark,
                 )}`}
               >
@@ -856,7 +831,9 @@ const ShippingPage = ({ isDark }) => {
             </div>
 
             <p
-              className={`max-w-3xl text-sm leading-7 ${styles.muted(isDark)}`}
+              className={`max-w-3xl text-sm leading-7 lg:text-xs lg:leading-6 ${styles.muted(
+                isDark,
+              )}`}
             >
               {section.description}
             </p>
@@ -912,7 +889,7 @@ const OrdersPage = ({ isDark }) => {
               <div className={last ? "" : "pb-9"}>
                 <div className="flex flex-wrap items-center gap-2">
                   <h2
-                    className={`text-sm font-semibold ${styles.heading(
+                    className={`text-sm lg:text-xs font-semibold ${styles.heading(
                       isDark,
                     )}`}
                   >
@@ -920,7 +897,7 @@ const OrdersPage = ({ isDark }) => {
                   </h2>
 
                   <span
-                    className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                    className={`rounded-full px-2 py-0.5 text-[10px] lg:text-[8px] font-medium ${
                       isDark
                         ? "bg-[#292b2f] text-gray-500"
                         : "bg-gray-100 text-gray-400"
@@ -931,7 +908,7 @@ const OrdersPage = ({ isDark }) => {
                 </div>
 
                 <p
-                  className={`mt-1 max-w-2xl text-sm leading-7 ${styles.muted(
+                  className={`mt-1 max-w-2xl text-sm leading-7 lg:text-xs lg:leading-6 ${styles.muted(
                     isDark,
                   )}`}
                 >

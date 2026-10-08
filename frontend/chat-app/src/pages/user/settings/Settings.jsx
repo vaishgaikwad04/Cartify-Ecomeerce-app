@@ -42,6 +42,7 @@ const Settings = () => {
     text-[10px]
     sm:text-xs
     md:text-sm
+    lg:text-xs
 
     ${
       isDark
@@ -104,6 +105,7 @@ const Settings = () => {
                 text-sm
                 sm:text-sm
                 md:text-3xl
+                lg:text-xl
 
                 font-bold
 
@@ -122,6 +124,7 @@ const Settings = () => {
                 text-[9px]
                 sm:text-[10px]
                 md:text-base
+                lg:text-xs
 
                 ${isDark ? "text-gray-400" : "text-gray-500"}
               `}
@@ -212,6 +215,7 @@ const Settings = () => {
                     text-[10px]
                     sm:text-xs
                     md:text-sm
+                    lg:text-xs
 
                     ${
                       isDark
@@ -250,6 +254,7 @@ const Settings = () => {
                     text-[10px]
                     sm:text-xs
                     md:text-sm
+                    lg:text-xs
 
                     ${
                       isDark
@@ -366,6 +371,7 @@ const Settings = () => {
                         text-[10px]
                         sm:text-xs
                         md:text-lg
+                        lg:text-sm
 
                         ${isDark ? "text-white" : "text-gray-900"}
                       `}
@@ -378,6 +384,7 @@ const Settings = () => {
                         text-[8px]
                         sm:text-[10px]
                         md:text-sm
+                        lg:text-xs
 
                         mt-0.5
                         sm:mt-1
@@ -443,6 +450,7 @@ const Settings = () => {
                     text-[10px]
                     sm:text-xs
                     md:text-lg
+                    lg:text-sm
 
                     ${isDark ? "text-white" : "text-gray-900"}
                   `}
@@ -527,6 +535,7 @@ const Settings = () => {
                           text-[9px]
                           sm:text-[10px]
                           md:text-base
+                          lg:text-xs
 
                           ${isDark ? "text-white" : "text-gray-900"}
                         `}

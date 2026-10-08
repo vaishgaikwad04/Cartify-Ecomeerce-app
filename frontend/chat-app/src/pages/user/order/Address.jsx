@@ -159,7 +159,7 @@ const Address = () => {
               <h1
                 className={`
                   text-2xl
-                  lg:text-lg
+                  lg:text-md
                   font-semibold
                   tracking-tight
                   ${headingText}
