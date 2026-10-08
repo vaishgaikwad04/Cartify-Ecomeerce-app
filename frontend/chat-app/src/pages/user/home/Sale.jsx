@@ -152,8 +152,9 @@ const Sale = () => {
           min-[500px]:max-[670px]:top-74
 
      /* DESKTOP: 1024px+ */
-min-[1024px]:left-60
-min-[1024px]:top-32
+
+min-[1024px]:top-[150px]
+min-[1024px]:left-[300px]
 
           w-[140px]
           sm:w-[140px]
