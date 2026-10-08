@@ -152,7 +152,7 @@ const Sale = () => {
           min-[500px]:max-[670px]:top-74
 
           lg:top-114
-          lg:left-102
+          lg:left-94
           -translate-y-1/2
 
           w-[140px]
