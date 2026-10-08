@@ -57,7 +57,7 @@ const Sale = () => {
         <div className="flex flex-col gap-4 sm:gap-5 lg:gap-6">
           {/* LARGE PROMOTIONAL IMAGE */}
           <div className="relative" onClick={() => setOpenProductModel(null)}>
-            {/* <div
+            <div
               className="
         relative
         overflow-hidden
@@ -132,9 +132,9 @@ const Sale = () => {
               >
                 +
               </button>
-            </div> */}
+            </div>
 
-            {/* PRODUCT POPUP
+            {/* PRODUCT POPUP */}
             {openProductModel === "sale-banner" && categories?.[0] && (
               <div
                 onClick={(e) => e.stopPropagation()}
@@ -147,11 +147,11 @@ const Sale = () => {
           sm:left-102
           sm:top-64
 
-          
+          /* TABLET: 500px → 670px */
           min-[500px]:max-[670px]:left-80
           min-[500px]:max-[670px]:top-74
 
-   
+     /* DESKTOP: 1024px+ */
 
   lg:!left-[280px]
   lg:!top-[120px]
@@ -182,125 +182,7 @@ const Sale = () => {
                   />
                 </div>
               </div>
-            )} */}
-            <div
-  className="
-    relative
-    overflow-hidden
-    h-[280px]
-    sm:h-[360px]
-    md:h-[420px]
-    lg:h-[440px]
-    xl:h-[500px]
-  "
->
-  <video
-    src="https://shopjonesandco.com/cdn/shop/videos/c/vp/0213a0b961b8456587d256593cc7e79e/0213a0b961b8456587d256593cc7e79e.HD-720p-4.5Mbps-84848524.mp4?v=0"
-    autoPlay
-    muted
-    loop
-    playsInline
-    className="w-full h-full object-cover"
-  />
-
-  {/* PLUS BUTTON */}
-  <button
-    type="button"
-    onClick={(e) => {
-      e.stopPropagation();
-      setOpenProductModel("sale-banner");
-    }}
-    className={`
-      absolute
-
-      top-20
-      right-34
-
-      sm:right-84
-      sm:top-24
-
-      min-[500px]:max-[670px]:right-60
-      min-[500px]:max-[670px]:top-24
-
-      lg:top-46
-      lg:left-88
-
-      w-7 h-7
-      sm:w-8 sm:h-8
-      md:w-9 md:h-9
-      lg:w-10 lg:h-10
-
-      rounded-full
-      flex
-      items-center
-      justify-center
-      shadow-md
-
-      text-sm
-      sm:text-base
-      md:text-lg
-      lg:text-xl
-
-      ${
-        isDark
-          ? "bg-gray-900 text-white hover:bg-gray-800"
-          : "bg-white text-black hover:bg-gray-100"
-      }
-    `}
-  >
-    +
-  </button>
-
-  {/* POPUP — NOW ANCHORED TO SAME CONTAINER */}
-  {openProductModel === "sale-banner" && categories?.[0] && (
-    <div
-      onClick={(e) => e.stopPropagation()}
-      className="
-        absolute
-        z-[99999]
-
-        /* mobile/tablet unchanged */
-        left-44
-        top-58
-
-        sm:left-102
-        sm:top-64
-
-        min-[500px]:max-[670px]:left-80
-        min-[500px]:max-[670px]:top-74
-
-        /* desktop */
-        lg:left-[300px]
-        lg:top-[150px]
-
-        w-[140px]
-        sm:w-[140px]
-        md:w-[240px]
-        min-[500px]:max-[670px]:w-[210px]
-        lg:w-[242px]
-      "
-    >
-      <div
-        className={`
-          w-full
-          rounded-lg
-          shadow-xl
-          p-1
-          sm:p-1.5
-          md:p-2
-
-          ${isDark ? "bg-gray-900" : "bg-white"}
-        `}
-      >
-        <Card
-          product={categories[0]}
-          isWishlisted={isWishlisted(categories[0]._id)}
-          onToggleWishlist={toggleWishlist}
-        />
-      </div>
-    </div>
-  )}
-</div>
+            )}
           </div>
 
           {/* SMALL IMAGE + TEXT CARD */}
