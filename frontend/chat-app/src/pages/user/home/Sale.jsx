@@ -153,8 +153,8 @@ const Sale = () => {
 
      /* DESKTOP: 1024px+ */
 
-min-[1024px]:top-[150px]
-min-[1024px]:left-[300px]
+  lg:!left-[280px]
+  lg:!top-[120px]
 
           w-[140px]
           sm:w-[140px]
