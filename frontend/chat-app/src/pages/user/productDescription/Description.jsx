@@ -819,7 +819,7 @@ const DescriptionPage = () => {
                     text-base
                     sm:text-lg
                     md:text-xl
-                    lg:text-sm
+                    lg:text-md
                     font-bold
                     ${isDark ? "text-white" : "text-black"}
                   `}
@@ -828,7 +828,7 @@ const DescriptionPage = () => {
                 </span>
               </div>
 
-              {/* SHIPPING / RETURNS 
+              {/* SHIPPING / RETURNS */}
               <div
                 className={`
                   mt-4
@@ -871,7 +871,7 @@ const DescriptionPage = () => {
                   <FiRefreshCcw className="text-sm sm:text-base lg:text-sm shrink-0" />
                   Easy returns
                 </span>
-              </div>*/}
+              </div>
 
               {/* SIZE */}
               {product.variants?.length > 0 && (
