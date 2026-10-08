@@ -819,7 +819,7 @@ const DescriptionPage = () => {
                     text-base
                     sm:text-lg
                     md:text-xl
-                    lg:text-lg
+                    lg:text-sm
                     font-bold
                     ${isDark ? "text-white" : "text-black"}
                   `}
