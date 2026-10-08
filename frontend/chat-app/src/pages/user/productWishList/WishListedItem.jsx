@@ -4,9 +4,7 @@ import { FaHeart } from "react-icons/fa";
 import Card from "../../../components/ui/Card";
 import { useWishlist } from "../../../hooks/user/useWishList";
 
-
 const WishListedItem = () => {
-
   // WISHLIST
   const {
     wishlist,
@@ -14,7 +12,6 @@ const WishListedItem = () => {
     toggleWishlist,
     isDark,
   } = useWishlist();
-
 
   return (
     <main
@@ -31,7 +28,7 @@ const WishListedItem = () => {
         }
       `}
     >
-      {/*INNER CONTAINER*/}
+      {/* INNER CONTAINER */}
       <div
         className={`
           w-full
@@ -57,6 +54,7 @@ const WishListedItem = () => {
             className={`
               text-2xl
               sm:text-3xl
+              lg:text-2xl
               font-semibold
               tracking-tight
 
@@ -75,6 +73,7 @@ const WishListedItem = () => {
               mt-2
               text-sm
               sm:text-base
+              lg:text-sm
 
               ${
                 isDark
@@ -142,6 +141,7 @@ const WishListedItem = () => {
                 mt-6
                 text-lg
                 sm:text-xl
+                lg:text-lg
                 font-semibold
 
                 ${
@@ -162,6 +162,7 @@ const WishListedItem = () => {
                 max-w-sm
                 text-sm
                 sm:text-base
+                lg:text-sm
 
                 ${
                   isDark
