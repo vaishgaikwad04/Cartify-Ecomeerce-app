@@ -151,8 +151,8 @@ const Sale = () => {
           min-[500px]:max-[670px]:left-80
           min-[500px]:max-[670px]:top-74
 
-          lg:top-12
-lg:left-4
+       lg:top-32
+lg:left-60
 
           w-[140px]
           sm:w-[140px]
