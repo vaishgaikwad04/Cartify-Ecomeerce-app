@@ -355,6 +355,7 @@ const Order = () => {
                   tracking-tight
                   sm:text-lg
                   md:text-xl
+                  lg:text-xl
                   ${heading}
                 `}
               >

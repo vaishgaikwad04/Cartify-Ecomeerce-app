@@ -14,13 +14,7 @@ import { useProfile } from "../../../hooks/user/useProfile";
 
 const Profile = () => {
   // PROFILE HOOK
-  const {
-    profileData,
-    loading,
-    handleLogout,
-    isDark,
-    navigate,
-  } = useProfile();
+  const { profileData, loading, handleLogout, isDark, navigate } = useProfile();
 
   // ACCOUNT MENU
   const accountItems = [
@@ -103,7 +97,6 @@ const Profile = () => {
           Width unchanged
       ===================================================== */}
       <div className="max-w-[1800px] mx-auto">
-
         {/* =====================================================
             PAGE HEADER
         ===================================================== */}
@@ -304,18 +297,12 @@ const Profile = () => {
 
                         break-all
 
-                        ${
-                          isDark
-                            ? "text-gray-400"
-                            : "text-gray-500"
-                        }
+                        ${isDark ? "text-gray-400" : "text-gray-500"}
                       `}
                     >
                       <FiMail className="text-[9px] sm:text-[10px]" />
 
-                      <span>
-                        {profileData.email}
-                      </span>
+                      <span>{profileData.email}</span>
                     </div>
                   )}
 
@@ -336,18 +323,12 @@ const Profile = () => {
                         md:text-xs
                         lg:text-[9px]
 
-                        ${
-                          isDark
-                            ? "text-gray-400"
-                            : "text-gray-500"
-                        }
+                        ${isDark ? "text-gray-400" : "text-gray-500"}
                       `}
                     >
                       <FiPhone className="text-[9px] sm:text-[10px]" />
 
-                      <span>
-                        {profileData.phone}
-                      </span>
+                      <span>{profileData.phone}</span>
                     </div>
                   )}
                 </div>
