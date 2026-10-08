@@ -98,8 +98,28 @@ const Profile = () => {
         ${isDark ? "bg-gray-950 text-white" : "bg-gray-50 text-gray-900"}
       `}
     >
-      <div className="max-w-[1800px] mx-auto">
+      {/* =====================================================
+          MAIN CONTAINER
 
+          Mobile / tablet:
+          Original responsive width.
+
+          Large desktop:
+          Compact centered profile.
+      ===================================================== */}
+      <div
+        className="
+          w-full
+          max-w-[1800px]
+          mx-auto
+
+          lg:w-[720px]
+          lg:max-w-[720px]
+
+          xl:w-[760px]
+          xl:max-w-[760px]
+        "
+      >
         {/* =====================================================
             PAGE HEADER
         ===================================================== */}
@@ -108,6 +128,9 @@ const Profile = () => {
             mb-3
             sm:mb-4
             md:mb-5
+
+            lg:mb-3
+            xl:mb-3
           "
         >
           <p
@@ -116,9 +139,13 @@ const Profile = () => {
               sm:text-[9px]
               md:text-[10px]
 
+              lg:text-[8px]
+              xl:text-[9px]
+
               uppercase
               tracking-[1.5px]
               sm:tracking-[2px]
+
               font-medium
 
               ${isDark ? "text-gray-500" : "text-gray-400"}
@@ -135,7 +162,9 @@ const Profile = () => {
               text-base
               sm:text-lg
               md:text-3xl
+
               lg:text-lg
+              xl:text-lg
 
               font-semibold
               tracking-tight
@@ -152,6 +181,9 @@ const Profile = () => {
               text-[9px]
               sm:text-[10px]
               md:text-sm
+
+              lg:text-[10px]
+              xl:text-[10px]
 
               ${isDark ? "text-gray-400" : "text-gray-500"}
             `}
@@ -174,8 +206,14 @@ const Profile = () => {
             sm:p-3
             md:p-4
 
+            lg:p-3
+            xl:p-3
+
             mb-3
             sm:mb-4
+
+            lg:mb-3
+            xl:mb-3
 
             shadow-sm
 
@@ -196,6 +234,9 @@ const Profile = () => {
               gap-2
               sm:gap-3
               md:gap-4
+
+              lg:gap-3
+              xl:gap-3
             "
           >
             {/* =================================================
@@ -212,6 +253,9 @@ const Profile = () => {
                 sm:gap-2.5
                 md:gap-3
 
+                lg:gap-2.5
+                xl:gap-2.5
+
                 min-w-0
               "
             >
@@ -227,6 +271,12 @@ const Profile = () => {
                   md:w-14
                   md:h-14
 
+                  lg:w-10
+                  lg:h-10
+
+                  xl:w-10
+                  xl:h-10
+
                   rounded-full
 
                   flex
@@ -238,6 +288,9 @@ const Profile = () => {
                   text-sm
                   sm:text-base
                   md:text-xl
+
+                  lg:text-sm
+                  xl:text-sm
 
                   font-semibold
                   text-white
@@ -260,6 +313,9 @@ const Profile = () => {
                     sm:text-sm
                     md:text-lg
 
+                    lg:text-sm
+                    xl:text-sm
+
                     font-semibold
                     truncate
                   "
@@ -272,9 +328,15 @@ const Profile = () => {
                     mt-1
                     sm:mt-1.5
 
+                    lg:mt-0.5
+                    xl:mt-0.5
+
                     grid
                     gap-0.5
                     sm:gap-1
+
+                    lg:gap-0.5
+                    xl:gap-0.5
                   "
                 >
                   {/* EMAIL */}
@@ -289,9 +351,15 @@ const Profile = () => {
                         gap-1
                         sm:gap-1.5
 
+                        lg:gap-1
+                        xl:gap-1
+
                         text-[9px]
                         sm:text-[10px]
                         md:text-xs
+
+                        lg:text-[9px]
+                        xl:text-[9px]
 
                         break-all
 
@@ -322,9 +390,15 @@ const Profile = () => {
                         gap-1
                         sm:gap-1.5
 
+                        lg:gap-1
+                        xl:gap-1
+
                         text-[9px]
                         sm:text-[10px]
                         md:text-xs
+
+                        lg:text-[9px]
+                        xl:text-[9px]
 
                         ${
                           isDark
@@ -358,9 +432,15 @@ const Profile = () => {
                 sm:px-2.5
                 md:px-4
 
+                lg:px-2.5
+                xl:px-2.5
+
                 py-1
                 sm:py-1.5
                 md:py-2
+
+                lg:py-1
+                xl:py-1
 
                 rounded-md
                 sm:rounded-lg
@@ -368,6 +448,9 @@ const Profile = () => {
                 text-[9px]
                 sm:text-[10px]
                 md:text-xs
+
+                lg:text-[10px]
+                xl:text-[10px]
 
                 font-medium
 
@@ -412,12 +495,21 @@ const Profile = () => {
               sm:px-3.5
               md:px-4
 
+              lg:px-3
+              xl:px-3
+
               pt-3
               sm:pt-3.5
               md:pt-4
 
+              lg:pt-3
+              xl:pt-3
+
               pb-1.5
               sm:pb-2
+
+              lg:pb-1
+              xl:pb-1
             "
           >
             <h2
@@ -425,6 +517,9 @@ const Profile = () => {
                 text-xs
                 sm:text-sm
                 md:text-base
+
+                lg:text-sm
+                xl:text-sm
 
                 font-semibold
               "
@@ -440,6 +535,9 @@ const Profile = () => {
                 sm:text-[10px]
                 md:text-xs
 
+                lg:text-[9px]
+                xl:text-[9px]
+
                 ${isDark ? "text-gray-400" : "text-gray-500"}
               `}
             >
@@ -453,6 +551,9 @@ const Profile = () => {
               p-1.5
               sm:p-2
               md:p-3
+
+              lg:p-1.5
+              xl:p-1.5
             "
           >
             {accountItems.map((item) => (
@@ -470,9 +571,15 @@ const Profile = () => {
                   sm:gap-2.5
                   md:gap-3
 
+                  lg:gap-2
+                  xl:gap-2
+
                   p-2
                   sm:p-2.5
                   md:p-3
+
+                  lg:p-2
+                  xl:p-2
 
                   rounded-md
                   sm:rounded-lg
@@ -497,6 +604,12 @@ const Profile = () => {
                     md:w-10
                     md:h-10
 
+                    lg:w-8
+                    lg:h-8
+
+                    xl:w-8
+                    xl:h-8
+
                     rounded-md
                     sm:rounded-lg
 
@@ -507,6 +620,9 @@ const Profile = () => {
                     text-xs
                     sm:text-sm
                     md:text-base
+
+                    lg:text-sm
+                    xl:text-sm
 
                     shrink-0
 
@@ -528,6 +644,9 @@ const Profile = () => {
                       sm:text-xs
                       md:text-sm
 
+                      lg:text-[11px]
+                      xl:text-[11px]
+
                       font-medium
                     "
                   >
@@ -541,6 +660,9 @@ const Profile = () => {
                       text-[8px]
                       sm:text-[10px]
                       md:text-xs
+
+                      lg:text-[9px]
+                      xl:text-[9px]
 
                       truncate
 
@@ -557,6 +679,9 @@ const Profile = () => {
                     text-xs
                     sm:text-sm
                     md:text-base
+
+                    lg:text-sm
+                    xl:text-sm
 
                     shrink-0
 
@@ -580,6 +705,10 @@ const Profile = () => {
           className={`
             mt-3
             sm:mt-4
+            md:mt-4
+
+            lg:mt-3
+            xl:mt-3
 
             rounded-lg
             sm:rounded-xl
@@ -589,6 +718,9 @@ const Profile = () => {
             p-1.5
             sm:p-2
             md:p-3
+
+            lg:p-1.5
+            xl:p-1.5
 
             ${
               isDark
@@ -610,8 +742,14 @@ const Profile = () => {
               sm:gap-2.5
               md:gap-3
 
+              lg:gap-2
+              xl:gap-2
+
               p-1.5
               sm:p-2
+
+              lg:p-1.5
+              xl:p-1.5
 
               rounded-md
               sm:rounded-lg
@@ -639,6 +777,12 @@ const Profile = () => {
                 md:w-10
                 md:h-10
 
+                lg:w-8
+                lg:h-8
+
+                xl:w-8
+                xl:h-8
+
                 rounded-md
                 sm:rounded-lg
 
@@ -651,6 +795,9 @@ const Profile = () => {
                 text-xs
                 sm:text-sm
                 md:text-base
+
+                lg:text-sm
+                xl:text-sm
 
                 ${isDark ? "bg-red-500/10" : "bg-red-50"}
               `}
@@ -666,6 +813,9 @@ const Profile = () => {
                   sm:text-xs
                   md:text-sm
 
+                  lg:text-[11px]
+                  xl:text-[11px]
+
                   font-medium
                 "
               >
@@ -677,6 +827,9 @@ const Profile = () => {
                   text-[8px]
                   sm:text-[10px]
                   md:text-xs
+
+                  lg:text-[9px]
+                  xl:text-[9px]
 
                   mt-0.5
 
