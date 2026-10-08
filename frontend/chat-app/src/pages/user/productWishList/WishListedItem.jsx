@@ -54,7 +54,7 @@ const WishListedItem = () => {
             className={`
               text-2xl
               sm:text-3xl
-              lg:text-2xl
+              lg:text-lg
               font-semibold
               tracking-tight
 
@@ -73,7 +73,7 @@ const WishListedItem = () => {
               mt-2
               text-sm
               sm:text-base
-              lg:text-sm
+              lg:text-xs
 
               ${
                 isDark
@@ -141,7 +141,7 @@ const WishListedItem = () => {
                 mt-6
                 text-lg
                 sm:text-xl
-                lg:text-lg
+                lg:text-sm
                 font-semibold
 
                 ${
@@ -162,7 +162,7 @@ const WishListedItem = () => {
                 max-w-sm
                 text-sm
                 sm:text-base
-                lg:text-sm
+                lg:text-xs
 
                 ${
                   isDark
@@ -200,9 +200,6 @@ const WishListedItem = () => {
               // ===========================================
 
               const product = item?.productId;
-
-              // If product data is unavailable,
-              // don't render the card.
 
               if (!product) {
                 return null;
