@@ -52,6 +52,7 @@ const Checkout = () => {
               items-center
               gap-2
               text-sm
+              lg:text-xs
               transition-colors
 
               ${
@@ -66,7 +67,7 @@ const Checkout = () => {
           </button>
 
           {/* Page title */}
-          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl lg:text-xl">
             Checkout
           </h1>
 
@@ -76,6 +77,7 @@ const Checkout = () => {
               mt-2
               max-w-xl
               text-sm
+              lg:text-xs
 
               ${isDark ? "text-gray-400" : "text-gray-500"}
             `}
@@ -105,12 +107,15 @@ const Checkout = () => {
               {/* Address heading */}
               <div className="mb-6 flex items-start justify-between gap-4">
                 <div>
-                  <h2 className="text-lg font-semibold">Delivery Address</h2>
+                  <h2 className="text-lg font-semibold lg:text-sm">
+                    Delivery Address
+                  </h2>
 
                   <p
                     className={`
                       mt-1
                       text-sm
+                      lg:text-xs
 
                       ${isDark ? "text-gray-400" : "text-gray-500"}
                     `}
@@ -179,7 +184,9 @@ const Checkout = () => {
                     `}
                   />
 
-                  <h3 className="mt-4 font-semibold">No address found</h3>
+                  <h3 className="mt-4 font-semibold lg:text-sm">
+                    No address found
+                  </h3>
 
                   <p
                     className={`
@@ -187,6 +194,7 @@ const Checkout = () => {
                       mt-2
                       max-w-sm
                       text-sm
+                      lg:text-xs
 
                       ${isDark ? "text-gray-400" : "text-gray-500"}
                     `}
@@ -265,7 +273,7 @@ const Checkout = () => {
                           {/* Address information */}
                           <div className="min-w-0 flex-1">
                             <div className="flex flex-wrap items-center gap-2">
-                              <h3 className="font-semibold">
+                              <h3 className="font-semibold lg:text-xs">
                                 {address.fullName}
                               </h3>
 
@@ -276,6 +284,7 @@ const Checkout = () => {
                                     px-2
                                     py-0.5
                                     text-[10px]
+                                    lg:text-[8px]
                                     font-medium
 
                                     ${
@@ -295,6 +304,7 @@ const Checkout = () => {
                               className={`
                                 mt-1
                                 text-sm
+                                lg:text-xs
 
                                 ${isDark ? "text-gray-300" : "text-gray-700"}
                               `}
@@ -308,6 +318,8 @@ const Checkout = () => {
                                 mt-2
                                 text-sm
                                 leading-6
+                                lg:text-xs
+                                lg:leading-5
 
                                 ${isDark ? "text-gray-400" : "text-gray-600"}
                               `}
@@ -348,16 +360,20 @@ const Checkout = () => {
             >
               {/* Summary heading */}
               <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold">Order Summary</h2>
+                <h2 className="text-lg font-semibold lg:text-sm">
+                  Order Summary
+                </h2>
 
                 <span
                   className={`
                     text-xs
+                    lg:text-[10px]
 
                     ${isDark ? "text-gray-400" : "text-gray-500"}
                   `}
                 >
-                  {cartData.length} {cartData.length === 1 ? "item" : "items"}
+                  {cartData.length}{" "}
+                  {cartData.length === 1 ? "item" : "items"}
                 </span>
               </div>
 
@@ -390,7 +406,7 @@ const Checkout = () => {
                     {/* Product details */}
                     <div className="min-w-0 flex-1">
                       <p
-                        className="truncate text-sm font-medium"
+                        className="truncate text-sm font-medium lg:text-xs"
                         title={item.productName}
                       >
                         {item.productName}
@@ -400,6 +416,7 @@ const Checkout = () => {
                         className={`
                           mt-1
                           text-xs
+                          lg:text-[10px]
 
                           ${isDark ? "text-gray-400" : "text-gray-500"}
                         `}
@@ -410,7 +427,7 @@ const Checkout = () => {
                     </div>
 
                     {/* Product total */}
-                    <span className="shrink-0 text-sm font-medium">
+                    <span className="shrink-0 text-sm font-medium lg:text-xs">
                       ₹
                       {(
                         Number(item.productPrice) * Number(item.quantity)
@@ -430,7 +447,7 @@ const Checkout = () => {
               />
 
               {/* Subtotal */}
-              <div className="flex justify-between text-sm">
+              <div className="flex justify-between text-sm lg:text-xs">
                 <span className={isDark ? "text-gray-400" : "text-gray-600"}>
                   Subtotal
                 </span>
@@ -439,7 +456,7 @@ const Checkout = () => {
               </div>
 
               {/* Shipping */}
-              <div className="mt-3 flex justify-between text-sm">
+              <div className="mt-3 flex justify-between text-sm lg:text-xs">
                 <span className={isDark ? "text-gray-400" : "text-gray-600"}>
                   Shipping
                 </span>
@@ -458,9 +475,9 @@ const Checkout = () => {
 
               {/* Final total */}
               <div className="flex items-center justify-between">
-                <span className="font-semibold">Total</span>
+                <span className="font-semibold lg:text-xs">Total</span>
 
-                <span className="text-xl font-semibold">
+                <span className="text-xl font-semibold lg:text-lg">
                   ₹{Number(totalPrice).toLocaleString("en-IN")}
                 </span>
               </div>
@@ -481,6 +498,7 @@ const Checkout = () => {
                     mt-3
                     text-center
                     text-xs
+                    lg:text-[10px]
 
                     ${isDark ? "text-gray-500" : "text-gray-400"}
                   `}

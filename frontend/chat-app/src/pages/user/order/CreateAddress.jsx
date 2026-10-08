@@ -1,3 +1,4 @@
+
 import React from "react";
 
 import InputField from "../../../components/ui/InputField";
@@ -46,16 +47,15 @@ const CreateAddress = ({
         ${cardBg}
       `}
     >
-
       {/* =====================================================
           HEADER
       ===================================================== */}
 
       <div className="mb-7">
-
         <h2
           className={`
             text-xl
+            lg:text-lg
             font-semibold
             tracking-tight
             ${headingText}
@@ -70,12 +70,12 @@ const CreateAddress = ({
           className={`
             mt-1.5
             text-sm
+            lg:text-xs
             ${bodyText}
           `}
         >
           Enter your delivery details carefully.
         </p>
-
       </div>
 
       {/* =====================================================
@@ -86,18 +86,16 @@ const CreateAddress = ({
         onSubmit={handleSubmit}
         className="space-y-8"
       >
-
         {/* =================================================
             CONTACT INFORMATION
         ================================================= */}
 
         <section>
-
           <div className="mb-4">
-
             <h3
               className={`
                 text-sm
+                lg:text-xs
                 font-semibold
                 ${headingText}
               `}
@@ -109,12 +107,12 @@ const CreateAddress = ({
               className={`
                 mt-1
                 text-xs
+                lg:text-[10px]
                 ${bodyText}
               `}
             >
               Provide the details we can use to contact you.
             </p>
-
           </div>
 
           <div
@@ -125,7 +123,6 @@ const CreateAddress = ({
               md:grid-cols-2
             "
           >
-
             {/* FULL NAME */}
 
             <InputField
@@ -145,7 +142,6 @@ const CreateAddress = ({
               handleChange={handleChange}
               placeholder="Enter phone number"
             />
-
           </div>
         </section>
 
@@ -154,12 +150,11 @@ const CreateAddress = ({
         ================================================= */}
 
         <section>
-
           <div className="mb-4">
-
             <h3
               className={`
                 text-sm
+                lg:text-xs
                 font-semibold
                 ${headingText}
               `}
@@ -171,17 +166,16 @@ const CreateAddress = ({
               className={`
                 mt-1
                 text-xs
+                lg:text-[10px]
                 ${bodyText}
               `}
             >
               Enter the complete address where your order
               should be delivered.
             </p>
-
           </div>
 
           <div className="space-y-5">
-
             {/* ADDRESS LINE */}
 
             <InputField
@@ -202,7 +196,6 @@ const CreateAddress = ({
                 md:grid-cols-2
               "
             >
-
               <InputField
                 label="City"
                 name="city"
@@ -218,7 +211,6 @@ const CreateAddress = ({
                 handleChange={handleChange}
                 placeholder="Maharashtra"
               />
-
             </div>
 
             {/* POSTAL CODE + COUNTRY */}
@@ -231,7 +223,6 @@ const CreateAddress = ({
                 md:grid-cols-2
               "
             >
-
               <InputField
                 label="Postal Code"
                 name="postalCode"
@@ -247,9 +238,7 @@ const CreateAddress = ({
                 handleChange={handleChange}
                 placeholder="India"
               />
-
             </div>
-
           </div>
         </section>
 
@@ -270,7 +259,6 @@ const CreateAddress = ({
             }
           `}
         >
-
           <CheckBox
             name="isDefault"
             label="Set as default address"
@@ -283,13 +271,13 @@ const CreateAddress = ({
               mt-1
               ml-6
               text-xs
+              lg:text-[10px]
               ${bodyText}
             `}
           >
             This address will be selected automatically
             during checkout.
           </p>
-
         </div>
 
         {/* =================================================
@@ -308,7 +296,6 @@ const CreateAddress = ({
             ${border}
           `}
         >
-
           {/* CANCEL */}
 
           <Button
@@ -331,9 +318,7 @@ const CreateAddress = ({
             variant="primary"
             className="w-full sm:w-auto"
           />
-
         </div>
-
       </form>
     </div>
   );

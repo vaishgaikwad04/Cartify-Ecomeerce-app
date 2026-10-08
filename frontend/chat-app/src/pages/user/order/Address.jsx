@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../../../context/ThemeContext";
 
@@ -158,6 +159,7 @@ const Address = () => {
               <h1
                 className={`
                   text-2xl
+                  lg:text-lg
                   font-semibold
                   tracking-tight
                   ${headingText}
@@ -170,6 +172,7 @@ const Address = () => {
                 className={`
                   mt-1
                   text-sm
+                  lg:text-xs
                   ${bodyText}
                 `}
               >
@@ -285,6 +288,7 @@ const Address = () => {
                   className={`
                     mt-5
                     text-lg
+                    lg:text-sm
                     font-semibold
                     ${headingText}
                   `}
@@ -300,6 +304,7 @@ const Address = () => {
                     mt-2
                     max-w-md
                     text-sm
+                    lg:text-xs
                     ${bodyText}
                   `}
                 >
@@ -403,6 +408,7 @@ const Address = () => {
                             px-2.5
                             py-1
                             text-[11px]
+                            lg:text-[9px]
                             font-medium
                             text-emerald-600
                             dark:text-emerald-400
@@ -425,6 +431,7 @@ const Address = () => {
                       <h3
                         className={`
                           text-base
+                          lg:text-sm
                           font-semibold
                           ${headingText}
                         `}
@@ -438,6 +445,7 @@ const Address = () => {
                         className={`
                           mt-1
                           text-sm
+                          lg:text-xs
                           ${secondaryText}
                         `}
                       >
@@ -450,6 +458,7 @@ const Address = () => {
                         className={`
                           mt-3
                           text-sm
+                          lg:text-xs
                           leading-6
                           ${bodyText}
                         `}
@@ -505,6 +514,7 @@ const Address = () => {
                             px-3
                             py-2
                             text-sm
+                            lg:text-xs
                             font-medium
                             transition-all
                             duration-200
@@ -556,6 +566,7 @@ const Address = () => {
                             px-3
                             py-2
                             text-sm
+                            lg:text-xs
                             font-medium
                             transition-all
                             duration-200
@@ -612,6 +623,7 @@ const Address = () => {
                             px-2
                             py-2
                             text-sm
+                            lg:text-xs
                             font-medium
                             transition-all
                             duration-200
