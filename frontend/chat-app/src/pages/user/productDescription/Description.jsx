@@ -999,7 +999,7 @@ const DescriptionPage = () => {
   <h3
     className={`
       text-sm
-      lg:text-xs
+      lg:text-md
       font-semibold
       mb-2
       ${
@@ -1016,14 +1016,14 @@ const DescriptionPage = () => {
     className={`
       text-xs
       sm:text-sm
-      lg:text-sm
-      leading-6
+      lg:text-xs
+      leading-4
       whitespace-pre-line
       break-words
       ${
         isDark
           ? "text-gray-300"
-          : "text-gray-600"
+          : "text-gray-500"
       }
     `}
   >
