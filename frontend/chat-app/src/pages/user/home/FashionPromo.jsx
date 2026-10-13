@@ -69,7 +69,7 @@ const FashionPromo = () => {
                 setOpenProductModel(index);
               }}
               aria-label={`View product ${index + 1}`}
-         className={`
+              className={`
   w-7 h-7
   sm:w-8 sm:h-8
   md:w-9 md:h-9
@@ -108,17 +108,14 @@ const FashionPromo = () => {
       z-[99999]
       mr-34
 
-      ${index === 0 ? "left-18" : "right-[-138px]"}
+   ${index === 0 ? "left-18" : "right-[-138px]"}
 
-      lg:top-72
-      lg:left-112
+min-[1108px]:!left-[90px]
+min-[1108px]:!top-[250px]
+min-[1108px]:!right-auto
+min-[1108px]:!ml-2
 
-        min-[500px]:max-[670px]:left-30
-          min-[500px]:max-[670px]:top-80
-
-      lg:right-auto
-      lg:ml-3
-
+     
       w-[90px]
       sm:w-[120px]
       md:w-[150px]
