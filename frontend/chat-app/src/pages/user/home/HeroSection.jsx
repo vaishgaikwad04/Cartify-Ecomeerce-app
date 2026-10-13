@@ -61,6 +61,7 @@ const HeroSection = () => {
               text-[8px]
               sm:text-[9px]
               md:text-xs
+              lg:text-sm
               
               mb-1
               sm:mb-2
