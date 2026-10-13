@@ -221,7 +221,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
                   text-lg
                   sm:text-lg
-                  lg:text-xl
+                  lg:text-lg
 
                   tracking-[2.5px]
                   sm:tracking-[3px]

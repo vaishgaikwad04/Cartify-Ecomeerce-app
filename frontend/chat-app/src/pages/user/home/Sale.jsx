@@ -151,18 +151,13 @@ const Sale = () => {
           min-[500px]:max-[670px]:left-80
           min-[500px]:max-[670px]:top-74
 
-     /* DESKTOP: 1024px+ */
-
-  lg:!left-[280px]
-  lg:!top-[120px]
-
+    // DESKTOP: 1024px
+ lg:!left-[280px] lg:!top-[120px]
           w-[140px]
           sm:w-[140px]
           md:w-[240px]
            min-[500px]:max-[670px]:w-[210px]
-          lg:w-[242px]
-        "
-              >
+         lg:w-[242px] " >
                 <div
                   className={`
             w-full
