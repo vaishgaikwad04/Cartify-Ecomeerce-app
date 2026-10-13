@@ -980,8 +980,10 @@ const DescriptionPage = () => {
                   className="w-full"
                 /> */}
               </div>
-              <div>
-                <p>{product.description}</p>
+              <div className="mt-1">
+                 <p className="lg:text-sm">
+                    {product.description || "No description available"}
+                  </p>
               </div>
             </div>
           </div>
