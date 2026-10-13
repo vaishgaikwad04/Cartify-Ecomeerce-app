@@ -784,46 +784,46 @@ const DescriptionPage = () => {
             </div>
 
             {/* PRODUCT DETAILS */}
-      
-<div className="w-full min-w-0 lg:sticky lg:top-24 lg:h-fit">
-  {/* BREADCRUMB */}
-  <p className="text-[11px] sm:text-xs md:text-sm lg:text-sm text-gray-400 mb-3 sm:mb-4 lg:mb-5 break-words">
-    Home / {product.category} / {product.name}
-  </p>
 
-  {/* PRODUCT NAME */}
-  <h1
-    className={`
+            <div className="w-full min-w-0 lg:sticky lg:top-24 lg:h-fit">
+              {/* BREADCRUMB */}
+              <p className="text-[11px] sm:text-xs md:text-sm lg:text-sm text-gray-400 mb-3 sm:mb-4 lg:mb-5 break-words">
+                Home / {product.category} / {product.name}
+              </p>
+
+              {/* PRODUCT NAME */}
+              <h1
+                className={`
       text-lg sm:text-xl md:text-2xl lg:text-2xl
       font-semibold leading-tight break-words
       ${isDark ? "text-white" : "text-gray-900"}
     `}
-  >
-    {product.name}
-  </h1>
+              >
+                {product.name}
+              </h1>
 
-  {/* PRICE */}
-  <div className="flex items-center flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-5 lg:mt-6">
-    {product.discountPrice && (
-      <span className="line-through text-gray-400 text-xs sm:text-sm md:text-base lg:text-base">
-        ₹{product.price}
-      </span>
-    )}
+              {/* PRICE */}
+              <div className="flex items-center flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-5 lg:mt-6">
+                {product.discountPrice && (
+                  <span className="line-through text-gray-400 text-xs sm:text-sm md:text-base lg:text-base">
+                    ₹{product.price}
+                  </span>
+                )}
 
-    <span
-      className={`
+                <span
+                  className={`
         text-base sm:text-lg md:text-xl lg:text-2xl
         font-bold
         ${isDark ? "text-white" : "text-black"}
       `}
-    >
-      ₹{finalPrice}
-    </span>
-  </div>
+                >
+                  ₹{finalPrice}
+                </span>
+              </div>
 
-  {/* SHIPPING / RETURNS */}
-  <div
-    className={`
+              {/* SHIPPING / RETURNS */}
+              <div
+                className={`
       mt-5 sm:mt-5 lg:mt-6
       pt-4 sm:pt-5 lg:pt-5
       border-t flex flex-wrap items-center
@@ -835,44 +835,44 @@ const DescriptionPage = () => {
           : "border-gray-200 text-gray-500"
       }
     `}
-  >
-    <span className="flex items-center gap-2 whitespace-nowrap">
-      <FiTruck className="text-sm sm:text-base lg:text-base shrink-0" />
-      Free shipping
-    </span>
+              >
+                <span className="flex items-center gap-2 whitespace-nowrap">
+                  <FiTruck className="text-sm sm:text-base lg:text-base shrink-0" />
+                  Free shipping
+                </span>
 
-    <span
-      className={`hidden sm:block h-4 w-px ${
-        isDark ? "bg-gray-800" : "bg-gray-200"
-      }`}
-    />
+                <span
+                  className={`hidden sm:block h-4 w-px ${
+                    isDark ? "bg-gray-800" : "bg-gray-200"
+                  }`}
+                />
 
-    <span className="flex items-center gap-2 whitespace-nowrap">
-      <FiRefreshCcw className="text-sm sm:text-base lg:text-base shrink-0" />
-      Easy returns
-    </span>
-  </div>
+                <span className="flex items-center gap-2 whitespace-nowrap">
+                  <FiRefreshCcw className="text-sm sm:text-base lg:text-base shrink-0" />
+                  Easy returns
+                </span>
+              </div>
 
-  {/* SIZE */}
-  {product.variants?.length > 0 && (
-    <div className="mt-6 sm:mt-7 lg:mt-8">
-      <h3
-        className={`
+              {/* SIZE */}
+              {product.variants?.length > 0 && (
+                <div className="mt-6 sm:mt-7 lg:mt-8">
+                  <h3
+                    className={`
           text-xs sm:text-sm md:text-base lg:text-base
           font-medium mb-3 sm:mb-4 lg:mb-4
           ${isDark ? "text-white" : "text-gray-900"}
         `}
-      >
-        Select Size
-      </h3>
+                  >
+                    Select Size
+                  </h3>
 
-      <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-3">
-        {product.variants.map((item) => (
-          <button
-            key={item._id}
-            disabled={item.stock <= 0}
-            onClick={() => setSelectedSize(item.size)}
-            className={`
+                  <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-3">
+                    {product.variants.map((item) => (
+                      <button
+                        key={item._id}
+                        disabled={item.stock <= 0}
+                        onClick={() => setSelectedSize(item.size)}
+                        className={`
               min-w-[52px] sm:min-w-[60px] md:min-w-[64px]
               lg:min-w-[60px]
               h-9 sm:h-10 lg:h-11
@@ -894,19 +894,19 @@ const DescriptionPage = () => {
                       : "bg-white text-gray-900 border-gray-300 hover:border-black"
               }
             `}
-          >
-            {item.size}
-          </button>
-        ))}
-      </div>
-    </div>
-  )}
+                      >
+                        {item.size}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
-  {/* ACTION BUTTONS */}
-  <div className="mt-5 sm:mt-7 lg:mt-8 flex flex-col gap-2.5 sm:gap-3">
-    <button
-      onClick={handleCart}
-      className={`
+              {/* ACTION BUTTONS */}
+              <div className="mt-5 sm:mt-7 lg:mt-8 flex flex-col gap-2.5 sm:gap-3">
+                <button
+                  onClick={handleCart}
+                  className={`
         h-11 sm:h-12 lg:h-12
         w-full rounded-lg sm:rounded-xl
         font-medium text-xs sm:text-sm lg:text-sm
@@ -917,21 +917,21 @@ const DescriptionPage = () => {
             : "bg-black text-white hover:bg-gray-800"
         }
       `}
-    >
-      {selectedSize && selectedVariant?.stock <= 0
-        ? "Out Of Stock"
-        : "Add To Cart"}
-    </button>
-  </div>
-</div>
-
+                >
+                  {selectedSize && selectedVariant?.stock <= 0
+                    ? "Out Of Stock"
+                    : "Add To Cart"}
+                </button>
+              </div>
+              <h3>{product.description}</h3>
+            </div>
           </div>
         </div>
 
         {/* =====================================================
             OLD TABS - KEPT UNCHANGED
         ===================================================== */}
-         <div className="mt-8 sm:mt-10">
+        <div className="mt-8 sm:mt-10">
           <Tabs
             tabs={[
               {
@@ -975,7 +975,7 @@ const DescriptionPage = () => {
               },
             ]}
           />
-        </div> 
+        </div>
 
         {/* =====================================================
             RECOMMENDED PRODUCTS
