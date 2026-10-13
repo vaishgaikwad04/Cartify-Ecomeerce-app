@@ -980,11 +980,57 @@ const DescriptionPage = () => {
                   className="w-full"
                 /> */}
               </div>
-              <div className="mt-4">
-                 <p className="lg:text-sm text-gray-400">
-                    {product.description || "No description available"}
-                  </p>
-              </div>
+              
+{/* PRODUCT DESCRIPTION */}
+<div
+  className={`
+    mt-5
+    lg:mt-6
+    pt-4
+    lg:pt-5
+    border-t
+    ${
+      isDark
+        ? "border-gray-800"
+        : "border-gray-200"
+    }
+  `}
+>
+  <h3
+    className={`
+      text-sm
+      lg:text-base
+      font-semibold
+      mb-2
+      ${
+        isDark
+          ? "text-white"
+          : "text-gray-900"
+      }
+    `}
+  >
+    Product Description
+  </h3>
+
+  <p
+    className={`
+      text-xs
+      sm:text-sm
+      lg:text-sm
+      leading-6
+      whitespace-pre-line
+      break-words
+      ${
+        isDark
+          ? "text-gray-300"
+          : "text-gray-600"
+      }
+    `}
+  >
+    {product.description || "No description available"}
+  </p>
+</div>
+
             </div>
           </div>
         </div>
