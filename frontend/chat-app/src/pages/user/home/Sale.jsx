@@ -152,14 +152,12 @@ const Sale = () => {
           min-[500px]:max-[670px]:top-74
 
     // DESKTOP: 1024px
-min-[1108px]:!left-[100px]
-min-[1108px]:!top-[80px]
+lg:!left-[300px] lg:!top-[140px]
           w-[140px]
           sm:w-[140px]
           md:w-[240px]
            min-[500px]:max-[670px]:w-[210px]
-         lg:w-[242px] "
-              >
+         lg:w-[242px] " >
                 <div
                   className={`
             w-full
