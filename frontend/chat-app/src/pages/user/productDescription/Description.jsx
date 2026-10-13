@@ -784,259 +784,207 @@ const DescriptionPage = () => {
             </div>
 
             {/* PRODUCT DETAILS */}
-            <div className="w-full min-w-0 lg:sticky lg:top-24 lg:h-fit">
-              {/* BREADCRUMB */}
-              <p className="text-[11px] sm:text-xs md:text-sm lg:text-xs text-gray-400 mb-3 sm:mb-4 break-words">
-                Home / {product.category} / {product.name}
-              </p>
+        
+{/* PRODUCT DETAILS */}
+<div className="w-full min-w-0 lg:sticky lg:top-20 lg:h-fit">
+  {/* BREADCRUMB */}
+  <p className="text-[11px] sm:text-xs md:text-sm lg:text-[11px] text-gray-400 mb-2 lg:mb-2">
+    Home / {product.category} / {product.name}
+  </p>
 
-              {/* PRODUCT NAME */}
-              <h1
-                className={`
-                  text-lg
-                  sm:text-xl
-                  md:text-2xl
-                  lg:text-xl
-                  font-semibold
-                  leading-tight
-                  break-words
-                  ${isDark ? "text-white" : "text-gray-900"}
-                `}
-              >
-                {product.name}
-              </h1>
+  {/* PRODUCT NAME */}
+  <h1
+    className={`
+      text-lg sm:text-xl md:text-2xl
+      lg:text-lg
+      font-semibold leading-tight break-words
+      ${isDark ? "text-white" : "text-gray-900"}
+    `}
+  >
+    {product.name}
+  </h1>
 
-              {/* PRICE */}
-              <div className="flex items-center flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-5">
-                {product.discountPrice && (
-                  <span className="line-through text-gray-400 text-xs sm:text-sm md:text-base lg:text-sm">
-                    ₹{product.price}
-                  </span>
-                )}
+  {/* PRICE */}
+  <div className="flex items-center flex-wrap gap-2 sm:gap-3 mt-3 lg:mt-2.5">
+    {product.discountPrice && (
+      <span className="line-through text-gray-400 text-xs sm:text-sm md:text-base lg:text-xs">
+        ₹{product.price}
+      </span>
+    )}
 
-                <span
-                  className={`
-                    text-base
-                    sm:text-lg
-                    md:text-xl
-                    lg:text-md
-                    font-bold
-                    ${isDark ? "text-white" : "text-black"}
-                  `}
-                >
-                  ₹{finalPrice}
-                </span>
-              </div>
-
-              {/* SHIPPING / RETURNS */}
-              <div
-                className={`
-                  mt-4
-                  sm:mt-5
-                  pt-4
-                  sm:pt-5
-                  border-t
-                  flex
-                  flex-wrap
-                  items-center
-                  gap-x-4
-                  gap-y-2
-                  text-[11px]
-                  sm:text-xs
-                  md:text-sm
-                  lg:text-xs
-                  ${
-                    isDark
-                      ? "border-gray-800 text-gray-400"
-                      : "border-gray-200 text-gray-500"
-                  }
-                `}
-              >
-                <span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
-                  <FiTruck className="text-sm sm:text-base lg:text-sm shrink-0" />
-                  Free shipping
-                </span>
-
-                <span
-                  className={`
-                    hidden
-                    sm:block
-                    h-4
-                    w-px
-                    ${isDark ? "bg-gray-800" : "bg-gray-200"}
-                  `}
-                />
-
-                <span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
-                  <FiRefreshCcw className="text-sm sm:text-base lg:text-sm shrink-0" />
-                  Easy returns
-                </span>
-              </div>
-
-              {/* SIZE */}
-              {product.variants?.length > 0 && (
-                <div className="mt-6 sm:mt-7">
-                  <h3
-                    className={`
-        text-xs
-        sm:text-sm
-        md:text-base
-        lg:text-sm
-        font-medium
-        mb-3
-        sm:mb-4
-        ${isDark ? "text-white" : "text-gray-900"}
+    <span
+      className={`
+        text-base sm:text-lg md:text-xl
+        lg:text-base
+        font-bold
+        ${isDark ? "text-white" : "text-black"}
       `}
-                  >
-                    Select Size
-                  </h3>
+    >
+      ₹{finalPrice}
+    </span>
+  </div>
 
-                  <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-2">
-                    {product.variants.map((item) => (
-                      <button
-                        key={item._id}
-                        disabled={item.stock <= 0}
-                        onClick={() => setSelectedSize(item.size)}
-                        className={`
-            min-w-[52px]
-            sm:min-w-[60px]
-            md:min-w-[64px]
-            lg:min-w-[52px]
+  {/* SHIPPING / RETURNS */}
+  <div
+    className={`
+      mt-3 lg:mt-3
+      pt-3 lg:pt-2.5
+      border-t flex flex-wrap items-center
+      gap-x-4 gap-y-2
+      text-[11px] sm:text-xs md:text-sm lg:text-[11px]
+      ${
+        isDark
+          ? "border-gray-800 text-gray-400"
+          : "border-gray-200 text-gray-500"
+      }
+    `}
+  >
+    <span className="flex items-center gap-1.5 whitespace-nowrap">
+      <FiTruck className="text-sm lg:text-xs shrink-0" />
+      Free shipping
+    </span>
 
-            h-9
-            sm:h-10
-            lg:h-8
+    <span
+      className={`hidden sm:block h-4 w-px ${
+        isDark ? "bg-gray-800" : "bg-gray-200"
+      }`}
+    />
 
-            px-3
-            sm:px-4
-            lg:px-3
+    <span className="flex items-center gap-1.5 whitespace-nowrap">
+      <FiRefreshCcw className="text-sm lg:text-xs shrink-0" />
+      Easy returns
+    </span>
+  </div>
 
-            rounded-lg
-            border
+  {/* SIZE */}
+  {product.variants?.length > 0 && (
+    <div className="mt-4 sm:mt-6 lg:mt-4">
+      <h3
+        className={`
+          text-xs sm:text-sm md:text-base lg:text-xs
+          font-medium mb-2 lg:mb-2
+          ${isDark ? "text-white" : "text-gray-900"}
+        `}
+      >
+        Select Size
+      </h3>
 
-            font-medium
-
-            text-xs
-            sm:text-sm
-            lg:text-xs
-
-            transition-all
-            duration-200
-
-            ${
-              selectedSize === item.size
-                ? isDark
-                  ? "bg-white text-black border-white shadow-md"
-                  : "bg-black text-white border-black shadow-sm"
-                : item.stock <= 0
+      <div className="flex flex-wrap gap-2 lg:gap-1.5">
+        {product.variants.map((item) => (
+          <button
+            key={item._id}
+            disabled={item.stock <= 0}
+            onClick={() => setSelectedSize(item.size)}
+            className={`
+              min-w-[52px] sm:min-w-[60px] md:min-w-[64px]
+              lg:min-w-[44px]
+              h-9 sm:h-10 lg:h-8
+              px-3 sm:px-4 lg:px-2.5
+              rounded-lg border font-medium
+              text-xs sm:text-sm lg:text-[11px]
+              transition-all duration-200
+              ${
+                selectedSize === item.size
                   ? isDark
-                    ? "bg-gray-900 text-gray-600 border-gray-800 cursor-not-allowed"
-                    : "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
-                  : isDark
-                    ? "bg-gray-950 text-white border-gray-700 hover:border-white hover:bg-gray-900"
-                    : "bg-white text-gray-900 border-gray-300 hover:border-black"
-            }
-          `}
-                      >
-                        {item.size}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
+                    ? "bg-white text-black border-white shadow-md"
+                    : "bg-black text-white border-black shadow-sm"
+                  : item.stock <= 0
+                    ? isDark
+                      ? "bg-gray-900 text-gray-600 border-gray-800 cursor-not-allowed"
+                      : "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
+                    : isDark
+                      ? "bg-gray-950 text-white border-gray-700 hover:border-white hover:bg-gray-900"
+                      : "bg-white text-gray-900 border-gray-300 hover:border-black"
+              }
+            `}
+          >
+            {item.size}
+          </button>
+        ))}
+      </div>
+    </div>
+  )}
 
-              {/* ACTION BUTTONS */}
-              <div className="mt-5 sm:mt-7 flex flex-col gap-2.5 sm:gap-3">
-                <button
-                  onClick={handleCart}
-                  className={`
-                    h-11
-                    sm:h-12
-                    md:h-13
-                    w-full
-                    rounded-lg
-                    sm:rounded-xl
-                    font-medium
-                    text-xs
-                    sm:text-sm
-                    lg:text-xs
-                    transition-all
-                    duration-300
-                    ${
-                      isDark
-                        ? "bg-white text-black hover:bg-gray-200"
-                        : "bg-black text-white hover:bg-gray-800"
-                    }
-                  `}
-                >
-                  {selectedSize && selectedVariant?.stock <= 0
-                    ? "Out Of Stock"
-                    : "Add To Cart"}
-                </button>
+  {/* ACTION BUTTONS */}
+  <div className="mt-4 sm:mt-7 lg:mt-4 flex flex-col gap-2 lg:gap-2">
+    <button
+      onClick={handleCart}
+      className={`
+        h-11 sm:h-12 lg:h-10
+        w-full rounded-lg
+        font-medium
+        text-xs sm:text-sm lg:text-xs
+        transition-all duration-300
+        ${
+          isDark
+            ? "bg-white text-black hover:bg-gray-200"
+            : "bg-black text-white hover:bg-gray-800"
+        }
+      `}
+    >
+      {selectedSize && selectedVariant?.stock <= 0
+        ? "Out Of Stock"
+        : "Add To Cart"}
+    </button>
+  </div>
 
-                {/* <Button
-                  label="Add To Wishlist"
-                  variant={isDark ? "outlineDark" : "outline"}
-                  className="w-full"
-                /> */}
-              </div>
+  {/* PRODUCT TABS */}
+  <div
+    className={`
+      mt-4 lg:mt-3
+      rounded-xl sm:rounded-2xl
+      border
+      ${isDark ? "bg-gray-900 border-gray-800" : "bg-gray-50 border-gray-100"}
+    `}
+  >
+    <Tabs
+      tabs={[
+        {
+          id: "description",
+          label: "Description",
+          content: (
+            <p className="text-sm lg:text-xs">
+              {product.description || "No description available"}
+            </p>
+          ),
+        },
+        {
+          id: "details",
+          label: "Details",
+          content: product.details ? (
+            <ul className="list-disc pl-5 text-sm lg:text-xs">
+              {product.details
+                .split(".")
+                .filter((item) => item.trim())
+                .map((item, index) => (
+                  <li key={index}>{item.trim()}</li>
+                ))}
+            </ul>
+          ) : (
+            <p className="text-sm lg:text-xs">No details available</p>
+          ),
+        },
+        {
+          id: "careFit",
+          label: "Care Fit",
+          content: product.careFit ? (
+            <ul className="list-disc pl-5 text-sm lg:text-xs">
+              {product.careFit
+                .split(".")
+                .filter((item) => item.trim())
+                .map((item, index) => (
+                  <li key={index}>{item.trim()}</li>
+                ))}
+            </ul>
+          ) : (
+            <p className="text-sm lg:text-xs">No care fit available</p>
+          ),
+        },
+      ]}
+    />
+  </div>
+</div>
 
-              {/* PRODUCT TABS */}
-              <div
-                className={`
-                  rounded-xl
-                  sm:rounded-2xl
-                  border
-                  ${isDark ? "bg-gray-900 border-gray-800" : "bg-gray-50 border-gray-100"}
-                `}
-              >
-                <Tabs
-                  tabs={[
-                    {
-                      id: "description",
-                      label: "Description",
-                      content: (
-                        <p className="lg:text-sm">
-                          {product.description || "No description available"}
-                        </p>
-                      ),
-                    },
-                    {
-                      id: "details",
-                      label: "Details",
-                      content: product.details ? (
-                        <ul className="list-disc pl-5 lg:text-sm">
-                          {product.details
-                            .split(".")
-                            .filter((item) => item.trim())
-                            .map((item, index) => (
-                              <li key={index}>{item.trim()}</li>
-                            ))}
-                        </ul>
-                      ) : (
-                        <p className="lg:text-sm">No details available</p>
-                      ),
-                    },
-                    {
-                      id: "careFit",
-                      label: "Care Fit",
-                      content: product.careFit ? (
-                        <ul className="list-disc pl-5 lg:text-sm">
-                          {product.careFit
-                            .split(".")
-                            .filter((item) => item.trim())
-                            .map((item, index) => (
-                              <li key={index}>{item.trim()}</li>
-                            ))}
-                        </ul>
-                      ) : (
-                        <p className="lg:text-sm">No care fit available</p>
-                      ),
-                    },
-                  ]}
-                />
-              </div>
-            </div>
           </div>
         </div>
 

@@ -157,7 +157,8 @@ lg:!left-[300px] lg:!top-[140px]
           sm:w-[140px]
           md:w-[240px]
            min-[500px]:max-[670px]:w-[210px]
-         lg:w-[242px] " >
+         lg:w-[242px] "
+              >
                 <div
                   className={`
             w-full
