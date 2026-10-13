@@ -103,25 +103,23 @@ const FashionPromo = () => {
             <div
               onClick={(e) => e.stopPropagation()}
               className={`
-      absolute
-      top-44
-      z-[99999]
-      mr-34
+  absolute
+  z-[99999]
 
-   ${index === 0 ? "left-18" : "right-[-138px]"}
+  top-44
+  ${index === 0 ? "left-18" : "right-[-138px]"}
 
-min-[1108px]:!left-[90px]
-min-[1108px]:!top-[250px]
-min-[1108px]:!right-auto
-min-[1108px]:!ml-2
+  min-[1108px]:!left-[250px]
+  min-[1108px]:!top-[100px]
+  min-[1108px]:!right-auto
+  min-[1108px]:!ml-0
 
-     
-      w-[90px]
-      sm:w-[120px]
-      md:w-[150px]
-       min-[500px]:max-[670px]:w-[180px]
-      lg:w-[272px]
-    `}
+  w-[90px]
+  sm:w-[120px]
+  md:w-[150px]
+  min-[500px]:max-[670px]:w-[180px]
+  min-[1108px]:!w-[240px]
+`}
             >
               <div
                 className={`
