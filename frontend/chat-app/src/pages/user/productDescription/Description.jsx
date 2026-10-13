@@ -784,38 +784,45 @@ const DescriptionPage = () => {
             </div>
 
             {/* PRODUCT DETAILS */}
-
             <div className="w-full min-w-0 lg:sticky lg:top-24 lg:h-fit">
               {/* BREADCRUMB */}
-              <p className="text-[11px] sm:text-xs md:text-sm lg:text-sm text-gray-400 mb-3 sm:mb-4 lg:mb-5 break-words">
+              <p className="text-[11px] sm:text-xs md:text-sm lg:text-xs text-gray-400 mb-3 sm:mb-4 break-words">
                 Home / {product.category} / {product.name}
               </p>
 
               {/* PRODUCT NAME */}
               <h1
                 className={`
-      text-lg sm:text-xl md:text-2xl lg:text-2xl
-      font-semibold leading-tight break-words
-      ${isDark ? "text-white" : "text-gray-900"}
-    `}
+                  text-lg
+                  sm:text-xl
+                  md:text-2xl
+                  lg:text-xl
+                  font-semibold
+                  leading-tight
+                  break-words
+                  ${isDark ? "text-white" : "text-gray-900"}
+                `}
               >
                 {product.name}
               </h1>
 
               {/* PRICE */}
-              <div className="flex items-center flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-5 lg:mt-6">
+              <div className="flex items-center flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-5">
                 {product.discountPrice && (
-                  <span className="line-through text-gray-400 text-xs sm:text-sm md:text-base lg:text-base">
+                  <span className="line-through text-gray-400 text-xs sm:text-sm md:text-base lg:text-sm">
                     ₹{product.price}
                   </span>
                 )}
 
                 <span
                   className={`
-        text-base sm:text-lg md:text-xl lg:text-2xl
-        font-bold
-        ${isDark ? "text-white" : "text-black"}
-      `}
+                    text-base
+                    sm:text-lg
+                    md:text-xl
+                    lg:text-md
+                    font-bold
+                    ${isDark ? "text-white" : "text-black"}
+                  `}
                 >
                   ₹{finalPrice}
                 </span>
@@ -824,76 +831,112 @@ const DescriptionPage = () => {
               {/* SHIPPING / RETURNS */}
               <div
                 className={`
-      mt-5 sm:mt-5 lg:mt-6
-      pt-4 sm:pt-5 lg:pt-5
-      border-t flex flex-wrap items-center
-      gap-x-5 gap-y-3
-      text-[11px] sm:text-xs md:text-sm lg:text-sm
-      ${
-        isDark
-          ? "border-gray-800 text-gray-400"
-          : "border-gray-200 text-gray-500"
-      }
-    `}
+                  mt-4
+                  sm:mt-5
+                  pt-4
+                  sm:pt-5
+                  border-t
+                  flex
+                  flex-wrap
+                  items-center
+                  gap-x-4
+                  gap-y-2
+                  text-[11px]
+                  sm:text-xs
+                  md:text-sm
+                  lg:text-xs
+                  ${
+                    isDark
+                      ? "border-gray-800 text-gray-400"
+                      : "border-gray-200 text-gray-500"
+                  }
+                `}
               >
-                <span className="flex items-center gap-2 whitespace-nowrap">
-                  <FiTruck className="text-sm sm:text-base lg:text-base shrink-0" />
+                <span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
+                  <FiTruck className="text-sm sm:text-base lg:text-sm shrink-0" />
                   Free shipping
                 </span>
 
                 <span
-                  className={`hidden sm:block h-4 w-px ${
-                    isDark ? "bg-gray-800" : "bg-gray-200"
-                  }`}
+                  className={`
+                    hidden
+                    sm:block
+                    h-4
+                    w-px
+                    ${isDark ? "bg-gray-800" : "bg-gray-200"}
+                  `}
                 />
 
-                <span className="flex items-center gap-2 whitespace-nowrap">
-                  <FiRefreshCcw className="text-sm sm:text-base lg:text-base shrink-0" />
+                <span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
+                  <FiRefreshCcw className="text-sm sm:text-base lg:text-sm shrink-0" />
                   Easy returns
                 </span>
               </div>
 
               {/* SIZE */}
               {product.variants?.length > 0 && (
-                <div className="mt-6 sm:mt-7 lg:mt-8">
+                <div className="mt-6 sm:mt-7">
                   <h3
                     className={`
-          text-xs sm:text-sm md:text-base lg:text-base
-          font-medium mb-3 sm:mb-4 lg:mb-4
-          ${isDark ? "text-white" : "text-gray-900"}
-        `}
+        text-xs
+        sm:text-sm
+        md:text-base
+        lg:text-sm
+        font-medium
+        mb-3
+        sm:mb-4
+        ${isDark ? "text-white" : "text-gray-900"}
+      `}
                   >
                     Select Size
                   </h3>
 
-                  <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-3">
+                  <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-2">
                     {product.variants.map((item) => (
                       <button
                         key={item._id}
                         disabled={item.stock <= 0}
                         onClick={() => setSelectedSize(item.size)}
                         className={`
-              min-w-[52px] sm:min-w-[60px] md:min-w-[64px]
-              lg:min-w-[60px]
-              h-9 sm:h-10 lg:h-11
-              px-3 sm:px-4 lg:px-4
-              rounded-lg border font-medium
-              text-xs sm:text-sm lg:text-sm
-              transition-all duration-200
-              ${
-                selectedSize === item.size
+            min-w-[52px]
+            sm:min-w-[60px]
+            md:min-w-[64px]
+            lg:min-w-[52px]
+
+            h-9
+            sm:h-10
+            lg:h-8
+
+            px-3
+            sm:px-4
+            lg:px-3
+
+            rounded-lg
+            border
+
+            font-medium
+
+            text-xs
+            sm:text-sm
+            lg:text-xs
+
+            transition-all
+            duration-200
+
+            ${
+              selectedSize === item.size
+                ? isDark
+                  ? "bg-white text-black border-white shadow-md"
+                  : "bg-black text-white border-black shadow-sm"
+                : item.stock <= 0
                   ? isDark
-                    ? "bg-white text-black border-white shadow-md"
-                    : "bg-black text-white border-black shadow-sm"
-                  : item.stock <= 0
-                    ? isDark
-                      ? "bg-gray-900 text-gray-600 border-gray-800 cursor-not-allowed"
-                      : "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
-                    : isDark
-                      ? "bg-gray-950 text-white border-gray-700 hover:border-white hover:bg-gray-900"
-                      : "bg-white text-gray-900 border-gray-300 hover:border-black"
-              }
-            `}
+                    ? "bg-gray-900 text-gray-600 border-gray-800 cursor-not-allowed"
+                    : "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
+                  : isDark
+                    ? "bg-gray-950 text-white border-gray-700 hover:border-white hover:bg-gray-900"
+                    : "bg-white text-gray-900 border-gray-300 hover:border-black"
+            }
+          `}
                       >
                         {item.size}
                       </button>
@@ -903,27 +946,43 @@ const DescriptionPage = () => {
               )}
 
               {/* ACTION BUTTONS */}
-              <div className="mt-5 sm:mt-7 lg:mt-8 flex flex-col gap-2.5 sm:gap-3">
+              <div className="mt-5 sm:mt-7 flex flex-col gap-2.5 sm:gap-3">
                 <button
                   onClick={handleCart}
                   className={`
-        h-11 sm:h-12 lg:h-12
-        w-full rounded-lg sm:rounded-xl
-        font-medium text-xs sm:text-sm lg:text-sm
-        transition-all duration-300
-        ${
-          isDark
-            ? "bg-white text-black hover:bg-gray-200"
-            : "bg-black text-white hover:bg-gray-800"
-        }
-      `}
+                    h-11
+                    sm:h-12
+                    md:h-13
+                    w-full
+                    rounded-lg
+                    sm:rounded-xl
+                    font-medium
+                    text-xs
+                    sm:text-sm
+                    lg:text-xs
+                    transition-all
+                    duration-300
+                    ${
+                      isDark
+                        ? "bg-white text-black hover:bg-gray-200"
+                        : "bg-black text-white hover:bg-gray-800"
+                    }
+                  `}
                 >
                   {selectedSize && selectedVariant?.stock <= 0
                     ? "Out Of Stock"
                     : "Add To Cart"}
                 </button>
+
+                {/* <Button
+                  label="Add To Wishlist"
+                  variant={isDark ? "outlineDark" : "outline"}
+                  className="w-full"
+                /> */}
               </div>
-              <h3>{product.description}</h3>
+              <div>
+                <p>{product.description}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -931,21 +990,31 @@ const DescriptionPage = () => {
         {/* =====================================================
             OLD TABS - KEPT UNCHANGED
         ===================================================== */}
-        <div className="mt-8 sm:mt-10">
+        {/* PRODUCT TABS */}
+        <div
+          className={`
+                  rounded-xl
+                  sm:rounded-2xl
+                  border
+                  ${isDark ? "bg-gray-900 border-gray-800" : "bg-gray-50 border-gray-100"}
+                `}
+        >
           <Tabs
             tabs={[
               {
                 id: "description",
                 label: "Description",
                 content: (
-                  <p>{product.description || "No description available"}</p>
+                  <p className="lg:text-sm">
+                    {product.description || "No description available"}
+                  </p>
                 ),
               },
               {
                 id: "details",
                 label: "Details",
                 content: product.details ? (
-                  <ul className="list-disc pl-5">
+                  <ul className="list-disc pl-5 lg:text-sm">
                     {product.details
                       .split(".")
                       .filter((item) => item.trim())
@@ -954,14 +1023,14 @@ const DescriptionPage = () => {
                       ))}
                   </ul>
                 ) : (
-                  <p>No details available</p>
+                  <p className="lg:text-sm">No details available</p>
                 ),
               },
               {
                 id: "careFit",
                 label: "Care Fit",
                 content: product.careFit ? (
-                  <ul className="list-disc pl-5">
+                  <ul className="list-disc pl-5 lg:text-sm">
                     {product.careFit
                       .split(".")
                       .filter((item) => item.trim())
@@ -970,7 +1039,7 @@ const DescriptionPage = () => {
                       ))}
                   </ul>
                 ) : (
-                  <p>No care fit available</p>
+                  <p className="lg:text-sm">No care fit available</p>
                 ),
               },
             ]}
