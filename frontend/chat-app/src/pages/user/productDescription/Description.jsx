@@ -1017,8 +1017,6 @@ const DescriptionPage = () => {
       text-xs
       sm:text-sm
       lg:text-xs
-      leading-4
-      whitespace-pre-line
       break-words
       ${
         isDark
