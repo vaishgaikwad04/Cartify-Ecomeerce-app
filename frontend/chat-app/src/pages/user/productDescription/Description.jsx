@@ -999,13 +999,13 @@ const DescriptionPage = () => {
   <h3
     className={`
       text-sm
-      lg:text-base
+      lg:text-xs
       font-semibold
       mb-2
       ${
         isDark
           ? "text-white"
-          : "text-gray-900"
+          : "text-gray-600"
       }
     `}
   >
