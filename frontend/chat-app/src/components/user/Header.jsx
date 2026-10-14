@@ -177,8 +177,8 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
           ? "text-white"
           : "text-red-900"
         : isDark
-        ? "text-gray-300 hover:text-white"
-        : "text-neutral-700 hover:text-red-900"
+          ? "text-gray-300 hover:text-white"
+          : "text-neutral-700 hover:text-red-900"
     }
   `;
 
@@ -207,7 +207,6 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       >
         <div className="max-w-[1700px] mx-auto px-3 sm:px-5 lg:px-6">
           <div className="flex items-center justify-between h-16 sm:h-[66px] lg:h-[64px]">
-
             {/* =================================================
                 LOGO
             ================================================= */}
@@ -1097,7 +1096,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                       type="button"
                       onClick={() =>
                         setOpenMobileMenu(
-                          openMobileMenu === menu.title ? null : menu.title
+                          openMobileMenu === menu.title ? null : menu.title,
                         )
                       }
                       className={`
@@ -1140,11 +1139,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                           transition-transform
                           duration-300
 
-                          ${
-                            openMobileMenu === menu.title
-                              ? "rotate-180"
-                              : ""
-                          }
+                          ${openMobileMenu === menu.title ? "rotate-180" : ""}
                         `}
                       />
                     </button>
@@ -1172,11 +1167,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
                           border-l
 
-                          ${
-                            isDark
-                              ? "border-gray-800"
-                              : "border-gray-200"
-                          }
+                          ${isDark ? "border-gray-800" : "border-gray-200"}
                         `}
                       >
                         {menu.items.map((item) => (
@@ -1242,7 +1233,6 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 </p>
 
                 <div className="grid grid-cols-3 gap-1.5">
-
                   {/* =================================================
                       ORDERS
                   ================================================= */}
@@ -1276,9 +1266,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   >
                     <FiPackage className="text-[19px] sm:text-[20px]" />
 
-                    <span className="text-[10px] sm:text-[11px]">
-                      Orders
-                    </span>
+                    <span className="text-[10px] sm:text-[11px]">Orders</span>
                   </button>
 
                   {/* =================================================
@@ -1446,9 +1434,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                     >
                       <FiUser className="text-[19px] sm:text-[20px]" />
 
-                      <span className="text-[10px] sm:text-[11px]">
-                        Login
-                      </span>
+                      <span className="text-[10px] sm:text-[11px]">Login</span>
                     </button>
                   )}
                 </div>
@@ -1507,7 +1493,6 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             `}
           >
             <div className="max-w-5xl mx-auto relative">
-
               {/* SEARCH ICON */}
 
               <FiSearch
