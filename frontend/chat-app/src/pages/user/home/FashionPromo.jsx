@@ -102,7 +102,7 @@ const FashionPromo = () => {
           {openProductModel === index && categories?.[index] && (
             <div
               onClick={(e) => e.stopPropagation()}
-              className={`
+             className={`
   absolute
   z-[99999]
   top-24
