@@ -34,23 +34,21 @@ const HeroSection = () => {
             className="aspect-[2/5] sm:aspect-[2/4] lg:aspect-[4/4]"
           >
             <div
-              className="
-            absolute
-            inset-x-0
-          bottom-8
-sm:bottom-10
-md:bottom-10
-lg:bottom-52
-            z-10
-            flex
-            flex-col
-            items-center
-            text-center
-            text-white
-            px-2
-            
-          "
-            >
+          className="
+  absolute
+  inset-x-0
+  bottom-16
+  sm:bottom-20
+  md:bottom-20
+  lg:bottom-52
+  z-10
+  flex
+  flex-col
+  items-center
+  text-center
+  text-white
+  px-2
+">
               <p
                 className="
               uppercase
