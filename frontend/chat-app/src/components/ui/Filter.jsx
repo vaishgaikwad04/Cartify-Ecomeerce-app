@@ -35,7 +35,7 @@ const Filter = ({ title, options = [] }) => {
           {options.map((option) => (
             <div
               key={option.label}
-              className="whitespace-nowrap text-[10px] sm:text-[11px] lg:text-[10px]"
+             className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center text-[10px]"
             >
               <Checkbox
                 label={option.label}
