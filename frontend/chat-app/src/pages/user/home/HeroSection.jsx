@@ -38,7 +38,7 @@ const HeroSection = () => {
             absolute
             inset-x-0
             bottom-4
-            sm:bottom-6
+            sm:bottom-8
             md:bottom-8
              min-[500px]:max-[670px]:top-42
             lg:bottom-48
