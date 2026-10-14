@@ -1038,7 +1038,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   Navigation
                 </p>
 
-                <h2 className="text-sm sm:text-base md:text-lg font-semibold tracking-[3px] uppercase">
+                <h2 className="text-sm sm:text-base md:text-md font-semibold tracking-[3px] uppercase">
                   Cartify
                 </h2>
               </div>
@@ -1124,7 +1124,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                         className="
                           text-sm
                           sm:text-base
-                          md:text-lg
+                          md:text-base
 
                           font-medium
                           tracking-wide
