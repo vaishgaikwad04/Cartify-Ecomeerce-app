@@ -8,28 +8,35 @@ const Filter = ({ title, options = [] }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="mb-6 min-w-[150px] sm:min-w-[160px] md:min-w-[170px] lg:min-w-0 lg:mb-3">
+    <div className="mb-3 min-w-0 sm:mb-4 lg:mb-2">
+      {/* FILTER TITLE */}
       <button
+        type="button"
         className="
           flex justify-between items-center w-full gap-2
-          font-medium mb-4 whitespace-nowrap
-          lg:!text-[11px] lg:!mb-2
+          text-[11px] sm:text-xs
+          font-medium mb-2 sm:mb-2.5
+          whitespace-nowrap
         "
         onClick={() => setOpen(!open)}
       >
         <span>{title}</span>
 
         {open ? (
-          <VscDash className="shrink-0 lg:!w-3 lg:!h-3" />
+          <VscDash className="shrink-0 w-3 h-3" />
         ) : (
-          <IoIosAdd className="shrink-0 lg:!w-3 lg:!h-3" />
+          <IoIosAdd className="shrink-0 w-3 h-3" />
         )}
       </button>
 
+      {/* FILTER OPTIONS */}
       {open && (
-        <div className="mt-3 space-y-2 lg:!mt-2 lg:!space-y-1">
+        <div className="mt-1.5 space-y-1">
           {options.map((option) => (
-            <div key={option.label} className="whitespace-nowrap">
+            <div
+              key={option.label}
+              className="whitespace-nowrap text-[10px] sm:text-[11px] lg:text-[10px]"
+            >
               <Checkbox
                 label={option.label}
                 checked={option.checked}
