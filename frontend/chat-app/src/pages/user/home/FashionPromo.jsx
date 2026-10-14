@@ -109,7 +109,7 @@ const FashionPromo = () => {
 
   ${index === 0 ? "left-2" : "right-2"}
 
-  min-[500px]:max-[670px]:top-24
+  min-[500px]:max-[670px]:top-14
 
   min-[1108px]:!left-[250px]
   min-[1108px]:!top-[100px]
