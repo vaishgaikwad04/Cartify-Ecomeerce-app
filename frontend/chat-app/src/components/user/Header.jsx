@@ -1023,24 +1023,27 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 }
               `}
             >
-              <div>
-                <p
-                  className={`
-                    text-[9px]
-                    tracking-[2.5px]
-                    uppercase
-                    mb-1
+            <div>
+  <p
+    className={`
+      text-[9px]
+      tracking-[2px]
+      uppercase
+      mb-2
+      ${isDark ? "text-gray-500" : "text-gray-400"}
+    `}
+  >
+    Navigation
+  </p>
 
-                    ${isDark ? "text-gray-500" : "text-gray-400"}
-                  `}
-                >
-                  Navigation
-                </p>
-
-                <h2 className="text-sm sm:text-base md:text-md font-semibold tracking-[3px] uppercase">
-                  Cartify
-                </h2>
-              </div>
+  <div className="flex items-center">
+    <img
+      src="https://tse1.mm.bing.net/th/id/OIP.YcW90dgGksBN4skfR3KtoQHaFW?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+      alt="Store logo"
+      className="w-24 sm:w-28 h-auto max-h-12 object-contain object-left"
+    />
+  </div>
+</div>
 
               <button
                 type="button"

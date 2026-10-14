@@ -321,28 +321,7 @@ const Order = () => {
             "
           >
 
-            {/* ICON */}
-
-            <div
-              className={`
-                flex
-                h-8
-                w-8
-                shrink-0
-                items-center
-                justify-center
-                rounded-lg
-                sm:h-9
-                sm:w-9
-                ${
-                  darkMode
-                    ? "bg-white text-black"
-                    : "bg-gray-950 text-white"
-                }
-              `}
-            >
-              <FiPackage size={15} />
-            </div>
+          
 
             {/* TITLE */}
 
