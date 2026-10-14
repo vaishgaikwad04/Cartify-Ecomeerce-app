@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { IoIosAdd } from "react-icons/io";
 import { VscDash } from "react-icons/vsc";
@@ -8,39 +7,39 @@ const Filter = ({ title, options = [] }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="w-full min-w-0 mb-2 sm:mb-2.5 lg:mb-2">
+    <div className="w-full min-w-0 mb-3">
       {/* FILTER TITLE */}
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
+        aria-expanded={open}
         className="
           flex w-full items-center justify-between gap-2
-          mb-1.5 sm:mb-2
-          text-[10px] sm:text-[11px] md:text-[11px] lg:text-[10px] xl:text-[11px]
-          font-medium
-          leading-tight
-          whitespace-nowrap
+          mb-2
+          text-xs font-medium
+          leading-normal
+          text-left
         "
       >
         <span className="min-w-0 truncate">{title}</span>
 
         {open ? (
-          <VscDash className="w-3 h-3 shrink-0" />
+          <VscDash className="h-4 w-4 shrink-0" />
         ) : (
-          <IoIosAdd className="w-3 h-3 shrink-0" />
+          <IoIosAdd className="h-4 w-4 shrink-0" />
         )}
       </button>
 
       {/* FILTER OPTIONS */}
       {open && (
-        <div className="mt-1 space-y-1 sm:space-y-1">
+        <div className="flex flex-col gap-2 pl-1">
           {options.map((option) => (
             <div
               key={option.label}
               className="
-                min-w-0
-                text-[9px] sm:text-[10px] md:text-[10px] lg:text-[9px] xl:text-[10px]
-                leading-tight
+                w-full min-w-0
+                text-xs
+                leading-normal
               "
             >
               <Checkbox
