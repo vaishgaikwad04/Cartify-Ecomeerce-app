@@ -142,9 +142,9 @@ const Sale = () => {
           absolute
           z-[99999]
 
-          left-44
+          left-46
           top-12
-          sm:left-102
+          sm:left-106
           sm:top-12
 
           /* TABLET: 500px → 670px */
