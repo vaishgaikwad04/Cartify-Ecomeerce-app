@@ -766,8 +766,7 @@ const DescriptionPage = () => {
         {/* =====================================================
             PRODUCT SECTION
         ===================================================== */}
-        <div className="py-6 sm:py-8 lg:py-12">
-          <div
+<div className="pt-6 pb-3 sm:pt-8 sm:pb-4 lg:pt-10 lg:pb-4">          <div
             className="
     grid
     grid-cols-1
