@@ -151,23 +151,13 @@ const Tabs = ({ tabs = [] }) => {
 
   return (
     <section
-      className={`w-full min-w-0 overflow-hidden rounded-xl sm:rounded-2xl border transition-colors duration-300 ${
+      className={`w-full min-w-0 overflow-hidden rounded-xl shadow-sm sm:rounded-2xl border transition-colors duration-300 ${
         isDark
-          ? "bg-gray-950 border-gray-800"
-          : "bg-white border-gray-200"
+          ? "bg-gray-950"
+          : "bg-white"
       }`}
     >
-      {/* HEADER */}
-      <div className="px-5 pt-6 sm:px-8 sm:pt-8 lg:px-10">
-        
-        <p
-          className={`mt-2 text-xs sm:text-sm leading-relaxed ${
-            isDark ? "text-gray-400" : "text-gray-500"
-          }`}
-        >
-          Explore the product description, details, and care instructions.
-        </p>
-      </div>
+    
 
       {/* TAB NAVIGATION */}
       <div
