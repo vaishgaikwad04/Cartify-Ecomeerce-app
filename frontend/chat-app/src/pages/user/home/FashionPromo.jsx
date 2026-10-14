@@ -105,7 +105,7 @@ const FashionPromo = () => {
               className={`
   absolute
   z-[99999]
-  top-24
+  top-26
 
   ${index === 0 ? "left-2" : "right-2"}
 
