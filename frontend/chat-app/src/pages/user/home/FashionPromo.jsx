@@ -129,7 +129,7 @@ const FashionPromo = () => {
   z-[99999]
   top-54
 
-  ${index === 0 ? "left-4" : "right-2"}
+  ${index === 0 ? "left-0" : "right-2"}
 
   min-[500px]:max-[670px]:top-28
 
