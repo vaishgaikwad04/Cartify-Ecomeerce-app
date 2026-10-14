@@ -160,21 +160,12 @@ const Tabs = ({ tabs = [] }) => {
       {/* HEADER */}
       <div className="px-5 pt-6 sm:px-8 sm:pt-8 lg:px-10">
         <p
-          className={`mb-2 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] ${
-            isDark ? "text-gray-400" : "text-gray-500"
+          className={`mb-2 text-[10px] sm:text-xs lg:text-lg font-semibold uppercase tracking-[0.2em] ${
+            isDark ? "text-gray-400" : "text-gray-900"
           }`}
         >
           Product information
         </p>
-
-        <h2
-          className={`text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight ${
-            isDark ? "text-white" : "text-gray-900"
-          }`}
-        >
-          Everything you need to know
-        </h2>
-
         <p
           className={`mt-2 text-xs sm:text-sm leading-relaxed ${
             isDark ? "text-gray-400" : "text-gray-500"

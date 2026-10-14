@@ -1022,13 +1022,7 @@ const DescriptionPage = () => {
     ${isDark ? "bg-gray-900 border-gray-800" : "bg-gray-50 border-gray-100"}
   `}
 >
-  <Tabs tabs={[/* your tabs */]} />
-</div>
-Replace the outer wrapper with this:
-
-jsx
-<div className="w-full max-w-6xl mx-auto mt-8 sm:mt-10 lg:mt-14">
-  <Tabs
+ <Tabs
     tabs={[
       {
         id: "description",
@@ -1074,6 +1068,9 @@ jsx
     ]}
   />
 </div>
+
+
+
 
         {/* =====================================================
             RECOMMENDED PRODUCTS
