@@ -31,7 +31,7 @@ const HeroSection = () => {
           <ImageCard
             key={index}
             image={banner.image}
-            className="aspect-[3/4] lg:aspect-[4/4]"
+            className="aspect-[4/4] lg:aspect-[4/4]"
           >
             <div
               className="
