@@ -31,17 +31,16 @@ const HeroSection = () => {
           <ImageCard
             key={index}
             image={banner.image}
-           className="aspect-[2/5] sm:aspect-[2/4] lg:aspect-[4/4]"
+            className="aspect-[2/5] sm:aspect-[2/4] lg:aspect-[4/4]"
           >
             <div
               className="
             absolute
             inset-x-0
-            bottom-4
-            sm:bottom-8
-            md:bottom-8
-             min-[500px]:max-[670px]:top-42
-            lg:bottom-48
+          bottom-8
+sm:bottom-10
+md:bottom-10
+lg:bottom-52
             z-10
             flex
             flex-col
