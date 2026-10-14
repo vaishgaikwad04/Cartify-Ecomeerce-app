@@ -124,15 +124,26 @@ const FashionPromo = () => {
 `}
             >
               <div
-                className={`
-        w-full
-        rounded-lg
-        shadow-xl
-        p-1
-        sm:p-1.5
-        md:p-2
-        ${isDark ? "bg-gray-900" : "bg-white"}
-      `}
+             className={`
+  absolute
+  z-[99999]
+  top-28
+
+  ${index === 0 ? "left-2" : "right-2"}
+
+  min-[500px]:max-[670px]:top-28
+
+  min-[1108px]:!left-[250px]
+  min-[1108px]:!top-[100px]
+  min-[1108px]:!right-auto
+  min-[1108px]:!ml-0
+
+  w-[110px]
+  sm:w-[120px]
+  md:w-[150px]
+  min-[500px]:max-[670px]:w-[180px]
+  min-[1108px]:!w-[240px]
+`}
               >
                 <Card
                   product={categories[index]}
