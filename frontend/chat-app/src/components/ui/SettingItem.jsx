@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
@@ -16,27 +16,27 @@ const SettingsItem = ({
   return (
     <div>
       <div
-        className="flex items-center justify-between cursor-pointer py-3"
-        onClick={() => setActiveTab(isActive ? "" : tabName)}
+        className="flex items-center justify-between cursor-pointer py-2 sm:py-2.5"
+        onClick={() =>
+          setActiveTab(isActive ? "" : tabName)
+        }
       >
-        <h1
-  className="text-[11px] 
-             sm:text-xs 
-             md:text-sm 
-             lg:text-xs 
-             xl:text-sm 
-             font-medium"
->
-  {title}
-</h1>
+        <h2 className="text-xs sm:text-sm font-medium">
+          {title}
+        </h2>
 
         {isActive ? (
-          <MdOutlineKeyboardArrowLeft />
+          <MdOutlineKeyboardArrowLeft size={16} />
         ) : (
-          <MdOutlineKeyboardArrowRight />
+          <MdOutlineKeyboardArrowRight size={16} />
         )}
       </div>
-      {isActive && <div className="pb-4">{children}</div>}
+
+      {isActive && (
+        <div className="pb-3">
+          {children}
+        </div>
+      )}
     </div>
   );
 };
