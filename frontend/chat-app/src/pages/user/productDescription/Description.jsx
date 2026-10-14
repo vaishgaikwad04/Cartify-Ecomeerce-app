@@ -1016,60 +1016,66 @@ const DescriptionPage = () => {
             OLD TABS - KEPT UNCHANGED
         ===================================================== */}
         {/* PRODUCT TABS */}
-        <div
-          className={`
-                  rounded-xl
-                  sm:rounded-2xl
-                  border
-                  ${isDark ? "bg-gray-900 border-gray-800" : "bg-gray-50 border-gray-100"}
-                `}
-        >
-          <Tabs
-            tabs={[
-              {
-                id: "description",
-                label: "Description",
-                content: (
-                  <p className="lg:text-sm">
-                    {product.description || "No description available"}
-                  </p>
-                ),
-              },
-              {
-                id: "details",
-                label: "Details",
-                content: product.details ? (
-                  <ul className="list-disc pl-5 lg:text-sm">
-                    {product.details
-                      .split(".")
-                      .filter((item) => item.trim())
-                      .map((item, index) => (
-                        <li key={index}>{item.trim()}</li>
-                      ))}
-                  </ul>
-                ) : (
-                  <p className="lg:text-sm">No details available</p>
-                ),
-              },
-              {
-                id: "careFit",
-                label: "Care Fit",
-                content: product.careFit ? (
-                  <ul className="list-disc pl-5 lg:text-sm">
-                    {product.careFit
-                      .split(".")
-                      .filter((item) => item.trim())
-                      .map((item, index) => (
-                        <li key={index}>{item.trim()}</li>
-                      ))}
-                  </ul>
-                ) : (
-                  <p className="lg:text-sm">No care fit available</p>
-                ),
-              },
-            ]}
-          />
-        </div>
+    <div
+  className={`
+    rounded-xl
+    sm:rounded-2xl
+    border mx-6
+    ${isDark ? "bg-gray-900 border-gray-800" : "bg-gray-50 border-gray-100"}
+  `}
+>
+  <Tabs tabs={[/* your tabs */]} />
+</div>
+Replace the outer wrapper with this:
+
+jsx
+<div className="w-full max-w-6xl mx-auto mt-8 sm:mt-10 lg:mt-14">
+  <Tabs
+    tabs={[
+      {
+        id: "description",
+        label: "Description",
+        content: (
+          <p className="whitespace-pre-line">
+            {product.description || "No description available."}
+          </p>
+        ),
+      },
+      {
+        id: "details",
+        label: "Details",
+        content: product.details ? (
+          <ul className="list-disc pl-5 space-y-2">
+            {product.details
+              .split(".")
+              .filter((item) => item.trim())
+              .map((item, index) => (
+                <li key={index}>{item.trim()}</li>
+              ))}
+          </ul>
+        ) : (
+          <p>No details available.</p>
+        ),
+      },
+      {
+        id: "careFit",
+        label: "Care & Fit",
+        content: product.careFit ? (
+          <ul className="list-disc pl-5 space-y-2">
+            {product.careFit
+              .split(".")
+              .filter((item) => item.trim())
+              .map((item, index) => (
+                <li key={index}>{item.trim()}</li>
+              ))}
+          </ul>
+        ) : (
+          <p>No care instructions available.</p>
+        ),
+      },
+    ]}
+  />
+</div>
 
         {/* =====================================================
             RECOMMENDED PRODUCTS
