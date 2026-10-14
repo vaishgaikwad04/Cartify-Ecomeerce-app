@@ -770,7 +770,7 @@ const DescriptionPage = () => {
           <div
             className="
               grid
-              grid-cols-1
+              grid-cols-2
               lg:grid-cols-2
               gap-8
               sm:gap-10
