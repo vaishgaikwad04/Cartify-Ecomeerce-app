@@ -778,7 +778,7 @@ const DescriptionPage = () => {
     md:gap-5
     lg:gap-7
     xl:gap-9
-    max-w-6xl
+    max-w-7xl
     mx-auto
   "
           >
@@ -1012,9 +1012,7 @@ const DescriptionPage = () => {
           </div>
         </div>
 
-        {/* =====================================================
-            OLD TABS - KEPT UNCHANGED
-        ===================================================== */}
+       
         {/* PRODUCT TABS */}
     <div
   className={`
