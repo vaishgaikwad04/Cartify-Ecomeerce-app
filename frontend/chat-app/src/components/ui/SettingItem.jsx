@@ -22,7 +22,8 @@ const SettingsItem = ({
         <h1
           className=" text-xs
                 sm:text-sm
-                md:text-lg"
+                md:text-lg
+                lg:text-lg"
         >
           {title}
         </h1>

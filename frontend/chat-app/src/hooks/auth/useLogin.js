@@ -63,35 +63,68 @@ export const useLogin = ({ setIsOpen }) => {
     });
 
   // Google Login
-  const handleLogin = async () => {
-    const provider = new GoogleAuthProvider();
+  // const handleLogin = async () => {
+  //   const provider = new GoogleAuthProvider();
 
-    try {
-      const result = await signInWithPopup(auth, provider);
+  //   try {
+  //     const result = await signInWithPopup(auth, provider);
 
-      const googleUser = result.user;
+  //     const googleUser = result.user;
 
-      const res = await googleLogin({
-        name: googleUser.displayName,
-        email: googleUser.email,
-      });
+  //     const res = await googleLogin({
+  //       name: googleUser.displayName,
+  //       email: googleUser.email,
+  //     });
 
-      setUser(res.data.user);
+  //     setUser(res.data.user);
 
-      toast.success(res.data.message);
+  //     toast.success(res.data.message);
 
-      navigate("/");
-    } catch (error) {
-      const message =
-        error?.response?.data?.message ||
-        error?.message ||
-        "Google login failed";
+  //     navigate("/");
+  //   } catch (error) {
+  //     const message =
+  //       error?.response?.data?.message ||
+  //       error?.message ||
+  //       "Google login failed";
 
-      setError(message);
+  //     setError(message);
 
-      toast.error(message);
-    }
-  };
+  //     toast.error(message);
+  //   }
+  // };
+  
+// Google Login
+const handleLogin = async () => {
+  const provider = new GoogleAuthProvider();
+
+  try {
+    const result = await signInWithPopup(auth, provider);
+
+    const googleUser = result.user;
+
+    const res = await googleLogin({
+      name: googleUser.displayName,
+      email: googleUser.email,
+    });
+
+    setUser(res.data.user);
+
+    toast.success(res.data.message);
+
+    setIsOpen(false); // Close modal after successful login
+
+    navigate("/");
+  } catch (error) {
+    const message =
+      error?.response?.data?.message ||
+      error?.message ||
+      "Google login failed";
+
+    setError(message);
+    toast.error(message);
+  }
+};
+
 
   return {
     values,
