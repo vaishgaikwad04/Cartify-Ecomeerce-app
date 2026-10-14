@@ -20,13 +20,15 @@ const SettingsItem = ({
         onClick={() => setActiveTab(isActive ? "" : tabName)}
       >
         <h1
-          className=" text-xs
-                sm:text-sm
-                md:text-lg
-                lg:text-lg"
-        >
-          {title}
-        </h1>
+  className="text-[11px] 
+             sm:text-xs 
+             md:text-sm 
+             lg:text-xs 
+             xl:text-sm 
+             font-medium"
+>
+  {title}
+</h1>
 
         {isActive ? (
           <MdOutlineKeyboardArrowLeft />
