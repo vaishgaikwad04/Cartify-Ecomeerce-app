@@ -767,270 +767,34 @@ const DescriptionPage = () => {
             PRODUCT SECTION
         ===================================================== */}
         <div className="py-6 sm:py-8 lg:py-12">
-          <div
-            className="
-              grid
-              grid-cols-2
-              lg:grid-cols-2
-              gap-8
-              sm:gap-10
-              lg:gap-20
-              xl:gap-24
-            "
-          >
-            {/* PRODUCT IMAGE */}
-            <div className="w-full min-w-0">
-              <ImagePreview Images={product?.images || []} />
-            </div>
-
-            {/* PRODUCT DETAILS */}
-            <div className="w-full min-w-0 lg:sticky lg:top-24 lg:h-fit">
-              {/* BREADCRUMB */}
-              <p className="text-[11px] sm:text-xs md:text-sm lg:text-xs text-gray-400 mb-3 sm:mb-4 break-words">
-                Home / {product.category} / {product.name}
-              </p>
-
-              {/* PRODUCT NAME */}
-              <h1
-                className={`
-                  text-lg
-                  sm:text-xl
-                  md:text-2xl
-                  lg:text-xl
-                  font-semibold
-                  leading-tight
-                  break-words
-                  ${isDark ? "text-white" : "text-gray-900"}
-                `}
-              >
-                {product.name}
-              </h1>
-
-              {/* PRICE */}
-              <div className="flex items-center flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-5">
-                {product.discountPrice && (
-                  <span className="line-through text-gray-400 text-xs sm:text-sm md:text-base lg:text-sm">
-                    ₹{product.price}
-                  </span>
-                )}
-
-                <span
-                  className={`
-                    text-base
-                    sm:text-lg
-                    md:text-xl
-                    lg:text-md
-                    font-bold
-                    ${isDark ? "text-white" : "text-black"}
-                  `}
-                >
-                  ₹{finalPrice}
-                </span>
-              </div>
-
-              {/* SHIPPING / RETURNS */}
-              <div
-                className={`
-                  mt-4
-                  sm:mt-5
-                  pt-4
-                  sm:pt-5
-                  border-t
-                  flex
-                  flex-wrap
-                  items-center
-                  gap-x-4
-                  gap-y-2
-                  text-[11px]
-                  sm:text-xs
-                  md:text-sm
-                  lg:text-xs
-                  ${
-                    isDark
-                      ? "border-gray-800 text-gray-400"
-                      : "border-gray-200 text-gray-500"
-                  }
-                `}
-              >
-                <span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
-                  <FiTruck className="text-sm sm:text-base lg:text-sm shrink-0" />
-                  Free shipping
-                </span>
-
-                <span
-                  className={`
-                    hidden
-                    sm:block
-                    h-4
-                    w-px
-                    ${isDark ? "bg-gray-800" : "bg-gray-200"}
-                  `}
-                />
-
-                <span className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap">
-                  <FiRefreshCcw className="text-sm sm:text-base lg:text-sm shrink-0" />
-                  Easy returns
-                </span>
-              </div>
-
-              {/* SIZE */}
-              {product.variants?.length > 0 && (
-                <div className="mt-6 sm:mt-7">
-                  <h3
-                    className={`
-        text-xs
-        sm:text-sm
-        md:text-base
-        lg:text-sm
-        font-medium
-        mb-3
-        sm:mb-4
-        ${isDark ? "text-white" : "text-gray-900"}
-      `}
-                  >
-                    Select Size
-                  </h3>
-
-                  <div className="flex flex-wrap gap-2 sm:gap-2.5 lg:gap-2">
-                    {product.variants.map((item) => (
-                      <button
-                        key={item._id}
-                        disabled={item.stock <= 0}
-                        onClick={() => setSelectedSize(item.size)}
-                        className={`
-            min-w-[52px]
-            sm:min-w-[60px]
-            md:min-w-[64px]
-            lg:min-w-[52px]
-
-            h-9
-            sm:h-10
-            lg:h-8
-
-            px-3
-            sm:px-4
-            lg:px-3
-
-            rounded-lg
-            border
-
-            font-medium
-
-            text-xs
-            sm:text-sm
-            lg:text-xs
-
-            transition-all
-            duration-200
-
-            ${
-              selectedSize === item.size
-                ? isDark
-                  ? "bg-white text-black border-white shadow-md"
-                  : "bg-black text-white border-black shadow-sm"
-                : item.stock <= 0
-                  ? isDark
-                    ? "bg-gray-900 text-gray-600 border-gray-800 cursor-not-allowed"
-                    : "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
-                  : isDark
-                    ? "bg-gray-950 text-white border-gray-700 hover:border-white hover:bg-gray-900"
-                    : "bg-white text-gray-900 border-gray-300 hover:border-black"
-            }
-          `}
-                      >
-                        {item.size}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* ACTION BUTTONS */}
-              <div className="mt-5 sm:mt-7 flex flex-col gap-2.5 sm:gap-3">
-                <button
-                  onClick={handleCart}
-                  className={`
-                    h-11
-                    sm:h-12
-                    md:h-13
-                    w-full
-                    rounded-lg
-                    sm:rounded-xl
-                    font-medium
-                    text-xs
-                    sm:text-sm
-                    lg:text-xs
-                    transition-all
-                    duration-300
-                    ${
-                      isDark
-                        ? "bg-white text-black hover:bg-gray-200"
-                        : "bg-black text-white hover:bg-gray-800"
-                    }
-                  `}
-                >
-                  {selectedSize && selectedVariant?.stock <= 0
-                    ? "Out Of Stock"
-                    : "Add To Cart"}
-                </button>
-
-                {/* <Button
-                  label="Add To Wishlist"
-                  variant={isDark ? "outlineDark" : "outline"}
-                  className="w-full"
-                /> */}
-              </div>
-              
-{/* PRODUCT DESCRIPTION */}
+          
 <div
-  className={`
-    mt-5
-    lg:mt-6
-    pt-4
-    lg:pt-5
-    border-t
-    ${
-      isDark
-        ? "border-gray-800"
-        : "border-gray-200"
-    }
-  `}
+  className="
+    grid
+    grid-cols-2
+    gap-4
+    sm:gap-5
+    md:gap-6
+    lg:gap-8
+    xl:gap-10
+    max-w-6xl
+    mx-auto
+    items-start
+  "
 >
-  <h3
-    className={`
-      text-sm
-      lg:text-md
-      font-semibold
-      mb-2
-      ${
-        isDark
-          ? "text-white"
-          : "text-gray-600"
-      }
-    `}
-  >
-    Product Description
-  </h3>
+  {/* PRODUCT IMAGE */}
+  <div className="w-full min-w-0 max-w-[500px] mx-auto">
+    <div className="w-full aspect-[4/5] overflow-hidden">
+      <ImagePreview Images={product?.images || []} />
+    </div>
+  </div>
 
-  <p
-    className={`
-      text-xs
-      sm:text-sm
-      lg:text-xs
-      break-words
-      ${
-        isDark
-          ? "text-gray-300"
-          : "text-gray-500"
-      }
-    `}
-  >
-    {product.description || "No description available"}
-  </p>
+  {/* PRODUCT DETAILS */}
+  <div className="w-full min-w-0 max-w-[460px] lg:sticky lg:top-20 lg:h-fit">
+    {/* Keep your existing PRODUCT DETAILS content here */}
+  </div>
 </div>
 
-            </div>
-          </div>
         </div>
 
         {/* =====================================================
