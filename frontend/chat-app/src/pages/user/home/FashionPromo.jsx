@@ -105,16 +105,18 @@ const FashionPromo = () => {
               className={`
   absolute
   z-[99999]
+  top-20
 
-  top-44
-  ${index === 0 ? "left-18" : "right-[-138px]"}
+  ${index === 0 ? "left-2" : "right-2"}
+
+  min-[500px]:max-[670px]:top-24
 
   min-[1108px]:!left-[250px]
   min-[1108px]:!top-[100px]
   min-[1108px]:!right-auto
   min-[1108px]:!ml-0
 
-  w-[90px]
+  w-[110px]
   sm:w-[120px]
   md:w-[150px]
   min-[500px]:max-[670px]:w-[180px]
