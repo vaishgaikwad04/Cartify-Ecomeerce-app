@@ -109,7 +109,7 @@ export const createCheckoutSession = async (req, res) => {
     });
 
    
-ADMIN_ID="6abf3ca7b4fe96242508973b"
+const ADMIN_ID="6abf3ca7b4fe96242508973b"
     await notificationModel.create({
       user: ADMIN_ID,
       title: "New Order",
