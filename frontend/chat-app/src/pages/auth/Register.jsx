@@ -1,3 +1,4 @@
+
 import React, { useContext } from "react";
 
 import InputField from "../../components/ui/InputField";
@@ -15,68 +16,45 @@ const Register = ({ isLogin, setIsLogin }) => {
   });
 
   const roleOptions = [
-    {
-      label: "User",
-      value: "user",
-    },
-    {
-      label: "Admin",
-      value: "admin",
-    },
+    { label: "User", value: "user" },
+    { label: "Admin", value: "admin" },
   ];
 
   return (
     <div
       className={`
-        w-full
-        overflow-hidden
-        transition-all
-        duration-300
+        w-full overflow-hidden
+        transition-colors duration-300
         ${isDark ? "bg-gray-900" : "bg-white"}
       `}
     >
-      {/* ================= MAIN CARD ================= */}
-
+      {/* MAIN CARD */}
       <div
         className={`
-          w-full
-          max-w-[440px]
-          overflow-hidden
-          shadow-2xl
-          transition-all
-          duration-300
+          w-full max-w-[400px] mx-auto
+          overflow-hidden shadow-xl
+          transition-colors duration-300
           ${isDark ? "bg-gray-900" : "bg-white"}
         `}
       >
-        {/* ================= TOP IMAGE ================= */}
-
-        <div className="w-full h-[150px] sm:h-[170px] overflow-hidden">
+        {/* TOP IMAGE */}
+        <div className="w-full h-[100px] sm:h-[120px] md:h-[130px] overflow-hidden">
           <img
             src="https://mafoil.wpbingosite.com/wp-content/uploads/2023/01/sign-in.jpg"
             alt="Register"
-            className="
-              w-full
-              h-full
-              object-cover
-              object-center
-            "
+            className="w-full h-full object-cover object-center"
           />
         </div>
 
-        {/* ================= FORM CONTENT ================= */}
-
-        <div className="px-6 py-5 sm:px-7 sm:py-6">
-
-          {/* ================= TITLE ================= */}
-
-          <div className="mb-5">
+        {/* FORM CONTENT */}
+        <div className="px-4 py-4 sm:px-5 sm:py-5">
+          {/* TITLE */}
+          <div className="mb-4">
             <h2
               className={`
-                text-lg
-                sm:text-xl
-                tracking-[0.22em]
-                font-medium
-                uppercase
+                text-base sm:text-lg
+                tracking-[0.18em]
+                font-medium uppercase
                 ${isDark ? "text-white" : "text-gray-900"}
               `}
             >
@@ -84,16 +62,12 @@ const Register = ({ isLogin, setIsLogin }) => {
             </h2>
           </div>
 
-          {/* ================= ERROR ================= */}
-
+          {/* ERROR */}
           {error && (
             <div
               className={`
-                mb-4
-                px-3
-                py-2.5
-                text-xs
-                border
+                mb-3 px-3 py-2
+                text-[11px] sm:text-xs border
                 ${
                   isDark
                     ? "bg-red-900/30 border-red-700 text-red-300"
@@ -105,16 +79,12 @@ const Register = ({ isLogin, setIsLogin }) => {
             </div>
           )}
 
-          {/* ================= SUCCESS ================= */}
-
+          {/* SUCCESS */}
           {success && (
             <div
               className={`
-                mb-4
-                px-3
-                py-2.5
-                text-xs
-                border
+                mb-3 px-3 py-2
+                text-[11px] sm:text-xs border
                 ${
                   isDark
                     ? "bg-green-900/30 border-green-700 text-green-300"
@@ -126,14 +96,12 @@ const Register = ({ isLogin, setIsLogin }) => {
             </div>
           )}
 
-          {/* ================= REGISTER FORM ================= */}
-
+          {/* REGISTER FORM */}
           <form
             onSubmit={formik.handleSubmit}
-            className="flex flex-col gap-3"
+            className="flex flex-col gap-2.5"
           >
             {/* NAME */}
-
             <div>
               <InputField
                 type="text"
@@ -146,14 +114,13 @@ const Register = ({ isLogin, setIsLogin }) => {
               />
 
               {formik.touched.name && formik.errors.name && (
-                <p className="mt-1 text-[11px] text-red-500">
+                <p className="mt-1 text-[10px] text-red-500">
                   {formik.errors.name}
                 </p>
               )}
             </div>
 
             {/* EMAIL */}
-
             <div>
               <InputField
                 type="email"
@@ -166,14 +133,13 @@ const Register = ({ isLogin, setIsLogin }) => {
               />
 
               {formik.touched.email && formik.errors.email && (
-                <p className="mt-1 text-[11px] text-red-500">
+                <p className="mt-1 text-[10px] text-red-500">
                   {formik.errors.email}
                 </p>
               )}
             </div>
 
             {/* PASSWORD */}
-
             <div>
               <InputField
                 type="password"
@@ -186,14 +152,13 @@ const Register = ({ isLogin, setIsLogin }) => {
               />
 
               {formik.touched.password && formik.errors.password && (
-                <p className="mt-1 text-[11px] text-red-500">
+                <p className="mt-1 text-[10px] text-red-500">
                   {formik.errors.password}
                 </p>
               )}
             </div>
 
             {/* ROLE */}
-
             <div>
               <Dropdown
                 label=""
@@ -205,30 +170,23 @@ const Register = ({ isLogin, setIsLogin }) => {
               />
 
               {formik.touched.role && formik.errors.role && (
-                <p className="mt-1 text-[11px] text-red-500">
+                <p className="mt-1 text-[10px] text-red-500">
                   {formik.errors.role}
                 </p>
               )}
             </div>
 
-            {/* ================= REGISTER BUTTON ================= */}
-
+            {/* REGISTER BUTTON */}
             <button
               type="submit"
               disabled={formik.isSubmitting}
               className="
-                w-full
-                h-[44px]
-                mt-1
-                bg-[#222222]
-                hover:bg-black
-                text-white
-                text-xs
-                font-semibold
-                uppercase
-                tracking-wide
-                transition-all
-                duration-300
+                w-full h-9 sm:h-10
+                mt-0.5
+                bg-[#222222] hover:bg-black
+                text-white text-[10px] sm:text-xs
+                font-semibold uppercase tracking-wide
+                transition-all duration-300
                 active:scale-[0.99]
                 disabled:opacity-50
                 disabled:cursor-not-allowed
@@ -237,20 +195,16 @@ const Register = ({ isLogin, setIsLogin }) => {
               {formik.isSubmitting ? "Registering..." : "Register"}
             </button>
 
-            {/* ================= LOGIN BUTTON ================= */}
-
+            {/* LOGIN BUTTON */}
             <button
               type="button"
               onClick={() => setIsLogin(true)}
               className={`
-                w-full
-                h-[44px]
-                text-xs
-                font-semibold
-                uppercase
-                tracking-wide
-                transition-all
-                duration-300
+                w-full min-h-9 sm:min-h-10
+                px-2 py-2
+                text-[10px] sm:text-xs
+                font-semibold uppercase tracking-wide
+                transition-all duration-300
                 ${
                   isDark
                     ? "bg-gray-700 text-white hover:bg-gray-600"
@@ -262,20 +216,18 @@ const Register = ({ isLogin, setIsLogin }) => {
             </button>
           </form>
 
-          {/* ================= DIVIDER ================= */}
-
-          <div className="flex items-center gap-3 my-4">
+          {/* DIVIDER */}
+          <div className="flex items-center gap-3 my-3">
             <div
               className={`
-                flex-1
-                h-px
+                flex-1 h-px
                 ${isDark ? "bg-gray-700" : "bg-gray-300"}
               `}
             />
 
             <span
               className={`
-                text-[11px]
+                text-[10px]
                 ${isDark ? "text-gray-500" : "text-gray-400"}
               `}
             >
@@ -284,19 +236,13 @@ const Register = ({ isLogin, setIsLogin }) => {
 
             <div
               className={`
-                flex-1
-                h-px
+                flex-1 h-px
                 ${isDark ? "bg-gray-700" : "bg-gray-300"}
               `}
             />
           </div>
 
-          {/* =====================================================
-              GOOGLE REGISTER
-
-              DO NOT CHANGE THIS SECTION
-          ===================================================== */}
-
+          {/* GOOGLE REGISTER — UNCHANGED */}
           <button
             type="button"
             onClick={handleLogin}
@@ -318,7 +264,6 @@ const Register = ({ isLogin, setIsLogin }) => {
               font-medium
               transition-all
               duration-300
-
               ${
                 isDark
                   ? "bg-gray-800 border-gray-700 text-white hover:bg-gray-700"
@@ -327,7 +272,6 @@ const Register = ({ isLogin, setIsLogin }) => {
             `}
           >
             {/* GOOGLE LOGO */}
-
             <svg
               className="w-4 h-4 sm:w-5 sm:h-5 shrink-0"
               viewBox="0 0 48 48"
