@@ -151,7 +151,7 @@ const Tabs = ({ tabs = [] }) => {
 
   return (
     <section
-      className={`w-full min-w-0 overflow-hidden rounded-xl shadow-sm sm:rounded-2xl border transition-colors duration-300 ${
+      className={`w-full min-w-0 overflow-hidden rounded-xl shadow-sm sm:rounded-2xl  transition-colors duration-300 ${
         isDark
           ? "bg-gray-950"
           : "bg-white"
