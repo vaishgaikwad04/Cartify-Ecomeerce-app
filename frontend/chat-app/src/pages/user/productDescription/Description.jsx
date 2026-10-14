@@ -767,31 +767,254 @@ const DescriptionPage = () => {
             PRODUCT SECTION
         ===================================================== */}
         <div className="py-6 sm:py-8 lg:py-12">
-          
+  
 <div
   className="
     grid
     grid-cols-2
-    gap-4
-    sm:gap-5
-    md:gap-6
-    lg:gap-8
-    xl:gap-10
+    items-start
+    gap-3
+    sm:gap-4
+    md:gap-5
+    lg:gap-7
+    xl:gap-9
     max-w-6xl
     mx-auto
-    items-start
   "
 >
   {/* PRODUCT IMAGE */}
   <div className="w-full min-w-0 max-w-[500px] mx-auto">
-    <div className="w-full aspect-[4/5] overflow-hidden">
+    <div className="w-full aspect-[4/5]">
       <ImagePreview Images={product?.images || []} />
     </div>
   </div>
 
   {/* PRODUCT DETAILS */}
   <div className="w-full min-w-0 max-w-[460px] lg:sticky lg:top-20 lg:h-fit">
-    {/* Keep your existing PRODUCT DETAILS content here */}
+    
+    {/* BREADCRUMB */}
+    <p className="text-[9px] sm:text-[10px] md:text-xs lg:text-[11px] text-gray-400 mb-2 sm:mb-3 break-words">
+      Home / {product.category} / {product.name}
+    </p>
+
+    {/* PRODUCT NAME */}
+    <h1
+      className={`
+        text-sm
+        sm:text-base
+        md:text-lg
+        lg:text-lg
+        xl:text-xl
+        font-semibold
+        leading-tight
+        break-words
+        ${isDark ? "text-white" : "text-gray-900"}
+      `}
+    >
+      {product.name}
+    </h1>
+
+    {/* PRICE */}
+    <div className="flex items-center flex-wrap gap-2 mt-3 sm:mt-4">
+      {product.discountPrice && (
+        <span className="line-through text-gray-400 text-[10px] sm:text-xs lg:text-xs">
+          ₹{product.price}
+        </span>
+      )}
+
+      <span
+        className={`
+          text-sm
+          sm:text-base
+          md:text-lg
+          lg:text-base
+          font-bold
+          ${isDark ? "text-white" : "text-black"}
+        `}
+      >
+        ₹{finalPrice}
+      </span>
+    </div>
+
+    {/* SHIPPING / RETURNS */}
+    <div
+      className={`
+        mt-3
+        sm:mt-4
+        pt-3
+        sm:pt-4
+        border-t
+        flex
+        flex-wrap
+        items-center
+        gap-x-3
+        gap-y-2
+        text-[9px]
+        sm:text-[10px]
+        lg:text-[11px]
+        ${
+          isDark
+            ? "border-gray-800 text-gray-400"
+            : "border-gray-200 text-gray-500"
+        }
+      `}
+    >
+      <span className="flex items-center gap-1 whitespace-nowrap">
+        <FiTruck className="text-xs shrink-0" />
+        Free shipping
+      </span>
+
+      <span
+        className={`
+          hidden
+          sm:block
+          h-3
+          w-px
+          ${isDark ? "bg-gray-800" : "bg-gray-200"}
+        `}
+      />
+
+      <span className="flex items-center gap-1 whitespace-nowrap">
+        <FiRefreshCcw className="text-xs shrink-0" />
+        Easy returns
+      </span>
+    </div>
+
+    {/* SIZE */}
+    {product.variants?.length > 0 && (
+      <div className="mt-4 sm:mt-5">
+        <h3
+          className={`
+            text-[11px]
+            sm:text-xs
+            lg:text-xs
+            font-medium
+            mb-2
+            sm:mb-3
+            ${isDark ? "text-white" : "text-gray-900"}
+          `}
+        >
+          Select Size
+        </h3>
+
+        <div className="flex flex-wrap gap-1.5 sm:gap-2">
+          {product.variants.map((item) => (
+            <button
+              key={item._id}
+              disabled={item.stock <= 0}
+              onClick={() => setSelectedSize(item.size)}
+              className={`
+                min-w-[36px]
+                sm:min-w-[44px]
+                lg:min-w-[42px]
+                h-7
+                sm:h-8
+                px-2
+                sm:px-3
+                rounded-md
+                border
+                font-medium
+                text-[10px]
+                sm:text-xs
+                transition-all
+                duration-200
+
+                ${
+                  selectedSize === item.size
+                    ? isDark
+                      ? "bg-white text-black border-white shadow-md"
+                      : "bg-black text-white border-black shadow-sm"
+                    : item.stock <= 0
+                      ? isDark
+                        ? "bg-gray-900 text-gray-600 border-gray-800 cursor-not-allowed"
+                        : "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
+                      : isDark
+                        ? "bg-gray-950 text-white border-gray-700 hover:border-white hover:bg-gray-900"
+                        : "bg-white text-gray-900 border-gray-300 hover:border-black"
+                }
+              `}
+            >
+              {item.size}
+            </button>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {/* ACTION BUTTON */}
+    <div className="mt-4 sm:mt-5 flex flex-col gap-2">
+      <button
+        onClick={handleCart}
+        className={`
+          h-9
+          sm:h-10
+          lg:h-10
+          w-full
+          rounded-md
+          sm:rounded-lg
+          font-medium
+          text-[10px]
+          sm:text-xs
+          transition-all
+          duration-300
+          ${
+            isDark
+              ? "bg-white text-black hover:bg-gray-200"
+              : "bg-black text-white hover:bg-gray-800"
+          }
+        `}
+      >
+        {selectedSize && selectedVariant?.stock <= 0
+          ? "Out Of Stock"
+          : "Add To Cart"}
+      </button>
+    </div>
+
+    {/* PRODUCT DESCRIPTION */}
+    <div
+      className={`
+        mt-4
+        sm:mt-5
+        pt-3
+        sm:pt-4
+        border-t
+        ${
+          isDark
+            ? "border-gray-800"
+            : "border-gray-200"
+        }
+      `}
+    >
+      <h3
+        className={`
+          text-xs
+          sm:text-sm
+          lg:text-xs
+          font-semibold
+          mb-2
+          ${isDark ? "text-white" : "text-gray-600"}
+        `}
+      >
+        Product Description
+      </h3>
+
+      <p
+        className={`
+          text-[10px]
+          sm:text-xs
+          lg:text-[11px]
+          leading-relaxed
+          break-words
+          ${
+            isDark
+              ? "text-gray-300"
+              : "text-gray-500"
+          }
+        `}
+      >
+        {product.description || "No description available"}
+      </p>
+    </div>
   </div>
 </div>
 
