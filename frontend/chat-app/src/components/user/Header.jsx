@@ -1023,27 +1023,51 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 }
               `}
             >
-            <div>
-  <p
-    className={`
+              <div>
+                <p
+                  className={`
       text-[9px]
       tracking-[2px]
       uppercase
       mb-2
       ${isDark ? "text-gray-500" : "text-gray-400"}
     `}
-  >
-    Navigation
-  </p>
+                >
+                  Navigation
+                </p>
 
-  <div className="flex items-center">
-    <img
-      src="https://tse1.mm.bing.net/th/id/OIP.YcW90dgGksBN4skfR3KtoQHaFW?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-      alt="Store logo"
-      className="w-24 sm:w-28 h-auto max-h-12 object-contain object-left"
-    />
-  </div>
-</div>
+                <div className="lg:w-[180px] xl:w-[190px] shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => navigate("/")}
+                    className={`
+                  font-serif-sarif
+
+                  text-lg
+                  sm:text-lg
+                  lg:text-lg
+
+                  tracking-[2.5px]
+                  sm:tracking-[3px]
+                  lg:tracking-[3px]
+
+                  font-semibold
+                  uppercase
+                  cursor-pointer
+                  transition-colors
+                  whitespace-nowrap
+
+                  ${
+                    isDark
+                      ? "text-gray-300 hover:text-white"
+                      : "text-gray-900 hover:text-black"
+                  }
+                `}
+                  >
+                    Cartify
+                  </button>
+                </div>
+              </div>
 
               <button
                 type="button"

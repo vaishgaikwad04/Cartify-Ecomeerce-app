@@ -1018,7 +1018,7 @@ const DescriptionPage = () => {
   className={`
     rounded-xl
     sm:rounded-2xl
-    border mx-6
+    border border-gray-100
     ${isDark ? "bg-gray-900 border-gray-800" : "bg-gray-50 border-gray-100"}
   `}
 >
