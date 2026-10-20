@@ -44,7 +44,7 @@ const AuthModal = ({ isOpen, setIsOpen, isLogin, setIsLogin, }) => {
         "
         onMouseDown={(e) => e.stopPropagation()}
       >
-        {/* CLOSE */}
+        {/* CLOSE 
         <button
           type="button"
           onClick={() => setIsOpen(false)}
@@ -72,7 +72,7 @@ const AuthModal = ({ isOpen, setIsOpen, isLogin, setIsLogin, }) => {
         >
           <FiX size={20} />
         </button>
-
+*/}
         {/* AUTH CONTENT */}
         {isLogin ? (
           <Login isLogin={isLogin} setIsLogin={setIsLogin} setIsOpen={setIsOpen} />
