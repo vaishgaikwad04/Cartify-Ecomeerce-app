@@ -1,18 +1,17 @@
+
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
-// Your Firebase config
 const firebaseConfig = {
-  apiKey: "AIzaSyD0GenAW9nNUyiAPSZW0jwW17Bs4Cb8WzA",
-  authDomain: "ecommerce-app-2e3c1.firebaseapp.com",
-  projectId: "ecommerce-app-2e3c1",
-  storageBucket: "ecommerce-app-2e3c1.appspot.com",
-  messagingSenderId: "1086122275694",
-  appId: "1:1086122275694:web:da8d20c22ad61840e5077f",
+  apiKey: "AIzaSyBoST4DJjUJwKDkZ34UyF0e3MwLsko9weE",
+  authDomain: "cartify-e-5555e.firebaseapp.com",
+  projectId: "cartify-e-5555e",
+  storageBucket: "cartify-e-5555e.firebasestorage.app",
+  messagingSenderId: "45477528718",
+  appId: "1:45477528718:web:4c363a7799614c5c4875df",
+  measurementId: "G-6HP7E05K5H"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Export auth (THIS is what you use in your React app)
 export const auth = getAuth(app);
