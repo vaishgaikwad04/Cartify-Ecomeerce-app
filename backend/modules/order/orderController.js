@@ -70,10 +70,10 @@ const session = await stripe.checkout.sessions.create({
   line_items,
 
  success_url:
-  `${process.env.FRONTEND_URL}/?payment=success&session_id={CHECKOUT_SESSION_ID}`,
+  'https://cartify-ecomeerce-app-9qyv.onrender.com/?payment=success&session_id={CHECKOUT_SESSION_ID}',
 
 cancel_url:
-  `${process.env.FRONTEND_URL}/?payment=cancelled`,
+ 'https://cartify-ecomeerce-app-9qyv.onrender.com/?payment=cancelled',
 
   metadata: {
     userId: req.user.id,
