@@ -5,10 +5,15 @@
 // 1280–1535px	xl: Desktop
 // 1536px+	2xl: Large desktop
 
-import React, { useState, useContext } from "react";
+import React, { useState,useEffect, useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeContext } from "./context/ThemeContext";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // User Layout
 import Layout from "./components/user/Layout";
@@ -50,6 +55,36 @@ import ScrollToTop from "./components/ui/ScrollToTop";
 import Notification from "./pages/admin/notification/Notification";
 import CustomCursor from "./components/ui/CustomCursor";
 
+const PaymentToastHandler = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const payment = params.get("payment");
+
+    if (payment === "success") {
+      toast.success("Payment successful! Thank you for shopping with Cartify.");
+    } else if (payment === "cancelled") {
+      toast.info("Payment cancelled. You can try again from your cart.");
+    } else {
+      return;
+    }
+
+    // Remove payment parameters without reloading the page
+    navigate(
+      {
+        pathname: location.pathname,
+        search: "",
+        hash: location.hash,
+      },
+      { replace: true },
+    );
+  }, [location.pathname, location.search, location.hash, navigate]);
+
+  return null;
+};
+
 const App = () => {
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "dark";
@@ -60,6 +95,17 @@ const App = () => {
   return (
     <div className={isDark ? "dark" : ""}>
       <Router>
+        <PaymentToastHandler />
+
+        <ToastContainer
+          position="top-right"
+          autoClose={4000}
+          newestOnTop
+          closeOnClick
+          pauseOnHover
+          theme={isDark ? "dark" : "light"}
+        />
+
         {/* Scroll position handler */}
         <ScrollToTop />
         <CustomCursor />
