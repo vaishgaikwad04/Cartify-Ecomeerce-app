@@ -67,8 +67,8 @@ export const createCheckoutSession = async (req, res) => {
       payment_method_types: ["card"],
       mode: "payment",
       line_items,
-      success_url: "https://cartify-ecomeerce-app.onrender.com/success",
-      cancel_url: "https://cartify-ecomeerce-app.onrender.com/cancel",
+      success_url: "https://cartify-ecomeerce-app-9qyv.onrender.com/success?session_id={CHECKOUT_SESSION_ID",
+      cancel_url: "https://cartify-ecomeerce-app-9qyv.onrender.com/cancel",
       metadata: {
         userId: req.user.id,
         addressId: address._id.toString(),
