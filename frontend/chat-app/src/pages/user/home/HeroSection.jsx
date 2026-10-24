@@ -141,7 +141,7 @@ const HeroSection = () => {
 
   return (
     <section className="mx-auto mt-0 w-full max-w-[1700px] px-1.5 sm:px-3 lg:mt-2 lg:px-5">
-      <div className="grid grid-cols-2 gap-1.5 sm:gap-0">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-1.5 sm:gap-0">
         {banners.map((banner, index) => (
           <ImageCard
             key={index}
