@@ -86,6 +86,7 @@
 
 // export default AdminPanelCard;
 
+
 import React, { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 
@@ -95,67 +96,54 @@ const AdminPanelCard = ({ title, value, subtitle, icon }) => {
 
   return (
     <div
-      className={`
-        group min-w-0 rounded-xl border p-4
-        transition-all duration-200
-        hover:-translate-y-0.5 hover:shadow-md
-        ${
-          isDark
-            ? "border-gray-800 bg-gray-900 hover:border-gray-700"
-            : "border-gray-200 bg-white hover:border-gray-300"
-        }
-      `}
+      className={`group min-w-0 rounded-lg border p-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${
+        isDark
+          ? "border-gray-700 bg-gray-800 hover:border-gray-600"
+          : "border-gray-200 bg-white hover:border-gray-300"
+      }`}
     >
-      <div className="flex items-start justify-between gap-3">
-        {/* CONTENT */}
+      <div className="flex items-start justify-between gap-2.5">
+        {/* Card content */}
         <div className="min-w-0 flex-1">
           <h2
-            className={`
-              truncate text-[12px] font-medium
-              ${isDark ? "text-gray-400" : "text-gray-500"}
-            `}
             title={title}
+            className={`truncate text-xs font-medium ${
+              isDark ? "text-gray-400" : "text-gray-500"
+            }`}
           >
             {title}
           </h2>
 
           <p
-            className={`
-              mt-2 text-2xl font-semibold leading-tight
-              tracking-tight tabular-nums
-              ${isDark ? "text-gray-100" : "text-gray-900"}
-            `}
+            title={String(value ?? "—")}
+            className={`mt-2 break-words text-xl font-semibold leading-tight tracking-tight tabular-nums ${
+              isDark ? "text-gray-100" : "text-gray-900"
+            }`}
           >
             {value ?? "—"}
           </p>
 
           {subtitle && (
             <p
-              className={`
-                mt-1.5 text-[11px] leading-relaxed
-                ${isDark ? "text-gray-500" : "text-gray-500"}
-              `}
+              className={`mt-1.5 text-[11px] leading-snug ${
+                isDark ? "text-gray-400" : "text-gray-500"
+              }`}
             >
               {subtitle}
             </p>
           )}
         </div>
 
-        {/* ICON */}
+        {/* Icon */}
         {icon && (
           <div
-            className={`
-              flex h-9 w-9 shrink-0 items-center
-              justify-center rounded-lg
-              transition-colors duration-200
-              ${
-                isDark
-                  ? "bg-blue-500/10 text-blue-300 group-hover:bg-blue-500/15"
-                  : "bg-blue-50 text-blue-600 group-hover:bg-blue-100"
-              }
-            `}
+            className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${
+              isDark
+                ? "bg-blue-500/10 text-blue-300 group-hover:bg-blue-500/20"
+                : "bg-blue-50 text-blue-600 group-hover:bg-blue-100"
+            }`}
           >
-            <span className="[&>svg]:h-[17px] [&>svg]:w-[17px]">
+            <span className="[&>svg]:h-4 [&>svg]:w-4">
               {icon}
             </span>
           </div>
