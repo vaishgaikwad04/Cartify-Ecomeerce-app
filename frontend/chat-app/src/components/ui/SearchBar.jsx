@@ -61,7 +61,7 @@ const SearchBar = ({
         onChange={onChange}
         placeholder={placeholder}
         aria-label={placeholder}
-        className={`h-10 w-full rounded-lg border py-2 pl-10 pr-10 text-sm outline-none transition-colors focus:ring-2 focus:ring-blue-500/20 ${
+        className={`h-8 w-full rounded-lg border py-2 pl-10 pr-10 text-sm outline-none transition-colors focus:ring-2 focus:ring-blue-500/20 ${
           isDark
             ? "border-gray-700 bg-gray-800 text-gray-100 placeholder:text-gray-500 focus:border-blue-500"
             : "border-gray-200 bg-white text-gray-900 placeholder:text-gray-400 focus:border-blue-500"
