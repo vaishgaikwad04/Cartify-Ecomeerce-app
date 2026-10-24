@@ -704,7 +704,7 @@ const Dashboard = () => {
       </section>
 
       {/* Order statistics */}
-      <section>
+      {/* <section>
         <div className="mb-2.5 flex items-center justify-between">
           <h2 className="text-sm font-semibold">Order Status</h2>
           <span className={`text-[11px] ${textSecondary}`}>
@@ -741,7 +741,7 @@ const Dashboard = () => {
             icon={<FiXCircle />}
           />
         </div>
-      </section>
+      </section> */}
 
       {/* Revenue chart */}
       <section
@@ -758,7 +758,7 @@ const Dashboard = () => {
           <RevenueChart />
         </div>
       </section>
-
+{/* 
       {/* Recent orders */}
       <section
         className={`min-w-0 overflow-hidden rounded-xl border ${panelStyle}`}
@@ -776,11 +776,11 @@ const Dashboard = () => {
           </span>
         </div>
 
-        <Table
+        {/* <Table
           data={recentOrders || []}
           columns={orderColumns}
-        />
-      </section>
+        /> */}
+      </section> */}
     </div>
   );
 };
