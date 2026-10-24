@@ -7,18 +7,19 @@ import ImageCard from "../../../components/ui/ImageCard";
 const banners = [
   {
     image:
-      "https://mafoil.wpbingosite.com/wp-content/uploads/2023/02/banner-54-1.jpg",
-    title: "Clothing",
-    subtitle: "New Collection",
-    route: "/new-in-body",
-  },
-  {
-    image:
       "https://shopjonesandco.com/cdn/shop/files/jones-_-co-mini-dome-pony-cuff-gold-hair-accessory-mdpc01.jpg?v=1781662952&width=3000",
     title: "Accessories",
     subtitle: "Trending Style",
     route: "/accessories",
   },
+  {
+    image:
+      "https://mafoil.wpbingosite.com/wp-content/uploads/2023/02/banner-54-1.jpg",
+    title: "Clothing",
+    subtitle: "New Collection",
+    route: "/new-in-body",
+  },
+  
 ];
 
 const HeroSection = () => {
@@ -26,7 +27,7 @@ const HeroSection = () => {
 
   return (
     <section className="w-full max-w-[1700px] mx-auto px-2 sm:px-3 lg:px-5 lg:mt-2">
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
         {banners.map((banner, index) => (
           <ImageCard
             key={index}
