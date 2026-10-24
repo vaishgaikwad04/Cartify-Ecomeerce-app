@@ -313,7 +313,7 @@ const RevenueChart = () => {
 
   return (
     <section
-      className={`w-full min-w-0 overflow-hidden rounded-lg border p-3 sm:p-4 ${panelStyle}`}
+      className={`w-full min-w-0 overflow-hidden ${panelStyle}`}
     >
       {/* Compact header */}
       <div className="mb-3 flex items-center justify-between gap-3">
