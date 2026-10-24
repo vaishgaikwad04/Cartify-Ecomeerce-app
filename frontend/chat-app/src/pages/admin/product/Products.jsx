@@ -244,7 +244,7 @@
 //             setOpenCreateProductFormModal(false);
 //             setSelectedProductId(null);
 //           }}
-          
+
 //         >
 //           {/* pass product id for edit product */}
 //           <CreateProduct
@@ -1366,9 +1366,7 @@ const FetchProducts = () => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   // Theme styles
-  const pageBg = isDark
-    ? "bg-gray-900 text-white"
-    : "bg-gray-50 text-gray-900";
+  const pageBg = isDark ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-900";
 
   const cardBg = isDark
     ? "bg-gray-800 border-gray-700"
@@ -1377,9 +1375,7 @@ const FetchProducts = () => {
   const heading = isDark ? "text-white" : "text-gray-900";
   const subHeading = isDark ? "text-gray-400" : "text-gray-500";
 
-  const borderColor = isDark
-    ? "border-gray-700"
-    : "border-gray-100";
+  const borderColor = isDark ? "border-gray-700" : "border-gray-100";
 
   // Brand options
   const brands = [
@@ -1399,8 +1395,7 @@ const FetchProducts = () => {
   ];
 
   // Safe price formatting
-  const formatPrice = (price) =>
-    Number(price ?? 0).toLocaleString("en-IN");
+  const formatPrice = (price) => Number(price ?? 0).toLocaleString("en-IN");
 
   // Product table columns
   const productColumns = [
@@ -1411,7 +1406,9 @@ const FetchProducts = () => {
         <div className="flex min-w-[190px] items-center gap-3">
           <div
             className={`h-11 w-11 shrink-0 overflow-hidden rounded-md border ${
-              isDark ? "border-gray-700 bg-gray-900" : "border-gray-200 bg-gray-50"
+              isDark
+                ? "border-gray-700 bg-gray-900"
+                : "border-gray-200 bg-gray-50"
             }`}
           >
             {row.images?.[0] ? (
@@ -1497,10 +1494,7 @@ const FetchProducts = () => {
                   : "text-gray-500"
             }`}
           >
-            ₹
-            {formatPrice(
-              hasDiscount ? row.discountPrice : row.price
-            )}
+            ₹{formatPrice(hasDiscount ? row.discountPrice : row.price)}
           </span>
         );
       },
@@ -1573,41 +1567,36 @@ const FetchProducts = () => {
       ? Number(selectedProduct.discountPrice)
       : null;
 
-  const hasDiscount =
-    discountPrice !== null && discountPrice < regularPrice;
+  const hasDiscount = discountPrice !== null && discountPrice < regularPrice;
 
-  const sellingPrice = hasDiscount
-    ? discountPrice
-    : regularPrice;
+  const sellingPrice = hasDiscount ? discountPrice : regularPrice;
 
   const discountPercentage =
     hasDiscount && regularPrice > 0
-      ? Math.round(
-          ((regularPrice - discountPrice) / regularPrice) * 100
-        )
+      ? Math.round(((regularPrice - discountPrice) / regularPrice) * 100)
       : 0;
 
   // Statistics
   const totalProducts = productsData.length;
 
-  const onSaleProducts = productsData.filter(
-    (item) => item.isOnSale
-  ).length;
+  const onSaleProducts = productsData.filter((item) => item.isOnSale).length;
 
   const totalBrands = new Set(
-    productsData.map((item) => item.brand).filter(Boolean)
+    productsData.map((item) => item.brand).filter(Boolean),
   ).size;
 
   const totalCategories = new Set(
-    productsData.map((item) => item.category).filter(Boolean)
+    productsData.map((item) => item.category).filter(Boolean),
   ).size;
 
   return (
     <div
-      className={`w-full min-w-0 space-y-4 p-3 transition-colors duration-200 sm:p-4 ${pageBg}`}
+      className={`w-full min-w-0 space-y-4 px-3 transition-colors duration-200 sm:p-4 ${pageBg}`}
     >
       {/* Header and filters */}
-      <section className={`overflow-hidden rounded-lg border shadow-sm ${cardBg}`}>
+      <section
+        className={`overflow-hidden rounded-lg border shadow-sm ${cardBg}`}
+      >
         {/* Page heading */}
         <div
           className={`flex flex-col gap-3 border-b p-3 sm:p-4 md:flex-row md:items-center md:justify-between ${borderColor}`}
@@ -1624,9 +1613,15 @@ const FetchProducts = () => {
 
           <div className="flex w-full flex-col gap-2 sm:flex-row md:w-auto">
             <div className="w-full sm:w-64">
+              {/* <SearchBar
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              /> */}
               <SearchBar
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search products..."
+                isDark={isDark}
               />
             </div>
 
@@ -1690,25 +1685,13 @@ const FetchProducts = () => {
 
       {/* Statistics */}
       <section className="grid grid-cols-2 gap-3 xl:grid-cols-4">
-        <AdminPanelCard
-          title="Total Products"
-          value={totalProducts}
-        />
+        <AdminPanelCard title="Total Products" value={totalProducts} />
 
-        <AdminPanelCard
-          title="On Sale"
-          value={onSaleProducts}
-        />
+        <AdminPanelCard title="On Sale" value={onSaleProducts} />
 
-        <AdminPanelCard
-          title="Brands"
-          value={totalBrands}
-        />
+        <AdminPanelCard title="Brands" value={totalBrands} />
 
-        <AdminPanelCard
-          title="Categories"
-          value={totalCategories}
-        />
+        <AdminPanelCard title="Categories" value={totalCategories} />
       </section>
 
       {/* Product table */}
@@ -1731,10 +1714,7 @@ const FetchProducts = () => {
         </div>
 
         <div className="w-full min-w-0 overflow-x-auto">
-          <Table
-            data={filteredProducts}
-            columns={productColumns}
-          />
+          <Table data={filteredProducts} columns={productColumns} />
         </div>
       </section>
 
@@ -1897,7 +1877,7 @@ const FetchProducts = () => {
                   >
                     {selectedProduct.variants?.length
                       ? selectedProduct.variants.some(
-                          (variant) => Number(variant.stock) > 0
+                          (variant) => Number(variant.stock) > 0,
                         )
                         ? "In Stock"
                         : "Out of Stock"
@@ -1906,9 +1886,13 @@ const FetchProducts = () => {
                 </div>
 
                 {/* Product information */}
-                <div className={`mt-5 grid grid-cols-2 border-y ${borderColor}`}>
+                <div
+                  className={`mt-5 grid grid-cols-2 border-y ${borderColor}`}
+                >
                   <div className={`border-r py-3 pr-3 ${borderColor}`}>
-                    <p className={`text-[10px] uppercase tracking-wider ${subHeading}`}>
+                    <p
+                      className={`text-[10px] uppercase tracking-wider ${subHeading}`}
+                    >
                       Category
                     </p>
                     <p className="mt-1.5 truncate text-sm font-medium">
@@ -1917,7 +1901,9 @@ const FetchProducts = () => {
                   </div>
 
                   <div className="py-3 pl-3">
-                    <p className={`text-[10px] uppercase tracking-wider ${subHeading}`}>
+                    <p
+                      className={`text-[10px] uppercase tracking-wider ${subHeading}`}
+                    >
                       Brand
                     </p>
                     <p className="mt-1.5 truncate text-sm font-medium">
@@ -1926,7 +1912,9 @@ const FetchProducts = () => {
                   </div>
 
                   <div className={`border-r border-t py-3 pr-3 ${borderColor}`}>
-                    <p className={`text-[10px] uppercase tracking-wider ${subHeading}`}>
+                    <p
+                      className={`text-[10px] uppercase tracking-wider ${subHeading}`}
+                    >
                       Product ID
                     </p>
                     <p
@@ -1940,7 +1928,9 @@ const FetchProducts = () => {
                   </div>
 
                   <div className={`border-t py-3 pl-3 ${borderColor}`}>
-                    <p className={`text-[10px] uppercase tracking-wider ${subHeading}`}>
+                    <p
+                      className={`text-[10px] uppercase tracking-wider ${subHeading}`}
+                    >
                       Variants
                     </p>
                     <p className="mt-1.5 text-sm font-medium">
@@ -1953,9 +1943,7 @@ const FetchProducts = () => {
 
             {/* Description */}
             <div className={`border-t pt-5 ${borderColor}`}>
-              <h3 className="text-sm font-semibold">
-                Product Description
-              </h3>
+              <h3 className="text-sm font-semibold">Product Description</h3>
 
               <p
                 className={`mt-2 whitespace-pre-line text-sm leading-6 ${
@@ -1979,7 +1967,9 @@ const FetchProducts = () => {
                     isDark ? "bg-gray-900" : "bg-gray-50"
                   }`}
                 >
-                  <p className={`text-[10px] uppercase tracking-wider ${subHeading}`}>
+                  <p
+                    className={`text-[10px] uppercase tracking-wider ${subHeading}`}
+                  >
                     Regular Price
                   </p>
                   <p className="mt-2 text-lg font-semibold">
@@ -1992,7 +1982,9 @@ const FetchProducts = () => {
                     isDark ? "bg-gray-900" : "bg-gray-50"
                   }`}
                 >
-                  <p className={`text-[10px] uppercase tracking-wider ${subHeading}`}>
+                  <p
+                    className={`text-[10px] uppercase tracking-wider ${subHeading}`}
+                  >
                     Selling Price
                   </p>
                   <p className="mt-2 text-lg font-semibold">
@@ -2005,7 +1997,9 @@ const FetchProducts = () => {
                     isDark ? "bg-gray-900" : "bg-gray-50"
                   }`}
                 >
-                  <p className={`text-[10px] uppercase tracking-wider ${subHeading}`}>
+                  <p
+                    className={`text-[10px] uppercase tracking-wider ${subHeading}`}
+                  >
                     Sale Status
                   </p>
                   <p
@@ -2027,9 +2021,7 @@ const FetchProducts = () => {
             {selectedProduct.variants?.length > 0 && (
               <div className={`border-t pt-5 ${borderColor}`}>
                 <div className="mb-3 flex items-center justify-between gap-3">
-                  <h3 className="text-sm font-semibold">
-                    Available Variants
-                  </h3>
+                  <h3 className="text-sm font-semibold">Available Variants</h3>
                   <span className={`text-xs ${subHeading}`}>
                     {selectedProduct.variants.length} variants
                   </span>
