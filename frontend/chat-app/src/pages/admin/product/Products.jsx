@@ -1698,8 +1698,6 @@ const FetchProducts = () => {
       <section
         className={`min-w-0 overflow-hidden rounded-lg border shadow-sm ${cardBg}`}
       >
-        
-
         <div className="w-full min-w-0 overflow-x-auto">
           <Table data={filteredProducts} columns={productColumns} />
         </div>
