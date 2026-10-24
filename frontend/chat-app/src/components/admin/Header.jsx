@@ -669,14 +669,6 @@ const Header = () => {
         >
           Admin Workspace
         </p>
-
-        <p
-          className={`mt-0.5 hidden text-[11px] sm:block ${
-            isDark ? "text-gray-400" : "text-gray-500"
-          }`}
-        >
-          Inventory Management
-        </p>
       </div>
 
       {/* RIGHT SIDE */}

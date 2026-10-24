@@ -665,12 +665,7 @@ const Dashboard = () => {
 
       {/* Main statistics */}
       <section>
-        <div className="mb-2.5 flex items-center justify-between">
-          <h2 className="text-sm font-semibold">Store Performance</h2>
-          <span className={`text-[11px] ${textSecondary}`}>
-            Key metrics
-          </span>
-        </div>
+      
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
           <AdminPanelCard
@@ -747,12 +742,7 @@ const Dashboard = () => {
       <section
         className={`min-w-0 overflow-hidden rounded-xl border p-3 sm:p-4 ${panelStyle}`}
       >
-        <div className="mb-3">
-          <h2 className="text-sm font-semibold">Revenue Analytics</h2>
-          <p className={`mt-0.5 text-xs ${textSecondary}`}>
-            Review your store's revenue performance.
-          </p>
-        </div>
+      
 
         <div className="min-w-0">
           <RevenueChart />
