@@ -63,24 +63,23 @@ export const createCheckoutSession = async (req, res) => {
     }));
 
     // CREATE STRIPE SESSION
-  
-const session = await stripe.checkout.sessions.create({
-  payment_method_types: ["card"],
-  mode: "payment",
-  line_items,
 
- success_url:
-  'https://cartify-ecomeerce-app-9qyv.onrender.com/?payment=success&session_id={CHECKOUT_SESSION_ID}',
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      mode: "payment",
+      line_items,
 
-cancel_url:
- 'https://cartify-ecomeerce-app-9qyv.onrender.com/?payment=cancelled',
+      success_url:
+        "https://cartify-ecomeerce-app-9qyv.onrender.com/?payment=success&session_id={CHECKOUT_SESSION_ID}",
 
-  metadata: {
-    userId: req.user.id,
-    addressId: address._id.toString(),
-  },
-});
+      cancel_url:
+        "https://cartify-ecomeerce-app-9qyv.onrender.com/?payment=cancelled",
 
+      metadata: {
+        userId: req.user.id,
+        addressId: address._id.toString(),
+      },
+    });
 
     // CREATE ORDER
     const order = await orderModel.create({

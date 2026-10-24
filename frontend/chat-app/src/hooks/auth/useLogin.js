@@ -94,26 +94,59 @@ export const useLogin = ({ setIsOpen }) => {
   // };
   
 // Google Login
+// const handleLogin = async () => {
+//   const provider = new GoogleAuthProvider();
+
+//   try {
+//     const result = await signInWithPopup(auth, provider);
+
+//     const googleUser = result.user;
+
+//     const res = await googleLogin({
+//       name: googleUser.displayName,
+//       email: googleUser.email,
+//     });
+
+//     setUser(res.data.user);
+
+//     toast.success(res.data.message);
+
+//     setIsOpen(false); // Close modal after successful login
+
+//     navigate("/");
+//   } catch (error) {
+//     const message =
+//       error?.response?.data?.message ||
+//       error?.message ||
+//       "Google login failed";
+
+//     setError(message);
+//     toast.error(message);
+//   }
+// };
+
+
 const handleLogin = async () => {
   const provider = new GoogleAuthProvider();
 
   try {
     const result = await signInWithPopup(auth, provider);
 
-    const googleUser = result.user;
+    // Get the Firebase ID token
+    const idToken = await result.user.getIdToken();
 
-    const res = await googleLogin({
-      name: googleUser.displayName,
-      email: googleUser.email,
-    });
+    // Send it to your backend for verification
+    const res = await googleLogin({ idToken });
 
     setUser(res.data.user);
-
     toast.success(res.data.message);
+    setIsOpen(false);
 
-    setIsOpen(false); // Close modal after successful login
-
-    navigate("/");
+    if (res.data.user.role === "admin") {
+      navigate("/admin");
+    } else {
+      navigate("/");
+    }
   } catch (error) {
     const message =
       error?.response?.data?.message ||
@@ -124,6 +157,7 @@ const handleLogin = async () => {
     toast.error(message);
   }
 };
+
 
 
   return {

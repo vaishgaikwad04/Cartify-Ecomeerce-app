@@ -5,7 +5,7 @@
 // 1280–1535px	xl: Desktop
 // 1536px+	2xl: Large desktop
 
-import React, { useState,useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import "./App.css";
@@ -29,8 +29,6 @@ import WishListedItem from "./pages/user/productWishList/WishListedItem";
 import SettingsPage from "./pages/user/settings/Settings";
 import BrandPage from "./pages/user/home/Brand";
 import CartPrev from "./pages/user/cart/CartPrev";
-import Success from "./pages/user/cart/Sucess";
-import Cancel from "./pages/user/cart/Cancel";
 import Orders from "./pages/user/order/Order";
 import Address from "./pages/user/order/Address";
 import Checkout from "./pages/user/order/Checkout";
@@ -64,9 +62,13 @@ const PaymentToastHandler = () => {
     const payment = params.get("payment");
 
     if (payment === "success") {
-      toast.success("Payment successful! Thank you for shopping with Cartify.");
+      toast.success(
+        "Your payment has been completed successfully. Thank you for shopping with Cartify! Your order is being processed.",
+      );
     } else if (payment === "cancelled") {
-      toast.info("Payment cancelled. You can try again from your cart.");
+      toast.info(
+        "Your payment was cancelled, and no payment was completed. You can return to your cart and try again whenever you are ready.",
+      );
     } else {
       return;
     }
@@ -179,12 +181,6 @@ const App = () => {
 
               <Route path="notifications" element={<Notifications />} />
             </Route>
-
-            {/* PAYMENT RESULT ROUTES */}
-
-            <Route path="success" element={<Success />} />
-
-            <Route path="cancel" element={<Cancel />} />
           </Route>
 
           {/* =========================
