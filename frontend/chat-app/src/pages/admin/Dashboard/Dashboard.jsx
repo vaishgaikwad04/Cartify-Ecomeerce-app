@@ -759,7 +759,7 @@ const Dashboard = () => {
         </div>
       </section>
 {/* 
-      {/* Recent orders */}
+    
       <section
         className={`min-w-0 overflow-hidden rounded-xl border ${panelStyle}`}
       >
@@ -779,7 +779,7 @@ const Dashboard = () => {
         {/* <Table
           data={recentOrders || []}
           columns={orderColumns}
-        /> */}
+        /> 
       </section> */}
     </div>
   );
