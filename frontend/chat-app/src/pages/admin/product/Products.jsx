@@ -1397,163 +1397,164 @@ const FetchProducts = () => {
   // Safe price formatting
   const formatPrice = (price) => Number(price ?? 0).toLocaleString("en-IN");
 
-  // Product table columns
-  const productColumns = [
-    {
-      key: "image",
-      label: "Product",
-      render: (row) => (
-        <div className="flex min-w-[190px] items-center gap-3">
-          <div
-            className={`h-11 w-11 shrink-0 overflow-hidden rounded-md border ${
-              isDark
-                ? "border-gray-700 bg-gray-900"
-                : "border-gray-200 bg-gray-50"
-            }`}
-          >
-            {row.images?.[0] ? (
-              <img
-                src={row.images[0]}
-                alt={row.name || "Product"}
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              <div className="flex h-full items-center justify-center text-[10px] text-gray-400">
-                No image
-              </div>
-            )}
-          </div>
-
-          <div className="min-w-0">
-            <h3
-              className={`max-w-[220px] truncate text-sm font-medium ${
-                isDark ? "text-gray-100" : "text-gray-800"
-              }`}
-              title={row.name}
-            >
-              {row.name || "Untitled product"}
-            </h3>
-
-            <p
-              className={`mt-0.5 text-xs ${
-                isDark ? "text-gray-400" : "text-gray-500"
-              }`}
-            >
-              {row.brand || "No brand"}
-            </p>
-          </div>
+  
+const productColumns = [
+  {
+    key: "image",
+    label: "Product",
+    render: (row) => (
+      <div className="flex min-w-[170px] items-center gap-2">
+        <div
+          className={`h-8 w-8 shrink-0 overflow-hidden rounded border ${
+            isDark
+              ? "border-gray-700 bg-gray-900"
+              : "border-gray-200 bg-gray-50"
+          }`}
+        >
+          {row.images?.[0] ? (
+            <img
+              src={row.images[0]}
+              alt={row.name || "Product"}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <div className="flex h-full items-center justify-center text-[8px] text-gray-400">
+              N/A
+            </div>
+          )}
         </div>
-      ),
-    },
 
-    {
-      key: "category",
-      label: "Category",
-      render: (row) => {
-        const categoryName = row.category || "Uncategorized";
+        <div className="min-w-0">
+          <h3
+            className={`max-w-[180px] truncate text-[11px] font-medium leading-4 ${
+              isDark ? "text-gray-100" : "text-gray-800"
+            }`}
+            title={row.name}
+          >
+            {row.name || "Untitled product"}
+          </h3>
 
-        return (
-          <span className={isDark ? "text-gray-300" : "text-gray-600"}>
-            {categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}
-          </span>
-        );
-      },
-    },
-
-    {
-      key: "price",
-      label: "Price",
-      render: (row) => (
-        <span
-          className={`font-medium ${
-            isDark ? "text-gray-200" : "text-gray-900"
-          }`}
-        >
-          ₹{formatPrice(row.price)}
-        </span>
-      ),
-    },
-
-    {
-      key: "discountPrice",
-      label: "Discount Price",
-      render: (row) => {
-        const hasDiscount =
-          row.discountPrice !== null &&
-          row.discountPrice !== undefined &&
-          row.discountPrice !== "" &&
-          Number(row.discountPrice) < Number(row.price);
-
-        return (
-          <span
-            className={`font-medium ${
-              hasDiscount
-                ? "text-green-600"
-                : isDark
-                  ? "text-gray-400"
-                  : "text-gray-500"
+          <p
+            className={`truncate text-[10px] leading-3 ${
+              isDark ? "text-gray-400" : "text-gray-500"
             }`}
           >
-            ₹{formatPrice(hasDiscount ? row.discountPrice : row.price)}
-          </span>
-        );
-      },
-    },
+            {row.brand || "No brand"}
+          </p>
+        </div>
+      </div>
+    ),
+  },
 
-    {
-      key: "isOnSale",
-      label: "Status",
-      render: (row) => (
+  {
+    key: "category",
+    label: "Category",
+    render: (row) => {
+      const categoryName = row.category || "Uncategorized";
+
+      return (
+        <span className={isDark ? "text-gray-300" : "text-gray-600"}>
+          {categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}
+        </span>
+      );
+    },
+  },
+
+  {
+    key: "price",
+    label: "Price",
+    render: (row) => (
+      <span
+        className={`font-medium whitespace-nowrap ${
+          isDark ? "text-gray-200" : "text-gray-900"
+        }`}
+      >
+        ₹{formatPrice(row.price)}
+      </span>
+    ),
+  },
+
+  {
+    key: "discountPrice",
+    label: "Discount Price",
+    render: (row) => {
+      const hasDiscount =
+        row.discountPrice !== null &&
+        row.discountPrice !== undefined &&
+        row.discountPrice !== "" &&
+        Number(row.discountPrice) < Number(row.price);
+
+      return (
         <span
-          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${
-            row.isOnSale
-              ? isDark
-                ? "bg-green-500/10 text-green-400"
-                : "bg-green-50 text-green-700"
+          className={`whitespace-nowrap font-medium ${
+            hasDiscount
+              ? "text-green-500"
               : isDark
-                ? "bg-gray-700 text-gray-300"
-                : "bg-gray-100 text-gray-600"
+                ? "text-gray-400"
+                : "text-gray-500"
           }`}
         >
-          <span
-            className={`h-1.5 w-1.5 rounded-full ${
-              row.isOnSale ? "bg-green-500" : "bg-gray-400"
-            }`}
-          />
-          {row.isOnSale ? "On Sale" : "Regular"}
+          ₹{formatPrice(hasDiscount ? row.discountPrice : row.price)}
         </span>
-      ),
+      );
     },
+  },
 
-    {
-      key: "brand",
-      label: "Brand",
-      render: (row) => (
-        <span className={isDark ? "text-gray-300" : "text-gray-700"}>
-          {row.brand || "—"}
-        </span>
-      ),
-    },
-
-    {
-      key: "actions",
-      label: "Actions",
-      render: (row) => (
-        <ActionMenu
-          row={row}
-          onView={(product) => {
-            setActiveImageIndex(0);
-            handleViewProduct(product);
-          }}
-          onEdit={handleUpdateProduct}
-          onDelete={() => {
-            setSelectedProductId(row._id);
-            setIsOpenConfirmDeleteModel(true);
-          }}
+  {
+    key: "isOnSale",
+    label: "Status",
+    render: (row) => (
+      <span
+        className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium whitespace-nowrap ${
+          row.isOnSale
+            ? isDark
+              ? "bg-green-500/10 text-green-400"
+              : "bg-green-50 text-green-700"
+            : isDark
+              ? "bg-gray-700 text-gray-300"
+              : "bg-gray-100 text-gray-600"
+        }`}
+      >
+        <span
+          className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+            row.isOnSale ? "bg-green-500" : "bg-gray-400"
+          }`}
         />
-      ),
-    },
-  ];
+        {row.isOnSale ? "On Sale" : "Regular"}
+      </span>
+    ),
+  },
+
+  {
+    key: "brand",
+    label: "Brand",
+    render: (row) => (
+      <span className="whitespace-nowrap">
+        {row.brand || "—"}
+      </span>
+    ),
+  },
+
+  {
+    key: "actions",
+    label: "Actions",
+    render: (row) => (
+      <ActionMenu
+        row={row}
+        onView={(product) => {
+          setActiveImageIndex(0);
+          handleViewProduct(product);
+        }}
+        onEdit={handleUpdateProduct}
+        onDelete={() => {
+          setSelectedProductId(row._id);
+          setIsOpenConfirmDeleteModel(true);
+        }}
+      />
+    ),
+  },
+];
+
 
   // Reset image selection when the selected product changes
   const productImages = selectedProduct?.images || [];
