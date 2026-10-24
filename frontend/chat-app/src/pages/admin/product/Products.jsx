@@ -1626,7 +1626,7 @@ const FetchProducts = () => {
             </div>
 
             <Button
-              className="h-10 w-full px-4 sm:w-auto"
+              className="h-8 w-full px-4 sm:w-auto"
               label="Add Product"
               icon={<IoIosAdd className="text-xl" />}
               onClick={() => {
@@ -1698,20 +1698,7 @@ const FetchProducts = () => {
       <section
         className={`min-w-0 overflow-hidden rounded-lg border shadow-sm ${cardBg}`}
       >
-        <div
-          className={`flex items-center justify-between gap-3 border-b px-3 py-3 sm:px-4 ${borderColor}`}
-        >
-          <div>
-            <h2 className={`text-sm font-semibold ${heading}`}>
-              Product Catalog
-            </h2>
-
-            <p className={`mt-0.5 text-xs ${subHeading}`}>
-              {filteredProducts.length}{" "}
-              {filteredProducts.length === 1 ? "product" : "products"} found
-            </p>
-          </div>
-        </div>
+        
 
         <div className="w-full min-w-0 overflow-x-auto">
           <Table data={filteredProducts} columns={productColumns} />
