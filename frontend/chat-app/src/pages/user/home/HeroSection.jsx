@@ -1,9 +1,124 @@
+// import React from "react";
+// import { useNavigate } from "react-router-dom";
+// import Button from "../../../components/ui/Button";
+// import ImageCard from "../../../components/ui/ImageCard";
+
+// // Array of banner images
+// const banners = [
+//   {
+//     image:
+//       "https://mafoil.wpbingosite.com/wp-content/uploads/2023/02/banner-54-1.jpg",
+//     title: "Clothing",
+//     subtitle: "New Collection",
+//     route: "/new-in-body",
+//   },
+//   {
+//     image:
+//       "https://shopjonesandco.com/cdn/shop/files/jones-_-co-mini-dome-pony-cuff-gold-hair-accessory-mdpc01.jpg?v=1781662952&width=3000",
+//     title: "Accessories",
+//     subtitle: "Trending Style",
+//     route: "/accessories",
+//   },
+// ];
+
+// const HeroSection = () => {
+//   const navigate = useNavigate();
+
+//   return (
+//     <section className="w-full max-w-[1700px] mx-auto px-2 sm:px-3 lg:px-5 lg:mt-2">
+//       <div className="grid grid-cols-2">
+//         {banners.map((banner, index) => (
+//           <ImageCard
+//             key={index}
+//             image={banner.image}
+//             className="aspect-[3/4] sm:aspect-[3/4] lg:aspect-[4/4]"
+//           >
+//             <div
+//           className="
+//   absolute
+//   inset-x-0
+//   bottom-12
+//   sm:bottom-48
+//   md:bottom-20
+//   lg:bottom-52
+//   z-10
+//   flex
+//   flex-col
+//   items-center
+//   text-center
+//   text-white
+//   px-2
+// ">
+//               <p
+//                 className="
+//               uppercase
+//               tracking-[1px]
+//               sm:tracking-[1.5px]
+//               md:tracking-[2px]
+//               text-[8px]
+//               sm:text-[9px]
+//               md:text-xs
+//               lg:text-xs
+              
+//               mb-1
+//               sm:mb-2
+//             "
+//               >
+//                 {banner.subtitle}
+//               </p>
+
+//               <h1
+//                 className="
+//               text-base
+//               sm:text-lg
+//               md:text-2xl
+//               lg:text-2xl
+//               xl:text-4xl
+//               font-semibold
+//               leading-tight
+//               mb-2
+//               sm:mb-3
+//               md:mb-4
+//             "
+//               >
+//                 {banner.title}
+//               </h1>
+
+//               <Button
+//                 onClick={() => navigate(banner.route)}
+//                 label="Shop Now"
+//                 variant="secondary"
+//                 className="
+//               !ml-0
+//               !px-3
+//               !py-1
+//               !text-[9px]
+//               sm:!px-4
+//               sm:!py-1.5
+//               sm:!text-[10px]
+//               md:!px-5
+//               md:!py-2
+//               md:!text-xs
+//               min-w-[75px]
+//               sm:min-w-[85px]
+//               md:min-w-[105px]
+//             "
+//               />
+//             </div>
+//           </ImageCard>
+//         ))}
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default HeroSection;
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/ui/Button";
 import ImageCard from "../../../components/ui/ImageCard";
 
-// Array of banner images
 const banners = [
   {
     image:
@@ -25,84 +140,64 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="w-full max-w-[1700px] mx-auto px-2 sm:px-3 lg:px-5 lg:mt-2">
-      <div className="grid grid-cols-2">
+    <section className="mx-auto mt-0 w-full max-w-[1700px] px-1.5 sm:px-3 lg:mt-2 lg:px-5">
+      <div className="grid grid-cols-2 gap-1.5 sm:gap-0">
         {banners.map((banner, index) => (
           <ImageCard
             key={index}
             image={banner.image}
-            className="aspect-[3/4] sm:aspect-[3/4] lg:aspect-[4/4]"
+            className="
+              aspect-[4/5]
+              sm:aspect-[3/4]
+              lg:aspect-[4/4]
+            "
           >
             <div
-          className="
-  absolute
-  inset-x-0
-  bottom-12
-  sm:bottom-48
-  md:bottom-20
-  lg:bottom-52
-  z-10
-  flex
-  flex-col
-  items-center
-  text-center
-  text-white
-  px-2
-">
+              className="
+                absolute inset-x-0 bottom-3 z-10
+                flex flex-col items-center
+                px-1 text-center text-white
+                sm:bottom-48 sm:px-2
+                md:bottom-20
+                lg:bottom-52
+              "
+            >
               <p
                 className="
-              uppercase
-              tracking-[1px]
-              sm:tracking-[1.5px]
-              md:tracking-[2px]
-              text-[8px]
-              sm:text-[9px]
-              md:text-xs
-              lg:text-xs
-              
-              mb-1
-              sm:mb-2
-            "
+                  mb-0.5 text-[7px] font-medium uppercase
+                  tracking-[0.8px] leading-tight
+                  sm:mb-2 sm:text-[9px] sm:tracking-[1.5px]
+                  md:text-xs md:tracking-[2px]
+                  lg:text-xs
+                "
               >
                 {banner.subtitle}
               </p>
 
-              <h1
+              <h2
                 className="
-              text-base
-              sm:text-lg
-              md:text-2xl
-              lg:text-2xl
-              xl:text-4xl
-              font-semibold
-              leading-tight
-              mb-2
-              sm:mb-3
-              md:mb-4
-            "
+                  mb-1.5 text-sm font-semibold leading-tight
+                  drop-shadow-sm
+                  sm:mb-3 sm:text-lg
+                  md:mb-4 md:text-2xl
+                  lg:text-2xl xl:text-4xl
+                "
               >
                 {banner.title}
-              </h1>
+              </h2>
 
               <Button
                 onClick={() => navigate(banner.route)}
                 label="Shop Now"
                 variant="secondary"
                 className="
-              !ml-0
-              !px-3
-              !py-1
-              !text-[9px]
-              sm:!px-4
-              sm:!py-1.5
-              sm:!text-[10px]
-              md:!px-5
-              md:!py-2
-              md:!text-xs
-              min-w-[75px]
-              sm:min-w-[85px]
-              md:min-w-[105px]
-            "
+                  !ml-0 !min-w-[68px] !px-2.5 !py-1
+                  !text-[9px]
+                  sm:!min-w-[85px] sm:!px-4
+                  sm:!py-1.5 sm:!text-[10px]
+                  md:!min-w-[105px] md:!px-5
+                  md:!py-2 md:!text-xs
+                "
               />
             </div>
           </ImageCard>
