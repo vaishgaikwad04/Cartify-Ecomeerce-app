@@ -674,12 +674,8 @@ import CreateCategory from "./CreateCategory";
 import { useCategory } from "../../../hooks/admin/category/useCategory";
 
 const Category = () => {
-  const {
-    categories,
-    createCategory,
-    updateCategory,
-    deleteCategory,
-  } = useCategory();
+  const { categories, createCategory, updateCategory, deleteCategory } =
+    useCategory();
 
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -718,8 +714,7 @@ const Category = () => {
         category.description?.toLowerCase().includes(searchText);
 
       const matchesCategory =
-        selectedCategory === "all" ||
-        category._id === selectedCategory;
+        selectedCategory === "all" || category._id === selectedCategory;
 
       const matchesStatus =
         selectedStatus === "all" ||
@@ -730,7 +725,7 @@ const Category = () => {
   }, [categoryList, search, selectedCategory, selectedStatus]);
 
   const activeCount = categoryList.filter(
-    (category) => String(category.status).toLowerCase() === "active"
+    (category) => String(category.status).toLowerCase() === "active",
   ).length;
 
   const inactiveCount = categoryList.length - activeCount;
@@ -761,16 +756,16 @@ const Category = () => {
       header: "Category",
       accessor: "name",
       render: (category) => (
-        <div className="flex min-w-0 items-center gap-2">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-indigo-50 text-xs font-semibold text-indigo-600 dark:bg-indigo-950 dark:text-indigo-300">
+        <div className="flex min-w-0 items-center gap-1.5">
+          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded bg-indigo-50 text-[10px] font-semibold text-indigo-600 dark:bg-indigo-950 dark:text-indigo-300">
             {category.name?.charAt(0)?.toUpperCase() || "C"}
           </div>
 
           <div className="min-w-0">
-            <p className="truncate text-xs font-medium text-gray-800 dark:text-gray-100">
+            <p className="truncate text-[11px] font-medium text-gray-800 dark:text-gray-100">
               {category.name || "Untitled"}
             </p>
-            <p className="truncate text-[11px] text-gray-500">
+            <p className="truncate text-[10px] text-gray-500 dark:text-gray-400">
               {category.slug || "No slug"}
             </p>
           </div>
@@ -782,7 +777,7 @@ const Category = () => {
       accessor: "description",
       render: (category) => (
         <p
-          className="max-w-[180px] truncate text-xs text-gray-600 dark:text-gray-300"
+          className="max-w-[150px] truncate text-[11px] text-gray-600 dark:text-gray-300"
           title={category.description || ""}
         >
           {category.description || "—"}
@@ -793,12 +788,11 @@ const Category = () => {
       header: "Status",
       accessor: "status",
       render: (category) => {
-        const isActive =
-          String(category.status).toLowerCase() === "active";
+        const isActive = String(category.status).toLowerCase() === "active";
 
         return (
           <span
-            className={`inline-flex rounded-full px-2 py-0.5 text-[11px] font-medium ${
+            className={`inline-flex rounded-full px-1.5 py-0.5 text-[10px] font-medium ${
               isActive
                 ? "bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300"
                 : "bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300"
@@ -813,7 +807,7 @@ const Category = () => {
       header: "Created",
       accessor: "createdAt",
       render: (category) => (
-        <span className="whitespace-nowrap text-xs text-gray-500">
+        <span className="whitespace-nowrap text-[11px] text-gray-500 dark:text-gray-400">
           {category.createdAt
             ? new Date(category.createdAt).toLocaleDateString()
             : "—"}
@@ -824,20 +818,22 @@ const Category = () => {
       header: "Actions",
       accessor: "actions",
       render: (category) => (
-        <ActionMenu
-          onView={() => setViewCategory(category)}
-          onEdit={() => {
-            setSelectedCategoryId(category._id);
-            setOpenCreateCategoryFormModal(true);
-          }}
-          onDelete={() => setDeleteCategoryId(category._id)}
-        />
+        <div className="scale-90 origin-left">
+          <ActionMenu
+            onView={() => setViewCategory(category)}
+            onEdit={() => {
+              setSelectedCategoryId(category._id);
+              setOpenCreateCategoryFormModal(true);
+            }}
+            onDelete={() => setDeleteCategoryId(category._id)}
+          />
+        </div>
       ),
     },
   ];
 
   const editingCategory = categoryList.find(
-    (category) => category._id === selectedCategoryId
+    (category) => category._id === selectedCategoryId,
   );
 
   return (
@@ -863,7 +859,7 @@ const Category = () => {
             </div>
 
             <Button
-              className="h-9 w-full px-3 text-sm sm:w-auto"
+              className="h-8 w-full px-3 text-sm sm:w-auto"
               label="Add Category"
               variant="primary"
               icon={<IoIosAdd className="text-lg" />}
@@ -914,18 +910,9 @@ const Category = () => {
 
       {/* Statistics */}
       <section className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-3">
-        <AdminPanelCard
-          title="Total Categories"
-          value={categoryList.length}
-        />
-        <AdminPanelCard
-          title="Active Categories"
-          value={activeCount}
-        />
-        <AdminPanelCard
-          title="Inactive Categories"
-          value={inactiveCount}
-        />
+        <AdminPanelCard title="Total Categories" value={categoryList.length} />
+        <AdminPanelCard title="Active Categories" value={activeCount} />
+        <AdminPanelCard title="Inactive Categories" value={inactiveCount} />
       </section>
 
       {/* Category table */}
@@ -959,9 +946,7 @@ const Category = () => {
         <CreateCategory
           initialData={editingCategory}
           onSubmit={
-            selectedCategoryId
-              ? handleUpdateCategory
-              : handleCreateCategory
+            selectedCategoryId ? handleUpdateCategory : handleCreateCategory
           }
           onCancel={() => {
             setOpenCreateCategoryFormModal(false);
@@ -1031,8 +1016,8 @@ const Category = () => {
       >
         <div className="max-w-full p-4">
           <p className="text-sm leading-5 text-gray-600 dark:text-gray-300">
-            Are you sure you want to delete this category? This action cannot
-            be undone.
+            Are you sure you want to delete this category? This action cannot be
+            undone.
           </p>
 
           <div className="mt-5 flex flex-col-reverse justify-end gap-2 sm:flex-row">
