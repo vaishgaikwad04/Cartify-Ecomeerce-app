@@ -21,7 +21,7 @@ const Layout = () => {
         <Header />
 
         <main
-          className={`min-h-0 min-w-0 flex-1 overflow-x-auto overflow-y-auto px-3 p-1 sm:px-4 ${
+          className={`min-h-0 min-w-0 flex-1 overflow-x-auto overflow-y-auto px-3  sm:px-4 ${
             isDark ? "bg-gray-900" : "bg-slate-50"
           }`}
         >
