@@ -247,9 +247,9 @@ const Register = ({ isLogin, setIsLogin }) => {
             type="button"
             onClick={handleLogin}
             className={`
-              hidden
+        
               w-full
-              sm:flex
+             flex
               items-center
               justify-center
               gap-1.5

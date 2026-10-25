@@ -19,7 +19,6 @@ const banners = [
     subtitle: "New Collection",
     route: "/new-in-body",
   },
-  
 ];
 
 const HeroSection = () => {
@@ -35,21 +34,22 @@ const HeroSection = () => {
             className="aspect-[3/4] sm:aspect-[3/4] lg:aspect-[4/4]"
           >
             <div
-          className="
+              className="
   absolute
   inset-x-0
   bottom-12
   sm:bottom-48
-  md:bottom-20
-  lg:bottom-52
-  z-10
+  md:bottom-28
+  lg:bottom-5
+  2v z-10
   flex
   flex-col
   items-center
   text-center
   text-white
   px-2
-">
+"
+            >
               <p
                 className="
               uppercase
@@ -114,4 +114,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
