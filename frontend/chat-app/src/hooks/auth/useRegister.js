@@ -6,7 +6,7 @@ import { authSchema} from "../../validations/auth/RegisterSchema";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 import { auth } from "../../Firebase";
-import { registerUser } from "../../api/auth/AuthApi";
+import { registerUser, googleLogin } from "../../api/auth/AuthApi";
 import toast from "react-hot-toast";
 
 const initialValues = {
@@ -64,26 +64,46 @@ export const useRegister = ({ setIsLogin }) => {
     },
   });
 
-  const handleLogin = async () => {
-    const provider = new GoogleAuthProvider();
+ const handleLogin = async () => {
+  const provider = new GoogleAuthProvider();
 
-    try {
-      const result = await signInWithPopup(auth, provider);
+  try {
+    setError("");
 
-      const user = result.user;
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
 
-      console.log("Google User:", user);
-
-      // Later:
-      // const token = await user.getIdToken();
-      // await googleRegister(token);
-    } catch (error) {
-      console.error("Google authentication error:", error);
-
-      toast.error("Google authentication failed");
+    if (!user.email) {
+      throw new Error("Google account email is required");
     }
-  };
 
+    const idToken = await user.getIdToken();
+
+    const res = await googleLogin({
+      idToken,
+      name: user.displayName || "",
+      email: user.email,
+    });
+
+    const message =
+      res.data?.message || "Google registration successful";
+
+    setSuccess(message);
+    toast.success(message);
+
+    setIsLogin(true);
+  } catch (error) {
+    console.error("Google registration error:", error);
+
+    const message =
+      error.response?.data?.message ||
+      error.message ||
+      "Google registration failed";
+
+    setError(message);
+    toast.error(message);
+  }
+};
   return {
     formik,
     error,

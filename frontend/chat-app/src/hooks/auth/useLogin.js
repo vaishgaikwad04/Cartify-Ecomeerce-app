@@ -128,15 +128,25 @@ export const useLogin = ({ setIsOpen }) => {
 
 const handleLogin = async () => {
   const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: "select_account" });
 
   try {
+    setError("");
+
     const result = await signInWithPopup(auth, provider);
+    const googleUser = result.user;
 
-    // Get the Firebase ID token
-    const idToken = await result.user.getIdToken();
+    if (!googleUser.email) {
+      throw new Error("Google account email is missing");
+    }
 
-    // Send it to your backend for verification
-    const res = await googleLogin({ idToken });
+    const idToken = await googleUser.getIdToken();
+
+    const res = await googleLogin({
+      idToken,
+      name: googleUser.displayName || "",
+      email: googleUser.email,
+    });
 
     setUser(res.data.user);
     toast.success(res.data.message);
