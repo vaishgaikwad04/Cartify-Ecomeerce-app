@@ -1,3 +1,369 @@
+// // // import React, { useState, useEffect, useContext } from "react";
+// // // import { FiBell } from "react-icons/fi";
+
+// // // import { ThemeContext } from "../../context/ThemeContext";
+// // // import { getAdminSettings } from "../../api/user/SettingsApi";
+// // // import { NotificationContext } from "../../context/NotificationContext";
+// // // import { useNavigate } from "react-router-dom";
+
+// // // const Header = () => {
+// // //   const navigate = useNavigate();
+// // //   const { allowNotification, notifications,  // Unread count
+// // //         unreadCount,     // Mark as read
+// // //         handleMarkAsRead,
+// // //         handleMarkAllAsRead} = useContext(NotificationContext);
+
+// // //   const [profileData, setProfileData] = useState(null);
+// // //   const [showNotifications, setShowNotifications] = useState(false);
+
+// // //   const { theme } = useContext(ThemeContext);
+
+// // //   const isDark = theme === "Dark Mode";
+
+// // //   // ==========================================
+// // //   // FETCH ADMIN SETTINGS
+// // //   // ==========================================
+
+// // //   const fetchSettings = async () => {
+// // //     try {
+// // //       const res = await getAdminSettings();
+
+// // //       setProfileData(res.data.data);
+// // //     } catch (error) {
+// // //       console.error("Admin settings error:", error);
+// // //     }
+// // //   };
+
+// // //     useEffect(() => {
+// // //     fetchSettings();
+// // //   }, []);
+
+// // //   return (
+// // //      <header
+// // //       className={`
+// // //         px-6 py-4
+// // //         flex
+// // //         items-center
+// // //         justify-between
+// // //         border-b
+
+// // //         ${isDark ? "bg-gray-900 border-gray-700" : "bg-white border-gray-200"}
+// // //       `}
+// // //     >
+// // //       {/* ==========================================
+// // //           LEFT
+// // //       ========================================== */}
+
+// // //       <div>
+// // //         <h1
+// // //           className={`
+// // //             text-2xl
+// // //             font-bold
+
+// // //             ${isDark ? "text-white" : "text-gray-900"}
+// // //           `}
+// // //         >
+// // //           Products
+// // //         </h1>
+
+// // //         <p
+// // //           className={`
+// // //             text-sm
+
+// // //             ${isDark ? "text-gray-400" : "text-gray-500"}
+// // //           `}
+// // //         >
+// // //           Manage inventory and product listings
+// // //         </p>
+// // //       </div>
+
+// // //       {/* ==========================================
+// // //           RIGHT
+// // //       ========================================== */}
+
+// // //       <div className="flex items-center gap-4">
+// // //         {/* ==========================================
+// // //             NOTIFICATIONS
+// // //         ========================================== */}
+
+// // //         {allowNotification  &&  notifications.map((notification) => (
+// // //           <div className="relative">
+// // //              onClick={() => handleMarkAsRead(notification._id)}
+
+// // //             <button
+// // //               type="button"
+// // //               onClick={() => setShowNotifications((prev) => !prev)}
+// // //               className={`
+// // //                 relative
+// // //                 w-11
+// // //                 h-11
+// // //                 rounded-full
+// // //                 flex
+// // //                 items-center
+// // //                 justify-center
+// // //                 transition-all
+// // //                 duration-300
+
+// // //                 ${
+// // //                   isDark
+// // //                     ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white hover:scale-105"
+// // //                     : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black hover:scale-105"
+// // //                 }
+// // //               `}
+// // //               aria-label={`Notifications${
+// // //                 unreadCount > 0 ? `, ${unreadCount} unread` : ""
+// // //               }`}
+// // //             >
+// // //               <FiBell className="text-[21px]" />
+
+// // //               {/* Unread Badge */}
+
+// // //               {unreadCount > 0 && (
+// // //                 <span
+// // //                   className="
+// // //                     absolute
+// // //                     -top-1
+// // //                     -right-1
+// // //                     min-w-[19px]
+// // //                     h-[19px]
+// // //                     px-1
+// // //                     rounded-full
+// // //                     bg-red-500
+// // //                     text-white
+// // //                     text-[10px]
+// // //                     font-bold
+// // //                     flex
+// // //                     items-center
+// // //                     justify-center
+// // //                     border-2
+// // //                     border-white
+// // //                     leading-none
+// // //                   "
+// // //                 >
+// // //                   {unreadCount > 99 ? "99+" : unreadCount}
+// // //                 </span>
+// // //               )}
+// // //             </button>
+
+// // //             {/* ==========================================
+// // //                 NOTIFICATION DROPDOWN
+// // //             ========================================== */}
+
+// // //             {showNotifications && (
+// // //               <div
+// // //               onClick={() => handleMarkAsRead(notification._id)}
+// // //                 className={`
+// // //                   absolute
+// // //                   right-0
+// // //                   top-14
+// // //                   w-80
+// // //                   rounded-xl
+// // //                   border
+// // //                   shadow-xl
+// // //                   z-50
+// // //                   overflow-hidden
+
+// // //                   ${
+// // //                     isDark
+// // //                       ? "bg-gray-900 border-gray-700"
+// // //                       : "bg-white border-gray-200"
+// // //                   }
+// // //                 `}
+// // //               >
+// // //                 {/* Dropdown Header */}
+
+// // //                 <div
+// // //                   className={`
+// // //     px-4
+// // //     py-3
+// // //     border-b
+// // //     flex
+// // //     items-center
+// // //     justify-between
+
+// // //     ${isDark ? "border-gray-700" : "border-gray-200"}
+// // //   `}
+// // //                 >
+// // //                   {/* Header Title */}
+// // //                   <h3
+// // //                     className={`
+// // //       font-semibold
+
+// // //       ${isDark ? "text-white" : "text-gray-900"}
+// // //     `}
+// // //                   >
+// // //                     Notifications
+// // //                   </h3>
+
+// // //                   {/* View All Button */}
+// // //                   <button
+// // //                     type="button"
+// // //                     onClick={() => {
+// // //                       setShowNotifications(false);
+// // //                       navigate("/admin/notifications");
+// // //                     }}
+// // //                     className={`
+// // //       text-xs
+// // //       font-medium
+// // //       hover:underline
+
+// // //       ${isDark ? "text-gray-300" : "text-gray-600"}
+// // //     `}
+// // //                   >
+// // //                     View all
+// // //                   </button>
+// // //                 </div>
+
+// // //                 {/* Notification List */}
+
+// // //                 <div className="max-h-96 overflow-y-auto">
+// // //                   {notifications.length === 0 ? (
+// // //                     <div
+// // //                       className={`
+// // //                         px-4
+// // //                         py-8
+// // //                         text-center
+// // //                         text-sm
+
+// // //                         ${isDark ? "text-gray-400" : "text-gray-500"}
+// // //                       `}
+// // //                     >
+// // //                       No notifications
+// // //                     </div>
+// // //                   ) : (
+// // //                     notifications.map((notification) => (
+// // //                       <div
+// // //                         key={notification._id}
+// // //                         className={`
+// // //                           px-4
+// // //                           py-3
+// // //                           border-b
+// // //                           cursor-pointer
+// // //                           transition
+
+// // //                           ${
+// // //                             isDark
+// // //                               ? "border-gray-700 hover:bg-gray-800"
+// // //                               : "border-gray-100 hover:bg-gray-50"
+// // //                           }
+
+// // //                           ${
+// // //                             !notification.isRead
+// // //                               ? isDark
+// // //                                 ? "bg-gray-800/50"
+// // //                                 : "bg-gray-50"
+// // //                               : ""
+// // //                           }
+// // //                         `}
+// // //                       >
+// // //                         {/* Title */}
+
+// // //                         <p
+// // //                           className={`
+// // //                             text-sm
+// // //                             font-semibold
+
+// // //                             ${isDark ? "text-white" : "text-gray-900"}
+// // //                           `}
+// // //                         >
+// // //                           {notification.title}
+// // //                         </p>
+
+// // //                         {/* Message */}
+
+// // //                         <p
+// // //                           className={`
+// // //                             mt-1
+// // //                             text-xs
+
+// // //                             ${isDark ? "text-gray-400" : "text-gray-500"}
+// // //                           `}
+// // //                         >
+// // //                           {notification.message}
+// // //                         </p>
+// // //                       </div>
+// // //                     ))
+// // //                   )}
+// // //                 </div>
+// // //               </div>
+// // //             )}
+// // //           </div>
+// // //         )
+// // //         )}
+
+// // //         {/* ==========================================
+// // //             PROFILE
+// // //         ========================================== */}
+
+// // //         <div
+// // //           className={`
+// // //             flex
+// // //             items-center
+// // //             gap-3
+// // //             rounded-xl
+// // //             px-3
+// // //             py-2
+// // //             cursor-pointer
+// // //             border
+// // //             transition
+
+// // //             ${
+// // //               isDark
+// // //                 ? "border-gray-600 hover:bg-gray-800"
+// // //                 : "border-gray-200 hover:bg-gray-50"
+// // //             }
+// // //           `}
+// // //         >
+// // //           {/* Profile Initial */}
+
+// // //           <div
+// // //             className="
+// // //               w-9
+// // //               h-9
+// // //               bg-black
+// // //               text-white
+// // //               rounded-full
+// // //               flex
+// // //               items-center
+// // //               justify-center
+// // //               font-semibold
+// // //             "
+// // //           >
+// // //             {profileData?.name?.charAt(0).toUpperCase()}
+// // //           </div>
+
+// // //           {/* Profile Information */}
+
+// // //           <div className="hidden md:block">
+// // //             <p
+// // //               className={`
+// // //                 text-sm
+// // //                 font-medium
+
+// // //                 ${isDark ? "text-white" : "text-gray-800"}
+// // //               `}
+// // //             >
+// // //               {profileData?.name}
+// // //             </p>
+
+// // //             <p
+// // //               className={`
+// // //                 text-xs
+
+// // //                 ${isDark ? "text-gray-400" : "text-gray-500"}
+// // //               `}
+// // //             >
+// // //               Administrator
+// // //             </p>
+// // //           </div>
+// // //         </div>
+// // //       </div>
+// // //     </header>
+// // //   );
+// // // };
+
+// // // export default Header;
+
 // // import React, { useState, useEffect, useContext } from "react";
 // // import { FiBell } from "react-icons/fi";
 
@@ -8,21 +374,26 @@
 
 // // const Header = () => {
 // //   const navigate = useNavigate();
-// //   const { allowNotification, notifications,  // Unread count
-// //         unreadCount,     // Mark as read
-// //         handleMarkAsRead,
-// //         handleMarkAllAsRead} = useContext(NotificationContext);
 
-// //   const [profileData, setProfileData] = useState(null);
-// //   const [showNotifications, setShowNotifications] = useState(false);
+// //   // =====================================================
+// //   // CONTEXT
+// //   // =====================================================
+
+// //   const { allowNotification, unreadCount } = useContext(NotificationContext);
 
 // //   const { theme } = useContext(ThemeContext);
 
 // //   const isDark = theme === "Dark Mode";
 
-// //   // ==========================================
+// //   // =====================================================
+// //   // STATE
+// //   // =====================================================
+
+// //   const [profileData, setProfileData] = useState(null);
+
+// //   // =====================================================
 // //   // FETCH ADMIN SETTINGS
-// //   // ==========================================
+// //   // =====================================================
 
 // //   const fetchSettings = async () => {
 // //     try {
@@ -34,324 +405,189 @@
 // //     }
 // //   };
 
-// //     useEffect(() => {
+// //   useEffect(() => {
 // //     fetchSettings();
 // //   }, []);
 
+// //   // =====================================================
+// //   // HANDLE NOTIFICATION CLICK
+// //   // =====================================================
+
+// //   const handleNotificationClick = () => {
+// //     navigate("/admin/notifications");
+// //   };
+
+// //   // =====================================================
+// //   // RENDER
+// //   // =====================================================
+
 // //   return (
-// //      <header
+// //     <header
 // //       className={`
-// //         px-6 py-4
-// //         flex
-// //         items-center
-// //         justify-between
-// //         border-b
-
-// //         ${isDark ? "bg-gray-900 border-gray-700" : "bg-white border-gray-200"}
-// //       `}
-// //     >
-// //       {/* ==========================================
-// //           LEFT
-// //       ========================================== */}
-
-// //       <div>
-// //         <h1
-// //           className={`
-// //             text-2xl
-// //             font-bold
-
-// //             ${isDark ? "text-white" : "text-gray-900"}
-// //           `}
-// //         >
-// //           Products
-// //         </h1>
-
-// //         <p
-// //           className={`
-// //             text-sm
-
-// //             ${isDark ? "text-gray-400" : "text-gray-500"}
-// //           `}
-// //         >
-// //           Manage inventory and product listings
-// //         </p>
-// //       </div>
-
-// //       {/* ==========================================
-// //           RIGHT
-// //       ========================================== */}
-
-// //       <div className="flex items-center gap-4">
-// //         {/* ==========================================
-// //             NOTIFICATIONS
-// //         ========================================== */}
-
-// //         {allowNotification  &&  notifications.map((notification) => (
-// //           <div className="relative">
-// //              onClick={() => handleMarkAsRead(notification._id)}
-
-// //             <button
-// //               type="button"
-// //               onClick={() => setShowNotifications((prev) => !prev)}
-// //               className={`
-// //                 relative
-// //                 w-11
-// //                 h-11
-// //                 rounded-full
-// //                 flex
-// //                 items-center
-// //                 justify-center
-// //                 transition-all
-// //                 duration-300
-
-// //                 ${
-// //                   isDark
-// //                     ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white hover:scale-105"
-// //                     : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black hover:scale-105"
-// //                 }
-// //               `}
-// //               aria-label={`Notifications${
-// //                 unreadCount > 0 ? `, ${unreadCount} unread` : ""
-// //               }`}
-// //             >
-// //               <FiBell className="text-[21px]" />
-
-// //               {/* Unread Badge */}
-
-// //               {unreadCount > 0 && (
-// //                 <span
-// //                   className="
-// //                     absolute
-// //                     -top-1
-// //                     -right-1
-// //                     min-w-[19px]
-// //                     h-[19px]
-// //                     px-1
-// //                     rounded-full
-// //                     bg-red-500
-// //                     text-white
-// //                     text-[10px]
-// //                     font-bold
-// //                     flex
-// //                     items-center
-// //                     justify-center
-// //                     border-2
-// //                     border-white
-// //                     leading-none
-// //                   "
-// //                 >
-// //                   {unreadCount > 99 ? "99+" : unreadCount}
-// //                 </span>
-// //               )}
-// //             </button>
-
-// //             {/* ==========================================
-// //                 NOTIFICATION DROPDOWN
-// //             ========================================== */}
-
-// //             {showNotifications && (
-// //               <div
-// //               onClick={() => handleMarkAsRead(notification._id)}
-// //                 className={`
-// //                   absolute
-// //                   right-0
-// //                   top-14
-// //                   w-80
-// //                   rounded-xl
-// //                   border
-// //                   shadow-xl
-// //                   z-50
-// //                   overflow-hidden
-
-// //                   ${
-// //                     isDark
-// //                       ? "bg-gray-900 border-gray-700"
-// //                       : "bg-white border-gray-200"
-// //                   }
-// //                 `}
-// //               >
-// //                 {/* Dropdown Header */}
-
-// //                 <div
-// //                   className={`
-// //     px-4
-// //     py-3
-// //     border-b
+// //     sticky
+// //     top-0
+// //     z-40
 // //     flex
 // //     items-center
 // //     justify-between
+// //     border-b
+// //     px-3
+// //     py-3
+// //     sm:px-4
+// //     sm:py-4
+// //     lg:px-6
+// //     backdrop-blur-md
+// //     transition-colors
+// //     duration-300
 
-// //     ${isDark ? "border-gray-700" : "border-gray-200"}
+// //     ${isDark ? "border-gray-800 bg-gray-900/95" : "border-gray-200 bg-white/95"}
 // //   `}
-// //                 >
-// //                   {/* Header Title */}
-// //                   <h3
-// //                     className={`
-// //       font-semibold
+// //     >
+// //       {/* =====================================================
+// //       LEFT SIDE
+// //   ===================================================== */}
 
-// //       ${isDark ? "text-white" : "text-gray-900"}
-// //     `}
-// //                   >
-// //                     Notifications
-// //                   </h3>
+// //       <div className="min-w-0 flex-1">
+// //         {/* Your page title can stay here */}
+// //       </div>
 
-// //                   {/* View All Button */}
-// //                   <button
-// //                     type="button"
-// //                     onClick={() => {
-// //                       setShowNotifications(false);
-// //                       navigate("/admin/notifications");
-// //                     }}
-// //                     className={`
-// //       text-xs
-// //       font-medium
-// //       hover:underline
+// //       {/* =====================================================
+// //       RIGHT SIDE
+// //   ===================================================== */}
 
-// //       ${isDark ? "text-gray-300" : "text-gray-600"}
-// //     `}
-// //                   >
-// //                     View all
-// //                   </button>
-// //                 </div>
+// //       <div className="flex shrink-0 items-center gap-2 sm:gap-4">
+// //         {/* =====================================================
+// //         NOTIFICATION
+// //     ===================================================== */}
 
-// //                 {/* Notification List */}
+// //         {allowNotification && (
+// //           <button
+// //             type="button"
+// //             onClick={handleNotificationClick}
+// //             className={`
+// //           relative
+// //           flex
+// //           h-10
+// //           w-10
+// //           shrink-0
+// //           items-center
+// //           justify-center
+// //           rounded-full
+// //           transition-all
+// //           duration-200
+// //           sm:h-11
+// //           sm:w-11
 
-// //                 <div className="max-h-96 overflow-y-auto">
-// //                   {notifications.length === 0 ? (
-// //                     <div
-// //                       className={`
-// //                         px-4
-// //                         py-8
-// //                         text-center
-// //                         text-sm
+// //           ${
+// //             isDark
+// //               ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white"
+// //               : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black"
+// //           }
+// //         `}
+// //             aria-label={`Notifications${
+// //               unreadCount > 0 ? `, ${unreadCount} unread` : ""
+// //             }`}
+// //           >
+// //             <FiBell className="text-[19px] sm:text-[21px]" />
 
-// //                         ${isDark ? "text-gray-400" : "text-gray-500"}
-// //                       `}
-// //                     >
-// //                       No notifications
-// //                     </div>
-// //                   ) : (
-// //                     notifications.map((notification) => (
-// //                       <div
-// //                         key={notification._id}
-// //                         className={`
-// //                           px-4
-// //                           py-3
-// //                           border-b
-// //                           cursor-pointer
-// //                           transition
-
-// //                           ${
-// //                             isDark
-// //                               ? "border-gray-700 hover:bg-gray-800"
-// //                               : "border-gray-100 hover:bg-gray-50"
-// //                           }
-
-// //                           ${
-// //                             !notification.isRead
-// //                               ? isDark
-// //                                 ? "bg-gray-800/50"
-// //                                 : "bg-gray-50"
-// //                               : ""
-// //                           }
-// //                         `}
-// //                       >
-// //                         {/* Title */}
-
-// //                         <p
-// //                           className={`
-// //                             text-sm
-// //                             font-semibold
-
-// //                             ${isDark ? "text-white" : "text-gray-900"}
-// //                           `}
-// //                         >
-// //                           {notification.title}
-// //                         </p>
-
-// //                         {/* Message */}
-
-// //                         <p
-// //                           className={`
-// //                             mt-1
-// //                             text-xs
-
-// //                             ${isDark ? "text-gray-400" : "text-gray-500"}
-// //                           `}
-// //                         >
-// //                           {notification.message}
-// //                         </p>
-// //                       </div>
-// //                     ))
-// //                   )}
-// //                 </div>
-// //               </div>
+// //             {unreadCount > 0 && (
+// //               <span
+// //                 className="
+// //               absolute
+// //               -right-1
+// //               -top-1
+// //               flex
+// //               h-[18px]
+// //               min-w-[18px]
+// //               items-center
+// //               justify-center
+// //               rounded-full
+// //               border-2
+// //               border-white
+// //               bg-red-500
+// //               px-1
+// //               text-[9px]
+// //               font-bold
+// //               leading-none
+// //               text-white
+// //               sm:h-[19px]
+// //               sm:min-w-[19px]
+// //               sm:text-[10px]
+// //             "
+// //               >
+// //                 {unreadCount > 99 ? "99+" : unreadCount}
+// //               </span>
 // //             )}
-// //           </div>
-// //         )
+// //           </button>
 // //         )}
 
-// //         {/* ==========================================
-// //             PROFILE
-// //         ========================================== */}
+// //         {/* =====================================================
+// //         PROFILE
+// //     ===================================================== */}
 
 // //         <div
 // //           className={`
-// //             flex
-// //             items-center
-// //             gap-3
-// //             rounded-xl
-// //             px-3
-// //             py-2
-// //             cursor-pointer
-// //             border
-// //             transition
+// //         flex
+// //         shrink-0
+// //         cursor-pointer
+// //         items-center
+// //         gap-2
+// //         rounded-xl
+// //         border
+// //         px-2
+// //         py-1.5
+// //         transition
+// //         sm:gap-3
+// //         sm:px-3
+// //         sm:py-2
 
-// //             ${
-// //               isDark
-// //                 ? "border-gray-600 hover:bg-gray-800"
-// //                 : "border-gray-200 hover:bg-gray-50"
-// //             }
-// //           `}
+// //         ${
+// //           isDark
+// //             ? "border-gray-700 hover:bg-gray-800"
+// //             : "border-gray-200 hover:bg-gray-50"
+// //         }
+// //       `}
 // //         >
-// //           {/* Profile Initial */}
+// //           {/* PROFILE INITIAL */}
 
 // //           <div
 // //             className="
-// //               w-9
-// //               h-9
-// //               bg-black
-// //               text-white
-// //               rounded-full
-// //               flex
-// //               items-center
-// //               justify-center
-// //               font-semibold
-// //             "
+// //           flex
+// //           h-8
+// //           w-8
+// //           shrink-0
+// //           items-center
+// //           justify-center
+// //           rounded-full
+// //           bg-black
+// //           text-sm
+// //           font-semibold
+// //           text-white
+// //           sm:h-9
+// //           sm:w-9
+// //         "
 // //           >
 // //             {profileData?.name?.charAt(0).toUpperCase()}
 // //           </div>
 
-// //           {/* Profile Information */}
+// //           {/* PROFILE INFORMATION */}
 
 // //           <div className="hidden md:block">
 // //             <p
 // //               className={`
-// //                 text-sm
-// //                 font-medium
-
-// //                 ${isDark ? "text-white" : "text-gray-800"}
-// //               `}
+// //             text-sm
+// //             font-medium
+// //             ${isDark ? "text-white" : "text-gray-800"}
+// //           `}
 // //             >
 // //               {profileData?.name}
 // //             </p>
 
 // //             <p
 // //               className={`
-// //                 text-xs
-
-// //                 ${isDark ? "text-gray-400" : "text-gray-500"}
-// //               `}
+// //             text-xs
+// //             ${isDark ? "text-gray-400" : "text-gray-500"}
+// //           `}
 // //             >
 // //               Administrator
 // //             </p>
@@ -365,155 +601,107 @@
 // // export default Header;
 
 // import React, { useState, useEffect, useContext } from "react";
-// import { FiBell } from "react-icons/fi";
+// import { FiBell, FiChevronDown, FiUser, FiSettings } from "react-icons/fi";
+// import { useNavigate } from "react-router-dom";
 
 // import { ThemeContext } from "../../context/ThemeContext";
 // import { getAdminSettings } from "../../api/user/SettingsApi";
 // import { NotificationContext } from "../../context/NotificationContext";
-// import { useNavigate } from "react-router-dom";
 
 // const Header = () => {
 //   const navigate = useNavigate();
 
-//   // =====================================================
-//   // CONTEXT
-//   // =====================================================
-
-//   const { allowNotification, unreadCount } = useContext(NotificationContext);
+//   const { allowNotification, unreadCount } =
+//     useContext(NotificationContext);
 
 //   const { theme } = useContext(ThemeContext);
-
 //   const isDark = theme === "Dark Mode";
 
-//   // =====================================================
-//   // STATE
-//   // =====================================================
-
 //   const [profileData, setProfileData] = useState(null);
-
-//   // =====================================================
-//   // FETCH ADMIN SETTINGS
-//   // =====================================================
-
-//   const fetchSettings = async () => {
-//     try {
-//       const res = await getAdminSettings();
-
-//       setProfileData(res.data.data);
-//     } catch (error) {
-//       console.error("Admin settings error:", error);
-//     }
-//   };
+//   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
 //   useEffect(() => {
+//     let mounted = true;
+
+//     const fetchSettings = async () => {
+//       try {
+//         const res = await getAdminSettings();
+
+//         if (mounted) {
+//           setProfileData(res?.data?.data ?? null);
+//         }
+//       } catch (error) {
+//         console.error("Admin settings error:", error);
+//       }
+//     };
+
 //     fetchSettings();
+
+//     return () => {
+//       mounted = false;
+//     };
 //   }, []);
 
-//   // =====================================================
-//   // HANDLE NOTIFICATION CLICK
-//   // =====================================================
+//   const name = profileData?.name || "Admin";
+//   const initial = name.charAt(0).toUpperCase();
 
-//   const handleNotificationClick = () => {
-//     navigate("/admin/notifications");
-//   };
-
-//   // =====================================================
-//   // RENDER
-//   // =====================================================
+//   const containerStyle = isDark
+//     ? "bg-gray-900/95 border-gray-800 text-gray-100"
+//     : "bg-white/95 border-gray-200 text-gray-800";
 
 //   return (
 //     <header
 //       className={`
-//     sticky
-//     top-0
-//     z-40
-//     flex
-//     items-center
-//     justify-between
-//     border-b
-//     px-3
-//     py-3
-//     sm:px-4
-//     sm:py-4
-//     lg:px-6
-//     backdrop-blur-md
-//     transition-colors
-//     duration-300
-
-//     ${isDark ? "border-gray-800 bg-gray-900/95" : "border-gray-200 bg-white/95"}
-//   `}
+//         sticky top-0 z-40
+//         flex h-[60px] items-center justify-between
+//         border-b px-4 sm:px-5 lg:px-6
+//         backdrop-blur-md
+//         transition-colors duration-200
+//         ${containerStyle}
+//       `}
 //     >
-//       {/* =====================================================
-//       LEFT SIDE
-//   ===================================================== */}
-
-//       <div className="min-w-0 flex-1">
-//         {/* Your page title can stay here */}
+//       {/* LEFT SIDE */}
+//       <div className="min-w-0">
+//         <p
+//           className={`text-sm font-semibold tracking-tight ${
+//             isDark ? "text-gray-100" : "text-gray-800"
+//           }`}
+//         >
+//           Admin Workspace
+//         </p>
 //       </div>
 
-//       {/* =====================================================
-//       RIGHT SIDE
-//   ===================================================== */}
-
-//       <div className="flex shrink-0 items-center gap-2 sm:gap-4">
-//         {/* =====================================================
-//         NOTIFICATION
-//     ===================================================== */}
-
+//       {/* RIGHT SIDE */}
+//       <div className="flex items-center gap-2.5 sm:gap-3">
+//         {/* NOTIFICATIONS */}
 //         {allowNotification && (
 //           <button
 //             type="button"
-//             onClick={handleNotificationClick}
-//             className={`
-//           relative
-//           flex
-//           h-10
-//           w-10
-//           shrink-0
-//           items-center
-//           justify-center
-//           rounded-full
-//           transition-all
-//           duration-200
-//           sm:h-11
-//           sm:w-11
-
-//           ${
-//             isDark
-//               ? "bg-gray-800 text-gray-200 hover:bg-gray-700 hover:text-white"
-//               : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-black"
-//           }
-//         `}
+//             onClick={() => navigate("/admin/notifications")}
 //             aria-label={`Notifications${
 //               unreadCount > 0 ? `, ${unreadCount} unread` : ""
 //             }`}
+//             className={`
+//               relative flex h-9 w-9 items-center justify-center
+//               rounded-lg border transition-colors
+//               ${
+//                 isDark
+//                   ? "border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
+//                   : "border-gray-200 text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+//               }
+//             `}
 //           >
-//             <FiBell className="text-[19px] sm:text-[21px]" />
+//             <FiBell className="h-[17px] w-[17px]" />
 
 //             {unreadCount > 0 && (
 //               <span
 //                 className="
-//               absolute
-//               -right-1
-//               -top-1
-//               flex
-//               h-[18px]
-//               min-w-[18px]
-//               items-center
-//               justify-center
-//               rounded-full
-//               border-2
-//               border-white
-//               bg-red-500
-//               px-1
-//               text-[9px]
-//               font-bold
-//               leading-none
-//               text-white
-//               sm:h-[19px]
-//               sm:min-w-[19px]
-//               sm:text-[10px]
-//             "
+//                   absolute -right-1 -top-1
+//                   flex h-[17px] min-w-[17px] items-center
+//                   justify-center rounded-full border-2
+//                   border-white bg-red-500 px-1
+//                   text-[9px] font-semibold leading-none text-white
+//                 "
 //               >
 //                 {unreadCount > 99 ? "99+" : unreadCount}
 //               </span>
@@ -521,77 +709,143 @@
 //           </button>
 //         )}
 
-//         {/* =====================================================
-//         PROFILE
-//     ===================================================== */}
-
+//         {/* DIVIDER */}
 //         <div
-//           className={`
-//         flex
-//         shrink-0
-//         cursor-pointer
-//         items-center
-//         gap-2
-//         rounded-xl
-//         border
-//         px-2
-//         py-1.5
-//         transition
-//         sm:gap-3
-//         sm:px-3
-//         sm:py-2
+//           className={`hidden h-7 w-px sm:block ${
+//             isDark ? "bg-gray-700" : "bg-gray-200"
+//           }`}
+//         />
 
-//         ${
-//           isDark
-//             ? "border-gray-700 hover:bg-gray-800"
-//             : "border-gray-200 hover:bg-gray-50"
-//         }
-//       `}
-//         >
-//           {/* PROFILE INITIAL */}
-
-//           <div
-//             className="
-//           flex
-//           h-8
-//           w-8
-//           shrink-0
-//           items-center
-//           justify-center
-//           rounded-full
-//           bg-black
-//           text-sm
-//           font-semibold
-//           text-white
-//           sm:h-9
-//           sm:w-9
-//         "
+//         {/* PROFILE */}
+//         <div className="relative">
+//           <button
+//             type="button"
+//             onClick={() => setProfileMenuOpen((prev) => !prev)}
+//             aria-expanded={profileMenuOpen}
+//             aria-label="Open administrator menu"
+//             className={`
+//               flex items-center gap-2 rounded-lg
+//               border px-2 py-1.5 transition-colors
+//               ${
+//                 isDark
+//                   ? "border-gray-700 hover:bg-gray-800"
+//                   : "border-gray-200 hover:bg-gray-50"
+//               }
+//             `}
 //           >
-//             {profileData?.name?.charAt(0).toUpperCase()}
-//           </div>
-
-//           {/* PROFILE INFORMATION */}
-
-//           <div className="hidden md:block">
-//             <p
+//             <span
 //               className={`
-//             text-sm
-//             font-medium
-//             ${isDark ? "text-white" : "text-gray-800"}
-//           `}
+//                 flex h-8 w-8 shrink-0 items-center justify-center
+//                 rounded-full text-xs font-semibold
+//                 ${
+//                   isDark
+//                     ? "bg-blue-500/15 text-blue-300"
+//                     : "bg-blue-50 text-blue-700"
+//                 }
+//               `}
 //             >
-//               {profileData?.name}
-//             </p>
+//               {initial}
+//             </span>
 
-//             <p
-//               className={`
-//             text-xs
-//             ${isDark ? "text-gray-400" : "text-gray-500"}
-//           `}
-//             >
-//               Administrator
-//             </p>
-//           </div>
+//             <span className="hidden text-left sm:block">
+//               <span className="block max-w-[120px] truncate text-xs font-semibold">
+//                 {name}
+//               </span>
+//               <span
+//                 className={`mt-0.5 block text-[10px] ${
+//                   isDark ? "text-gray-400" : "text-gray-500"
+//                 }`}
+//               >
+//                 Administrator
+//               </span>
+//             </span>
+
+//             <FiChevronDown
+//               className={`hidden h-3.5 w-3.5 sm:block ${
+//                 isDark ? "text-gray-400" : "text-gray-500"
+//               }`}
+//             />
+//           </button>
+
+//           {/* PROFILE MENU */}
+//           {profileMenuOpen && (
+//             <>
+//               <button
+//                 type="button"
+//                 aria-label="Close profile menu"
+//                 className="fixed inset-0 z-40 cursor-default"
+//                 onClick={() => setProfileMenuOpen(false)}
+//               />
+
+//               <div
+//                 className={`
+//                   absolute right-0 top-full z-50 mt-2 w-44
+//                   overflow-hidden rounded-lg border p-1
+//                   shadow-xl
+//                   ${
+//                     isDark
+//                       ? "border-gray-700 bg-gray-900"
+//                       : "border-gray-200 bg-white"
+//                   }
+//                 `}
+//               >
+//                 <div
+//                   className={`border-b px-3 py-2 ${
+//                     isDark ? "border-gray-800" : "border-gray-100"
+//                   }`}
+//                 >
+//                   <p className="truncate text-xs font-semibold">{name}</p>
+//                   <p
+//                     className={`mt-1 truncate text-[10px] ${
+//                       isDark ? "text-gray-400" : "text-gray-500"
+//                     }`}
+//                   >
+//                     {profileData?.email || "Administrator"}
+//                   </p>
+//                 </div>
+
+//                 <button
+//                   type="button"
+//                   onClick={() => {
+//                     setProfileMenuOpen(false);
+//                     navigate("/admin/settings");
+//                   }}
+//                   className={`
+//                     flex w-full items-center gap-2 rounded-md
+//                     px-3 py-2 text-xs transition-colors
+//                     ${
+//                       isDark
+//                         ? "text-gray-300 hover:bg-gray-800"
+//                         : "text-gray-700 hover:bg-gray-100"
+//                     }
+//                   `}
+//                 >
+//                   <FiSettings className="h-3.5 w-3.5" />
+//                   Settings
+//                 </button>
+
+//                 <button
+//                   type="button"
+//                   onClick={() => {
+//                     setProfileMenuOpen(false);
+//                     navigate("/admin/settings");
+//                   }}
+//                   className={`
+//                     flex w-full items-center gap-2 rounded-md
+//                     px-3 py-2 text-xs transition-colors
+//                     ${
+//                       isDark
+//                         ? "text-gray-300 hover:bg-gray-800"
+//                         : "text-gray-700 hover:bg-gray-100"
+//                     }
+//                   `}
+//                 >
+//                   <FiUser className="h-3.5 w-3.5" />
+//                   My Profile
+//                 </button>
+//               </div>
+//             </>
+//           )}
 //         </div>
 //       </div>
 //     </header>
@@ -601,14 +855,21 @@
 // export default Header;
 
 import React, { useState, useEffect, useContext } from "react";
-import { FiBell, FiChevronDown, FiUser, FiSettings } from "react-icons/fi";
+import {
+  FiBell,
+  FiChevronDown,
+  FiUser,
+  FiSettings,
+  FiMenu,
+  FiX,
+} from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
 import { ThemeContext } from "../../context/ThemeContext";
 import { getAdminSettings } from "../../api/user/SettingsApi";
 import { NotificationContext } from "../../context/NotificationContext";
 
-const Header = () => {
+const Header = ({ sidebarOpen = false, setSidebarOpen }) => {
   const navigate = useNavigate();
 
   const { allowNotification, unreadCount } =
@@ -620,6 +881,7 @@ const Header = () => {
   const [profileData, setProfileData] = useState(null);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
+  // Fetch administrator settings
   useEffect(() => {
     let mounted = true;
 
@@ -645,34 +907,94 @@ const Header = () => {
   const name = profileData?.name || "Admin";
   const initial = name.charAt(0).toUpperCase();
 
-  const containerStyle = isDark
-    ? "bg-gray-900/95 border-gray-800 text-gray-100"
-    : "bg-white/95 border-gray-200 text-gray-800";
+  const handleSidebarToggle = () => {
+    if (setSidebarOpen) {
+      setSidebarOpen((prev) => !prev);
+    }
+  };
+
+  const handleNavigate = (path) => {
+    setProfileMenuOpen(false);
+    navigate(path);
+  };
+
+  const headerTheme = isDark
+    ? "border-gray-800 bg-gray-900/95 text-gray-100"
+    : "border-gray-200 bg-white/95 text-gray-800";
+
+  const iconButtonTheme = isDark
+    ? "border-gray-700 bg-gray-900 text-gray-300 hover:border-gray-600 hover:bg-gray-800 hover:text-white focus-visible:ring-offset-gray-900"
+    : "border-gray-200 bg-white text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-900 focus-visible:ring-offset-white";
 
   return (
     <header
       className={`
         sticky top-0 z-40
         flex h-[60px] items-center justify-between
-        border-b px-4 sm:px-5 lg:px-6
+        gap-3 border-b px-3 sm:px-5 lg:px-6
         backdrop-blur-md
         transition-colors duration-200
-        ${containerStyle}
+        ${headerTheme}
       `}
     >
       {/* LEFT SIDE */}
-      <div className="min-w-0">
-        <p
-          className={`text-sm font-semibold tracking-tight ${
-            isDark ? "text-gray-100" : "text-gray-800"
-          }`}
+      <div className="flex min-w-0 flex-1 items-center gap-3">
+        {/* HAMBURGER BUTTON */}
+        <button
+          type="button"
+          onClick={handleSidebarToggle}
+          aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
+          aria-expanded={sidebarOpen}
+          className={`
+            group relative flex h-9 w-9 shrink-0
+            items-center justify-center rounded-lg border
+            transition-all duration-200 ease-out
+            hover:shadow-sm
+            active:scale-95
+            focus:outline-none focus-visible:ring-2
+            focus-visible:ring-blue-500 focus-visible:ring-offset-2
+            ${iconButtonTheme}
+          `}
         >
-          Admin Workspace
-        </p>
+          <span
+            className={`
+              flex items-center justify-center
+              transition-transform duration-200
+              ${sidebarOpen ? "rotate-0" : "group-hover:scale-105"}
+            `}
+          >
+            {sidebarOpen ? (
+              <FiX className="h-[18px] w-[18px]" />
+            ) : (
+              <FiMenu className="h-[18px] w-[18px]" />
+            )}
+          </span>
+        </button>
+
+        {/* WORKSPACE TITLE */}
+        <div className="min-w-0">
+          <p
+            className={`
+              truncate text-sm font-semibold tracking-tight
+              ${isDark ? "text-gray-100" : "text-gray-800"}
+            `}
+          >
+            Admin Workspace
+          </p>
+
+          <p
+            className={`
+              hidden text-[10px] sm:block
+              ${isDark ? "text-gray-500" : "text-gray-400"}
+            `}
+          >
+            Manage your store
+          </p>
+        </div>
       </div>
 
       {/* RIGHT SIDE */}
-      <div className="flex items-center gap-2.5 sm:gap-3">
+      <div className="flex shrink-0 items-center gap-2 sm:gap-3">
         {/* NOTIFICATIONS */}
         {allowNotification && (
           <button
@@ -682,13 +1004,13 @@ const Header = () => {
               unreadCount > 0 ? `, ${unreadCount} unread` : ""
             }`}
             className={`
-              relative flex h-9 w-9 items-center justify-center
-              rounded-lg border transition-colors
-              ${
-                isDark
-                  ? "border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
-                  : "border-gray-200 text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-              }
+              relative flex h-9 w-9 shrink-0
+              items-center justify-center rounded-lg border
+              transition-all duration-200
+              hover:shadow-sm active:scale-95
+              focus:outline-none focus-visible:ring-2
+              focus-visible:ring-blue-500
+              ${iconButtonTheme}
             `}
           >
             <FiBell className="h-[17px] w-[17px]" />
@@ -697,9 +1019,10 @@ const Header = () => {
               <span
                 className="
                   absolute -right-1 -top-1
-                  flex h-[17px] min-w-[17px] items-center
-                  justify-center rounded-full border-2
-                  border-white bg-red-500 px-1
+                  flex h-[17px] min-w-[17px]
+                  items-center justify-center
+                  rounded-full border-2 border-white
+                  bg-red-500 px-1
                   text-[9px] font-semibold leading-none text-white
                 "
               >
@@ -711,32 +1034,39 @@ const Header = () => {
 
         {/* DIVIDER */}
         <div
-          className={`hidden h-7 w-px sm:block ${
-            isDark ? "bg-gray-700" : "bg-gray-200"
-          }`}
+          className={`
+            hidden h-7 w-px sm:block
+            ${isDark ? "bg-gray-700" : "bg-gray-200"}
+          `}
         />
 
-        {/* PROFILE */}
+        {/* PROFILE DROPDOWN */}
         <div className="relative">
           <button
             type="button"
             onClick={() => setProfileMenuOpen((prev) => !prev)}
             aria-expanded={profileMenuOpen}
+            aria-haspopup="menu"
             aria-label="Open administrator menu"
             className={`
               flex items-center gap-2 rounded-lg
-              border px-2 py-1.5 transition-colors
+              border px-2 py-1.5
+              transition-all duration-200
+              focus:outline-none focus-visible:ring-2
+              focus-visible:ring-blue-500
               ${
                 isDark
-                  ? "border-gray-700 hover:bg-gray-800"
-                  : "border-gray-200 hover:bg-gray-50"
+                  ? "border-gray-700 hover:border-gray-600 hover:bg-gray-800"
+                  : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
               }
             `}
           >
+            {/* AVATAR */}
             <span
               className={`
-                flex h-8 w-8 shrink-0 items-center justify-center
-                rounded-full text-xs font-semibold
+                flex h-8 w-8 shrink-0 items-center
+                justify-center rounded-full
+                text-xs font-semibold
                 ${
                   isDark
                     ? "bg-blue-500/15 text-blue-300"
@@ -747,27 +1077,32 @@ const Header = () => {
               {initial}
             </span>
 
+            {/* PROFILE DETAILS */}
             <span className="hidden text-left sm:block">
               <span className="block max-w-[120px] truncate text-xs font-semibold">
                 {name}
               </span>
+
               <span
-                className={`mt-0.5 block text-[10px] ${
-                  isDark ? "text-gray-400" : "text-gray-500"
-                }`}
+                className={`
+                  mt-0.5 block text-[10px]
+                  ${isDark ? "text-gray-400" : "text-gray-500"}
+                `}
               >
                 Administrator
               </span>
             </span>
 
             <FiChevronDown
-              className={`hidden h-3.5 w-3.5 sm:block ${
-                isDark ? "text-gray-400" : "text-gray-500"
-              }`}
+              className={`
+                hidden h-3.5 w-3.5 transition-transform duration-200 sm:block
+                ${profileMenuOpen ? "rotate-180" : ""}
+                ${isDark ? "text-gray-400" : "text-gray-500"}
+              `}
             />
           </button>
 
-          {/* PROFILE MENU */}
+          {/* CLICK-OUTSIDE OVERLAY */}
           {profileMenuOpen && (
             <>
               <button
@@ -777,11 +1112,13 @@ const Header = () => {
                 onClick={() => setProfileMenuOpen(false)}
               />
 
+              {/* MENU */}
               <div
+                role="menu"
                 className={`
-                  absolute right-0 top-full z-50 mt-2 w-44
-                  overflow-hidden rounded-lg border p-1
-                  shadow-xl
+                  absolute right-0 top-full z-50 mt-2
+                  w-52 overflow-hidden rounded-xl
+                  border p-1 shadow-xl
                   ${
                     isDark
                       ? "border-gray-700 bg-gray-900"
@@ -789,58 +1126,64 @@ const Header = () => {
                   }
                 `}
               >
+                {/* PROFILE SUMMARY */}
                 <div
-                  className={`border-b px-3 py-2 ${
-                    isDark ? "border-gray-800" : "border-gray-100"
-                  }`}
+                  className={`
+                    border-b px-3 py-3
+                    ${isDark ? "border-gray-800" : "border-gray-100"}
+                  `}
                 >
-                  <p className="truncate text-xs font-semibold">{name}</p>
+                  <p className="truncate text-xs font-semibold">
+                    {name}
+                  </p>
+
                   <p
-                    className={`mt-1 truncate text-[10px] ${
-                      isDark ? "text-gray-400" : "text-gray-500"
-                    }`}
+                    className={`
+                      mt-1 truncate text-[10px]
+                      ${isDark ? "text-gray-400" : "text-gray-500"}
+                    `}
                   >
                     {profileData?.email || "Administrator"}
                   </p>
                 </div>
 
+                {/* SETTINGS */}
                 <button
                   type="button"
-                  onClick={() => {
-                    setProfileMenuOpen(false);
-                    navigate("/admin/settings");
-                  }}
+                  role="menuitem"
+                  onClick={() => handleNavigate("/admin/settings")}
                   className={`
-                    flex w-full items-center gap-2 rounded-md
-                    px-3 py-2 text-xs transition-colors
+                    flex w-full items-center gap-2.5
+                    rounded-lg px-3 py-2.5 text-xs
+                    transition-colors
                     ${
                       isDark
-                        ? "text-gray-300 hover:bg-gray-800"
-                        : "text-gray-700 hover:bg-gray-100"
+                        ? "text-gray-300 hover:bg-gray-800 hover:text-white"
+                        : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                     }
                   `}
                 >
-                  <FiSettings className="h-3.5 w-3.5" />
+                  <FiSettings className="h-4 w-4" />
                   Settings
                 </button>
 
+                {/* MY PROFILE */}
                 <button
                   type="button"
-                  onClick={() => {
-                    setProfileMenuOpen(false);
-                    navigate("/admin/settings");
-                  }}
+                  role="menuitem"
+                  onClick={() => handleNavigate("/admin/settings")}
                   className={`
-                    flex w-full items-center gap-2 rounded-md
-                    px-3 py-2 text-xs transition-colors
+                    flex w-full items-center gap-2.5
+                    rounded-lg px-3 py-2.5 text-xs
+                    transition-colors
                     ${
                       isDark
-                        ? "text-gray-300 hover:bg-gray-800"
-                        : "text-gray-700 hover:bg-gray-100"
+                        ? "text-gray-300 hover:bg-gray-800 hover:text-white"
+                        : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                     }
                   `}
                 >
-                  <FiUser className="h-3.5 w-3.5" />
+                  <FiUser className="h-4 w-4" />
                   My Profile
                 </button>
               </div>
