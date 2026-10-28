@@ -806,18 +806,17 @@ const DescriptionPage = () => {
               <h1
                 className={`
         text-sm
-        sm:text-base
-        md:text-lg
-        lg:text-lg
-        xl:text-xl
-        font-semibold
+          sm:text-base
+          md:text-lg
+          lg:text-base
+          font-semibold
         leading-tight
         break-words
         ${isDark ? "text-white" : "text-gray-900"}
       `}
               >
                 {product.name}
-              </h1>
+              </h1>                                                                                                                                                                                                 
 
               {/* PRICE */}
               <div className="flex items-center flex-wrap gap-2 mt-3 sm:mt-4">
