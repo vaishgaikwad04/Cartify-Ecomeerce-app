@@ -1737,6 +1737,7 @@ import {
   FiMenu,
   FiUser,
 } from "react-icons/fi";
+import { FiMenu, FiX, FiMinus } from "react-icons/fi";
 
 import { useHeader } from "../../hooks/user/useHeader";
 
@@ -1778,10 +1779,8 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     handleProductClick,
   } = useHeader();
 
-  // ============================================================
-  // NAVIGATION MENU
-  // ============================================================
 
+  // NAVIGATION MENU
   const menus = [
     {
       title: "Home",
@@ -1956,7 +1955,8 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             {/* =================================================
                 MOBILE HAMBURGER — LEFT SIDE
             ================================================= */}
-         {/* MOBILE HAMBURGER — LEFT SIDE */}
+          
+{/* MOBILE HAMBURGER — LEFT SIDE */}
 <button
   type="button"
   onClick={() => {
@@ -1981,16 +1981,21 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     }
   `}
 >
-  <span
-    className={`
-      inline-block text-[26px] font-light leading-none
-      transition-transform duration-200
-      ${isMobileMenuOpen ? "rotate-180" : "group-hover:scale-110"}
-    `}
-  >
-    {isMobileMenuOpen ? "−" : "+"}
+  
+{isMobileMenuOpen ? (
+  <span className="text-[25px] font-light leading-none animate-[spin_0.3s_ease-out]">
+    ×
   </span>
+) : (
+  <span className="flex flex-col gap-[5px] transition-transform duration-200 group-hover:scale-105">
+    <span className="h-[1.5px] w-[20px] rounded-full bg-current" />
+    <span className="h-[1.5px] w-[20px] rounded-full bg-current" />
+    <span className="h-[1.5px] w-[20px] rounded-full bg-current" />
+  </span>
+)}
+
 </button>
+
 
             {/* =================================================
                 DESKTOP NAVIGATION
@@ -3431,4 +3436,4 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
   );
 };
 
-export default Header;
+export default Header;                                                       
