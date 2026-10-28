@@ -1,4 +1,3 @@
-
 import React from "react";
 
 import Card from "../../../components/ui/Card";
@@ -47,36 +46,27 @@ const Category = () => {
       {/* =====================================================
           FILTER BUTTON
       ===================================================== */}
+
       <button
         type="button"
         onClick={() => setShowFilter(!showFilter)}
         className={`
-          flex
-          items-center
-          gap-1.5
-
-          mb-5
-          sm:mb-6
-
-          text-xs
-          sm:text-sm
-          font-medium
-
-          transition-colors
-          duration-200
-
-          ${
-            isDark
-              ? "text-gray-300 hover:text-white"
-              : "text-gray-700 hover:text-black"
-          }
-        `}
+    flex items-center gap-1.5
+    mb-3 sm:mb-5
+    text-xs sm:text-sm
+    font-medium
+    transition-colors duration-200
+    ${
+      isDark
+        ? "text-gray-300 hover:text-white"
+        : "text-gray-700 hover:text-black"
+    }
+  `}
       >
-        <CiFilter className="text-lg sm:text-xl" />
+        <CiFilter className="text-base sm:text-xl shrink-0" />
 
-        {showFilter ? "Hide Filter" : "Show Filter"}
+        <span>{showFilter ? "Hide Filter" : "Show Filter"}</span>
       </button>
-
       {/* =====================================================
           FILTER + PRODUCTS
       ===================================================== */}
@@ -230,14 +220,11 @@ const Category = () => {
               {totalPages > 1 && (
                 <div className="flex items-center justify-center mt-10 pb-8 sm:mt-12 sm:pb-10">
                   <div className="flex items-center gap-1.5 sm:gap-2">
-
                     {/* PREVIOUS */}
                     <button
                       type="button"
                       onClick={() =>
-                        setCurrentPage((prev) =>
-                          Math.max(prev - 1, 1)
-                        )
+                        setCurrentPage((prev) => Math.max(prev - 1, 1))
                       }
                       disabled={currentPage === 1}
                       aria-label="Previous page"
@@ -276,7 +263,7 @@ const Category = () => {
                     <div className="hidden sm:flex items-center gap-1.5">
                       {Array.from(
                         { length: totalPages },
-                        (_, index) => index + 1
+                        (_, index) => index + 1,
                       ).map((page) => (
                         <button
                           key={page}
@@ -326,9 +313,7 @@ const Category = () => {
                     <button
                       type="button"
                       onClick={() =>
-                        setCurrentPage((prev) =>
-                          Math.min(prev + 1, totalPages)
-                        )
+                        setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                       }
                       disabled={currentPage === totalPages}
                       aria-label="Next page"

@@ -100,19 +100,34 @@
 
 // export default Checkbox;
 
+
 import React from "react";
 
 const Checkbox = ({ label, checked, onChange }) => {
   return (
-    <label className="flex w-full min-w-0 items-center gap-2 cursor-pointer">
+    <label className="flex w-full min-w-0 items-center gap-2 sm:gap-2.5 cursor-pointer">
       <input
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange?.(e.target.checked)}
-        className="h-3.5 w-3.5 shrink-0 accent-black"
+        className="
+          h-3.5 w-3.5
+          sm:h-4 sm:w-4
+          shrink-0
+          accent-black
+          cursor-pointer
+        "
       />
 
-      <span className="min-w-0 whitespace-normal break-words text-xs leading-5">
+      <span
+        className="
+          min-w-0
+          whitespace-normal
+          break-words
+          text-[11px] sm:text-sm
+          leading-4 sm:leading-5
+        "
+      >
         {label}
       </span>
     </label>

@@ -1736,9 +1736,8 @@ import {
   FiBell,
   FiMenu,
   FiUser,
-  FiMinus
+  FiMinus,
 } from "react-icons/fi";
-
 
 import { useHeader } from "../../hooks/user/useHeader";
 
@@ -1779,7 +1778,6 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     closeSearch,
     handleProductClick,
   } = useHeader();
-
 
   // NAVIGATION MENU
   const menus = [
@@ -1956,20 +1954,20 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             {/* =================================================
                 MOBILE HAMBURGER — LEFT SIDE
             ================================================= */}
-          
-{/* MOBILE HAMBURGER — LEFT SIDE */}
-<button
-  type="button"
-  onClick={() => {
-    if (isMobileMenuOpen) {
-      closeMobileMenu();
-    } else {
-      setIsMobileMenuOpen(true);
-    }
-  }}
-  aria-label={isMobileMenuOpen ? "Close menu" : " "}
-  aria-expanded={isMobileMenuOpen}
-  className={`
+
+            {/* MOBILE HAMBURGER — LEFT SIDE */}
+            <button
+              type="button"
+              onClick={() => {
+                if (isMobileMenuOpen) {
+                  closeMobileMenu();
+                } else {
+                  setIsMobileMenuOpen(true);
+                }
+              }}
+              aria-label={isMobileMenuOpen ? "Close menu" : " "}
+              aria-expanded={isMobileMenuOpen}
+              className={`
     lg:hidden shrink-0
     group flex h-10 w-10 items-center justify-center
     rounded-xl border
@@ -1981,22 +1979,19 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
         : "border-gray-200 bg-white text-gray-800 hover:bg-gray-50"
     }
   `}
->
-  
-{isMobileMenuOpen ? (
-  <span className="text-[25px] font-light leading-none animate-[spin_0.3s_ease-out]">
-    ×
-  </span>
-) : (
-  <span className="flex flex-col gap-[5px] transition-transform duration-200 group-hover:scale-105">
-    <span className="h-[1.5px] w-[20px] rounded-full bg-current" />
-    <span className="h-[1.5px] w-[20px] rounded-full bg-current" />
-    <span className="h-[1.5px] w-[20px] rounded-full bg-current" />
-  </span>
-)}
-
-</button>
-
+            >
+              {isMobileMenuOpen ? (
+                <span className="text-[25px] font-light leading-none animate-[spin_0.3s_ease-out]">
+                  ×
+                </span>
+              ) : (
+                <span className="flex flex-col gap-[5px] transition-transform duration-200 group-hover:scale-105">
+                  <span className="h-[1.5px] w-[20px] rounded-full bg-current" />
+                  <span className="h-[1.5px] w-[20px] rounded-full bg-current" />
+                  <span className="h-[1.5px] w-[20px] rounded-full bg-current" />
+                </span>
+              )}
+            </button>
 
             {/* =================================================
                 DESKTOP NAVIGATION
@@ -3437,4 +3432,4 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
   );
 };
 
-export default Header;                                                       
+export default Header;
