@@ -766,7 +766,9 @@ const DescriptionPage = () => {
         {/* =====================================================
             PRODUCT SECTION
         ===================================================== */}
-<div className="pt-6 pb-3 sm:pt-8 sm:pb-4 lg:pt-10 lg:pb-4">          <div
+        <div className="pt-6 pb-3 sm:pt-8 sm:pb-4 lg:pt-10 lg:pb-4">
+          {" "}
+          <div
             className="
     grid
     grid-cols-1
@@ -783,19 +785,18 @@ const DescriptionPage = () => {
   "
           >
             {/* PRODUCT IMAGE */}
-      
-{/* <div className="w-full min-w-0 max-w-[500px] mx-auto">
+
+            {/* <div className="w-full min-w-0 max-w-[500px] mx-auto">
   <div className="w-full aspect-[4/5] lg:aspect-[5/4] overflow-hidden">
     <ImagePreview Images={product?.images || []} />
   </div>
 </div> */}
-<div className="w-full min-w-0 max-w-[500px] mx-auto">
-  <ImagePreview Images={product?.images || []} />
-</div>
-
+            <div className="w-full min-w-0 max-w-[500px] mx-auto">
+              <ImagePreview Images={product?.images || []} />
+            </div>
 
             {/* PRODUCT DETAILS */}
-            <div className="w-full min-w-0 max-w-[460px] lg:sticky lg:top-20 lg:h-fit">
+            <div className="w-full min-w-0 max-w-[460px] lg:sticky lg:top-20 lg:h-fit mt-4">
               {/* BREADCRUMB */}
               <p className="text-[9px] sm:text-[10px] md:text-xs lg:text-[11px] text-gray-400 mb-2 sm:mb-3 break-words">
                 Home / {product.category} / {product.name}
@@ -1015,65 +1016,61 @@ const DescriptionPage = () => {
           </div>
         </div>
 
-       
         {/* PRODUCT TABS */}
-    <div
-  className={`
+        <div
+          className={`
     rounded-xl
     sm:rounded-2xl
     border border-gray-100 mt-2
     ${isDark ? "bg-gray-900 border-gray-800" : "bg-gray-50 border-gray-100"}
   `}
->
- <Tabs
-    tabs={[
-      {
-        id: "description",
-        label: "Description",
-        content: (
-          <p className="whitespace-pre-line">
-            {product.description || "No description available."}
-          </p>
-        ),
-      },
-      {
-        id: "details",
-        label: "Details",
-        content: product.details ? (
-          <ul className="list-disc pl-5 space-y-2">
-            {product.details
-              .split(".")
-              .filter((item) => item.trim())
-              .map((item, index) => (
-                <li key={index}>{item.trim()}</li>
-              ))}
-          </ul>
-        ) : (
-          <p>No details available.</p>
-        ),
-      },
-      {
-        id: "careFit",
-        label: "Care & Fit",
-        content: product.careFit ? (
-          <ul className="list-disc pl-5 space-y-2">
-            {product.careFit
-              .split(".")
-              .filter((item) => item.trim())
-              .map((item, index) => (
-                <li key={index}>{item.trim()}</li>
-              ))}
-          </ul>
-        ) : (
-          <p>No care instructions available.</p>
-        ),
-      },
-    ]}
-  />
-</div>
-
-
-
+        >
+          <Tabs
+            tabs={[
+              {
+                id: "description",
+                label: "Description",
+                content: (
+                  <p className="whitespace-pre-line">
+                    {product.description || "No description available."}
+                  </p>
+                ),
+              },
+              {
+                id: "details",
+                label: "Details",
+                content: product.details ? (
+                  <ul className="list-disc pl-5 space-y-2">
+                    {product.details
+                      .split(".")
+                      .filter((item) => item.trim())
+                      .map((item, index) => (
+                        <li key={index}>{item.trim()}</li>
+                      ))}
+                  </ul>
+                ) : (
+                  <p>No details available.</p>
+                ),
+              },
+              {
+                id: "careFit",
+                label: "Care & Fit",
+                content: product.careFit ? (
+                  <ul className="list-disc pl-5 space-y-2">
+                    {product.careFit
+                      .split(".")
+                      .filter((item) => item.trim())
+                      .map((item, index) => (
+                        <li key={index}>{item.trim()}</li>
+                      ))}
+                  </ul>
+                ) : (
+                  <p>No care instructions available.</p>
+                ),
+              },
+            ]}
+          />
+        </div>
 
         {/* =====================================================
             RECOMMENDED PRODUCTS
