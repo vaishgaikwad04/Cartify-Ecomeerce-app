@@ -1729,15 +1729,7 @@ import React, { useContext } from "react";
 // Icons
 import { FaChevronDown } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
-import {
-  FiSearch,
-  FiPackage,
-  FiX,
-  FiBell,
-  FiMenu,
-  FiUser,
-  FiMinus,
-} from "react-icons/fi";
+import { FiSearch, FiPackage, FiX, FiBell, FiUser } from "react-icons/fi";
 
 import { useHeader } from "../../hooks/user/useHeader";
 
@@ -1956,6 +1948,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             ================================================= */}
 
             {/* MOBILE HAMBURGER — LEFT SIDE */}
+
             <button
               type="button"
               onClick={() => {
@@ -1965,19 +1958,14 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   setIsMobileMenuOpen(true);
                 }
               }}
-              aria-label={isMobileMenuOpen ? "Close menu" : " "}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileMenuOpen}
               className={`
     lg:hidden shrink-0
     group flex h-10 w-10 items-center justify-center
-    rounded-xl 
     transition-all duration-200
     active:scale-95
-    ${
-      isDark
-        ? "border-gray-800 bg-gray-900 text-gray-200 hover:bg-gray-800"
-        : "border-gray-200 bg-white text-gray-800 hover:bg-gray-50"
-    }
+    ${isDark ? "text-gray-200" : "text-gray-800"}
   `}
             >
               {isMobileMenuOpen ? (
@@ -1986,6 +1974,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 </span>
               ) : (
                 <span className="flex flex-col gap-[5px] transition-transform duration-200 group-hover:scale-105">
+                  <span className="h-[1.5px] w-[20px] rounded-full bg-current" />
+                  <span className="h-[1.5px] w-[20px] rounded-full bg-current" />
+                  <span className="h-[1.5px] w-[20px] rounded-full bg-current" />
                 </span>
               )}
             </button>

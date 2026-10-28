@@ -38,8 +38,8 @@ const HeroSection = () => {
   absolute
   inset-x-0
   bottom-24
-  sm:bottom-48
-  md:bottom-28
+  sm:bottom-56
+  md:bottom-34
   lg:bottom-5
   2v z-10
   flex
