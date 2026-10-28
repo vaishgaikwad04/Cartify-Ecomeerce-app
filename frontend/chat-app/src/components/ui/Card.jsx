@@ -131,11 +131,11 @@ const Card = ({
         {/* Brand */}
         <p
           className={`
-            text-[7px]
-            sm:text-[8px]
-            md:text-[9px]
-            lg:text-[10px]
-            xl:text-[11px]
+            text-[10px]
+            sm:text-[11px]
+            md:text-[12px]
+            lg:text-[13px]
+            xl:text-[14px]
 
             leading-tight
             truncate
@@ -171,11 +171,11 @@ const Card = ({
           {/* Original price */}
           <del
             className={`
-              text-[7px]
-              sm:text-[8px]
-              md:text-[9px]
-              lg:text-[10px]
-              xl:text-[11px]
+              text-[9px]
+              sm:text-[10px]
+              md:text-[11px]
+              lg:text-[12px]
+              xl:text-[13px]
 
               ${
                 isDark
@@ -190,9 +190,9 @@ const Card = ({
           {/* Discount price */}
           <span
             className={`
-              text-[8px]
-              sm:text-[9px]
-              md:text-[10px]
+              text-[9px]
+              sm:text-[10px]
+              md:text-[11px]
               lg:text-xs
               xl:text-sm
 

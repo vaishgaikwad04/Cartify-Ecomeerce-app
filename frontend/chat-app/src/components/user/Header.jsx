@@ -1970,7 +1970,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               className={`
     lg:hidden shrink-0
     group flex h-10 w-10 items-center justify-center
-    rounded-xl border
+    rounded-xl 
     transition-all duration-200
     active:scale-95
     ${
@@ -1986,9 +1986,6 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 </span>
               ) : (
                 <span className="flex flex-col gap-[5px] transition-transform duration-200 group-hover:scale-105">
-                  <span className="h-[1.5px] w-[20px] rounded-full bg-current" />
-                  <span className="h-[1.5px] w-[20px] rounded-full bg-current" />
-                  <span className="h-[1.5px] w-[20px] rounded-full bg-current" />
                 </span>
               )}
             </button>

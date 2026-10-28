@@ -66,7 +66,7 @@ const Filter = ({ title, options = [] }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="w-full min-w-0 mb-2 sm:mb-3">
+    <div className="w-full min-w-0 mb-2  mb-4">
       {/* FILTER TITLE */}
       <button
         type="button"
