@@ -1736,8 +1736,9 @@ import {
   FiBell,
   FiMenu,
   FiUser,
+  FiMinus
 } from "react-icons/fi";
-import { FiMenu, FiX, FiMinus } from "react-icons/fi";
+
 
 import { useHeader } from "../../hooks/user/useHeader";
 
@@ -1966,7 +1967,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       setIsMobileMenuOpen(true);
     }
   }}
-  aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+  aria-label={isMobileMenuOpen ? "Close menu" : " "}
   aria-expanded={isMobileMenuOpen}
   className={`
     lg:hidden shrink-0
