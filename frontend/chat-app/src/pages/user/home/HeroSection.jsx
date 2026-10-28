@@ -37,7 +37,7 @@ const HeroSection = () => {
               className="
   absolute
   inset-x-0
-  bottom-12
+  bottom-16
   sm:bottom-48
   md:bottom-28
   lg:bottom-5
