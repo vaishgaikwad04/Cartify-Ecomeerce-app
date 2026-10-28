@@ -784,10 +784,13 @@ const DescriptionPage = () => {
           >
             {/* PRODUCT IMAGE */}
       
-<div className="w-full min-w-0 max-w-[500px] mx-auto">
+{/* <div className="w-full min-w-0 max-w-[500px] mx-auto">
   <div className="w-full aspect-[4/5] lg:aspect-[5/4] overflow-hidden">
     <ImagePreview Images={product?.images || []} />
   </div>
+</div> */}
+<div className="w-full min-w-0 max-w-[500px] mx-auto">
+  <ImagePreview Images={product?.images || []} />
 </div>
 
 
