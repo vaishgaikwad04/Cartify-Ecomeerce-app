@@ -1956,29 +1956,41 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             {/* =================================================
                 MOBILE HAMBURGER — LEFT SIDE
             ================================================= */}
-            <button
-              type="button"
-              onClick={() => setIsMobileMenuOpen(true)}
-              aria-label="Open menu"
-              aria-expanded={isMobileMenuOpen}
-              className={`
-                lg:hidden shrink-0 group
-                flex h-10 w-10 items-center justify-center
-                rounded-xl border
-                transition-all duration-200
-                active:scale-95
-                ${
-                  isDark
-                    ? "border-gray-800 bg-gray-900 text-gray-200 hover:border-gray-700 hover:bg-gray-800"
-                    : "border-gray-200 bg-white text-gray-800 hover:border-gray-300 hover:bg-gray-50"
-                }
-              `}
-            >
-              <FiMenu
-                className="text-[21px] transition-transform duration-200 group-hover:scale-110"
-                strokeWidth={1.8}
-              />
-            </button>
+         {/* MOBILE HAMBURGER — LEFT SIDE */}
+<button
+  type="button"
+  onClick={() => {
+    if (isMobileMenuOpen) {
+      closeMobileMenu();
+    } else {
+      setIsMobileMenuOpen(true);
+    }
+  }}
+  aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+  aria-expanded={isMobileMenuOpen}
+  className={`
+    lg:hidden shrink-0
+    group flex h-10 w-10 items-center justify-center
+    rounded-xl border
+    transition-all duration-200
+    active:scale-95
+    ${
+      isDark
+        ? "border-gray-800 bg-gray-900 text-gray-200 hover:bg-gray-800"
+        : "border-gray-200 bg-white text-gray-800 hover:bg-gray-50"
+    }
+  `}
+>
+  <span
+    className={`
+      inline-block text-[26px] font-light leading-none
+      transition-transform duration-200
+      ${isMobileMenuOpen ? "rotate-180" : "group-hover:scale-110"}
+    `}
+  >
+    {isMobileMenuOpen ? "−" : "+"}
+  </span>
+</button>
 
             {/* =================================================
                 DESKTOP NAVIGATION
