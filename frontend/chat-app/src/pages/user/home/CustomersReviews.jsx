@@ -232,9 +232,9 @@ const HomeReviews = () => {
                     {/* Review description */}
                     <p
                       className={`
-                        text-2xl font-medium
+                        text-xl font-medium
                         tracking-tight leading-relaxed
-                        sm:text-3xl lg:text-4xl
+                        sm:text-2xl lg:text-3xl
                         transition-colors duration-300
                         ${headingText}
                       `}
