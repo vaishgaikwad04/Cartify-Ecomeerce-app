@@ -14,10 +14,7 @@ import { useWishlist } from "../../../hooks/user/useWishList";
 const images = [
   "https://shopjonesandco.com/cdn/shop/files/jones-_-co-glossy-bar-barrette-gold-hair-clip-x7y2z1_50b3496a-3d37-4857-814f-41a9e0038d40.jpg?v=1781663253&width=3000",
   "https://mafoil.wpbingosite.com/wp-content/uploads/2022/12/banner-24.jpg",
-  "https://shopjonesandco.com/cdn/shop/files/jones-_-co-glossy-bar-barrette-gold-hair-clip-x7y2z1_50b3496a-3d37-4857-814f-41a9e0038d40.jpg?v=1781663253&width=3000",
-  "https://mafoil.wpbingosite.com/wp-content/uploads/2022/12/banner-24.jpg",
-  "https://shopjonesandco.com/cdn/shop/files/jones-_-co-glossy-bar-barrette-gold-hair-clip-x7y2z1_50b3496a-3d37-4857-814f-41a9e0038d40.jpg?v=1781663253&width=3000",
-  "https://mafoil.wpbingosite.com/wp-content/uploads/2022/12/banner-24.jpg",
+ 
 ];
 
 const FashionPromo = () => {

@@ -4,6 +4,7 @@ import Sale from "./Sale";
 import FashionPromo from "./FashionPromo";
 import HeroSection from "./HeroSection";
 import SubFooter from "./SubFooter";
+import CustomersReviews from "./CustomersReviews"
 
 const Home = () => {
   return (
@@ -12,7 +13,9 @@ const Home = () => {
         <HeroSection />
         <NewArrivals />
         <Sale />
+        <CustomersReviews/>
         <FashionPromo />
+        
         <SubFooter />
       </div>
     </>

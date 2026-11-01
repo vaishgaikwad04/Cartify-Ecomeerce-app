@@ -37,9 +37,121 @@ body,
 }
 
 
-/* Firefox */
+/* ================================
+   GLOBAL SCROLLBAR THEME
+================================ */
 
+/* Light Mode */
+:root {
+  --scrollbar-thumb: #e5e5f0;
+  --scrollbar-track: #f1f5f9;
+  --scrollbar-hover: #94a3b8;
+}
+
+/* Dark Mode */
+.dark {
+  --scrollbar-thumb: #4b5563;
+  --scrollbar-track: #1f2937;
+  --scrollbar-hover: #6b7280;
+}
+
+/* Firefox - Default scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #4b5563 #111827;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* Chrome, Edge, Safari - Default scrollbar */
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-hover);
+}
+
+/* ================================
+   HORIZONTAL SCROLLER
+   Hide scrollbar, keep scrolling
+================================ */
+
+.horizontal-scroller {
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+}
+
+.horizontal-scroller::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Review horizontal scrollbar */
+.review-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+}
+
+/* Dark mode scrollbar */
+.review-scrollbar-dark {
+  scrollbar-color: #555555 #1b1b1b;
+}
+
+.review-scrollbar-dark::-webkit-scrollbar {
+  height: 7px;
+}
+
+.review-scrollbar-dark::-webkit-scrollbar-track {
+  background: #1b1b1b;
+  border-radius: 10px;
+}
+
+.review-scrollbar-dark::-webkit-scrollbar-thumb {
+  background: #555555;
+  border-radius: 10px;
+}
+
+.review-scrollbar-dark::-webkit-scrollbar-thumb:hover {
+  background: #777777;
+}
+
+/* Light mode scrollbar */
+.review-scrollbar-light {
+  scrollbar-color: #c9c2ba #f1efec;
+}
+
+.review-scrollbar-light::-webkit-scrollbar {
+  height: 7px;
+}
+
+.review-scrollbar-light::-webkit-scrollbar-track {
+  background: #f1efec;
+  border-radius: 10px;
+}
+
+.review-scrollbar-light::-webkit-scrollbar-thumb {
+  background: #c9c2ba;
+  border-radius: 10px;
+}
+
+.review-scrollbar-light::-webkit-scrollbar-thumb:hover {
+  background: #a18a70;
 }

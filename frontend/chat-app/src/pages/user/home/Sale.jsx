@@ -190,17 +190,35 @@ lg:!left-[300px] lg:!top-[140px]
     "
           >
             {/* SECOND BANNER */}
-            <ImageCard
-              image="https://shopjonesandco.com/cdn/shop/files/jones-plus-co-rider-s-taupe-leather-bag_50f3d876-73b8-4b79-be64-0f742840c07c.png?v=1790204313&width=3000"
-              className="
-        h-[220px]
-        sm:h-[280px]
-        md:h-[320px]
-        lg:h-[300px]
-        xl:h-[360px]
-      "
-              onClick={() => navigate("/accessories")}
-            />
+          <div className="relative">
+  <ImageCard
+    image="https://shopjonesandco.com/cdn/shop/files/jones-plus-co-rider-s-taupe-leather-bag_50f3d876-73b8-4b79-be64-0f742840c07c.png?v=1790204313&width=3000"
+    className="
+      h-[220px]
+      sm:h-[280px]
+      md:h-[320px]
+      lg:h-[300px]
+      xl:h-[360px]
+    "
+    onClick={() => navigate("/accessories")}
+  />
+
+  {/* Offer badge */}
+  <div className="
+    absolute  top-1/2 z-10
+    -translate-y-1/2
+    bg-white text-black
+    px-4 py-3
+    sm:px-5 sm:py-4
+    shadow-md
+    pointer-events-none
+  ">
+    
+    <p className="text-2xl sm:text-3xl font-bold leading-tight">
+      40% OFF
+    </p>
+  </div>
+</div>
 
             {/* TEXT CARD */}
             <TextCard
