@@ -214,17 +214,50 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               <button
                 type="button"
                 onClick={() => navigate("/")}
+                aria-label="Cartify home"
                 className={`
-                  font-serif-sarif text-lg tracking-[3px] font-semibold
-                  uppercase whitespace-nowrap transition-colors
-                  ${
-                    isDark
-                      ? "text-gray-300 hover:text-white"
-                      : "text-gray-900 hover:text-black"
-                  }
-                `}
+    group flex items-center gap-2.5
+    whitespace-nowrap
+    transition-all duration-300
+    ${
+      isDark
+        ? "text-gray-100 hover:text-white"
+        : "text-gray-900 hover:text-black"
+    }
+  `}
               >
-                Cartify
+                {/* C monogram */}
+                <span
+                  className={`
+      flex items-center justify-center
+      w-8 h-8
+      border
+      rounded-sm
+      font-serif
+      text-xl
+      font-medium
+      transition-all duration-300
+      group-hover:rotate-[-6deg]
+      ${isDark ? "border-gray-500 text-white" : "border-gray-800 text-gray-900"}
+    `}
+                >
+                  C
+                </span>
+
+                {/* Brand name */}
+                <span
+                  className="
+      font-serif
+      text-[19px]
+      sm:text-[21px]
+      font-semibold
+      tracking-[2.5px]
+      uppercase
+      leading-none
+    "
+                >
+                  CARTIFY
+                </span>
               </button>
             </div>
 
@@ -932,7 +965,6 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   </span>
                 </button>
               )}
-
             </div>
           </div>
         </div>
