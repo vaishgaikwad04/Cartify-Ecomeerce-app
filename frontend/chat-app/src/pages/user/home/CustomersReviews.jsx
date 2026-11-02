@@ -268,9 +268,9 @@ const HomeReviews = () => {
                     max-w-[1100px]
                     text-[19px]
                     sm:text-[23px]
-                    md:text-[26px]
-                    lg:text-[29px]
-                    xl:text-[30px]
+                    md:text-[24px]
+                    lg:text-[25px]
+                    xl:text-[26px]
                     font-semibold
                     leading-[1.4]
                     tracking-[-0.5px]
