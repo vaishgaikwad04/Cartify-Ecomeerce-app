@@ -1,9 +1,8 @@
 
-
 import React, { useEffect, useRef, useState, useContext } from "react";
 import { fetchAllReviews } from "../../../api/user/ReviewApi";
 import { ThemeContext } from "../../../context/ThemeContext";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 const HomeReviews = () => {
   const { theme } = useContext(ThemeContext);
@@ -15,6 +14,7 @@ const HomeReviews = () => {
 
   const scrollRef = useRef(null);
 
+  // Fetch Reviews
   useEffect(() => {
     const getReviews = async () => {
       try {
@@ -41,6 +41,7 @@ const HomeReviews = () => {
     getReviews();
   }, []);
 
+  // Customer Details
   const getCustomer = (review) =>
     review.userId?.name ||
     review.user?.name ||
@@ -55,6 +56,7 @@ const HomeReviews = () => {
     review.reviewText ||
     "";
 
+  // Navigate Reviews
   const scrollReviews = (direction) => {
     if (!reviews.length || !scrollRef.current) return;
 
@@ -69,6 +71,7 @@ const HomeReviews = () => {
     });
   };
 
+  // Sync Active Index with Swipe
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
@@ -107,49 +110,48 @@ const HomeReviews = () => {
     ? "text-gray-300"
     : "text-[#444444]";
 
-  const mutedText = isDark
-    ? "text-gray-500"
-    : "text-[#888888]";
-
   const dividerColor = isDark
     ? "bg-[#48413a]"
     : "bg-[#ded3c6]";
 
-  const buttonStyle = isDark
-    ? "border-[#383838] bg-[#222222] text-gray-300 hover:border-[#a18a70] hover:bg-[#a18a70] hover:text-white"
-    : "border-[#e7e2dc] bg-white text-[#555555] hover:border-[#a18a70] hover:bg-[#a18a70] hover:text-white";
+  const arrowColor = isDark
+    ? "text-gray-400 hover:text-[#c2a88b]"
+    : "text-[#777777] hover:text-[#a18a70]";
 
   return (
     <section
-      className={`
+      className="
         w-full
         py-8 sm:py-10 lg:py-12
         transition-colors duration-300
-      `}
+      "
     >
       <div className="mx-auto w-full max-w-[1100px] px-4 sm:px-8">
 
         {/* Review Slider */}
         <div className="relative mx-auto max-w-[820px]">
 
-          {/* Previous Button */}
+          {/* Previous Arrow */}
           {reviews.length > 1 && (
             <button
               type="button"
               onClick={() => scrollReviews(-1)}
               aria-label="Previous review"
               className={`
-                absolute left-0 top-1/2 z-20
-                hidden sm:flex
-                h-8 w-8 lg:h-9 lg:w-9
-                -translate-x-1/2 -translate-y-1/2
+                absolute left-0 sm:-left-2 lg:-left-5
+                top-1/2 z-20
+                flex h-9 w-9 sm:h-10 sm:w-10
+                -translate-y-1/2
                 items-center justify-center
-                rounded-full border
                 transition-all duration-300
-                ${buttonStyle}
+                ${arrowColor}
               `}
             >
-              <FiChevronLeft size={18} />
+              <FiArrowLeft
+                size={27}
+                strokeWidth={1.3}
+                className="transition-transform duration-300 hover:-translate-x-1"
+              />
             </button>
           )}
 
@@ -174,20 +176,22 @@ const HomeReviews = () => {
                   key={review._id || review.id || index}
                   className="
                     w-full min-w-0 shrink-0 snap-start
-                    px-2 py-2
-                    sm:px-10 sm:py-3
+                    px-10 py-2
+                    sm:px-14 sm:py-3
                   "
                 >
                   <div
                     className={`
-                      flex min-h-[180px] sm:min-h-[190px] lg:min-h-[200px]
+                      flex min-h-[180px]
+                      sm:min-h-[190px]
+                      lg:min-h-[200px]
                       flex-col items-center justify-center
                       rounded-xl
-                      px-5 py-6
+                      px-4 py-6
                       sm:px-10 sm:py-7
                       text-center
                       transition-colors duration-300
-                     
+                      ${isDark ? "bg-[#191919]" : "bg-[#faf8f5]"}
                     `}
                   >
                     {/* Review Text */}
@@ -232,102 +236,31 @@ const HomeReviews = () => {
             })}
           </div>
 
-          {/* Next Button */}
+          {/* Next Arrow */}
           {reviews.length > 1 && (
             <button
               type="button"
               onClick={() => scrollReviews(1)}
               aria-label="Next review"
               className={`
-                absolute right-0 top-1/2 z-20
-                hidden sm:flex
-                h-8 w-8 lg:h-9 lg:w-9
-                translate-x-1/2 -translate-y-1/2
+                absolute right-0 sm:-right-2 lg:-right-5
+                top-1/2 z-20
+                flex h-9 w-9 sm:h-10 sm:w-10
+                -translate-y-1/2
                 items-center justify-center
-                rounded-full border
-                shadow-sm
                 transition-all duration-300
-                ${buttonStyle}
+                ${arrowColor}
               `}
             >
-              <FiChevronRight size={18} />
+              <FiArrowRight
+                size={27}
+                strokeWidth={1.3}
+                className="transition-transform duration-300 hover:translate-x-1"
+              />
             </button>
           )}
+
         </div>
-
-        {/* Mobile Navigation */}
-        {reviews.length > 1 && (
-          <div className="mt-4 flex items-center justify-center gap-4 sm:hidden">
-
-            <button
-              type="button"
-              onClick={() => scrollReviews(-1)}
-              aria-label="Previous review"
-              className={`
-                flex h-8 w-8 items-center justify-center
-                rounded-full border
-                transition-all duration-300
-                ${buttonStyle}
-              `}
-            >
-              <FiChevronLeft size={17} />
-            </button>
-
-            <span
-              className={`text-[11px] tracking-widest ${mutedText}`}
-            >
-              {String(activeIndex + 1).padStart(2, "0")}
-              <span className="mx-2">/</span>
-              {String(reviews.length).padStart(2, "0")}
-            </span>
-
-            <button
-              type="button"
-              onClick={() => scrollReviews(1)}
-              aria-label="Next review"
-              className={`
-                flex h-8 w-8 items-center justify-center
-                rounded-full border
-                transition-all duration-300
-                ${buttonStyle}
-              `}
-            >
-              <FiChevronRight size={17} />
-            </button>
-          </div>
-        )}
-
-        {/* Desktop Pagination */}
-        {reviews.length > 1 && (
-          <div className="mt-5 hidden items-center justify-center gap-2 sm:flex">
-            {reviews.map((review, index) => (
-              <button
-                key={review._id || review.id || index}
-                type="button"
-                onClick={() => {
-                  setActiveIndex(index);
-
-                  scrollRef.current?.scrollTo({
-                    left: index * scrollRef.current.clientWidth,
-                    behavior: "smooth",
-                  });
-                }}
-                aria-label={`Go to review ${index + 1}`}
-                className={`
-                  h-1 rounded-full
-                  transition-all duration-300
-                  ${
-                    activeIndex === index
-                      ? "w-7 bg-[#a18a70]"
-                      : isDark
-                        ? "w-2.5 bg-[#454545] hover:bg-[#a18a70]"
-                        : "w-2.5 bg-[#d9d2ca] hover:bg-[#a18a70]"
-                  }
-                `}
-              />
-            ))}
-          </div>
-        )}
       </div>
     </section>
   );
