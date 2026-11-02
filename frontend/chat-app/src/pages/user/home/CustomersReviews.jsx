@@ -1,17 +1,8 @@
-
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useContext,
-} from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 
 import { fetchAllReviews } from "../../../api/user/ReviewApi";
 import { ThemeContext } from "../../../context/ThemeContext";
-import {
-  FaArrowLeftLong,
-  FaArrowRightLong,
-} from "react-icons/fa6";
+import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 
 const HomeReviews = () => {
   const { theme } = useContext(ThemeContext);
@@ -74,8 +65,7 @@ const HomeReviews = () => {
     if (!container || reviews.length <= 1) return;
 
     const nextIndex =
-      (activeIndex + direction + reviews.length) %
-      reviews.length;
+      (activeIndex + direction + reviews.length) % reviews.length;
 
     setActiveIndex(nextIndex);
 
@@ -101,13 +91,9 @@ const HomeReviews = () => {
 
         if (!width) return;
 
-        const index = Math.round(
-          container.scrollLeft / width
-        );
+        const index = Math.round(container.scrollLeft / width);
 
-        setActiveIndex(
-          Math.min(index, reviews.length - 1)
-        );
+        setActiveIndex(Math.min(index, reviews.length - 1));
       }, 100);
     };
 
@@ -116,10 +102,7 @@ const HomeReviews = () => {
     });
 
     return () => {
-      container.removeEventListener(
-        "scroll",
-        handleScroll
-      );
+      container.removeEventListener("scroll", handleScroll);
 
       clearTimeout(timeout);
     };
@@ -152,11 +135,7 @@ const HomeReviews = () => {
       className={`
         w-full
         transition-colors duration-300
-        ${
-          isDark
-            ? "bg-[#171717] text-white"
-            : "bg-white text-[#292929]"
-        }
+        ${isDark ? "bg-[#171717] text-white" : "bg-white text-[#292929]"}
       `}
     >
       <div
@@ -174,17 +153,12 @@ const HomeReviews = () => {
           className={`
             w-full
             border-t
-            ${
-              isDark
-                ? "border-[#383838]"
-                : "border-[#e5e5e5]"
-            }
+            ${isDark ? "border-[#383838]" : "border-[#e5e5e5]"}
           `}
         />
 
         {/* Review Slider */}
         <div className="relative w-full">
-
           {/* Previous Arrow */}
           {reviews.length > 1 && (
             <button
@@ -267,20 +241,16 @@ const HomeReviews = () => {
                   className={`
                     max-w-[1100px]
                     text-[19px]
-                    sm:text-[23px]
-                    md:text-[24px]
-                    lg:text-[25px]
-                    xl:text-[26px]
+                    sm:text-[21px]
+                    md:text-[22px]
+                    lg:text-[23px]
+                    xl:text-[24px]
                     font-semibold
                     leading-[1.4]
                     tracking-[-0.5px]
                     transition-colors
                     duration-300
-                    ${
-                      isDark
-                        ? "text-[#f1f1f1]"
-                        : "text-[#292929]"
-                    }
+                    ${isDark ? "text-[#f1f1f1]" : "text-[#292929]"}
                   `}
                 >
                   “{getComment(review)}”
@@ -293,11 +263,7 @@ const HomeReviews = () => {
                     mb-4
                     h-px
                     w-7
-                    ${
-                      isDark
-                        ? "bg-[#766b60]"
-                        : "bg-[#d9c7b7]"
-                    }
+                    ${isDark ? "bg-[#766b60]" : "bg-[#d9c7b7]"}
                   `}
                 />
 
@@ -309,11 +275,7 @@ const HomeReviews = () => {
                     font-normal
                     uppercase
                     tracking-[0.02em]
-                    ${
-                      isDark
-                        ? "text-[#d0d0d0]"
-                        : "text-[#444444]"
-                    }
+                    ${isDark ? "text-[#d0d0d0]" : "text-[#444444]"}
                   `}
                 >
                   {getCustomer(review)}
@@ -365,11 +327,7 @@ const HomeReviews = () => {
           className={`
             w-full
             border-b
-            ${
-              isDark
-                ? "border-[#383838]"
-                : "border-[#e5e5e5]"
-            }
+            ${isDark ? "border-[#383838]" : "border-[#e5e5e5]"}
           `}
         />
       </div>

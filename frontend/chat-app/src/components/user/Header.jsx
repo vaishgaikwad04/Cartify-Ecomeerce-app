@@ -293,10 +293,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 DESKTOP NAVIGATION
             ================================================= */}
 
-           
-{/* DESKTOP NAVIGATION */}
-<nav
-  className={`
+            {/* DESKTOP NAVIGATION */}
+            <nav
+              className={`
     hidden lg:flex
     flex-1
     justify-center
@@ -308,38 +307,38 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     uppercase
     ${isDark ? "text-gray-300" : "text-neutral-700"}
   `}
->
-  {menus.slice(0, 5).map((menu) => (
-    <div
-      key={menu.title}
-      className="group relative flex items-center h-full"
-    >
-      <NavLink
-        to={menu.items[0]?.path || "/"}
-        className={`
+            >
+              {menus.slice(0, 5).map((menu) => (
+                <div
+                  key={menu.title}
+                  className="group relative flex items-center h-full"
+                >
+                  <NavLink
+                    to={menu.items[0]?.path || "/"}
+                    className={`
           relative flex items-center gap-1
           py-5 whitespace-nowrap
           transition-all duration-300
           ${navClass}
         `}
-      >
-        {menu.title}
-        <FaChevronDown className="text-[8px] opacity-60 group-hover:rotate-180 transition-transform" />
+                  >
+                    {menu.title}
+                    <FaChevronDown className="text-[8px] opacity-60 group-hover:rotate-180 transition-transform" />
 
-        <span
-          className={`
+                    <span
+                      className={`
             absolute bottom-2 left-0
             h-[1px] w-0
             group-hover:w-full
             transition-all duration-300
             ${isDark ? "bg-white" : "bg-black"}
           `}
-        />
-      </NavLink>
+                    />
+                  </NavLink>
 
-      {/* MULTI-COLUMN MEGA MENU */}
-      <div
-        className="
+                  {/* MULTI-COLUMN MEGA MENU */}
+                  <div
+                    className="
           absolute top-full left-1/2
           -translate-x-1/2 pt-2
           invisible opacity-0 translate-y-3
@@ -349,11 +348,10 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
           z-50
           w-[650px] xl:w-[800px]
         "
-      >
-      
-{/* DYNAMIC MEGA MENU */}
-<div
-  className={`
+                  >
+                    {/* DYNAMIC MEGA MENU */}
+                    <div
+                      className={`
     grid
     ${
       menu.items.length > 10
@@ -365,37 +363,33 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     gap-x-10 gap-y-7
     p-8
     shadow-2xl border
-    ${
-      isDark
-        ? "bg-gray-950 border-gray-800"
-        : "bg-white border-gray-100"
-    }
+    ${isDark ? "bg-gray-950 border-gray-800" : "bg-white border-gray-100"}
   `}
->
-  {Array.from({
-    length: Math.ceil(menu.items.length / 5),
-  }).map((_, columnIndex) => {
-    const columnItems = menu.items.slice(
-      columnIndex * 5,
-      columnIndex * 5 + 5
-    );
+                    >
+                      {Array.from({
+                        length: Math.ceil(menu.items.length / 5),
+                      }).map((_, columnIndex) => {
+                        const columnItems = menu.items.slice(
+                          columnIndex * 5,
+                          columnIndex * 5 + 5,
+                        );
 
-    return (
-      <div key={columnIndex}>
-        <h3 className="text-[12px] font-semibold mb-5">
-          {columnIndex === 0
-            ? menu.heading
-            : columnIndex === 1
-              ? `Explore ${menu.title}`
-              : `Discover ${menu.title}`}
-        </h3>
+                        return (
+                          <div key={columnIndex}>
+                            <h3 className="text-[12px] font-semibold mb-5">
+                              {columnIndex === 0
+                                ? menu.heading
+                                : columnIndex === 1
+                                  ? `Explore ${menu.title}`
+                                  : `Discover ${menu.title}`}
+                            </h3>
 
-        <div className="space-y-4">
-          {columnItems.map((item) => (
-            <NavLink
-              key={item.name}
-              to={item.path}
-              className={`
+                            <div className="space-y-4">
+                              {columnItems.map((item) => (
+                                <NavLink
+                                  key={item.name}
+                                  to={item.path}
+                                  className={`
                 block text-[11px]
                 normal-case tracking-normal
                 transition-all duration-200
@@ -406,33 +400,32 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                     : "text-gray-500 hover:text-black"
                 }
               `}
-            >
-              {item.name}
-            </NavLink>
-          ))}
-        </div>
-      </div>
-    );
-  })}
-</div>
+                                >
+                                  {item.name}
+                                </NavLink>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              ))}
 
-      </div>
-    </div>
-  ))}
+              {/* MORE MENU */}
+              {menus.length > 5 && (
+                <div className="group relative flex items-center h-full">
+                  <button
+                    type="button"
+                    className="flex items-center gap-1 py-5 whitespace-nowrap"
+                  >
+                    More
+                    <FaChevronDown className="text-[8px] opacity-60 group-hover:rotate-180 transition-transform" />
+                  </button>
 
-  {/* MORE MENU */}
-  {menus.length > 5 && (
-    <div className="group relative flex items-center h-full">
-      <button
-        type="button"
-        className="flex items-center gap-1 py-5 whitespace-nowrap"
-      >
-        More
-        <FaChevronDown className="text-[8px] opacity-60 group-hover:rotate-180 transition-transform" />
-      </button>
-
-      <div
-        className="
+                  <div
+                    className="
           absolute top-full right-0 pt-2
           w-64
           invisible opacity-0 translate-y-2
@@ -441,9 +434,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
           transition-all duration-300
           z-50
         "
-      >
-        <div
-          className={`
+                  >
+                    <div
+                      className={`
             p-5 border shadow-2xl
             ${
               isDark
@@ -451,18 +444,18 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 : "bg-white border-gray-100"
             }
           `}
-        >
-          {menus.slice(5).map((menu) => (
-            <div key={menu.title} className="mb-5 last:mb-0">
-              <p className="text-[11px] font-semibold mb-3">
-                {menu.title}
-              </p>
+                    >
+                      {menus.slice(5).map((menu) => (
+                        <div key={menu.title} className="mb-5 last:mb-0">
+                          <p className="text-[11px] font-semibold mb-3">
+                            {menu.title}
+                          </p>
 
-              {menu.items.map((item) => (
-                <NavLink
-                  key={item.name}
-                  to={item.path}
-                  className={`
+                          {menu.items.map((item) => (
+                            <NavLink
+                              key={item.name}
+                              to={item.path}
+                              className={`
                     block py-2 text-[11px]
                     normal-case tracking-normal
                     ${
@@ -471,18 +464,17 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                         : "text-gray-500 hover:text-black"
                     }
                   `}
-                >
-                  {item.name}
-                </NavLink>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )}
-</nav>
-
+                            >
+                              {item.name}
+                            </NavLink>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </nav>
 
             {/* =================================================
                 RIGHT ACTIONS

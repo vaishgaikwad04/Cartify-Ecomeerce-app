@@ -60,7 +60,7 @@
 //               sm:text-[9px]
 //               md:text-xs
 //               lg:text-xs
-              
+
 //               mb-1
 //               sm:mb-2
 //             "
@@ -143,9 +143,7 @@ const HeroSection = () => {
 
   return (
     <section className="w-full max-w-[1700px] mx-auto px-3 sm:px-4 lg:px-5 mt-2">
-
       <div className="grid grid-cols-2">
-
         {banners.map((banner, index) => (
           <ImageCard
             key={index}
@@ -257,7 +255,6 @@ const HeroSection = () => {
                 "
               >
                 Shop Now
-
                 <FiArrowUpRight
                   className="
                     text-sm
@@ -272,7 +269,6 @@ const HeroSection = () => {
             </div>
           </ImageCard>
         ))}
-
       </div>
     </section>
   );
