@@ -214,7 +214,7 @@ lg:!left-[300px] lg:!top-[140px]
     pointer-events-none
   ">
     
-    <p className="text-lg sm:text-xl font-bold leading-tight">
+    <p className="text-lg sm:text-xl lg:text-xl font-bold leading-tight">
       40% OFF
     </p>
   </div>
