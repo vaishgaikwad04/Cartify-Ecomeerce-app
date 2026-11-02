@@ -115,7 +115,7 @@ const FashionPromo = () => {
   min-[1108px]:!left-[250px]
   min-[1108px]:!top-[100px]
   min-[1108px]:!right-auto
-  min-[1108px]:!ml-0
+  min-[1108px]:!ml-34
 
   w-[110px]
   sm:w-[120px]
