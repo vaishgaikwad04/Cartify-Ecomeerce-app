@@ -76,7 +76,7 @@ const FashionPromo = () => {
   md:w-9 md:h-9
   lg:w-10 lg:h-10
 
-  -translate-x-4
+  -translate-x-5
 
   lg:mb-32
 
@@ -108,8 +108,7 @@ const FashionPromo = () => {
   z-[99999]
   top-24
 
-  ${index === 0 ? "left-2" : "right-2"}
-
+${index === 0 ? "left-0" : "right-4"}
   min-[500px]:max-[670px]:top-24
 
   min-[1108px]:!left-[250px]
