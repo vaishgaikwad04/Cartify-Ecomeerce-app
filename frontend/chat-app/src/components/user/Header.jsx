@@ -250,7 +250,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       font-serif
       text-[19px]
       sm:text-[21px]
-      lg:text-[22px]
+      lg:text-[18px]
       font-semibold
       tracking-[2.5px]
       uppercase
