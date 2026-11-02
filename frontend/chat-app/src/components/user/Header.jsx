@@ -293,231 +293,196 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 DESKTOP NAVIGATION
             ================================================= */}
 
-            <nav
+           
+{/* DESKTOP NAVIGATION */}
+<nav
+  className={`
+    hidden lg:flex
+    flex-1
+    justify-center
+    items-center
+    gap-5 xl:gap-7
+    text-[11px]
+    font-medium
+    tracking-[1.3px]
+    uppercase
+    ${isDark ? "text-gray-300" : "text-neutral-700"}
+  `}
+>
+  {menus.slice(0, 5).map((menu) => (
+    <div
+      key={menu.title}
+      className="group relative flex items-center h-full"
+    >
+      <NavLink
+        to={menu.items[0]?.path || "/"}
+        className={`
+          relative flex items-center gap-1
+          py-5 whitespace-nowrap
+          transition-all duration-300
+          ${navClass}
+        `}
+      >
+        {menu.title}
+        <FaChevronDown className="text-[8px] opacity-60 group-hover:rotate-180 transition-transform" />
+
+        <span
+          className={`
+            absolute bottom-2 left-0
+            h-[1px] w-0
+            group-hover:w-full
+            transition-all duration-300
+            ${isDark ? "bg-white" : "bg-black"}
+          `}
+        />
+      </NavLink>
+
+      {/* MULTI-COLUMN MEGA MENU */}
+      <div
+        className="
+          absolute top-full left-1/2
+          -translate-x-1/2 pt-2
+          invisible opacity-0 translate-y-3
+          group-hover:visible group-hover:opacity-100
+          group-hover:translate-y-0
+          transition-all duration-300
+          z-50
+          w-[650px] xl:w-[800px]
+        "
+      >
+      
+{/* DYNAMIC MEGA MENU */}
+<div
+  className={`
+    grid
+    ${
+      menu.items.length > 10
+        ? "grid-cols-3"
+        : menu.items.length > 5
+          ? "grid-cols-2"
+          : "grid-cols-1"
+    }
+    gap-x-10 gap-y-7
+    p-8
+    shadow-2xl border
+    ${
+      isDark
+        ? "bg-gray-950 border-gray-800"
+        : "bg-white border-gray-100"
+    }
+  `}
+>
+  {Array.from({
+    length: Math.ceil(menu.items.length / 5),
+  }).map((_, columnIndex) => {
+    const columnItems = menu.items.slice(
+      columnIndex * 5,
+      columnIndex * 5 + 5
+    );
+
+    return (
+      <div key={columnIndex}>
+        <h3 className="text-[12px] font-semibold mb-5">
+          {columnIndex === 0
+            ? menu.heading
+            : columnIndex === 1
+              ? `Explore ${menu.title}`
+              : `Discover ${menu.title}`}
+        </h3>
+
+        <div className="space-y-4">
+          {columnItems.map((item) => (
+            <NavLink
+              key={item.name}
+              to={item.path}
               className={`
-                hidden
-                lg:flex
-                flex-1
-                justify-center
-                items-center
-
-                gap-3
-                xl:gap-5
-                2xl:gap-7
-
-                text-[10px]
-                xl:text-[11px]
-
-                font-medium
-
-                tracking-[1.2px]
-                xl:tracking-[1.5px]
-
-                uppercase
-
-                ${isDark ? "text-gray-300" : "text-neutral-700"}
+                block text-[11px]
+                normal-case tracking-normal
+                transition-all duration-200
+                hover:translate-x-1
+                ${
+                  isDark
+                    ? "text-gray-400 hover:text-white"
+                    : "text-gray-500 hover:text-black"
+                }
               `}
             >
-              {menus.map((menu) => (
-                <div
-                  key={menu.title}
-                  className="
-                    group
-                    relative
-                    flex
-                    items-center
-                    h-full
-                  "
+              {item.name}
+            </NavLink>
+          ))}
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+      </div>
+    </div>
+  ))}
+
+  {/* MORE MENU */}
+  {menus.length > 5 && (
+    <div className="group relative flex items-center h-full">
+      <button
+        type="button"
+        className="flex items-center gap-1 py-5 whitespace-nowrap"
+      >
+        More
+        <FaChevronDown className="text-[8px] opacity-60 group-hover:rotate-180 transition-transform" />
+      </button>
+
+      <div
+        className="
+          absolute top-full right-0 pt-2
+          w-64
+          invisible opacity-0 translate-y-2
+          group-hover:visible group-hover:opacity-100
+          group-hover:translate-y-0
+          transition-all duration-300
+          z-50
+        "
+      >
+        <div
+          className={`
+            p-5 border shadow-2xl
+            ${
+              isDark
+                ? "bg-gray-950 border-gray-800"
+                : "bg-white border-gray-100"
+            }
+          `}
+        >
+          {menus.slice(5).map((menu) => (
+            <div key={menu.title} className="mb-5 last:mb-0">
+              <p className="text-[11px] font-semibold mb-3">
+                {menu.title}
+              </p>
+
+              {menu.items.map((item) => (
+                <NavLink
+                  key={item.name}
+                  to={item.path}
+                  className={`
+                    block py-2 text-[11px]
+                    normal-case tracking-normal
+                    ${
+                      isDark
+                        ? "text-gray-400 hover:text-white"
+                        : "text-gray-500 hover:text-black"
+                    }
+                  `}
                 >
-                  {/* MENU TITLE */}
-
-                  <NavLink
-                    to={menu.items[0]?.path || "/"}
-                    className={`
-                      relative
-                      flex
-                      items-center
-                      gap-1
-
-                      py-5
-                      xl:py-5
-
-                      transition-all
-                      duration-500
-
-                      hover:tracking-[1.7px]
-                      xl:hover:tracking-[2px]
-
-                      ${navClass}
-                    `}
-                  >
-                    {menu.title}
-
-                    {/* UNDERLINE */}
-
-                    <span
-                      className={`
-                        absolute
-                        left-0
-                        bottom-2
-
-                        h-[1px]
-                        w-0
-
-                        transition-all
-                        duration-500
-
-                        group-hover:w-full
-
-                        ${isDark ? "bg-white" : "bg-neutral-900"}
-                      `}
-                    />
-
-                    <FaChevronDown
-                      className="
-                        text-[5px]
-                        sm:text-[6px]
-
-                        opacity-60
-
-                        transition-all
-                        duration-500
-
-                        group-hover:rotate-180
-                        group-hover:opacity-100
-                      "
-                    />
-                  </NavLink>
-
-                  {/* =================================================
-                      DESKTOP DROPDOWN
-                  ================================================= */}
-
-                  <div
-                    className="
-                      absolute
-                      top-full
-                      left-1/2
-                      -translate-x-1/2
-
-                      pt-2
-
-                      opacity-0
-                      invisible
-                      translate-y-2
-
-                      group-hover:opacity-100
-                      group-hover:visible
-                      group-hover:translate-y-0
-
-                      transition-all
-                      duration-300
-
-                      w-[240px]
-                      xl:w-[270px]
-                      2xl:w-[290px]
-
-                      z-50
-                    "
-                  >
-                    <div
-                      className={`
-                        p-4
-                        xl:p-5
-
-                        shadow-[0_18px_45px_rgba(0,0,0,0.12)]
-                        backdrop-blur-xl
-                        border
-
-                        ${
-                          isDark
-                            ? "bg-neutral-950/95 border-neutral-800"
-                            : "bg-white/95 border-neutral-100"
-                        }
-                      `}
-                    >
-                      {/* DROPDOWN HEADER */}
-
-                      <div className="mb-4">
-                        <h3
-                          className={`
-                            text-sm
-                            xl:text-sm
-
-                            font-semibold
-                            tracking-normal
-
-                            ${isDark ? "text-white" : "text-gray-900"}
-                          `}
-                        >
-                          {menu.heading}
-                        </h3>
-
-                        <p
-                          className={`
-                            mt-1
-
-                            text-[8px]
-                            xl:text-[8px]
-
-                            tracking-normal
-
-                            ${isDark ? "text-gray-400" : "text-gray-500"}
-                          `}
-                        >
-                          {menu.subtitle}
-                        </p>
-                      </div>
-
-                      {/* DROPDOWN LINKS */}
-
-                      <div className="space-y-2">
-                        {menu.items.map((item) => (
-                          <NavLink
-                            key={item.name}
-                            to={item.path}
-                            className={`
-                              group/item
-                              flex
-                              justify-between
-                              items-center
-
-                              text-[10px]
-                              xl:text-[11px]
-
-                              tracking-normal
-
-                              transition-all
-                              duration-300
-
-                              hover:translate-x-1
-
-                              ${
-                                isDark
-                                  ? "text-gray-300 hover:text-white"
-                                  : "text-gray-700 hover:text-black"
-                              }
-                            `}
-                          >
-                            <span>{item.name}</span>
-
-                            <span
-                              className="
-                                opacity-0
-                                group-hover/item:opacity-100
-                                transition-all
-                              "
-                            >
-                              →
-                            </span>
-                          </NavLink>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  {item.name}
+                </NavLink>
               ))}
-            </nav>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )}
+</nav>
+
 
             {/* =================================================
                 RIGHT ACTIONS
