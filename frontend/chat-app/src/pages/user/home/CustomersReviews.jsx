@@ -133,7 +133,7 @@ const HomeReviews = () => {
       <div className="mx-auto w-full max-w-[1800px] px-4 sm:px-8">
 
         {/* Review Slider */}
-        <div className="relative mx-auto max-w-[820px]">
+        <div className="relative mx-auto max-w-[1800px]">
 
           {/* Previous Arrow */}
           {reviews.length > 1 && (

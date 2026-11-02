@@ -155,3 +155,14 @@ body,
 .review-scrollbar-light::-webkit-scrollbar-thumb:hover {
   background: #a18a70;
 }
+/* Hide review slider scrollbar */
+.review-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.review-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
