@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { FaArrowLeftLong } from "react-icons/fa6";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const Slider = ({ items = [], visibleItems = 4, renderItem }) => {
   const [startIndex, setStartIndex] = useState(0);
@@ -95,7 +96,7 @@ const Slider = ({ items = [], visibleItems = 4, renderItem }) => {
           duration-200
         "
       >
-        <ChevronLeft
+        <FaArrowLeftLong
           className="
             w-3
             h-3
@@ -182,7 +183,7 @@ const Slider = ({ items = [], visibleItems = 4, renderItem }) => {
           duration-200
         "
       >
-        <ChevronRight
+        <FaArrowRightLong
           className="
             w-3
             h-3

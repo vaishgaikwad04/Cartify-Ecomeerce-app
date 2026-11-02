@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import { fetchAllReviews } from "../../../api/user/ReviewApi";
 import { ThemeContext } from "../../../context/ThemeContext";
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
 
@@ -130,10 +129,10 @@ const HomeReviews = () => {
         transition-colors duration-300
       "
     >
-      <div className="mx-auto w-full max-w-[1800px] px-4 sm:px-8">
+      <div className="mx-auto w-full max-w-[1700px] px-4 sm:px-8">
 
         {/* Review Slider */}
-        <div className="relative mx-auto max-w-[1800px]">
+        <div className="relative mx-auto max-w-[1700px]">
 
           {/* Previous Arrow */}
           {reviews.length > 1 && (
