@@ -129,10 +129,10 @@ const HomeReviews = () => {
         transition-colors duration-300
       "
     >
-      <div className="mx-auto w-full max-w-[1700px] px-4 sm:px-8">
+      <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-8">
 
         {/* Review Slider */}
-        <div className="relative mx-auto max-w-[1700px]">
+        <div className="relative mx-auto max-w-[1600px]">
 
           {/* Previous Arrow */}
           {reviews.length > 1 && (

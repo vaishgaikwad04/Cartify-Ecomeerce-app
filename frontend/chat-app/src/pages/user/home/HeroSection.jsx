@@ -40,7 +40,7 @@ const HeroSection = () => {
   bottom-34
   sm:bottom-56
   md:bottom-34
-  lg:bottom-5
+  lg:bottom-24
   2v z-10
   flex
   flex-col
