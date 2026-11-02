@@ -191,15 +191,16 @@ const HomeReviews = () => {
                       sm:px-10 sm:py-7
                       text-center
                       transition-colors duration-300
-                      ${isDark ? "bg-[#191919]" : "bg-[#faf8f5]"}
+                    
                     `}
                   >
                     {/* Review Text */}
                     <p
                       className={`
-                        max-w-[650px]
-                        text-sm sm:text-base lg:text-lg
+                        max-w-[670px]
+                        text-sm sm:text-md lg:text-lg
                         font-medium
+                        font-semibold
                         leading-relaxed
                         tracking-normal
                         break-words
