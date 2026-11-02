@@ -248,9 +248,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 <span
                   className="
       font-serif
-      text-[19px]
-      sm:text-[21px]
-      lg:text-[18px]
+      text-[9px]
+      sm:text-[12px]
+      lg:text-[14px]
       font-semibold
       tracking-[2.5px]
       uppercase
