@@ -1,8 +1,18 @@
-import React, { useEffect, useRef, useState, useContext } from "react";
+
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useContext,
+} from "react";
 
 import { fetchAllReviews } from "../../../api/user/ReviewApi";
 import { ThemeContext } from "../../../context/ThemeContext";
-import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+
+import {
+  FaArrowLeftLong,
+  FaArrowRightLong,
+} from "react-icons/fa6";
 
 const HomeReviews = () => {
   const { theme } = useContext(ThemeContext);
@@ -14,8 +24,37 @@ const HomeReviews = () => {
 
   const scrollRef = useRef(null);
 
-  // Fetch Reviews
+  // ============================================================
+  // THEME
+  // ============================================================
+
+  const sectionBg = isDark
+    ? "bg-[#171715]"
+    : "bg-[#F7F5F0]";
+
+  const primaryText = isDark
+    ? "text-[#F1EEE8]"
+    : "text-[#292722]";
+
+  const secondaryText = isDark
+    ? "text-[#AAA59B]"
+    : "text-[#858078]";
+
+  const borderColor = isDark
+    ? "border-white/10"
+    : "border-[#E5E0D7]";
+
+  const arrowStyle = isDark
+    ? "text-[#B5AEA2] hover:text-white hover:bg-white/[0.06]"
+    : "text-[#57534C] hover:text-black hover:bg-black/[0.04]";
+
+  // ============================================================
+  // FETCH REVIEWS
+  // ============================================================
+
   useEffect(() => {
+    let isMounted = true;
+
     const getReviews = async () => {
       try {
         const response = await fetchAllReviews();
@@ -30,19 +69,33 @@ const HomeReviews = () => {
               ? data.data
               : [];
 
-        setReviews(reviewList);
+        if (isMounted) {
+          setReviews(reviewList);
+        }
       } catch (error) {
         console.error("Error fetching reviews:", error);
-        setReviews([]);
+
+        if (isMounted) {
+          setReviews([]);
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     getReviews();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-  // Customer Name
+  // ============================================================
+  // CUSTOMER DETAILS
+  // ============================================================
+
   const getCustomer = (review) =>
     review.userId?.name ||
     review.user?.name ||
@@ -50,7 +103,6 @@ const HomeReviews = () => {
     review.name ||
     "Customer";
 
-  // Review Content
   const getComment = (review) =>
     review.comment ||
     review.review ||
@@ -58,14 +110,17 @@ const HomeReviews = () => {
     review.reviewText ||
     "";
 
-  // Navigate Slider
-  const scrollReviews = (direction) => {
+  // ============================================================
+  // SLIDER NAVIGATION
+  // ============================================================
+
+  const scrollToReview = (index) => {
     const container = scrollRef.current;
 
-    if (!container || reviews.length <= 1) return;
+    if (!container || !reviews.length) return;
 
     const nextIndex =
-      (activeIndex + direction + reviews.length) % reviews.length;
+      (index + reviews.length) % reviews.length;
 
     setActiveIndex(nextIndex);
 
@@ -75,7 +130,14 @@ const HomeReviews = () => {
     });
   };
 
-  // Sync Index With Manual Scroll
+  const scrollReviews = (direction) => {
+    scrollToReview(activeIndex + direction);
+  };
+
+  // ============================================================
+  // SYNC INDEX WITH MANUAL SCROLL
+  // ============================================================
+
   useEffect(() => {
     const container = scrollRef.current;
 
@@ -91,9 +153,13 @@ const HomeReviews = () => {
 
         if (!width) return;
 
-        const index = Math.round(container.scrollLeft / width);
+        const index = Math.round(
+          container.scrollLeft / width
+        );
 
-        setActiveIndex(Math.min(index, reviews.length - 1));
+        setActiveIndex(
+          Math.min(Math.max(index, 0), reviews.length - 1)
+        );
       }, 100);
     };
 
@@ -103,21 +169,23 @@ const HomeReviews = () => {
 
     return () => {
       container.removeEventListener("scroll", handleScroll);
-
       clearTimeout(timeout);
     };
   }, [reviews.length]);
 
-  // Responsive resize handling
+  // ============================================================
+  // RESPONSIVE RESIZE
+  // ============================================================
+
   useEffect(() => {
+    const container = scrollRef.current;
+
+    if (!container) return;
+
     const handleResize = () => {
-      const container = scrollRef.current;
-
-      if (!container) return;
-
       container.scrollTo({
         left: activeIndex * container.clientWidth,
-        behavior: "instant",
+        behavior: "auto",
       });
     };
 
@@ -128,14 +196,24 @@ const HomeReviews = () => {
     };
   }, [activeIndex]);
 
+  // ============================================================
+  // LOADING / EMPTY STATE
+  // ============================================================
+
   if (loading || !reviews.length) return null;
+
+  // ============================================================
+  // RENDER
+  // ============================================================
 
   return (
     <section
       className={`
+        relative
         w-full
+        overflow-hidden
         transition-colors duration-300
-        ${isDark ? "bg-[#171717] text-white" : "bg-white text-[#292929]"}
+        ${sectionBg}
       `}
     >
       <div
@@ -143,23 +221,41 @@ const HomeReviews = () => {
           mx-auto
           w-full
           max-w-[1600px]
-          px-5
-          sm:px-10
-          lg:px-[34px]
+          px-4
+          sm:px-8
+          lg:px-10
+          xl:px-14
+          py-10
+          sm:py-14
+          lg:py-16
         "
       >
-        {/* Top Divider */}
+        {/* ==================================================
+            TOP DIVIDER
+        ================================================== */}
+
         <div
           className={`
             w-full
             border-t
-            ${isDark ? "border-[#383838]" : "border-[#e5e5e5]"}
+            ${borderColor}
           `}
         />
 
-        {/* Review Slider */}
-        <div className="relative w-full">
-          {/* Previous Arrow */}
+        {/* ==================================================
+            SECTION HEADING
+        ================================================== */}
+
+        
+
+        {/* ==================================================
+            REVIEW SLIDER
+        ================================================== */}
+
+        <div className="relative mt-5 sm:mt-7 lg:mt-8">
+
+          {/* PREVIOUS ARROW */}
+
           {reviews.length > 1 && (
             <button
               type="button"
@@ -169,34 +265,32 @@ const HomeReviews = () => {
                 absolute
                 left-0
                 top-1/2
-                z-20
                 -translate-y-1/2
+                z-20
                 flex
-                h-10
-                w-10
                 items-center
                 justify-center
-                transition-all
-                duration-300
-                ${
-                  isDark
-                    ? "text-gray-400 hover:text-white"
-                    : "text-[#292929] hover:text-[#999999]"
-                }
+                w-9 h-9
+                sm:w-11 sm:h-11
+                rounded-full
+                transition-all duration-300
+                ${arrowStyle}
               `}
             >
               <FaArrowLeftLong
-                size={25}
                 className="
+                  text-sm
+                  sm:text-base
                   transition-transform
                   duration-300
-                  hover:-translate-x-1
+                  group-hover:-translate-x-1
                 "
               />
             </button>
           )}
 
-          {/* Reviews */}
+          {/* REVIEW SLIDES */}
+
           <div
             ref={scrollRef}
             className="
@@ -211,80 +305,86 @@ const HomeReviews = () => {
               [scrollbar-width:none]
               [&::-webkit-scrollbar]:hidden
             "
-            aria-live="polite"
+            aria-label="Customer reviews"
           >
             {reviews.map((review, index) => (
               <article
                 key={review._id || review.id || index}
                 className="
+                  flex
                   w-full
                   min-w-full
                   shrink-0
                   snap-start
-                  flex
                   flex-col
                   items-center
                   justify-center
-                  min-h-[260px]
-                  sm:min-h-[290px]
-                  lg:min-h-[315px]
-                  px-12
-                  sm:px-20
+                  min-h-[250px]
+                  sm:min-h-[270px]
+                  lg:min-h-[290px]
+                  px-11
+                  sm:px-16
                   lg:px-24
-                  py-12
-                  sm:py-14
+                  py-9
+                  sm:py-10
                   text-center
                 "
               >
-                {/* Review Text */}
+           
+
+                {/* REVIEW TEXT */}
+
                 <p
                   className={`
-                    max-w-[1100px]
-                    text-[19px]
+                    max-w-[950px]
+            
+                    text-[18px]
                     sm:text-[21px]
-                    md:text-[22px]
-                    lg:text-[23px]
-                    xl:text-[24px]
-                    font-semibold
-                    leading-[1.4]
-                    tracking-[-0.5px]
-                    transition-colors
-                    duration-300
-                    ${isDark ? "text-[#f1f1f1]" : "text-[#292929]"}
+                    md:text-[23px]
+                    lg:text-[25px]
+                    font-normal
+                    leading-[1.55]
+                    tracking-[-0.25px]
+                    ${primaryText}
                   `}
                 >
-                  “{getComment(review)}”
+                  {getComment(review)}
                 </p>
 
-                {/* Small Divider */}
+                {/* DECORATIVE DIVIDER */}
+
                 <div
                   className={`
-                    mt-9
+                    mt-7
                     mb-4
                     h-px
-                    w-7
-                    ${isDark ? "bg-[#766b60]" : "bg-[#d9c7b7]"}
+                    w-8
+                    ${isDark ? "bg-[#887A67]" : "bg-[#C7B7A3]"}
                   `}
                 />
 
-                {/* Customer Name */}
+                {/* CUSTOMER NAME */}
+
                 <p
                   className={`
-                    text-[12px]
-                    sm:text-[13px]
-                    font-normal
+                    text-[10px]
+                    sm:text-[11px]
                     uppercase
-                    tracking-[0.02em]
-                    ${isDark ? "text-[#d0d0d0]" : "text-[#444444]"}
+                    tracking-[2px]
+                    font-medium
+                    ${primaryText}
                   `}
                 >
                   {getCustomer(review)}
                 </p>
+
+              
               </article>
             ))}
           </div>
 
-          {/* Next Arrow */}
+          {/* NEXT ARROW */}
+
           {reviews.length > 1 && (
             <button
               type="button"
@@ -294,25 +394,22 @@ const HomeReviews = () => {
                 absolute
                 right-0
                 top-1/2
-                z-20
                 -translate-y-1/2
+                z-20
                 flex
-                h-10
-                w-10
                 items-center
                 justify-center
-                transition-all
-                duration-300
-                ${
-                  isDark
-                    ? "text-gray-400 hover:text-white"
-                    : "text-[#292929] hover:text-[#999999]"
-                }
+                w-9 h-9
+                sm:w-11 sm:h-11
+                rounded-full
+                transition-all duration-300
+                ${arrowStyle}
               `}
             >
               <FaArrowRightLong
-                size={25}
                 className="
+                  text-sm
+                  sm:text-base
                   transition-transform
                   duration-300
                   hover:translate-x-1
@@ -322,12 +419,62 @@ const HomeReviews = () => {
           )}
         </div>
 
-        {/* Bottom Divider */}
+        {/* ==================================================
+            SLIDER INDICATORS
+        ================================================== */}
+
+        {reviews.length > 1 && (
+          <div
+            className="
+              flex
+              items-center
+              justify-center
+              gap-2
+              mt-2
+              sm:mt-3
+            "
+          >
+            {reviews.map((review, index) => (
+              <button
+                key={review._id || review.id || index}
+                type="button"
+                onClick={() => scrollToReview(index)}
+                aria-label={`Go to review ${index + 1}`}
+                aria-current={activeIndex === index ? "true" : undefined}
+                className={`
+                  h-[3px]
+                  rounded-full
+                  transition-all duration-300
+                  ${
+                    activeIndex === index
+                      ? `w-7 ${
+                          isDark
+                            ? "bg-[#D5C3A9]"
+                            : "bg-[#51483C]"
+                        }`
+                      : `w-2 ${
+                          isDark
+                            ? "bg-white/20"
+                            : "bg-[#D7D1C7]"
+                        }`
+                  }
+                `}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* ==================================================
+            BOTTOM DIVIDER
+        ================================================== */}
+
         <div
           className={`
             w-full
             border-b
-            ${isDark ? "border-[#383838]" : "border-[#e5e5e5]"}
+            mt-9
+            sm:mt-11
+            ${borderColor}
           `}
         />
       </div>

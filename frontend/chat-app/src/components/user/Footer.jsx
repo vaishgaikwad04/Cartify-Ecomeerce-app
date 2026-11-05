@@ -110,7 +110,7 @@ const Footer = () => {
                 inline-block
                 cursor-pointer
 
-                font-serif
+                
                 font-normal
 
                 text-xl
@@ -126,7 +126,7 @@ const Footer = () => {
                 hover:opacity-60
               "
             >
-              Cartify
+             CARTIFY
             </h2>
 
           </div>
@@ -495,7 +495,7 @@ const Footer = () => {
                   transition-opacity
                 "
               >
-                Cartify
+              CARTIFY
               </Link>
 
               . All rights reserved.

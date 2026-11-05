@@ -1,10 +1,7 @@
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-// Icons
-import { FaChevronDown } from "react-icons/fa";
-import { HiOutlineShoppingBag } from "react-icons/hi2";
 import {
   FiSearch,
   FiPackage,
@@ -12,13 +9,19 @@ import {
   FiBell,
   FiMenu,
   FiUser,
+  FiArrowUpRight,
+  FiArrowRight,
 } from "react-icons/fi";
 
-// Hooks
+import {
+  HiOutlineShoppingBag,
+} from "react-icons/hi2";
+
+import { FaChevronDown } from "react-icons/fa";
+
 import { useHeader } from "../../hooks/user/useHeader";
 import { AuthContext } from "../../context/AuthContext";
 
-// Components
 import Drawer from "../ui/drawer";
 import CartSidebar from "../../pages/user/cart/CartSidebar";
 import AuthModal from "../../components/ui/AuthModal";
@@ -32,7 +35,6 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
     allowNotification,
     unreadCount,
-
     profileData,
 
     isMobileMenuOpen,
@@ -55,25 +57,27 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
   } = useHeader();
 
   // ============================================================
-  // NAVIGATION MENU
+  // NAVIGATION DATA
   // ============================================================
 
   const menus = [
     {
       title: "Home",
-      subtitle: "Interior Collection",
-      heading: "Living",
+      subtitle: "Thoughtful spaces & living",
+      heading: "The Living Edit",
+      description: "Make every corner feel like home.",
       items: [
         { name: "Decor", path: "/decor" },
         { name: "Kitchen & Dining", path: "/kitchen-dining" },
-        { name: "Pillows", path: "/pillows-cushions" },
+        { name: "Pillows & Cushions", path: "/pillows-cushions" },
         { name: "Books", path: "/books" },
       ],
     },
     {
       title: "Clothing",
-      subtitle: "Everyday Essentials",
-      heading: "Clothing",
+      subtitle: "Everyday, elevated",
+      heading: "The Wardrobe",
+      description: "Discover pieces for every occasion.",
       items: [
         { name: "Tops", path: "/tops" },
         { name: "Basics & Loungewear", path: "/basics-loungewear" },
@@ -86,8 +90,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     },
     {
       title: "Body",
-      subtitle: "Beauty Essentials",
-      heading: "Body",
+      subtitle: "Beauty & self care",
+      heading: "The Beauty Edit",
+      description: "Everyday essentials, thoughtfully chosen.",
       items: [
         { name: "Body Care", path: "/body-care" },
         { name: "Beauty", path: "/beauty" },
@@ -97,8 +102,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     },
     {
       title: "New In",
-      subtitle: "Latest Arrivals",
-      heading: "Latest",
+      subtitle: "Freshly discovered",
+      heading: "Just Arrived",
+      description: "A fresh perspective on everyday style.",
       items: [
         { name: "New In Body", path: "/new-in-body" },
         { name: "New In Home", path: "/new-in-home" },
@@ -106,87 +112,333 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     },
   ];
 
-  const visibleMenus = menus.slice(0, 5);
-  const moreMenus = menus.slice(5);
-
   // ============================================================
-  // THEME STYLES
+  // LOCAL STATE
   // ============================================================
 
-  const headerTheme = isDark
-    ? "bg-gray-950/95 border-gray-800"
-    : "bg-[#FAF9F7]/95 border-gray-200";
-
-  const textTheme = isDark
-    ? "text-gray-300"
-    : "text-neutral-700";
-
-  const hoverTheme = isDark
-    ? "hover:text-white"
-    : "hover:text-black";
-
-  const menuTheme = isDark
-    ? "bg-gray-950 border-gray-800"
-    : "bg-white border-gray-100";
-
-  const mobileTheme = isDark
-    ? "bg-gray-950 text-white"
-    : "bg-white text-gray-900";
+  const [activeMegaMenu, setActiveMegaMenu] = useState(null);
 
   // ============================================================
-  // NAVIGATION LINK STYLE
+  // THEME
+  // ============================================================
+
+  const headerBg = isDark
+    ? "bg-[#111111]/95 border-white/10"
+    : "bg-[#FAF9F6]/95 border-[#EAE6DF]";
+
+  const mainText = isDark
+    ? "text-[#F1EEE8]"
+    : "text-[#262522]";
+
+  const secondaryText = isDark
+    ? "text-gray-400"
+    : "text-[#858078]";
+
+  const menuBg = isDark
+    ? "bg-[#171717] border-white/10"
+    : "bg-[#FFFFFF] border-[#EAE6DF]";
+
+  const mobileBg = isDark
+    ? "bg-[#111111] text-white"
+    : "bg-[#FAF9F6] text-[#262522]";
+
+  const subtleHover = isDark
+    ? "hover:bg-white/[0.06]"
+    : "hover:bg-black/[0.035]";
+
+  // ============================================================
+  // HELPERS
+  // ============================================================
+
+  const handleLogin = () => {
+    setIsLogin(true);
+    setIsOpen(true);
+  };
+
+  const handleLogoClick = () => {
+    setActiveMegaMenu(null);
+    closeMobileMenu();
+    navigate("/");
+  };
+
+  const handleMobileCategory = (title) => {
+    setOpenMobileMenu(
+      openMobileMenu === title ? null : title
+    );
+  };
+
+  const handleMobileNavigation = () => {
+    closeMobileMenu();
+    setOpenMobileMenu(null);
+    setActiveMegaMenu(null);
+  };
+
+  const handleDesktopMenuEnter = (title) => {
+    setActiveMegaMenu(title);
+  };
+
+  const handleDesktopMenuLeave = () => {
+    setActiveMegaMenu(null);
+  };
+
+  // ============================================================
+  // NAV LINK STYLE
   // ============================================================
 
   const navClass = ({ isActive }) => `
     relative
-    flex items-center gap-1
-    py-5 whitespace-nowrap
+    flex items-center
+    gap-1.5
+    py-5
+    text-[10px]
+    xl:text-[11px]
+    font-medium
+    uppercase
+    tracking-[1.5px]
+    whitespace-nowrap
     transition-colors duration-300
     ${
       isActive
         ? isDark
           ? "text-white"
-          : "text-gray-950"
+          : "text-black"
         : isDark
           ? "text-gray-300 hover:text-white"
-          : "text-neutral-700 hover:text-black"
+          : "text-[#5F5B55] hover:text-black"
     }
   `;
 
   // ============================================================
-  // SHARED NAVIGATION LINKS
+  // HEADER ICON STYLE
   // ============================================================
 
-  const renderMenuItems = (items) =>
-    items.map((item) => (
-      <NavLink
-        key={item.name}
-        to={item.path}
-        onClick={closeMobileMenu}
-        className={({ isActive }) => `
-          block
-          text-[11px]
-          normal-case
-          tracking-normal
-          transition-all duration-200
-          hover:translate-x-1
-          ${
-            isActive
-              ? isDark
-                ? "text-white font-medium"
-                : "text-gray-950 font-medium"
-              : isDark
-                ? "text-gray-400 hover:text-white"
-                : "text-gray-500 hover:text-black"
-          }
+  const iconButtonClass = `
+    group
+    relative
+    flex items-center justify-center
+    w-9 h-9
+    rounded-full
+    transition-all duration-300
+    ${subtleHover}
+    ${mainText}
+  `;
+
+  // ============================================================
+  // MEGA MENU
+  // ============================================================
+
+  const renderMegaMenu = (menu) => (
+    <div
+      className={`
+        absolute
+        top-full
+        left-1/2
+        -translate-x-1/2
+        pt-3
+        w-[680px]
+        xl:w-[820px]
+        z-50
+        transition-all duration-300 ease-out
+        ${
+          activeMegaMenu === menu.title
+            ? "visible opacity-100 translate-y-0"
+            : "invisible opacity-0 translate-y-2 pointer-events-none"
+        }
+      `}
+    >
+      <div
+        className={`
+          relative
+          grid grid-cols-[1fr_1.15fr]
+          gap-10
+          p-9 xl:p-11
+          border
+          shadow-[0_18px_55px_rgba(0,0,0,0.12)]
+          ${menuBg}
         `}
       >
-        {item.name}
-      </NavLink>
-    ));
+        {/* EDITORIAL INTRO */}
+
+        <div className="flex flex-col justify-between min-h-[210px]">
+
+          <div>
+            <p
+              className={`
+                text-[9px]
+                uppercase
+                tracking-[2.5px]
+                mb-5
+                ${secondaryText}
+              `}
+            >
+              Explore Cartify
+            </p>
+
+            <h3
+              className={`
+                
+                text-3xl
+                xl:text-[36px]
+                leading-tight
+                font-normal
+                ${mainText}
+              `}
+            >
+              {menu.heading}
+            </h3>
+
+            <p
+              className={`
+                mt-3
+                text-xs
+                leading-6
+                max-w-[230px]
+                ${secondaryText}
+              `}
+            >
+              {menu.description}
+            </p>
+          </div>
+
+          <div
+            className={`
+              flex items-center gap-2
+              text-[9px]
+              uppercase
+              tracking-[1.5px]
+              ${secondaryText}
+            `}
+          >
+            DISCOVER MORE
+            <FiArrowRight className="text-sm transition-transform group-hover:translate-x-1" />
+          </div>
+        </div>
+
+        {/* CATEGORY LINKS */}
+
+        <div>
+          <div
+            className={`
+              flex items-center justify-between
+              pb-4 mb-2 border-b
+              ${
+                isDark
+                  ? "border-white/10"
+                  : "border-gray-200"
+              }
+            `}
+          >
+            <span
+              className={`
+                text-[9px]
+                uppercase
+                tracking-[2px]
+                ${secondaryText}
+              `}
+            >
+              Browse Categories
+            </span>
+
+            <span className={secondaryText}>
+              <FiArrowUpRight size={14} />
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 gap-x-5">
+            {menu.items.map((item, index) => (
+              <NavLink
+                key={item.name}
+                to={item.path}
+                onClick={() => {
+                  setActiveMegaMenu(null);
+                }}
+                className={({ isActive }) => `
+                  group
+                  flex items-center justify-between
+                  py-3
+                  border-b
+                  text-[11px]
+                  transition-all duration-200
+                  ${
+                    isDark
+                      ? "border-white/[0.06]"
+                      : "border-gray-100"
+                  }
+                  ${
+                    isActive
+                      ? isDark
+                        ? "text-white"
+                        : "text-black"
+                      : secondaryText
+                  }
+                  ${
+                    isDark
+                      ? "hover:text-white"
+                      : "hover:text-black"
+                  }
+                `}
+              >
+                <span>{item.name}</span>
+
+                <FiArrowUpRight
+                  className="
+                    opacity-0
+                    -translate-x-1
+                    group-hover:opacity-100
+                    group-hover:translate-x-0
+                    transition-all duration-200
+                    text-xs
+                  "
+                />
+              </NavLink>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  // ============================================================
+  // RENDER
+  // ============================================================
 
   return (
     <>
+      {/* =====================================================
+          ANNOUNCEMENT BAR
+      ===================================================== */}
+
+      <div
+        className={`
+          relative
+          flex items-center justify-center
+          min-h-[29px]
+          px-3
+          text-center
+          transition-colors duration-300
+          ${
+            isDark
+              ? "bg-[#D7C5AA] text-[#29251F]"
+              : "bg-[#292722] text-[#F7F3EB]"
+          }
+        `}
+      >
+        <p
+          className="
+            text-[8px]
+            sm:text-[9px]
+            uppercase
+            tracking-[1.5px]
+            font-medium
+            leading-4
+          "
+        >
+          A little something for your everyday
+          <span className="mx-2 opacity-50">|</span>
+          Discover the collection
+        </p>
+      </div>
+
       {/* =====================================================
           MAIN HEADER
       ===================================================== */}
@@ -194,275 +446,189 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       <header
         className={`
           sticky top-0 z-50
-          backdrop-blur-md
           border-b
+          backdrop-blur-xl
           transition-colors duration-300
-          ${headerTheme}
+          ${headerBg}
         `}
       >
-        <div className="max-w-[1700px] mx-auto px-3 sm:px-5 lg:px-6">
+        <div className="max-w-[1800px] mx-auto px-3 sm:px-6 lg:px-8 xl:px-12">
 
-          <div className="flex items-center justify-between h-16 sm:h-[66px] lg:h-[64px]">
-
-            {/* =================================================
-                DESKTOP LOGO
-            ================================================= */}
-
-            <div className="hidden lg:block lg:w-[180px] xl:w-[190px] shrink-0">
-
-              <button
-                type="button"
-                onClick={() => navigate("/")}
-                aria-label="Cartify home"
-                className={`
-                  group flex items-center gap-2.5
-                  whitespace-nowrap
-                  transition-colors duration-300
-                  ${
-                    isDark
-                      ? "text-gray-100 hover:text-white"
-                      : "text-gray-900 hover:text-black"
-                  }
-                `}
-              >
-                {/* MONOGRAM */}
-
-                <span
-                  className={`
-                    flex items-center justify-center
-                    w-8 h-8
-                    border rounded-sm
-                    text-xl font-medium
-                    transition-all duration-300
-                    group-hover:rotate-[-6deg]
-                    ${
-                      isDark
-                        ? "border-gray-500 text-white"
-                        : "border-gray-800 text-gray-900"
-                    }
-                  `}
-                >
-                  C
-                </span>
-
-                {/* BRAND NAME */}
-
-                <span
-                  className="
-                    text-[18px]
-                    tracking-[2.5px]
-                    uppercase
-                    font-bold
-                    leading-none
-                  "
-                >
-                  CARTIFY
-                </span>
-              </button>
-            </div>
+          <div
+            className="
+              relative
+              flex items-center justify-between
+              h-[66px]
+              sm:h-[72px]
+              lg:h-[82px]
+            "
+          >
 
             {/* =================================================
-                MOBILE HAMBURGER
+                MOBILE MENU BUTTON
             ================================================= */}
 
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(true)}
-              aria-label="Open menu"
+              aria-label="Open navigation menu"
               aria-expanded={isMobileMenuOpen}
               className={`
-                lg:hidden shrink-0 group
-                flex h-10 w-10
-                items-center justify-center
-                rounded-xl border
-                transition-all duration-200
-                active:scale-95
-                ${
-                  isDark
-                    ? "border-gray-800 bg-gray-900 text-gray-200 hover:bg-gray-800"
-                    : "border-gray-200 bg-white text-gray-800 hover:bg-gray-50"
-                }
+                lg:hidden
+                flex items-center justify-center
+                w-9 h-9
+                rounded-full
+                transition-all duration-300
+                ${subtleHover}
+                ${mainText}
               `}
             >
-              <FiMenu
-                className="text-[21px] transition-transform duration-200 group-hover:scale-110"
-                strokeWidth={1.8}
-              />
+              <FiMenu size={21} strokeWidth={1.5} />
             </button>
+
+            {/* =================================================
+                BRAND WORDMARK
+            ================================================= */}
+
+            <div
+              className="
+                absolute
+                left-1/2
+                -translate-x-1/2
+                lg:static
+                lg:translate-x-0
+                shrink-0
+              "
+            >
+              <button
+                type="button"
+                onClick={handleLogoClick}
+                aria-label="Cartify home"
+                className={`
+                  group
+                  flex flex-col items-center
+                  lg:items-start
+                  transition-colors duration-300
+                  ${mainText}
+                `}
+              >
+                <span
+                  className="
+                    
+                    text-[21px]
+                    sm:text-[24px]
+                    lg:text-[25px]
+                    font-semibold
+                    tracking-[3px]
+                    leading-none
+                    transition-all duration-300
+                    group-hover:tracking-[3.8px]
+                  "
+                >
+                  CARTIFY
+                </span>
+
+                <span
+                  className={`
+                    hidden lg:block
+                    mt-1
+                    text-[7px]
+                    uppercase
+                    tracking-[3.1px]
+                    ${secondaryText}
+                  `}
+                >
+                  Style in every detail
+                </span>
+              </button>
+            </div>
 
             {/* =================================================
                 DESKTOP NAVIGATION
             ================================================= */}
 
             <nav
-              className={`
-                hidden lg:flex flex-1
-                justify-center items-center
-                gap-5 xl:gap-7
-                text-[11px]
-                font-medium
-                tracking-[1.5px]
-                uppercase
-                ${textTheme}
-              `}
+              className="
+                hidden lg:flex
+                items-center justify-center
+                flex-1
+                gap-5 xl:gap-8
+                h-full
+                px-5 xl:px-8
+              "
+              onMouseLeave={handleDesktopMenuLeave}
             >
-              {visibleMenus.map((menu) => (
+              {menus.map((menu) => (
                 <div
                   key={menu.title}
-                  className="group relative flex items-center h-full"
+                  className="relative flex items-center h-full"
+                  onMouseEnter={() =>
+                    handleDesktopMenuEnter(menu.title)
+                  }
                 >
-
-                  {/* CATEGORY LINK */}
-
-                  <NavLink
-                    to={menu.items[0]?.path || "/"}
-                    className={navClass}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setActiveMegaMenu(
+                        activeMegaMenu === menu.title
+                          ? null
+                          : menu.title
+                      )
+                    }
+                    aria-expanded={activeMegaMenu === menu.title}
+                    className={`
+                      relative
+                      flex items-center gap-2
+                      py-5
+                      text-[10px]
+                      xl:text-[11px]
+                      font-medium
+                      uppercase
+                      tracking-[1.5px]
+                      whitespace-nowrap
+                      transition-colors duration-300
+                      ${
+                        activeMegaMenu === menu.title
+                          ? mainText
+                          : secondaryText
+                      }
+                      ${isDark ? "hover:text-white" : "hover:text-black"}
+                    `}
                   >
                     {menu.title}
 
                     <FaChevronDown
-                      className="
-                        text-[8px]
-                        opacity-60
+                      className={`
+                        text-[7px]
                         transition-transform duration-300
-                        group-hover:rotate-180
-                      "
+                        ${
+                          activeMegaMenu === menu.title
+                            ? "rotate-180"
+                            : ""
+                        }
+                      `}
                     />
 
-                    {/* HOVER UNDERLINE */}
+                    {/* ACTIVE UNDERLINE */}
 
                     <span
                       className={`
-                        absolute bottom-2 left-0
-                        h-[1px] w-0
-                        group-hover:w-full
+                        absolute bottom-[14px] left-0
+                        h-[1px]
                         transition-all duration-300
-                        ${isDark ? "bg-white" : "bg-black"}
-                      `}
-                    />
-                  </NavLink>
-
-                  {/* MEGA MENU */}
-
-                  <div
-                    className="
-                      absolute top-full left-1/2
-                      -translate-x-1/2 pt-2
-                      invisible opacity-0 translate-y-3
-                      group-hover:visible group-hover:opacity-100
-                      group-hover:translate-y-0
-                      transition-all duration-300
-                      z-50
-                      w-[650px] xl:w-[800px]
-                    "
-                  >
-                    <div
-                      className={`
-                        grid
                         ${
-                          menu.items.length > 10
-                            ? "grid-cols-3"
-                            : menu.items.length > 5
-                              ? "grid-cols-2"
-                              : "grid-cols-1"
+                          activeMegaMenu === menu.title
+                            ? "w-full"
+                            : "w-0"
                         }
-                        gap-x-10 gap-y-7
-                        p-8
-                        shadow-2xl border
-                        ${menuTheme}
+                        ${isDark ? "bg-white" : "bg-[#292722]"}
                       `}
-                    >
-                      {Array.from({
-                        length: Math.ceil(menu.items.length / 5),
-                      }).map((_, columnIndex) => {
-                        const columnItems = menu.items.slice(
-                          columnIndex * 5,
-                          columnIndex * 5 + 5
-                        );
-
-                        return (
-                          <div key={columnIndex}>
-                            <h3
-                              className={`
-                                text-[12px]
-                                font-semibold
-                                mb-5
-                                ${isDark ? "text-white" : "text-gray-900"}
-                              `}
-                            >
-                              {columnIndex === 0
-                                ? menu.heading
-                                : columnIndex === 1
-                                  ? `Explore ${menu.title}`
-                                  : `Discover ${menu.title}`}
-                            </h3>
-
-                            <div className="space-y-4">
-                              {renderMenuItems(columnItems)}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              ))}
-
-              {/* MORE MENU */}
-
-              {moreMenus.length > 0 && (
-                <div className="group relative flex items-center h-full">
-
-                  <button
-                    type="button"
-                    className="flex items-center gap-1 py-5 whitespace-nowrap"
-                  >
-                    More
-
-                    <FaChevronDown
-                      className="
-                        text-[8px] opacity-60
-                        transition-transform duration-300
-                        group-hover:rotate-180
-                      "
                     />
                   </button>
 
-                  <div
-                    className="
-                      absolute top-full right-0 pt-2
-                      w-64
-                      invisible opacity-0 translate-y-2
-                      group-hover:visible group-hover:opacity-100
-                      group-hover:translate-y-0
-                      transition-all duration-300
-                      z-50
-                    "
-                  >
-                    <div
-                      className={`
-                        p-5 border shadow-2xl
-                        ${menuTheme}
-                      `}
-                    >
-                      {moreMenus.map((menu) => (
-                        <div
-                          key={menu.title}
-                          className="mb-5 last:mb-0"
-                        >
-                          <p className="text-[11px] font-semibold mb-3">
-                            {menu.title}
-                          </p>
-
-                          <div className="space-y-3">
-                            {renderMenuItems(menu.items)}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  {renderMegaMenu(menu)}
                 </div>
-              )}
+              ))}
             </nav>
 
             {/* =================================================
@@ -470,76 +636,36 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             ================================================= */}
 
             <div
-              className={`
-                flex justify-end items-center
-                gap-1 sm:gap-1.5
+              className="
+                flex items-center justify-end
+                gap-0.5 sm:gap-1
                 shrink-0
-                ${isDark ? "text-white" : "text-gray-900"}
-              `}
+                lg:min-w-[150px]
+                xl:min-w-[190px]
+              "
             >
 
               {/* SEARCH */}
 
               <button
                 type="button"
-                onClick={() => setIsSearchModalOpen(true)}
-                aria-label="Search"
-                className={`
-                  group
-                  w-8 h-8 sm:w-9 sm:h-9
-                  rounded-full
-                  flex items-center justify-center
-                  transition-all duration-200
-                  ${
-                    isDark
-                      ? "text-gray-300 hover:bg-gray-800 hover:text-white"
-                      : "text-gray-600 hover:bg-gray-100 hover:text-black"
-                  }
-                `}
+                onClick={() => {
+                  setActiveMegaMenu(null);
+                  setIsSearchModalOpen(true);
+                }}
+                aria-label="Search products"
+                className={iconButtonClass}
               >
                 <FiSearch
-                  className="
-                    text-[15px] sm:text-[16px]
-                    transition-transform duration-200
-                    group-hover:scale-105
-                  "
+                  size={17}
+                  strokeWidth={1.5}
+                  className="transition-transform duration-300 group-hover:scale-110"
                 />
               </button>
 
-              {/* DESKTOP ACTION GROUP */}
+              {/* DESKTOP ACTIONS */}
 
-              <div
-                className={`
-                  hidden lg:flex
-                  items-center gap-0.5
-                  rounded-full p-0.5 border
-                  ${
-                    isDark
-                      ? "bg-gray-900/80 border-gray-800"
-                      : "bg-gray-50 border-gray-200"
-                  }
-                `}
-              >
-
-                {/* CART */}
-
-                <button
-                  type="button"
-                  onClick={() => setIsCartDrawerOpen(true)}
-                  aria-label="Cart"
-                  className={`
-                    w-8 h-8 rounded-full
-                    flex items-center justify-center
-                    transition-all duration-200
-                    ${
-                      isDark
-                        ? "text-gray-300 hover:bg-gray-800 hover:text-white"
-                        : "text-gray-600 hover:bg-white hover:text-black hover:shadow-sm"
-                    }
-                  `}
-                >
-                  <HiOutlineShoppingBag className="text-[15px]" />
-                </button>
+              <div className="hidden lg:flex items-center gap-0.5">
 
                 {/* ORDERS */}
 
@@ -547,18 +673,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   type="button"
                   onClick={() => navigate("/orders")}
                   aria-label="Orders"
-                  className={`
-                    w-8 h-8 rounded-full
-                    flex items-center justify-center
-                    transition-all duration-200
-                    ${
-                      isDark
-                        ? "text-gray-300 hover:bg-gray-800 hover:text-white"
-                        : "text-gray-600 hover:bg-white hover:text-black hover:shadow-sm"
-                    }
-                  `}
+                  className={iconButtonClass}
                 >
-                  <FiPackage className="text-[14px]" />
+                  <FiPackage size={17} strokeWidth={1.5} />
                 </button>
 
                 {/* NOTIFICATIONS */}
@@ -568,175 +685,79 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                     type="button"
                     onClick={() => navigate("/notifications")}
                     aria-label="Notifications"
-                    className={`
-                      relative
-                      w-8 h-8 rounded-full
-                      flex items-center justify-center
-                      transition-all duration-200
-                      ${
-                        isDark
-                          ? "text-gray-300 hover:bg-gray-800 hover:text-white"
-                          : "text-gray-600 hover:bg-white hover:text-black hover:shadow-sm"
-                      }
-                    `}
+                    className={iconButtonClass}
                   >
-                    <FiBell className="text-[14px]" />
+                    <FiBell size={17} strokeWidth={1.5} />
 
                     {unreadCount > 0 && (
                       <span
                         className="
-                          absolute top-0 right-0
-                          min-w-[14px] h-[14px] px-1
+                          absolute top-[5px] right-[4px]
+                          w-[7px] h-[7px]
                           rounded-full
-                          bg-red-500 text-white
-                          text-[7px] font-bold
-                          flex items-center justify-center
-                          border-2 border-white
-                          leading-none
+                          bg-[#B85C50]
+                          ring-2 ring-inherit
                         "
-                      >
-                        {unreadCount > 99 ? "99+" : unreadCount}
-                      </span>
+                      />
                     )}
                   </button>
                 )}
               </div>
 
-              {/* MOBILE CART */}
+              {/* CART */}
 
               <button
                 type="button"
                 onClick={() => setIsCartDrawerOpen(true)}
-                aria-label="Open cart"
+                aria-label="Shopping bag"
                 className={`
-                  lg:hidden
-                  w-9 h-9 sm:w-10 sm:h-10
-                  rounded-full
-                  flex items-center justify-center
-                  transition-all duration-200
-                  ${
-                    isDark
-                      ? "text-gray-300 hover:bg-gray-800 hover:text-white"
-                      : "text-gray-600 hover:bg-gray-100 hover:text-black"
-                  }
+                  ${iconButtonClass}
+                  ${!isDark ? "hover:bg-[#EEEAE3]" : ""}
                 `}
               >
-                <HiOutlineShoppingBag className="text-[17px]" />
+                <HiOutlineShoppingBag
+                  size={19}
+                  strokeWidth={1.5}
+                />
               </button>
 
-              {/* =================================================
-                  PROFILE / SIGN IN
-              ================================================= */}
+              {/* ACCOUNT */}
 
               {user ? (
-
                 <button
                   type="button"
                   onClick={() => navigate("/profile")}
-                  aria-label="Open profile"
+                  aria-label="My profile"
                   className={`
-                    group
-                    flex items-center gap-1.5
-                    rounded-full border
-                    px-1 py-1
-                    transition-all duration-200
+                    ml-1
+                    flex items-center justify-center
+                    w-8 h-8
+                    rounded-full
+                    border
+                    text-[10px]
+                    font-semibold
+                    uppercase
+                    transition-all duration-300
                     ${
                       isDark
-                        ? "bg-gray-900/80 border-gray-800 hover:border-gray-700 hover:bg-gray-800"
-                        : "bg-white border-gray-200 hover:border-gray-300 hover:bg-gray-50"
+                        ? "border-white/20 bg-white/5 text-white hover:bg-white/10"
+                        : "border-[#DDD8CF] bg-[#F0EDE7] text-[#393630] hover:bg-[#E7E2D9]"
                     }
                   `}
                 >
-                  {/* AVATAR */}
-
-                  <div className="relative shrink-0">
-                    <div
-                      className="
-                        w-7 h-7
-                        rounded-full
-                        flex items-center justify-center
-                        text-[10px] font-semibold uppercase
-                        text-white
-                        transition-transform duration-200
-                        group-hover:scale-105
-                        bg-gradient-to-br from-gray-600 to-black
-                      "
-                    >
-                      {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
-                    </div>
-
-                    <span
-                      className={`
-                        absolute right-0 bottom-0
-                        w-2 h-2 rounded-full
-                        border-2 bg-green-500
-                        ${isDark ? "border-gray-900" : "border-white"}
-                      `}
-                    />
-                  </div>
-
-                  {/* USER INFO */}
-
-                  <div className="hidden xl:flex flex-col min-w-0 pr-1">
-                    <span
-                      className={`
-                        max-w-[90px] truncate
-                        text-[10px] font-semibold leading-none
-                        ${isDark ? "text-gray-100" : "text-gray-900"}
-                      `}
-                    >
-                      {profileData?.name || "User"}
-                    </span>
-
-                    <span
-                      className={`
-                        mt-1 text-[7px]
-                        uppercase tracking-[0.12em]
-                        ${isDark ? "text-gray-500" : "text-gray-400"}
-                      `}
-                    >
-                      Profile
-                    </span>
-                  </div>
-
-                  <span
-                    className={`
-                      hidden xl:block mr-1
-                      text-[10px]
-                      transition-transform duration-200
-                      group-hover:translate-x-0.5
-                      ${isDark ? "text-gray-500" : "text-gray-400"}
-                    `}
-                  >
-                    ›
-                  </span>
+                  {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
                 </button>
-
               ) : (
-
                 <button
                   type="button"
-                  onClick={() => {
-                    setIsLogin(true);
-                    setIsOpen(true);
-                  }}
+                  onClick={handleLogin}
+                  aria-label="Sign in"
                   className={`
-                    flex items-center gap-1.5
-                    rounded-full border
-                    px-2.5 py-1.5
-                    transition-all duration-200
-                    ${
-                      isDark
-                        ? "bg-gray-900/80 border-gray-800 text-gray-200 hover:bg-gray-800"
-                        : "bg-white border-gray-200 text-gray-700 hover:bg-gray-50"
-                    }
+                    ${iconButtonClass}
+                    hidden sm:flex
                   `}
                 >
-                  <FiUser className="text-[14px]" />
-
-                  <span className="hidden xl:block text-[10px] font-semibold">
-                    Sign In
-                  </span>
+                  <FiUser size={17} strokeWidth={1.5} />
                 </button>
               )}
             </div>
@@ -745,7 +766,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       </header>
 
       {/* =====================================================
-          MOBILE MENU
+          MOBILE NAVIGATION DRAWER
       ===================================================== */}
 
       {isMobileMenuOpen && (
@@ -754,7 +775,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             fixed inset-0 z-[100]
             lg:hidden
             bg-black/50
-            backdrop-blur-[2px]
+            backdrop-blur-[3px]
           "
           onClick={closeMobileMenu}
         >
@@ -762,148 +783,175 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             className={`
               absolute top-0 left-0
               h-full
-              w-[85%] sm:w-[380px]
-              max-w-[380px]
+              w-[86%] sm:w-[390px]
+              max-w-[390px]
               overflow-y-auto
               shadow-2xl
-              ${mobileTheme}
+              animate-[slideIn_.3s_ease-out]
+              ${mobileBg}
             `}
             onClick={(e) => e.stopPropagation()}
           >
 
-            {/* MOBILE HEADER */}
+            {/* MOBILE DRAWER HEADER */}
 
             <div
               className={`
                 sticky top-0 z-10
                 flex items-center justify-between
-                px-5 py-4 border-b
+                px-5 sm:px-6
+                py-5
+                border-b
                 ${
                   isDark
-                    ? "bg-gray-950 border-gray-800"
-                    : "bg-white border-gray-100"
+                    ? "bg-[#111111] border-white/10"
+                    : "bg-[#FAF9F6] border-[#EAE6DF]"
                 }
               `}
             >
               <div>
-                <p
-                  className={`
-                    text-[9px] tracking-[2px]
-                    uppercase mb-2
-                    ${isDark ? "text-gray-500" : "text-gray-400"}
-                  `}
-                >
-                  Navigation
-                </p>
-
                 <button
                   type="button"
-                  onClick={() => {
-                    closeMobileMenu();
-                    navigate("/");
-                  }}
-                  className={`
-                    text-lg tracking-[3px]
-                    font-semibold uppercase
-                    whitespace-nowrap
-                    transition-colors
-                    ${
-                      isDark
-                        ? "text-gray-300 hover:text-white"
-                        : "text-gray-900 hover:text-black"
-                    }
-                  `}
+                  onClick={handleLogoClick}
+                  className="
+              
+                    text-[23px]
+                    tracking-[3px]
+                    font-semibold
+                  "
                 >
                   CARTIFY
                 </button>
-              </div>
 
-              {/* CLOSE BUTTON */}
+                <p
+                  className={`
+                    mt-1
+                    text-[8px]
+                    uppercase
+                    tracking-[2.5px]
+                    ${secondaryText}
+                  `}
+                >
+                  Style in every detail
+                </p>
+              </div>
 
               <button
                 type="button"
                 onClick={closeMobileMenu}
                 aria-label="Close menu"
                 className={`
-                  group
+                  flex items-center justify-center
                   w-9 h-9
                   rounded-full
-                  flex items-center justify-center
-                  transition-all duration-200
-                  ${
-                    isDark
-                      ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                  }
+                  transition-all duration-300
+                  hover:rotate-90
+                  ${subtleHover}
                 `}
               >
-                <FiX className="text-lg transition-transform duration-300 group-hover:rotate-90" />
+                <FiX size={20} strokeWidth={1.5} />
               </button>
             </div>
 
-            {/* SHOP NAVIGATION */}
+            {/* MOBILE NAVIGATION */}
 
-            <div className="px-5 pt-6">
+            <div className="px-5 sm:px-6 pt-7">
 
               <p
                 className={`
-                  text-[9px] tracking-[2.5px]
-                  uppercase mb-3
-                  ${isDark ? "text-gray-500" : "text-gray-400"}
+                  mb-3
+                  text-[9px]
+                  uppercase
+                  tracking-[2.5px]
+                  ${secondaryText}
                 `}
               >
-                Shop
+                Explore Cartify
               </p>
 
-              <nav className="flex flex-col">
-
-                {menus.map((menu) => {
-                  const isExpanded = openMobileMenu === menu.title;
+              <nav>
+                {menus.map((menu, index) => {
+                  const isExpanded =
+                    openMobileMenu === menu.title;
 
                   return (
-                    <div key={menu.title}>
-
-                      {/* CATEGORY BUTTON */}
+                    <div
+                      key={menu.title}
+                      className={`
+                        border-b
+                        ${
+                          isDark
+                            ? "border-white/[0.08]"
+                            : "border-[#EAE6DF]"
+                        }
+                      `}
+                    >
+                      {/* CATEGORY */}
 
                       <button
                         type="button"
                         aria-expanded={isExpanded}
                         onClick={() =>
-                          setOpenMobileMenu(
-                            isExpanded ? null : menu.title
-                          )
+                          handleMobileCategory(menu.title)
                         }
-                        className={`
+                        className="
                           w-full
                           flex items-center justify-between
-                          py-4
+                          py-[19px]
                           text-left
-                          transition-colors
-                          ${
-                            isDark
-                              ? "text-gray-200 hover:text-white"
-                              : "text-gray-800 hover:text-black"
-                          }
-                        `}
+                          group
+                        "
                       >
-                        <span className="text-sm sm:text-base font-medium tracking-wide">
-                          {menu.title}
-                        </span>
+                        <div className="flex items-center gap-3">
+
+                          <span
+                            className={`
+                              text-[9px]
+                              tracking-wider
+                              ${secondaryText}
+                            `}
+                          >
+                            0{index + 1}
+                          </span>
+
+                          <span
+                            className={`
+                          
+                              text-[20px]
+                              sm:text-[22px]
+                              font-normal
+                              transition-colors duration-300
+                              ${
+                                isExpanded
+                                  ? isDark
+                                    ? "text-white"
+                                    : "text-black"
+                                  : isDark
+                                    ? "text-gray-200"
+                                    : "text-[#38352F]"
+                              }
+                            `}
+                          >
+                            {menu.title}
+                          </span>
+                        </div>
 
                         <FaChevronDown
                           className={`
-                            text-[10px]
+                            text-[9px]
                             transition-transform duration-300
                             ${isExpanded ? "rotate-180" : ""}
+                            ${secondaryText}
                           `}
                         />
                       </button>
 
-                      {/* SUB NAVIGATION */}
+                      {/* EXPANDABLE LINKS */}
 
                       <div
                         className={`
-                          grid transition-all duration-300 ease-in-out
+                          grid
+                          transition-all duration-300 ease-in-out
                           ${
                             isExpanded
                               ? "grid-rows-[1fr] opacity-100"
@@ -912,45 +960,55 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                         `}
                       >
                         <div className="overflow-hidden">
+
                           <div
                             className={`
-                              ml-1 pl-4
-                              border-l
-                              pb-3
+                              pb-5
+                              pl-7
                               ${
                                 isDark
-                                  ? "border-gray-800"
-                                  : "border-gray-200"
+                                  ? "border-white/10"
+                                  : "border-[#EAE6DF]"
                               }
                             `}
                           >
-                            <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+                            <p
+                              className={`
+                                text-[10px]
+                                leading-5
+                                mb-3
+                                ${secondaryText}
+                              `}
+                            >
+                              {menu.subtitle}
+                            </p>
+
+                            <div className="grid grid-cols-2 gap-x-4 gap-y-3">
 
                               {menu.items.map((item) => (
                                 <NavLink
                                   key={item.name}
                                   to={item.path}
-                                  onClick={closeMobileMenu}
+                                  onClick={handleMobileNavigation}
                                   className={({ isActive }) => `
-                                    flex min-w-0 min-h-10
-                                    items-center py-2
-                                    text-[11px] sm:text-xs
+                                    text-[11px]
                                     leading-5
                                     transition-colors duration-200
                                     ${
                                       isActive
                                         ? isDark
-                                          ? "text-white font-medium"
-                                          : "text-gray-950 font-medium"
-                                        : isDark
-                                          ? "text-gray-400 hover:text-white"
-                                          : "text-gray-500 hover:text-gray-900"
+                                          ? "text-white font-semibold"
+                                          : "text-black font-semibold"
+                                        : secondaryText
+                                    }
+                                    ${
+                                      isDark
+                                        ? "hover:text-white"
+                                        : "hover:text-black"
                                     }
                                   `}
                                 >
-                                  <span className="break-words">
-                                    {item.name}
-                                  </span>
+                                  {item.name}
                                 </NavLink>
                               ))}
 
@@ -961,176 +1019,161 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                     </div>
                   );
                 })}
-
               </nav>
             </div>
 
-            {/* ACCOUNT ACTIONS */}
+            {/* MOBILE ACCOUNT SECTION */}
 
-            <div className="px-5">
+            <div className="px-5 sm:px-6 pt-7 pb-8">
+
+              <p
+                className={`
+                  mb-4
+                  text-[9px]
+                  uppercase
+                  tracking-[2.5px]
+                  ${secondaryText}
+                `}
+              >
+                Your Account
+              </p>
 
               <div
                 className={`
-                  mt-4 pt-5 border-t
-                  ${isDark ? "border-gray-800" : "border-gray-200"}
+                  grid gap-2
+                  ${
+                    allowNotification
+                      ? "grid-cols-3"
+                      : "grid-cols-2"
+                  }
                 `}
               >
-                <p
+
+                {/* ORDERS */}
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    closeMobileMenu();
+                    navigate("/orders");
+                  }}
                   className={`
-                    text-[9px] tracking-[2.5px]
-                    uppercase mb-3
-                    ${isDark ? "text-gray-500" : "text-gray-400"}
+                    flex flex-col items-center gap-2
+                    py-4 rounded-xl
+                    text-[10px]
+                    ${subtleHover}
+                    ${secondaryText}
                   `}
                 >
-                  Account
-                </p>
+                  <FiPackage size={19} />
+                  Orders
+                </button>
 
-                <div
-                  className={`
-                    grid gap-1.5
-                    ${
-                      allowNotification
-                        ? "grid-cols-3"
-                        : "grid-cols-2"
-                    }
-                  `}
-                >
+                {/* NOTIFICATIONS */}
 
-                  {/* ORDERS */}
-
+                {allowNotification && (
                   <button
                     type="button"
                     onClick={() => {
                       closeMobileMenu();
-                      navigate("/orders");
+                      navigate("/notifications");
                     }}
                     className={`
-                      flex flex-col items-center justify-center
-                      gap-1.5 py-3 rounded-xl
-                      transition-all
-                      ${
-                        isDark
-                          ? "text-gray-400 hover:bg-gray-900 hover:text-white"
-                          : "text-gray-600 hover:bg-gray-100 hover:text-black"
-                      }
+                      flex flex-col items-center gap-2
+                      py-4 rounded-xl
+                      text-[10px]
+                      ${subtleHover}
+                      ${secondaryText}
                     `}
                   >
-                    <FiPackage className="text-xl" />
+                    <span className="relative">
+                      <FiBell size={19} />
 
-                    <span className="text-[10px] sm:text-[11px]">
-                      Orders
+                      {unreadCount > 0 && (
+                        <span
+                          className="
+                            absolute -top-1.5 -right-2
+                            min-w-[14px] h-[14px]
+                            px-1 rounded-full
+                            bg-[#B85C50]
+                            text-white text-[8px]
+                            flex items-center justify-center
+                          "
+                        >
+                          {unreadCount > 99 ? "99+" : unreadCount}
+                        </span>
+                      )}
                     </span>
+                    Notifications
                   </button>
+                )}
 
-                  {/* NOTIFICATIONS */}
+                {/* PROFILE / LOGIN */}
 
-                  {allowNotification && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        closeMobileMenu();
-                        navigate("/notifications");
-                      }}
-                      className={`
-                        flex flex-col items-center justify-center
-                        gap-1.5 py-3 rounded-xl
-                        transition-all
-                        ${
-                          isDark
-                            ? "text-gray-400 hover:bg-gray-900 hover:text-white"
-                            : "text-gray-600 hover:bg-gray-100 hover:text-black"
-                        }
-                      `}
-                    >
-                      <div className="relative">
-                        <FiBell className="text-xl" />
-
-                        {unreadCount > 0 && (
-                          <span
-                            className="
-                              absolute -top-2 -right-2
-                              min-w-[16px] h-4 px-1
-                              rounded-full
-                              bg-red-500 text-white
-                              text-[8px] font-bold
-                              flex items-center justify-center
-                            "
-                          >
-                            {unreadCount > 99 ? "99+" : unreadCount}
-                          </span>
-                        )}
-                      </div>
-
-                      <span className="text-[10px] sm:text-[11px]">
-                        Notifications
-                      </span>
-                    </button>
-                  )}
-
-                  {/* PROFILE / LOGIN */}
-
-                  {user ? (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        closeMobileMenu();
-                        navigate("/profile");
-                      }}
-                      className={`
-                        flex flex-col items-center justify-center
-                        gap-1.5 py-3 rounded-xl
-                        transition-all
-                        ${
-                          isDark
-                            ? "text-gray-400 hover:bg-gray-900 hover:text-white"
-                            : "text-gray-600 hover:bg-gray-100 hover:text-black"
-                        }
-                      `}
-                    >
-                      <div
-                        className="
-                          w-7 h-7 rounded-full
-                          flex items-center justify-center
-                          text-white text-[10px] font-semibold
-                          bg-gradient-to-br from-gray-600 to-black
-                        "
-                      >
-                        {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
-                      </div>
-
-                      <span className="text-[10px] sm:text-[11px]">
-                        Profile
-                      </span>
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        closeMobileMenu();
-                        setIsLogin(true);
-                        setIsOpen(true);
-                      }}
-                      className={`
-                        flex flex-col items-center justify-center
-                        gap-1.5 py-3 rounded-xl
-                        transition-all
-                        ${
-                          isDark
-                            ? "text-gray-400 hover:bg-gray-900 hover:text-white"
-                            : "text-gray-600 hover:bg-gray-100 hover:text-black"
-                        }
-                      `}
-                    >
-                      <FiUser className="text-xl" />
-
-                      <span className="text-[10px] sm:text-[11px]">
-                        Login
-                      </span>
-                    </button>
-                  )}
-
-                </div>
+                {user ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      closeMobileMenu();
+                      navigate("/profile");
+                    }}
+                    className={`
+                      flex flex-col items-center gap-2
+                      py-4 rounded-xl
+                      text-[10px]
+                      ${subtleHover}
+                      ${secondaryText}
+                    `}
+                  >
+                    <FiUser size={19} />
+                    Profile
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      closeMobileMenu();
+                      handleLogin();
+                    }}
+                    className={`
+                      flex flex-col items-center gap-2
+                      py-4 rounded-xl
+                      text-[10px]
+                      ${subtleHover}
+                      ${secondaryText}
+                    `}
+                  >
+                    <FiUser size={19} />
+                    Sign In
+                  </button>
+                )}
               </div>
+            </div>
+
+            {/* MOBILE FOOTER */}
+
+            <div
+              className={`
+                px-5 sm:px-6
+                py-5
+                border-t
+                ${
+                  isDark
+                    ? "border-white/10"
+                    : "border-[#EAE6DF]"
+                }
+              `}
+            >
+              <p
+                className={`
+                
+                  text-[17px]
+                  italic
+                  ${secondaryText}
+                `}
+              >
+                Style in every detail.
+              </p>
             </div>
           </div>
         </div>
@@ -1156,7 +1199,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       {isSearchModalOpen && (
         <div
           className={`
-            fixed inset-0 z-[100]
+            fixed inset-0 z-[110]
             ${isDark ? "bg-black/70" : "bg-black/40"}
           `}
           onClick={(e) => {
@@ -1168,24 +1211,25 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
           <div
             className={`
               relative w-full
-              px-3 sm:px-5 lg:px-6
-              py-4 sm:py-5
+              px-3 sm:px-5 lg:px-8
+              py-5 sm:py-7
               shadow-xl
-              ${isDark ? "bg-gray-900" : "bg-white"}
+              ${isDark ? "bg-[#171717]" : "bg-[#FAF9F6]"}
             `}
           >
-            <div className="max-w-5xl mx-auto relative">
+            <div className="max-w-4xl mx-auto">
 
+             
               {/* SEARCH INPUT */}
 
               <div className="relative">
 
                 <FiSearch
                   className={`
-                    absolute left-3 sm:left-4
+                    absolute left-0
                     top-1/2 -translate-y-1/2
-                    text-base sm:text-lg
-                    ${isDark ? "text-gray-400" : "text-gray-500"}
+                    text-lg
+                    ${secondaryText}
                   `}
                 />
 
@@ -1194,45 +1238,24 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   type="text"
                   value={searchTerm}
                   onChange={(e) => handleSearch(e.target.value)}
-                  placeholder="Search products, brands, categories..."
+                  placeholder="What are you looking for?"
                   aria-label="Search products"
                   className={`
                     w-full
-                    pl-10 sm:pl-12 pr-12
-                    py-3 sm:py-4
+                    pl-8 pr-3
+                    py-3
                     bg-transparent
-                    border-b outline-none
-                    text-xs sm:text-sm
-                    font-medium
-                    ${
-                      isDark
-                        ? "text-white border-gray-700 placeholder-gray-500 focus:border-white"
-                        : "text-black border-gray-300 placeholder-gray-400 focus:border-black"
-                    }
-                  `}
-                />
-
-                {/* CLOSE SEARCH */}
-
-                <button
-                  type="button"
-                  onClick={closeSearch}
-                  aria-label="Close search"
-                  className={`
-                    absolute right-2 top-1/2
-                    -translate-y-1/2
-                    w-8 h-8 rounded-full
-                    flex items-center justify-center
+                    border-b
+                    outline-none
+                    text-sm
                     transition-colors
                     ${
                       isDark
-                        ? "text-gray-400 hover:bg-gray-800 hover:text-white"
-                        : "text-gray-500 hover:bg-gray-100 hover:text-black"
+                        ? "border-white/20 text-white placeholder-gray-500 focus:border-white"
+                        : "border-[#D9D4CA] text-[#292722] placeholder-gray-400 focus:border-black"
                     }
                   `}
-                >
-                  <FiX className="text-lg" />
-                </button>
+                />
               </div>
 
               {/* SEARCH RESULTS */}
@@ -1242,14 +1265,14 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 (searchTerm.trim() && !searchLoading)) && (
                 <div
                   className={`
-                    absolute top-full left-0 right-0
-                    mt-2 rounded-xl
-                    shadow-2xl border
-                    overflow-hidden z-50
+                    mt-3
+                    max-h-[65vh]
+                    overflow-y-auto
+                    border
                     ${
                       isDark
-                        ? "bg-gray-900 border-gray-800"
-                        : "bg-white border-gray-100"
+                        ? "bg-[#1D1D1D] border-white/10"
+                        : "bg-white border-[#EAE6DF]"
                     }
                   `}
                 >
@@ -1259,11 +1282,11 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   {searchLoading && (
                     <div
                       className={`
-                        px-4 py-5 text-center text-xs sm:text-sm
-                        ${isDark ? "text-gray-400" : "text-gray-500"}
+                        py-7 text-center text-xs
+                        ${secondaryText}
                       `}
                     >
-                      Searching...
+                      Searching products...
                     </div>
                   )}
 
@@ -1272,49 +1295,50 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   {!searchLoading &&
                     results.map((item) => (
                       <button
-                        type="button"
                         key={item._id}
-                        onClick={() => handleProductClick(item._id)}
+                        type="button"
+                        onClick={() =>
+                          handleProductClick(item._id)
+                        }
                         className={`
                           w-full
+                          flex items-center gap-4
                           px-4 sm:px-5
-                          py-3 sm:py-4
-                          flex items-center gap-3 sm:gap-4
+                          py-3
                           text-left
                           border-b last:border-b-0
-                          transition-colors
+                          transition-colors duration-200
                           ${
                             isDark
-                              ? "border-gray-800 hover:bg-gray-800 text-white"
-                              : "border-gray-100 hover:bg-gray-50 text-gray-800"
+                              ? "border-white/[0.06] hover:bg-white/[0.04] text-white"
+                              : "border-[#F0EDE8] hover:bg-[#FAF9F6] text-gray-900"
                           }
                         `}
                       >
                         {item.images?.[0] && (
                           <img
                             src={item.images[0]}
-                            alt={item.name}
+                            alt={item.name || "Product"}
                             className="
-                              w-9 h-9
-                              rounded object-cover shrink-0
+                              w-11 h-11
+                              object-cover
+                              shrink-0
                             "
                           />
                         )}
 
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs sm:text-sm font-medium truncate">
+                        <span className="flex-1 min-w-0">
+                          <span className="block text-xs sm:text-sm font-medium truncate">
                             {item.name}
-                          </p>
-                        </div>
-
-                        <span
-                          className={`
-                            text-lg
-                            ${isDark ? "text-gray-500" : "text-gray-400"}
-                          `}
-                        >
-                          →
+                          </span>
                         </span>
+
+                        <FiArrowUpRight
+                          className={`
+                            shrink-0
+                            ${secondaryText}
+                          `}
+                        />
                       </button>
                     ))}
 
@@ -1323,18 +1347,24 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   {!searchLoading &&
                     searchTerm.trim() &&
                     results.length === 0 && (
-                      <div
-                        className={`
-                          px-4 py-6 text-center
-                          text-xs sm:text-sm
-                          ${
-                            isDark
-                              ? "text-gray-400"
-                              : "text-gray-500"
-                          }
-                        `}
-                      >
-                        No products found. Try another search.
+                      <div className="py-8 text-center">
+                        <p
+                          className={`
+                             text-lg
+                            ${mainText}
+                          `}
+                        >
+                          Nothing found
+                        </p>
+
+                        <p
+                          className={`
+                            mt-1 text-xs
+                            ${secondaryText}
+                          `}
+                        >
+                          Try another product or category.
+                        </p>
                       </div>
                     )}
                 </div>
@@ -1345,7 +1375,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       )}
 
       {/* =====================================================
-          AUTH MODAL
+          AUTHENTICATION MODAL
       ===================================================== */}
 
       <AuthModal

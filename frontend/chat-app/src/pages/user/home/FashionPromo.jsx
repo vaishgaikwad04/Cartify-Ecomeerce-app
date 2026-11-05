@@ -52,14 +52,26 @@ const FashionPromo = () => {
           </h2>
         </div>
 
-        <p className="
-          hidden sm:block
-          text-[10px] tracking-[0.2em]
-          uppercase text-gray-400
-          pb-2
-        ">
+        <button   className={`
+            group
+            flex items-center gap-3
+            w-fit
+            pb-1
+            border-b
+            text-[10px]
+            sm:text-[11px]
+            uppercase
+            tracking-[1.5px]
+            font-medium
+            transition-all duration-300
+            ${
+              isDark
+                ? "border-white/30 text-gray-300 hover:text-white hover:border-white"
+                : "border-[#BDB8AF] text-[#5D5951] hover:text-black hover:border-black"
+            }
+          `}>
           Discover the collection
-        </p>
+        </button>
 
       </div>
 
