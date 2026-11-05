@@ -1,161 +1,224 @@
+
 import React from "react";
 
-// Reusable components
 import ImageCard from "../../../components/ui/ImageCard";
 import Card from "../../../components/ui/Card";
 
-// Fashion Promo custom hook
 import { useFashionPromo } from "../../../hooks/user/useFashionPromo";
-
-// Wishlist custom hook
 import { useWishlist } from "../../../hooks/user/useWishList";
 
-// FASHION PROMO IMAGES
 const images = [
   "https://shopjonesandco.com/cdn/shop/files/jones-_-co-glossy-bar-barrette-gold-hair-clip-x7y2z1_50b3496a-3d37-4857-814f-41a9e0038d40.jpg?v=1781663253&width=3000",
   "https://mafoil.wpbingosite.com/wp-content/uploads/2022/12/banner-24.jpg",
- 
 ];
 
 const FashionPromo = () => {
-  // FASHION PROMO HOOK
-  const { openProductModel, setOpenProductModel, isDark, categories } =
-    useFashionPromo();
+  const {
+    openProductModel,
+    setOpenProductModel,
+    isDark,
+    categories,
+  } = useFashionPromo();
 
-  // WISHLIST
   const { isWishlisted, toggleWishlist } = useWishlist();
 
   return (
-    <div
+    <section
       className={`
-    max-w-[1800px]
-    mx-auto
-    px-4
-    sm:px-6
-    lg:px-10
-    py-12
-
-    grid
-    grid-cols-2
-
-    sm:gap-2
-    md:gap-3
-    lg:gap-4
-
-    ${isDark ? "bg-gray-950" : "bg-white"}
-  `}
+        w-full max-w-[1800px] mx-auto
+        px-4 sm:px-8 lg:px-12
+        py-14 md:py-20
+        transition-colors duration-300
+        ${isDark ? "bg-gray-950 text-white" : "bg-[#faf9f7] text-[#171717]"}
+      `}
     >
-      {images.map((image, index) => (
-        <div key={index} className="relative min-w-0">
-          {/* IMAGE */}
-          <ImageCard
-            image={image}
-            onClick={() => {
-              if (openProductModel !== null) {
-                setOpenProductModel(null);
-              }
-            }}
-            className="
-        aspect-[2/4] lg:aspect-[5/4]
-        w-full
-        rounded 
-           
-      "
-          >
-            {/* PLUS BUTTON */}
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setOpenProductModel(index);
-              }}
-              aria-label={`View product ${index + 1}`}
-              className={`
-  w-7 h-7
-  sm:w-8 sm:h-8
-  md:w-9 md:h-9
-  lg:w-10 lg:h-10
+      {/* EDITORIAL HEADER */}
+      <div className="flex items-end justify-between mb-8 md:mb-12">
 
-  -translate-x-5
+        <div>
+          <p className="
+            text-[9px] md:text-[10px]
+            uppercase tracking-[0.3em]
+            text-gray-400 mb-3
+          ">
+            THE EDIT / 2026
+          </p>
 
-  lg:mb-32
+          <h2 className="
+            text-3xl sm:text-4xl md:text-5xl
+            font-normal tracking-tight
+          ">
+            Shop the Look
+          </h2>
+        </div>
 
-  rounded-full
-  flex items-center justify-center
-  shadow-md
+        <p className="
+          hidden sm:block
+          text-[10px] tracking-[0.2em]
+          uppercase text-gray-400
+          pb-2
+        ">
+          Discover the collection
+        </p>
 
-  text-sm
-  sm:text-base
-  md:text-lg
-  lg:text-xl
+      </div>
 
-  ${
-    isDark
-      ? "bg-gray-900 text-white hover:bg-gray-800"
-      : "bg-white text-black hover:bg-gray-100"
-  }
-`}
-            >
-              +
-            </button>
-          </ImageCard>
+      {/* EDITORIAL IMAGE LAYOUT */}
+      <div className="
+        grid grid-cols-1 md:grid-cols-12
+        gap-4 md:gap-5
+        items-stretch
+      ">
 
-          {openProductModel === index && categories?.[index] && (
+        {images.map((image, index) => {
+
+          const product = categories?.[index];
+          const isOpen = openProductModel === index;
+
+          return (
             <div
-              onClick={(e) => e.stopPropagation()}
+              key={image}
               className={`
-  absolute
-  z-[99999]
-  top-24
-
-${index === 0 ? "left-6" : "right-4"}
-  min-[500px]:max-[670px]:top-34
-
-  min-[1108px]:!left-[46px]
-  min-[1108px]:!top-[220px]
-  min-[1108px]:!right-auto
-  min-[1108px]:!ml-34
-
-  w-[110px]
-  sm:w-[120px]
-  md:w-[150px]
-  min-[500px]:max-[670px]:w-[180px]
-  min-[1108px]:!w-[240px]
-`}
+                relative group min-w-0
+                ${index === 0
+                  ? "md:col-span-7"
+                  : "md:col-span-5"
+                }
+              `}
             >
-              <div
-                className={`
-  absolute
-  z-[99999]
-  top-24
 
-  ${index === 0 ? "left-10" : "right-2"}
+              {/* IMAGE */}
+              <div className={`
+                relative w-full overflow-hidden
+                bg-[#eeece9]
+                ${index === 0
+                  ? "aspect-[4/5] md:aspect-[0.91/1]"
+                  : "aspect-[4/5] md:aspect-[0.91/1]"
+                }
+              `}>
 
-  min-[500px]:max-[670px]:top-28
-
-  min-[1108px]:!left-[250px]
-  min-[1108px]:!top-[100px]
-  min-[1108px]:!right-auto
-  min-[1108px]:!ml-0
-
-  w-[110px]
-  sm:w-[120px]
-  md:w-[150px]
-  min-[500px]:max-[670px]:w-[180px]
-  min-[1108px]:!w-[240px]
-`}
-              >
-                <Card
-                  product={categories[index]}
-                  isWishlisted={isWishlisted(categories[index]._id)}
-                  onToggleWishlist={toggleWishlist}
+                <ImageCard
+                  image={image}
+                  onClick={() => setOpenProductModel(null)}
+                  className="
+                    w-full h-full
+                    rounded-none
+                    overflow-hidden
+                    transition-transform
+                    duration-700
+                    ease-out
+                    group-hover:scale-[1.035]
+                  "
                 />
+
+                {/* SUBTLE IMAGE OVERLAY */}
+                <div className="
+                  absolute inset-0
+                  bg-black/[0.03]
+                  pointer-events-none
+                  group-hover:bg-transparent
+                  transition-all duration-500
+                " />
+
+                {/* SMALL EDITORIAL LABEL */}
+                <div className="
+                  absolute top-5 left-5
+                  z-10 pointer-events-none
+                ">
+                  <span className="
+                    bg-white/90
+                    px-3 py-2
+                    text-[9px]
+                    uppercase tracking-[0.18em]
+                    text-gray-800
+                  ">
+                    {index === 0 ? "The Accessories Edit" : "New Season"}
+                  </span>
+                </div>
+
+                {/* PRODUCT HOTSPOT */}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenProductModel(isOpen ? null : index);
+                  }}
+                  aria-label="View featured product"
+                  aria-expanded={isOpen}
+                  className="
+                    absolute z-20
+                    top-1/2 left-1/2
+                    -translate-x-1/2
+                    -translate-y-1/2
+                    w-10 h-10
+                    rounded-full
+                    bg-white
+                    text-black
+                    flex items-center justify-center
+                    shadow-lg
+                    border border-white/60
+                    transition-transform duration-300
+                    hover:scale-110
+                    active:scale-95
+                  "
+                >
+                  <span className={`
+                    text-xl font-light
+                    transition-transform duration-300
+                    ${isOpen ? "rotate-45" : ""}
+                  `}>
+                    +
+                  </span>
+                </button>
+
+                {/* PRODUCT PREVIEW */}
+                {isOpen && product && (
+                  <div
+                    onClick={(e) => e.stopPropagation()}
+                    className={`
+                      absolute z-30
+                      bottom-5
+                      ${index === 0 ? "left-5" : "right-5"}
+                      w-[min(230px,calc(100%-40px))]
+                      rounded-sm overflow-hidden
+                      shadow-2xl
+                      animate-in fade-in slide-in-from-bottom-2
+                      duration-300
+                      ${isDark ? "bg-gray-900" : "bg-white"}
+                    `}
+                  >
+
+                    <button
+                      type="button"
+                      onClick={() => setOpenProductModel(null)}
+                      aria-label="Close preview"
+                      className="
+                        absolute top-2 right-2 z-50
+                        w-7 h-7 rounded-full
+                        bg-white text-black
+                        shadow flex items-center justify-center
+                      "
+                    >
+                      ×
+                    </button>
+
+                    <Card
+                      product={product}
+                      isWishlisted={isWishlisted(product._id)}
+                      onToggleWishlist={toggleWishlist}
+                    />
+
+                  </div>
+                )}
+
               </div>
             </div>
-          )}
-        </div>
-      ))}
-    </div>
+          );
+        })}
+
+      </div>
+
+    </section>
   );
 };
 

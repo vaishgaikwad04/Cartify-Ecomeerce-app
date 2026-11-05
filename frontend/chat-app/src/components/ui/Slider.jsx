@@ -97,14 +97,33 @@ const Slider = ({ items = [], visibleItems = 4, renderItem }) => {
         "
       >
         <FaArrowLeftLong
-          className="
-            w-3
-            h-3
-            sm:w-4
-            sm:h-4
-            md:w-5
-            md:h-5
-          "
+         className="
+  absolute
+  top-1/2
+  -translate-y-1/2
+  z-20
+
+ w-4 h-4
+sm:w-5 sm:h-5
+md:w-6 md:h-6
+lg:w-7 lg:h-7
+
+  flex items-center justify-center
+
+  bg-white
+  shadow-lg
+  rounded-full
+
+  text-gray-800
+
+  disabled:opacity-30
+  disabled:cursor-not-allowed
+
+  hover:bg-gray-100
+  hover:scale-110
+
+  transition-all duration-300
+"
         />
       </button>
 
@@ -184,14 +203,33 @@ const Slider = ({ items = [], visibleItems = 4, renderItem }) => {
         "
       >
         <FaArrowRightLong
-          className="
-            w-3
-            h-3
-            sm:w-4
-            sm:h-4
-            md:w-5
-            md:h-5
-          "
+      className="
+  absolute
+  top-1/2
+  -translate-y-1/2
+  z-20
+
+  w-4 h-4
+sm:w-5 sm:h-5
+md:w-6 md:h-6
+lg:w-7 lg:h-7
+
+  flex items-center justify-center
+
+  bg-white
+  shadow-lg
+  rounded-full
+
+  text-gray-800
+
+  disabled:opacity-30
+  disabled:cursor-not-allowed
+
+  hover:bg-gray-100
+  hover:scale-110
+
+  transition-all duration-300
+"
         />
       </button>
     </div>

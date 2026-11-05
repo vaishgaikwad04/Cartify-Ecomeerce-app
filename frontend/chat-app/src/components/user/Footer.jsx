@@ -1,3 +1,4 @@
+
 import React, { useContext } from "react";
 
 import {
@@ -6,6 +7,8 @@ import {
   FaTwitter,
   FaDribbble,
 } from "react-icons/fa";
+
+import { FiMail } from "react-icons/fi";
 
 import { NavLink, Link, useNavigate } from "react-router-dom";
 
@@ -18,126 +21,176 @@ const Footer = () => {
 
   const navigate = useNavigate();
 
-  return (
-    <footer className="w-full">
-      {/* =========================================================
-          MAIN FOOTER
-      ========================================================= */}
-      <section
-        className={`
-          w-full
-          transition-colors
-          duration-300
+  const categories = [
+    { label: "DECOR", path: "/decor" },
+    { label: "BEAUTY", path: "/beauty" },
+    { label: "NEW-IN-BODY", path: "/new-in-body" },
+    { label: "ACCESSORIES", path: "/accessories" },
+    { label: "TRENDING-NOW", path: "/trending-now" },
+  ];
 
-          ${
-            isDark
-              ? "bg-gray-900 text-white"
-              : "bg-[#f5f5f5] text-gray-900"
-          }
-        `}
-      >
-        {/* =====================================================
-            FOOTER CONTAINER
-        ===================================================== */}
+  const helpLinks = [
+    { label: "FAQ", path: "/help/faq" },
+    { label: "SHIPPING", path: "/help/shipping" },
+    { label: "RETURNS", path: "/help/returns" },
+    { label: "ORDER STATUS", path: "/help/orders" },
+  ];
+
+  const socialLinks = [
+    {
+      icon: <FaTwitter />,
+      hover: "hover:text-sky-500",
+    },
+    {
+      icon: <FaInstagram />,
+      hover: "hover:text-pink-500",
+    },
+    {
+      icon: <FaFacebookF />,
+      hover: "hover:text-blue-600",
+    },
+    {
+      icon: <FaDribbble />,
+      hover: "hover:text-pink-400",
+    },
+  ];
+
+  return (
+    <footer
+      className={`
+        w-full
+        transition-colors duration-300
+        ${
+          isDark
+            ? "bg-gray-950 text-white"
+            : "bg-white text-gray-900"
+        }
+      `}
+    >
+      {/* MAIN FOOTER */}
+      <section className="w-full px-3 sm:px-5 lg:px-8 py-8 md:py-12">
+
         <div
-          className="
-            w-full
+          className={`
             max-w-[1800px]
             mx-auto
+            w-full
 
-            px-2
-            sm:px-4
-            md:px-6
-            lg:px-10
-            xl:px-12
+            ${
+              isDark
+                ? "bg-gray-900"
+                : "bg-[#f7f5f4]"
+            }
 
-            py-6
-            sm:py-8
-            md:py-10
-            lg:py-8
-            xl:py-9
-          "
+            px-5
+            sm:px-8
+            md:px-10
+            lg:px-12
+
+            pt-12
+            sm:pt-14
+            md:pt-16
+
+            pb-8
+            sm:pb-10
+            md:pb-12
+
+            transition-colors duration-300
+          `}
         >
-          {/* =====================================================
-              FOOTER GRID
-          ===================================================== */}
+
+          {/* ==========================================
+              CENTERED BRAND
+          ========================================== */}
+          <div className="text-center mb-12 md:mb-16">
+
+            <h2
+              onClick={() => navigate("/")}
+              className="
+                inline-block
+                cursor-pointer
+
+                font-serif
+                font-normal
+
+                text-4xl
+                sm:text-5xl
+                md:text-6xl
+
+                tracking-tight
+
+                transition-opacity
+                duration-300
+
+                hover:opacity-60
+              "
+            >
+              Cartify
+            </h2>
+
+          </div>
+
+          {/* ==========================================
+              FOOTER FOUR COLUMN LAYOUT
+          ========================================== */}
           <div
             className="
               grid
 
-              grid-cols-[1.25fr_0.85fr_0.8fr_1.2fr]
+              grid-cols-2
+              lg:grid-cols-4
+
+              gap-x-5
+              sm:gap-x-8
+              lg:gap-x-10
+
+              gap-y-10
+              lg:gap-y-6
 
               items-start
-
-              gap-x-2
-              sm:gap-x-4
-              md:gap-x-8
-              lg:gap-x-10
-              xl:gap-x-12
-
-              gap-y-4
             "
           >
-            {/* ===================================================
-                BRAND / CONTACT
-            =================================================== */}
+
+            {/* ========================================
+                COLUMN 1 - CONTACT / SOCIAL
+            ======================================== */}
             <div className="min-w-0">
-              {/* BRAND */}
-              <h2
-                onClick={() => navigate("/")}
-                className="
-                  cursor-pointer
 
-                  text-[10px]
+              <h3
+                className={`
+                  text-xs
                   sm:text-sm
-                  md:text-base
-                  lg:text-base
+                  font-semibold
+                  mb-5
+                  tracking-wide
 
-                  font-serif
-                  font-medium
-
-                  tracking-[1.5px]
-                  sm:tracking-[3px]
-                  md:tracking-[4px]
-                  lg:tracking-[3px]
-
-                  uppercase
-                  whitespace-nowrap
-                "
+                  ${
+                    isDark
+                      ? "text-white"
+                      : "text-gray-900"
+                  }
+                `}
               >
-                Cartify
-              </h2>
+                CONTACT
+              </h3>
 
-              {/* DESCRIPTION */}
               <p
                 className={`
-                  mt-2
-                  sm:mt-3
-
-                  max-w-[150px]
-                  sm:max-w-[220px]
-                  md:max-w-[260px]
-                  lg:max-w-[230px]
-
-                  text-[7px]
-                  sm:text-[9px]
-                  md:text-xs
-                  lg:text-[10px]
-
-                  leading-[1.5]
-
-                  line-clamp-5
+                  text-[11px]
+                  sm:text-xs
+                  leading-7
 
                   ${
                     isDark
                       ? "text-gray-400"
-                      : "text-gray-500"
+                      : "text-gray-600"
                   }
                 `}
               >
-                Your destination for modern fashion, beauty, and lifestyle.
-                Discover curated collections, premium quality, and trending
-                styles all in one place.
+                Your destination for modern fashion,
+                beauty, and lifestyle. Discover curated
+                collections, premium quality, and
+                trending styles all in one place.
               </p>
 
               {/* SOCIAL ICONS */}
@@ -145,108 +198,48 @@ const Footer = () => {
                 className={`
                   flex
                   items-center
-
-                  gap-1
-                  sm:gap-2
-                  md:gap-3
-                  lg:gap-2.5
-
-                  mt-3
-                  sm:mt-4
+                  gap-4
+                  mt-6
 
                   ${
                     isDark
                       ? "text-gray-300"
-                      : "text-gray-600"
+                      : "text-gray-800"
                   }
                 `}
               >
-                {[
-                  {
-                    icon: <FaTwitter />,
-                    hover: "hover:text-sky-500",
-                  },
-                  {
-                    icon: <FaInstagram />,
-                    hover: "hover:text-pink-500",
-                  },
-                  {
-                    icon: <FaFacebookF />,
-                    hover: "hover:text-blue-600",
-                  },
-                  {
-                    icon: <FaDribbble />,
-                    hover: "hover:text-pink-400",
-                  },
-                ].map((item, index) => (
+                {socialLinks.map((item, index) => (
                   <div
                     key={index}
                     className={`
-                      flex
-                      items-center
-                      justify-center
-                      shrink-0
-
-                      w-5
-                      h-5
-
-                      sm:w-7
-                      sm:h-7
-
-                      md:w-8
-                      md:h-8
-
-                      lg:w-7
-                      lg:h-7
-
-                      rounded-full
-
-                      text-[7px]
-                      sm:text-[9px]
-                      md:text-[10px]
-                      lg:text-[9px]
-
+                      text-sm
                       cursor-pointer
+                      transition-all
+                      duration-300
+                      hover:scale-125
 
-                      hover:scale-110
-
-                      transition-transform
-                      duration-200
-
-                      ${
-                        isDark
-                          ? "bg-gray-800"
-                          : "bg-gray-100"
-                      }
+                      ${item.hover}
                     `}
                   >
-                    <span className={item.hover}>
-                      {item.icon}
-                    </span>
+                    {item.icon}
                   </div>
                 ))}
               </div>
+
             </div>
 
-            {/* ===================================================
-                CATEGORIES
-            =================================================== */}
+            {/* ========================================
+                COLUMN 2 - CATEGORIES
+            ======================================== */}
             <div className="min-w-0">
+
               <h3
                 className="
-                  text-[8px]
-                  sm:text-xs
-                  md:text-sm
-                  lg:text-xs
-
-                  font-medium
-
-                  tracking-[0.5px]
-
-                  mb-2
-                  sm:mb-3
-                  md:mb-4
-                  lg:mb-3
+                  text-xs
+                  sm:text-sm
+                  font-semibold
+                  mb-5
+                  tracking-wide
                 "
               >
                 CATEGORIES
@@ -254,15 +247,10 @@ const Footer = () => {
 
               <ul
                 className={`
-                  space-y-1.5
-                  sm:space-y-2
-                  md:space-y-2.5
-                  lg:space-y-2
+                  space-y-3
 
-                  text-[7px]
-                  sm:text-[9px]
-                  md:text-xs
-                  lg:text-[10px]
+                  text-[11px]
+                  sm:text-xs
 
                   ${
                     isDark
@@ -271,23 +259,17 @@ const Footer = () => {
                   }
                 `}
               >
-                {[
-                  "/decor",
-                  "/beauty",
-                  "/new-in-body",
-                  "/accessories",
-                  "/trending-now",
-                ].map((path, i) => (
-                  <li key={i}>
+                {categories.map((item) => (
+                  <li key={item.path}>
                     <NavLink
-                      to={path}
+                      to={item.path}
                       className={`
+                        inline-block
                         relative
                         group
-                        inline-block
 
                         transition-colors
-                        duration-200
+                        duration-300
 
                         ${
                           isDark
@@ -296,18 +278,16 @@ const Footer = () => {
                         }
                       `}
                     >
-                      {path.replace("/", "").toUpperCase()}
+                      {item.label}
 
-                      {/* HOVER UNDERLINE */}
                       <span
                         className={`
                           absolute
-
                           left-0
                           -bottom-1
 
-                          w-0
                           h-px
+                          w-0
 
                           group-hover:w-full
 
@@ -325,30 +305,28 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
+
             </div>
 
-            {/* ===================================================
-                HELP
-            =================================================== */}
+            {/* ========================================
+                COLUMN 3 - HELP
+            ======================================== */}
             <div className="min-w-0">
+
               <h3
                 onClick={() => navigate("/help")}
                 className="
                   cursor-pointer
 
-                  text-[8px]
-                  sm:text-xs
-                  md:text-sm
-                  lg:text-xs
+                  text-xs
+                  sm:text-sm
 
-                  font-medium
+                  font-semibold
+                  mb-5
+                  tracking-wide
 
-                  tracking-[0.5px]
-
-                  mb-2
-                  sm:mb-3
-                  md:mb-4
-                  lg:mb-3
+                  hover:opacity-60
+                  transition-opacity
                 "
               >
                 HELP
@@ -356,15 +334,10 @@ const Footer = () => {
 
               <ul
                 className={`
-                  space-y-1.5
-                  sm:space-y-2
-                  md:space-y-2.5
-                  lg:space-y-2
+                  space-y-3
 
-                  text-[7px]
-                  sm:text-[9px]
-                  md:text-xs
-                  lg:text-[10px]
+                  text-[11px]
+                  sm:text-xs
 
                   ${
                     isDark
@@ -373,32 +346,14 @@ const Footer = () => {
                   }
                 `}
               >
-                {[
-                  {
-                    label: "FAQ",
-                    path: "/help/faq",
-                  },
-                  {
-                    label: "SHIPPING",
-                    path: "/help/shipping",
-                  },
-                  {
-                    label: "RETURNS",
-                    path: "/help/returns",
-                  },
-                  {
-                    label: "ORDER STATUS",
-                    path: "/help/orders",
-                  },
-                ].map((item) => (
+                {helpLinks.map((item) => (
                   <li key={item.path}>
                     <Link
                       to={item.path}
                       className={`
                         inline-block
-
                         transition-colors
-                        duration-200
+                        duration-300
 
                         ${
                           isDark
@@ -412,338 +367,143 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
+
             </div>
 
-            {/* ===================================================
-                PROMOTIONAL CARDS
-            =================================================== */}
-            <div
-              className="
-                min-w-0
+            {/* ========================================
+                COLUMN 4 - NEWSLETTER
+            ======================================== */}
+            <div className="min-w-0">
 
-                space-y-2
-                sm:space-y-3
-                md:space-y-4
-                lg:space-y-3
-              "
-            >
-              {/* =================================================
-                  ACCESSORIES
-              ================================================= */}
-              <Link to="/accessories">
-                <div
-                  className="
-                    flex
-                    items-center
+              <h3
+                className="
+                  text-xs
+                  sm:text-sm
+                  font-semibold
+                  mb-5
+                  tracking-wide
+                "
+              >
+                NEWSLETTER
+              </h3>
 
-                    gap-1
-                    sm:gap-2
-                    md:gap-2.5
-                    lg:gap-2
+              <p
+                className={`
+                  text-[11px]
+                  sm:text-xs
+                  leading-6
+                  mb-6
 
-                    group
-                    cursor-pointer
+                  ${
+                    isDark
+                      ? "text-gray-400"
+                      : "text-gray-600"
+                  }
+                `}
+              >
+                Subscribe to the weekly newsletter
+                for all the latest updates.
+              </p>
+
+              {/* EMAIL INPUT DESIGN */}
+              <div
+                className={`
+                  flex
+                  items-center
+                  justify-between
+                  w-full
+
+                  border-b
+
+                  pb-2
+
+                  ${
+                    isDark
+                      ? "border-gray-600"
+                      : "border-gray-800"
+                  }
+                `}
+              >
+                <input
+                  type="email"
+                  placeholder="Email..."
+                  aria-label="Newsletter email address"
+                  className={`
+                    w-full
                     min-w-0
-                  "
-                >
-                  {/* IMAGE */}
-                  <div
-                    className="
-                      shrink-0
-                      overflow-hidden
-                    "
-                  >
-                    <img
-                      src="https://mafoil.wpbingosite.com/wp-content/uploads/2022/11/banner-11.jpg"
-                      alt="Accessories"
-                      className="
-                        w-7
-                        h-7
+                    bg-transparent
+                    outline-none
 
-                        sm:w-10
-                        sm:h-10
+                    text-xs
 
-                        md:w-12
-                        md:h-12
+                    placeholder:text-gray-400
 
-                        lg:w-10
-                        lg:h-10
+                    ${
+                      isDark
+                        ? "text-white"
+                        : "text-gray-800"
+                    }
+                  `}
+                />
 
-                        object-cover
-
-                        group-hover:scale-105
-
-                        transition-transform
-                        duration-300
-                      "
-                    />
-                  </div>
-
-                  {/* TEXT */}
-                  <div className="min-w-0">
-                    <p
-                      className={`
-                        text-[5px]
-                        sm:text-[7px]
-                        md:text-[8px]
-                        lg:text-[7px]
-
-                        tracking-[1px]
-                        sm:tracking-[1.5px]
-                        md:tracking-[2px]
-                        lg:tracking-[1.5px]
-
-                        uppercase
-                        leading-none
-
-                        ${
-                          isDark
-                            ? "text-gray-400"
-                            : "text-gray-500"
-                        }
-                      `}
-                    >
-                      Accessories
-                    </p>
-
-                    <h4
-                      className={`
-                        mt-1
-
-                        text-[8px]
-                        sm:text-[10px]
-                        md:text-xs
-                        lg:text-[10px]
-
-                        font-normal
-                        truncate
-
-                        ${
-                          isDark
-                            ? "text-white"
-                            : "text-gray-800"
-                        }
-                      `}
-                    >
-                      Fashion
-                    </h4>
-                  </div>
-                </div>
-              </Link>
-
-              {/* =================================================
-                  COLLECTION
-              ================================================= */}
-              <Link to="/new-in-body">
-                <div
-                  className="
-                    flex
-                    items-center
-
-                    gap-1
-                    sm:gap-2
-                    md:gap-2.5
-                    lg:gap-2
-
-                    group
+                <FiMail
+                  className={`
+                    shrink-0
+                    text-lg
                     cursor-pointer
-                    min-w-0
 
-                    mt-1
-                  "
-                >
-                  {/* IMAGE */}
-                  <div
-                    className="
-                      shrink-0
-                      overflow-hidden
-                    "
-                  >
-                    <img
-                      src="https://mafoil.wpbingosite.com/wp-content/plugins/wpbingo/lib/lookbook/images/bwp_lookbook/lookbook-1.jpg"
-                      alt="Collection"
-                      className="
-                        w-7
-                        h-7
+                    ${
+                      isDark
+                        ? "text-gray-300"
+                        : "text-gray-800"
+                    }
+                  `}
+                />
 
-                        sm:w-10
-                        sm:h-10
+              </div>
 
-                        md:w-12
-                        md:h-12
-
-                        lg:w-10
-                        lg:h-10
-
-                        object-cover
-
-                        group-hover:scale-105
-
-                        transition-transform
-                        duration-300
-                      "
-                    />
-                  </div>
-
-                  {/* TEXT */}
-                  <div className="min-w-0">
-                    <p
-                      className={`
-                        text-[5px]
-                        sm:text-[7px]
-                        md:text-[8px]
-                        lg:text-[7px]
-
-                        tracking-[1px]
-                        sm:tracking-[1.5px]
-                        md:tracking-[2px]
-                        lg:tracking-[1.5px]
-
-                        uppercase
-                        leading-none
-
-                        ${
-                          isDark
-                            ? "text-gray-400"
-                            : "text-gray-500"
-                        }
-                      `}
-                    >
-                      Collection
-                    </p>
-
-                    <h4
-                      className={`
-                        mt-1
-
-                        text-[8px]
-                        sm:text-[10px]
-                        md:text-xs
-                        lg:text-[10px]
-
-                        font-normal
-                        truncate
-
-                        ${
-                          isDark
-                            ? "text-white"
-                            : "text-gray-800"
-                        }
-                      `}
-                    >
-                      Her Style Choice
-                    </h4>
-                  </div>
-                </div>
-              </Link>
             </div>
+
           </div>
-        </div>
 
-        {/* =========================================================
-            FOOTER BOTTOM
-        ========================================================= */}
-        <div
-          className={`
-            border-t
+          {/* ==========================================
+              COPYRIGHT
+          ========================================== */}
+          <div className="mt-12 md:mt-14 text-center">
 
-            ${
-              isDark
-                ? "border-gray-700"
-                : "border-gray-300"
-            }
-          `}
-        >
-          <div
-            className="
-              max-w-[1800px]
-              mx-auto
-
-              px-2
-              sm:px-4
-              md:px-6
-              lg:px-10
-              xl:px-12
-
-              py-3
-              sm:py-4
-              md:py-5
-              lg:py-3.5
-
-              flex
-              flex-row
-
-              justify-between
-              items-center
-
-              gap-2
-              sm:gap-4
-            "
-          >
-            {/* COPYRIGHT */}
             <p
               className={`
-                text-[7px]
-                sm:text-[9px]
-                md:text-xs
-                lg:text-[10px]
-
-                whitespace-nowrap
-
-                transition-colors
+                text-[11px]
+                sm:text-xs
 
                 ${
                   isDark
-                    ? "text-gray-400 hover:text-white"
-                    : "text-gray-600 hover:text-black"
+                    ? "text-gray-300"
+                    : "text-gray-700"
                 }
               `}
             >
-              © 2026 Cartify. Crafted with care.
+              © 2026{" "}
+
+              <Link
+                to="/"
+                className="
+                  underline
+                  underline-offset-2
+                  hover:opacity-60
+                  transition-opacity
+                "
+              >
+                Cartify
+              </Link>
+
+              . All rights reserved.
             </p>
 
-            {/* PAYMENT METHODS */}
-            <div
-              className={`
-                flex
-                items-center
-                justify-end
-
-                gap-1.5
-                sm:gap-3
-                md:gap-4
-                lg:gap-3
-
-                text-[7px]
-                sm:text-[9px]
-                md:text-xs
-                lg:text-[10px]
-
-                font-semibold
-
-                whitespace-nowrap
-
-                ${
-                  isDark
-                    ? "text-gray-500"
-                    : "text-gray-400"
-                }
-              `}
-            >
-              <span className="hover:text-black transition-colors cursor-pointer">
-                Mastercard
-              </span>
-
-              <span className="hover:text-black transition-colors cursor-pointer">
-                VISA
-              </span>
-
-              <span className="hover:text-black transition-colors cursor-pointer">
-                PayPal
-              </span>
-            </div>
           </div>
+
         </div>
+
       </section>
     </footer>
   );
