@@ -24,9 +24,7 @@ const HomeReviews = () => {
 
   const scrollRef = useRef(null);
 
-  // ============================================================
   // THEME
-  // ============================================================
 
   const sectionBg = isDark
     ? "bg-[#171715]"
@@ -36,10 +34,6 @@ const HomeReviews = () => {
     ? "text-[#F1EEE8]"
     : "text-[#292722]";
 
-  const secondaryText = isDark
-    ? "text-[#AAA59B]"
-    : "text-[#858078]";
-
   const borderColor = isDark
     ? "border-white/10"
     : "border-[#E5E0D7]";
@@ -48,9 +42,11 @@ const HomeReviews = () => {
     ? "text-[#B5AEA2] hover:text-white hover:bg-white/[0.06]"
     : "text-[#57534C] hover:text-black hover:bg-black/[0.04]";
 
-  // ============================================================
+  const slideBg = isDark
+    ? "bg-[#171715]"
+    : "bg-[#F7F5F0]";
+
   // FETCH REVIEWS
-  // ============================================================
 
   useEffect(() => {
     let isMounted = true;
@@ -71,6 +67,7 @@ const HomeReviews = () => {
 
         if (isMounted) {
           setReviews(reviewList);
+          setActiveIndex(0);
         }
       } catch (error) {
         console.error("Error fetching reviews:", error);
@@ -92,9 +89,7 @@ const HomeReviews = () => {
     };
   }, []);
 
-  // ============================================================
   // CUSTOMER DETAILS
-  // ============================================================
 
   const getCustomer = (review) =>
     review.userId?.name ||
@@ -110,9 +105,7 @@ const HomeReviews = () => {
     review.reviewText ||
     "";
 
-  // ============================================================
   // SLIDER NAVIGATION
-  // ============================================================
 
   const scrollToReview = (index) => {
     const container = scrollRef.current;
@@ -134,9 +127,7 @@ const HomeReviews = () => {
     scrollToReview(activeIndex + direction);
   };
 
-  // ============================================================
   // SYNC INDEX WITH MANUAL SCROLL
-  // ============================================================
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -158,7 +149,10 @@ const HomeReviews = () => {
         );
 
         setActiveIndex(
-          Math.min(Math.max(index, 0), reviews.length - 1)
+          Math.min(
+            Math.max(index, 0),
+            reviews.length - 1
+          )
         );
       }, 100);
     };
@@ -173,9 +167,7 @@ const HomeReviews = () => {
     };
   }, [reviews.length]);
 
-  // ============================================================
   // RESPONSIVE RESIZE
-  // ============================================================
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -196,15 +188,11 @@ const HomeReviews = () => {
     };
   }, [activeIndex]);
 
-  // ============================================================
   // LOADING / EMPTY STATE
-  // ============================================================
 
   if (loading || !reviews.length) return null;
 
-  // ============================================================
   // RENDER
-  // ============================================================
 
   return (
     <section
@@ -212,7 +200,8 @@ const HomeReviews = () => {
         relative
         w-full
         overflow-hidden
-        transition-colors duration-300
+        transition-colors
+        duration-300
         ${sectionBg}
       `}
     >
@@ -225,14 +214,12 @@ const HomeReviews = () => {
           sm:px-8
           lg:px-10
           xl:px-14
-          py-10
-          sm:py-14
+          py-7
+          sm:py-9
           lg:py-16
         "
       >
-        {/* ==================================================
-            TOP DIVIDER
-        ================================================== */}
+        {/* TOP DIVIDER */}
 
         <div
           className={`
@@ -242,17 +229,9 @@ const HomeReviews = () => {
           `}
         />
 
-        {/* ==================================================
-            SECTION HEADING
-        ================================================== */}
+        {/* REVIEW SLIDER */}
 
-        
-
-        {/* ==================================================
-            REVIEW SLIDER
-        ================================================== */}
-
-        <div className="relative mt-5 sm:mt-7 lg:mt-8">
+        <div className="relative mt-3 sm:mt-5 lg:mt-8">
 
           {/* PREVIOUS ARROW */}
 
@@ -270,20 +249,20 @@ const HomeReviews = () => {
                 flex
                 items-center
                 justify-center
-                w-9 h-9
+                w-8 h-8
                 sm:w-11 sm:h-11
                 rounded-full
-                transition-all duration-300
+                transition-all
+                duration-300
                 ${arrowStyle}
               `}
             >
               <FaArrowLeftLong
                 className="
-                  text-sm
+                  text-xs
                   sm:text-base
                   transition-transform
                   duration-300
-                  group-hover:-translate-x-1
                 "
               />
             </button>
@@ -293,7 +272,7 @@ const HomeReviews = () => {
 
           <div
             ref={scrollRef}
-            className="
+            className={`
               flex
               w-full
               overflow-x-auto
@@ -302,15 +281,19 @@ const HomeReviews = () => {
               snap-mandatory
               scroll-smooth
               overscroll-x-contain
+
               [scrollbar-width:none]
+              [-ms-overflow-style:none]
               [&::-webkit-scrollbar]:hidden
-            "
+
+              ${slideBg}
+            `}
             aria-label="Customer reviews"
           >
             {reviews.map((review, index) => (
               <article
                 key={review._id || review.id || index}
-                className="
+                className={`
                   flex
                   w-full
                   min-w-full
@@ -319,32 +302,32 @@ const HomeReviews = () => {
                   flex-col
                   items-center
                   justify-center
-                  min-h-[250px]
-                  sm:min-h-[270px]
+                  min-h-[190px]
+                  sm:min-h-[220px]
                   lg:min-h-[290px]
-                  px-11
-                  sm:px-16
+                  px-10
+                  sm:px-14
                   lg:px-24
-                  py-9
-                  sm:py-10
+                  py-6
+                  sm:py-7
+                  lg:py-10
                   text-center
-                "
+                  ${slideBg}
+                `}
               >
-           
-
                 {/* REVIEW TEXT */}
 
                 <p
                   className={`
                     max-w-[950px]
-            
-                    text-[18px]
-                    sm:text-[21px]
+                    text-[15px]
+                    sm:text-[18px]
                     md:text-[23px]
                     lg:text-[25px]
                     font-normal
                     leading-[1.55]
                     tracking-[-0.25px]
+                    break-words
                     ${primaryText}
                   `}
                 >
@@ -355,11 +338,18 @@ const HomeReviews = () => {
 
                 <div
                   className={`
-                    mt-7
-                    mb-4
+                    mt-5
+                    sm:mt-6
+                    lg:mt-7
+                    mb-3
+                    sm:mb-4
                     h-px
                     w-8
-                    ${isDark ? "bg-[#887A67]" : "bg-[#C7B7A3]"}
+                    ${
+                      isDark
+                        ? "bg-[#887A67]"
+                        : "bg-[#C7B7A3]"
+                    }
                   `}
                 />
 
@@ -367,7 +357,7 @@ const HomeReviews = () => {
 
                 <p
                   className={`
-                    text-[10px]
+                    text-[9px]
                     sm:text-[11px]
                     uppercase
                     tracking-[2px]
@@ -377,8 +367,6 @@ const HomeReviews = () => {
                 >
                   {getCustomer(review)}
                 </p>
-
-              
               </article>
             ))}
           </div>
@@ -399,16 +387,17 @@ const HomeReviews = () => {
                 flex
                 items-center
                 justify-center
-                w-9 h-9
+                w-8 h-8
                 sm:w-11 sm:h-11
                 rounded-full
-                transition-all duration-300
+                transition-all
+                duration-300
                 ${arrowStyle}
               `}
             >
               <FaArrowRightLong
                 className="
-                  text-sm
+                  text-xs
                   sm:text-base
                   transition-transform
                   duration-300
@@ -419,9 +408,7 @@ const HomeReviews = () => {
           )}
         </div>
 
-        {/* ==================================================
-            SLIDER INDICATORS
-        ================================================== */}
+        {/* SLIDER INDICATORS */}
 
         {reviews.length > 1 && (
           <div
@@ -440,11 +427,16 @@ const HomeReviews = () => {
                 type="button"
                 onClick={() => scrollToReview(index)}
                 aria-label={`Go to review ${index + 1}`}
-                aria-current={activeIndex === index ? "true" : undefined}
+                aria-current={
+                  activeIndex === index
+                    ? "true"
+                    : undefined
+                }
                 className={`
                   h-[3px]
                   rounded-full
-                  transition-all duration-300
+                  transition-all
+                  duration-300
                   ${
                     activeIndex === index
                       ? `w-7 ${
@@ -464,16 +456,15 @@ const HomeReviews = () => {
           </div>
         )}
 
-        {/* ==================================================
-            BOTTOM DIVIDER
-        ================================================== */}
+        {/* BOTTOM DIVIDER */}
 
         <div
           className={`
             w-full
             border-b
-            mt-9
-            sm:mt-11
+            mt-6
+            sm:mt-8
+            lg:mt-11
             ${borderColor}
           `}
         />

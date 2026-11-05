@@ -3,8 +3,7 @@ import NewArrivals from "./NewArrivals";
 import Sale from "./Sale";
 import FashionPromo from "./FashionPromo";
 import HeroSection from "./HeroSection";
-import SubFooter from "./SubFooter";
-import CustomersReviews from "./CustomersReviews"
+import CustomersReviews from "./CustomersReviews";
 
 const Home = () => {
   return (
@@ -13,10 +12,9 @@ const Home = () => {
         <HeroSection />
         <NewArrivals />
         <Sale />
-       
+
         <FashionPromo />
-         <CustomersReviews/>
-       
+        <CustomersReviews />
       </div>
     </>
   );

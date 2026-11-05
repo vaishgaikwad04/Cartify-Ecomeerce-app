@@ -138,7 +138,7 @@ const Footer = () => {
             className="
               grid
 
-              grid-cols-2
+              grid-cols-4
               lg:grid-cols-4
 
               gap-x-5

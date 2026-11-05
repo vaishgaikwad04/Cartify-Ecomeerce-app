@@ -77,7 +77,7 @@ const FashionPromo = () => {
 
       {/* EDITORIAL IMAGE LAYOUT */}
       <div className="
-        grid grid-cols-1 md:grid-cols-12
+        grid grid-cols-2 md:grid-cols-12
         gap-4 md:gap-5
         items-stretch
       ">

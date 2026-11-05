@@ -1,4 +1,10 @@
-import { FiMapPin, FiCheck, FiPlus, FiArrowLeft } from "react-icons/fi";
+
+import {
+  FiMapPin,
+  FiCheck,
+  FiPlus,
+  FiArrowLeft,
+} from "react-icons/fi";
 
 import { useAddress } from "../../../hooks/user/useAddress";
 import { useCheckout } from "../../../hooks/user/useCheckout";
@@ -7,13 +13,19 @@ import { useCart } from "../../../context/CartContext";
 import Button from "../../../components/ui/Button";
 
 const Checkout = () => {
-  // Get address data.
-  const { addresses = [], loading: addressLoading } = useAddress();
+  // ================= ADDRESS =================
+  const {
+    addresses = [],
+    loading: addressLoading,
+  } = useAddress();
 
-  // Get cart data and total price from shared CartContext.
-  const { cartData = [], totalPrice = 0 } = useCart();
+  // ================= CART =================
+  const {
+    cartData = [],
+    totalPrice = 0,
+  } = useCart();
 
-  // Get checkout state and actions.
+  // ================= CHECKOUT =================
   const {
     isDark,
     navigate,
@@ -23,26 +35,54 @@ const Checkout = () => {
     handlePayment,
   } = useCheckout();
 
+  // ================= THEME CLASSES =================
+  const pageBg = isDark
+    ? "bg-gray-950 text-white"
+    : "bg-white text-gray-900";
+
+  const cardBg = isDark
+    ? "border-white/[0.08] bg-gray-900"
+    : "border-gray-200 bg-white";
+
+  const heading = isDark
+    ? "text-gray-100"
+    : "text-gray-900";
+
+  const bodyText = isDark
+    ? "text-gray-400"
+    : "text-gray-500";
+
+  const secondaryText = isDark
+    ? "text-gray-300"
+    : "text-gray-700";
+
+  const border = isDark
+    ? "border-white/[0.08]"
+    : "border-gray-200";
+
+  const mutedBg = isDark
+    ? "bg-gray-800"
+    : "bg-gray-50";
+
+  const formatPrice = (price) =>
+    Number(price || 0).toLocaleString("en-IN");
+
   return (
     <main
       className={`
         min-h-screen
-        px-4
-        py-6
-        transition-colors
-        duration-300
-        sm:px-6
-        sm:py-8
-        lg:px-8
-
-        ${isDark ? "bg-gray-950 text-white" : "bg-gray-50 text-gray-900"}
+        px-3 py-6
+        sm:px-4 sm:py-8
+        lg:px-6 lg:py-10
+        transition-colors duration-300
+        ${pageBg}
       `}
     >
-      {/* Main checkout container */}
       <div className="mx-auto w-full max-w-[1800px]">
-        {/* Checkout header */}
+
+        {/* ================= PAGE HEADER ================= */}
         <header className="mb-6 sm:mb-8">
-          {/* Back to cart */}
+
           <button
             type="button"
             onClick={() => navigate(-1)}
@@ -51,10 +91,9 @@ const Checkout = () => {
               flex
               items-center
               gap-2
-              text-sm
-              lg:text-xs
+              text-xs
+              sm:text-sm
               transition-colors
-
               ${
                 isDark
                   ? "text-gray-400 hover:text-white"
@@ -62,148 +101,92 @@ const Checkout = () => {
               }
             `}
           >
-            <FiArrowLeft size={16} />
+            <FiArrowLeft size={15} />
             Back to cart
           </button>
 
-          {/* Page title */}
-          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl lg:text-xl">
+          <h1 className={`text-xl font-semibold tracking-tight sm:text-2xl ${heading}`}>
             Checkout
           </h1>
 
-          {/* Page description */}
-          <p
-            className={`
-              mt-2
-              max-w-xl
-              text-sm
-              lg:text-xs
-
-              ${isDark ? "text-gray-400" : "text-gray-500"}
-            `}
-          >
+          <p className={`mt-1.5 text-xs sm:text-sm ${bodyText}`}>
             Select your delivery address and continue to secure payment.
           </p>
         </header>
 
-        {/* Checkout content */}
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {/* Address section */}
-          <section className="lg:col-span-2">
-            <div
-              className={`
-                rounded-2xl
-                border
-                p-4
-                sm:p-6
+        {/* ================= CHECKOUT CONTENT ================= */}
+        <div className="grid grid-cols-1 items-start gap-5 lg:grid-cols-3 lg:gap-6">
 
-                ${
-                  isDark
-                    ? "border-gray-800 bg-gray-900"
-                    : "border-gray-200 bg-white"
-                }
-              `}
-            >
-              {/* Address heading */}
-              <div className="mb-6 flex items-start justify-between gap-4">
+          {/* ================= ADDRESS SECTION ================= */}
+          <section className="lg:col-span-2">
+            <div className={`rounded-xl border p-4 sm:p-5 lg:p-6 ${cardBg}`}>
+
+              {/* ADDRESS HEADER */}
+              <div className="mb-5 flex items-center justify-between gap-3">
                 <div>
-                  <h2 className="text-lg font-semibold lg:text-sm">
+                  <h2 className={`text-base font-semibold sm:text-lg ${heading}`}>
                     Delivery Address
                   </h2>
 
-                  <p
-                    className={`
-                      mt-1
-                      text-sm
-                      lg:text-xs
-
-                      ${isDark ? "text-gray-400" : "text-gray-500"}
-                    `}
-                  >
-                    Select where you want your order delivered.
+                  <p className={`mt-1 text-xs sm:text-sm ${bodyText}`}>
+                    Choose your preferred delivery location.
                   </p>
                 </div>
 
-                {/* Location icon */}
                 <div
                   className={`
-                    flex
-                    h-10
-                    w-10
-                    shrink-0
-                    items-center
-                    justify-center
+                    flex h-9 w-9 shrink-0
+                    items-center justify-center
                     rounded-lg
-
-                    ${
-                      isDark
-                        ? "bg-gray-800 text-gray-300"
-                        : "bg-gray-100 text-gray-600"
-                    }
+                    ${mutedBg}
+                    ${secondaryText}
                   `}
                 >
-                  <FiMapPin size={18} />
+                  <FiMapPin size={17} />
                 </div>
               </div>
 
-              {/* Loading state */}
+              {/* ADDRESS LOADING */}
               {addressLoading ? (
-                <div className="space-y-4">
+                <div className="space-y-3 animate-pulse">
                   {[1, 2].map((item) => (
                     <div
                       key={item}
-                      className={`
-                        h-32
-                        animate-pulse
-                        rounded-xl
-
-                        ${isDark ? "bg-gray-800" : "bg-gray-100"}
-                      `}
+                      className={`h-28 rounded-lg ${mutedBg}`}
                     />
                   ))}
                 </div>
               ) : addresses.length === 0 ? (
-                /* No address */
+
+                /* ================= NO ADDRESS ================= */
                 <div
                   className={`
-                    rounded-xl
+                    flex
+                    flex-col
+                    items-center
+                    justify-center
+                    rounded-lg
                     border
-                    px-5
-                    py-12
+                    px-4 py-10
                     text-center
-
-                    ${isDark ? "border-gray-700" : "border-gray-200"}
+                    ${border}
                   `}
                 >
                   <FiMapPin
-                    className={`
-                      mx-auto
-                      text-3xl
-
-                      ${isDark ? "text-gray-600" : "text-gray-400"}
-                    `}
+                    size={27}
+                    className={bodyText}
                   />
 
-                  <h3 className="mt-4 font-semibold lg:text-sm">
+                  <h3 className={`mt-3 text-sm font-semibold ${heading}`}>
                     No address found
                   </h3>
 
-                  <p
-                    className={`
-                      mx-auto
-                      mt-2
-                      max-w-sm
-                      text-sm
-                      lg:text-xs
-
-                      ${isDark ? "text-gray-400" : "text-gray-500"}
-                    `}
-                  >
+                  <p className={`mt-1.5 max-w-sm text-xs leading-relaxed ${bodyText}`}>
                     Add a delivery address before placing your order.
                   </p>
 
                   <Button
-                    className="mt-5"
+                    className="mt-4"
                     label="Add Address"
                     icon={<FiPlus />}
                     onClick={() => navigate("/addresses")}
@@ -211,10 +194,12 @@ const Checkout = () => {
                   />
                 </div>
               ) : (
-                /* Available addresses */
+
+                /* ================= ADDRESS LIST ================= */
                 <div className="space-y-3">
                   {addresses.map((address) => {
-                    const selected = selectedAddressId === address._id;
+                    const selected =
+                      selectedAddressId === address._id;
 
                     return (
                       <button
@@ -223,39 +208,33 @@ const Checkout = () => {
                         onClick={() => handleSelectAddress(address._id)}
                         className={`
                           w-full
-                          rounded-xl
+                          rounded-lg
                           border
-                          p-4
+                          p-3.5
                           text-left
                           transition-all
                           duration-200
-                          sm:p-5
-
+                          sm:p-4
                           ${
                             selected
                               ? isDark
-                                ? "border-white bg-gray-800"
+                                ? "border-gray-400 bg-gray-800/70"
                                 : "border-gray-900 bg-gray-50"
                               : isDark
-                                ? "border-gray-800 bg-gray-900 hover:border-gray-600"
-                                : "border-gray-200 bg-white hover:border-gray-300"
+                                ? "border-white/[0.08] bg-gray-900 hover:border-gray-600"
+                                : "border-gray-200 bg-white hover:border-gray-400"
                           }
                         `}
                       >
-                        <div className="flex gap-3 sm:gap-4">
-                          {/* Selected indicator */}
+                        <div className="flex items-start gap-3">
+
+                          {/* SELECTED INDICATOR */}
                           <div
                             className={`
-                              mt-1
-                              flex
-                              h-5
-                              w-5
-                              shrink-0
-                              items-center
-                              justify-center
-                              rounded-full
-                              border
-
+                              mt-0.5
+                              flex h-5 w-5 shrink-0
+                              items-center justify-center
+                              rounded-full border
                               ${
                                 selected
                                   ? "border-gray-900 bg-gray-900"
@@ -266,14 +245,18 @@ const Checkout = () => {
                             `}
                           >
                             {selected && (
-                              <FiCheck className="text-white" size={12} />
+                              <FiCheck
+                                size={12}
+                                className="text-white"
+                              />
                             )}
                           </div>
 
-                          {/* Address information */}
+                          {/* ADDRESS DETAILS */}
                           <div className="min-w-0 flex-1">
+
                             <div className="flex flex-wrap items-center gap-2">
-                              <h3 className="font-semibold lg:text-xs">
+                              <h3 className={`text-sm font-semibold ${heading}`}>
                                 {address.fullName}
                               </h3>
 
@@ -281,12 +264,9 @@ const Checkout = () => {
                                 <span
                                   className={`
                                     rounded-full
-                                    px-2
-                                    py-0.5
-                                    text-[10px]
-                                    lg:text-[8px]
+                                    px-2 py-0.5
+                                    text-[9px]
                                     font-medium
-
                                     ${
                                       isDark
                                         ? "bg-green-400/10 text-green-400"
@@ -297,39 +277,26 @@ const Checkout = () => {
                                   Default
                                 </span>
                               )}
+
+                              {selected && (
+                                <span className="text-[9px] font-medium text-green-500">
+                                  Selected
+                                </span>
+                              )}
                             </div>
 
-                            {/* Phone */}
-                            <p
-                              className={`
-                                mt-1
-                                text-sm
-                                lg:text-xs
-
-                                ${isDark ? "text-gray-300" : "text-gray-700"}
-                              `}
-                            >
+                            <p className={`mt-1 text-xs ${secondaryText}`}>
                               {address.phone}
                             </p>
 
-                            {/* Address */}
-                            <p
-                              className={`
-                                mt-2
-                                text-sm
-                                leading-6
-                                lg:text-xs
-                                lg:leading-5
-
-                                ${isDark ? "text-gray-400" : "text-gray-600"}
-                              `}
-                            >
+                            <p className={`mt-2 text-xs leading-5 ${bodyText}`}>
                               {address.addressLine}
                               <br />
                               {address.city}, {address.state}
                               <br />
                               {address.postalCode}, {address.country}
                             </p>
+
                           </div>
                         </div>
                       </button>
@@ -340,174 +307,152 @@ const Checkout = () => {
             </div>
           </section>
 
-          {/* Order summary */}
+          {/* ================= ORDER SUMMARY ================= */}
           <aside>
             <div
               className={`
-                rounded-2xl
+                rounded-xl
                 border
                 p-4
-                sm:p-6
+                sm:p-5
                 lg:sticky
                 lg:top-6
-
-                ${
-                  isDark
-                    ? "border-gray-800 bg-gray-900"
-                    : "border-gray-200 bg-white"
-                }
+                ${cardBg}
               `}
             >
-              {/* Summary heading */}
+
+              {/* SUMMARY HEADER */}
               <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold lg:text-sm">
+                <h2 className={`text-base font-semibold ${heading}`}>
                   Order Summary
                 </h2>
 
-                <span
-                  className={`
-                    text-xs
-                    lg:text-[10px]
-
-                    ${isDark ? "text-gray-400" : "text-gray-500"}
-                  `}
-                >
+                <span className={`text-xs ${bodyText}`}>
                   {cartData.length}{" "}
                   {cartData.length === 1 ? "item" : "items"}
                 </span>
               </div>
 
-              {/* Cart products */}
-              <div className="mt-6 space-y-4">
+              {/* CART ITEMS */}
+              <div className="mt-5 space-y-4">
                 {cartData.map((item) => (
                   <div
                     key={`${item.productId}-${item.size}`}
-                    className="flex gap-3"
+                    className="flex items-center gap-3"
                   >
-                    {/* Product image */}
+
+                    {/* PRODUCT IMAGE */}
                     <div
                       className={`
-                        h-14
-                        w-14
+                        h-12 w-12
                         shrink-0
                         overflow-hidden
                         rounded-lg
-
-                        ${isDark ? "bg-gray-800" : "bg-gray-100"}
+                        ${mutedBg}
                       `}
                     >
-                      <img
-                        src={item.productImage}
-                        alt={item.productName}
-                        className="h-full w-full object-cover"
-                      />
+                      {item.productImage ? (
+                        <img
+                          src={item.productImage}
+                          alt={item.productName || "Product"}
+                          className="h-full w-full object-cover"
+                        />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center">
+                          <FiMapPin className={bodyText} size={15} />
+                        </div>
+                      )}
                     </div>
 
-                    {/* Product details */}
+                    {/* PRODUCT DETAILS */}
                     <div className="min-w-0 flex-1">
                       <p
-                        className="truncate text-sm font-medium lg:text-xs"
+                        className={`truncate text-xs font-medium ${heading}`}
                         title={item.productName}
                       >
                         {item.productName}
                       </p>
 
-                      <p
-                        className={`
-                          mt-1
-                          text-xs
-                          lg:text-[10px]
-
-                          ${isDark ? "text-gray-400" : "text-gray-500"}
-                        `}
-                      >
+                      <p className={`mt-1 text-[10px] ${bodyText}`}>
                         Qty: {item.quantity}
-                        {item.size && ` • Size: ${item.size}`}
+                        {item.size && ` · Size: ${item.size}`}
                       </p>
                     </div>
 
-                    {/* Product total */}
-                    <span className="shrink-0 text-sm font-medium lg:text-xs">
+                    {/* PRODUCT PRICE */}
+                    <span className={`shrink-0 text-xs font-medium ${heading}`}>
                       ₹
-                      {(
-                        Number(item.productPrice) * Number(item.quantity)
-                      ).toLocaleString("en-IN")}
+                      {formatPrice(
+                        Number(item.productPrice) *
+                        Number(item.quantity)
+                      )}
                     </span>
+
                   </div>
                 ))}
               </div>
 
-              {/* Divider */}
-              <hr
-                className={`
-                  my-5
+              {/* DIVIDER */}
+              <div className={`my-5 border-t ${border}`} />
 
-                  ${isDark ? "border-gray-700" : "border-gray-200"}
-                `}
-              />
-
-              {/* Subtotal */}
-              <div className="flex justify-between text-sm lg:text-xs">
-                <span className={isDark ? "text-gray-400" : "text-gray-600"}>
-                  Subtotal
+              {/* SUBTOTAL */}
+              <div className="flex justify-between text-xs">
+                <span className={bodyText}>Subtotal</span>
+                <span className={secondaryText}>
+                  ₹{formatPrice(totalPrice)}
                 </span>
-
-                <span>₹{Number(totalPrice).toLocaleString("en-IN")}</span>
               </div>
 
-              {/* Shipping */}
-              <div className="mt-3 flex justify-between text-sm lg:text-xs">
-                <span className={isDark ? "text-gray-400" : "text-gray-600"}>
-                  Shipping
+              {/* SHIPPING */}
+              <div className="mt-3 flex justify-between text-xs">
+                <span className={bodyText}>Shipping</span>
+                <span className="font-medium text-green-500">
+                  Free
                 </span>
-
-                <span className="text-green-500">Free</span>
               </div>
 
-              {/* Divider */}
-              <hr
-                className={`
-                  my-5
+              {/* DIVIDER */}
+              <div className={`my-5 border-t ${border}`} />
 
-                  ${isDark ? "border-gray-700" : "border-gray-200"}
-                `}
-              />
-
-              {/* Final total */}
+              {/* TOTAL */}
               <div className="flex items-center justify-between">
-                <span className="font-semibold lg:text-xs">Total</span>
+                <span className={`text-sm font-semibold ${heading}`}>
+                  Total
+                </span>
 
-                <span className="text-xl font-semibold lg:text-lg">
-                  ₹{Number(totalPrice).toLocaleString("en-IN")}
+                <span className={`text-lg font-semibold ${heading}`}>
+                  ₹{formatPrice(totalPrice)}
                 </span>
               </div>
 
-              {/* Payment button */}
+              {/* PAYMENT BUTTON */}
               <Button
-                className="mt-6 w-full"
+                className="mt-5 w-full"
                 variant={isDark ? "secondary" : "primary"}
-                label={paymentLoading ? "Processing..." : "Continue to Payment"}
+                label={
+                  paymentLoading
+                    ? "Processing..."
+                    : "Continue to Payment"
+                }
                 onClick={handlePayment}
-                disabled={paymentLoading || !selectedAddressId}
+                disabled={
+                  paymentLoading ||
+                  !selectedAddressId ||
+                  addressLoading ||
+                  cartData.length === 0
+                }
               />
 
-              {/* Explain disabled button */}
+              {/* ADDRESS VALIDATION MESSAGE */}
               {!selectedAddressId && addresses.length > 0 && (
-                <p
-                  className={`
-                    mt-3
-                    text-center
-                    text-xs
-                    lg:text-[10px]
-
-                    ${isDark ? "text-gray-500" : "text-gray-400"}
-                  `}
-                >
+                <p className={`mt-3 text-center text-[10px] ${bodyText}`}>
                   Please select a delivery address to continue.
                 </p>
               )}
+
             </div>
           </aside>
+
         </div>
       </div>
     </main>

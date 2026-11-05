@@ -13,10 +13,7 @@ import {
   FiArrowRight,
 } from "react-icons/fi";
 
-import {
-  HiOutlineShoppingBag,
-} from "react-icons/hi2";
-
+import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { FaChevronDown } from "react-icons/fa";
 
 import { useHeader } from "../../hooks/user/useHeader";
@@ -216,7 +213,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     group
     relative
     flex items-center justify-center
-    w-9 h-9
+    w-8 h-8
+    sm:w-8 sm:h-8
+    lg:w-9 lg:h-9
     rounded-full
     transition-all duration-300
     ${subtleHover}
@@ -260,7 +259,6 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
         {/* EDITORIAL INTRO */}
 
         <div className="flex flex-col justify-between min-h-[210px]">
-
           <div>
             <p
               className={`
@@ -276,7 +274,6 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
             <h3
               className={`
-                
                 text-3xl
                 xl:text-[36px]
                 leading-tight
@@ -345,13 +342,11 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
           </div>
 
           <div className="grid grid-cols-2 gap-x-5">
-            {menu.items.map((item, index) => (
+            {menu.items.map((item) => (
               <NavLink
                 key={item.name}
                 to={item.path}
-                onClick={() => {
-                  setActiveMegaMenu(null);
-                }}
+                onClick={() => setActiveMegaMenu(null)}
                 className={({ isActive }) => `
                   group
                   flex items-center justify-between
@@ -404,16 +399,16 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
   return (
     <>
-      {/* =====================================================
-          ANNOUNCEMENT BAR
-      ===================================================== */}
+      {/* ANNOUNCEMENT BAR */}
 
       <div
         className={`
           relative
           flex items-center justify-center
-          min-h-[29px]
-          px-3
+          min-h-[24px]
+          sm:min-h-[26px]
+          lg:min-h-[29px]
+          px-2
           text-center
           transition-colors duration-300
           ${
@@ -425,23 +420,23 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       >
         <p
           className="
-            text-[8px]
-            sm:text-[9px]
+            text-[7px]
+            sm:text-[8px]
+            lg:text-[9px]
             uppercase
-            tracking-[1.5px]
+            tracking-[1px]
+            sm:tracking-[1.5px]
             font-medium
             leading-4
           "
         >
           A little something for your everyday
-          <span className="mx-2 opacity-50">|</span>
+          <span className="mx-1.5 sm:mx-2 opacity-50">|</span>
           Discover the collection
         </p>
       </div>
 
-      {/* =====================================================
-          MAIN HEADER
-      ===================================================== */}
+      {/* MAIN HEADER */}
 
       <header
         className={`
@@ -452,21 +447,19 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
           ${headerBg}
         `}
       >
-        <div className="max-w-[1800px] mx-auto px-3 sm:px-6 lg:px-8 xl:px-12">
+        <div className="max-w-[1800px] mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12">
 
           <div
             className="
               relative
               flex items-center justify-between
-              h-[66px]
-              sm:h-[72px]
+              h-[56px]
+              sm:h-[60px]
               lg:h-[82px]
             "
           >
 
-            {/* =================================================
-                MOBILE MENU BUTTON
-            ================================================= */}
+            {/* MOBILE MENU BUTTON */}
 
             <button
               type="button"
@@ -476,19 +469,17 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               className={`
                 lg:hidden
                 flex items-center justify-center
-                w-9 h-9
+                w-8 h-8
                 rounded-full
                 transition-all duration-300
                 ${subtleHover}
                 ${mainText}
               `}
             >
-              <FiMenu size={21} strokeWidth={1.5} />
+              <FiMenu size={19} strokeWidth={1.5} />
             </button>
 
-            {/* =================================================
-                BRAND WORDMARK
-            ================================================= */}
+            {/* BRAND WORDMARK */}
 
             <div
               className="
@@ -514,12 +505,12 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               >
                 <span
                   className="
-                    
-                    text-[21px]
-                    sm:text-[24px]
+                    text-[19px]
+                    sm:text-[21px]
                     lg:text-[25px]
                     font-semibold
-                    tracking-[3px]
+                    tracking-[2.5px]
+                    sm:tracking-[3px]
                     leading-none
                     transition-all duration-300
                     group-hover:tracking-[3.8px]
@@ -543,9 +534,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               </button>
             </div>
 
-            {/* =================================================
-                DESKTOP NAVIGATION
-            ================================================= */}
+            {/* DESKTOP NAVIGATION */}
 
             <nav
               className="
@@ -609,8 +598,6 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                       `}
                     />
 
-                    {/* ACTIVE UNDERLINE */}
-
                     <span
                       className={`
                         absolute bottom-[14px] left-0
@@ -631,14 +618,13 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               ))}
             </nav>
 
-            {/* =================================================
-                RIGHT ACTIONS
-            ================================================= */}
+            {/* RIGHT ACTIONS */}
 
             <div
               className="
                 flex items-center justify-end
-                gap-0.5 sm:gap-1
+                gap-0
+                sm:gap-0.5
                 shrink-0
                 lg:min-w-[150px]
                 xl:min-w-[190px]
@@ -657,7 +643,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 className={iconButtonClass}
               >
                 <FiSearch
-                  size={17}
+                  size={16}
                   strokeWidth={1.5}
                   className="transition-transform duration-300 group-hover:scale-110"
                 />
@@ -710,13 +696,10 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 type="button"
                 onClick={() => setIsCartDrawerOpen(true)}
                 aria-label="Shopping bag"
-                className={`
-                  ${iconButtonClass}
-                  ${!isDark ? "hover:bg-[#EEEAE3]" : ""}
-                `}
+                className={iconButtonClass}
               >
                 <HiOutlineShoppingBag
-                  size={19}
+                  size={17}
                   strokeWidth={1.5}
                 />
               </button>
@@ -729,9 +712,10 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   onClick={() => navigate("/profile")}
                   aria-label="My profile"
                   className={`
-                    ml-1
+                    ml-0.5 sm:ml-1
                     flex items-center justify-center
-                    w-8 h-8
+                    w-7 h-7
+                    lg:w-8 lg:h-8
                     rounded-full
                     border
                     text-[10px]
@@ -757,7 +741,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                     hidden sm:flex
                   `}
                 >
-                  <FiUser size={17} strokeWidth={1.5} />
+                  <FiUser size={16} strokeWidth={1.5} />
                 </button>
               )}
             </div>
@@ -765,9 +749,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
         </div>
       </header>
 
-      {/* =====================================================
-          MOBILE NAVIGATION DRAWER
-      ===================================================== */}
+      {/* MOBILE NAVIGATION DRAWER */}
 
       {isMobileMenuOpen && (
         <div
@@ -783,8 +765,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             className={`
               absolute top-0 left-0
               h-full
-              w-[86%] sm:w-[390px]
-              max-w-[390px]
+              w-[82%]
+              sm:w-[340px]
+              max-w-[340px]
               overflow-y-auto
               shadow-2xl
               animate-[slideIn_.3s_ease-out]
@@ -793,14 +776,14 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             onClick={(e) => e.stopPropagation()}
           >
 
-            {/* MOBILE DRAWER HEADER */}
+            {/* DRAWER HEADER */}
 
             <div
               className={`
                 sticky top-0 z-10
                 flex items-center justify-between
-                px-5 sm:px-6
-                py-5
+                px-4 sm:px-5
+                py-4
                 border-b
                 ${
                   isDark
@@ -814,8 +797,8 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   type="button"
                   onClick={handleLogoClick}
                   className="
-              
-                    text-[23px]
+                    text-[21px]
+                    sm:text-[23px]
                     tracking-[3px]
                     font-semibold
                   "
@@ -826,7 +809,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 <p
                   className={`
                     mt-1
-                    text-[8px]
+                    text-[7px]
                     uppercase
                     tracking-[2.5px]
                     ${secondaryText}
@@ -842,25 +825,25 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 aria-label="Close menu"
                 className={`
                   flex items-center justify-center
-                  w-9 h-9
+                  w-8 h-8
                   rounded-full
                   transition-all duration-300
                   hover:rotate-90
                   ${subtleHover}
                 `}
               >
-                <FiX size={20} strokeWidth={1.5} />
+                <FiX size={19} strokeWidth={1.5} />
               </button>
             </div>
 
             {/* MOBILE NAVIGATION */}
 
-            <div className="px-5 sm:px-6 pt-7">
+            <div className="px-4 sm:px-5 pt-5">
 
               <p
                 className={`
-                  mb-3
-                  text-[9px]
+                  mb-2
+                  text-[8px]
                   uppercase
                   tracking-[2.5px]
                   ${secondaryText}
@@ -886,6 +869,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                         }
                       `}
                     >
+
                       {/* CATEGORY */}
 
                       <button
@@ -897,16 +881,15 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                         className="
                           w-full
                           flex items-center justify-between
-                          py-[19px]
+                          py-4
                           text-left
                           group
                         "
                       >
                         <div className="flex items-center gap-3">
-
                           <span
                             className={`
-                              text-[9px]
+                              text-[8px]
                               tracking-wider
                               ${secondaryText}
                             `}
@@ -916,9 +899,8 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
                           <span
                             className={`
-                          
-                              text-[20px]
-                              sm:text-[22px]
+                              text-[18px]
+                              sm:text-[20px]
                               font-normal
                               transition-colors duration-300
                               ${
@@ -938,7 +920,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
                         <FaChevronDown
                           className={`
-                            text-[9px]
+                            text-[8px]
                             transition-transform duration-300
                             ${isExpanded ? "rotate-180" : ""}
                             ${secondaryText}
@@ -960,38 +942,28 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                         `}
                       >
                         <div className="overflow-hidden">
+                          <div className="pb-4 pl-7">
 
-                          <div
-                            className={`
-                              pb-5
-                              pl-7
-                              ${
-                                isDark
-                                  ? "border-white/10"
-                                  : "border-[#EAE6DF]"
-                              }
-                            `}
-                          >
                             <p
                               className={`
-                                text-[10px]
+                                text-[9px]
                                 leading-5
-                                mb-3
+                                mb-2
                                 ${secondaryText}
                               `}
                             >
                               {menu.subtitle}
                             </p>
 
-                            <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-
+                            <div className="grid grid-cols-2 gap-x-4 gap-y-2.5">
                               {menu.items.map((item) => (
                                 <NavLink
                                   key={item.name}
                                   to={item.path}
                                   onClick={handleMobileNavigation}
                                   className={({ isActive }) => `
-                                    text-[11px]
+                                    text-[10px]
+                                    sm:text-[11px]
                                     leading-5
                                     transition-colors duration-200
                                     ${
@@ -1011,7 +983,6 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                                   {item.name}
                                 </NavLink>
                               ))}
-
                             </div>
                           </div>
                         </div>
@@ -1022,14 +993,14 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               </nav>
             </div>
 
-            {/* MOBILE ACCOUNT SECTION */}
+            {/* ACCOUNT SECTION */}
 
-            <div className="px-5 sm:px-6 pt-7 pb-8">
+            <div className="px-4 sm:px-5 pt-5 pb-6">
 
               <p
                 className={`
-                  mb-4
-                  text-[9px]
+                  mb-3
+                  text-[8px]
                   uppercase
                   tracking-[2.5px]
                   ${secondaryText}
@@ -1040,7 +1011,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
               <div
                 className={`
-                  grid gap-2
+                  grid gap-1
                   ${
                     allowNotification
                       ? "grid-cols-3"
@@ -1058,14 +1029,14 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                     navigate("/orders");
                   }}
                   className={`
-                    flex flex-col items-center gap-2
-                    py-4 rounded-xl
-                    text-[10px]
+                    flex flex-col items-center gap-1.5
+                    py-3 rounded-lg
+                    text-[9px]
                     ${subtleHover}
                     ${secondaryText}
                   `}
                 >
-                  <FiPackage size={19} />
+                  <FiPackage size={18} />
                   Orders
                 </button>
 
@@ -1079,15 +1050,15 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                       navigate("/notifications");
                     }}
                     className={`
-                      flex flex-col items-center gap-2
-                      py-4 rounded-xl
-                      text-[10px]
+                      flex flex-col items-center gap-1.5
+                      py-3 rounded-lg
+                      text-[9px]
                       ${subtleHover}
                       ${secondaryText}
                     `}
                   >
                     <span className="relative">
-                      <FiBell size={19} />
+                      <FiBell size={18} />
 
                       {unreadCount > 0 && (
                         <span
@@ -1118,14 +1089,14 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                       navigate("/profile");
                     }}
                     className={`
-                      flex flex-col items-center gap-2
-                      py-4 rounded-xl
-                      text-[10px]
+                      flex flex-col items-center gap-1.5
+                      py-3 rounded-lg
+                      text-[9px]
                       ${subtleHover}
                       ${secondaryText}
                     `}
                   >
-                    <FiUser size={19} />
+                    <FiUser size={18} />
                     Profile
                   </button>
                 ) : (
@@ -1136,26 +1107,26 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                       handleLogin();
                     }}
                     className={`
-                      flex flex-col items-center gap-2
-                      py-4 rounded-xl
-                      text-[10px]
+                      flex flex-col items-center gap-1.5
+                      py-3 rounded-lg
+                      text-[9px]
                       ${subtleHover}
                       ${secondaryText}
                     `}
                   >
-                    <FiUser size={19} />
+                    <FiUser size={18} />
                     Sign In
                   </button>
                 )}
               </div>
             </div>
 
-            {/* MOBILE FOOTER */}
+            {/* DRAWER FOOTER */}
 
             <div
               className={`
-                px-5 sm:px-6
-                py-5
+                px-4 sm:px-5
+                py-4
                 border-t
                 ${
                   isDark
@@ -1166,8 +1137,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             >
               <p
                 className={`
-                
-                  text-[17px]
+                  text-[15px]
                   italic
                   ${secondaryText}
                 `}
@@ -1179,9 +1149,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
         </div>
       )}
 
-      {/* =====================================================
-          CART DRAWER
-      ===================================================== */}
+      {/* CART DRAWER */}
 
       <Drawer
         isOpen={isCartDrawerOpen}
@@ -1192,9 +1160,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
         />
       </Drawer>
 
-      {/* =====================================================
-          SEARCH MODAL
-      ===================================================== */}
+      {/* SEARCH MODAL */}
 
       {isSearchModalOpen && (
         <div
@@ -1212,18 +1178,16 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             className={`
               relative w-full
               px-3 sm:px-5 lg:px-8
-              py-5 sm:py-7
+              py-4 sm:py-7
               shadow-xl
               ${isDark ? "bg-[#171717]" : "bg-[#FAF9F6]"}
             `}
           >
             <div className="max-w-4xl mx-auto">
 
-             
               {/* SEARCH INPUT */}
 
               <div className="relative">
-
                 <FiSearch
                   className={`
                     absolute left-0
@@ -1350,7 +1314,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                       <div className="py-8 text-center">
                         <p
                           className={`
-                             text-lg
+                            text-lg
                             ${mainText}
                           `}
                         >
@@ -1374,9 +1338,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
         </div>
       )}
 
-      {/* =====================================================
-          AUTHENTICATION MODAL
-      ===================================================== */}
+      {/* AUTHENTICATION MODAL */}
 
       <AuthModal
         isOpen={isOpen}

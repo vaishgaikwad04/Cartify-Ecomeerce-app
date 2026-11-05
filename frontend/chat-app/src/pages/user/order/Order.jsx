@@ -1,3 +1,4 @@
+
 import React, {
   useContext,
   useEffect,
@@ -18,34 +19,21 @@ import { ThemeContext } from "../../../context/ThemeContext";
 import { getOrdersByUserId } from "../../../api/user/OrderApi";
 
 const Order = () => {
-  // =====================================================
-  // STATE
-  // =====================================================
-
+  // ================= STATE =================
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expandedOrder, setExpandedOrder] = useState(null);
 
-  // =====================================================
-  // THEME
-  // =====================================================
-
+  // ================= THEME =================
   const { theme } = useContext(ThemeContext);
-
   const darkMode = theme === "Dark Mode";
 
-  // =====================================================
-  // FETCH ORDERS
-  // =====================================================
-
+  // ================= FETCH ORDERS =================
   const fetchOrders = async () => {
     try {
       setLoading(true);
 
       const res = await getOrdersByUserId();
-
-      console.log("Orders:", res.data.fetchedOrder);
-
       setOrders(res.data.fetchedOrder || []);
     } catch (error) {
       console.error(
@@ -63,10 +51,7 @@ const Order = () => {
     fetchOrders();
   }, []);
 
-  // =====================================================
-  // STATUS CONFIG
-  // =====================================================
-
+  // ================= STATUS CONFIG =================
   const getStatusConfig = (status) => {
     switch (status) {
       case "paid":
@@ -116,10 +101,7 @@ const Order = () => {
     }
   };
 
-  // =====================================================
-  // FORMAT DATE
-  // =====================================================
-
+  // ================= FORMAT DATE =================
   const formatDate = (date) => {
     if (!date) return "—";
 
@@ -136,29 +118,23 @@ const Order = () => {
     });
   };
 
-  // =====================================================
-  // FORMAT CURRENCY
-  // =====================================================
-
+  // ================= FORMAT CURRENCY =================
   const formatPrice = (price) => {
     return Number(price || 0).toLocaleString("en-IN");
   };
 
-  // =====================================================
-  // THEME CLASSES
-  // =====================================================
-
+  // ================= THEME CLASSES =================
   const pageBg = darkMode
-    ? "bg-[#09090b]"
-    : "bg-[#f7f7f6]";
+    ? "bg-gray-950"
+    : "bg-white";
 
   const cardBg = darkMode
-    ? "bg-gray-800 border-white/[0.08]"
+    ? "bg-gray-900 border-white/[0.08]"
     : "bg-white border-gray-200";
 
   const heading = darkMode
-    ? "text-white"
-    : "text-gray-950";
+    ? "text-gray-100"
+    : "text-gray-900";
 
   const bodyText = darkMode
     ? "text-gray-400"
@@ -176,100 +152,36 @@ const Order = () => {
     ? "border-white/[0.08]"
     : "border-gray-200";
 
-  // =====================================================
-  // LOADING STATE
-  // =====================================================
+  const skeletonBg = darkMode
+    ? "bg-white/[0.07]"
+    : "bg-gray-200";
 
+  // ================= LOADING STATE =================
   if (loading) {
     return (
       <main
         className={`
           min-h-screen
-          px-3
-          py-4
-          sm:px-4
-          sm:py-5
-          lg:px-5
+          px-3 py-6
+          sm:px-4 sm:py-8
+          lg:px-6
           ${pageBg}
-          transition-colors
-          duration-300
+          transition-colors duration-300
         `}
       >
-        <div className="mx-auto  max-w-[1700px]  px-12 animate-pulse">
-
+        <div className="mx-auto w-full max-w-[1800px] animate-pulse">
           {/* HEADER SKELETON */}
-
-          <div
-            className={`
-              mb-4
-              border-b
-              pb-4
-              sm:mb-5
-              sm:pb-5
-              ${border}
-            `}
-          >
-            <div className="grid grid-cols-[auto_1fr] items-center gap-2.5">
-
-              <div
-                className={`
-                  h-8
-                  w-8
-                  rounded-lg
-                  sm:h-9
-                  sm:w-9
-                  ${
-                    darkMode
-                      ? "bg-white/[0.08]"
-                      : "bg-gray-200"
-                  }
-                `}
-              />
-
-              <div className="min-w-0">
-                <div
-                  className={`
-                    h-4
-                    w-24
-                    rounded
-                    ${
-                      darkMode
-                        ? "bg-white/[0.08]"
-                        : "bg-gray-200"
-                    }
-                  `}
-                />
-
-                <div
-                  className={`
-                    mt-1.5
-                    h-2.5
-                    w-48
-                    max-w-full
-                    rounded
-                    ${
-                      darkMode
-                        ? "bg-white/[0.06]"
-                        : "bg-gray-200"
-                    }
-                  `}
-                />
-              </div>
-            </div>
+          <div className={`mb-6 border-b pb-5 ${border}`}>
+            <div className={`h-5 w-28 rounded ${skeletonBg}`} />
+            <div className={`mt-2 h-3 w-52 max-w-full rounded ${skeletonBg}`} />
           </div>
 
           {/* ORDER SKELETONS */}
-
-          <div className="space-y-3">
+          <div className="space-y-4">
             {[1, 2].map((item) => (
               <div
                 key={item}
-                className={`
-                  h-48
-                  rounded-xl
-                  border
-                  ${cardBg}
-                `}
+                className={`h-44 rounded-xl border ${cardBg}`}
               />
             ))}
           </div>
@@ -278,189 +190,104 @@ const Order = () => {
     );
   }
 
-  // =====================================================
-  // MAIN UI
-  // =====================================================
-
+  // ================= MAIN UI =================
   return (
     <main
       className={`
         min-h-screen
-        px-3
-        py-4
-        sm:px-4
-        sm:py-5
-        lg:px-5
+        px-3 py-6
+        sm:px-4 sm:py-8
+        lg:px-6 lg:py-10
         ${pageBg}
-        transition-colors
-        duration-300
+        transition-colors duration-300
       `}
     >
-      <div className="mx-auto w-full max-w-[1700px] px-6">
+      <div className="mx-auto w-full max-w-[1800px]">
 
-        {/* =================================================
-            PAGE HEADER
-        ================================================= */}
-
-        <header
-          className={`
-            mb-4
-            border-b
-            pb-4
-            sm:mb-5
-            sm:pb-5
-            ${border}
-          `}
-        >
-          <div
-            className="
-              grid
-              grid-cols-[auto_1fr]
-              items-center
-              gap-2.5
-            "
+        {/* ================= PAGE HEADER ================= */}
+        <header className={`mb-6 border-b pb-4 sm:mb-7 sm:pb-5 ${border}`}>
+          <h1
+            className={`
+              text-lg
+              sm:text-xl
+              font-semibold
+              tracking-tight
+              ${heading}
+            `}
           >
+            My Orders
+          </h1>
 
-          
-
-            {/* TITLE */}
-
-            <div className="min-w-0">
-
-              <h1
-                className={`
-                  text-base
-                  font-semibold
-                  tracking-tight
-                  sm:text-lg
-                  md:text-xl
-                  lg:text-lg
-                  ${heading}
-                `}
-              >
-                My Orders
-              </h1>
-
-              <p
-                className={`
-                  mt-0.5
-                  text-[10px]
-                  leading-4
-                  sm:text-xs
-                  ${bodyText}
-                `}
-              >
-                View your order history and track your
-                purchases.
-              </p>
-
-            </div>
-          </div>
-
-          {/* ORDER COUNT */}
+          <p className={`mt-1 text-xs sm:text-sm ${bodyText}`}>
+            View your order history and track your purchases.
+          </p>
 
           {orders.length > 0 && (
-            <p
-              className={`
-                mt-2.5
-                text-[10px]
-                sm:text-xs
-                ${bodyText}
-              `}
-            >
-              <span
-                className={`
-                  font-medium
-                  ${heading}
-                `}
-              >
+            <p className={`mt-2.5 text-xs ${bodyText}`}>
+              <span className={`font-semibold ${heading}`}>
                 {orders.length}
               </span>{" "}
-              {orders.length === 1
-                ? "order"
-                : "orders"}
+              {orders.length === 1 ? "order" : "orders"}
             </p>
           )}
         </header>
 
-        {/* =================================================
-            EMPTY STATE
-        ================================================= */}
-
+        {/* ================= EMPTY STATE ================= */}
         {orders.length === 0 ? (
           <div
             className={`
+              flex
+              min-h-[320px]
+              flex-col
+              items-center
+              justify-center
               rounded-xl
               border
               px-4
               py-10
               text-center
-              sm:px-5
-              sm:py-12
+              sm:min-h-[380px]
               ${cardBg}
             `}
           >
-            <FiPackage
-              size={25}
+            <div
               className={`
-                mx-auto
-                ${
-                  darkMode
-                    ? "text-gray-600"
-                    : "text-gray-400"
-                }
-              `}
-            />
-
-            <h2
-              className={`
-                mt-3
-                text-sm
-                font-semibold
-                sm:text-base
-                ${heading}
+                flex h-16 w-16
+                items-center justify-center
+                rounded-full
+                ${darkMode ? "bg-gray-800" : "bg-gray-50"}
               `}
             >
+              <FiPackage
+                size={28}
+                className={mutedText}
+              />
+            </div>
+
+            <h2 className={`mt-5 text-base font-semibold sm:text-lg ${heading}`}>
               No orders yet
             </h2>
 
-            <p
-              className={`
-                mx-auto
-                mt-1
-                max-w-md
-                text-[10px]
-                leading-5
-                sm:text-xs
-                ${bodyText}
-              `}
-            >
-              Your completed purchases will appear
-              here once you place an order.
+            <p className={`mt-2 max-w-sm text-xs leading-relaxed sm:text-sm ${bodyText}`}>
+              Your purchases will appear here once you place an order.
             </p>
           </div>
         ) : (
 
-          /* =================================================
-             ORDERS LIST
-          ================================================= */
-
-          <div className="space-y-3 sm:space-y-4">
+          /* ================= ORDERS LIST ================= */
+          <div className="space-y-4">
 
             {orders.map((order) => {
-
-              const status =
-                getStatusConfig(order.status);
-
+              const status = getStatusConfig(order.status);
               const StatusIcon = status.icon;
 
-              const isExpanded =
-                expandedOrder === order._id;
+              const isExpanded = expandedOrder === order._id;
 
-              const visibleItems =
-                isExpanded
-                  ? order.items || []
-                  : (order.items || []).slice(0, 2);
+              const items = order.items || [];
+
+              const visibleItems = isExpanded
+                ? items
+                : items.slice(0, 2);
 
               return (
                 <article
@@ -470,139 +297,51 @@ const Order = () => {
                     rounded-xl
                     border
                     ${cardBg}
-                    transition-colors
-                    duration-300
+                    transition-colors duration-300
                   `}
                 >
 
-                  {/* =================================================
-                      ORDER HEADER
-                  ================================================= */}
-
-                  <div
-                    className={`
-                      border-b
-                      px-3
-                      py-2.5
-                      sm:px-4
-                      sm:py-3
-                      ${border}
-                    `}
-                  >
-                    <div
-                      className="
-                        grid
-                        gap-2.5
-                        sm:grid-cols-[1fr_auto]
-                        sm:items-center
-                      "
-                    >
+                  {/* ================= ORDER HEADER ================= */}
+                  <div className={`border-b px-3 py-3 sm:px-5 sm:py-4 ${border}`}>
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 
                       {/* ORDER DETAILS */}
-
-                      <div
-                        className="
-                          grid
-                          grid-cols-2
-                          gap-3
-                          sm:flex
-                          sm:flex-wrap
-                          sm:items-center
-                          sm:gap-5
-                        "
-                      >
-
-                        {/* ORDER NUMBER */}
+                      <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
 
                         <div>
-                          <p
-                            className={`
-                              text-[8px]
-                              font-medium
-                              uppercase
-                              tracking-wider
-                              sm:text-[9px]
-                              ${mutedText}
-                            `}
-                          >
-                            Order
+                          <p className={`text-[10px] font-medium uppercase tracking-wider ${mutedText}`}>
+                            Order ID
                           </p>
 
-                          <p
-                            className={`
-                              mt-0.5
-                              font-mono
-                              text-[10px]
-                              sm:text-[11px]
-                              ${secondaryText}
-                            `}
-                          >
-                            #
-                            {order._id?.slice(-8) ||
-                              "—"}
+                          <p className={`mt-1 font-mono text-xs ${secondaryText}`}>
+                            #{order._id?.slice(-8) || "—"}
                           </p>
                         </div>
 
-                        {/* DATE */}
-
                         <div>
-                          <p
-                            className={`
-                              text-[8px]
-                              font-medium
-                              uppercase
-                              tracking-wider
-                              sm:text-[9px]
-                              ${mutedText}
-                            `}
-                          >
-                            Date
+                          <p className={`text-[10px] font-medium uppercase tracking-wider ${mutedText}`}>
+                            Order Date
                           </p>
 
-                          <p
-                            className={`
-                              mt-0.5
-                              text-[10px]
-                              sm:text-xs
-                              ${secondaryText}
-                            `}
-                          >
-                            {formatDate(
-                              order.createdAt
-                            )}
+                          <p className={`mt-1 text-xs ${secondaryText}`}>
+                            {formatDate(order.createdAt)}
                           </p>
                         </div>
 
                       </div>
 
-                      {/* STATUS */}
-
-                      <div
-                        className="
-                          flex
-                          flex-wrap
-                          items-center
-                          gap-1
-                          sm:justify-end
-                        "
-                      >
-
-                        {/* PAYMENT STATUS */}
+                      {/* STATUS BADGES */}
+                      <div className="flex flex-wrap items-center gap-2">
 
                         <span
                           className={`
                             rounded-full
                             border
-                            px-2
-                            py-0.5
-                            text-[9px]
+                            px-2.5 py-1
+                            text-[10px]
                             font-medium
-                            sm:px-2.5
-                            sm:py-1
-                            sm:text-[10px]
                             ${
-                              order.paymentStatus ===
-                              "paid"
+                              order.paymentStatus === "paid"
                                 ? darkMode
                                   ? "border-emerald-400/20 bg-emerald-400/10 text-emerald-400"
                                   : "border-emerald-200 bg-emerald-50 text-emerald-700"
@@ -612,33 +351,25 @@ const Order = () => {
                             }
                           `}
                         >
-                          {order.paymentStatus ===
-                          "paid"
+                          {order.paymentStatus === "paid"
                             ? "Payment received"
                             : "Payment pending"}
                         </span>
-
-                        {/* ORDER STATUS */}
 
                         <span
                           className={`
                             flex
                             items-center
-                            gap-1
+                            gap-1.5
                             rounded-full
                             border
-                            px-2
-                            py-0.5
-                            text-[9px]
+                            px-2.5 py-1
+                            text-[10px]
                             font-medium
-                            sm:px-2.5
-                            sm:py-1
-                            sm:text-[10px]
                             ${status.className}
                           `}
                         >
-                          <StatusIcon size={11} />
-
+                          <StatusIcon size={12} />
                           {status.label}
                         </span>
 
@@ -646,10 +377,7 @@ const Order = () => {
                     </div>
                   </div>
 
-                  {/* =================================================
-                      ORDER ITEMS
-                  ================================================= */}
-
+                  {/* ================= ORDER ITEMS ================= */}
                   <div
                     className={`
                       divide-y
@@ -660,156 +388,83 @@ const Order = () => {
                       }
                     `}
                   >
+                    {visibleItems.map((item, index) => (
+                      <div
+                        key={
+                          item._id ||
+                          item.productId ||
+                          `${order._id}-${index}`
+                        }
+                        className="
+                          grid
+                          grid-cols-[auto_minmax(0,1fr)_auto]
+                          items-center
+                          gap-3
+                          px-3 py-3
+                          sm:px-5 sm:py-3.5
+                        "
+                      >
 
-                    {visibleItems.map(
-                      (item, index) => (
+                        {/* PRODUCT IMAGE */}
                         <div
-                          key={
-                            item.productId ||
-                            `${order._id}-${index}`
-                          }
-                          className="
-                            grid
-                            grid-cols-[auto_1fr_auto]
-                            items-center
-                            gap-2
-                            px-3
-                            py-2.5
-                            sm:gap-3
-                            sm:px-4
-                            sm:py-3
-                          "
+                          className={`
+                            h-12 w-12
+                            shrink-0
+                            overflow-hidden
+                            rounded-lg
+                            border
+                            sm:h-14 sm:w-14
+                            ${border}
+                            ${darkMode ? "bg-gray-800" : "bg-gray-50"}
+                          `}
                         >
-
-                          {/* PRODUCT IMAGE */}
-
-                          <div
-                            className={`
-                              h-10
-                              w-10
-                              shrink-0
-                              overflow-hidden
-                              rounded-lg
-                              border
-                              sm:h-12
-                              sm:w-12
-                              ${border}
-                              ${
-                                darkMode
-                                  ? "bg-white/[0.04]"
-                                  : "bg-gray-50"
-                              }
-                            `}
-                          >
-                            {item.image ? (
-                              <img
-                                src={item.image}
-                                alt={
-                                  item.productName ||
-                                  "Product"
-                                }
-                                className="
-                                  h-full
-                                  w-full
-                                  object-cover
-                                "
+                          {item.image ? (
+                            <img
+                              src={item.image}
+                              alt={item.productName || "Product"}
+                              className="h-full w-full object-cover"
+                            />
+                          ) : (
+                            <div className="flex h-full w-full items-center justify-center">
+                              <FiPackage
+                                size={17}
+                                className={mutedText}
                               />
-                            ) : (
-                              <div
-                                className="
-                                  flex
-                                  h-full
-                                  w-full
-                                  items-center
-                                  justify-center
-                                "
-                              >
-                                <FiPackage
-                                  size={14}
-                                  className={
-                                    darkMode
-                                      ? "text-gray-600"
-                                      : "text-gray-400"
-                                  }
-                                />
-                              </div>
-                            )}
-                          </div>
-
-                          {/* PRODUCT INFO */}
-
-                          <div className="min-w-0">
-
-                            <h3
-                              className={`
-                                truncate
-                                text-[11px]
-                                font-medium
-                                sm:text-xs
-                                ${heading}
-                              `}
-                            >
-                              {item.productName ||
-                                "Product"}
-                            </h3>
-
-                            <p
-                              className={`
-                                mt-0.5
-                                text-[9px]
-                                sm:text-[10px]
-                                ${bodyText}
-                              `}
-                            >
-                              ₹
-                              {formatPrice(
-                                item.productPrice
-                              )}{" "}
-                              × {item.quantity}
-                            </p>
-
-                          </div>
-
-                          {/* ITEM TOTAL */}
-
-                          <p
-                            className={`
-                              shrink-0
-                              text-[11px]
-                              font-semibold
-                              sm:text-xs
-                              ${heading}
-                            `}
-                          >
-                            ₹
-                            {formatPrice(
-                              Number(
-                                item.productPrice || 0
-                              ) *
-                                Number(
-                                  item.quantity || 0
-                                )
-                            )}
-                          </p>
-
+                            </div>
+                          )}
                         </div>
-                      )
-                    )}
 
+                        {/* PRODUCT INFO */}
+                        <div className="min-w-0">
+                          <h3 className={`truncate text-xs font-medium sm:text-sm ${heading}`}>
+                            {item.productName || "Product"}
+                          </h3>
+
+                          <p className={`mt-1 text-[10px] sm:text-xs ${bodyText}`}>
+                            ₹{formatPrice(item.productPrice)} × {item.quantity}
+                          </p>
+                        </div>
+
+                        {/* ITEM TOTAL */}
+                        <p className={`shrink-0 text-xs font-semibold sm:text-sm ${heading}`}>
+                          ₹
+                          {formatPrice(
+                            Number(item.productPrice || 0) *
+                              Number(item.quantity || 0)
+                          )}
+                        </p>
+
+                      </div>
+                    ))}
                   </div>
 
-                  {/* =================================================
-                      SHOW MORE / LESS
-                  ================================================= */}
-
-                  {order.items?.length > 2 && (
+                  {/* ================= SHOW MORE / LESS ================= */}
+                  {items.length > 2 && (
                     <button
                       type="button"
                       onClick={() =>
                         setExpandedOrder(
-                          isExpanded
-                            ? null
-                            : order._id
+                          isExpanded ? null : order._id
                         )
                       }
                       className={`
@@ -817,14 +472,12 @@ const Order = () => {
                         w-full
                         items-center
                         justify-center
-                        gap-1
+                        gap-1.5
                         border-t
-                        py-2
-                        text-[10px]
+                        py-2.5
+                        text-xs
                         font-medium
                         transition-colors
-                        sm:py-2.5
-                        sm:text-[11px]
                         ${border}
                         ${
                           darkMode
@@ -836,33 +489,19 @@ const Order = () => {
                       {isExpanded ? (
                         <>
                           Show less
-
-                          <FiChevronUp
-                            size={12}
-                          />
+                          <FiChevronUp size={14} />
                         </>
                       ) : (
                         <>
-                          View{" "}
-                          {order.items.length - 2}{" "}
-                          more{" "}
-                          {order.items.length - 2 ===
-                          1
-                            ? "item"
-                            : "items"}
-
-                          <FiChevronDown
-                            size={12}
-                          />
+                          View {items.length - 2} more{" "}
+                          {items.length - 2 === 1 ? "item" : "items"}
+                          <FiChevronDown size={14} />
                         </>
                       )}
                     </button>
                   )}
 
-                  {/* =================================================
-                      ORDER FOOTER
-                  ================================================= */}
-
+                  {/* ================= ORDER FOOTER ================= */}
                   <div
                     className={`
                       grid
@@ -870,82 +509,35 @@ const Order = () => {
                       items-center
                       gap-3
                       border-t
-                      px-3
-                      py-2.5
-                      sm:px-4
-                      sm:py-3
+                      px-3 py-3
+                      sm:px-5 sm:py-4
                       ${border}
-                      ${
-                        darkMode
-                          ? "bg-white/[0.02]"
-                          : "bg-gray-50/70"
-                      }
+                      ${darkMode ? "bg-white/[0.02]" : "bg-gray-50/70"}
                     `}
                   >
 
                     {/* PAYMENT */}
-
                     <div>
-                      <p
-                        className={`
-                          text-[8px]
-                          font-medium
-                          uppercase
-                          tracking-wider
-                          sm:text-[9px]
-                          ${mutedText}
-                        `}
-                      >
+                      <p className={`text-[10px] font-medium uppercase tracking-wider ${mutedText}`}>
                         Payment
                       </p>
 
-                      <p
-                        className={`
-                          mt-0.5
-                          text-[10px]
-                          sm:text-xs
-                          ${secondaryText}
-                        `}
-                      >
-                        {order.paymentStatus ===
-                        "paid"
+                      <p className={`mt-1 text-xs ${secondaryText}`}>
+                        {order.paymentStatus === "paid"
                           ? "Paid securely online"
                           : "Payment pending"}
                       </p>
                     </div>
 
                     {/* TOTAL */}
-
                     <div className="text-right">
-
-                      <p
-                        className={`
-                          text-[8px]
-                          font-medium
-                          uppercase
-                          tracking-wider
-                          sm:text-[9px]
-                          ${mutedText}
-                        `}
-                      >
+                      <p className={`text-[10px] font-medium uppercase tracking-wider ${mutedText}`}>
                         Order total
                       </p>
 
-                      <p
-                        className={`
-                          mt-0.5
-                          text-sm
-                          font-semibold
-                          sm:text-base
-                          ${heading}
-                        `}
-                      >
-                        ₹
-                        {formatPrice(
-                          order.total
-                        )}
+                      <p className={`mt-1 text-base font-semibold ${heading}`}>
+                        ₹{formatPrice(order.total)}
                       </p>
-
                     </div>
 
                   </div>

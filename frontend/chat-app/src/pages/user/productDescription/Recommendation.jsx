@@ -1,3 +1,4 @@
+
 import Card from "../../../components/ui/Card";
 
 // Hooks
@@ -15,96 +16,90 @@ const Recommendation = ({ currentId, category }) => {
   const { isWishlisted, toggleWishlist } = useWishlist();
 
   return (
-    <div
+    <section
       className={`
         w-full
         max-w-[1800px]
         mx-auto
-
-        mt-10
-        sm:mt-12
-        lg:mt-16
-
+        mt-8
+        sm:mt-10
+        lg:mt-12
         px-3
         sm:px-4
         lg:px-6
-
         transition-colors
         duration-300
-
         ${isDark ? "bg-gray-950" : "bg-white"}
       `}
     >
       {/* ================= SECTION TITLE ================= */}
-      <h2
-        className={`
-          text-base
-          sm:text-lg
-          md:text-xl
-          lg:text-lg
+      <div className="mb-5 sm:mb-6 lg:mb-7">
+        <h2
+          className={`
+            text-sm
+            sm:text-base
+            md:text-lg
+            font-semibold
+            text-center
+            tracking-[1.5px]
+            ${isDark ? "text-gray-100" : "text-gray-800"}
+          `}
+        >
+          RELATED PRODUCTS
+        </h2>
 
-          text-center
-          font-semibold
-
-          tracking-wide
-
-          mb-5
-          sm:mb-7
-          lg:mb-8
-
-          ${isDark ? "text-white" : "text-gray-800"}
-        `}
-      >
-        RELATED PRODUCTS
-      </h2>
+        <div
+          className={`
+            w-10
+            h-[2px]
+            mx-auto
+            mt-2
+            rounded-full
+            ${isDark ? "bg-gray-600" : "bg-gray-300"}
+          `}
+        />
+      </div>
 
       {/* ================= RECOMMENDED PRODUCTS ================= */}
-      <div
-        className="
-          grid
-
-          grid-cols-2
-          sm:grid-cols-2
-          md:grid-cols-3
-          lg:grid-cols-4
-          xl:grid-cols-5
-
-          gap-4
-          sm:gap-5
-          lg:gap-6
-        "
-      >
-        {products.length > 0 ? (
-          products.map((item) => (
+      {products?.length > 0 ? (
+        <div
+          className="
+            grid
+            grid-cols-2
+            sm:grid-cols-2
+            md:grid-cols-3
+            lg:grid-cols-4
+            xl:grid-cols-5
+            gap-3
+            sm:gap-4
+            lg:gap-5
+          "
+        >
+          {products.map((item) => (
             <Card
               key={item._id}
               product={item}
               isWishlisted={isWishlisted(item._id)}
               onToggleWishlist={toggleWishlist}
             />
-          ))
-        ) : (
-          /* ================= EMPTY STATE ================= */
-          <p
-            className={`
-              col-span-full
-
-              py-8
-              sm:py-10
-
-              text-xs
-              sm:text-sm
-
-              text-center
-
-              ${isDark ? "text-gray-400" : "text-gray-500"}
-            `}
-          >
-            No related products
-          </p>
-        )}
-      </div>
-    </div>
+          ))}
+        </div>
+      ) : (
+        /* ================= EMPTY STATE ================= */
+        <div
+          className={`
+            py-8
+            sm:py-10
+            text-center
+            text-xs
+            sm:text-sm
+            ${isDark ? "text-gray-400" : "text-gray-500"}
+          `}
+        >
+          No related products available.
+        </div>
+      )}
+    </section>
   );
 };
 

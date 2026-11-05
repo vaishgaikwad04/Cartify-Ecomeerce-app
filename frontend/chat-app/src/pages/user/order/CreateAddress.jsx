@@ -13,118 +13,50 @@ const CreateAddress = ({
   onCancel,
   isDark,
 }) => {
-  // =====================================================
-  // THEME CLASSES
-  // =====================================================
-
   const cardBg = isDark
     ? "bg-[#111113] border-white/[0.08]"
     : "bg-white border-gray-200";
 
-  const headingText = isDark
-    ? "text-white"
-    : "text-gray-950";
-
-  const bodyText = isDark
-    ? "text-gray-400"
-    : "text-gray-500";
-
-  const border = isDark
-    ? "border-white/[0.08]"
-    : "border-gray-200";
+  const headingText = isDark ? "text-white" : "text-gray-950";
+  const bodyText = isDark ? "text-gray-400" : "text-gray-500";
+  const border = isDark ? "border-white/[0.08]" : "border-gray-200";
 
   return (
     <div
       className={`
-        w-full
-        max-w-4xl
-        mx-auto
-        rounded-xl
-        border
-        p-5
-        sm:p-6
-        lg:p-8
+        w-full max-w-4xl mx-auto
+        rounded-xl border
+        p-4 sm:p-5 lg:p-6
+        transition-colors duration-300
         ${cardBg}
       `}
     >
-      {/* =====================================================
-          HEADER
-      ===================================================== */}
-
-      <div className="mb-7">
-        <h2
-          className={`
-            text-xl
-            lg:text-lg
-            font-semibold
-            tracking-tight
-            ${headingText}
-          `}
-        >
-          {editingId
-            ? "Update Address"
-            : "Add New Address"}
+      {/* HEADER */}
+      <div className="mb-6">
+        <h2 className={`text-lg sm:text-xl font-semibold tracking-tight ${headingText}`}>
+          {editingId ? "Update Address" : "Add New Address"}
         </h2>
 
-        <p
-          className={`
-            mt-1.5
-            text-sm
-            lg:text-xs
-            ${bodyText}
-          `}
-        >
+        <p className={`mt-1 text-xs sm:text-sm ${bodyText}`}>
           Enter your delivery details carefully.
         </p>
       </div>
 
-      {/* =====================================================
-          FORM
-      ===================================================== */}
+      <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-7">
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-8"
-      >
-        {/* =================================================
-            CONTACT INFORMATION
-        ================================================= */}
-
+        {/* CONTACT INFORMATION */}
         <section>
-          <div className="mb-4">
-            <h3
-              className={`
-                text-sm
-                lg:text-xs
-                font-semibold
-                ${headingText}
-              `}
-            >
+          <div className="mb-3">
+            <h3 className={`text-sm font-semibold ${headingText}`}>
               Contact Information
             </h3>
 
-            <p
-              className={`
-                mt-1
-                text-xs
-                lg:text-[10px]
-                ${bodyText}
-              `}
-            >
+            <p className={`mt-1 text-xs ${bodyText}`}>
               Provide the details we can use to contact you.
             </p>
           </div>
 
-          <div
-            className="
-              grid
-              grid-cols-1
-              gap-5
-              md:grid-cols-2
-            "
-          >
-            {/* FULL NAME */}
-
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <InputField
               label="Full Name"
               name="fullName"
@@ -132,8 +64,6 @@ const CreateAddress = ({
               handleChange={handleChange}
               placeholder="Enter full name"
             />
-
-            {/* PHONE */}
 
             <InputField
               label="Phone Number"
@@ -145,39 +75,19 @@ const CreateAddress = ({
           </div>
         </section>
 
-        {/* =================================================
-            DELIVERY ADDRESS
-        ================================================= */}
-
+        {/* DELIVERY ADDRESS */}
         <section>
-          <div className="mb-4">
-            <h3
-              className={`
-                text-sm
-                lg:text-xs
-                font-semibold
-                ${headingText}
-              `}
-            >
+          <div className="mb-3">
+            <h3 className={`text-sm font-semibold ${headingText}`}>
               Delivery Address
             </h3>
 
-            <p
-              className={`
-                mt-1
-                text-xs
-                lg:text-[10px]
-                ${bodyText}
-              `}
-            >
-              Enter the complete address where your order
-              should be delivered.
+            <p className={`mt-1 text-xs ${bodyText}`}>
+              Enter the complete address where your order should be delivered.
             </p>
           </div>
 
-          <div className="space-y-5">
-            {/* ADDRESS LINE */}
-
+          <div className="space-y-4">
             <InputField
               label="Address"
               name="addressLine"
@@ -186,16 +96,7 @@ const CreateAddress = ({
               placeholder="House no, street, area"
             />
 
-            {/* CITY + STATE */}
-
-            <div
-              className="
-                grid
-                grid-cols-1
-                gap-5
-                md:grid-cols-2
-              "
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <InputField
                 label="City"
                 name="city"
@@ -213,16 +114,7 @@ const CreateAddress = ({
               />
             </div>
 
-            {/* POSTAL CODE + COUNTRY */}
-
-            <div
-              className="
-                grid
-                grid-cols-1
-                gap-5
-                md:grid-cols-2
-              "
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <InputField
                 label="Postal Code"
                 name="postalCode"
@@ -242,16 +134,11 @@ const CreateAddress = ({
           </div>
         </section>
 
-        {/* =================================================
-            DEFAULT ADDRESS
-        ================================================= */}
-
+        {/* DEFAULT ADDRESS */}
         <div
           className={`
-            rounded-lg
-            border
-            px-4
-            py-3.5
+            rounded-lg border
+            px-3 sm:px-4 py-3
             ${
               isDark
                 ? "border-white/[0.08] bg-white/[0.02]"
@@ -266,38 +153,20 @@ const CreateAddress = ({
             onChange={handleChange}
           />
 
-          <p
-            className={`
-              mt-1
-              ml-6
-              text-xs
-              lg:text-[10px]
-              ${bodyText}
-            `}
-          >
-            This address will be selected automatically
-            during checkout.
+          <p className={`mt-1 ml-6 text-[11px] sm:text-xs ${bodyText}`}>
+            This address will be selected automatically during checkout.
           </p>
         </div>
 
-        {/* =================================================
-            ACTIONS
-        ================================================= */}
-
+        {/* ACTIONS */}
         <div
           className={`
-            flex
-            flex-col-reverse
-            gap-3
-            border-t
-            pt-6
-            sm:flex-row
-            sm:justify-end
+            flex flex-col-reverse sm:flex-row
+            gap-2.5 sm:justify-end
+            border-t pt-5
             ${border}
           `}
         >
-          {/* CANCEL */}
-
           <Button
             type="button"
             label="Cancel"
@@ -306,15 +175,9 @@ const CreateAddress = ({
             className="w-full sm:w-auto"
           />
 
-          {/* SAVE / UPDATE */}
-
           <Button
             type="submit"
-            label={
-              editingId
-                ? "Update Address"
-                : "Save Address"
-            }
+            label={editingId ? "Update Address" : "Save Address"}
             variant="primary"
             className="w-full sm:w-auto"
           />

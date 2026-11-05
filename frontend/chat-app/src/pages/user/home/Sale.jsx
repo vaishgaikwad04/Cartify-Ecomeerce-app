@@ -77,7 +77,7 @@ const Sale = () => {
         lg:px-8
         xl:px-12
         py-9
-        sm:py-12
+        sm:py-10
         lg:py-16
         transition-colors duration-300
         ${sectionBg}
@@ -89,17 +89,16 @@ const Sale = () => {
 
       <div
         className="
-          flex flex-col
-          sm:flex-row
-          sm:items-end
+          flex flex-row
+          items-end
           justify-between
-          gap-3
-          mb-6
-          sm:mb-8
+          gap-2
+          mb-5
+          sm:mb-6
           lg:mb-10
         "
       >
-        <div>
+        <div className="min-w-0">
           <p
             className={`
               text-[9px]
@@ -116,9 +115,9 @@ const Sale = () => {
 
           <h2
             className={`
-              
-              text-[30px]
-              sm:text-[36px]
+              text-[27px]
+              sm:text-[30px]
+              md:text-[36px]
               lg:text-[44px]
               font-normal
               leading-tight
@@ -135,14 +134,17 @@ const Sale = () => {
           onClick={handleShopNow}
           className={`
             group
-            flex items-center gap-3
+            flex items-center gap-2
+            shrink-0
             w-fit
             pb-1
             border-b
-            text-[10px]
-            sm:text-[11px]
+            text-[9px]
+            sm:text-[10px]
+            lg:text-[11px]
             uppercase
-            tracking-[1.5px]
+            tracking-[1px]
+            sm:tracking-[1.5px]
             font-medium
             transition-all duration-300
             ${
@@ -168,9 +170,10 @@ const Sale = () => {
         className="
           grid
           grid-cols-1
+          sm:grid-cols-2
           lg:grid-cols-[1.05fr_0.95fr]
-          gap-5
-          sm:gap-6
+          gap-3
+          sm:gap-4
           lg:gap-8
           items-start
         "
@@ -179,11 +182,9 @@ const Sale = () => {
             LEFT SIDE: CAMPAIGN BANNERS
         ================================================= */}
 
-        <div className="min-w-0 flex flex-col gap-4 sm:gap-5">
+        <div className="min-w-0 flex flex-col gap-3 sm:gap-4 lg:gap-5">
 
-          {/* ===============================================
-              MAIN VIDEO CAMPAIGN
-          =============================================== */}
+          {/* MAIN VIDEO CAMPAIGN */}
 
           <div
             className="relative group"
@@ -193,9 +194,9 @@ const Sale = () => {
               className="
                 relative
                 overflow-hidden
-                h-[290px]
-                sm:h-[380px]
-                md:h-[450px]
+                h-[230px]
+                sm:h-[280px]
+                md:h-[350px]
                 lg:h-[450px]
                 xl:h-[520px]
                 bg-[#DDD8CF]
@@ -212,7 +213,7 @@ const Sale = () => {
                 preload="metadata"
                 onLoadedData={() => setIsVideoLoaded(true)}
                 className="
-                  inset-0
+                  absolute inset-0
                   w-full h-full
                   object-cover
                   transition-transform duration-[1200ms]
@@ -232,8 +233,6 @@ const Sale = () => {
                   pointer-events-none
                 "
               />
-
-     
 
               {/* PRODUCT HOTSPOT */}
 
@@ -260,8 +259,8 @@ const Sale = () => {
                   lg:right-[29%]
                   z-20
                   flex items-center justify-center
-                  w-8 h-8
-                  sm:w-9 sm:h-9
+                  w-7 h-7
+                  sm:w-8 sm:h-8
                   lg:w-10 lg:h-10
                   rounded-full
                   border
@@ -298,13 +297,16 @@ const Sale = () => {
               <div
                 className="
                   absolute
-                  top-5 right-5
-                  sm:top-7 sm:right-7
+                  top-3 right-3
+                  sm:top-4 sm:right-4
+                  lg:top-7 lg:right-7
                   pointer-events-none
                   text-white
-                  text-[8px]
-                  sm:text-[9px]
-                  tracking-[2px]
+                  text-[7px]
+                  sm:text-[8px]
+                  lg:text-[9px]
+                  tracking-[1.5px]
+                  sm:tracking-[2px]
                   uppercase
                 "
               >
@@ -312,9 +314,7 @@ const Sale = () => {
               </div>
             </div>
 
-            {/* =============================================
-                FEATURED PRODUCT POPUP
-            ============================================= */}
+            {/* FEATURED PRODUCT POPUP */}
 
             {openProductModel === "sale-banner" &&
               categories?.[0] && (
@@ -336,9 +336,10 @@ const Sale = () => {
                       top-12
                       right-3
                       sm:top-16
-                      sm:right-6
+                      sm:right-4
+                      lg:right-6
                       w-[155px]
-                      sm:w-[190px]
+                      sm:w-[180px]
                       md:w-[225px]
                       lg:w-[235px]
                       max-w-[65%]
@@ -390,30 +391,27 @@ const Sale = () => {
               )}
           </div>
 
-          {/* ===============================================
-              SECONDARY PROMOTIONAL BANNERS
-          =============================================== */}
+          {/* SECONDARY PROMOTIONAL BANNERS */}
 
           <div
             className="
               grid
               grid-cols-2
-              gap-3
-              sm:gap-4
+              gap-2
+              sm:gap-3
+              lg:gap-4
             "
           >
-            {/* =============================================
-                ACCESSORIES IMAGE
-            ============================================= */}
+            {/* ACCESSORIES IMAGE */}
 
-            <div className="relative group overflow-hidden">
+            <div className="relative group overflow-hidden min-w-0">
 
               <ImageCard
                 image="https://shopjonesandco.com/cdn/shop/files/jones-plus-co-rider-s-taupe-leather-bag_50f3d876-73b8-4b79-be64-0f742840c07c.png?v=1790204313&width=3000"
                 className="
-                  h-[210px]
-                  sm:h-[270px]
-                  md:h-[310px]
+                  h-[170px]
+                  sm:h-[190px]
+                  md:h-[240px]
                   lg:h-[290px]
                   xl:h-[350px]
                   transition-transform duration-700
@@ -434,10 +432,12 @@ const Sale = () => {
                   -translate-y-1/2
                   z-10
                   pointer-events-none
-                  px-3
-                  sm:px-5
-                  py-3
-                  sm:py-4
+                  px-2
+                  sm:px-3
+                  lg:px-5
+                  py-2
+                  sm:py-3
+                  lg:py-4
                   bg-[#F8F5EF]/95
                   text-[#292722]
                   shadow-md
@@ -445,10 +445,12 @@ const Sale = () => {
               >
                 <p
                   className="
-                    text-[8px]
-                    sm:text-[9px]
+                    text-[7px]
+                    sm:text-[8px]
+                    lg:text-[9px]
                     uppercase
-                    tracking-[2px]
+                    tracking-[1px]
+                    sm:tracking-[2px]
                     mb-1
                   "
                 >
@@ -457,9 +459,8 @@ const Sale = () => {
 
                 <p
                   className="
-                    
-                    text-xl
-                    sm:text-2xl
+                    text-base
+                    sm:text-xl
                     lg:text-3xl
                     leading-none
                   "
@@ -469,11 +470,9 @@ const Sale = () => {
               </div>
             </div>
 
-            {/* =============================================
-                SUMMER SALE TEXT CARD
-            ============================================= */}
+            {/* SUMMER SALE TEXT CARD */}
 
-            <div className="relative overflow-hidden">
+            <div className="relative overflow-hidden min-w-0">
 
               <TextCard
                 subtitle="Limited Offer"
@@ -481,14 +480,14 @@ const Sale = () => {
                 description="A little more style, for a little less. Enjoy up to 50% off on selected favourites."
                 className={`
                   relative
-                  h-[210px]
-                  sm:h-[270px]
-                  md:h-[310px]
+                  h-[170px]
+                  sm:h-[190px]
+                  md:h-[240px]
                   lg:h-[290px]
                   xl:h-[350px]
-                  !p-3
-                  sm:!p-5
-                  md:!p-6
+                  !p-2
+                  sm:!p-3
+                  lg:!p-6
                   flex flex-col
                   justify-center
                   !rounded-none
@@ -500,15 +499,16 @@ const Sale = () => {
                   }
                 `}
               >
-                <div className="mb-3 sm:mb-4">
-
+                <div className="mb-2 sm:mb-3">
                   <p
                     className={`
-                      text-[8px]
-                      sm:text-[9px]
+                      text-[7px]
+                      sm:text-[8px]
+                      lg:text-[9px]
                       uppercase
-                      tracking-[2px]
-                      mb-2
+                      tracking-[1px]
+                      sm:tracking-[2px]
+                      mb-1 sm:mb-2
                       ${mutedText}
                     `}
                   >
@@ -517,7 +517,7 @@ const Sale = () => {
 
                   <div
                     className={`
-                      w-8 h-[1px]
+                      w-6 sm:w-7 lg:w-8 h-[1px]
                       ${isDark ? "bg-white/30" : "bg-black/30"}
                     `}
                   />
@@ -529,15 +529,18 @@ const Sale = () => {
                   variant="primary"
                   className={`
                     !ml-0
-                    !mt-3
-                    !px-3
-                    !py-2
-                    !text-[9px]
-                    sm:!px-5
-                    sm:!py-2.5
-                    sm:!text-[10px]
+                    !mt-2
+                    !px-2
+                    !py-1
+                    !text-[8px]
+                    sm:!px-3
+                    sm:!py-1.5
+                    sm:!text-[9px]
+                    lg:!px-5
+                    lg:!py-2.5
+                    lg:!text-[10px]
                     !rounded-none
-                    !tracking-[1.5px]
+                    !tracking-[1px]
                     !uppercase
                     transition-all duration-300
                     hover:translate-y-[-2px]
@@ -560,16 +563,15 @@ const Sale = () => {
           <div
             className={`
               flex items-center justify-between
-              mb-4
-              sm:mb-5
-              pb-3
+              mb-3
+              sm:mb-4
+              lg:mb-5
+              pb-2
+              sm:pb-3
               border-b
               ${borderColor}
             `}
           >
-           
-
-         
           </div>
 
           {/* PRODUCT GRID */}
@@ -579,20 +581,18 @@ const Sale = () => {
               className="
                 grid
                 grid-cols-2
-                gap-x-3
-                gap-y-5
-                sm:gap-x-4
-                sm:gap-y-7
+                gap-x-2
+                gap-y-4
+                sm:gap-x-3
+                sm:gap-y-5
+                lg:gap-x-4
                 xl:gap-x-5
               "
             >
               {categories.slice(0, 4).map((product) => (
                 <div
                   key={product._id}
-                  className="
-                    min-w-0
-                    group
-                  "
+                  className="min-w-0 group"
                 >
                   <Card
                     product={product}
@@ -606,15 +606,16 @@ const Sale = () => {
             <div
               className={`
                 flex flex-col items-center justify-center
-                min-h-[250px]
+                min-h-[200px]
+                sm:min-h-[250px]
                 border
                 ${borderColor}
               `}
             >
               <p
                 className={`
-          
-                  text-xl
+                  text-lg
+                  sm:text-xl
                   ${primaryText}
                 `}
               >
@@ -624,7 +625,8 @@ const Sale = () => {
               <p
                 className={`
                   mt-2
-                  text-xs
+                  text-[10px]
+                  sm:text-xs
                   ${mutedText}
                 `}
               >
