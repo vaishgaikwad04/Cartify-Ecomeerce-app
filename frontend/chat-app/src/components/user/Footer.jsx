@@ -113,9 +113,10 @@ const Footer = () => {
                 font-serif
                 font-normal
 
-                text-4xl
-                sm:text-5xl
-                md:text-6xl
+                text-xl
+                sm:text-2xl
+                md:text-3xl
+                lg:text-4xl
 
                 tracking-tight
 

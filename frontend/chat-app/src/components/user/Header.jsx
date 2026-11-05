@@ -1,5 +1,6 @@
+
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import React, { useContext } from "react";
 
 // Icons
 import { FaChevronDown } from "react-icons/fa";
@@ -13,13 +14,13 @@ import {
   FiUser,
 } from "react-icons/fi";
 
+// Hooks
 import { useHeader } from "../../hooks/user/useHeader";
+import { AuthContext } from "../../context/AuthContext";
 
 // Components
 import Drawer from "../ui/drawer";
 import CartSidebar from "../../pages/user/cart/CartSidebar";
-
-import { AuthContext } from "../../context/AuthContext";
 import AuthModal from "../../components/ui/AuthModal";
 
 const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
@@ -63,199 +64,197 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       subtitle: "Interior Collection",
       heading: "Living",
       items: [
-        {
-          name: "Decor",
-          path: "/decor",
-        },
-        {
-          name: "Kitchen & Dining",
-          path: "/kitchen-dining",
-        },
-        {
-          name: "Pillows",
-          path: "/pillows-cushions",
-        },
-        {
-          name: "Books",
-          path: "/books",
-        },
+        { name: "Decor", path: "/decor" },
+        { name: "Kitchen & Dining", path: "/kitchen-dining" },
+        { name: "Pillows", path: "/pillows-cushions" },
+        { name: "Books", path: "/books" },
       ],
     },
-
     {
       title: "Clothing",
       subtitle: "Everyday Essentials",
       heading: "Clothing",
       items: [
-        {
-          name: "Tops",
-          path: "/tops",
-        },
-        {
-          name: "Basics & Loungewear",
-          path: "/basics-loungewear",
-        },
-        {
-          name: "Pants & Shorts",
-          path: "/pants-shorts",
-        },
-        {
-          name: "Dresses & Skirts",
-          path: "/dresses-skirts",
-        },
-        {
-          name: "Sweaters",
-          path: "/sweaters",
-        },
-        {
-          name: "Kids",
-          path: "/kids",
-        },
-        {
-          name: "Sale",
-          path: "/sale",
-        },
+        { name: "Tops", path: "/tops" },
+        { name: "Basics & Loungewear", path: "/basics-loungewear" },
+        { name: "Pants & Shorts", path: "/pants-shorts" },
+        { name: "Dresses & Skirts", path: "/dresses-skirts" },
+        { name: "Sweaters", path: "/sweaters" },
+        { name: "Kids", path: "/kids" },
+        { name: "Sale", path: "/sale" },
       ],
     },
-
     {
       title: "Body",
       subtitle: "Beauty Essentials",
       heading: "Body",
       items: [
-        {
-          name: "Body Care",
-          path: "/body-care",
-        },
-        {
-          name: "Beauty",
-          path: "/beauty",
-        },
-        {
-          name: "Accessories",
-          path: "/accessories",
-        },
-        {
-          name: "Trending",
-          path: "/trending-now",
-        },
+        { name: "Body Care", path: "/body-care" },
+        { name: "Beauty", path: "/beauty" },
+        { name: "Accessories", path: "/accessories" },
+        { name: "Trending", path: "/trending-now" },
       ],
     },
-
     {
       title: "New In",
       subtitle: "Latest Arrivals",
       heading: "Latest",
       items: [
-        {
-          name: "New In Body",
-          path: "/new-in-body",
-        },
-        {
-          name: "New In Home",
-          path: "/new-in-home",
-        },
+        { name: "New In Body", path: "/new-in-body" },
+        { name: "New In Home", path: "/new-in-home" },
       ],
     },
   ];
+
+  const visibleMenus = menus.slice(0, 5);
+  const moreMenus = menus.slice(5);
+
+  // ============================================================
+  // THEME STYLES
+  // ============================================================
+
+  const headerTheme = isDark
+    ? "bg-gray-950/95 border-gray-800"
+    : "bg-[#FAF9F7]/95 border-gray-200";
+
+  const textTheme = isDark
+    ? "text-gray-300"
+    : "text-neutral-700";
+
+  const hoverTheme = isDark
+    ? "hover:text-white"
+    : "hover:text-black";
+
+  const menuTheme = isDark
+    ? "bg-gray-950 border-gray-800"
+    : "bg-white border-gray-100";
+
+  const mobileTheme = isDark
+    ? "bg-gray-950 text-white"
+    : "bg-white text-gray-900";
 
   // ============================================================
   // NAVIGATION LINK STYLE
   // ============================================================
 
   const navClass = ({ isActive }) => `
-    transition-all
-    duration-300
-    flex
-    items-center
-    gap-1
-    whitespace-nowrap
-
+    relative
+    flex items-center gap-1
+    py-5 whitespace-nowrap
+    transition-colors duration-300
     ${
       isActive
         ? isDark
           ? "text-white"
-          : "text-red-900"
+          : "text-gray-950"
         : isDark
           ? "text-gray-300 hover:text-white"
-          : "text-neutral-700 hover:text-red-900"
+          : "text-neutral-700 hover:text-black"
     }
   `;
+
+  // ============================================================
+  // SHARED NAVIGATION LINKS
+  // ============================================================
+
+  const renderMenuItems = (items) =>
+    items.map((item) => (
+      <NavLink
+        key={item.name}
+        to={item.path}
+        onClick={closeMobileMenu}
+        className={({ isActive }) => `
+          block
+          text-[11px]
+          normal-case
+          tracking-normal
+          transition-all duration-200
+          hover:translate-x-1
+          ${
+            isActive
+              ? isDark
+                ? "text-white font-medium"
+                : "text-gray-950 font-medium"
+              : isDark
+                ? "text-gray-400 hover:text-white"
+                : "text-gray-500 hover:text-black"
+          }
+        `}
+      >
+        {item.name}
+      </NavLink>
+    ));
 
   return (
     <>
       {/* =====================================================
-          HEADER
+          MAIN HEADER
       ===================================================== */}
 
       <header
         className={`
-          sticky
-          top-0
-          z-50
+          sticky top-0 z-50
           backdrop-blur-md
           border-b
-          transition-colors
-          duration-300
-
-          ${
-            isDark
-              ? "bg-gray-950/95 border-gray-800"
-              : "bg-white/95 border-gray-100"
-          }
+          transition-colors duration-300
+          ${headerTheme}
         `}
       >
         <div className="max-w-[1700px] mx-auto px-3 sm:px-5 lg:px-6">
+
           <div className="flex items-center justify-between h-16 sm:h-[66px] lg:h-[64px]">
+
             {/* =================================================
                 DESKTOP LOGO
             ================================================= */}
+
             <div className="hidden lg:block lg:w-[180px] xl:w-[190px] shrink-0">
+
               <button
                 type="button"
                 onClick={() => navigate("/")}
                 aria-label="Cartify home"
                 className={`
-    group flex items-center gap-2.5
-    whitespace-nowrap
-    transition-all duration-300
-    ${
-      isDark
-        ? "text-gray-100 hover:text-white"
-        : "text-gray-900 hover:text-black"
-    }
-  `}
+                  group flex items-center gap-2.5
+                  whitespace-nowrap
+                  transition-colors duration-300
+                  ${
+                    isDark
+                      ? "text-gray-100 hover:text-white"
+                      : "text-gray-900 hover:text-black"
+                  }
+                `}
               >
-                {/* C monogram */}
+                {/* MONOGRAM */}
+
                 <span
                   className={`
-      flex items-center justify-center
-      w-8 h-8
-      border
-      rounded-sm
-      font-serif
-      text-xl
-      font-medium
-      transition-all duration-300
-      group-hover:rotate-[-6deg]
-      ${isDark ? "border-gray-500 text-white" : "border-gray-800 text-gray-900"}
-    `}
+                    flex items-center justify-center
+                    w-8 h-8
+                    border rounded-sm
+                    text-xl font-medium
+                    transition-all duration-300
+                    group-hover:rotate-[-6deg]
+                    ${
+                      isDark
+                        ? "border-gray-500 text-white"
+                        : "border-gray-800 text-gray-900"
+                    }
+                  `}
                 >
                   C
                 </span>
 
-                {/* Brand name */}
+                {/* BRAND NAME */}
+
                 <span
                   className="
-      font-serif
-      text-[9px]
-      sm:text-[12px]
-      lg:text-[14px]
-      font-semibold
-      tracking-[2.5px]
-      uppercase
-      leading-none
-    "
+                    text-[18px]
+                    tracking-[2.5px]
+                    uppercase
+                    font-bold
+                    leading-none
+                  "
                 >
                   CARTIFY
                 </span>
@@ -263,8 +262,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             </div>
 
             {/* =================================================
-                MOBILE HAMBURGER — LEFT SIDE
+                MOBILE HAMBURGER
             ================================================= */}
+
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(true)}
@@ -272,14 +272,15 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               aria-expanded={isMobileMenuOpen}
               className={`
                 lg:hidden shrink-0 group
-                flex h-10 w-10 items-center justify-center
+                flex h-10 w-10
+                items-center justify-center
                 rounded-xl border
                 transition-all duration-200
                 active:scale-95
                 ${
                   isDark
-                    ? "border-gray-800 bg-gray-900 text-gray-200 hover:border-gray-700 hover:bg-gray-800"
-                    : "border-gray-200 bg-white text-gray-800 hover:border-gray-300 hover:bg-gray-50"
+                    ? "border-gray-800 bg-gray-900 text-gray-200 hover:bg-gray-800"
+                    : "border-gray-200 bg-white text-gray-800 hover:bg-gray-50"
                 }
               `}
             >
@@ -293,90 +294,102 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 DESKTOP NAVIGATION
             ================================================= */}
 
-            {/* DESKTOP NAVIGATION */}
             <nav
               className={`
-    hidden lg:flex
-    flex-1
-    justify-center
-    items-center
-    gap-5 xl:gap-7
-    text-[11px]
-    font-medium
-    tracking-[1.3px]
-    uppercase
-    ${isDark ? "text-gray-300" : "text-neutral-700"}
-  `}
+                hidden lg:flex flex-1
+                justify-center items-center
+                gap-5 xl:gap-7
+                text-[11px]
+                font-medium
+                tracking-[1.5px]
+                uppercase
+                ${textTheme}
+              `}
             >
-              {menus.slice(0, 5).map((menu) => (
+              {visibleMenus.map((menu) => (
                 <div
                   key={menu.title}
                   className="group relative flex items-center h-full"
                 >
+
+                  {/* CATEGORY LINK */}
+
                   <NavLink
                     to={menu.items[0]?.path || "/"}
-                    className={`
-          relative flex items-center gap-1
-          py-5 whitespace-nowrap
-          transition-all duration-300
-          ${navClass}
-        `}
+                    className={navClass}
                   >
                     {menu.title}
-                    <FaChevronDown className="text-[8px] opacity-60 group-hover:rotate-180 transition-transform" />
+
+                    <FaChevronDown
+                      className="
+                        text-[8px]
+                        opacity-60
+                        transition-transform duration-300
+                        group-hover:rotate-180
+                      "
+                    />
+
+                    {/* HOVER UNDERLINE */}
 
                     <span
                       className={`
-            absolute bottom-2 left-0
-            h-[1px] w-0
-            group-hover:w-full
-            transition-all duration-300
-            ${isDark ? "bg-white" : "bg-black"}
-          `}
+                        absolute bottom-2 left-0
+                        h-[1px] w-0
+                        group-hover:w-full
+                        transition-all duration-300
+                        ${isDark ? "bg-white" : "bg-black"}
+                      `}
                     />
                   </NavLink>
 
-                  {/* MULTI-COLUMN MEGA MENU */}
+                  {/* MEGA MENU */}
+
                   <div
                     className="
-          absolute top-full left-1/2
-          -translate-x-1/2 pt-2
-          invisible opacity-0 translate-y-3
-          group-hover:visible group-hover:opacity-100
-          group-hover:translate-y-0
-          transition-all duration-300
-          z-50
-          w-[650px] xl:w-[800px]
-        "
+                      absolute top-full left-1/2
+                      -translate-x-1/2 pt-2
+                      invisible opacity-0 translate-y-3
+                      group-hover:visible group-hover:opacity-100
+                      group-hover:translate-y-0
+                      transition-all duration-300
+                      z-50
+                      w-[650px] xl:w-[800px]
+                    "
                   >
-                    {/* DYNAMIC MEGA MENU */}
                     <div
                       className={`
-    grid
-    ${
-      menu.items.length > 10
-        ? "grid-cols-3"
-        : menu.items.length > 5
-          ? "grid-cols-2"
-          : "grid-cols-1"
-    }
-    gap-x-10 gap-y-7
-    p-8
-    shadow-2xl border
-    ${isDark ? "bg-gray-950 border-gray-800" : "bg-white border-gray-100"}
-  `}
+                        grid
+                        ${
+                          menu.items.length > 10
+                            ? "grid-cols-3"
+                            : menu.items.length > 5
+                              ? "grid-cols-2"
+                              : "grid-cols-1"
+                        }
+                        gap-x-10 gap-y-7
+                        p-8
+                        shadow-2xl border
+                        ${menuTheme}
+                      `}
                     >
                       {Array.from({
                         length: Math.ceil(menu.items.length / 5),
                       }).map((_, columnIndex) => {
                         const columnItems = menu.items.slice(
                           columnIndex * 5,
-                          columnIndex * 5 + 5,
+                          columnIndex * 5 + 5
                         );
 
                         return (
                           <div key={columnIndex}>
-                            <h3 className="text-[12px] font-semibold mb-5">
+                            <h3
+                              className={`
+                                text-[12px]
+                                font-semibold
+                                mb-5
+                                ${isDark ? "text-white" : "text-gray-900"}
+                              `}
+                            >
                               {columnIndex === 0
                                 ? menu.heading
                                 : columnIndex === 1
@@ -385,25 +398,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                             </h3>
 
                             <div className="space-y-4">
-                              {columnItems.map((item) => (
-                                <NavLink
-                                  key={item.name}
-                                  to={item.path}
-                                  className={`
-                block text-[11px]
-                normal-case tracking-normal
-                transition-all duration-200
-                hover:translate-x-1
-                ${
-                  isDark
-                    ? "text-gray-400 hover:text-white"
-                    : "text-gray-500 hover:text-black"
-                }
-              `}
-                                >
-                                  {item.name}
-                                </NavLink>
-                              ))}
+                              {renderMenuItems(columnItems)}
                             </div>
                           </div>
                         );
@@ -414,60 +409,54 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               ))}
 
               {/* MORE MENU */}
-              {menus.length > 5 && (
+
+              {moreMenus.length > 0 && (
                 <div className="group relative flex items-center h-full">
+
                   <button
                     type="button"
                     className="flex items-center gap-1 py-5 whitespace-nowrap"
                   >
                     More
-                    <FaChevronDown className="text-[8px] opacity-60 group-hover:rotate-180 transition-transform" />
+
+                    <FaChevronDown
+                      className="
+                        text-[8px] opacity-60
+                        transition-transform duration-300
+                        group-hover:rotate-180
+                      "
+                    />
                   </button>
 
                   <div
                     className="
-          absolute top-full right-0 pt-2
-          w-64
-          invisible opacity-0 translate-y-2
-          group-hover:visible group-hover:opacity-100
-          group-hover:translate-y-0
-          transition-all duration-300
-          z-50
-        "
+                      absolute top-full right-0 pt-2
+                      w-64
+                      invisible opacity-0 translate-y-2
+                      group-hover:visible group-hover:opacity-100
+                      group-hover:translate-y-0
+                      transition-all duration-300
+                      z-50
+                    "
                   >
                     <div
                       className={`
-            p-5 border shadow-2xl
-            ${
-              isDark
-                ? "bg-gray-950 border-gray-800"
-                : "bg-white border-gray-100"
-            }
-          `}
+                        p-5 border shadow-2xl
+                        ${menuTheme}
+                      `}
                     >
-                      {menus.slice(5).map((menu) => (
-                        <div key={menu.title} className="mb-5 last:mb-0">
+                      {moreMenus.map((menu) => (
+                        <div
+                          key={menu.title}
+                          className="mb-5 last:mb-0"
+                        >
                           <p className="text-[11px] font-semibold mb-3">
                             {menu.title}
                           </p>
 
-                          {menu.items.map((item) => (
-                            <NavLink
-                              key={item.name}
-                              to={item.path}
-                              className={`
-                    block py-2 text-[11px]
-                    normal-case tracking-normal
-                    ${
-                      isDark
-                        ? "text-gray-400 hover:text-white"
-                        : "text-gray-500 hover:text-black"
-                    }
-                  `}
-                            >
-                              {item.name}
-                            </NavLink>
-                          ))}
+                          <div className="space-y-3">
+                            {renderMenuItems(menu.items)}
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -482,24 +471,14 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
             <div
               className={`
-                lg:w-auto
-                xl:w-auto
-
-                flex
-                justify-end
-                items-center
-
-                gap-1
-                sm:gap-1.5
-
+                flex justify-end items-center
+                gap-1 sm:gap-1.5
                 shrink-0
-
                 ${isDark ? "text-white" : "text-gray-900"}
               `}
             >
-              {/* =================================================
-                  SEARCH
-              ================================================= */}
+
+              {/* SEARCH */}
 
               <button
                 type="button"
@@ -507,22 +486,10 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 aria-label="Search"
                 className={`
                   group
-
-                  w-8
-                  h-8
-
-                  sm:w-9
-                  sm:h-9
-
+                  w-8 h-8 sm:w-9 sm:h-9
                   rounded-full
-
-                  flex
-                  items-center
-                  justify-center
-
-                  transition-all
-                  duration-200
-
+                  flex items-center justify-center
+                  transition-all duration-200
                   ${
                     isDark
                       ? "text-gray-300 hover:bg-gray-800 hover:text-white"
@@ -532,34 +499,20 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               >
                 <FiSearch
                   className="
-                    text-[15px]
-                    sm:text-[16px]
-
-                    transition-transform
-                    duration-200
-
+                    text-[15px] sm:text-[16px]
+                    transition-transform duration-200
                     group-hover:scale-105
                   "
                 />
               </button>
 
-              {/* =================================================
-                  DESKTOP MAIN ACTION GROUP
-              ================================================= */}
+              {/* DESKTOP ACTION GROUP */}
 
               <div
                 className={`
-                  hidden
-                  lg:flex
-
-                  items-center
-                  gap-0.5
-
-                  rounded-full
-                  p-0.5
-
-                  border
-
+                  hidden lg:flex
+                  items-center gap-0.5
+                  rounded-full p-0.5 border
                   ${
                     isDark
                       ? "bg-gray-900/80 border-gray-800"
@@ -567,29 +520,17 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   }
                 `}
               >
-                {/* =================================================
-                    CART
-                ================================================= */}
+
+                {/* CART */}
 
                 <button
                   type="button"
                   onClick={() => setIsCartDrawerOpen(true)}
                   aria-label="Cart"
                   className={`
-                    relative
-
-                    w-8
-                    h-8
-
-                    rounded-full
-
-                    flex
-                    items-center
-                    justify-center
-
-                    transition-all
-                    duration-200
-
+                    w-8 h-8 rounded-full
+                    flex items-center justify-center
+                    transition-all duration-200
                     ${
                       isDark
                         ? "text-gray-300 hover:bg-gray-800 hover:text-white"
@@ -597,30 +538,19 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                     }
                   `}
                 >
-                  <HiOutlineShoppingBag className="text-[14px]" />
+                  <HiOutlineShoppingBag className="text-[15px]" />
                 </button>
 
-                {/* =================================================
-                    ORDERS
-                ================================================= */}
+                {/* ORDERS */}
 
                 <button
                   type="button"
                   onClick={() => navigate("/orders")}
                   aria-label="Orders"
                   className={`
-                    w-8
-                    h-8
-
-                    rounded-full
-
-                    flex
-                    items-center
-                    justify-center
-
-                    transition-all
-                    duration-200
-
+                    w-8 h-8 rounded-full
+                    flex items-center justify-center
+                    transition-all duration-200
                     ${
                       isDark
                         ? "text-gray-300 hover:bg-gray-800 hover:text-white"
@@ -631,32 +561,18 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   <FiPackage className="text-[14px]" />
                 </button>
 
-                {/* =================================================
-                    NOTIFICATIONS
-                ================================================= */}
+                {/* NOTIFICATIONS */}
 
                 {allowNotification && (
                   <button
                     type="button"
                     onClick={() => navigate("/notifications")}
-                    aria-label={`Notifications${
-                      unreadCount > 0 ? `, ${unreadCount} unread` : ""
-                    }`}
+                    aria-label="Notifications"
                     className={`
                       relative
-
-                      w-8
-                      h-8
-
-                      rounded-full
-
-                      flex
-                      items-center
-                      justify-center
-
-                      transition-all
-                      duration-200
-
+                      w-8 h-8 rounded-full
+                      flex items-center justify-center
+                      transition-all duration-200
                       ${
                         isDark
                           ? "text-gray-300 hover:bg-gray-800 hover:text-white"
@@ -669,30 +585,13 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                     {unreadCount > 0 && (
                       <span
                         className="
-                          absolute
-                          top-0
-                          right-0
-
-                          min-w-[14px]
-                          h-[14px]
-
-                          px-1
-
+                          absolute top-0 right-0
+                          min-w-[14px] h-[14px] px-1
                           rounded-full
-
-                          bg-red-500
-                          text-white
-
-                          text-[7px]
-                          font-bold
-
-                          flex
-                          items-center
-                          justify-center
-
-                          border-2
-                          border-white
-
+                          bg-red-500 text-white
+                          text-[7px] font-bold
+                          flex items-center justify-center
+                          border-2 border-white
                           leading-none
                         "
                       >
@@ -703,9 +602,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 )}
               </div>
 
-              {/* =================================================
-                  MOBILE CART
-              ================================================= */}
+              {/* MOBILE CART */}
 
               <button
                 type="button"
@@ -713,22 +610,10 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 aria-label="Open cart"
                 className={`
                   lg:hidden
-
-                  w-9
-                  h-9
-
-                  sm:w-10
-                  sm:h-10
-
+                  w-9 h-9 sm:w-10 sm:h-10
                   rounded-full
-
-                  flex
-                  items-center
-                  justify-center
-
-                  transition-all
-                  duration-200
-
+                  flex items-center justify-center
+                  transition-all duration-200
                   ${
                     isDark
                       ? "text-gray-300 hover:bg-gray-800 hover:text-white"
@@ -736,7 +621,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   }
                 `}
               >
-                <HiOutlineShoppingBag className="text-[16px] sm:text-[17px]" />
+                <HiOutlineShoppingBag className="text-[17px]" />
               </button>
 
               {/* =================================================
@@ -744,29 +629,17 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               ================================================= */}
 
               {user ? (
-                // LOGGED IN → PROFILE
 
                 <button
                   type="button"
                   onClick={() => navigate("/profile")}
+                  aria-label="Open profile"
                   className={`
                     group
-
-                    flex
-                    items-center
-                    gap-1.5
-
-                    rounded-full
-                    border
-
-                    px-1
-                    py-1
-
-                    cursor-pointer
-
-                    transition-all
-                    duration-200
-
+                    flex items-center gap-1.5
+                    rounded-full border
+                    px-1 py-1
+                    transition-all duration-200
                     ${
                       isDark
                         ? "bg-gray-900/80 border-gray-800 hover:border-gray-700 hover:bg-gray-800"
@@ -778,51 +651,25 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
                   <div className="relative shrink-0">
                     <div
-                      className={`
-                        w-7
-                        h-7
-
+                      className="
+                        w-7 h-7
                         rounded-full
-
-                        flex
-                        items-center
-                        justify-center
-
-                        text-[10px]
-                        font-semibold
-                        uppercase
+                        flex items-center justify-center
+                        text-[10px] font-semibold uppercase
                         text-white
-
-                        transition-transform
-                        duration-200
-
+                        transition-transform duration-200
                         group-hover:scale-105
-
-                        ${
-                          isDark
-                            ? "bg-gradient-to-br from-gray-500 via-gray-700 to-black"
-                            : "bg-gradient-to-br from-gray-800 to-black"
-                        }
-                      `}
+                        bg-gradient-to-br from-gray-600 to-black
+                      "
                     >
                       {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
                     </div>
 
-                    {/* ONLINE */}
-
                     <span
                       className={`
-                        absolute
-                        right-0
-                        bottom-0
-
-                        w-2
-                        h-2
-
-                        rounded-full
-                        border-2
-                        bg-green-500
-
+                        absolute right-0 bottom-0
+                        w-2 h-2 rounded-full
+                        border-2 bg-green-500
                         ${isDark ? "border-gray-900" : "border-white"}
                       `}
                     />
@@ -833,13 +680,8 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   <div className="hidden xl:flex flex-col min-w-0 pr-1">
                     <span
                       className={`
-                        max-w-[90px]
-                        truncate
-
-                        text-[10px]
-                        font-semibold
-                        leading-none
-
+                        max-w-[90px] truncate
+                        text-[10px] font-semibold leading-none
                         ${isDark ? "text-gray-100" : "text-gray-900"}
                       `}
                     >
@@ -848,13 +690,8 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
                     <span
                       className={`
-                        mt-1
-
-                        text-[7px]
-                        uppercase
-                        tracking-[0.12em]
-                        leading-none
-
+                        mt-1 text-[7px]
+                        uppercase tracking-[0.12em]
                         ${isDark ? "text-gray-500" : "text-gray-400"}
                       `}
                     >
@@ -862,30 +699,20 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                     </span>
                   </div>
 
-                  {/* CHEVRON */}
-
                   <span
                     className={`
-                      hidden
-                      xl:block
-
-                      mr-1
-
+                      hidden xl:block mr-1
                       text-[10px]
-
-                      transition-transform
-                      duration-200
-
+                      transition-transform duration-200
                       group-hover:translate-x-0.5
-
                       ${isDark ? "text-gray-500" : "text-gray-400"}
                     `}
                   >
                     ›
                   </span>
                 </button>
+
               ) : (
-                // NOT LOGGED IN → SIGN IN
 
                 <button
                   type="button"
@@ -894,25 +721,14 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                     setIsOpen(true);
                   }}
                   className={`
-                    flex
-                    items-center
-                    gap-1.5
-
-                    rounded-full
-                    border
-
-                    px-2.5
-                    py-1.5
-
-                    cursor-pointer
-
-                    transition-all
-                    duration-200
-
+                    flex items-center gap-1.5
+                    rounded-full border
+                    px-2.5 py-1.5
+                    transition-all duration-200
                     ${
                       isDark
-                        ? "bg-gray-900/80 border-gray-800 text-gray-200 hover:border-gray-700 hover:bg-gray-800"
-                        : "bg-white border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50"
+                        ? "bg-gray-900/80 border-gray-800 text-gray-200 hover:bg-gray-800"
+                        : "bg-white border-gray-200 text-gray-700 hover:bg-gray-50"
                     }
                   `}
                 >
@@ -935,9 +751,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       {isMobileMenuOpen && (
         <div
           className="
-            fixed
-            inset-0
-            z-[100]
+            fixed inset-0 z-[100]
             lg:hidden
             bg-black/50
             backdrop-blur-[2px]
@@ -946,43 +760,24 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
         >
           <div
             className={`
-              absolute
-              top-0
-              left-0
-
+              absolute top-0 left-0
               h-full
-
-              w-[85%]
-              sm:w-[380px]
+              w-[85%] sm:w-[380px]
               max-w-[380px]
-
               overflow-y-auto
-
               shadow-2xl
-
-              ${isDark ? "bg-gray-950 text-white" : "bg-white text-gray-900"}
+              ${mobileTheme}
             `}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* =================================================
-                MOBILE HEADER
-            ================================================= */}
+
+            {/* MOBILE HEADER */}
 
             <div
               className={`
-                sticky
-                top-0
-                z-10
-
-                flex
-                items-center
-                justify-between
-
-                px-5
-                py-4
-
-                border-b
-
+                sticky top-0 z-10
+                flex items-center justify-between
+                px-5 py-4 border-b
                 ${
                   isDark
                     ? "bg-gray-950 border-gray-800"
@@ -993,88 +788,67 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               <div>
                 <p
                   className={`
-      text-[9px]
-      tracking-[2px]
-      uppercase
-      mb-2
-      ${isDark ? "text-gray-500" : "text-gray-400"}
-    `}
+                    text-[9px] tracking-[2px]
+                    uppercase mb-2
+                    ${isDark ? "text-gray-500" : "text-gray-400"}
+                  `}
                 >
                   Navigation
                 </p>
 
-                <div className="lg:w-[180px] xl:w-[190px] shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => navigate("/")}
-                    className={`
-                  font-serif-sarif
-
-                  text-lg
-                  sm:text-lg
-                  lg:text-lg
-
-                  tracking-[2.5px]
-                  sm:tracking-[3px]
-                  lg:tracking-[3px]
-
-                  font-semibold
-                  uppercase
-                  cursor-pointer
-                  transition-colors
-                  whitespace-nowrap
-
-                  ${
-                    isDark
-                      ? "text-gray-300 hover:text-white"
-                      : "text-gray-900 hover:text-black"
-                  }
-                `}
-                  >
-                    Cartify
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    closeMobileMenu();
+                    navigate("/");
+                  }}
+                  className={`
+                    text-lg tracking-[3px]
+                    font-semibold uppercase
+                    whitespace-nowrap
+                    transition-colors
+                    ${
+                      isDark
+                        ? "text-gray-300 hover:text-white"
+                        : "text-gray-900 hover:text-black"
+                    }
+                  `}
+                >
+                  CARTIFY
+                </button>
               </div>
+
+              {/* CLOSE BUTTON */}
 
               <button
                 type="button"
                 onClick={closeMobileMenu}
+                aria-label="Close menu"
                 className={`
-                  w-9
-                  h-9
-
+                  group
+                  w-9 h-9
                   rounded-full
-
-                  flex
-                  items-center
-                  justify-center
-
-                  transition
-
+                  flex items-center justify-center
+                  transition-all duration-200
                   ${
                     isDark
                       ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
                       : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                   }
                 `}
-                aria-label="Close menu"
               >
-                <FiX className="text-sm sm:text-base md:text-lg" />
+                <FiX className="text-lg transition-transform duration-300 group-hover:rotate-90" />
               </button>
             </div>
 
-            {/* =================================================
-                SHOP
-            ================================================= */}
+            {/* SHOP NAVIGATION */}
 
             <div className="px-5 pt-6">
+
               <p
                 className={`
-                  text-[9px]
-                  tracking-[2.5px]
-                  uppercase
-                  mb-3
-
+                  text-[9px] tracking-[2.5px]
+                  uppercase mb-3
                   ${isDark ? "text-gray-500" : "text-gray-400"}
                 `}
               >
@@ -1082,154 +856,147 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               </p>
 
               <nav className="flex flex-col">
-                {menus.map((menu) => (
-                  <div key={menu.title}>
-                    {/* MAIN CATEGORY */}
 
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setOpenMobileMenu(
-                          openMobileMenu === menu.title ? null : menu.title,
-                        )
-                      }
-                      className={`
-                        w-full
+                {menus.map((menu) => {
+                  const isExpanded = openMobileMenu === menu.title;
 
-                        flex
-                        items-center
-                        justify-between
+                  return (
+                    <div key={menu.title}>
 
-                        py-4
+                      {/* CATEGORY BUTTON */}
 
-                        text-left
-
-                        transition-colors
-
-                        ${
-                          isDark
-                            ? "text-gray-200 hover:text-white"
-                            : "text-gray-800 hover:text-black"
+                      <button
+                        type="button"
+                        aria-expanded={isExpanded}
+                        onClick={() =>
+                          setOpenMobileMenu(
+                            isExpanded ? null : menu.title
+                          )
                         }
-                      `}
-                    >
-                      <span
-                        className="
-                          text-sm
-                          sm:text-base
-                          md:text-base
-
-                          font-medium
-                          tracking-wide
-                        "
-                      >
-                        {menu.title}
-                      </span>
-
-                      <FaChevronDown
                         className={`
-                          text-[10px]
-
-                          transition-transform
-                          duration-300
-
-                          ${openMobileMenu === menu.title ? "rotate-180" : ""}
+                          w-full
+                          flex items-center justify-between
+                          py-4
+                          text-left
+                          transition-colors
+                          ${
+                            isDark
+                              ? "text-gray-200 hover:text-white"
+                              : "text-gray-800 hover:text-black"
+                          }
                         `}
-                      />
-                    </button>
+                      >
+                        <span className="text-sm sm:text-base font-medium tracking-wide">
+                          {menu.title}
+                        </span>
 
-                    {/* SUB NAV */}
+                        <FaChevronDown
+                          className={`
+                            text-[10px]
+                            transition-transform duration-300
+                            ${isExpanded ? "rotate-180" : ""}
+                          `}
+                        />
+                      </button>
 
-                    <div
-                      className={`
-                        overflow-hidden
+                      {/* SUB NAVIGATION */}
 
-                        transition-all
-                        duration-300
-
-                        ${
-                          openMobileMenu === menu.title
-                            ? "max-h-96 opacity-100 pb-3"
-                            : "max-h-0 opacity-0"
-                        }
-                      `}
-                    >
                       <div
                         className={`
-                          ml-1
-                          pl-4
-                          border-l
-                          ${isDark ? "border-gray-800" : "border-gray-200"}
+                          grid transition-all duration-300 ease-in-out
+                          ${
+                            isExpanded
+                              ? "grid-rows-[1fr] opacity-100"
+                              : "grid-rows-[0fr] opacity-0"
+                          }
                         `}
                       >
-                        {/* SUB NAV LINKS — TWO-COLUMN LAYOUT */}
-                        <div className="grid grid-cols-2 gap-x-4 gap-y-1">
-                          {menu.items.map((item) => (
-                            <NavLink
-                              key={item.name}
-                              to={item.path}
-                              onClick={closeMobileMenu}
-                              className={`
-                                flex
-                                min-w-0
-                                min-h-10
-                                items-center
-                                py-2
-                                text-[11px]
-                                sm:text-xs
-                                leading-5
-                                transition-colors
-                                duration-200
-                                ${
-                                  isDark
-                                    ? "text-gray-400 hover:text-white"
-                                    : "text-gray-500 hover:text-gray-900"
-                                }
-                              `}
-                            >
-                              <span className="break-words">{item.name}</span>
-                            </NavLink>
-                          ))}
+                        <div className="overflow-hidden">
+                          <div
+                            className={`
+                              ml-1 pl-4
+                              border-l
+                              pb-3
+                              ${
+                                isDark
+                                  ? "border-gray-800"
+                                  : "border-gray-200"
+                              }
+                            `}
+                          >
+                            <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+
+                              {menu.items.map((item) => (
+                                <NavLink
+                                  key={item.name}
+                                  to={item.path}
+                                  onClick={closeMobileMenu}
+                                  className={({ isActive }) => `
+                                    flex min-w-0 min-h-10
+                                    items-center py-2
+                                    text-[11px] sm:text-xs
+                                    leading-5
+                                    transition-colors duration-200
+                                    ${
+                                      isActive
+                                        ? isDark
+                                          ? "text-white font-medium"
+                                          : "text-gray-950 font-medium"
+                                        : isDark
+                                          ? "text-gray-400 hover:text-white"
+                                          : "text-gray-500 hover:text-gray-900"
+                                    }
+                                  `}
+                                >
+                                  <span className="break-words">
+                                    {item.name}
+                                  </span>
+                                </NavLink>
+                              ))}
+
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
+
               </nav>
             </div>
 
-            {/* =================================================
-                ACCOUNT ACTIONS
-            ================================================= */}
+            {/* ACCOUNT ACTIONS */}
 
             <div className="px-5">
+
               <div
                 className={`
-                  mt-4
-                  pt-5
-
-                  border-t
-
+                  mt-4 pt-5 border-t
                   ${isDark ? "border-gray-800" : "border-gray-200"}
                 `}
               >
                 <p
                   className={`
-                    text-[9px]
-                    tracking-[2.5px]
-                    uppercase
-                    mb-3
-
+                    text-[9px] tracking-[2.5px]
+                    uppercase mb-3
                     ${isDark ? "text-gray-500" : "text-gray-400"}
                   `}
                 >
                   Account
                 </p>
 
-                <div className="grid grid-cols-3 gap-1.5">
-                  {/* =================================================
-                      ORDERS
-                  ================================================= */}
+                <div
+                  className={`
+                    grid gap-1.5
+                    ${
+                      allowNotification
+                        ? "grid-cols-3"
+                        : "grid-cols-2"
+                    }
+                  `}
+                >
+
+                  {/* ORDERS */}
 
                   <button
                     type="button"
@@ -1238,19 +1005,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                       navigate("/orders");
                     }}
                     className={`
-                      flex
-                      flex-col
-                      items-center
-                      justify-center
-
-                      gap-1.5
-
-                      py-3
-
-                      rounded-xl
-
+                      flex flex-col items-center justify-center
+                      gap-1.5 py-3 rounded-xl
                       transition-all
-
                       ${
                         isDark
                           ? "text-gray-400 hover:bg-gray-900 hover:text-white"
@@ -1258,14 +1015,14 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                       }
                     `}
                   >
-                    <FiPackage className="text-[19px] sm:text-[20px]" />
+                    <FiPackage className="text-xl" />
 
-                    <span className="text-[10px] sm:text-[11px]">Orders</span>
+                    <span className="text-[10px] sm:text-[11px]">
+                      Orders
+                    </span>
                   </button>
 
-                  {/* =================================================
-                      NOTIFICATIONS
-                  ================================================= */}
+                  {/* NOTIFICATIONS */}
 
                   {allowNotification && (
                     <button
@@ -1275,21 +1032,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                         navigate("/notifications");
                       }}
                       className={`
-                        relative
-
-                        flex
-                        flex-col
-                        items-center
-                        justify-center
-
-                        gap-1.5
-
-                        py-3
-
-                        rounded-xl
-
+                        flex flex-col items-center justify-center
+                        gap-1.5 py-3 rounded-xl
                         transition-all
-
                         ${
                           isDark
                             ? "text-gray-400 hover:bg-gray-900 hover:text-white"
@@ -1298,31 +1043,17 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                       `}
                     >
                       <div className="relative">
-                        <FiBell className="text-[19px] sm:text-[20px]" />
+                        <FiBell className="text-xl" />
 
                         {unreadCount > 0 && (
                           <span
                             className="
-                              absolute
-                              -top-2
-                              -right-2
-
-                              min-w-[16px]
-                              h-[16px]
-
-                              px-1
-
+                              absolute -top-2 -right-2
+                              min-w-[16px] h-4 px-1
                               rounded-full
-
-                              bg-red-500
-                              text-white
-
-                              text-[8px]
-                              font-bold
-
-                              flex
-                              items-center
-                              justify-center
+                              bg-red-500 text-white
+                              text-[8px] font-bold
+                              flex items-center justify-center
                             "
                           >
                             {unreadCount > 99 ? "99+" : unreadCount}
@@ -1336,13 +1067,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                     </button>
                   )}
 
-                  {/* =================================================
-                      PROFILE / LOGIN
-                  ================================================= */}
+                  {/* PROFILE / LOGIN */}
 
                   {user ? (
-                    /* PROFILE */
-
                     <button
                       type="button"
                       onClick={() => {
@@ -1350,19 +1077,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                         navigate("/profile");
                       }}
                       className={`
-                        flex
-                        flex-col
-                        items-center
-                        justify-center
-
-                        gap-1.5
-
-                        py-3
-
-                        rounded-xl
-
+                        flex flex-col items-center justify-center
+                        gap-1.5 py-3 rounded-xl
                         transition-all
-
                         ${
                           isDark
                             ? "text-gray-400 hover:bg-gray-900 hover:text-white"
@@ -1371,22 +1088,12 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                       `}
                     >
                       <div
-                        className={`
-                          w-7
-                          h-7
-
-                          rounded-full
-
-                          flex
-                          items-center
-                          justify-center
-
-                          text-white
-                          text-[10px]
-                          font-semibold
-
-                          ${isDark ? "bg-gray-700" : "bg-gray-800"}
-                        `}
+                        className="
+                          w-7 h-7 rounded-full
+                          flex items-center justify-center
+                          text-white text-[10px] font-semibold
+                          bg-gradient-to-br from-gray-600 to-black
+                        "
                       >
                         {profileData?.name?.charAt(0)?.toUpperCase() || "U"}
                       </div>
@@ -1396,8 +1103,6 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                       </span>
                     </button>
                   ) : (
-                    /* LOGIN */
-
                     <button
                       type="button"
                       onClick={() => {
@@ -1406,19 +1111,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                         setIsOpen(true);
                       }}
                       className={`
-                        flex
-                        flex-col
-                        items-center
-                        justify-center
-
-                        gap-1.5
-
-                        py-3
-
-                        rounded-xl
-
+                        flex flex-col items-center justify-center
+                        gap-1.5 py-3 rounded-xl
                         transition-all
-
                         ${
                           isDark
                             ? "text-gray-400 hover:bg-gray-900 hover:text-white"
@@ -1426,11 +1121,14 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                         }
                       `}
                     >
-                      <FiUser className="text-[19px] sm:text-[20px]" />
+                      <FiUser className="text-xl" />
 
-                      <span className="text-[10px] sm:text-[11px]">Login</span>
+                      <span className="text-[10px] sm:text-[11px]">
+                        Login
+                      </span>
                     </button>
                   )}
+
                 </div>
               </div>
             </div>
@@ -1446,7 +1144,9 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
         isOpen={isCartDrawerOpen}
         onClose={() => setIsCartDrawerOpen(false)}
       >
-        <CartSidebar onClose={() => setIsCartDrawerOpen(false)} />
+        <CartSidebar
+          onClose={() => setIsCartDrawerOpen(false)}
+        />
       </Drawer>
 
       {/* =====================================================
@@ -1456,10 +1156,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       {isSearchModalOpen && (
         <div
           className={`
-            fixed
-            inset-0
-            z-[100]
-
+            fixed inset-0 z-[100]
             ${isDark ? "bg-black/70" : "bg-black/40"}
           `}
           onClick={(e) => {
@@ -1470,103 +1167,85 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
         >
           <div
             className={`
-              relative
-
-              w-full
-
-              px-3
-              sm:px-5
-              lg:px-6
-
-              py-4
-              sm:py-5
-
+              relative w-full
+              px-3 sm:px-5 lg:px-6
+              py-4 sm:py-5
               shadow-xl
-
               ${isDark ? "bg-gray-900" : "bg-white"}
             `}
           >
             <div className="max-w-5xl mx-auto relative">
-              {/* SEARCH ICON */}
-
-              <FiSearch
-                className={`
-                  absolute
-
-                  left-3
-                  sm:left-4
-
-                  top-1/2
-                  -translate-y-1/2
-
-                  text-base
-                  sm:text-lg
-
-                  ${isDark ? "text-gray-400" : "text-gray-500"}
-                `}
-              />
 
               {/* SEARCH INPUT */}
 
-              <input
-                autoFocus
-                type="text"
-                value={searchTerm}
-                onChange={(e) => handleSearch(e.target.value)}
-                placeholder="Search products, brands, categories..."
-                className={`
-                  w-full
+              <div className="relative">
 
-                  pl-10
-                  sm:pl-12
+                <FiSearch
+                  className={`
+                    absolute left-3 sm:left-4
+                    top-1/2 -translate-y-1/2
+                    text-base sm:text-lg
+                    ${isDark ? "text-gray-400" : "text-gray-500"}
+                  `}
+                />
 
-                  pr-12
+                <input
+                  autoFocus
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => handleSearch(e.target.value)}
+                  placeholder="Search products, brands, categories..."
+                  aria-label="Search products"
+                  className={`
+                    w-full
+                    pl-10 sm:pl-12 pr-12
+                    py-3 sm:py-4
+                    bg-transparent
+                    border-b outline-none
+                    text-xs sm:text-sm
+                    font-medium
+                    ${
+                      isDark
+                        ? "text-white border-gray-700 placeholder-gray-500 focus:border-white"
+                        : "text-black border-gray-300 placeholder-gray-400 focus:border-black"
+                    }
+                  `}
+                />
 
-                  py-3
-                  sm:py-4
+                {/* CLOSE SEARCH */}
 
-                  bg-transparent
-
-                  border-b
-
-                  outline-none
-
-                  text-xs
-                  sm:text-sm
-
-                  font-medium
-
-                  ${
-                    isDark
-                      ? "text-white border-gray-700 placeholder-gray-500 focus:border-white"
-                      : "text-black border-gray-300 placeholder-gray-400 focus:border-black"
-                  }
-                `}
-              />
+                <button
+                  type="button"
+                  onClick={closeSearch}
+                  aria-label="Close search"
+                  className={`
+                    absolute right-2 top-1/2
+                    -translate-y-1/2
+                    w-8 h-8 rounded-full
+                    flex items-center justify-center
+                    transition-colors
+                    ${
+                      isDark
+                        ? "text-gray-400 hover:bg-gray-800 hover:text-white"
+                        : "text-gray-500 hover:bg-gray-100 hover:text-black"
+                    }
+                  `}
+                >
+                  <FiX className="text-lg" />
+                </button>
+              </div>
 
               {/* SEARCH RESULTS */}
 
-              {(searchLoading || results.length > 0) && (
+              {(searchLoading ||
+                results.length > 0 ||
+                (searchTerm.trim() && !searchLoading)) && (
                 <div
                   className={`
-                    absolute
-
-                    top-full
-                    left-0
-                    right-0
-
-                    mt-2
-
-                    rounded-xl
-
-                    shadow-2xl
-
-                    border
-
-                    overflow-hidden
-
-                    z-50
-
+                    absolute top-full left-0 right-0
+                    mt-2 rounded-xl
+                    shadow-2xl border
+                    overflow-hidden z-50
                     ${
                       isDark
                         ? "bg-gray-900 border-gray-800"
@@ -1574,19 +1253,13 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                     }
                   `}
                 >
+
                   {/* LOADING */}
 
                   {searchLoading && (
                     <div
                       className={`
-                        px-4
-                        py-5
-
-                        text-center
-
-                        text-xs
-                        sm:text-sm
-
+                        px-4 py-5 text-center text-xs sm:text-sm
                         ${isDark ? "text-gray-400" : "text-gray-500"}
                       `}
                     >
@@ -1604,26 +1277,12 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                         onClick={() => handleProductClick(item._id)}
                         className={`
                           w-full
-
-                          px-4
-                          sm:px-5
-
-                          py-3
-                          sm:py-4
-
-                          flex
-                          items-center
-
-                          gap-3
-                          sm:gap-4
-
+                          px-4 sm:px-5
+                          py-3 sm:py-4
+                          flex items-center gap-3 sm:gap-4
                           text-left
-
-                          border-b
-                          last:border-b-0
-
-                          transition
-
+                          border-b last:border-b-0
+                          transition-colors
                           ${
                             isDark
                               ? "border-gray-800 hover:bg-gray-800 text-white"
@@ -1636,16 +1295,8 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                             src={item.images[0]}
                             alt={item.name}
                             className="
-                              w-7
-                              h-7
-
-                              sm:w-8
-                              sm:h-8
-
-                              rounded
-                              object-cover
-
-                              shrink-0
+                              w-9 h-9
+                              rounded object-cover shrink-0
                             "
                           />
                         )}
@@ -1658,9 +1309,7 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
                         <span
                           className={`
-                            text-base
-                            sm:text-lg
-
+                            text-lg
                             ${isDark ? "text-gray-500" : "text-gray-400"}
                           `}
                         >
@@ -1668,6 +1317,26 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                         </span>
                       </button>
                     ))}
+
+                  {/* EMPTY RESULTS */}
+
+                  {!searchLoading &&
+                    searchTerm.trim() &&
+                    results.length === 0 && (
+                      <div
+                        className={`
+                          px-4 py-6 text-center
+                          text-xs sm:text-sm
+                          ${
+                            isDark
+                              ? "text-gray-400"
+                              : "text-gray-500"
+                          }
+                        `}
+                      >
+                        No products found. Try another search.
+                      </div>
+                    )}
                 </div>
               )}
             </div>
