@@ -1,12 +1,3 @@
-// import { createContext } from "react";
-
-// // Create Auth Context
-// export const AuthContext = createContext();
-
-// // Auth Provider
-// export const AuthProvider = ({ children }) => {
-
-// };
 
 
 import { createContext, useEffect, useState } from "react";

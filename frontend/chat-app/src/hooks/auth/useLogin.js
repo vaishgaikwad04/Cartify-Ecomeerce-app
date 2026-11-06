@@ -28,7 +28,7 @@ export const useLogin = ({ setIsOpen }) => {
       validationSchema: authSchema,
 
       onSubmit: async (values, actions) => {
-        console.log("FORM VALUES:", values);
+      
 
         try {
           const res = await loginUser(values);

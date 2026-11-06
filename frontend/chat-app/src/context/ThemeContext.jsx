@@ -14,7 +14,7 @@ export const ThemeProvider = ({ children }) => {
 
         setTheme(user.theme);
       } catch (err) {
-        console.log(err);
+        //console.log(err);
       }
     };
 

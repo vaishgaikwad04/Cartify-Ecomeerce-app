@@ -34,8 +34,6 @@ export const useRegister = ({ setIsLogin }) => {
         setError("");
         setSuccess("");
 
-        console.log("Registration values:", values);
-
         const res = await registerUser(values);
 
         const message = res.data?.message || "Registration successful";

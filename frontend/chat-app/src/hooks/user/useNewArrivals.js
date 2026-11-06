@@ -22,7 +22,6 @@ export const useNewArrivals = () => {
         const data = await fetchCategoryData("new-in-body");
 
         setCategories(data || []);
-        console.log("NEW ARRIVALS DATA:", data);
       } catch (error) {
         console.error("Failed to fetch new arrivals:", error);
 

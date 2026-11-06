@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 import Button from "../../../components/ui/Button";
@@ -48,21 +47,13 @@ const Sale = () => {
   };
 
   // THEME
-  const sectionBg = isDark
-    ? "bg-[#111111]"
-    : "bg-[#FAF9F6]";
+  const sectionBg = isDark ? "bg-[#111111]" : "bg-[#FAF9F6]";
 
-  const primaryText = isDark
-    ? "text-[#F2EFE9]"
-    : "text-[#282722]";
+  const primaryText = isDark ? "text-[#F2EFE9]" : "text-[#282722]";
 
-  const mutedText = isDark
-    ? "text-[#A6A198]"
-    : "text-[#89847B]";
+  const mutedText = isDark ? "text-[#A6A198]" : "text-[#89847B]";
 
-  const borderColor = isDark
-    ? "border-white/10"
-    : "border-[#E8E4DC]";
+  const borderColor = isDark ? "border-white/10" : "border-[#E8E4DC]";
 
   return (
     <section
@@ -155,7 +146,6 @@ const Sale = () => {
           `}
         >
           Shop all offers
-
           <span className="transition-transform duration-300 group-hover:translate-x-1">
             →
           </span>
@@ -183,13 +173,9 @@ const Sale = () => {
         ================================================= */}
 
         <div className="min-w-0 flex flex-col gap-3 sm:gap-4 lg:gap-5">
-
           {/* MAIN VIDEO CAMPAIGN */}
 
-          <div
-            className="relative group"
-            onClick={closeProductPopup}
-          >
+          <div className="relative group" onClick={closeProductPopup}>
             <div
               className="
                 relative
@@ -242,9 +228,7 @@ const Sale = () => {
                   e.stopPropagation();
 
                   setOpenProductModel(
-                    openProductModel === "sale-banner"
-                      ? null
-                      : "sale-banner"
+                    openProductModel === "sale-banner" ? null : "sale-banner",
                   );
                 }}
                 aria-label="View featured sale product"
@@ -281,11 +265,7 @@ const Sale = () => {
                     text-xl
                     font-light
                     transition-transform duration-300
-                    ${
-                      openProductModel === "sale-banner"
-                        ? "rotate-45"
-                        : ""
-                    }
+                    ${openProductModel === "sale-banner" ? "rotate-45" : ""}
                   `}
                 >
                   +
@@ -316,28 +296,29 @@ const Sale = () => {
 
             {/* FEATURED PRODUCT POPUP */}
 
-            {openProductModel === "sale-banner" &&
-              categories?.[0] && (
-                <>
-                  <div
-                    className="
+            {openProductModel === "sale-banner" && categories?.[0] && (
+              <>
+                <div
+                  className="
                       fixed inset-0
                       z-[80]
                       bg-black/10
                     "
-                    onClick={closeProductPopup}
-                  />
+                  onClick={closeProductPopup}
+                />
 
-                  <div
-                    onClick={(e) => e.stopPropagation()}
-                    className="
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="
                       absolute
                       z-[90]
-                      top-12
-                      right-3
-                      sm:top-16
-                      sm:right-4
-                      lg:right-6
+                     top-12
+right-3
+sm:top-16
+sm:right-4
+lg:top-54
+lg:right-6
+                
                       w-[155px]
                       sm:w-[180px]
                       md:w-[225px]
@@ -345,20 +326,16 @@ const Sale = () => {
                       max-w-[65%]
                       animate-[fadeIn_.2s_ease-out]
                     "
-                  >
-                    <div
-                      className={`
+                >
+                  <div
+                    className={`
                         relative
                         p-2
                         shadow-[0_12px_45px_rgba(0,0,0,0.2)]
-                        ${
-                          isDark
-                            ? "bg-[#202020]"
-                            : "bg-white"
-                        }
+                        ${isDark ? "bg-[#202020]" : "bg-white"}
                       `}
-                    >
-                      <button
+                  >
+                    {/* <button
                         type="button"
                         onClick={closeProductPopup}
                         aria-label="Close product preview"
@@ -378,17 +355,17 @@ const Sale = () => {
                         `}
                       >
                         ×
-                      </button>
+                      </button> */}
 
-                      <Card
-                        product={categories[0]}
-                        isWishlisted={isWishlisted(categories[0]._id)}
-                        onToggleWishlist={toggleWishlist}
-                      />
-                    </div>
+                    <Card
+                      product={categories[0]}
+                      isWishlisted={isWishlisted(categories[0]._id)}
+                      onToggleWishlist={toggleWishlist}
+                    />
                   </div>
-                </>
-              )}
+                </div>
+              </>
+            )}
           </div>
 
           {/* SECONDARY PROMOTIONAL BANNERS */}
@@ -405,7 +382,6 @@ const Sale = () => {
             {/* ACCESSORIES IMAGE */}
 
             <div className="relative group overflow-hidden min-w-0">
-
               <ImageCard
                 image="https://shopjonesandco.com/cdn/shop/files/jones-plus-co-rider-s-taupe-leather-bag_50f3d876-73b8-4b79-be64-0f742840c07c.png?v=1790204313&width=3000"
                 className="
@@ -417,9 +393,7 @@ const Sale = () => {
                   transition-transform duration-700
                   group-hover:scale-[1.02]
                 "
-                onClick={() =>
-                  handleProductNavigation("/accessories")
-                }
+                onClick={() => handleProductNavigation("/accessories")}
               />
 
               {/* OFFER LABEL */}
@@ -473,7 +447,6 @@ const Sale = () => {
             {/* SUMMER SALE TEXT CARD */}
 
             <div className="relative overflow-hidden min-w-0">
-
               <TextCard
                 subtitle="Limited Offer"
                 title="Summer Sale"
@@ -557,7 +530,6 @@ const Sale = () => {
         ================================================= */}
 
         <div className="min-w-0">
-
           {/* PRODUCT SECTION HEADER */}
 
           <div
@@ -571,8 +543,7 @@ const Sale = () => {
               border-b
               ${borderColor}
             `}
-          >
-          </div>
+          ></div>
 
           {/* PRODUCT GRID */}
 
@@ -590,10 +561,7 @@ const Sale = () => {
               "
             >
               {categories.slice(0, 4).map((product) => (
-                <div
-                  key={product._id}
-                  className="min-w-0 group"
-                >
+                <div key={product._id} className="min-w-0 group">
                   <Card
                     product={product}
                     isWishlisted={isWishlisted(product._id)}

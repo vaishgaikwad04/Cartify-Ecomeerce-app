@@ -401,40 +401,46 @@ const Header = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     <>
       {/* ANNOUNCEMENT BAR */}
 
-      <div
-        className={`
-          relative
-          flex items-center justify-center
-          min-h-[24px]
-          sm:min-h-[26px]
-          lg:min-h-[29px]
-          px-2
-          text-center
-          transition-colors duration-300
-          ${
-            isDark
-              ? "bg-[#D7C5AA] text-[#29251F]"
-              : "bg-[#292722] text-[#F7F3EB]"
-          }
-        `}
-      >
-        <p
-          className="
-            text-[7px]
-            sm:text-[8px]
-            lg:text-[9px]
-            uppercase
-            tracking-[1px]
-            sm:tracking-[1.5px]
-            font-medium
-            leading-4
-          "
-        >
-          A little something for your everyday
-          <span className="mx-1.5 sm:mx-2 opacity-50">|</span>
-          Discover the collection
-        </p>
-      </div>
+    <div
+  className={`
+    relative
+    flex items-center justify-center
+    min-h-[24px]
+    sm:min-h-[26px]
+    lg:min-h-[29px]
+    px-2
+    text-center
+    transition-all duration-300
+    ${
+      isDark
+        ? "bg-[#D7C5AA] text-[#29251F]"
+        : "bg-[#292722] text-[#F7F3EB]"
+    }
+  `}
+>
+  <p
+    className={`
+      text-[7px]
+      sm:text-[8px]
+      lg:text-[9px]
+      uppercase
+      tracking-[1px]
+      sm:tracking-[1.5px]
+      font-medium
+      leading-4
+      transition-colors duration-300
+      ${
+        isDark
+          ? "text-[#29251F]"
+          : "text-[#F7F3EB]"
+      }
+    `}
+  >
+    A little something for your everyday
+    <span className="mx-1.5 sm:mx-2 opacity-50">|</span>
+    Discover the collection
+  </p>
+</div>
 
       {/* MAIN HEADER */}
 

@@ -200,7 +200,7 @@ const FashionPromo = () => {
                     `}
                   >
 
-                    <button
+                    {/* <button
                       type="button"
                       onClick={() => setOpenProductModel(null)}
                       aria-label="Close preview"
@@ -212,7 +212,7 @@ const FashionPromo = () => {
                       "
                     >
                       ×
-                    </button>
+                    </button> */}
 
                     <Card
                       product={product}
